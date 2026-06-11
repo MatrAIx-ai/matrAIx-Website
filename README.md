@@ -13,7 +13,7 @@ the persona **dimension schema** that defines the space those agents are sampled
 |------|------|------------|
 | Landing | [`index.html`](index.html) | Hero with the 8.3-billion-behavior headline and a live agent-field simulation (canvas), telemetry strip, and eval methodology. |
 | Dimension Explorer | [`explorer.html`](explorer.html) | Browse the flat persona schema: filter by category, search, expand value pools, and sample a full synthetic persona. |
-| Benchmark Portal (matrAIx OS) | [`benchmark.html`](benchmark.html) | A mission-control interface: a live "Neural Eval Core" brain visualization, an agent swarm simulating the selected app/website, streaming trajectory telemetry, switchable reports (A/B, segments, score distribution, heatmap, findings), and JSONL trajectory export. |
+| Demo Portal (matrAIx OS) | [`demo.html`](demo.html) | A mission-control interface: a live "Neural Eval Core" brain visualization, an agent swarm simulating the selected app/website, streaming trajectory telemetry, switchable reports (A/B, segments, score distribution, heatmap, findings), and JSONL trajectory export. |
 | Agent Walkthrough | [`walkthrough.html`](walkthrough.html) | A recorded sample trajectory: a matrAIx computer-using agent (10-dimension persona) files an auto-insurance claim on hugclaim.com, with per-step screenshots, observations, actions, rewards, friction findings, and a JSONL export. |
 | Pitch Deck | [`deck.html`](deck.html) | Self-contained investor deck (15 slides) matching the site's dark phosphor design. Arrow-key / swipe navigation, `F` for fullscreen. Business-specific figures are marked as illustrative placeholders to fill in. |
 
@@ -68,7 +68,7 @@ industry, genre, personality facet, lifestyle, cognition, health …). Regenerat
 
 ## Benchmark portal (matrAIx OS)
 
-The [Benchmark Portal](benchmark.html) is a mission-control interface. Pick a **target**
+The [Demo Portal](demo.html) is a mission-control interface. Pick a **target**
 (app/website), and an **agent swarm** of personas drawn from the dimension space runs its
 flow step by step. Each step emits **trajectory telemetry** (`observation → action → reward`)
 to the live console, the **Neural Eval Core** brain pulses the activated region, and the
@@ -115,7 +115,8 @@ styles.css        Shared console styling for the tool pages (CSS variables, base
 explorer.html     Dimension explorer markup
 explorer.css      Explorer-specific styling
 explorer.js       Schema loading, filtering, search, persona sampler
-benchmark.html    Benchmark console markup
+demo.html         Demo / benchmark console markup (runway hero + OS portal)
+benchmark.html    Redirect stub -> demo.html
 benchmark.css     Benchmark-specific styling
 benchmark.js      Sampling, structured scoring, live stream, heatmap, JSONL export
 deck.html         Self-contained investor pitch deck (15 slides)
