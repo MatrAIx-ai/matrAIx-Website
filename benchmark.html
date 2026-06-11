@@ -23,11 +23,11 @@
     <div class="runway-stage">
       <canvas id="runway" aria-hidden="true"></canvas>
       <div class="runway-hud">
-        <h1>600+ agents. <span class="hl">One benchmark.</span></h1>
+        <h1><span class="hl">8.3</span> Billion Agents</h1>
         <p>Every agent runs your flow as a live data point — the fast ones glide straight through, the slow ones stall at the friction points.</p>
       </div>
       <div class="runway-stats">
-        <div class="rstat"><b id="rAgents">620+</b><span>agents running</span></div>
+        <div class="rstat"><b id="rAgents">620+</b><span>live on this node</span></div>
         <div class="rstat"><b id="rRate">—</b><span>finishing / sec</span></div>
         <div class="rstat"><b id="rSmooth">—</b><span>smooth</span></div>
         <div class="rstat"><b id="rStall">—</b><span>stalled</span></div>
@@ -139,8 +139,10 @@
       ctx.fillStyle='rgba(84,246,166,0.6)'; ctx.fillText('FINISH', fx, TY(0)-16);
       var smooth=0,stall=0;
       for(var k=0;k<agents.length;k++){ var a=agents[k]; var m=mult(a)*a.jit;
-        a.x += a.base*m*0.016;
         var col; if(m>0.78){col='#54f6a6';smooth++;} else if(m>0.4){col='#ffb547';} else {col='#ff5c6c';stall++;}
+        var dx=a.base*Math.max(m,0.14)*0.016;                       // floored forward so they eventually escape
+        if(m<0.55 && a.x>0.04 && Math.random()<0.015){ dx-=a.base*0.016*rnd(4,7); }  // error loop: step back & retry
+        a.x += dx; if(a.x<0) a.x=0;
         if(a.x>=1.02){ finN++; var s=spawn(true); a.x=s.x;a.y=s.y;a.base=s.base;a.skill=s.skill;a.jit=s.jit; continue; }
         var px=TX(a.x>1?1:a.x), py=TY(a.y);
         if(m>0.78){ ctx.strokeStyle='rgba(84,246,166,0.22)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(px-13,py); ctx.lineTo(px,py); ctx.stroke(); }
