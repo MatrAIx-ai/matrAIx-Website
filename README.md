@@ -13,7 +13,7 @@ the persona **dimension schema** that defines the space those agents are sampled
 |------|------|------------|
 | Landing | [`index.html`](index.html) | Hero with the 8.3-billion-behavior headline and a live agent-field simulation (canvas), telemetry strip, and eval methodology. |
 | Dimension Explorer | [`explorer.html`](explorer.html) | Browse the flat persona schema: filter by category, search, expand value pools, and sample a full synthetic persona. |
-| Benchmark Console | [`benchmark.html`](benchmark.html) | Simulate a benchmark run over the space: stream scored behaviors live, see the score histogram, hardest-aspect leaderboard, and a pass-rate heatmap — then export an open-source sample as JSONL. |
+| Benchmark Portal (matrAIx OS) | [`benchmark.html`](benchmark.html) | A mission-control interface: a live "Neural Eval Core" brain visualization, an agent swarm simulating the selected app/website, streaming trajectory telemetry, switchable reports (A/B, segments, score distribution, findings), and JSONL trajectory export. |
 
 No build step — open `index.html` in a browser, or serve the folder:
 
@@ -64,20 +64,24 @@ industry, genre, personality facet, lifestyle, cognition, health …). Regenerat
 | **Psychographic** | traits, risk tolerance, decision style, values, politics, religiosity, neurotype, learning style, media diet, economic motivation |
 | **Interaction** | intent, query complexity, expertise gap, tone, trust, safety sensitivity, time pressure, device, modality, accessibility |
 
-## Benchmark simulation
+## Benchmark portal (matrAIx OS)
 
-The [Benchmark Console](benchmark.html) treats each **behavior** as `persona + task + verdict`.
+The [Benchmark Portal](benchmark.html) is a mission-control interface. Pick a **target**
+(app/website), and an **agent swarm** of personas drawn from the dimension space runs its
+flow step by step. Each step emits **trajectory telemetry** (`observation → action → reward`)
+to the live console, the **Neural Eval Core** brain pulses the activated region, and the
+verdict feeds the **reports** panel (A/B, segments, score distribution, findings).
+
 Scores are **synthetic but structured**: a behavior's difficulty is driven mainly by its single
-hardest aspect (e.g. `query_complexity = Adversarial`, `safety_sensitivity = Potentially harmful`,
-`trust_level = Hostile`, `english_proficiency = None`), so the heatmap and hardest-aspect
-leaderboard surface real signal rather than noise. Four synthetic agents are provided with
-different competence/robustness, producing a believable leaderboard (≈79% → 9% pass).
+hardest persona aspect (e.g. `query_complexity = Adversarial`, `safety_sensitivity = Potentially
+harmful`, `trust_level = Hostile`, `english_proficiency = None`).
 
-**Export** writes one JSON object per line (JSONL) — a public, reproducible slice of the corpus:
+**Export** writes one JSON object per line (JSONL) — a public, reproducible slice of trajectories:
 
 ```json
-{"id":"mx-000042","model":"orion-moe","task":"Verify a contested claim about Cardiology",
- "persona":{ "...one value per dimension..." },"score":0.31,"verdict":"fail"}
+{"id":"mx-001042","target":"checkout","persona":{ "...key dimensions..." },
+ "trajectory":[{"step":1,"observation":"load cart","action":"scan UI","reward":0.86}],
+ "score":0.81,"verdict":"pass"}
 ```
 
 > Scores are simulated for demonstration; no model is actually called.
