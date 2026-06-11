@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>matrAIx — Agent Walkthrough · HugClaim.com</title>
-<meta name="description" content="A matrAIx computer-using agent files an auto-insurance claim on hugclaim.com — recorded trajectory with screenshots, observations, actions, and an eval report." />
+<meta name="description" content="Interactive replay: a matrAIx computer-using agent files an auto-insurance claim on hugclaim.com — trajectory player with per-step durations, observations, actions, and an eval report." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -21,131 +21,148 @@ body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:14p
 ::selection{background:var(--phos);color:#04140c}
 a{color:inherit;text-decoration:none}
 
-/* top bar */
 .wbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:14px clamp(16px,4vw,40px);border-bottom:1px solid var(--line);background:rgba(6,8,7,.85);backdrop-filter:blur(8px)}
 .brand{font-family:var(--disp);font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
 .brand .ai{color:var(--phos);text-shadow:var(--glow)}
-.rec{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;color:var(--ink-dim);letter-spacing:.08em}
+.rec{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;color:var(--ink-dim);letter-spacing:.08em;font-variant-numeric:tabular-nums}
 .rec .d{width:9px;height:9px;border-radius:50%;background:var(--rose);box-shadow:0 0 10px var(--rose);animation:blink 1.3s infinite}
+.rec.paused .d{background:var(--ink-dim);box-shadow:none;animation:none}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 .wnav{display:flex;gap:20px;font-size:.8rem;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.06em}
 .wnav a:hover{color:var(--phos)}
 
-.wmain{max-width:1120px;margin:0 auto;padding:clamp(28px,5vw,60px) clamp(16px,4vw,40px) 80px}
-
-/* intro */
-.eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:18px}
+.wmain{max-width:1120px;margin:0 auto;padding:clamp(24px,4vw,48px) clamp(16px,4vw,40px) 80px}
+.eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:16px}
 .eyebrow .tick{color:var(--phos)}
-h1{font-family:var(--disp);font-weight:800;letter-spacing:-.03em;line-height:1.02;font-size:clamp(2rem,5vw,3.4rem);margin-bottom:18px}
+h1{font-family:var(--disp);font-weight:800;letter-spacing:-.03em;line-height:1.02;font-size:clamp(1.9rem,4.6vw,3.1rem);margin-bottom:16px}
 h1 .hl{color:var(--phos);text-shadow:var(--glow)}
-.sub{color:var(--ink-dim);font-size:clamp(1rem,1.8vw,1.18rem);max-width:760px;line-height:1.6}
-.target{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:.82rem;color:var(--phos);
-  border:1px solid var(--line);background:rgba(84,246,166,.05);padding:7px 14px;border-radius:100px}
+.sub{color:var(--ink-dim);font-size:clamp(.98rem,1.7vw,1.12rem);max-width:780px;line-height:1.6}
+.target{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:.82rem;color:var(--phos);border:1px solid var(--line);background:rgba(84,246,166,.05);padding:7px 14px;border-radius:100px}
 
 /* persona */
-.persona{margin:34px 0 10px;border:1px solid var(--line);background:var(--bg-2);padding:20px 22px}
-.persona h2{font-family:var(--disp);font-weight:700;font-size:1rem;letter-spacing:.04em;color:var(--phos);margin-bottom:14px}
+.persona{margin:30px 0 8px;border:1px solid var(--line);background:var(--bg-2);padding:18px 20px}
+.persona h2{font-family:var(--disp);font-weight:700;font-size:1rem;letter-spacing:.04em;color:var(--phos);margin-bottom:12px}
 .pchips{display:flex;flex-wrap:wrap;gap:8px}
-.pchip{font-size:.78rem;background:var(--bg-3);border:1px solid var(--line-soft);padding:6px 11px;border-radius:6px}
-.pchip b{color:var(--ink-dim);font-weight:400}
-.pchip span{color:var(--phos)}
+.pchip{font-size:.76rem;background:var(--bg-3);border:1px solid var(--line-soft);padding:6px 11px;border-radius:6px}
+.pchip b{color:var(--ink-dim);font-weight:400} .pchip span{color:var(--phos)}
 
-.sec-h{font-family:var(--disp);font-weight:700;font-size:1.3rem;margin:44px 0 18px;letter-spacing:-.01em}
-.sec-h .n{color:var(--phos)}
+/* ---------- PLAYER ---------- */
+.player{display:grid;grid-template-columns:1.12fr .88fr;gap:18px;margin-top:18px;align-items:stretch}
+.stage{position:relative;min-height:clamp(340px,46vh,440px);border:1px solid var(--line);background:var(--bg-2);overflow:hidden}
+.frame{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:18px;
+  opacity:0;transform:scale(.985);transition:opacity .45s ease,transform .45s ease;pointer-events:none}
+.frame.active{opacity:1;transform:none;pointer-events:auto}
+.frame .bw{width:min(100%,560px)}
+.stage-foot{position:absolute;left:0;right:0;bottom:0;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:9px 12px;background:linear-gradient(to top,rgba(6,8,7,.92),rgba(6,8,7,0))}
+.act-chip{font-size:.76rem;color:#04140c;background:var(--phos);padding:5px 11px;border-radius:100px;font-weight:700;box-shadow:0 0 16px rgba(84,246,166,.35)}
+.scan{position:absolute;left:0;right:0;height:60px;z-index:5;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(84,246,166,0),rgba(84,246,166,.10),rgba(84,246,166,0));animation:scan 3.2s linear infinite}
+@keyframes scan{0%{top:-60px}100%{top:100%}}
 
-/* trajectory */
-.tstep{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:start;margin-bottom:22px;
-  border:1px solid var(--line-soft);background:var(--bg-2);padding:16px}
-.tmeta .tnum{font-size:.74rem;color:var(--phos);letter-spacing:.08em}
-.tmeta .tnum .t{color:var(--ink-dim);margin-left:8px}
-.tlabel{font-family:var(--disp);font-weight:700;font-size:1.15rem;margin:8px 0 12px}
-.kv{margin-bottom:10px;font-size:.92rem;line-height:1.5}
-.kv .k{display:inline-block;width:64px;color:var(--ink-dim);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;vertical-align:top}
-.kv .v{display:inline-block;width:calc(100% - 70px);color:var(--ink)}
-.rwbar{display:flex;align-items:center;gap:10px;margin-top:12px}
-.rwbar .track{flex:1;height:5px;background:var(--line-soft)}
-.rwbar .fill{height:100%}
-.rwbar .val{font-size:.8rem;font-weight:700;font-variant-numeric:tabular-nums}
+.sidepanel{border:1px solid var(--line);background:var(--bg-2);padding:18px;display:flex;flex-direction:column}
+.sp-num{font-size:.74rem;color:var(--phos);letter-spacing:.08em}
+.sp-num .t{color:var(--ink-dim);margin-left:8px}
+.sp-label{font-family:var(--disp);font-weight:700;font-size:1.3rem;margin:8px 0 14px}
+.kv{margin-bottom:11px;font-size:.92rem;line-height:1.5}
+.kv .k{display:block;color:var(--ink-dim);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
+.kv .v{color:var(--ink)}
+.rwbar{display:flex;align-items:center;gap:10px;margin-top:6px}
+.rwbar .track{flex:1;height:5px;background:var(--line-soft)} .rwbar .fill{height:100%}
+.rwbar .val{font-size:.82rem;font-weight:700;font-variant-numeric:tabular-nums}
 .rw-ok .fill{background:var(--phos);box-shadow:var(--glow)} .rw-ok .val{color:var(--phos)}
 .rw-mid .fill{background:var(--amber)} .rw-mid .val{color:var(--amber)}
 .rw-bad .fill{background:var(--rose)} .rw-bad .val{color:var(--rose)}
 .fric{margin-top:12px;font-size:.82rem;display:flex;gap:9px;align-items:flex-start}
 .sev{flex:0 0 auto;font-size:.62rem;font-weight:700;padding:2px 7px;letter-spacing:.04em;margin-top:1px}
 .sev.high{background:rgba(255,92,108,.16);color:var(--rose)} .sev.med{background:rgba(255,181,71,.16);color:var(--amber)} .sev.low{background:rgba(84,246,166,.13);color:var(--phos)}
+.sp-dwell{margin-top:auto;padding-top:14px}
+.sp-dwell .lbl{display:flex;justify-content:space-between;font-size:.7rem;color:var(--ink-dim);margin-bottom:5px}
+.dwelltrack{height:5px;background:var(--line-soft)} .dwellfill{height:100%;width:0;background:linear-gradient(90deg,var(--phos-deep),var(--phos))}
 
-/* browser screenshot mock (light page) */
+/* controls */
+.controls{display:flex;align-items:center;gap:8px;margin-top:14px;flex-wrap:wrap}
+.cbtn{font-family:var(--mono);font-size:.82rem;color:var(--ink);background:transparent;border:1px solid var(--line);padding:8px 13px;cursor:pointer;transition:all .18s}
+.cbtn:hover{border-color:var(--phos);color:var(--phos)}
+.cbtn.primary{color:#04140c;background:var(--phos);border-color:var(--phos);font-weight:700}
+.cstatus{margin-left:auto;font-size:.8rem;color:var(--ink-dim);font-variant-numeric:tabular-nums}
+
+/* timeline */
+.timeline{display:flex;gap:4px;margin-top:12px}
+.seg{position:relative;height:42px;border:1px solid var(--line-soft);background:var(--bg-2);cursor:pointer;overflow:hidden;min-width:26px;transition:border-color .2s}
+.seg:hover{border-color:var(--line)}
+.seg.active{border-color:var(--phos);box-shadow:inset 0 0 0 1px var(--phos)}
+.segfill{position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(84,246,166,.14)}
+.seg.done .segfill{width:100%;background:rgba(84,246,166,.10)}
+.segn{position:absolute;top:5px;left:7px;font-size:.68rem;color:var(--ink-dim);z-index:2}
+.seg.active .segn,.seg.done .segn{color:var(--phos)}
+.segdur{position:absolute;bottom:4px;right:6px;font-size:.6rem;color:var(--ink-dim);z-index:2;font-variant-numeric:tabular-nums}
+
+/* eval */
+.eval{margin-top:34px;border:1px solid var(--phos);background:rgba(84,246,166,.04);padding:24px;box-shadow:inset 0 0 50px rgba(84,246,166,.04);opacity:.5;transition:opacity .5s}
+.eval.on{opacity:1}
+.eval h2{font-family:var(--disp);font-weight:700;font-size:1.35rem;margin-bottom:6px}
+.eval .meta{color:var(--ink-dim);font-size:.92rem;margin-bottom:16px} .eval .meta b{color:var(--phos)}
+.eval .findings{list-style:none;display:flex;flex-direction:column;gap:11px}
+.eval .findings li{display:flex;gap:10px;font-size:.94rem;line-height:1.45}
+.eval .close{margin-top:18px;color:var(--ink);font-size:.94rem}
+.btn{display:inline-flex;align-items:center;gap:9px;margin-top:20px;font-family:var(--mono);font-size:.84rem;letter-spacing:.06em;text-transform:uppercase;
+  color:#04140c;background:var(--phos);border:0;padding:12px 22px;cursor:pointer;font-weight:700;box-shadow:0 0 24px rgba(84,246,166,.3)}
+.btn:hover{background:#76ffbf}
+
+/* hugclaim screenshot mocks (light) */
 .bw{border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.4)}
 .bw-bar{display:flex;align-items:center;gap:10px;padding:8px 11px;background:#0e1411;border-bottom:1px solid var(--line-soft)}
 .bw-dots{display:flex;gap:5px} .bw-dots i{width:9px;height:9px;border-radius:50%;background:#33453b}
 .bw-url{flex:1;font-size:.72rem;color:var(--ink-dim);background:#070a09;border:1px solid var(--line-soft);border-radius:5px;padding:4px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bw-body{background:#f6f6f2;color:#1b1b1a;min-height:230px;padding:20px;display:flex;flex-direction:column}
-
-/* hugclaim UI bits (light) */
-.hc-top{display:flex;align-items:center;gap:8px;margin-bottom:auto}
-.hc-top img{height:24px;width:auto}
-.hc-home{margin:auto 0;text-align:center}
-.hc-home img{height:46px;margin-bottom:16px}
+.hc-top{display:flex;align-items:center;gap:8px;margin-bottom:auto} .hc-top img{height:24px;width:auto}
+.hc-home{margin:auto 0;text-align:center} .hc-home img{height:46px;margin-bottom:16px}
 .hc-home h3{font-family:var(--disp);font-weight:800;font-size:1.45rem;color:#15171c;line-height:1.1;margin-bottom:18px}
 .hc-cta{display:inline-flex;align-items:center;gap:8px;background:#12a566;color:#fff;font-weight:700;font-size:.95rem;padding:12px 22px;border-radius:8px;position:relative}
 .cursor{position:absolute;right:-6px;bottom:-10px;width:18px;height:18px;border:2px solid #12a566;border-radius:50%;box-shadow:0 0 0 6px rgba(18,165,102,.18);animation:tap 1.4s infinite}
 @keyframes tap{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.8);opacity:.6}}
 .chat{display:flex;flex-direction:column;gap:9px;margin:auto 0;width:100%}
-.msg{max-width:78%;padding:9px 13px;border-radius:12px;font-size:.86rem;line-height:1.4}
+.msg{max-width:80%;padding:9px 13px;border-radius:12px;font-size:.86rem;line-height:1.4}
 .msg.bot{align-self:flex-start;background:#e9e8e2;color:#26261f;border-bottom-left-radius:3px}
 .msg.me{align-self:flex-end;background:#12a566;color:#fff;border-bottom-right-radius:3px}
-.evi{display:flex;gap:8px;margin-top:4px}
-.evi img{height:52px;width:72px;object-fit:cover;border-radius:6px;border:1px solid #d7d6cf}
+.evi{display:flex;gap:8px;margin-top:6px} .evi img{height:50px;width:70px;object-fit:cover;border-radius:6px;border:1px solid #d7d6cf}
 .hc-card{margin:auto 0;border:1px solid #d7d6cf;border-radius:10px;padding:18px;background:#fff;text-align:center}
 .hc-card .big{font-family:var(--disp);font-weight:800;font-size:2.4rem;color:#12a566;line-height:1}
-.hc-card .lbl{font-size:.8rem;color:#6a6a62;margin-top:4px}
-.hc-card .ok{color:#12a566;font-weight:700;font-size:.78rem;margin-top:10px}
+.hc-card .lbl{font-size:.8rem;color:#6a6a62;margin-top:4px} .hc-card .ok{color:#12a566;font-weight:700;font-size:.78rem;margin-top:10px}
 .hc-card .ln{display:flex;justify-content:space-between;font-size:.78rem;color:#55554d;margin-top:8px;border-top:1px solid #ececdf;padding-top:8px}
 .hc-flag{margin:auto 0;background:#fdecec;border:1px solid #f3b6b6;border-radius:10px;padding:16px;color:#a3231f}
-.hc-flag b{display:block;font-size:.95rem;margin-bottom:4px}
-.hc-flag small{color:#b06a18}
+.hc-flag b{display:block;font-size:.95rem;margin-bottom:4px} .hc-flag small{color:#b06a18}
 .hc-confirm{margin:auto 0;text-align:center}
 .hc-check{width:54px;height:54px;border-radius:50%;background:#12a566;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 12px}
-.hc-confirm h3{font-family:var(--disp);font-weight:800;color:#15171c;font-size:1.3rem}
-.hc-confirm .cid{font-family:var(--mono);font-size:.74rem;color:#6a6a62;margin-top:6px}
+.hc-confirm h3{font-family:var(--disp);font-weight:800;color:#15171c;font-size:1.3rem} .hc-confirm .cid{font-family:var(--mono);font-size:.74rem;color:#6a6a62;margin-top:6px}
 .hc-prompt{margin:auto 0;border:1px solid #d7d6cf;border-radius:10px;padding:18px;background:#fff;text-align:center}
 .hc-prompt h3{font-family:var(--disp);font-weight:700;color:#15171c;font-size:1.05rem;margin-bottom:14px}
 .hc-prompt .row{display:flex;gap:10px;justify-content:center}
-.hc-prompt .b1{background:#12a566;color:#fff} .hc-prompt .b2{background:#ececdf;color:#33332c}
 .hc-prompt button{border:0;font-family:var(--mono);font-weight:700;font-size:.82rem;padding:9px 18px;border-radius:7px;cursor:default}
-
-/* eval summary */
-.eval{margin-top:40px;border:1px solid var(--phos);background:rgba(84,246,166,.04);padding:26px;box-shadow:inset 0 0 50px rgba(84,246,166,.04)}
-.eval h2{font-family:var(--disp);font-weight:700;font-size:1.4rem;margin-bottom:6px}
-.eval .meta{color:var(--ink-dim);font-size:.92rem;margin-bottom:18px}
-.eval .meta b{color:var(--phos)}
-.eval .findings{list-style:none;display:flex;flex-direction:column;gap:12px}
-.eval .findings li{display:flex;gap:10px;font-size:.95rem;line-height:1.45}
-.eval .close{margin-top:20px;color:var(--ink);font-size:.95rem}
-.btn{display:inline-flex;align-items:center;gap:9px;margin-top:22px;font-family:var(--mono);font-size:.84rem;letter-spacing:.06em;text-transform:uppercase;
-  color:#04140c;background:var(--phos);border:0;padding:12px 22px;cursor:pointer;font-weight:700;box-shadow:0 0 24px rgba(84,246,166,.3)}
-.btn:hover{background:#76ffbf}
+.hc-prompt .b1{background:#12a566;color:#fff} .hc-prompt .b2{background:#ececdf;color:#33332c}
 
 .foot{border-top:1px solid var(--line);padding:24px clamp(16px,4vw,40px);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--ink-dim);font-size:.82rem}
 .foot a:hover{color:var(--phos)}
 
-@media (max-width:820px){.tstep{grid-template-columns:1fr} .wnav{display:none}}
+@media (max-width:860px){.player{grid-template-columns:1fr} .wnav{display:none}}
+@media (prefers-reduced-motion:reduce){.scan,.cursor{animation:none}}
 </style>
 </head>
 <body>
   <div class="wbar">
     <a class="brand" href="index.html">matr<span class="ai">AI</span>x</a>
-    <span class="rec"><span class="d"></span>REC <span id="clock">00:00</span></span>
+    <span class="rec" id="rec"><span class="d"></span>REC <span id="clock">00:00</span></span>
     <nav class="wnav"><a href="index.html">Home</a><a href="benchmark.html">Benchmark</a><a href="explorer.html">Dimensions</a></nav>
   </div>
 
   <main class="wmain">
-    <div class="eyebrow"><span class="tick">//</span> SAMPLE AGENT WALKTHROUGH</div>
-    <h1>A computer-using agent files a claim on <span class="hl">HugClaim.com</span></h1>
-    <p class="sub">We drew one agent from the matrAIx persona space and let it complete a real auto-insurance claim flow end-to-end. Every screen, observation, action, and reward is recorded as a trajectory — the same data that powers our reports and training sets.</p>
+    <div class="eyebrow"><span class="tick">//</span> INTERACTIVE AGENT WALKTHROUGH</div>
+    <h1>Replay an agent filing a claim on <span class="hl">HugClaim.com</span></h1>
+    <p class="sub">One agent drawn from the matrAIx persona space completes a real auto-insurance claim. Press play to watch it move through the flow — each step shows what it saw, what it did, how long it dwelled, and the reward.</p>
     <span class="target">◎ target: hugclaim.com — conversational auto-claim flow</span>
 
-    <!-- PERSONA -->
     <section class="persona">
       <h2>AGENT PERSONA · 10 DIMENSIONS</h2>
       <div class="pchips">
@@ -157,166 +174,59 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
         <span class="pchip"><b>intent</b> <span>File a claim</span></span>
         <span class="pchip"><b>expertise</b> <span>Novice</span></span>
         <span class="pchip"><b>trust</b> <span>Verifying</span></span>
-        <span class="pchip"><b>emotion</b> <span>Frustrated (post-accident)</span></span>
+        <span class="pchip"><b>emotion</b> <span>Frustrated</span></span>
         <span class="pchip"><b>tech</b> <span>Cautious adopter</span></span>
       </div>
     </section>
 
-    <h2 class="sec-h"><span class="n">▸</span> Recorded trajectory · 8 steps</h2>
+    <!-- PLAYER -->
+    <section class="player">
+      <div class="stage" id="stage">
+        <div class="scan"></div>
+        <div class="frame" data-i="0"><div class="bw"><div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com</div></div>
+          <div class="bw-body"><div class="hc-home"><img src="Assets/hugclaim/hugclaim-logo.png" alt="HugClaim" /><h3>Get cash back on your<br>car-insurance claim — in minutes.</h3><span class="hc-cta">Start a claim →<span class="cursor"></span></span></div></div></div></div>
 
-    <!-- STEP 1 -->
-    <div class="tstep">
-      <div class="bw">
-        <div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com</div></div>
-        <div class="bw-body"><div class="hc-home">
-          <img src="Assets/hugclaim/hugclaim-logo.png" alt="HugClaim" />
-          <h3>Get cash back on your<br>car-insurance claim — in minutes.</h3>
-          <span class="hc-cta">Start a claim →<span class="cursor"></span></span>
-        </div></div>
-      </div>
-      <div class="tmeta">
-        <div class="tnum">STEP 01<span class="t">00:00</span></div>
-        <div class="tlabel">Landing page</div>
-        <div class="kv"><span class="k">observe</span><span class="v">hugclaim.com home — one primary CTA, no signup wall.</span></div>
-        <div class="kv"><span class="k">act</span><span class="v">Click “Start a claim”.</span></div>
-        <div class="rwbar rw-ok"><div class="track"><div class="fill" style="width:95%"></div></div><span class="val">0.95</span></div>
-      </div>
-    </div>
+        <div class="frame" data-i="1"><div class="bw"><div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com/pages/core/claim.html</div></div>
+          <div class="bw-body"><div class="hc-top"><img src="Assets/hugclaim/hugclaim-logo.png" alt="HugClaim" /></div><div class="chat"><div class="msg bot">Hi! Tell me what happened with your vehicle.</div><div class="msg me">Someone hit my car from behind at a red light. Small damage on the bumper.</div></div></div></div></div>
 
-    <!-- STEP 2 -->
-    <div class="tstep">
-      <div class="bw">
-        <div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com/pages/core/claim.html</div></div>
-        <div class="bw-body"><div class="hc-top"><img src="Assets/hugclaim/hugclaim-logo.png" alt="HugClaim" /></div>
-          <div class="chat">
-            <div class="msg bot">Hi! Tell me what happened with your vehicle.</div>
-            <div class="msg me">Someone hit my car from behind at a red light. Small damage on the bumper.</div>
-          </div>
-        </div>
-      </div>
-      <div class="tmeta">
-        <div class="tnum">STEP 02<span class="t">00:11</span></div>
-        <div class="tlabel">Describe the incident</div>
-        <div class="kv"><span class="k">observe</span><span class="v">Conversational intake — free-text, no structured form.</span></div>
-        <div class="kv"><span class="k">act</span><span class="v">Describe the rear-end collision in plain language.</span></div>
-        <div class="rwbar rw-ok"><div class="track"><div class="fill" style="width:88%"></div></div><span class="val">0.88</span></div>
-      </div>
-    </div>
+        <div class="frame" data-i="2"><div class="bw"><div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com/pages/core/claim.html</div></div>
+          <div class="bw-body"><div class="hc-top"><img src="Assets/hugclaim/hugclaim-logo.png" alt="HugClaim" /></div><div class="chat"><div class="msg bot">Add photos of your car’s safety features for a higher cash-back.</div><div class="msg me">Here are my airbags, seat-belt, and ABS.<div class="evi"><img src="Assets/hugclaim/airbags.jpeg" alt="airbags" /><img src="Assets/hugclaim/seatbelt.jpeg" alt="seat belt" /><img src="Assets/hugclaim/abs.png" alt="ABS" /></div></div></div></div></div></div>
 
-    <!-- STEP 3 -->
-    <div class="tstep">
-      <div class="bw">
-        <div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com/pages/core/claim.html</div></div>
-        <div class="bw-body"><div class="hc-top"><img src="Assets/hugclaim/hugclaim-logo.png" alt="HugClaim" /></div>
-          <div class="chat">
-            <div class="msg bot">Add photos of your car’s safety features for a higher cash-back.</div>
-            <div class="msg me">Here are my airbags, seat-belt, and ABS.
-              <div class="evi"><img src="Assets/hugclaim/airbags.jpeg" alt="airbags" /><img src="Assets/hugclaim/seatbelt.jpeg" alt="seat belt" /><img src="Assets/hugclaim/abs.png" alt="ABS" /></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tmeta">
-        <div class="tnum">STEP 03<span class="t">00:34</span></div>
-        <div class="tlabel">Provide evidence</div>
-        <div class="kv"><span class="k">observe</span><span class="v">Asks for safety-feature evidence to raise the payout.</span></div>
-        <div class="kv"><span class="k">act</span><span class="v">Upload airbags, seat-belt, and ABS photos.</span></div>
-        <div class="rwbar rw-mid"><div class="track"><div class="fill" style="width:62%"></div></div><span class="val">0.62</span></div>
-        <div class="fric"><span class="sev med">MED</span><span>Low-bandwidth upload stalled — 3 retries, 41s. Mobile persona segment.</span></div>
-      </div>
-    </div>
+        <div class="frame" data-i="3"><div class="bw"><div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com/pages/core/claim.html</div></div>
+          <div class="bw-body"><div class="hc-top"><img src="Assets/hugclaim/hugclaim-logo.png" alt="HugClaim" /></div><div class="hc-card"><div class="big">$420</div><div class="lbl">estimated cash back</div><div class="ln"><span>Base claim</span><span>$300</span></div><div class="ln"><span>Safety-feature bonus</span><span>+$120</span></div></div></div></div></div>
 
-    <!-- STEP 4 -->
-    <div class="tstep">
-      <div class="bw">
-        <div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com/pages/core/claim.html</div></div>
-        <div class="bw-body"><div class="hc-top"><img src="Assets/hugclaim/hugclaim-logo.png" alt="HugClaim" /></div>
-          <div class="hc-card"><div class="big">$420</div><div class="lbl">estimated cash back</div>
-            <div class="ln"><span>Base claim</span><span>$300</span></div>
-            <div class="ln"><span>Safety-feature bonus</span><span>+$120</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="tmeta">
-        <div class="tnum">STEP 04<span class="t">01:02</span></div>
-        <div class="tlabel">Cash-back estimate</div>
-        <div class="kv"><span class="k">observe</span><span class="v">Response LLM returns an itemized cash-back estimate.</span></div>
-        <div class="kv"><span class="k">act</span><span class="v">Review the estimate and breakdown.</span></div>
-        <div class="rwbar rw-ok"><div class="track"><div class="fill" style="width:90%"></div></div><span class="val">0.90</span></div>
-      </div>
-    </div>
+        <div class="frame" data-i="4"><div class="bw"><div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com/pages/core/claim.html</div></div>
+          <div class="bw-body"><div class="hc-top"><img src="Assets/hugclaim/hugclaim-logo.png" alt="HugClaim" /></div><div class="hc-flag"><b>⚠ The verifier disagrees with: “ABS present”.</b><small>No reason provided.</small></div></div></div></div>
 
-    <!-- STEP 5 -->
-    <div class="tstep">
-      <div class="bw">
-        <div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com/pages/core/claim.html</div></div>
-        <div class="bw-body"><div class="hc-top"><img src="Assets/hugclaim/hugclaim-logo.png" alt="HugClaim" /></div>
-          <div class="hc-flag"><b>⚠ The verifier disagrees with: “ABS present”.</b><small>No reason provided.</small></div>
-        </div>
-      </div>
-      <div class="tmeta">
-        <div class="tnum">STEP 05<span class="t">01:18</span></div>
-        <div class="tlabel">Verifier disagreement</div>
-        <div class="kv"><span class="k">observe</span><span class="v">Verifier rejects the ABS claim — but shows no reason.</span></div>
-        <div class="kv"><span class="k">act</span><span class="v">Stall, re-read, then re-state ABS with the photo reference.</span></div>
-        <div class="rwbar rw-bad"><div class="track"><div class="fill" style="width:41%"></div></div><span class="val">0.41</span></div>
-        <div class="fric"><span class="sev high">HIGH</span><span>Rejection with no rationale — agent stalled 22s. Hits low-trust &amp; novice segments hardest.</span></div>
-      </div>
-    </div>
+        <div class="frame" data-i="5"><div class="bw"><div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com/pages/core/claim.html</div></div>
+          <div class="bw-body"><div class="hc-top"><img src="Assets/hugclaim/hugclaim-logo.png" alt="HugClaim" /></div><div class="hc-card"><div class="big">$460</div><div class="lbl">cash back</div><div class="ok">✓ verified</div></div></div></div></div>
 
-    <!-- STEP 6 -->
-    <div class="tstep">
-      <div class="bw">
-        <div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com/pages/core/claim.html</div></div>
-        <div class="bw-body"><div class="hc-top"><img src="Assets/hugclaim/hugclaim-logo.png" alt="HugClaim" /></div>
-          <div class="hc-card"><div class="big">$460</div><div class="lbl">cash back</div><div class="ok">✓ verified</div></div>
-        </div>
-      </div>
-      <div class="tmeta">
-        <div class="tnum">STEP 06<span class="t">01:46</span></div>
-        <div class="tlabel">Resolved &amp; verified</div>
-        <div class="kv"><span class="k">observe</span><span class="v">Verifier accepts after clarification; payout updated.</span></div>
-        <div class="kv"><span class="k">act</span><span class="v">Accept the updated estimate.</span></div>
-        <div class="rwbar rw-ok"><div class="track"><div class="fill" style="width:83%"></div></div><span class="val">0.83</span></div>
-      </div>
-    </div>
+        <div class="frame" data-i="6"><div class="bw"><div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com/pages/core/claim.html</div></div>
+          <div class="bw-body"><div class="hc-confirm"><div class="hc-check">✓</div><h3>Claim submitted</h3><div class="cid">claim id · HC-8E3F-4471</div></div></div></div></div>
 
-    <!-- STEP 7 -->
-    <div class="tstep">
-      <div class="bw">
-        <div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com/pages/core/claim.html</div></div>
-        <div class="bw-body"><div class="hc-confirm"><div class="hc-check">✓</div><h3>Claim submitted</h3><div class="cid">claim id · HC-8E3F-4471</div></div></div>
-      </div>
-      <div class="tmeta">
-        <div class="tnum">STEP 07<span class="t">02:01</span></div>
-        <div class="tlabel">Submit claim</div>
-        <div class="kv"><span class="k">observe</span><span class="v">Submit enabled once the estimate is verified.</span></div>
-        <div class="kv"><span class="k">act</span><span class="v">Submit the claim.</span></div>
-        <div class="rwbar rw-ok"><div class="track"><div class="fill" style="width:92%"></div></div><span class="val">0.92</span></div>
-      </div>
-    </div>
+        <div class="frame" data-i="7"><div class="bw"><div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com/pages/core/claim.html</div></div>
+          <div class="bw-body"><div class="hc-top"><img src="Assets/hugclaim/hugclaim-logo.png" alt="HugClaim" /></div><div class="hc-prompt"><h3>Share this claim to the forum?</h3><div class="row"><button class="b1">Share</button><button class="b2">Not now</button></div></div></div></div></div>
 
-    <!-- STEP 8 -->
-    <div class="tstep">
-      <div class="bw">
-        <div class="bw-bar"><div class="bw-dots"><i></i><i></i><i></i></div><div class="bw-url">https://hugclaim.com/pages/core/claim.html</div></div>
-        <div class="bw-body"><div class="hc-top"><img src="Assets/hugclaim/hugclaim-logo.png" alt="HugClaim" /></div>
-          <div class="hc-prompt"><h3>Share this claim to the forum?</h3><div class="row"><button class="b1">Share</button><button class="b2">Not now</button></div></div>
-        </div>
+        <div class="stage-foot"><span class="act-chip" id="actChip">▸</span><span id="dwellLbl" style="font-size:.72rem;color:var(--phos)"></span></div>
       </div>
-      <div class="tmeta">
-        <div class="tnum">STEP 08<span class="t">02:14</span></div>
-        <div class="tlabel">Community forum prompt</div>
-        <div class="kv"><span class="k">observe</span><span class="v">Post-submit upsell to share the claim publicly.</span></div>
-        <div class="kv"><span class="k">act</span><span class="v">Decline — persona is privacy-sensitive.</span></div>
-        <div class="rwbar rw-ok"><div class="track"><div class="fill" style="width:70%"></div></div><span class="val">0.70</span></div>
-      </div>
+
+      <aside class="sidepanel" id="side"></aside>
+    </section>
+
+    <div class="controls">
+      <button class="cbtn primary" id="play">▶ Play</button>
+      <button class="cbtn" id="prev">‹ Prev</button>
+      <button class="cbtn" id="next">Next ›</button>
+      <button class="cbtn" id="restart">⟲ Restart</button>
+      <button class="cbtn" id="speed">1×</button>
+      <span class="cstatus" id="status"></span>
     </div>
+    <div class="timeline" id="timeline"></div>
 
     <!-- EVAL -->
-    <section class="eval">
+    <section class="eval" id="eval">
       <h2>Eval summary</h2>
-      <div class="meta">Outcome <b>claim submitted ✓</b> · 8 steps · 2m14s · trajectory score <b>0.78</b></div>
+      <div class="meta">Outcome <b>claim submitted ✓</b> · 8 steps · 2m26s · trajectory score <b>0.78</b></div>
       <ul class="findings">
         <li><span class="sev high">HIGH</span><span>Verifier rejection shows <strong>no rationale</strong> — 22s stall. Worst for low-trust &amp; novice users.</span></li>
         <li><span class="sev med">MED</span><span>Low-bandwidth <strong>evidence upload</strong> needed 3 retries. Worst for mobile segment.</span></li>
@@ -335,30 +245,96 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
 
 <script>
 (function(){
-  // REC clock
-  var t=0, el=document.getElementById('clock');
-  function pad(x){return (x<10?'0':'')+x;}
-  setInterval(function(){t++;el.textContent=pad((t/60)|0)+':'+pad(t%60);},1000);
-
-  // export trajectory JSONL
-  var persona={age_bracket:'35–44',region:'North America',primary_language:'Spanish',english_proficiency:'Intermediate (B1–B2)',device_context:'Mobile, on-the-go',intent:'File a claim',expertise_gap:'Novice asking expert',trust_level:'Verifying',emotional_state:'Frustrated',tech_savviness:'Cautious adopter'};
-  var steps=[
-    {step:1,t:'00:00',observation:'hugclaim.com home — one primary CTA',action:'click Start a claim',reward:0.95},
-    {step:2,t:'00:11',observation:'conversational intake, free-text',action:'describe rear-end collision',reward:0.88},
-    {step:3,t:'00:34',observation:'asks for safety-feature evidence',action:'upload airbags, seat-belt, ABS',reward:0.62,friction:'low-bandwidth upload, 3 retries'},
-    {step:4,t:'01:02',observation:'LLM returns cash-back estimate $420',action:'review estimate',reward:0.90},
-    {step:5,t:'01:18',observation:'verifier disagrees on ABS, no reason',action:'re-state ABS with photo',reward:0.41,friction:'rejection without rationale, 22s stall'},
-    {step:6,t:'01:46',observation:'verifier accepts, payout $460',action:'accept estimate',reward:0.83},
-    {step:7,t:'02:01',observation:'submit enabled',action:'submit claim',reward:0.92},
-    {step:8,t:'02:14',observation:'forum share upsell',action:'decline (privacy)',reward:0.70}
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STEPS=[
+    {label:'Landing page',dur:11,observe:'hugclaim.com home — one primary CTA, no signup wall.',act:'Click “Start a claim”.',chip:'click “Start a claim”',reward:0.95,cls:'ok'},
+    {label:'Describe the incident',dur:23,observe:'Conversational intake — free-text, no structured form.',act:'Describe the rear-end collision.',chip:'type incident description',reward:0.88,cls:'ok'},
+    {label:'Provide evidence',dur:28,observe:'Asks for safety-feature evidence to raise the payout.',act:'Upload airbags, seat-belt, and ABS photos.',chip:'upload 3 photos',reward:0.62,cls:'mid',fric:{sev:'med',text:'Low-bandwidth upload stalled — 3 retries, 41s. Mobile segment.'}},
+    {label:'Cash-back estimate',dur:16,observe:'Response LLM returns an itemized cash-back estimate.',act:'Review the estimate and breakdown.',chip:'read estimate',reward:0.90,cls:'ok'},
+    {label:'Verifier disagreement',dur:28,observe:'Verifier rejects the ABS claim — but shows no reason.',act:'Stall, then re-state ABS with the photo.',chip:'re-submit ABS evidence',reward:0.41,cls:'bad',fric:{sev:'high',text:'Rejection with no rationale — agent stalled 22s.'}},
+    {label:'Resolved & verified',dur:15,observe:'Verifier accepts after clarification; payout updated.',act:'Accept the updated estimate.',chip:'accept $460',reward:0.83,cls:'ok'},
+    {label:'Submit claim',dur:13,observe:'Submit enabled once the estimate is verified.',act:'Submit the claim.',chip:'click Submit',reward:0.92,cls:'ok'},
+    {label:'Community forum prompt',dur:12,observe:'Post-submit upsell to share the claim publicly.',act:'Decline — persona is privacy-sensitive.',chip:'decline share',reward:0.70,cls:'ok'}
   ];
-  document.getElementById('export').addEventListener('click',function(){
-    var rec={id:'mx-walkthrough-hugclaim',target:'hugclaim.com',persona:persona,trajectory:steps,outcome:'submitted',score:0.78,
-      findings:[{sev:'high',text:'verifier rejection without rationale'},{sev:'med',text:'low-bandwidth evidence upload retries'},{sev:'low',text:'deductible term unclear to intermediate English'}]};
-    var blob=new Blob([JSON.stringify(rec,null,2)+'\n'],{type:'application/x-ndjson'});
-    var u=URL.createObjectURL(blob),a=document.createElement('a');
-    a.href=u;a.download='matraix-walkthrough-hugclaim.jsonl';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u);
+  var N=STEPS.length, starts=[]; (function(){var s=0;for(var i=0;i<N;i++){starts[i]=s;s+=STEPS[i].dur;}})();
+  var TOTAL=starts[N-1]+STEPS[N-1].dur;
+  var SCALE=0.16; // trajectory-seconds -> real-seconds compression at 1x
+
+  var $=function(s){return document.getElementById(s);};
+  var frames=[].slice.call(document.querySelectorAll('.frame'));
+  var pad=function(x){return (x<10?'0':'')+x;};
+  var mmss=function(s){s=Math.floor(s);return pad((s/60)|0)+':'+pad(s%60);};
+
+  var idx=0,prog=0,playing=false,speed=1,raf=null,last=0,done=false;
+  function dwellMs(){return STEPS[idx].dur*1000*SCALE/speed;}
+
+  // timeline
+  var tl=$('timeline');
+  tl.innerHTML=STEPS.map(function(s,i){return '<div class="seg" data-i="'+i+'" style="flex:'+s.dur+'"><div class="segfill"></div><span class="segn">'+(i+1)+'</span><span class="segdur">'+s.dur+'s</span></div>';}).join('');
+  var segs=[].slice.call(tl.children);
+  tl.addEventListener('click',function(e){var s=e.target.closest('.seg');if(!s)return;jump(+s.dataset.i);});
+
+  function renderSide(){
+    var s=STEPS[idx];
+    var fr=s.fric?'<div class="fric"><span class="sev '+s.fric.sev+'">'+s.fric.sev.toUpperCase()+'</span><span>'+s.fric.text+'</span></div>':'';
+    $('side').innerHTML=
+      '<div class="sp-num">STEP '+(idx+1)+' / '+N+'<span class="t">'+mmss(starts[idx])+'</span></div>'+
+      '<div class="sp-label">'+s.label+'</div>'+
+      '<div class="kv"><span class="k">observe</span><span class="v">'+s.observe+'</span></div>'+
+      '<div class="kv"><span class="k">act</span><span class="v">'+s.act+'</span></div>'+
+      '<div class="rwbar rw-'+s.cls+'"><div class="track"><div class="fill" style="width:'+(s.reward*100)+'%"></div></div><span class="val">'+s.reward.toFixed(2)+'</span></div>'+
+      fr+
+      '<div class="sp-dwell"><div class="lbl"><span>dwell on this step</span><span>'+s.dur+'s</span></div><div class="dwelltrack"><div class="dwellfill" id="dwellfill"></div></div></div>';
+  }
+  function render(){
+    frames.forEach(function(f,i){f.classList.toggle('active',i===idx);});
+    segs.forEach(function(g,i){g.classList.toggle('active',i===idx);g.classList.toggle('done',i<idx);});
+    $('actChip').textContent='▸ '+STEPS[idx].chip;
+    renderSide();
+    paint();
+  }
+  function paint(){
+    segs.forEach(function(g,i){var fl=g.querySelector('.segfill');fl.style.width=(i<idx?100:i===idx?prog*100:0)+'%';});
+    var df=document.getElementById('dwellfill'); if(df) df.style.width=(prog*100)+'%';
+    var cur=starts[idx]+prog*STEPS[idx].dur;
+    $('clock').textContent=mmss(cur);
+    $('dwellLbl').textContent='dwell '+Math.ceil(STEPS[idx].dur*(1-prog))+'s';
+    $('status').textContent='STEP '+(idx+1)+'/'+N+' · '+mmss(cur)+' / '+mmss(TOTAL);
+  }
+  function setRec(){ $('rec').classList.toggle('paused',!playing); $('play').textContent=playing?'⏸ Pause':(done?'⟲ Replay':'▶ Play'); }
+
+  function loop(ts){
+    if(!playing)return;
+    if(!last)last=ts;
+    prog += (ts-last)/dwellMs(); last=ts;
+    if(prog>=1){
+      if(idx<N-1){idx++;prog=0;render();}
+      else{prog=1;playing=false;last=0;done=true;paint();setRec();$('eval').classList.add('on');return;}
+    }
+    paint();
+    raf=requestAnimationFrame(loop);
+  }
+  function play(){ if(done){idx=0;prog=0;done=false;render();} playing=true;last=0;setRec();raf=requestAnimationFrame(loop); }
+  function pause(){ playing=false;last=0;setRec();if(raf)cancelAnimationFrame(raf); }
+  function jump(i){ pause();idx=Math.max(0,Math.min(N-1,i));prog=0;done=(i===N-1);render(); }
+
+  $('play').addEventListener('click',function(){playing?pause():play();});
+  $('prev').addEventListener('click',function(){jump(idx-1);});
+  $('next').addEventListener('click',function(){jump(idx+1);});
+  $('restart').addEventListener('click',function(){pause();idx=0;prog=0;done=false;render();play();});
+  $('speed').addEventListener('click',function(){speed=speed===1?2:speed===2?4:1;this.textContent=speed+'×';});
+
+  // export
+  $('export').addEventListener('click',function(){
+    var persona={age_bracket:'35–44',region:'North America',primary_language:'Spanish',english_proficiency:'Intermediate (B1–B2)',device_context:'Mobile, on-the-go',intent:'File a claim',expertise_gap:'Novice asking expert',trust_level:'Verifying',emotional_state:'Frustrated',tech_savviness:'Cautious adopter'};
+    var traj=STEPS.map(function(s,i){return {step:i+1,t:mmss(starts[i]),dwell_s:s.dur,observation:s.observe,action:s.act,reward:s.reward,friction:s.fric?s.fric.text:null};});
+    var rec={id:'mx-walkthrough-hugclaim',target:'hugclaim.com',persona:persona,trajectory:traj,outcome:'submitted',score:0.78};
+    var b=new Blob([JSON.stringify(rec,null,2)+'\n'],{type:'application/x-ndjson'});
+    var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='matraix-walkthrough-hugclaim.jsonl';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u);
   });
+
+  render();
+  if(!reduce) play(); else setRec();
 })();
 </script>
 </body>
