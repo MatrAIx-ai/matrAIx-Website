@@ -94,6 +94,11 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
 .step .meta .dwell{font-size:.66rem;color:var(--ink-dim);letter-spacing:.06em;text-transform:uppercase}
 .step .meta .rw{font-family:var(--disp);font-weight:800;font-size:1.2rem;font-variant-numeric:tabular-nums}
 .rw.ok{color:var(--phos)} .rw.mid{color:var(--amber)} .rw.bad{color:var(--rose)}
+.step{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
+.step.show{opacity:1;transform:none}
+.dseg.active{border-color:var(--phos);box-shadow:inset 0 0 0 1px var(--phos)}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:.6rem;letter-spacing:.12em;color:var(--rose);vertical-align:middle;margin-left:10px}
+.live .d{width:7px;height:7px;border-radius:50%;background:var(--rose);box-shadow:0 0 8px var(--rose);animation:blink 1.3s infinite}
 
 /* eval */
 .eval{margin-top:34px;border:1px solid var(--phos);background:rgba(84,246,166,.04);padding:24px;box-shadow:inset 0 0 50px rgba(84,246,166,.04)}
@@ -160,8 +165,7 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
         <div class="durlegend">▸ widest segments = the friction points. Click to jump.</div>
       </div>
       <div class="traj-col">
-        <h2 class="sec-h"><span class="n">▸</span> Recorded trajectory · 8 steps</h2>
-        <p class="sec-sub">What the agent saw, did, how long it dwelled, and the reward — step by step.</p>
+        <h2 class="sec-h"><span class="n">▸</span> Real-Time trajectory <span class="live"><span class="d"></span>LIVE</span></h2>
         <div class="steps" id="steps"></div>
       </div>
     </section>
@@ -216,6 +220,31 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
       '<div class="meta"><div class="dwell">dwell '+s.dur+'s</div><div class="rw '+s.cls+'">'+s.reward.toFixed(2)+'</div></div>'+
     '</div>';
   }).join('');
+
+  // progressive, looping reveal — each step appears after the prior step's dwell
+  (function(){
+    var stepEls=[].slice.call(document.querySelectorAll('.step'));
+    var segEls=[].slice.call(document.querySelectorAll('.dseg'));
+    var TOTAL=starts[STEPS.length-1]+STEPS[STEPS.length-1].dur;
+    var SCALE=0.18, HOLD=3, timers=[];
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      stepEls.forEach(function(s){s.classList.add('show');});
+      return;
+    }
+    function cycle(){
+      timers.forEach(clearTimeout); timers=[];
+      stepEls.forEach(function(s){s.classList.remove('show');});
+      segEls.forEach(function(s){s.classList.remove('active');});
+      STEPS.forEach(function(st,i){
+        timers.push(setTimeout(function(){
+          stepEls[i].classList.add('show');
+          segEls.forEach(function(s,k){s.classList.toggle('active',k===i);});
+        }, 700 + starts[i]*1000*SCALE));
+      });
+      timers.push(setTimeout(cycle, 700 + (TOTAL*SCALE+HOLD)*1000));
+    }
+    cycle();
+  })();
 
   document.getElementById('export').addEventListener('click',function(){
     var persona={age_bracket:'35–44',region:'North America',primary_language:'Spanish',english_proficiency:'Intermediate (B1–B2)',device_context:'Mobile, on-the-go',intent:'File a claim',expertise_gap:'Novice asking expert',trust_level:'Verifying',emotional_state:'Frustrated',tech_savviness:'Cautious adopter'};
