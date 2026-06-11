@@ -13,6 +13,7 @@ the persona **dimension schema** that defines the space those agents are sampled
 |------|------|------------|
 | Landing | [`index.html`](index.html) | Hero with the 8.3-billion-behavior headline and a live agent-field simulation (canvas), telemetry strip, and eval methodology. |
 | Dimension Explorer | [`explorer.html`](explorer.html) | Browse the flat persona schema: filter by category, search, expand value pools, and sample a full synthetic persona. |
+| Benchmark Console | [`benchmark.html`](benchmark.html) | Simulate a benchmark run over the space: stream scored behaviors live, see the score histogram, hardest-aspect leaderboard, and a pass-rate heatmap — then export an open-source sample as JSONL. |
 
 No build step — open `index.html` in a browser, or serve the folder:
 
@@ -59,6 +60,24 @@ The 8.3B headline is the corpus of behaviors already simulated within that space
 | **Psychographic** | traits, risk tolerance, decision style, values, politics, religiosity, neurotype, learning style, media diet, economic motivation |
 | **Interaction** | intent, query complexity, expertise gap, tone, trust, safety sensitivity, time pressure, device, modality, accessibility |
 
+## Benchmark simulation
+
+The [Benchmark Console](benchmark.html) treats each **behavior** as `persona + task + verdict`.
+Scores are **synthetic but structured**: a behavior's difficulty is driven mainly by its single
+hardest aspect (e.g. `query_complexity = Adversarial`, `safety_sensitivity = Potentially harmful`,
+`trust_level = Hostile`, `english_proficiency = None`), so the heatmap and hardest-aspect
+leaderboard surface real signal rather than noise. Four synthetic agents are provided with
+different competence/robustness, producing a believable leaderboard (≈79% → 9% pass).
+
+**Export** writes one JSON object per line (JSONL) — a public, reproducible slice of the corpus:
+
+```json
+{"id":"mx-000042","model":"orion-moe","task":"Verify a contested claim about Cardiology",
+ "persona":{ "...one value per dimension..." },"score":0.31,"verdict":"fail"}
+```
+
+> Scores are simulated for demonstration; no model is actually called.
+
 ## Sampling a persona
 
 The explorer's **Sample persona** action draws one value per dimension, renders a
@@ -85,6 +104,9 @@ script.js         Background agent simulation, count-up, telemetry, behavior gri
 explorer.html     Dimension explorer markup
 explorer.css      Explorer-specific styling
 explorer.js       Schema loading, filtering, search, persona sampler
+benchmark.html    Benchmark console markup
+benchmark.css     Benchmark-specific styling
+benchmark.js      Sampling, structured scoring, live stream, heatmap, JSONL export
 dimensions.json   Canonical flat dimension schema (source of truth)
 dimensions.js     Browser-loadable mirror of dimensions.json
 ```

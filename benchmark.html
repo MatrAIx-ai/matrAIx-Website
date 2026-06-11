@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>matrAIx.ai — Behavior Benchmark Console</title>
+  <meta name="description" content="Simulate the 8.3-billion-behavior benchmark across 1000 persona dimensions and export an open-source sample." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="benchmark.css" />
+</head>
+<body class="explorer-body">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">▚</span>
+      <span class="brand-name">matr<em>AI</em>x<span class="tld">.ai</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#sim-field">Simulate</a>
+      <a href="explorer.html">Dimensions</a>
+      <a href="benchmark.html" class="active">Benchmark</a>
+      <a href="index.html#eval">Eval</a>
+    </nav>
+    <a href="#export" class="btn btn-ghost nav-cta">
+      <span class="dot live"></span> Export sample
+    </a>
+  </header>
+
+  <main class="bench">
+    <!-- Head -->
+    <section class="bench-head">
+      <div class="hero-eyebrow">
+        <span class="tick">//</span> BEHAVIOR BENCHMARK
+        <span class="ver">SIM</span>
+        <span class="sep">—</span>
+        <span class="status"><span class="dot live"></span> 8.3B SPACE</span>
+      </div>
+      <h1 class="ex-title">Benchmark the <span>8.3-Billion-Behavior</span> set</h1>
+      <p class="ex-sub">
+        Each <em>behavior</em> is one persona — a point in the 1000-dimension space —
+        paired with a task and scored by the agent under test. Configure a run below to
+        sample the space, watch verdicts stream in live, and export an
+        <strong>open-source slice</strong> as JSONL.
+      </p>
+      <div class="oss-banner">
+        <span class="oss-tag">OPEN SAMPLE</span>
+        This console simulates scoring. The exported JSONL is a public, reproducible
+        sample of the full proprietary 8.3B corpus.
+      </div>
+    </section>
+
+    <!-- Control bar -->
+    <section class="control-bar">
+      <div class="ctrl">
+        <label for="model">Agent under test</label>
+        <select id="model" class="ctrl-input"></select>
+      </div>
+      <div class="ctrl">
+        <label for="size">Sample size <span id="sizeVal" class="ctrl-num">1,000</span></label>
+        <input type="range" id="size" class="ctrl-range" min="100" max="5000" step="100" value="1000" />
+      </div>
+      <div class="ctrl ctrl-mini">
+        <label>Active dimensions</label>
+        <span class="ctrl-stat" id="dimCount">—</span>
+      </div>
+      <div class="ctrl ctrl-mini">
+        <label>Space coverage</label>
+        <span class="ctrl-stat" id="coverage">—</span>
+      </div>
+      <div class="ctrl-actions">
+        <button id="runBtn" class="btn btn-solid">▶ Run benchmark</button>
+        <button id="stopBtn" class="btn btn-ghost" disabled>⏹ Stop</button>
+      </div>
+      <div class="run-progress"><div class="run-bar" id="runBar"></div></div>
+    </section>
+
+    <!-- Metrics -->
+    <section class="metrics" id="metrics">
+      <div class="metric"><span class="metric-val" data-m="evaluated">0</span><span class="metric-label">behaviors evaluated</span></div>
+      <div class="metric"><span class="metric-val pass" data-m="pass">—</span><span class="metric-label">pass rate</span></div>
+      <div class="metric"><span class="metric-val" data-m="score">—</span><span class="metric-label">mean score</span></div>
+      <div class="metric"><span class="metric-val" data-m="rate">—</span><span class="metric-label">behaviors / sec</span></div>
+    </section>
+
+    <!-- Dashboard -->
+    <section class="dash">
+      <!-- live feed -->
+      <div class="panel-box feed-box">
+        <div class="box-head"><h3>Live evaluation stream</h3><span class="box-hint">click a row for detail</span></div>
+        <div class="feed" id="feed"><p class="feed-idle">▸ press <b>Run benchmark</b> to begin sampling the space…</p></div>
+      </div>
+
+      <!-- histogram -->
+      <div class="panel-box">
+        <div class="box-head"><h3>Score distribution</h3></div>
+        <div class="histo" id="histo"></div>
+        <div class="histo-axis"><span>0.0</span><span>0.5</span><span>1.0</span></div>
+      </div>
+
+      <!-- hardest aspects -->
+      <div class="panel-box">
+        <div class="box-head"><h3>Hardest aspects</h3><span class="box-hint">lowest pass rate</span></div>
+        <div class="diff" id="diff"><p class="feed-idle">No data yet.</p></div>
+      </div>
+    </section>
+
+    <!-- Heatmap -->
+    <section class="panel-box heat-box">
+      <div class="box-head">
+        <h3>Pass-rate heatmap</h3>
+        <div class="heat-picks">
+          <label>X <select id="heatX" class="ctrl-input sm"></select></label>
+          <label>Y <select id="heatY" class="ctrl-input sm"></select></label>
+        </div>
+      </div>
+      <div class="heat-wrap"><div class="heat" id="heat"><p class="feed-idle">Run a benchmark to populate the grid.</p></div></div>
+      <div class="heat-legend">
+        <span>pass rate</span>
+        <i class="heat-grad"></i>
+        <span class="lo">0%</span><span class="hi">100%</span>
+      </div>
+    </section>
+
+    <!-- Export -->
+    <section class="export-bar" id="export">
+      <div>
+        <h3>Open-source this sample</h3>
+        <p id="exportNote">Run a benchmark, then download every evaluated behavior as JSONL — persona, task, score, and verdict.</p>
+      </div>
+      <button id="exportBtn" class="btn btn-solid btn-lg" disabled>⬇ Export JSONL</button>
+    </section>
+  </main>
+
+  <!-- Behavior detail drawer -->
+  <aside class="persona-drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-inner">
+      <div class="drawer-head">
+        <div>
+          <span class="drawer-eyebrow"><span class="dot live"></span> <span id="bhId">BEHAVIOR</span></span>
+          <h2 class="drawer-name" id="bhVerdict">—</h2>
+          <p class="drawer-line" id="bhTask">—</p>
+        </div>
+        <button class="drawer-close" id="drawerClose" aria-label="Close">✕</button>
+      </div>
+      <div class="bh-score" id="bhScore"></div>
+      <div class="drawer-traits" id="bhTraits"></div>
+    </div>
+  </aside>
+  <div class="drawer-scrim" id="scrim" hidden></div>
+
+  <footer class="foot">
+    <span class="brand-name small">matr<em>AI</em>x<span class="tld">.ai</span></span>
+    <span class="foot-meta">BENCHMARK SIM · SYNTHETIC SCORES · © 2026</span>
+  </footer>
+
+  <script src="dimensions.js"></script>
+  <script src="benchmark.js"></script>
+</body>
+</html>
