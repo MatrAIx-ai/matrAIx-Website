@@ -141,9 +141,9 @@ main { position: relative; z-index: 10; }
 .megacount { display: flex; align-items: baseline; justify-content: center; gap: 0.22em; }
 .megacount .count {
   font-family: var(--disp); font-weight: 800;
-  font-size: clamp(4rem, 15vw, 10rem); line-height: 0.85;
+  font-size: clamp(2rem, 8.2vw, 5.6rem); line-height: 0.9;
   color: var(--phos); text-shadow: 0 0 40px rgba(84,246,166,0.42);
-  letter-spacing: -0.04em; font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em; font-variant-numeric: tabular-nums; white-space: nowrap;
 }
 .megacount .count-unit {
   font-family: var(--disp); font-weight: 800;

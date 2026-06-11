@@ -75,15 +75,15 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 (() => {
   const el = document.getElementById('count');
   if (!el) return;
-  const target = 8.3;
-  if (reduceMotion) { el.textContent = target.toFixed(1); return; }
-  const dur = 1700; let start = null;
+  const target = 8300000000, nf = new Intl.NumberFormat('en-US');
+  if (reduceMotion) { el.textContent = nf.format(target); return; }
+  const dur = 1900; let start = null;
   const ease = t => 1 - Math.pow(1 - t, 3);
   function step(ts) {
     if (start === null) start = ts;
     const p = Math.min((ts - start) / dur, 1);
-    el.textContent = (ease(p) * target).toFixed(1);
-    if (p < 1) requestAnimationFrame(step); else el.textContent = target.toFixed(1);
+    el.textContent = nf.format(Math.floor(ease(p) * target));
+    if (p < 1) requestAnimationFrame(step); else el.textContent = nf.format(target);
   }
   setTimeout(() => requestAnimationFrame(step), 400);
 })();

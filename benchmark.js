@@ -230,15 +230,25 @@
   }
 
   /* ---- behaviour factory + finalize ---- */
+  const MICRO = ['scans the page', 're-reads the prompt', 'scrolls to find it', 'hesitates', 'checks the field', 'waits for load', 'compares options', 'taps the wrong button'];
   function newBehavior() {
-    const persona = samplePersona(), pen = personaPenalty(persona), steps = target.steps, rewards = [], traj = [];
-    for (let s = 0; s < steps.length; s++) {
+    const persona = samplePersona(), pen = personaPenalty(persona), base = target.steps, rewards = [], traj = [];
+    let n = 1;
+    for (let i = 0; i < base.length; i++) {
+      if (Math.random() < 0.45) {                                   // optional pre-action — varies per agent
+        const rr = clamp01(0.9 - pen * 0.4 + (Math.random() - 0.5) * 0.12);
+        traj.push({ step: n++, observation: base[i], action: pick(MICRO), reward: +rr.toFixed(3) }); rewards.push(rr);
+      }
       const r = clamp01(0.88 - pen * (0.7 + Math.random() * 0.5) + (Math.random() - 0.5) * 0.14);
-      rewards.push(r); traj.push({ step: s + 1, observation: steps[s], action: ACTIONS[s % ACTIONS.length], reward: +r.toFixed(3) });
+      traj.push({ step: n++, observation: base[i], action: pick(ACTIONS), reward: +r.toFixed(3) }); rewards.push(r);
+      if (Math.random() < 0.12 + pen * 0.7) {                       // friction retry — more likely for hard personas
+        const rr = clamp01(0.5 - pen * 0.5 + (Math.random() - 0.5) * 0.16);
+        traj.push({ step: n++, observation: base[i] + ' — error, retry', action: 'retry', reward: +rr.toFixed(3) }); rewards.push(rr);
+      }
     }
     const score = rewards.reduce((a, b) => a + b, 0) / rewards.length;
     const verdict = score >= 0.7 ? 'pass' : score >= 0.5 ? 'watch' : 'fail';
-    return { persona, pen, region: regionFor(persona), steps, rewards, traj, score, verdict };
+    return { persona, pen, region: regionFor(persona), rewards, traj, score, verdict };
   }
   function finalize(b, id) {
     agg.n++; agg.rewardSum += b.score; if (b.verdict === 'pass') agg.pass++;
@@ -258,7 +268,7 @@
     div.className = 'con-line' + (cls ? ' ' + cls : '');
     div.innerHTML = html;
     conFeed.prepend(div);
-    while (conFeed.childElementCount > 60) conFeed.lastElementChild.remove();
+    while (conFeed.childElementCount > 90) conFeed.lastElementChild.remove();
   }
 
   /* ---- background swarm: many agents finishing continuously ---- */
@@ -283,14 +293,14 @@
   function renderFocusCards() {
     focusListEl.innerHTML = focus.map(f => {
       if (!f) return '';
-      const b = f.b, total = b.steps.length, done = f.step >= total;
-      const curObs = done ? 'complete' : b.steps[f.step];
-      const lastR = f.step > 0 ? b.rewards[f.step - 1] : null;
+      const b = f.b, total = b.traj.length, done = f.step >= total;
+      const cur = done ? null : b.traj[f.step];
+      const lastR = f.step > 0 ? b.traj[f.step - 1].reward : null;
       const prog = Math.round(Math.min(f.step, total) / total * 100);
       return `<div class="focus">
         <div class="f-top"><span class="f-id"><span class="foc">◉</span>AGENT#${pad(f.id, 4)}</span><span class="f-step">step ${Math.min(f.step + (done ? 0 : 1), total)}/${total}</span></div>
         <div class="f-persona">${personaLabel(b.persona)}</div>
-        <div class="f-now">▸ <b>${curObs}</b>${lastR != null ? ` · r=${lastR.toFixed(2)}` : ''}</div>
+        <div class="f-now">▸ <b>${done ? 'complete' : cur.observation}</b>${cur ? ` · ${cur.action}` : ''}${lastR != null ? ` · r=${lastR.toFixed(2)}` : ''}</div>
         <div class="f-bar"><i style="width:${prog}%"></i></div>
       </div>`;
     }).join('');
@@ -301,15 +311,15 @@
       let f = focus[idx];
       if (!f) { focus[idx] = spawnFocus(); continue; }
       const b = f.b;
-      if (f.step < b.steps.length) {
-        const obs = b.steps[f.step], r = b.rewards[f.step], act = b.traj[f.step].action;
+      if (f.step < b.traj.length) {
+        const it = b.traj[f.step], r = it.reward;
         const rc = r >= 0.7 ? 'ok' : r >= 0.5 ? 'mid' : 'bad';
-        conLine(`<span class="t">[${nowStr()}]</span> <span class="foc">◉</span> <span class="ag">AGENT#${pad(f.id, 4)}</span> <span class="st">step ${f.step + 1}/${b.steps.length}</span> <span class="obs">obs:"${obs}"</span> → <span class="act">${act}</span> <span class="rw ${rc}">r=${r.toFixed(2)}</span>`);
+        conLine(`<span class="t">[${nowStr()}]</span> <span class="foc">◉</span> <span class="ag">AGENT#${pad(f.id, 4)}</span> <span class="st">step ${f.step + 1}/${b.traj.length}</span> <span class="obs">obs:"${it.observation}"</span> → <span class="act">${it.action}</span> <span class="rw ${rc}">r=${r.toFixed(2)}</span>`);
         f.step++;
       } else {
         finalize(b, f.id);
         const vc = b.verdict === 'pass' ? 'done' : b.verdict === 'watch' ? 'rw mid' : 'rw bad';
-        conLine(`<span class="t">[${nowStr()}]</span> <span class="foc">◉</span> <span class="ag">AGENT#${pad(f.id, 4)}</span> <span class="${vc}">⮑ ${b.verdict.toUpperCase()}</span> score=${b.score.toFixed(2)} · ${b.steps.length} steps · region:${b.region}`);
+        conLine(`<span class="t">[${nowStr()}]</span> <span class="foc">◉</span> <span class="ag">AGENT#${pad(f.id, 4)}</span> <span class="${vc}">⮑ ${b.verdict.toUpperCase()}</span> score=${b.score.toFixed(2)} · ${b.traj.length} steps · region:${b.region}`);
         focus[idx] = spawnFocus();
       }
     }
