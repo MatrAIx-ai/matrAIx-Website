@@ -1,0 +1,65 @@
+window.MATRAIX_DIMENSIONS = {
+  "schemaVersion": "1.0",
+  "name": "matrAIx Persona Dimension Space",
+  "headlineBehaviors": 8300000000,
+  "targetDimensions": 1000,
+  "note": "Flat unified dimension set. Every sampled persona is assigned exactly one value per dimension. The 'category' tag is for UI grouping/filtering only — it does not nest the schema. The full reachable persona space is the product of all value counts; the 8.3B headline is the corpus of behaviors already simulated within it.",
+  "dimensions": [
+    { "id": "age_bracket", "label": "Age bracket", "category": "Demographic", "description": "Life-age band of the persona.", "values": ["13–17", "18–24", "25–34", "35–44", "45–54", "55–64", "65+"] },
+    { "id": "region", "label": "Region", "category": "Demographic", "description": "World region the persona is based in.", "values": ["North America", "Latin America", "Western Europe", "Eastern Europe", "Sub-Saharan Africa", "MENA", "South Asia", "East Asia", "Southeast Asia", "Oceania"] },
+    { "id": "gender_identity", "label": "Gender identity", "category": "Demographic", "description": "Self-identified gender.", "values": ["Woman", "Man", "Non-binary", "Self-described", "Prefer not to say"] },
+    { "id": "urbanicity", "label": "Urbanicity", "category": "Demographic", "description": "Settlement density of where they live.", "values": ["Dense urban", "Suburban", "Small town", "Rural", "Nomadic / remote"] },
+    { "id": "socioeconomic_band", "label": "Socioeconomic band", "category": "Demographic", "description": "Relative income/wealth band.", "values": ["Low income", "Lower-middle", "Middle", "Upper-middle", "High income"] },
+
+    { "id": "primary_language", "label": "Primary language", "category": "Linguistic", "description": "First / dominant language.", "values": ["English", "Mandarin", "Spanish", "Hindi", "Arabic", "French", "Portuguese", "Bengali", "Russian", "Japanese", "German", "Swahili"] },
+    { "id": "english_proficiency", "label": "English proficiency", "category": "Linguistic", "description": "Command of English (the eval lingua franca).", "values": ["Native", "Fluent (C1–C2)", "Intermediate (B1–B2)", "Basic (A1–A2)", "None"] },
+    { "id": "multilingualism", "label": "Multilingualism", "category": "Linguistic", "description": "Number of working languages.", "values": ["Monolingual", "Bilingual", "Trilingual+"] },
+    { "id": "register", "label": "Dialect / register", "category": "Linguistic", "description": "Default speech register.", "values": ["Formal / standard", "Colloquial", "Regional dialect", "Code-switching", "Technical jargon"] },
+
+    { "id": "domain", "label": "Domain", "category": "Domain", "description": "Primary field of work or study.", "values": ["Software & AI", "Healthcare & Medicine", "Law & Policy", "Finance & Economics", "Education", "Engineering", "Natural Sciences", "Social Sciences", "Arts & Humanities", "Business & Management", "Agriculture", "Manufacturing", "Media & Journalism", "Public Sector", "Hospitality", "Skilled Trades"] },
+    { "id": "subject_specialty", "label": "Subject specialty", "category": "Domain", "description": "Specific specialty within the domain.", "values": ["Machine learning", "Cardiology", "Constitutional law", "Quant trading", "Curriculum design", "Structural engineering", "Molecular biology", "Behavioral economics", "Comparative literature", "Operations", "Agronomy", "Robotics", "Investigative reporting", "Urban planning", "Culinary arts", "Electrical work"] },
+    { "id": "domain_characteristics", "label": "Domain stance", "category": "Domain", "description": "Relationship to their field.", "values": ["Cutting-edge researcher", "Practitioner", "Educator", "Student", "Hobbyist", "Skeptic / critic", "Cross-disciplinary"] },
+
+    { "id": "highest_education", "label": "Highest education", "category": "Academic", "description": "Highest level of formal education completed.", "values": ["No formal", "Primary", "Secondary", "Vocational / cert", "Bachelor's", "Master's", "Doctorate", "Postdoc"] },
+    { "id": "academic_field", "label": "Academic field", "category": "Academic", "description": "Field of formal study.", "values": ["STEM", "Medicine", "Law", "Business", "Humanities", "Social science", "Arts", "Interdisciplinary"] },
+    { "id": "institution_tier", "label": "Institution tier", "category": "Academic", "description": "Type/prestige of the educating institution.", "values": ["Top-tier research", "Mid-tier university", "Community college", "Online / bootcamp", "Self-taught", "Not applicable"] },
+    { "id": "research_output", "label": "Research output", "category": "Academic", "description": "Scholarly/published footprint.", "values": ["Prolific publisher", "Occasional author", "Industry whitepapers", "Thesis only", "None"] },
+
+    { "id": "seniority", "label": "Seniority", "category": "Professional", "description": "Career level (LinkedIn-style).", "values": ["Student / intern", "Entry", "Mid", "Senior", "Lead / Principal", "Manager", "Director", "VP", "C-suite", "Founder", "Retired"] },
+    { "id": "company_size", "label": "Company size", "category": "Professional", "description": "Size/type of employing organization.", "values": ["Solo / freelance", "Startup (<50)", "SMB (50–500)", "Mid (500–5k)", "Enterprise (5k+)", "Public sector", "Academia", "NGO"] },
+    { "id": "role_function", "label": "Role function", "category": "Professional", "description": "Job function.", "values": ["Engineering", "Product", "Research", "Design", "Sales / GTM", "Marketing", "Operations", "Finance", "HR", "Legal", "Clinical", "Teaching", "Executive"] },
+    { "id": "years_experience", "label": "Years experience", "category": "Professional", "description": "Tenure in their field.", "values": ["0–2", "3–5", "6–10", "11–20", "20+"] },
+    { "id": "linkedin_activity", "label": "LinkedIn activity", "category": "Professional", "description": "Professional-network behavior.", "values": ["Thought leader", "Active networker", "Lurker", "Job seeker", "Recruiter", "Inactive"] },
+
+    { "id": "life_stage", "label": "Life stage", "category": "Life Experience", "description": "Current stage of life.", "values": ["Student", "Early career", "Parent of young kids", "Mid-life", "Career change", "Empty nester", "Retirement"] },
+    { "id": "major_life_events", "label": "Major life events", "category": "Life Experience", "description": "Defining experience shaping their outlook.", "values": ["Migration / immigration", "Started a business", "Health journey", "Military service", "Caregiving", "Bereavement", "Major relocation", "None notable"] },
+    { "id": "cultural_background", "label": "Cultural background", "category": "Life Experience", "description": "Cultural frame of reference.", "values": ["Individualist (Western)", "Collectivist (East Asian)", "South Asian", "Latin", "African", "Middle Eastern", "Indigenous", "Mixed / diaspora"] },
+    { "id": "tech_savviness", "label": "Tech savviness", "category": "Life Experience", "description": "Comfort with technology.", "values": ["Digital native", "Comfortable", "Cautious adopter", "Reluctant", "Avoidant"] },
+
+    { "id": "dominant_trait", "label": "Dominant trait", "category": "Psychographic", "description": "Most pronounced Big-Five-style trait.", "values": ["High openness", "High conscientiousness", "High extraversion", "High agreeableness", "High neuroticism", "Balanced"] },
+    { "id": "risk_tolerance", "label": "Risk tolerance", "category": "Psychographic", "description": "Appetite for risk.", "values": ["Risk-averse", "Cautious", "Balanced", "Risk-tolerant", "Risk-seeking"] },
+    { "id": "decision_style", "label": "Decision style", "category": "Psychographic", "description": "How they reach decisions.", "values": ["Analytical", "Intuitive", "Consensus-driven", "Directive", "Deliberative"] },
+    { "id": "values_priority", "label": "Core value", "category": "Psychographic", "description": "Top personal value.", "values": ["Achievement", "Security", "Autonomy", "Community", "Novelty", "Tradition"] },
+    { "id": "political_lean", "label": "Political lean", "category": "Psychographic", "description": "Broad political orientation.", "values": ["Left", "Center-left", "Center", "Center-right", "Right", "Apolitical"] },
+    { "id": "religiosity", "label": "Religiosity", "category": "Psychographic", "description": "Relationship to religion.", "values": ["Secular", "Spiritual", "Observant", "Devout", "Prefer not to say"] },
+    { "id": "neurotype", "label": "Neurotype", "category": "Psychographic", "description": "Cognitive profile.", "values": ["Neurotypical", "ADHD", "Autistic", "Dyslexic", "Anxiety-prone", "Other"] },
+
+    { "id": "emotional_state", "label": "Emotional state", "category": "Interaction", "description": "Mood at the moment of interaction.", "values": ["Calm", "Curious", "Frustrated", "Anxious", "Excited", "Skeptical", "Urgent"] },
+    { "id": "intent", "label": "Intent", "category": "Interaction", "description": "What they want from the agent.", "values": ["Learn / explain", "Get task done", "Brainstorm", "Debug / troubleshoot", "Decide", "Vent / support", "Probe / red-team", "Verify a claim"] },
+    { "id": "query_complexity", "label": "Query complexity", "category": "Interaction", "description": "Shape of the request.", "values": ["Simple factual", "Multi-step", "Ambiguous / underspecified", "Adversarial", "Open-ended creative"] },
+    { "id": "expertise_gap", "label": "Expertise gap", "category": "Interaction", "description": "Their expertise relative to the task.", "values": ["Novice asking expert", "Peer-level", "Expert testing the system", "Teaching the model"] },
+    { "id": "tone_expected", "label": "Expected tone", "category": "Interaction", "description": "Tone they want back.", "values": ["Concise", "Detailed", "Warm / empathetic", "Formal", "Playful", "Blunt"] },
+    { "id": "trust_level", "label": "Trust level", "category": "Interaction", "description": "How much they trust the agent.", "values": ["Trusting", "Verifying", "Skeptical", "Hostile"] },
+    { "id": "safety_sensitivity", "label": "Safety sensitivity", "category": "Interaction", "description": "Risk class of the request.", "values": ["Benign", "Sensitive personal", "High-stakes (medical/legal/financial)", "Potentially harmful", "Dual-use"] },
+    { "id": "time_pressure", "label": "Time pressure", "category": "Interaction", "description": "Urgency of the need.", "values": ["No rush", "Moderate", "Deadline", "Emergency"] },
+    { "id": "prior_context", "label": "Prior context", "category": "Interaction", "description": "History with the agent.", "values": ["Cold start", "Returning user", "Long ongoing project", "Frustrated re-ask"] },
+    { "id": "device_context", "label": "Device context", "category": "Interaction", "description": "Where/how they're interacting.", "values": ["Desktop, focused", "Mobile, on-the-go", "Voice assistant", "Accessibility tool", "Low-bandwidth"] },
+    { "id": "modality_pref", "label": "Modality preference", "category": "Interaction", "description": "Preferred answer format.", "values": ["Text", "Code", "Visual / diagram", "Tabular", "Step-by-step", "Examples-first"] },
+    { "id": "accessibility_needs", "label": "Accessibility needs", "category": "Interaction", "description": "Accommodations required.", "values": ["None", "Visual", "Hearing", "Motor", "Cognitive / neurodivergent", "Language barrier"] },
+
+    { "id": "learning_style", "label": "Learning style", "category": "Psychographic", "description": "How they best absorb information.", "values": ["Visual", "Auditory", "Reading / writing", "Kinesthetic", "Mixed"] },
+    { "id": "media_diet", "label": "Media diet", "category": "Psychographic", "description": "Primary information sources.", "values": ["Academic journals", "News", "Social-media-heavy", "Long-form", "Video-first", "Minimal"] },
+    { "id": "economic_motivation", "label": "Economic motivation", "category": "Psychographic", "description": "Spending posture.", "values": ["Cost-sensitive", "Value-driven", "Premium-seeking", "Indifferent"] }
+  ]
+}
+;
