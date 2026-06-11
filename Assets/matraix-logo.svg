@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 72" role="img" aria-label="matrAIx">
+  <!-- mark: ▚ quadrant grid -->
+  <g>
+    <rect x="6" y="14" width="20" height="20" rx="2" fill="none" stroke="#c8d6cf" stroke-width="2"/>
+    <rect x="30" y="14" width="20" height="20" rx="2" fill="#0e7c5a"/>
+    <rect x="6" y="38" width="20" height="20" rx="2" fill="#0e7c5a"/>
+    <rect x="30" y="38" width="20" height="20" rx="2" fill="none" stroke="#c8d6cf" stroke-width="2"/>
+  </g>
+  <text x="66" y="52" font-family="Syne, 'Arial Black', 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="42" letter-spacing="-1">
+    <tspan fill="#141414">matr</tspan><tspan fill="#0e7c5a">AI</tspan><tspan fill="#141414">x</tspan>
+  </text>
+</svg>
