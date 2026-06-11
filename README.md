@@ -14,6 +14,7 @@ the persona **dimension schema** that defines the space those agents are sampled
 | Landing | [`index.html`](index.html) | Hero with the 8.3-billion-behavior headline and a live agent-field simulation (canvas), telemetry strip, and eval methodology. |
 | Dimension Explorer | [`explorer.html`](explorer.html) | Browse the flat persona schema: filter by category, search, expand value pools, and sample a full synthetic persona. |
 | Benchmark Portal (matrAIx OS) | [`benchmark.html`](benchmark.html) | A mission-control interface: a live "Neural Eval Core" brain visualization, an agent swarm simulating the selected app/website, streaming trajectory telemetry, switchable reports (A/B, segments, score distribution, heatmap, findings), and JSONL trajectory export. |
+| Agent Walkthrough | [`walkthrough.html`](walkthrough.html) | A recorded sample trajectory: a matrAIx computer-using agent (10-dimension persona) files an auto-insurance claim on hugclaim.com, with per-step screenshots, observations, actions, rewards, friction findings, and a JSONL export. |
 | Pitch Deck | [`deck.html`](deck.html) | Self-contained investor deck (15 slides) matching the site's dark phosphor design. Arrow-key / swipe navigation, `F` for fullscreen. Business-specific figures are marked as illustrative placeholders to fill in. |
 
 No build step — open `index.html` in a browser, or serve the folder:
