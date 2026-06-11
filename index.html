@@ -4,98 +4,133 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>matrAIx — Agent Simulation for Evaluation</title>
-  <meta name="description" content="matrAIx simulates populations of AI agents across 1,000 persona dimensions and scores every behavior — evaluating capability, alignment, and failure modes at the scale of 8.3 billion behaviors." />
+  <meta name="description" content="matrAIx runs Agent Simulation for Evaluation: 8.3 Billion behaviors across 1,000 persona dimensions — generating segmented A/B reports and high-quality SFT and RL training data." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="home.css" />
 </head>
 <body>
+  <!-- Background simulation layers -->
+  <canvas id="sim" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
   <header class="nav">
     <a class="brand" href="/">matr<span class="ai">AI</span>x</a>
     <nav class="nav-links" aria-label="Primary">
+      <a href="#reports">Reports</a>
+      <a href="#data">Training data</a>
       <a href="explorer.html">Dimensions</a>
       <a href="benchmark.html">Benchmark</a>
-      <a href="#how">How it works</a>
     </nav>
-    <a href="#contact" class="btn btn-primary nav-cta">Request access</a>
+    <a href="mailto:info@matraix.ai?subject=Request%20a%20matrAIx%20demo" class="btn btn-solid nav-cta">
+      <span class="dot live"></span> Request access
+    </a>
   </header>
 
   <main>
     <!-- Hero -->
     <section class="hero">
-      <span class="eyebrow"><i class="dot"></i> Evaluation infrastructure for autonomous agents</span>
-      <h1 class="headline">Agent simulation<br />for evaluation.</h1>
-      <p class="lede">
-        We simulate populations of AI agents across <strong>1,000 persona dimensions</strong>,
-        let them act in realistic worlds, and score every decision — so you can evaluate
-        capability, alignment, and failure modes before they ship.
-      </p>
+      <div class="eyebrow">
+        <span class="tick">//</span> EVALUATION ENGINE
+        <span class="ver">v4.8</span>
+        <span class="sep">—</span>
+        <span class="status"><span class="dot live"></span> CLUSTER ONLINE</span>
+      </div>
+
+      <h1 class="headline">
+        <span class="line">Agent Simulation</span>
+        <span class="line dim">for Evaluation</span>
+      </h1>
 
       <div class="hero-stat">
-        <span class="stat-num"><span id="count">0.0</span>B</span>
-        <span class="stat-cap"><strong id="countFull">8,300,000,000</strong> behaviors simulated &amp; scored</span>
+        <span class="megacount">
+          <span class="count" id="count">0.0</span>
+          <span class="count-unit">Billion</span>
+        </span>
+        <span class="stat-cap">behaviors simulated &amp; scored across <strong>1,000 Persona dimensions</strong></span>
       </div>
+
+      <p class="subhead">
+        We spin up populations of AI agents, turn them loose on your app, and score
+        every interaction — producing segmented A/B reports and high-quality training data.
+      </p>
 
       <div class="cta-row">
-        <a href="#contact" class="btn btn-primary btn-lg">Request access</a>
-        <a href="explorer.html" class="btn btn-ghost btn-lg">Explore the dataset <span class="arr">→</span></a>
+        <a href="mailto:info@matraix.ai?subject=Request%20a%20matrAIx%20demo" class="btn btn-solid btn-lg">Request access <span class="arr">→</span></a>
+        <a href="#reports" class="btn btn-ghost btn-lg">See a sample report</a>
+      </div>
+
+      <div class="telemetry">
+        <div class="tele-cell"><span class="tele-label">behaviors / sec</span><span class="tele-val" data-stream="rate">412,880</span></div>
+        <div class="tele-cell"><span class="tele-label">active agents</span><span class="tele-val" data-stream="agents">2,048,512</span></div>
+        <div class="tele-cell"><span class="tele-label">eval pass rate</span><span class="tele-val" data-stream="pass">94.7%</span></div>
+        <div class="tele-cell"><span class="tele-label">worlds in flight</span><span class="tele-val" data-stream="worlds">16,384</span></div>
       </div>
     </section>
 
-    <!-- Proof stats -->
-    <section class="stats" aria-label="Key figures">
-      <div class="stat">
-        <span class="s-num">1,000</span>
-        <span class="s-lab">persona dimensions</span>
+    <!-- A/B report viewer -->
+    <section class="panel reports" id="reports">
+      <div class="sec-head">
+        <span class="idx">01 — REPORTS</span>
+        <h2 class="sec-title">See the report before you ship.</h2>
+        <p class="sec-sub">Thousands of agents run both variants. You get a verdict broken down by the Persona segments that matter — and the exact friction they hit.</p>
+        <div class="target-chips">
+          <span class="chip">Web apps</span><span class="chip">Checkout</span><span class="chip">Onboarding</span>
+          <span class="chip">AI assistants</span><span class="chip">Search</span><span class="chip">Accessibility</span>
+        </div>
       </div>
-      <div class="stat">
-        <span class="s-num">8.3B</span>
-        <span class="s-lab">scored behaviors</span>
-      </div>
-      <div class="stat">
-        <span class="s-num">Open</span>
-        <span class="s-lab">sample, free to download</span>
+      <div class="report-card">
+        <div class="report-tabs" id="reportTabs" role="tablist"></div>
+        <div class="report-body" id="reportBody"></div>
       </div>
     </section>
 
-    <!-- How it works -->
-    <section class="how" id="how">
-      <h2 class="sec-title">Three stages, fully instrumented.</h2>
-      <div class="steps">
-        <article class="step">
-          <span class="step-n">01</span>
-          <h3>Spawn</h3>
-          <p>Draw agents from a 1,000-dimension space — language, age, domain, expertise, intent and more.</p>
-        </article>
-        <article class="step">
-          <span class="step-n">02</span>
-          <h3>Simulate</h3>
-          <p>Run them through realistic and adversarial tasks. Every action and decision is captured.</p>
-        </article>
-        <article class="step">
-          <span class="step-n">03</span>
-          <h3>Score</h3>
-          <p>Grade each behavior against rubrics to surface regressions, exploits, and failure modes.</p>
-        </article>
+    <!-- Training data -->
+    <section class="panel data" id="data">
+      <div class="sec-head">
+        <span class="idx">02 — TRAINING DATA</span>
+        <h2 class="sec-title">Every run becomes training data.</h2>
+        <p class="sec-sub">Each agent session is a structured, rubric-scored trace — rejection-sampled for SFT and paired for RL.</p>
+      </div>
+      <div class="data-grid">
+        <div class="data-panel">
+          <div class="data-toggle" id="dataToggle">
+            <button class="dt-btn active" data-kind="sft">SFT trajectory</button>
+            <button class="dt-btn" data-kind="rl">RL preference pair</button>
+          </div>
+          <pre class="data-sample"><code id="dataSample"></code></pre>
+        </div>
+        <ul class="data-points">
+          <li><strong>Structured traces</strong> — observation → action → outcome for every agent.</li>
+          <li><strong>Rubric-scored</strong> — keep only high-quality trajectories.</li>
+          <li><strong>Preference pairs</strong> — chosen vs. rejected, ready for DPO / RLHF.</li>
+          <li><strong>Persona-tagged</strong> — train on the exact segments you care about.</li>
+          <li><strong>Streaming export</strong> — JSONL straight into your training stack.</li>
+        </ul>
       </div>
     </section>
 
     <!-- Closing CTA -->
-    <section class="contact" id="contact">
-      <h2 class="closing">Evaluate your agents before the world does.</h2>
-      <a href="mailto:hello@matraix.ai" class="btn btn-primary btn-lg">Request access</a>
+    <section class="closing" id="contact">
+      <h2>Evaluate your agents <span>before</span> the world does.</h2>
+      <p class="closing-sub">Request a demo or ask us anything.</p>
+      <a href="mailto:info@matraix.ai?subject=Request%20a%20matrAIx%20demo" class="btn btn-solid btn-lg">Request access — info@matraix.ai</a>
     </section>
   </main>
 
   <footer class="foot">
     <span class="brand small">matr<span class="ai">AI</span>x</span>
     <span class="foot-links">
+      <a href="#reports">Reports</a>
+      <a href="#data">Training data</a>
       <a href="explorer.html">Dimensions</a>
       <a href="benchmark.html">Benchmark</a>
-      <a href="mailto:hello@matraix.ai">Contact</a>
+      <a href="mailto:info@matraix.ai?subject=matrAIx%20enquiry">Contact</a>
     </span>
-    <span class="foot-meta">© 2026 matrAIx</span>
+    <span class="foot-meta">SIM-NODE 07 · © 2026 matrAIx</span>
   </footer>
 
   <script src="home.js"></script>

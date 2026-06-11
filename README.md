@@ -98,9 +98,9 @@ readable LinkedIn-style summary, and offers the result as JSON:
 ## Files
 
 ```
-index.html        Landing page markup (investor-facing)
-home.css          Landing page styling — warm light theme, Fraunces + Hanken Grotesk
-home.js           Hero stat count-up
+index.html        Landing page markup
+home.css          Landing page styling — dark phosphor console (Syne + JetBrains Mono)
+home.js           Agent-field sim, count-up, telemetry, A/B report viewer, SFT/RL toggle
 styles.css        Shared console styling for the tool pages (CSS variables, base look)
 explorer.html     Dimension explorer markup
 explorer.css      Explorer-specific styling
