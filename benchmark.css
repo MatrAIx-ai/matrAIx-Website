@@ -343,3 +343,43 @@ a { color: inherit; text-decoration: none; }
 .gr-sev.med { background: rgba(255,181,71,.16); color: var(--amber); }
 .gr-sev.low { background: rgba(84,246,166,.13); color: var(--phos); }
 @media (max-width:600px){ .gr-table th,.gr-table td{ padding-left:8px; padding-right:8px; font-size:.9rem; } .gr-lift{ font-size:1.8rem; } }
+.gr-print { margin-top: 18px; font-family: var(--mono); font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; color: var(--phos); background: transparent; border: 1px solid var(--line); padding: 9px 18px; cursor: pointer; transition: all .2s; }
+.gr-print:hover { border-color: var(--phos); box-shadow: inset 0 0 14px rgba(84,246,166,.1); }
+.print-head, .print-foot { display: none; }
+
+/* ---------- Print: clean light marketing report ---------- */
+@media print {
+  body > *:not(#reports) { display: none !important; }
+  html, body { background: #fff !important; }
+  #reports { display: block !important; position: static; max-width: none; margin: 0; padding: 0; border: none;
+    color: #1c1c1c; font-family: system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif; }
+  .gr-head, .gr-tabs, .gr-print { display: none !important; }
+  .print-head { display: block !important; border-bottom: 2px solid #0e7c5a; padding-bottom: 14px; margin-bottom: 22px; }
+  .ph-brand { font-family: "Syne", sans-serif; font-weight: 800; font-size: 22pt; color: #111; letter-spacing: -.02em; }
+  .ph-brand em { color: #0e7c5a; font-style: normal; }
+  .ph-title { font-family: "Syne", sans-serif; font-weight: 700; font-size: 15pt; color: #111; margin-top: 6px; }
+  .ph-meta { font-size: 9.5pt; color: #666; margin-top: 5px; }
+  .gr-card { border: none !important; background: #fff !important; box-shadow: none !important; overflow: visible; }
+  .gr-body { padding: 0 !important; }
+  .gr-meta { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+  .gr-target { font-family: "Syne", sans-serif; font-weight: 700; font-size: 14pt; color: #111; }
+  .gr-variants { color: #444; font-size: 10pt; } .gr-variants b { color: #0e7c5a; }
+  .gr-agents { color: #555; border: 1px solid #ddd; font-size: 8.5pt; }
+  .gr-verdict { background: #eef7f2 !important; border: 1px solid #bfe3d2 !important; padding: 14px 18px; margin-bottom: 18px; page-break-inside: avoid; }
+  .gr-badge { background: #0e7c5a !important; color: #fff !important; }
+  .gr-lift { color: #0e7c5a !important; text-shadow: none !important; font-size: 22pt; }
+  .gr-metric { color: #555 !important; }
+  .gr-table { font-size: 10.5pt; page-break-inside: avoid; }
+  .gr-table th { color: #666 !important; border-bottom: 1px solid #ccc !important; }
+  .gr-table td { color: #222 !important; border-bottom: 1px solid #eee !important; }
+  .gr-table td.seg { color: #111 !important; }
+  .gr-table td.win { color: #0e7c5a !important; background: #f0f8f4 !important; }
+  .gr-table td.up { color: #0e7c5a !important; } .gr-table td.down { color: #c0392b !important; }
+  .gr-find h4 { color: #666 !important; }
+  .gr-fi { color: #222 !important; font-size: 10.5pt; page-break-inside: avoid; }
+  .gr-sev.high { background: #fbe9e7 !important; color: #c0392b !important; }
+  .gr-sev.med { background: #fdf3e0 !important; color: #b7791f !important; }
+  .gr-sev.low { background: #eef7f2 !important; color: #0e7c5a !important; }
+  .print-foot { display: block !important; margin-top: 26px; padding-top: 12px; border-top: 1px solid #ddd; font-size: 8.5pt; color: #777; text-align: center; }
+  @page { margin: 16mm; }
+}
