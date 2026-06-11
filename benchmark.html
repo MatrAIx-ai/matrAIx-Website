@@ -8,11 +8,36 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="benchmark.css?v=4" />
+  <link rel="stylesheet" href="benchmark.css?v=5" />
 </head>
 <body class="os">
   <div class="grain" aria-hidden="true"></div>
   <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- HERO: agent runway -->
+  <section class="runway">
+    <header class="runway-bar">
+      <a class="runway-brand" href="index.html"><span class="mk">▚</span>matr<span class="ai">AI</span>x<span class="tld">.ai</span></a>
+      <nav class="runway-nav"><a href="index.html">Home</a><a href="explorer.html">Dimensions</a><a href="walkthrough.html">Walkthrough</a><a href="#portal">Portal ▾</a></nav>
+    </header>
+    <div class="runway-stage">
+      <canvas id="runway" aria-hidden="true"></canvas>
+      <div class="runway-hud">
+        <h1>600+ agents. <span class="hl">One benchmark.</span></h1>
+        <p>Every agent runs your flow as a live data point — the fast ones glide straight through, the slow ones stall at the friction points.</p>
+      </div>
+      <div class="runway-stats">
+        <div class="rstat"><b id="rAgents">620+</b><span>agents running</span></div>
+        <div class="rstat"><b id="rRate">—</b><span>finishing / sec</span></div>
+        <div class="rstat"><b id="rSmooth">—</b><span>smooth</span></div>
+        <div class="rstat"><b id="rStall">—</b><span>stalled</span></div>
+      </div>
+      <a class="scrollcue" href="#portal">▼ open the evaluation portal</a>
+    </div>
+  </section>
+
+  <!-- PORTAL -->
+  <section class="portal" id="portal">
 
   <!-- System bar -->
   <div class="os-bar">
@@ -81,8 +106,57 @@
     <div class="win-bar"><span>Trajectory Telemetry</span><span id="conMeta">obs = what the agent sees · act = what it does · r = step reward (0–1)</span></div>
     <div class="con-feed" id="conFeed"></div>
   </section>
+  </section>
 
   <script src="dimensions.js?v=3"></script>
-  <script src="benchmark.js?v=4"></script>
+  <script src="benchmark.js?v=5"></script>
+  <script>
+  /* ---------- Runway hero: 600+ agents racing the flow as data points ---------- */
+  (function(){
+    var canvas=document.getElementById('runway'); if(!canvas) return;
+    var ctx=canvas.getContext('2d');
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var w=0,h=0,PADX=64,PADT=150,PADB=88,agents=[],N=620;
+    var STAGES=[{x:0.14,name:'LAND'},{x:0.32,name:'EVIDENCE',fric:0.9},{x:0.50,name:'ESTIMATE'},{x:0.68,name:'VERIFY',fric:0.96},{x:0.86,name:'SUBMIT'}];
+    var rnd=function(a,b){return a+Math.random()*(b-a);};
+    function spawn(fromStart){ return {x: fromStart? rnd(-0.05,0): Math.random(), y: Math.random(), base: rnd(0.06,0.20), skill: Math.random(), jit: rnd(0.8,1.2)}; }
+    function resize(){ var r=canvas.getBoundingClientRect(); w=canvas.width=r.width; h=canvas.height=r.height; if(!agents.length) agents=Array.from({length:N},function(){return spawn(false);}); }
+    function TX(x){ return PADX + x*(w-2*PADX); }
+    function TY(y){ return PADT + y*(h-PADT-PADB); }
+    function mult(a){ var m=1; for(var i=0;i<STAGES.length;i++){ var s=STAGES[i]; if(!s.fric) continue; var d=Math.abs(a.x-s.x); if(d<0.055){ var hard=s.fric*(1-a.skill); m=Math.min(m, 1-hard*(1-d/0.055)); } } return m; }
+    var rate=0,lastSec=0,finN=0;
+    function set(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; }
+    function frame(ts){
+      ctx.clearRect(0,0,w,h);
+      ctx.textAlign='center'; ctx.font='10px "JetBrains Mono",monospace';
+      for(var i=0;i<STAGES.length;i++){ var sx=TX(STAGES[i].x);
+        ctx.strokeStyle=STAGES[i].fric?'rgba(255,181,71,0.16)':'rgba(84,246,166,0.08)'; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(sx,TY(0)-8); ctx.lineTo(sx,TY(1)+8); ctx.stroke();
+        ctx.fillStyle=STAGES[i].fric?'rgba(255,181,71,0.55)':'rgba(111,130,115,0.7)';
+        ctx.fillText(STAGES[i].name+(STAGES[i].fric?' ⚠':''), sx, TY(1)+22); }
+      var fx=TX(1)+4; ctx.setLineDash([5,5]); ctx.strokeStyle='rgba(84,246,166,0.5)';
+      ctx.beginPath(); ctx.moveTo(fx,TY(0)-8); ctx.lineTo(fx,TY(1)+8); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle='rgba(84,246,166,0.6)'; ctx.fillText('FINISH', fx, TY(0)-16);
+      var smooth=0,stall=0;
+      for(var k=0;k<agents.length;k++){ var a=agents[k]; var m=mult(a)*a.jit;
+        a.x += a.base*m*0.016;
+        var col; if(m>0.78){col='#54f6a6';smooth++;} else if(m>0.4){col='#ffb547';} else {col='#ff5c6c';stall++;}
+        if(a.x>=1.02){ finN++; var s=spawn(true); a.x=s.x;a.y=s.y;a.base=s.base;a.skill=s.skill;a.jit=s.jit; continue; }
+        var px=TX(a.x>1?1:a.x), py=TY(a.y);
+        if(m>0.78){ ctx.strokeStyle='rgba(84,246,166,0.22)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(px-13,py); ctx.lineTo(px,py); ctx.stroke(); }
+        ctx.fillStyle=col; ctx.shadowBlur=m>0.78?7:0; ctx.shadowColor=col;
+        ctx.beginPath(); ctx.arc(px,py,2.1,0,6.283); ctx.fill();
+      }
+      ctx.shadowBlur=0;
+      if(!lastSec) lastSec=ts;
+      if(ts-lastSec>=1000){ rate=finN/((ts-lastSec)/1000); finN=0; lastSec=ts;
+        set('rRate',Math.round(rate)); set('rSmooth',Math.round(smooth/N*100)+'%'); set('rStall',Math.round(stall/N*100)+'%'); }
+      requestAnimationFrame(frame);
+    }
+    resize(); window.addEventListener('resize',resize); set('rAgents', N+'+');
+    if(!reduce) requestAnimationFrame(frame);
+    else { for(var k=0;k<agents.length;k++){var a=agents[k];ctx.fillStyle='#54f6a6';ctx.globalAlpha=0.6;ctx.beginPath();ctx.arc(TX(a.x),TY(a.y),2,0,6.283);ctx.fill();} }
+  })();
+  </script>
 </body>
 </html>

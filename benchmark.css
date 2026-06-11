@@ -30,10 +30,35 @@ body.os {
   font-family: var(--mono);
   font-size: 13px;
   line-height: 1.45;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
 }
+.portal { min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ---------- Runway hero ---------- */
+.runway { position: relative; z-index: 4; height: 100vh; display: flex; flex-direction: column; overflow: hidden;
+  border-bottom: 1px solid var(--line); background: radial-gradient(120% 90% at 50% 18%, rgba(84,246,166,0.045), transparent 60%); }
+.runway-bar { position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 16px clamp(16px,4vw,40px); border-bottom: 1px solid var(--line-soft); }
+.runway-brand { font-family: var(--disp); font-weight: 800; font-size: 1.15rem; color: var(--ink); display: inline-flex; align-items: center; gap: .3em; }
+.runway-brand .mk { color: var(--phos); text-shadow: var(--glow); }
+.runway-brand .ai { color: var(--phos); text-shadow: var(--glow); }
+.runway-brand .tld { color: var(--ink-dim); font-weight: 600; }
+.runway-nav { display: flex; gap: 20px; font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-dim); }
+.runway-nav a:hover { color: var(--phos); }
+.runway-stage { position: relative; flex: 1; min-height: 0; }
+#runway { position: absolute; inset: 0; width: 100%; height: 100%; }
+.runway-hud { position: absolute; left: 0; right: 0; top: 0; padding: clamp(20px,5vw,52px) clamp(20px,5vw,52px) 0; pointer-events: none; z-index: 3; }
+.runway-hud h1 { font-family: var(--disp); font-weight: 800; font-size: clamp(2rem,5.5vw,4rem); letter-spacing: -.03em; line-height: 1; margin-bottom: 14px; }
+.runway-hud h1 .hl { color: var(--phos); text-shadow: var(--glow); }
+.runway-hud p { color: var(--ink-dim); font-size: clamp(.95rem,1.7vw,1.12rem); max-width: 600px; line-height: 1.5; }
+.runway-stats { position: absolute; left: 0; right: 0; bottom: 52px; z-index: 3; display: flex; justify-content: center; pointer-events: none; }
+.rstat { padding: 0 clamp(14px,3vw,32px); text-align: center; border-right: 1px solid var(--line-soft); }
+.rstat:last-child { border-right: none; }
+.rstat b { display: block; font-family: var(--disp); font-weight: 800; font-size: clamp(1.3rem,2.6vw,2rem); color: var(--phos); font-variant-numeric: tabular-nums; text-shadow: 0 0 12px rgba(84,246,166,.3); }
+.rstat span { font-size: .64rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-dim); }
+.scrollcue { position: absolute; left: 0; right: 0; bottom: 16px; text-align: center; z-index: 4; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-dim); animation: bob 2s infinite; }
+.scrollcue:hover { color: var(--phos); }
+@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+@media (max-width:620px){ .runway-nav{display:none} .runway-stats{flex-wrap:wrap;gap:8px} }
 ::selection { background: var(--phos); color: #04140c; }
 a { color: inherit; text-decoration: none; }
 
