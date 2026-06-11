@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="home.css?v=3" />
+  <link rel="stylesheet" href="home.css?v=4" />
 </head>
 <body>
   <!-- Background simulation layers -->
@@ -22,6 +22,7 @@
     <nav class="nav-links" aria-label="Primary">
       <a href="#reports">Reports</a>
       <a href="#data">Training data</a>
+      <a href="#playground">Playground</a>
       <a href="person.html">Persona</a>
       <a href="demo.html">Demo</a>
     </nav>
@@ -113,6 +114,32 @@
       </div>
     </section>
 
+    <!-- Simulation Playground -->
+    <section class="panel playground" id="playground">
+      <div class="sec-head">
+        <span class="idx">03 — SIMULATION PLAYGROUND</span>
+        <h2 class="sec-title">Run it in the playground.</h2>
+        <p class="sec-sub">Interactive environments for running user simulations with persona-driven agents. Point the swarm at any app and watch the trajectories stream — live.</p>
+      </div>
+      <div class="os-card">
+        <div class="os-card-bar">
+          <span class="os-card-id">◉ matr<em>AI</em>x OS <span class="v">v4.8</span> <span class="node">NODE-07</span></span>
+          <span class="os-card-status">
+            <span class="led">CORE</span><span class="led">EVAL</span><span class="led">NET</span>
+            <span class="os-card-clock" id="pgClock">--:--:--</span>
+          </span>
+        </div>
+        <div class="os-card-body">
+          <div class="os-card-vitals">
+            <div><b>8.3B</b><span>agents on standby</span></div>
+            <div><b>1,000</b><span>persona dimensions</span></div>
+            <div><b data-stream="rate">412,880</b><span>behaviors / sec</span></div>
+          </div>
+          <a href="demo.html" class="btn btn-solid btn-lg">Launch the playground <span class="arr">→</span></a>
+        </div>
+      </div>
+    </section>
+
     <!-- Closing CTA -->
     <section class="closing" id="contact">
       <h2>Evaluate your agents <span>before</span> the world does.</h2>
@@ -126,6 +153,7 @@
     <span class="foot-links">
       <a href="#reports">Reports</a>
       <a href="#data">Training data</a>
+      <a href="#playground">Playground</a>
       <a href="person.html">Persona</a>
       <a href="demo.html">Demo</a>
       <a href="walkthrough.html">Walkthrough</a>
@@ -135,5 +163,8 @@
   </footer>
 
   <script src="home.js?v=3"></script>
+  <script>
+  (function(){var el=document.getElementById('pgClock');if(!el)return;var p=function(x){return(x<10?'0':'')+x;};function t(){var d=new Date();el.textContent=p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());}t();setInterval(t,1000);})();
+  </script>
 </body>
 </html>
