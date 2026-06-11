@@ -104,18 +104,23 @@ table.t td.y{color:var(--phos);font-weight:700} table.t td.n{color:var(--ink-dim
 .tam .lo .k{display:block;font-size:.62rem;color:var(--ink-dim);letter-spacing:.1em;text-transform:uppercase}
 .tam .lo .v{font-size:1.5rem}
 
-/* team — founder cards */
+/* team & advisor */
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:26px}
-.founder{border:1px solid var(--line);background:var(--bg-2);padding:28px 22px;display:flex;flex-direction:column;align-items:center;text-align:center}
-.mono{width:84px;height:84px;border-radius:50%;border:1px solid var(--phos);
-  background:radial-gradient(circle at 40% 35%,#11241c,#0a0e0c);box-shadow:0 0 24px rgba(84,246,166,.22),inset 0 0 16px rgba(84,246,166,.1);
-  display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:1.7rem;color:var(--phos);text-shadow:var(--glow);margin-bottom:16px}
-.founder h3{font-family:var(--disp);font-weight:700;font-size:1.5rem}
-.founder .role{color:var(--phos);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
-.founder .cred{color:var(--ink-dim);font-size:.95rem;margin-top:8px}
-.founder .logos{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:16px}
-.founder .logos span{font-size:.66rem;color:var(--ink);background:rgba(84,246,166,.05);border:1px solid var(--line);padding:4px 10px;border-radius:100px}
-@media (max-width:780px){.tam{width:min(340px,86vw)} .team-grid{gap:20px}}
+.founder{border:1px solid var(--line);background:var(--bg-2);padding:26px 22px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.photo{width:96px;height:96px;border-radius:50%;overflow:hidden;border:1px solid var(--phos);box-shadow:0 0 24px rgba(84,246,166,.22);margin-bottom:16px;flex:0 0 auto}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.founder h3,.advisor h3{font-family:var(--disp);font-weight:700;font-size:1.5rem}
+.role{color:var(--phos);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
+.cred{color:var(--ink-dim);font-size:.95rem;margin-top:8px}
+.logos{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:16px}
+.lg{height:26px;display:inline-flex;align-items:center;justify-content:center;background:#fbfbf9;border-radius:6px;padding:0 9px}
+.lg img{height:14px;width:auto;display:block}
+.lg.txt{font-size:.64rem;font-weight:700;color:#15171c;letter-spacing:.02em}
+.advisor{display:flex;gap:28px;align-items:center;max-width:660px;margin:34px auto 0;border:1px solid var(--line);background:var(--bg-2);padding:28px}
+.advisor .photo{width:124px;height:124px;margin:0}
+.advisor .info{text-align:left}
+.advisor .logos{justify-content:flex-start}
+@media (max-width:780px){.tam{width:min(340px,86vw)} .team-grid{gap:20px} .advisor{flex-direction:column;text-align:center} .advisor .info{text-align:center} .advisor .logos{justify-content:center}}
 
 .progress{position:fixed;top:0;left:0;height:2px;background:var(--phos);box-shadow:var(--glow);z-index:6;transition:width .4s ease}
 .hud{position:fixed;bottom:20px;left:0;right:0;z-index:6;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,4vw,40px);pointer-events:none}
@@ -368,27 +373,56 @@ table.t td.y{color:var(--phos);font-weight:700} table.t td.n{color:var(--ink-dim
       <h2>Two co-founders.</h2>
       <div class="team-grid">
         <div class="founder">
-          <div class="mono">YH</div>
+          <div class="photo"><img src="Assets/Look_Yuexing_Hao.jpg" alt="Yuexing Hao" /></div>
           <h3>Yuexing Hao</h3>
           <div class="role">Co-founder &amp; CEO</div>
           <div class="cred">Cornell · MIT Ph.D. ’26</div>
-          <div class="logos"><span>Microsoft</span><span>MIT</span><span>Google</span><span>Scale</span></div>
+          <div class="logos">
+            <span class="lg"><img src="Assets/logos/logo-microsoft.svg" alt="Microsoft" /></span>
+            <span class="lg"><img src="Assets/logos/logo-mit.svg" alt="MIT" /></span>
+            <span class="lg txt">Google</span>
+            <span class="lg txt">Scale</span>
+          </div>
         </div>
         <div class="founder">
-          <div class="mono">XL</div>
+          <div class="photo"><img src="Assets/Xiaomin_Li.jpg" alt="Xiaomin Li" /></div>
           <h3>Xiaomin Li</h3>
           <div class="role">Co-founder &amp; CTO</div>
           <div class="cred">Harvard Ph.D. ’25</div>
-          <div class="logos"><span>Microsoft</span><span>Harvard</span><span>ByteDance</span></div>
+          <div class="logos">
+            <span class="lg"><img src="Assets/logos/logo-microsoft.svg" alt="Microsoft" /></span>
+            <span class="lg"><img src="Assets/logos/logo-harvard.svg" alt="Harvard" /></span>
+            <span class="lg txt">ByteDance</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 14 · ASK -->
+  <!-- 14 · ADVISOR -->
+  <section class="slide">
+    <div class="inner">
+      <div class="eyebrow"><span class="tick">//</span> <span class="n">14</span> &nbsp;ADVISOR</div>
+      <h2>Advisor.</h2>
+      <div class="advisor">
+        <div class="photo"><img src="Assets/SethMuriphHeadshot.webp" alt="Seth Muriph" /></div>
+        <div class="info">
+          <h3>Seth Muriph</h3>
+          <div class="role">Advisor · Kenwood Ventures</div>
+          <div class="cred">MIT SM &amp; SB</div>
+          <div class="logos">
+            <span class="lg"><img src="Assets/logos/logo-mit.svg" alt="MIT" /></span>
+            <span class="lg txt">Kenwood Ventures</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 · ASK -->
   <section class="slide">
     <div class="inner cover">
-      <div class="eyebrow" style="justify-content:center"><span class="tick">//</span> <span class="n">14</span> &nbsp;THE ASK</div>
+      <div class="eyebrow" style="justify-content:center"><span class="tick">//</span> <span class="n">15</span> &nbsp;THE ASK</div>
       <h1>Evaluate agents <span class="hl">before</span> the world does.</h1>
       <p class="lead" style="margin:22px auto 0;text-align:center">Raising <strong>$4M seed</strong> to scale the portal, expand to 1,000 dimensions, and convert design partners.</p>
       <div class="meta" style="margin-top:38px"><span>Request a demo →</span><span><b>info@matraix.ai</b></span><span>matraix.ai</span></div>
