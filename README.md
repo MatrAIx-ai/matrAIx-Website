@@ -98,9 +98,10 @@ readable LinkedIn-style summary, and offers the result as JSON:
 ## Files
 
 ```
-index.html        Landing page markup
-styles.css        Shared simulation-console styling (CSS variables, base look)
-script.js         Background agent simulation, count-up, telemetry, behavior grid
+index.html        Landing page markup (investor-facing)
+home.css          Landing page styling — warm light theme, Fraunces + Hanken Grotesk
+home.js           Hero stat count-up
+styles.css        Shared console styling for the tool pages (CSS variables, base look)
 explorer.html     Dimension explorer markup
 explorer.css      Explorer-specific styling
 explorer.js       Schema loading, filtering, search, persona sampler
@@ -109,4 +110,5 @@ benchmark.css     Benchmark-specific styling
 benchmark.js      Sampling, structured scoring, live stream, heatmap, JSONL export
 dimensions.json   Canonical flat dimension schema (source of truth)
 dimensions.js     Browser-loadable mirror of dimensions.json
+CNAME             Custom domain for GitHub Pages (matraix.ai)
 ```
