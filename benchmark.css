@@ -299,3 +299,46 @@ a { color: inherit; text-decoration: none; }
   .os-nav { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+
+/* ---------- Generated reports (section below the portal) ---------- */
+.genreports { position: relative; z-index: 4; max-width: 1000px; margin: 0 auto; padding: clamp(48px,8vw,88px) clamp(16px,4vw,40px) 80px; border-top: 1px solid var(--line); }
+.gr-head { max-width: 760px; margin: 0 auto 28px; text-align: center; }
+.gr-idx { font-size: .72rem; letter-spacing: .2em; color: var(--phos); }
+.gr-title { font-family: var(--disp); font-weight: 700; font-size: clamp(1.7rem,4vw,2.6rem); letter-spacing: -.02em; line-height: 1.06; margin: 10px 0 12px; }
+.gr-sub { color: var(--ink-dim); font-size: 1.02rem; line-height: 1.55; }
+.gr-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 18px; }
+.gr-chip { font-size: .8rem; color: var(--ink-dim); background: rgba(84,246,166,.05); border: 1px solid var(--line-soft); padding: 6px 14px; border-radius: 100px; }
+.gr-card { border: 1px solid var(--line); background: var(--bg-2); overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+.gr-tabs { display: flex; gap: 6px; padding: 14px 16px; border-bottom: 1px solid var(--line-soft); background: rgba(84,246,166,.03); overflow-x: auto; scrollbar-width: none; }
+.gr-tabs::-webkit-scrollbar { display: none; }
+.gr-tab { font-family: var(--mono); font-weight: 600; font-size: .86rem; color: var(--ink-dim); background: transparent; border: 1px solid var(--line-soft); padding: 8px 16px; cursor: pointer; white-space: nowrap; transition: all .18s; }
+.gr-tab:hover { color: var(--ink); border-color: var(--line); }
+.gr-tab.active { color: #04140c; background: var(--phos); border-color: var(--phos); font-weight: 700; }
+.gr-body { padding: clamp(20px,4vw,32px); }
+.gr-body.flip { animation: grflip .4s ease; }
+@keyframes grflip { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+.gr-meta { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+.gr-target { font-family: var(--disp); font-weight: 700; font-size: 1.4rem; }
+.gr-variants { margin-top: 6px; color: var(--ink-dim); font-size: .96rem; }
+.gr-variants b { color: var(--phos); }
+.gr-agents { font-size: .82rem; font-weight: 600; color: var(--ink-dim); border: 1px solid var(--line); padding: 6px 12px; white-space: nowrap; }
+.gr-verdict { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; background: rgba(84,246,166,.06); border: 1px solid var(--line); padding: 18px 22px; margin-bottom: 24px; }
+.gr-badge { font-weight: 700; color: #04140c; background: var(--phos); padding: 5px 12px; font-size: .86rem; }
+.gr-lift { font-family: var(--disp); font-weight: 800; font-size: 2.2rem; color: var(--phos); text-shadow: var(--glow); }
+.gr-metric { color: var(--ink-dim); font-size: .95rem; }
+.gr-table { width: 100%; border-collapse: collapse; margin-bottom: 26px; }
+.gr-table th { text-align: right; font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-dim); font-weight: 600; padding: 0 14px 12px; border-bottom: 1px solid var(--line-soft); }
+.gr-table th:first-child { text-align: left; }
+.gr-table td { padding: 12px 14px; text-align: right; font-size: 1rem; font-variant-numeric: tabular-nums; border-bottom: 1px solid var(--line-soft); font-weight: 600; }
+.gr-table td.seg { text-align: left; font-weight: 500; color: var(--ink); }
+.gr-table td.win { color: var(--phos); background: rgba(84,246,166,.05); }
+.gr-table td.up { color: var(--phos); } .gr-table td.down { color: var(--rose); }
+.gr-table tr:last-child td { border-bottom: none; }
+.gr-find h4 { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-dim); margin-bottom: 12px; }
+.gr-find ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.gr-fi { display: flex; gap: 10px; font-size: .96rem; color: var(--ink); line-height: 1.5; }
+.gr-sev { flex: 0 0 auto; font-size: .64rem; font-weight: 700; padding: 2px 8px; margin-top: 2px; letter-spacing: .05em; }
+.gr-sev.high { background: rgba(255,92,108,.16); color: var(--rose); }
+.gr-sev.med { background: rgba(255,181,71,.16); color: var(--amber); }
+.gr-sev.low { background: rgba(84,246,166,.13); color: var(--phos); }
+@media (max-width:600px){ .gr-table th,.gr-table td{ padding-left:8px; padding-right:8px; font-size:.9rem; } .gr-lift{ font-size:1.8rem; } }
