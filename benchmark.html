@@ -140,8 +140,8 @@
       var smooth=0,stall=0;
       for(var k=0;k<agents.length;k++){ var a=agents[k]; var m=mult(a)*a.jit;
         var col; if(m>0.78){col='#54f6a6';smooth++;} else if(m>0.4){col='#ffb547';} else {col='#ff5c6c';stall++;}
-        var dx=a.base*Math.max(m,0.14)*0.016;                       // floored forward so they eventually escape
-        if(m<0.55 && a.x>0.04 && Math.random()<0.015){ dx-=a.base*0.016*rnd(4,7); }  // error loop: step back & retry
+        var dx=a.base*Math.max(m,0.32)*0.016;                       // floored forward so they eventually escape
+        if(m<0.55 && a.x>0.04 && Math.random()<0.012){ dx-=a.base*0.016*rnd(12,24); }  // error loop: dramatic step back & retry
         a.x += dx; if(a.x<0) a.x=0;
         if(a.x>=1.02){ finN++; var s=spawn(true); a.x=s.x;a.y=s.y;a.base=s.base;a.skill=s.skill;a.jit=s.jit; continue; }
         var px=TX(a.x>1?1:a.x), py=TY(a.y);
