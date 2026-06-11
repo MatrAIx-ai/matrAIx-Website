@@ -12,7 +12,7 @@ the persona **dimension schema** that defines the space those agents are sampled
 | Page | File | What it is |
 |------|------|------------|
 | Landing | [`index.html`](index.html) | Hero with the 8.3-billion-behavior headline and a live agent-field simulation (canvas), telemetry strip, and eval methodology. |
-| Dimension Explorer | [`explorer.html`](explorer.html) | Browse the flat persona schema: filter by category, search, expand value pools, and sample a full synthetic persona. |
+| Persona Explorer | [`person.html`](person.html) | Browse the flat persona schema: filter by category, search, expand value pools, and sample a full synthetic persona. |
 | Demo Portal (matrAIx OS) | [`demo.html`](demo.html) | A mission-control interface: a live "Neural Eval Core" brain visualization, an agent swarm simulating the selected app/website, streaming trajectory telemetry, switchable reports (A/B, segments, score distribution, heatmap, findings), and JSONL trajectory export. |
 | Agent Walkthrough | [`walkthrough.html`](walkthrough.html) | A recorded sample trajectory: a matrAIx computer-using agent (10-dimension persona) files an auto-insurance claim on hugclaim.com, with per-step screenshots, observations, actions, rewards, friction findings, and a JSONL export. |
 | Pitch Deck | [`deck.html`](deck.html) | Self-contained investor deck (15 slides) matching the site's dark phosphor design. Arrow-key / swipe navigation, `F` for fullscreen. Business-specific figures are marked as illustrative placeholders to fill in. |
@@ -112,8 +112,9 @@ index.html        Landing page markup
 home.css          Landing page styling — dark phosphor console (Syne + JetBrains Mono)
 home.js           Agent-field sim, count-up, telemetry, A/B report viewer, SFT/RL toggle
 styles.css        Shared console styling for the tool pages (CSS variables, base look)
-explorer.html     Dimension explorer markup
-explorer.css      Explorer-specific styling
+person.html       Persona explorer markup
+explorer.html     Redirect stub -> person.html
+explorer.css      Persona-explorer styling
 explorer.js       Schema loading, filtering, search, persona sampler
 demo.html         Demo / benchmark console markup (runway hero + OS portal)
 benchmark.html    Redirect stub -> demo.html

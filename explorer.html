@@ -1,101 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>matrAIx.ai — Dimension Explorer</title>
-  <meta name="description" content="Explore the flat persona dimension space that powers matrAIx agent simulations." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=3" />
-  <link rel="stylesheet" href="explorer.css?v=3" />
+<meta charset="utf-8" />
+<title>matrAIx — Persona</title>
+<meta http-equiv="refresh" content="0; url=person.html" />
+<link rel="canonical" href="https://matraix.ai/person.html" />
+<script>location.replace('person.html' + location.search + location.hash);</script>
 </head>
-<body class="explorer-body">
-  <div class="grain" aria-hidden="true"></div>
-  <div class="scanlines" aria-hidden="true"></div>
-
-  <!-- Header -->
-  <header class="nav">
-    <a class="brand" href="index.html">
-      <span class="brand-mark">▚</span>
-      <span class="brand-name">matr<em>AI</em>x<span class="tld">.ai</span></span>
-    </a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <a href="explorer.html" class="active">Dimensions</a>
-      <a href="demo.html">Demo</a>
-      <a href="index.html#docs">Docs</a>
-    </nav>
-    <a href="#" class="btn btn-ghost nav-cta" id="sampleTop">
-      <span class="dot live"></span> Sample persona
-    </a>
-  </header>
-
-  <main class="ex-main">
-    <!-- Title -->
-    <section class="ex-head">
-      <div class="hero-eyebrow">
-        <span class="tick">//</span> PERSONA DIMENSION SPACE
-        <span class="ver" id="verTag">v1.0</span>
-        <span class="sep">—</span>
-        <span class="status"><span class="dot live"></span> FLAT / UNIFIED</span>
-      </div>
-      <h1 class="ex-title">1000-Dimension <span>Persona Schema</span></h1>
-      <p class="ex-sub">
-        Every simulated agent is drawn by assigning <em>one value per dimension</em>.
-        Language, age, domain, academic background, professional history (LinkedIn-style)
-        and behavioral state are all flat siblings — multiplied together they define the
-        space matrAIx samples 8.3 billion behaviors from.
-      </p>
-
-      <!-- Stat bar -->
-      <div class="ex-stats" id="statBar">
-        <div class="stat"><span class="stat-val" data-stat="dims">—</span><span class="stat-label">dimensions live</span></div>
-        <div class="stat"><span class="stat-val" data-stat="vals">—</span><span class="stat-label">total values</span></div>
-        <div class="stat"><span class="stat-val" data-stat="space">—</span><span class="stat-label">reachable personas</span></div>
-        <div class="stat"><span class="stat-val">8.3B</span><span class="stat-label">behaviors simulated</span></div>
-        <div class="stat"><span class="stat-val" data-stat="target">1000</span><span class="stat-label">dimension target</span></div>
-      </div>
-    </section>
-
-    <!-- Controls -->
-    <section class="ex-controls">
-      <input type="search" id="search" class="ex-search" placeholder="search dimensions…" aria-label="Search dimensions" />
-      <div class="ex-chips" id="chips" role="tablist" aria-label="Filter by category"></div>
-    </section>
-
-    <!-- Dimension grid -->
-    <section class="ex-grid" id="grid" aria-live="polite"></section>
-    <p class="ex-empty" id="emptyMsg" hidden>No dimensions match that filter.</p>
-  </main>
-
-  <!-- Persona drawer -->
-  <aside class="persona-drawer" id="drawer" aria-hidden="true">
-    <div class="drawer-inner">
-      <div class="drawer-head">
-        <div>
-          <span class="drawer-eyebrow"><span class="dot live"></span> SAMPLED PERSONA</span>
-          <h2 class="drawer-name" id="personaName">—</h2>
-          <p class="drawer-line" id="personaLine">—</p>
-        </div>
-        <button class="drawer-close" id="drawerClose" aria-label="Close">✕</button>
-      </div>
-      <div class="drawer-actions">
-        <button class="btn btn-solid" id="regen">↻ Resample</button>
-        <button class="btn btn-ghost" id="copyJson">⧉ Copy JSON</button>
-      </div>
-      <div class="drawer-traits" id="personaTraits"></div>
-    </div>
-  </aside>
-  <div class="drawer-scrim" id="scrim" hidden></div>
-
-  <footer class="foot">
-    <span class="brand-name small">matr<em>AI</em>x<span class="tld">.ai</span></span>
-    <span class="foot-meta" id="footMeta">SCHEMA v1.0 · FLAT UNIFIED · © 2026</span>
-  </footer>
-
-  <script src="dimensions.js?v=3"></script>
-  <script src="explorer.js?v=3"></script>
+<body style="background:#060807;color:#54f6a6;font-family:monospace;padding:24px">
+Redirecting to <a href="person.html" style="color:#54f6a6">person.html</a>…
 </body>
 </html>
