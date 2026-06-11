@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>matrAIx — Request Access</title>
+<meta name="description" content="Request access to matrAIx — agent simulation for evaluation. Book a demo of the portal or get the open dataset sample." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#060807;--bg-2:#0a0e0c;--bg-3:#0d1411;--ink:#d6e6d8;--ink-dim:#6f8273;
+  --phos:#54f6a6;--phos-deep:#1f7e58;--amber:#ffb547;--rose:#ff5c6c;
+  --line:rgba(84,246,166,.16);--line-soft:rgba(84,246,166,.07);--glow:0 0 18px rgba(84,246,166,.45);
+  --mono:"JetBrains Mono",ui-monospace,monospace;--disp:"Syne",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--mono);line-height:1.6;min-height:100vh;display:flex;flex-direction:column;
+  background-image:repeating-linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,0,0,.12) 3px,rgba(0,0,0,0) 4px)}
+::selection{background:var(--phos);color:#04140c}
+a{color:inherit;text-decoration:none}
+
+.nav{display:flex;align-items:center;justify-content:space-between;padding:18px clamp(16px,4vw,40px);border-bottom:1px solid var(--line-soft)}
+.brand{font-family:var(--disp);font-weight:800;font-size:1.25rem;display:inline-flex;align-items:center;gap:.3em}
+.brand .mk{color:var(--phos);text-shadow:var(--glow)} .brand .ai{color:var(--phos);text-shadow:var(--glow)} .brand .tld{color:var(--ink-dim);font-weight:600}
+.nav .back{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
+.nav .back:hover{color:var(--phos)}
+
+.wrap{flex:1;max-width:720px;margin:0 auto;padding:clamp(48px,9vw,110px) clamp(16px,4vw,40px) 80px}
+.eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:18px;display:flex;align-items:center;gap:9px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--phos);box-shadow:var(--glow);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(2.2rem,5.5vw,3.6rem);letter-spacing:-.03em;line-height:1.02;margin-bottom:18px}
+h1 .hl{color:var(--phos);text-shadow:var(--glow)}
+.lead{color:var(--ink-dim);font-size:clamp(1.02rem,2vw,1.2rem);line-height:1.65;max-width:600px;margin-bottom:36px}
+.lead strong{color:var(--ink)}
+
+.cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:46px}
+.btn{font-family:var(--mono);font-size:1rem;letter-spacing:.04em;text-transform:uppercase;font-weight:700;
+  color:#04140c;background:var(--phos);border:0;padding:15px 28px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;
+  box-shadow:0 0 26px rgba(84,246,166,.3);transition:all .22s}
+.btn:hover{background:#76ffbf;transform:translateY(-1px)}
+.email{font-size:.95rem;color:var(--ink-dim)} .email b{color:var(--phos);font-weight:500}
+
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;border-top:1px solid var(--line-soft);padding-top:34px}
+.card{border:1px solid var(--line-soft);background:var(--bg-2);padding:22px}
+.card .k{font-family:var(--disp);font-weight:700;color:var(--phos);font-size:.85rem;letter-spacing:.04em}
+.card h3{font-family:var(--disp);font-weight:700;font-size:1.2rem;margin:9px 0 7px}
+.card p{color:var(--ink-dim);font-size:.92rem;line-height:1.5}
+
+.note{margin-top:34px;font-size:.9rem;color:var(--ink-dim);border-left:2px solid var(--phos);padding-left:14px;line-height:1.6}
+.note b{color:var(--ink)}
+
+.foot{border-top:1px solid var(--line-soft);padding:22px clamp(16px,4vw,40px);color:var(--ink-dim);font-size:.82rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.foot a:hover{color:var(--phos)}
+@media (max-width:620px){.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="index.html"><span class="mk">▚</span>matr<span class="ai">AI</span>x<span class="tld">.ai</span></a>
+    <a class="back" href="index.html">← Back</a>
+  </header>
+
+  <main class="wrap">
+    <div class="eyebrow"><span class="dot"></span> Get started</div>
+    <h1>Request <span class="hl">access</span>.</h1>
+    <p class="lead">matrAIx is onboarding design partners and early customers. Reach out and we'll set up a <strong>demo of the evaluation portal</strong>, walk through a sample report on your flows, and share the <strong>open dataset sample</strong>. We typically reply within one business day.</p>
+
+    <div class="cta">
+      <a class="btn" href="mailto:info@matraix.ai?subject=matrAIx%20access%20request&amp;body=Hi%20matrAIx%20team%2C%0A%0AI%27d%20like%20to%20request%20access.%0A%0AName%3A%0ACompany%3A%0AWhat%20we%27d%20like%20to%20evaluate%3A%0A">Email us <span>→</span></a>
+      <span class="email">or write to <b>info@matraix.ai</b></span>
+    </div>
+
+    <div class="cols">
+      <div class="card"><div class="k">01</div><h3>Demo</h3><p>A live walkthrough of the portal evaluating your app or agent.</p></div>
+      <div class="card"><div class="k">02</div><h3>Sample report</h3><p>A segmented A/B report on a flow you care about.</p></div>
+      <div class="card"><div class="k">03</div><h3>Open dataset</h3><p>A free, reproducible slice of the behavior corpus.</p></div>
+    </div>
+
+    <p class="note">When you write, it helps to include your <b>name</b>, <b>company</b>, and a line on <b>what you'd like to evaluate</b> — and we'll come prepared.</p>
+  </main>
+
+  <footer class="foot">
+    <span class="brand" style="font-size:1rem"><span class="mk">▚</span>matr<span class="ai">AI</span>x<span class="tld">.ai</span></span>
+    <span><a href="index.html">Home</a> · <a href="explorer.html">Dimensions</a> · <a href="benchmark.html">Benchmark</a> · <a href="walkthrough.html">Walkthrough</a></span>
+    <span>© 2026 matrAIx</span>
+  </footer>
+</body>
+</html>
