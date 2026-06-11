@@ -86,6 +86,16 @@ a { color: inherit; text-decoration: none; }
 @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
 .os-clock { font-size: 0.82rem; color: var(--phos); font-variant-numeric: tabular-nums; text-shadow: 0 0 10px rgba(84,246,166,0.3); }
 
+/* ---------- Explainer strip ---------- */
+.os-explain {
+  position: relative; z-index: 4;
+  padding: 9px 16px; border-bottom: 1px solid var(--line-soft);
+  background: rgba(84,246,166,0.04);
+  font-size: 0.78rem; color: var(--ink-dim); letter-spacing: 0.01em;
+}
+.os-explain b { color: var(--phos); font-weight: 700; }
+.os-explain em { color: var(--ink); font-style: normal; }
+
 /* ---------- Main grid ---------- */
 .os-grid {
   position: relative; z-index: 4; flex: 1; min-height: 0;
@@ -101,6 +111,30 @@ a { color: inherit; text-decoration: none; }
 .win-bar > span:first-child { color: var(--phos); }
 
 /* ---------- Agent swarm (left) ---------- */
+.pop-cap, .focus-head { font-size: 0.66rem; letter-spacing: 0.04em; color: var(--ink-dim); padding: 9px 12px 4px; }
+.focus-head { color: var(--phos); border-top: 1px solid var(--line-soft); margin-top: 2px; }
+.pop {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(11px, 1fr));
+  gap: 3px; padding: 4px 12px 10px; flex: 0 0 auto;
+}
+.pop i { aspect-ratio: 1; background: rgba(84,246,166,0.05); border: 1px solid var(--line-soft); transition: background 0.4s; }
+.pop i.spawn { background: var(--cyan); }
+.pop i.sim   { background: var(--amber); }
+.pop i.pass  { background: var(--phos); box-shadow: 0 0 5px rgba(84,246,166,0.5); }
+.pop i.fail  { background: var(--rose); }
+
+.focus-list { flex: 1; overflow-y: auto; padding: 6px 12px 12px; display: flex; flex-direction: column; gap: 8px; min-height: 0; scrollbar-width: thin; scrollbar-color: var(--phos-deep) transparent; }
+.focus { border: 1px solid var(--line); background: var(--bg-3); padding: 9px 10px; display: flex; flex-direction: column; gap: 6px; }
+.f-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.f-id { color: var(--phos); font-size: 0.74rem; }
+.f-id .foc { margin-right: 4px; }
+.f-step { font-size: 0.64rem; color: var(--ink-dim); }
+.f-persona { font-size: 0.68rem; color: var(--ink-dim); line-height: 1.35; }
+.f-now { font-size: 0.74rem; color: var(--ink); }
+.f-now b { color: var(--amber); font-weight: 500; }
+.f-bar { height: 4px; background: var(--line-soft); overflow: hidden; }
+.f-bar i { display: block; height: 100%; background: var(--phos); box-shadow: var(--glow); transition: width 0.4s; }
+
 .swarm-list { flex: 1; overflow-y: auto; padding: 8px; display: flex; flex-direction: column; gap: 7px; scrollbar-width: thin; scrollbar-color: var(--phos-deep) transparent; }
 .agent {
   border: 1px solid var(--line-soft); background: var(--bg-3); padding: 9px 10px;
@@ -126,6 +160,9 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- Brain stage (center) ---------- */
 .stage { position: relative; }
+.stage-legend { font-size: 0.66rem; color: var(--ink-dim); padding: 8px 12px; border-bottom: 1px solid var(--line-soft); }
+.stage-legend b { font-weight: 600; margin: 0 2px; }
+.stage-legend .cp { color: var(--phos); } .stage-legend .ca { color: var(--amber); } .stage-legend .cr { color: var(--rose); }
 .brain-wrap { position: relative; flex: 1; min-height: 0; overflow: hidden; }
 #brain { position: absolute; inset: 0; width: 100%; height: 100%; }
 .scan-tag { color: var(--amber) !important; }
@@ -219,6 +256,10 @@ a { color: inherit; text-decoration: none; }
 .con-line .rw { font-weight: 700; }
 .con-line .rw.ok { color: var(--phos); } .con-line .rw.mid { color: var(--amber); } .con-line .rw.bad { color: var(--rose); }
 .con-line .done { color: var(--phos); }
+.con-line .foc { color: var(--phos); }
+.con-line .st { color: var(--ink-dim); }
+.con-line.dim { opacity: 0.62; }
+.con-line.dim .sum { color: var(--ink-dim); }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1100px) {

@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>matrAIx OS — Evaluation Portal</title>
-  <meta name="description" content="matrAIx OS: a live agent-swarm evaluation portal. Watch the neural eval core scan apps and websites, stream trajectory telemetry, and pull reports." />
+  <meta name="description" content="matrAIx OS: hundreds of simulated agents evaluate apps and websites step by step, with live trajectory telemetry and reports." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="benchmark.css?v=3" />
+  <link rel="stylesheet" href="benchmark.css?v=4" />
 </head>
 <body class="os">
   <div class="grain" aria-hidden="true"></div>
@@ -31,31 +31,33 @@
     </div>
   </div>
 
+  <!-- Plain-language explainer -->
+  <div class="os-explain" id="explain">▸ loading…</div>
+
   <!-- Main grid -->
   <div class="os-grid">
     <!-- Agent swarm -->
     <section class="win swarm">
-      <div class="win-bar"><span>Agent Swarm</span><span id="swarmCount">0 active</span></div>
-      <div class="swarm-list" id="swarmList"></div>
-      <div class="swarm-foot">
-        <div><b id="mEval">0</b><span>evaluated</span></div>
-        <div><b id="mPass">—</b><span>pass rate</span></div>
-        <div><b id="mRate">—</b><span>beh / s</span></div>
-      </div>
+      <div class="win-bar"><span>Agent Swarm</span><span id="swarmCount">— active</span></div>
+      <div class="pop-cap">Live population — each square is a simulated user</div>
+      <div class="pop" id="pop"></div>
+      <div class="focus-head">▸ In focus — follow a few agents step through the flow</div>
+      <div class="focus-list" id="focusList"></div>
     </section>
 
     <!-- Neural eval core -->
     <section class="win stage">
       <div class="win-bar"><span>Neural Eval Core</span><span class="scan-tag" id="scanTag">● SCANNING</span></div>
+      <div class="stage-legend">Region lights up = the cognitive area each behavior stresses &nbsp;·&nbsp; <b class="cp">pass</b> <b class="ca">flag</b> <b class="cr">fail</b></div>
       <div class="brain-wrap">
         <canvas id="brain"></canvas>
         <div class="regions" id="regions"></div>
       </div>
       <div class="vitals" id="vitals">
-        <div class="vital"><div class="vl">throughput</div><div class="vv" data-v="tp">—</div><div class="spark" data-s="tp"></div></div>
-        <div class="vital"><div class="vl">mean reward</div><div class="vv" data-v="rw">—</div><div class="spark" data-s="rw"></div></div>
-        <div class="vital"><div class="vl">active worlds</div><div class="vv" data-v="wd">—</div><div class="spark" data-s="wd"></div></div>
-        <div class="vital"><div class="vl">latency p50</div><div class="vv" data-v="lat">—</div><div class="spark" data-s="lat"></div></div>
+        <div class="vital"><div class="vl">active agents</div><div class="vv" data-v="ag">—</div><div class="spark" data-s="ag"></div></div>
+        <div class="vital"><div class="vl">behaviors / sec</div><div class="vv" data-v="tp">—</div><div class="spark" data-s="tp"></div></div>
+        <div class="vital"><div class="vl">mean score</div><div class="vv" data-v="rw">—</div><div class="spark" data-s="rw"></div></div>
+        <div class="vital"><div class="vl">pass rate</div><div class="vv" data-v="ps">—</div><div class="spark" data-s="ps"></div></div>
       </div>
     </section>
 
@@ -76,11 +78,11 @@
 
   <!-- Trajectory telemetry -->
   <section class="console">
-    <div class="win-bar"><span>Trajectory Telemetry</span><span id="conMeta">stream live</span></div>
+    <div class="win-bar"><span>Trajectory Telemetry</span><span id="conMeta">obs = what the agent sees · act = what it does · r = step reward (0–1)</span></div>
     <div class="con-feed" id="conFeed"></div>
   </section>
 
   <script src="dimensions.js?v=3"></script>
-  <script src="benchmark.js?v=3"></script>
+  <script src="benchmark.js?v=4"></script>
 </body>
 </html>

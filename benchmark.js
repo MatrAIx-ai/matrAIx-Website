@@ -1,9 +1,10 @@
 /* ============================================================
    matrAIx OS — evaluation portal
-   - Neural Eval Core: animated brain (nodes, signals, scan, regions)
-   - Agent swarm: personas simulating the selected app/website live
-   - Trajectory telemetry: streaming obs→action→reward console
-   - Reports: A/B verdict, segments, score distribution, findings
+   - Hundreds of simulated agents evaluate the selected app
+   - A few "in-focus" agents step through the flow slowly so you
+     can actually follow a trajectory
+   - Background agents complete continuously to drive the reports
+   - Neural Eval Core brain pulses the region each behavior stresses
    ============================================================ */
 
 (() => {
@@ -35,15 +36,13 @@
     return p;
   }
   function personaPenalty(p) {
-    let hits = [];
+    const hits = [];
     for (const k in PENALTY) if (PENALTY[k][p[k]]) hits.push(PENALTY[k][p[k]]);
     if (!hits.length) return 0;
     const mx = Math.max(...hits);
     return mx + 0.18 * (hits.reduce((a, b) => a + b, 0) - mx);
   }
-  function personaLabel(p) {
-    return `${p.age_bracket} · ${p.region} · ${p.primary_language} · ${p.intent}`;
-  }
+  const personaLabel = p => `${p.age_bracket} · ${p.region} · ${p.primary_language} · ${p.intent}`;
   function regionFor(p) {
     if (PENALTY.safety_sensitivity[p.safety_sensitivity]) return 'Safety';
     if (PENALTY.query_complexity[p.query_complexity]) return 'Reasoning';
@@ -52,6 +51,7 @@
     if (p.prior_context === 'Long ongoing project' || p.prior_context === 'Returning user') return 'Memory';
     return 'Perception';
   }
+  const ACTIONS = ['scan UI', 'tap target', 'type input', 'wait for load', 'read prompt', 'retry', 'confirm', 'scroll', 'select option', 'submit'];
 
   /* ---------- targets (apps/websites under evaluation) ---------- */
   const TARGETS = [
@@ -104,20 +104,16 @@
       w = canvas.width = rect.width; h = canvas.height = rect.height;
       cx = w / 2; cy = h / 2 + 4;
       rx = Math.min(w * 0.42, 260); ry = Math.min(h * 0.40, 190);
-      // sample nodes inside the brain ellipse, leaving a thin central fissure
       nodes = [];
       const target = Math.min(260, Math.floor((rx * ry) / 90));
       let guard = 0;
       while (nodes.length < target && guard < target * 40) {
         guard++;
-        const a = Math.random() * Math.PI * 2;
-        const rr = Math.sqrt(Math.random());
-        const x = cx + Math.cos(a) * rx * rr;
-        const y = cy + Math.sin(a) * ry * rr;
-        if (Math.abs(x - cx) < 5) continue;                 // fissure
+        const a = Math.random() * Math.PI * 2, rr = Math.sqrt(Math.random());
+        const x = cx + Math.cos(a) * rx * rr, y = cy + Math.sin(a) * ry * rr;
+        if (Math.abs(x - cx) < 5) continue;
         nodes.push({ x, y, t: Math.random() * 100, hot: 0 });
       }
-      // edges: nearest neighbours
       edges = [];
       for (let i = 0; i < nodes.length; i++) {
         const dists = [];
@@ -127,19 +123,12 @@
           dists.push([dx * dx + dy * dy, j]);
         }
         dists.sort((p, q) => p[0] - q[0]);
-        for (let k = 0; k < 3 && k < dists.length; k++) {
-          const j = dists[k][1];
-          if (i < j) edges.push([i, j]);
-        }
+        for (let k = 0; k < 3 && k < dists.length; k++) { const j = dists[k][1]; if (i < j) edges.push([i, j]); }
       }
-      // place region labels around the perimeter + nearest node
       REGIONS.forEach((r, i) => {
         const ang = -Math.PI / 2 + (i / REGIONS.length) * Math.PI * 2;
-        const lx = cx + Math.cos(ang) * (rx + 26);
-        const ly = cy + Math.sin(ang) * (ry + 18);
-        regionEls[r].style.left = (lx / w * 100) + '%';
-        regionEls[r].style.top = (ly / h * 100) + '%';
-        // nearest interior node to the region anchor
+        regionEls[r].style.left = ((cx + Math.cos(ang) * (rx + 26)) / w * 100) + '%';
+        regionEls[r].style.top = ((cy + Math.sin(ang) * (ry + 18)) / h * 100) + '%';
         const ax = cx + Math.cos(ang) * rx * 0.7, ay = cy + Math.sin(ang) * ry * 0.7;
         let best = 0, bd = Infinity;
         nodes.forEach((n, idx) => { const d = (n.x - ax) ** 2 + (n.y - ay) ** 2; if (d < bd) { bd = d; best = idx; } });
@@ -149,7 +138,6 @@
 
     function spawnSignal(from, verdict) {
       const a = nodes[from]; if (!a) return;
-      // pick a neighbour
       const near = edges.filter(e => e[0] === from || e[1] === from);
       const e = near.length ? pick(near) : null;
       const to = e ? (e[0] === from ? e[1] : e[0]) : (Math.random() * nodes.length) | 0;
@@ -159,27 +147,18 @@
 
     function frame() {
       ctx.clearRect(0, 0, w, h);
-      // outline + fissure
       ctx.strokeStyle = 'rgba(84,246,166,0.12)'; ctx.lineWidth = 1;
       ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2); ctx.stroke();
       ctx.beginPath(); ctx.moveTo(cx, cy - ry * 0.92); ctx.lineTo(cx, cy + ry * 0.92); ctx.stroke();
-
       scan += 1.1; if (scan > h + 40) scan = -40;
-
-      // edges
       for (const [i, j] of edges) {
-        const a = nodes[i], b = nodes[j];
-        const midY = (a.y + b.y) / 2;
-        const near = Math.abs(midY - scan) < 60;
+        const a = nodes[i], b = nodes[j], near = Math.abs((a.y + b.y) / 2 - scan) < 60;
         ctx.strokeStyle = near ? 'rgba(84,246,166,0.22)' : 'rgba(84,246,166,0.06)';
-        ctx.lineWidth = 0.5;
-        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        ctx.lineWidth = 0.5; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
       }
-      // nodes
       for (const n of nodes) {
         n.t += 0.05; if (n.hot > 0) n.hot -= 0.02;
-        const near = Math.abs(n.y - scan) < 55;
-        const base = 0.3 + 0.3 * Math.sin(n.t);
+        const near = Math.abs(n.y - scan) < 55, base = 0.3 + 0.3 * Math.sin(n.t);
         ctx.globalAlpha = Math.min(1, base + (near ? 0.4 : 0) + n.hot);
         const r = 1.3 + (n.hot > 0 ? 1.6 * n.hot : 0);
         ctx.fillStyle = n.hot > 0 ? '#9affd0' : '#54f6a6';
@@ -187,216 +166,189 @@
         ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, Math.PI * 2); ctx.fill();
       }
       ctx.globalAlpha = 1; ctx.shadowBlur = 0;
-
-      // signals
       for (let s = signals.length - 1; s >= 0; s--) {
-        const sig = signals[s];
-        const a = nodes[sig.from], b = nodes[sig.to];
+        const sig = signals[s], a = nodes[sig.from], b = nodes[sig.to];
         if (!a || !b) { signals.splice(s, 1); continue; }
         sig.p += sig.sp;
         const x = a.x + (b.x - a.x) * sig.p, y = a.y + (b.y - a.y) * sig.p;
         ctx.fillStyle = sig.col; ctx.shadowBlur = 12; ctx.shadowColor = sig.col;
         ctx.beginPath(); ctx.arc(x, y, 2.2, 0, Math.PI * 2); ctx.fill();
         if (sig.p >= 1) {
-          nodes[sig.to].hot = 1;
-          signals.splice(s, 1);
-          if (sig.depth < 2 && Math.random() < 0.6) {        // propagate
-            const next = signals.length;
+          nodes[sig.to].hot = 1; signals.splice(s, 1);
+          if (sig.depth < 2 && Math.random() < 0.6) {
+            const nx = signals.length;
             spawnSignal(sig.to, sig.col === '#ff5c6c' ? 'fail' : sig.col === '#ffb547' ? 'watch' : 'pass');
-            if (signals[next]) signals[next].depth = sig.depth + 1;
+            if (signals[nx]) signals[nx].depth = sig.depth + 1;
           }
         }
       }
       ctx.shadowBlur = 0;
-
-      // idle ambient signals scaled by activity
       activity = Math.max(0.25, activity - 0.004);
-      if (!reduceMotion && Math.random() < activity * 0.5 && signals.length < 60) {
-        spawnSignal((Math.random() * nodes.length) | 0, 'pass');
-      }
+      if (!reduceMotion && Math.random() < activity * 0.5 && signals.length < 60) spawnSignal((Math.random() * nodes.length) | 0, 'pass');
       requestAnimationFrame(frame);
     }
 
     function pulse(region, verdict) {
-      activity = Math.min(1.4, activity + 0.25);
+      activity = Math.min(1.5, activity + 0.18);
       const el = regionEls[region];
       if (el) { el.classList.add('hot'); setTimeout(() => el.classList.remove('hot'), 600); }
       const node = regionNode[region] ?? ((Math.random() * nodes.length) | 0);
       if (nodes[node]) nodes[node].hot = 1;
-      for (let i = 0; i < 3; i++) spawnSignal(node, verdict);
+      spawnSignal(node, verdict);
     }
 
     layout();
     window.addEventListener('resize', layout);
-    if (reduceMotion) {
-      // static single frame
-      ctx.fillStyle = '#54f6a6';
-      nodes.forEach(n => { ctx.globalAlpha = 0.5; ctx.beginPath(); ctx.arc(n.x, n.y, 1.5, 0, 6.3); ctx.fill(); });
-    } else frame();
-
+    if (reduceMotion) { ctx.fillStyle = '#54f6a6'; nodes.forEach(n => { ctx.globalAlpha = 0.5; ctx.beginPath(); ctx.arc(n.x, n.y, 1.5, 0, 6.3); ctx.fill(); }); }
+    else frame();
     return { pulse };
   })();
 
   /* ============================================================
-     SIMULATION — agent swarm + telemetry + reports
+     SIMULATION
      ============================================================ */
   let target = TARGETS[0];
   let running = true;
-  let agents = [], nextId = 1021;
-  const MAX_AGENTS = 6;
+  let nextId = 1021;
+  let activeCount = 600;
+  let currentReport = 'ab';
   const store = [];
   const agg = { n: 0, pass: 0, rewardSum: 0, hist: new Array(10).fill(0), finishes: [] };
-  const sparks = { tp: [], rw: [], wd: [], lat: [] };
+  const sparks = { ag: [], tp: [], rw: [], ps: [] };
 
-  const swarmList = $('#swarmList');
-  const conFeed = $('#conFeed');
-  const intelBody = $('#intelBody');
+  const popEl = $('#pop'), focusListEl = $('#focusList'), conFeed = $('#conFeed'), intelBody = $('#intelBody'), explainEl = $('#explain');
 
-  /* ---- target select ---- */
-  const sel = $('#target');
-  sel.innerHTML = TARGETS.map(t => `<option value="${t.id}">${t.label} · ${t.url}</option>`).join('');
-  sel.addEventListener('change', () => {
-    target = TARGETS.find(t => t.id === sel.value) || TARGETS[0];
-    resetSession();
-  });
-
-  function resetSession() {
-    agents = []; store.length = 0;
-    agg.n = 0; agg.pass = 0; agg.rewardSum = 0; agg.hist.fill(0); agg.finishes = [];
-    swarmList.innerHTML = ''; conFeed.innerHTML = '';
-    setMetric('mEval', '0'); setMetric('mPass', '—'); setMetric('mRate', '—');
-    renderReport();
-    conLine(`<span class="t">▸ session reset · target = ${target.url}</span>`);
+  /* ---- population grid (visual swarm) ---- */
+  const POP_N = 168;
+  const popCells = [];
+  for (let i = 0; i < POP_N; i++) { const c = document.createElement('i'); popEl.appendChild(c); popCells.push(c); }
+  const POP_STATES = ['spawn', 'sim', 'sim', 'sim', 'pass', 'pass', 'fail', ''];
+  function popTick() {
+    if (!running) return;
+    const flips = 10 + ((Math.random() * 14) | 0);
+    for (let k = 0; k < flips; k++) popCells[(Math.random() * POP_N) | 0].className = POP_STATES[(Math.random() * POP_STATES.length) | 0];
   }
 
-  const setMetric = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-
-  function spawnAgent() {
-    const persona = samplePersona();
-    const pen = personaPenalty(persona);
-    const a = {
-      id: nextId++, persona, label: personaLabel(persona),
-      target: target.id, step: -1, steps: target.steps,
-      status: 'spawn', rewards: [], traj: [], pen,
-      region: regionFor(persona), el: null,
-    };
-    agents.push(a);
-    const el = document.createElement('div');
-    el.className = 'agent';
-    el.innerHTML = `<div class="agent-top"><span class="agent-id">AGENT#${pad(a.id, 4)}</span><span class="agent-state spawn">spawn</span></div>
-      <div class="agent-persona">${a.label}</div>
-      <div class="agent-bar"><i style="width:0%"></i></div>`;
-    swarmList.prepend(el);
-    a.el = el;
-    while (swarmList.childElementCount > MAX_AGENTS) swarmList.lastElementChild.remove();
+  /* ---- behaviour factory + finalize ---- */
+  function newBehavior() {
+    const persona = samplePersona(), pen = personaPenalty(persona), steps = target.steps, rewards = [], traj = [];
+    for (let s = 0; s < steps.length; s++) {
+      const r = clamp01(0.88 - pen * (0.7 + Math.random() * 0.5) + (Math.random() - 0.5) * 0.14);
+      rewards.push(r); traj.push({ step: s + 1, observation: steps[s], action: ACTIONS[s % ACTIONS.length], reward: +r.toFixed(3) });
+    }
+    const score = rewards.reduce((a, b) => a + b, 0) / rewards.length;
+    const verdict = score >= 0.7 ? 'pass' : score >= 0.5 ? 'watch' : 'fail';
+    return { persona, pen, region: regionFor(persona), steps, rewards, traj, score, verdict };
+  }
+  function finalize(b, id) {
+    agg.n++; agg.rewardSum += b.score; if (b.verdict === 'pass') agg.pass++;
+    agg.hist[Math.min(9, (b.score * 10) | 0)]++;
+    agg.finishes.push(performance.now());
+    if (agg.finishes.length > 300) agg.finishes = agg.finishes.filter(t => performance.now() - t < 8000);
+    Brain.pulse(b.region, b.verdict);
+    store.push({ id: `mx-${pad(id, 6)}`, target: target.id, persona: b.persona, trajectory: b.traj, score: +b.score.toFixed(4), verdict: b.verdict });
+    if (store.length > 5000) store.shift();
+    if (currentReport === 'score' || currentReport === 'heat') renderReport();
   }
 
-  function nowStr() {
-    const d = new Date();
-    return `${pad(d.getHours(), 2)}:${pad(d.getMinutes(), 2)}:${pad(d.getSeconds(), 2)}`;
-  }
-  function conLine(html) {
+  /* ---- console ---- */
+  function nowStr() { const d = new Date(); return `${pad(d.getHours(), 2)}:${pad(d.getMinutes(), 2)}:${pad(d.getSeconds(), 2)}`; }
+  function conLine(html, cls) {
     const div = document.createElement('div');
-    div.className = 'con-line';
+    div.className = 'con-line' + (cls ? ' ' + cls : '');
     div.innerHTML = html;
     conFeed.prepend(div);
     while (conFeed.childElementCount > 60) conFeed.lastElementChild.remove();
   }
 
-  function advance(a) {
-    if (a.status === 'spawn') {
-      a.status = 'sim'; a.step = 0;
-      updateAgentEl(a, 0);
-      return;
-    }
-    if (a.status === 'sim') {
-      const obs = a.steps[a.step];
-      // reward for this step
-      const rwBase = 0.88;
-      const r = clamp01(rwBase - a.pen * (0.7 + Math.random() * 0.5) + (Math.random() - 0.5) * 0.14);
-      a.rewards.push(r);
-      const act = ACTIONS[a.step % ACTIONS.length];
-      a.traj.push({ step: a.step + 1, observation: obs, action: act, reward: +r.toFixed(3) });
-      const rc = r >= 0.7 ? 'ok' : r >= 0.5 ? 'mid' : 'bad';
-      conLine(`<span class="t">[${nowStr()}]</span> <span class="ag">AGENT#${pad(a.id, 4)}</span> <span class="obs">obs:"${obs}"</span> → <span class="act">${act}</span> <span class="rw ${rc}">r=${r.toFixed(2)}</span>`);
-      a.step++;
-      updateAgentEl(a, a.step / a.steps.length);
-      if (a.step >= a.steps.length) { a.status = 'score'; }
-      return;
-    }
-    if (a.status === 'score') {
-      const score = a.rewards.reduce((s, x) => s + x, 0) / a.rewards.length;
-      a.score = score;
-      a.verdict = score >= 0.7 ? 'pass' : score >= 0.5 ? 'watch' : 'fail';
-      finishAgent(a);
-      a.status = 'done';
-      return;
+  /* ---- background swarm: many agents finishing continuously ---- */
+  let bgScored = 0, lastBatch = 0;
+  function bgTick() {
+    if (!running) return;
+    const batch = 2 + ((Math.random() * 4) | 0);
+    for (let i = 0; i < batch; i++) finalize(newBehavior(), nextId++);
+    bgScored += batch;
+    const now = performance.now();
+    if (now - lastBatch > 2200) {
+      lastBatch = now;
+      conLine(`<span class="t">[${nowStr()}]</span> <span class="sum">· background: ${bgScored} agents scored · ${(agg.n ? agg.pass / agg.n * 100 : 0).toFixed(0)}% pass cumulative</span>`, 'dim');
+      bgScored = 0;
     }
   }
-  const ACTIONS = ['scan UI', 'tap target', 'type input', 'wait for load', 'read prompt', 'retry', 'confirm', 'scroll', 'select option', 'submit'];
 
-  function updateAgentEl(a, prog) {
-    if (!a.el) return;
-    const st = a.el.querySelector('.agent-state');
-    const bar = a.el.querySelector('.agent-bar i');
-    st.className = 'agent-state ' + a.status;
-    st.textContent = a.status;
-    bar.style.width = Math.round(prog * 100) + '%';
+  /* ---- in-focus agents: slow, readable trajectories ---- */
+  const FOCUS_N = 3;
+  let focus = [];
+  function spawnFocus() { return { id: nextId++, b: newBehavior(), step: 0 }; }
+  function renderFocusCards() {
+    focusListEl.innerHTML = focus.map(f => {
+      if (!f) return '';
+      const b = f.b, total = b.steps.length, done = f.step >= total;
+      const curObs = done ? 'complete' : b.steps[f.step];
+      const lastR = f.step > 0 ? b.rewards[f.step - 1] : null;
+      const prog = Math.round(Math.min(f.step, total) / total * 100);
+      return `<div class="focus">
+        <div class="f-top"><span class="f-id"><span class="foc">◉</span>AGENT#${pad(f.id, 4)}</span><span class="f-step">step ${Math.min(f.step + (done ? 0 : 1), total)}/${total}</span></div>
+        <div class="f-persona">${personaLabel(b.persona)}</div>
+        <div class="f-now">▸ <b>${curObs}</b>${lastR != null ? ` · r=${lastR.toFixed(2)}` : ''}</div>
+        <div class="f-bar"><i style="width:${prog}%"></i></div>
+      </div>`;
+    }).join('');
   }
-
-  function finishAgent(a) {
-    // metrics
-    agg.n++; agg.rewardSum += a.score;
-    if (a.verdict === 'pass') agg.pass++;
-    agg.hist[Math.min(9, (a.score * 10) | 0)]++;
-    agg.finishes.push(performance.now());
-    if (agg.finishes.length > 200) agg.finishes = agg.finishes.filter(t => performance.now() - t < 8000);
-    // brain + console
-    Brain.pulse(a.region, a.verdict);
-    const vc = a.verdict === 'pass' ? 'done' : a.verdict === 'watch' ? 'rw mid' : 'rw bad';
-    conLine(`<span class="t">[${nowStr()}]</span> <span class="ag">AGENT#${pad(a.id, 4)}</span> <span class="${vc}">⮑ ${a.verdict.toUpperCase()}</span> score=${a.score.toFixed(2)} · region:${a.region}`);
-    updateAgentEl(a, 1);
-    // store for export
-    store.push({ id: `mx-${pad(a.id, 6)}`, target: a.target, persona: a.persona, trajectory: a.traj, score: +a.score.toFixed(4), verdict: a.verdict });
-    if (store.length > 5000) store.shift();
-    // metrics display
-    setMetric('mEval', fmt.format(agg.n));
-    setMetric('mPass', ((agg.pass / agg.n) * 100).toFixed(1) + '%');
-    const recent = agg.finishes.filter(t => performance.now() - t < 4000).length;
-    setMetric('mRate', (recent / 4).toFixed(1));
-    if (currentReport === 'score' || currentReport === 'heat') renderReport();
-  }
-
-  /* ---- main tick: advance every agent one step ---- */
-  function tick() {
-    if (running) {
-      while (agents.filter(a => a.status !== 'done').length < MAX_AGENTS) spawnAgent();
-      agents.forEach(advance);
-      agents = agents.filter(a => a.status !== 'done');
+  function focusTick() {
+    if (!running) return;
+    for (let idx = 0; idx < FOCUS_N; idx++) {
+      let f = focus[idx];
+      if (!f) { focus[idx] = spawnFocus(); continue; }
+      const b = f.b;
+      if (f.step < b.steps.length) {
+        const obs = b.steps[f.step], r = b.rewards[f.step], act = b.traj[f.step].action;
+        const rc = r >= 0.7 ? 'ok' : r >= 0.5 ? 'mid' : 'bad';
+        conLine(`<span class="t">[${nowStr()}]</span> <span class="foc">◉</span> <span class="ag">AGENT#${pad(f.id, 4)}</span> <span class="st">step ${f.step + 1}/${b.steps.length}</span> <span class="obs">obs:"${obs}"</span> → <span class="act">${act}</span> <span class="rw ${rc}">r=${r.toFixed(2)}</span>`);
+        f.step++;
+      } else {
+        finalize(b, f.id);
+        const vc = b.verdict === 'pass' ? 'done' : b.verdict === 'watch' ? 'rw mid' : 'rw bad';
+        conLine(`<span class="t">[${nowStr()}]</span> <span class="foc">◉</span> <span class="ag">AGENT#${pad(f.id, 4)}</span> <span class="${vc}">⮑ ${b.verdict.toUpperCase()}</span> score=${b.score.toFixed(2)} · ${b.steps.length} steps · region:${b.region}`);
+        focus[idx] = spawnFocus();
+      }
     }
+    renderFocusCards();
   }
-  setInterval(tick, 400);
 
-  /* ---- vitals sparklines ---- */
+  /* ---- vitals + active count ---- */
+  function setV(k, v) { const el = document.querySelector(`[data-v="${k}"]`); if (el) el.textContent = v; }
   function pushSpark(key, v, max) {
     const arr = sparks[key]; arr.push(v); if (arr.length > 18) arr.shift();
     const el = document.querySelector(`.spark[data-s="${key}"]`);
-    if (el) el.innerHTML = arr.map(x => `<i style="height:${Math.max(8, Math.round(x / max * 100))}%"></i>`).join('');
+    if (el) el.innerHTML = arr.map(x => `<i style="height:${Math.max(8, Math.round(clamp01(x / max) * 100))}%"></i>`).join('');
   }
   function vitals() {
+    activeCount = 590 + ((Math.random() * 60) | 0);
     const recent = agg.finishes.filter(t => performance.now() - t < 4000).length;
-    const tp = recent / 4 * 1 + Math.random() * 0.4;
-    const rw = agg.n ? agg.rewardSum / agg.n : 0.8;
-    const wd = MAX_AGENTS * 1000 + ((Math.random() * 600) | 0);
-    const lat = 120 + ((Math.random() * 80) | 0);
-    document.querySelector('[data-v="tp"]').textContent = (recent / 4).toFixed(1) + '/s';
-    document.querySelector('[data-v="rw"]').textContent = rw.toFixed(3);
-    document.querySelector('[data-v="wd"]').textContent = fmt.format(wd);
-    document.querySelector('[data-v="lat"]').textContent = lat + 'ms';
-    pushSpark('tp', tp + 0.2, 4); pushSpark('rw', rw, 1); pushSpark('wd', wd, MAX_AGENTS * 1700); pushSpark('lat', lat, 240);
-    $('#swarmCount').textContent = agents.filter(a => a.status !== 'done').length + ' active';
+    const tp = recent / 4, rw = agg.n ? agg.rewardSum / agg.n : 0, ps = agg.n ? agg.pass / agg.n * 100 : 0;
+    setV('ag', fmt.format(activeCount)); setV('tp', tp.toFixed(1) + '/s'); setV('rw', rw.toFixed(3)); setV('ps', ps.toFixed(1) + '%');
+    pushSpark('ag', activeCount, 700); pushSpark('tp', tp + 0.3, 22); pushSpark('rw', rw, 1); pushSpark('ps', ps / 100, 1);
+    $('#swarmCount').textContent = fmt.format(activeCount) + ' active';
   }
-  setInterval(vitals, 900);
+
+  function setExplain() {
+    explainEl.innerHTML = `▸ <b>${fmt.format(activeCount)}</b> simulated users are completing <em>“${target.label}”</em> on <em>${target.url}</em> — each agent runs the flow step-by-step, and every finished run is scored and rolled into the reports →`;
+  }
+
+  function resetSession() {
+    store.length = 0; agg.n = 0; agg.pass = 0; agg.rewardSum = 0; agg.hist.fill(0); agg.finishes = [];
+    focus = Array.from({ length: FOCUS_N }, spawnFocus); renderFocusCards();
+    conFeed.innerHTML = ''; bgScored = 0;
+    activeCount = 590 + ((Math.random() * 60) | 0);
+    setExplain(); renderReport();
+    conLine(`<span class="t">▸ session reset · target = ${target.url}</span>`, 'dim');
+  }
+
+  /* ---- target select ---- */
+  const sel = $('#target');
+  sel.innerHTML = TARGETS.map(t => `<option value="${t.id}">${t.label} · ${t.url}</option>`).join('');
+  sel.addEventListener('change', () => { target = TARGETS.find(t => t.id === sel.value) || TARGETS[0]; resetSession(); });
 
   /* ---- run / halt ---- */
   const runBtn = $('#run');
@@ -409,8 +361,9 @@
     document.querySelectorAll('.led').forEach(l => l.classList.toggle('on', running));
   });
 
-  /* ---- reports ---- */
-  let currentReport = 'ab';
+  /* ============================================================
+     REPORTS
+     ============================================================ */
   $('#reportTabs').addEventListener('click', e => {
     const b = e.target.closest('.rtab'); if (!b) return;
     currentReport = b.dataset.r;
@@ -428,8 +381,7 @@
   function hmColor(rate) {
     const stops = [[255, 92, 108], [255, 181, 71], [84, 246, 166]];
     const t = clamp01(rate) * 2, i = t < 1 ? 0 : 1, f = t < 1 ? t : t - 1;
-    const a = stops[i], b = stops[i + 1];
-    const c = a.map((v, k) => Math.round(v + (b[k] - v) * f));
+    const a = stops[i], b = stops[i + 1], c = a.map((v, k) => Math.round(v + (b[k] - v) * f));
     return `rgb(${c[0]},${c[1]},${c[2]})`;
   }
   function renderHeat() {
@@ -477,25 +429,20 @@
       intelBody.innerHTML = `<table class="seg-table"><thead><tr><th>Persona segment</th><th>A</th><th>B</th><th>Δ</th></tr></thead><tbody>${rows}</tbody></table>`;
     } else if (currentReport === 'score') {
       const max = Math.max(1, ...agg.hist);
-      const bars = agg.hist.map((v, i) => {
-        const cls = i < 5 ? 'lo' : i < 7 ? 'mid' : '';
-        return `<i class="${cls}" style="height:${v / max * 100}%"></i>`;
-      }).join('');
+      const bars = agg.hist.map((v, i) => `<i class="${i < 5 ? 'lo' : i < 7 ? 'mid' : ''}" style="height:${v / max * 100}%"></i>`).join('');
       intelBody.innerHTML = `<div class="histo">${bars}</div><div class="histo-axis"><span>0.0</span><span>0.5</span><span>1.0</span></div>
         <p style="font-size:.76rem;color:var(--ink-dim);margin-top:10px">Live score distribution · ${fmt.format(agg.n)} behaviors this session.</p>`;
     } else if (currentReport === 'heat') {
       intelBody.innerHTML = renderHeat();
     } else {
-      intelBody.innerHTML = `<ul class="findings">${r.findings.map(([sev, t]) =>
-        `<li class="finding"><span class="sev ${sev}">${sev.toUpperCase()}</span>${t}</li>`).join('')}</ul>`;
+      intelBody.innerHTML = `<ul class="findings">${r.findings.map(([sev, t]) => `<li class="finding"><span class="sev ${sev}">${sev.toUpperCase()}</span>${t}</li>`).join('')}</ul>`;
     }
   }
 
   /* ---- export ---- */
   $('#export').addEventListener('click', () => {
     if (!store.length) return;
-    const lines = store.map(b => JSON.stringify(b));
-    const blob = new Blob([lines.join('\n') + '\n'], { type: 'application/x-ndjson' });
+    const blob = new Blob([store.map(b => JSON.stringify(b)).join('\n') + '\n'], { type: 'application/x-ndjson' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url; a.download = `matraix-trajectories-${target.id}-${store.length}.jsonl`;
@@ -504,7 +451,16 @@
 
   /* ---- clock ---- */
   function clock() { $('#clock').textContent = nowStr(); }
-  clock(); setInterval(clock, 1000);
 
-  renderReport();
+  /* ============================================================
+     INIT
+     ============================================================ */
+  focus = Array.from({ length: FOCUS_N }, spawnFocus);
+  renderFocusCards();
+  vitals(); setExplain(); renderReport(); clock();
+  setInterval(popTick, 240);
+  setInterval(bgTick, 300);
+  setInterval(focusTick, 1300);   // slow & readable
+  setInterval(vitals, 900);
+  setInterval(clock, 1000);
 })();
