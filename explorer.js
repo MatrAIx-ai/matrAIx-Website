@@ -19,17 +19,18 @@
 
   /* ---------- Stats ---------- */
   const totalValues = dims.reduce((s, d) => s + d.values.length, 0);
-  // reachable space = product of value counts (huge → scientific notation)
-  let space = 1;
-  dims.forEach(d => { space *= d.values.length; });
+  // reachable space = product of value counts. With 1000+ dims this overflows
+  // float range, so accumulate the base-10 logarithm and format from that.
+  let log10space = 0;
+  dims.forEach(d => { log10space += Math.log10(d.values.length); });
 
   function supScript(exp) {
     const map = { '-': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' };
     return String(exp).split('').map(c => map[c] || c).join('');
   }
-  function sci(n) {
-    const e = Math.floor(Math.log10(n));
-    const m = (n / Math.pow(10, e)).toFixed(2);
+  function sciFromLog(L) {
+    const e = Math.floor(L);
+    const m = Math.pow(10, L - e).toFixed(2);
     return `${m} × 10${supScript(e)}`;
   }
 
@@ -39,7 +40,7 @@
   };
   setStat('dims', dims.length);
   setStat('vals', fmtInt.format(totalValues));
-  setStat('space', sci(space));
+  setStat('space', sciFromLog(log10space));
   setStat('target', fmtInt.format(DATA.targetDimensions));
   document.getElementById('verTag').textContent = 'v' + DATA.schemaVersion;
   document.getElementById('footMeta').textContent =
@@ -108,9 +109,11 @@
     card.querySelector('.dim-hint').textContent = open ? '▾ click to collapse' : '▸ click to expand';
   });
 
+  let searchTimer;
   document.getElementById('search').addEventListener('input', e => {
     query = e.target.value;
-    render();
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(render, 120);   // debounce: 1000+ cards re-render
   });
 
   render();
