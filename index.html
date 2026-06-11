@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="home.css?v=7" />
+  <link rel="stylesheet" href="home.css?v=8" />
 </head>
 <body>
   <!-- Background simulation layers -->
@@ -148,6 +148,17 @@
     <!-- Closing CTA -->
     <section class="closing" id="contact">
       <h2>Evaluate your agents <span>before</span> the world does.</h2>
+      <div class="globes">
+        <div class="globe-wrap human">
+          <canvas class="globe" data-kind="human" aria-hidden="true"></canvas>
+          <div class="globe-cap"><b>8.3 Billion</b><span>real people</span></div>
+        </div>
+        <div class="globe-link"><span class="sym">≈</span>every person,<br />an agent</div>
+        <div class="globe-wrap agent">
+          <canvas class="globe" data-kind="agent" aria-hidden="true"></canvas>
+          <div class="globe-cap"><b>8.3 Billion</b><span>matrAIx agents</span></div>
+        </div>
+      </div>
       <p class="closing-sub">Request a demo or ask us anything.</p>
       <a href="access.html" class="btn btn-solid btn-lg">Request access <span class="arr">→</span></a>
     </section>
@@ -167,7 +178,7 @@
     <span class="foot-meta">SIM-NODE 07 · © 2026 matrAIx</span>
   </footer>
 
-  <script src="home.js?v=4"></script>
+  <script src="home.js?v=5"></script>
   <script>
   (function(){var el=document.getElementById('pgClock');if(!el)return;var p=function(x){return(x<10?'0':'')+x;};function t(){var d=new Date();el.textContent=p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());}t();setInterval(t,1000);})();
   </script>

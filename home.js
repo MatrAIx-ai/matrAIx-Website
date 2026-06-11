@@ -283,3 +283,58 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
   }
   setTimeout(tick, 700);
 })();
+
+/* ---------- 7. Twin globes: 8.3B real people ≈ 8.3B matrAIx agents ---------- */
+(() => {
+  const globes = document.querySelectorAll('.globe');
+  if (!globes.length) return;
+
+  // shared point cloud (fibonacci sphere) — same population on both globes
+  const N = 520, PTS = [];
+  const ga = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < N; i++) {
+    const y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), t = ga * i;
+    PTS.push([Math.cos(t) * r, y, Math.sin(t) * r]);
+  }
+
+  function initGlobe(canvas) {
+    const ctx = canvas.getContext('2d');
+    const isAgent = canvas.dataset.kind === 'agent';
+    const col = isAgent ? '84,246,166' : '138,208,255';
+    let w, h, cx, cy, R, dpr, rot = Math.random() * 6, raf;
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = rect.width; h = rect.height;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cx = w / 2; cy = h / 2; R = Math.min(w, h) * 0.42;
+    }
+    function step() {
+      ctx.clearRect(0, 0, w, h);
+      if (isAgent) {
+        const g = ctx.createRadialGradient(cx, cy, R * 0.2, cx, cy, R * 1.15);
+        g.addColorStop(0, 'rgba(84,246,166,0.12)'); g.addColorStop(1, 'rgba(84,246,166,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R * 1.15, 0, 6.283); ctx.fill();
+      }
+      ctx.strokeStyle = 'rgba(' + col + ',0.16)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(cx, cy, R, 0, 6.283); ctx.stroke();
+      const ca = Math.cos(rot), sa = Math.sin(rot), proj = [];
+      for (let i = 0; i < N; i++) {
+        const p = PTS[i], x = p[0] * ca - p[2] * sa, z = p[0] * sa + p[2] * ca;
+        proj.push([cx + x * R, cy + p[1] * R, z]);
+      }
+      proj.sort((a, b) => a[2] - b[2]);
+      for (let i = 0; i < proj.length; i++) {
+        const q = proj[i], f = (q[2] + 1) / 2;
+        ctx.fillStyle = 'rgba(' + col + ',' + (0.12 + f * 0.85).toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(q[0], q[1], (0.7 + f * 1.5) * (isAgent ? 1.12 : 1), 0, 6.283); ctx.fill();
+      }
+    }
+    function loop() { step(); rot += isAgent ? 0.0045 : 0.0038; raf = requestAnimationFrame(loop); }
+    resize(); window.addEventListener('resize', resize);
+    if (reduceMotion) step(); else loop();
+  }
+  globes.forEach(initGlobe);
+})();
