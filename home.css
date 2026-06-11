@@ -326,10 +326,10 @@ main { position: relative; z-index: 10; }
 .os-card { max-width: 980px; margin: 0 auto; border: 1px solid var(--line); background: var(--bg-2); overflow: hidden; }
 .os-card-bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
   padding: 14px 18px; border-bottom: 1px solid var(--line-soft); background: linear-gradient(to bottom, #0a100d, #070a09); }
-.os-card-id { font-family: var(--disp); font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em; color: var(--ink); }
+.os-card-id { font-family: var(--disp); font-weight: 800; font-size: 1.45rem; letter-spacing: -0.01em; color: var(--ink); }
 .os-card-id em { color: var(--phos); font-style: normal; text-shadow: var(--glow); }
-.os-card-id .v { color: var(--amber); font-size: 0.72rem; border: 1px solid rgba(255,181,71,0.3); padding: 1px 6px; margin: 0 4px; }
-.os-card-id .node { color: var(--ink-dim); font-weight: 400; font-family: var(--mono); font-size: 0.74rem; }
+.os-card-id .v { color: var(--amber); font-size: 0.82rem; border: 1px solid rgba(255,181,71,0.3); padding: 1px 7px; margin: 0 5px; }
+.os-card-id .node { color: var(--ink-dim); font-weight: 400; font-family: var(--mono); font-size: 0.86rem; }
 .os-card-status { display: flex; align-items: center; gap: 14px; }
 .os-card-status .led { display: inline-flex; align-items: center; gap: 6px; font-size: 0.68rem; letter-spacing: 0.1em; color: var(--ink-dim); }
 .os-card-status .led::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--phos); box-shadow: var(--glow); animation: pulse 1.4s infinite; }

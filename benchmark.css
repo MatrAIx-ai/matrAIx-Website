@@ -79,10 +79,10 @@ a { color: inherit; text-decoration: none; }
   border-bottom: 1px solid var(--line);
   background: linear-gradient(to bottom, #0a100d, #070a09);
 }
-.os-id { font-family: var(--disp); font-weight: 800; font-size: 1rem; letter-spacing: -0.01em; white-space: nowrap; }
+.os-id { font-family: var(--disp); font-weight: 800; font-size: 1.35rem; letter-spacing: -0.01em; white-space: nowrap; }
 .os-id .ai { color: var(--phos); text-shadow: var(--glow); }
-.os-id .v { color: var(--amber); font-size: 0.72rem; border: 1px solid rgba(255,181,71,0.3); padding: 1px 5px; margin: 0 4px; }
-.os-id .node { color: var(--ink-dim); font-weight: 400; font-family: var(--mono); font-size: 0.74rem; }
+.os-id .v { color: var(--amber); font-size: 0.84rem; border: 1px solid rgba(255,181,71,0.3); padding: 1px 6px; margin: 0 5px; }
+.os-id .node { color: var(--ink-dim); font-weight: 400; font-family: var(--mono); font-size: 0.86rem; }
 
 .os-target { display: flex; align-items: center; gap: 10px; flex: 1; justify-content: center; min-width: 0; }
 .os-target .lbl { font-size: 0.7rem; letter-spacing: 0.14em; color: var(--ink-dim); }
@@ -185,8 +185,9 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- Brain stage (center) ---------- */
 .stage { position: relative; }
-.stage-legend { font-size: 0.66rem; color: var(--ink-dim); padding: 8px 12px; border-bottom: 1px solid var(--line-soft); }
+.stage-legend { font-size: 0.74rem; line-height: 1.5; color: var(--ink-dim); padding: 10px 12px; border-bottom: 1px solid var(--line-soft); }
 .stage-legend b { font-weight: 600; margin: 0 2px; }
+.stage-legend .hint { color: var(--phos); }
 .stage-legend .cp { color: var(--phos); } .stage-legend .ca { color: var(--amber); } .stage-legend .cr { color: var(--rose); }
 .brain-wrap { position: relative; flex: 1; min-height: 0; overflow: hidden; }
 #brain { position: absolute; inset: 0; width: 100%; height: 100%; }

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="benchmark.css?v=6" />
+  <link rel="stylesheet" href="benchmark.css?v=7" />
 </head>
 <body class="os">
   <div class="grain" aria-hidden="true"></div>
@@ -18,7 +18,7 @@
   <section class="runway">
     <header class="runway-bar">
       <a class="runway-brand" href="index.html"><span class="mk">▚</span>matr<span class="ai">AI</span>x<span class="tld">.ai</span></a>
-      <nav class="runway-nav"><a href="index.html">Home</a><a href="person.html">Persona</a><a href="walkthrough.html">Walkthrough</a><a href="#portal">Portal ▾</a><a href="#reports">Reports ▾</a></nav>
+      <nav class="runway-nav"><a href="index.html">Home</a><a href="person.html">Persona</a><a href="case_study.html">Case Study</a><a href="#portal">Portal ▾</a><a href="#reports">Reports ▾</a></nav>
     </header>
     <div class="runway-stage">
       <canvas id="runway" aria-hidden="true"></canvas>
@@ -48,7 +48,7 @@
       <button id="run" class="os-btn run">■ HALT</button>
     </div>
     <div class="os-status">
-      <nav class="os-nav"><a href="index.html">Home</a><a href="person.html">Persona</a><a href="walkthrough.html">Walkthrough</a></nav>
+      <nav class="os-nav"><a href="index.html">Home</a><a href="person.html">Persona</a><a href="case_study.html">Case Study</a></nav>
       <span class="led on" data-led="core">CORE</span>
       <span class="led on" data-led="eval">EVAL</span>
       <span class="led on" data-led="net">NET</span>
@@ -72,8 +72,8 @@
 
     <!-- Neural eval core -->
     <section class="win stage">
-      <div class="win-bar"><span>Neural Eval Core</span><span class="scan-tag" id="scanTag">● SCANNING</span></div>
-      <div class="stage-legend">Region lights up = the cognitive area each behavior stresses &nbsp;·&nbsp; <b class="cp">pass</b> <b class="ca">flag</b> <b class="cr">fail</b></div>
+      <div class="win-bar"><span>Neural Eval Core · skill map</span><span class="scan-tag" id="scanTag">● SCANNING</span></div>
+      <div class="stage-legend"><b class="hint">What this shows →</b> a live map of the human skills your agents get tested on. Each pulse is one scored behavior, lighting the region (skill) it stressed — Reasoning · Safety · Memory · Language · Planning · Perception. &nbsp;<b class="cp">● pass</b> <b class="ca">● flag</b> <b class="cr">● fail</b></div>
       <div class="brain-wrap">
         <canvas id="brain"></canvas>
         <div class="regions" id="regions"></div>

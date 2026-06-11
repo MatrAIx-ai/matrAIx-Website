@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>matrAIx — Case Study · HugClaim.com</title>
+<meta name="description" content="Recorded replay: a matrAIx computer-using agent files an auto-insurance claim on hugclaim.com, with a per-step trajectory breakdown and eval report." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#060807;--bg-2:#0a0e0c;--bg-3:#0d1411;--ink:#d6e6d8;--ink-dim:#6f8273;
+  --phos:#54f6a6;--phos-deep:#1f7e58;--amber:#ffb547;--rose:#ff5c6c;--cyan:#8ad0ff;
+  --line:rgba(84,246,166,.16);--line-soft:rgba(84,246,166,.07);--glow:0 0 18px rgba(84,246,166,.45);
+  --mono:"JetBrains Mono",ui-monospace,monospace;--disp:"Syne",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:14px;line-height:1.55;
+  background-image:repeating-linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,0,0,.14) 3px,rgba(0,0,0,0) 4px);background-attachment:fixed}
+::selection{background:var(--phos);color:#04140c}
+a{color:inherit;text-decoration:none}
+
+.wbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:14px clamp(16px,4vw,40px);border-bottom:1px solid var(--line);background:rgba(6,8,7,.85);backdrop-filter:blur(8px)}
+.brand{font-family:var(--disp);font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
+.brand .ai{color:var(--phos);text-shadow:var(--glow)}
+.rec{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;color:var(--ink-dim);letter-spacing:.08em}
+.rec .d{width:9px;height:9px;border-radius:50%;background:var(--rose);box-shadow:0 0 10px var(--rose);animation:blink 1.3s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.wnav{display:flex;gap:20px;font-size:.8rem;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.06em}
+.wnav a:hover{color:var(--phos)}
+
+.wmain{max-width:1120px;margin:0 auto;padding:clamp(24px,4vw,48px) clamp(16px,4vw,40px) 80px}
+.eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:16px}
+.eyebrow .tick{color:var(--phos)}
+h1{font-family:var(--disp);font-weight:800;letter-spacing:-.03em;line-height:1.02;font-size:clamp(1.9rem,4.6vw,3.1rem);margin-bottom:16px}
+h1 .hl{color:var(--phos);text-shadow:var(--glow)}
+.sub{color:var(--ink-dim);font-size:clamp(.98rem,1.7vw,1.12rem);max-width:780px;line-height:1.6}
+.target{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:.82rem;color:var(--phos);border:1px solid var(--line);background:rgba(84,246,166,.05);padding:7px 14px;border-radius:100px}
+
+.persona{margin:28px 0 0;border:1px solid var(--line);background:var(--bg-2);padding:18px 20px}
+.persona h2{font-family:var(--disp);font-weight:700;font-size:1rem;letter-spacing:.04em;color:var(--phos);margin-bottom:12px}
+.pchips{display:flex;flex-wrap:wrap;gap:8px}
+.pchip{font-size:.76rem;background:var(--bg-3);border:1px solid var(--line-soft);padding:6px 11px;border-radius:6px}
+.pchip b{color:var(--ink-dim);font-weight:400} .pchip span{color:var(--phos)}
+
+/* recording hero */
+.recording{margin-top:22px}
+.bw{border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.5);position:relative}
+.bw-bar{display:flex;align-items:center;gap:10px;padding:9px 12px;background:#0e1411;border-bottom:1px solid var(--line-soft)}
+.bw-dots{display:flex;gap:5px} .bw-dots i{width:9px;height:9px;border-radius:50%;background:#33453b}
+.bw-url{flex:1;font-size:.74rem;color:var(--ink-dim);background:#070a09;border:1px solid var(--line-soft);border-radius:5px;padding:5px 11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rec-badge{display:inline-flex;align-items:center;gap:6px;font-size:.66rem;letter-spacing:.1em;color:var(--rose)}
+.rec-badge .d{width:8px;height:8px;border-radius:50%;background:var(--rose);box-shadow:0 0 8px var(--rose);animation:blink 1.3s infinite}
+.gifwrap{position:relative;background:#000;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}
+.gifwrap img{width:100%;height:100%;object-fit:contain;display:block}
+.gifwrap .loading{position:absolute;color:var(--ink-dim);font-size:.82rem;letter-spacing:.06em}
+.cap{margin-top:10px;font-size:.8rem;color:var(--ink-dim);text-align:center}
+.cap b{color:var(--phos)}
+
+/* two-column: small recording panel + trajectory */
+.layout{display:grid;grid-template-columns:minmax(300px,390px) 1fr;gap:26px;margin-top:22px;align-items:start}
+.rec-col{position:sticky;top:78px}
+.traj-col{min-width:0}
+.traj-col .sec-h{margin-top:0}
+@media (max-width:860px){.layout{grid-template-columns:1fr} .rec-col{position:static}}
+
+/* duration strip */
+.sec-h{font-family:var(--disp);font-weight:700;font-size:1.25rem;margin:40px 0 6px;letter-spacing:-.01em}
+.sec-h .n{color:var(--phos)}
+.sec-sub{color:var(--ink-dim);font-size:.86rem;margin-bottom:16px}
+.durstrip{display:flex;gap:4px;margin-bottom:8px}
+.dseg{position:relative;height:46px;min-width:30px;border:1px solid var(--line-soft);background:var(--bg-2);cursor:pointer;overflow:hidden;transition:border-color .2s}
+.dseg:hover{border-color:var(--phos)}
+.dseg .bar{position:absolute;left:0;bottom:0;top:0;width:100%}
+.dseg.ok .bar{background:rgba(84,246,166,.10)} .dseg.mid .bar{background:rgba(255,181,71,.14)} .dseg.bad .bar{background:rgba(255,92,108,.16)}
+.dseg .n{position:absolute;top:5px;left:7px;font-size:.68rem;color:var(--phos);z-index:2}
+.dseg .d{position:absolute;bottom:4px;right:6px;font-size:.6rem;color:var(--ink-dim);z-index:2;font-variant-numeric:tabular-nums}
+.durlegend{font-size:.72rem;color:var(--ink-dim)}
+
+/* steps */
+.steps{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.step{border:1px solid var(--line-soft);background:var(--bg-2);padding:14px 16px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;scroll-margin-top:80px}
+.step .si{font-family:var(--disp);font-weight:800;font-size:1.1rem;color:var(--phos);min-width:34px}
+.step .si small{display:block;font-family:var(--mono);font-weight:400;font-size:.62rem;color:var(--ink-dim)}
+.step .body .lab{font-family:var(--disp);font-weight:700;font-size:1.05rem;margin-bottom:6px}
+.step .body .kv{font-size:.86rem;line-height:1.45}
+.step .body .kv b{color:var(--ink-dim);font-weight:400;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;margin-right:6px}
+.step .body .fric{margin-top:7px;font-size:.8rem;display:flex;gap:8px;align-items:flex-start}
+.sev{flex:0 0 auto;font-size:.6rem;font-weight:700;padding:2px 7px;letter-spacing:.04em;margin-top:1px}
+.sev.high{background:rgba(255,92,108,.16);color:var(--rose)} .sev.med{background:rgba(255,181,71,.16);color:var(--amber)} .sev.low{background:rgba(84,246,166,.13);color:var(--phos)}
+.step .meta{text-align:right;min-width:96px}
+.step .meta .dwell{font-size:.66rem;color:var(--ink-dim);letter-spacing:.06em;text-transform:uppercase}
+.step .meta .rw{font-family:var(--disp);font-weight:800;font-size:1.2rem;font-variant-numeric:tabular-nums}
+.rw.ok{color:var(--phos)} .rw.mid{color:var(--amber)} .rw.bad{color:var(--rose)}
+.step{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
+.step.show{opacity:1;transform:none}
+.dseg.active{border-color:var(--phos);box-shadow:inset 0 0 0 1px var(--phos)}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:.6rem;letter-spacing:.12em;color:var(--rose);vertical-align:middle;margin-left:10px}
+.live .d{width:7px;height:7px;border-radius:50%;background:var(--rose);box-shadow:0 0 8px var(--rose);animation:blink 1.3s infinite}
+
+/* eval */
+.eval{margin-top:34px;border:1px solid var(--phos);background:rgba(84,246,166,.04);padding:24px;box-shadow:inset 0 0 50px rgba(84,246,166,.04)}
+.eval h2{font-family:var(--disp);font-weight:700;font-size:1.35rem;margin-bottom:6px}
+.eval .meta{color:var(--ink-dim);font-size:.92rem;margin-bottom:16px} .eval .meta b{color:var(--phos)}
+.eval .findings{list-style:none;display:flex;flex-direction:column;gap:11px}
+.eval .findings li{display:flex;gap:10px;font-size:.94rem;line-height:1.45}
+.eval .close{margin-top:18px;color:var(--ink);font-size:.94rem}
+.btn{display:inline-flex;align-items:center;gap:9px;margin-top:20px;font-family:var(--mono);font-size:.84rem;letter-spacing:.06em;text-transform:uppercase;
+  color:#04140c;background:var(--phos);border:0;padding:12px 22px;cursor:pointer;font-weight:700;box-shadow:0 0 24px rgba(84,246,166,.3)}
+.btn:hover{background:#76ffbf}
+
+.foot{border-top:1px solid var(--line);padding:24px clamp(16px,4vw,40px);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--ink-dim);font-size:.82rem}
+.foot a:hover{color:var(--phos)}
+
+@media (max-width:760px){.wnav{display:none} .step{grid-template-columns:auto 1fr;gap:10px} .step .meta{grid-column:2;text-align:left;display:flex;gap:14px;align-items:baseline}}
+</style>
+</head>
+<body>
+  <div class="wbar">
+    <a class="brand" href="index.html">matr<span class="ai">AI</span>x</a>
+    <span class="rec"><span class="d"></span>RECORDED SESSION</span>
+    <nav class="wnav"><a href="index.html">Home</a><a href="demo.html">Demo</a><a href="person.html">Persona</a></nav>
+  </div>
+
+  <main class="wmain">
+    <div class="eyebrow"><span class="tick">//</span> CASE STUDY · HUGCLAIM.COM</div>
+    <h1>An agent files a claim on <span class="hl">HugClaim.com</span></h1>
+    <p class="sub">One agent drawn from the matrAIx persona space completes a real auto-insurance claim, end-to-end. Below is the actual screen recording, followed by the recorded trajectory — what it saw, what it did, how long it dwelled, and the reward at each step.</p>
+    <span class="target">◎ target: hugclaim.com — conversational auto-claim flow</span>
+
+    <section class="persona">
+      <h2>AGENT PERSONA · 10 DIMENSIONS</h2>
+      <div class="pchips">
+        <span class="pchip"><b>age</b> <span>35–44</span></span>
+        <span class="pchip"><b>region</b> <span>North America</span></span>
+        <span class="pchip"><b>language</b> <span>Spanish</span></span>
+        <span class="pchip"><b>English</b> <span>Intermediate (B1–B2)</span></span>
+        <span class="pchip"><b>device</b> <span>Mobile · low-bandwidth</span></span>
+        <span class="pchip"><b>intent</b> <span>File a claim</span></span>
+        <span class="pchip"><b>expertise</b> <span>Novice</span></span>
+        <span class="pchip"><b>trust</b> <span>Verifying</span></span>
+        <span class="pchip"><b>emotion</b> <span>Frustrated</span></span>
+        <span class="pchip"><b>tech</b> <span>Cautious adopter</span></span>
+      </div>
+    </section>
+
+    <!-- RECORDING + TRAJECTORY -->
+    <section class="layout">
+      <div class="rec-col">
+        <div class="bw">
+          <div class="bw-bar">
+            <div class="bw-dots"><i></i><i></i><i></i></div>
+            <div class="bw-url">https://hugclaim.com — agent session</div>
+            <span class="rec-badge"><span class="d"></span>REC</span>
+          </div>
+          <div class="gifwrap">
+            <span class="loading">loading recording…</span>
+            <img src="Assets/hugclaim/HugClaim_Walkthrough_web.gif" alt="HugClaim agent walkthrough recording" loading="lazy" onload="this.previousElementSibling.style.display='none'" />
+          </div>
+        </div>
+        <p class="cap">Actual recording · <b>loops automatically</b></p>
+        <div class="durstrip" id="durstrip"></div>
+        <div class="durlegend">▸ widest segments = the friction points. Click to jump.</div>
+      </div>
+      <div class="traj-col">
+        <h2 class="sec-h"><span class="n">▸</span> Real-Time trajectory <span class="live"><span class="d"></span>LIVE</span></h2>
+        <div class="steps" id="steps"></div>
+      </div>
+    </section>
+
+    <!-- EVAL -->
+    <section class="eval">
+      <h2>Eval summary</h2>
+      <div class="meta">Outcome <b>claim submitted ✓</b> · 8 steps · trajectory score <b>0.78</b></div>
+      <ul class="findings">
+        <li><span class="sev high">HIGH</span><span>Verifier rejection shows <strong>no rationale</strong> — 22s stall. Worst for low-trust &amp; novice users.</span></li>
+        <li><span class="sev med">MED</span><span>Low-bandwidth <strong>evidence upload</strong> needed 3 retries. Worst for mobile segment.</span></li>
+        <li><span class="sev low">LOW</span><span>“Deductible” unclear to an <strong>intermediate-English</strong> persona — re-asked twice.</span></li>
+      </ul>
+      <p class="close">One agent finds three real issues. matrAIx runs this across <strong>8.3 billion behaviors</strong> and every persona segment — then hands you the report and the training data.</p>
+      <button class="btn" id="export">⬇ Export this trajectory (JSONL)</button>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span class="brand" style="font-size:1rem">matr<span class="ai">AI</span>x</span>
+    <span><a href="index.html">Home</a> · <a href="demo.html">Demo</a> · <a href="person.html">Persona</a> · <a href="mailto:info@matraix.ai?subject=matrAIx%20demo">Contact</a></span>
+    <span>© 2026 matrAIx · target: hugclaim.com</span>
+  </footer>
+
+<script>
+(function(){
+  var STEPS=[
+    {label:'Landing page',dur:11,observe:'hugclaim.com home — one primary CTA, no signup wall.',act:'Click “Start a claim”.',reward:0.95,cls:'ok'},
+    {label:'Describe the incident',dur:23,observe:'Conversational intake — free-text, no structured form.',act:'Describe the rear-end collision.',reward:0.88,cls:'ok'},
+    {label:'Provide evidence',dur:28,observe:'Asks for safety-feature evidence to raise the payout.',act:'Upload airbags, seat-belt, and ABS photos.',reward:0.62,cls:'mid',fric:{sev:'med',text:'Low-bandwidth upload stalled — 3 retries, 41s. Mobile segment.'}},
+    {label:'Cash-back estimate',dur:16,observe:'Response LLM returns an itemized cash-back estimate.',act:'Review the estimate and breakdown.',reward:0.90,cls:'ok'},
+    {label:'Verifier disagreement',dur:28,observe:'Verifier rejects the ABS claim — but shows no reason.',act:'Stall, then re-state ABS with the photo.',reward:0.41,cls:'bad',fric:{sev:'high',text:'Rejection with no rationale — agent stalled 22s.'}},
+    {label:'Resolved & verified',dur:15,observe:'Verifier accepts after clarification; payout updated.',act:'Accept the updated estimate.',reward:0.83,cls:'ok'},
+    {label:'Submit claim',dur:13,observe:'Submit enabled once the estimate is verified.',act:'Submit the claim.',reward:0.92,cls:'ok'},
+    {label:'Community forum prompt',dur:12,observe:'Post-submit upsell to share the claim publicly.',act:'Decline — persona is privacy-sensitive.',reward:0.70,cls:'ok'}
+  ];
+  var starts=[]; (function(){var s=0;for(var i=0;i<STEPS.length;i++){starts[i]=s;s+=STEPS[i].dur;}})();
+  var pad=function(x){return (x<10?'0':'')+x;};
+  var mmss=function(s){return pad((s/60)|0)+':'+pad(s%60);};
+
+  document.getElementById('durstrip').innerHTML=STEPS.map(function(s,i){
+    return '<a class="dseg '+s.cls+'" href="#step-'+i+'" style="flex:'+s.dur+'" title="'+s.label+' · '+s.dur+'s"><span class="bar"></span><span class="n">'+(i+1)+'</span><span class="d">'+s.dur+'s</span></a>';
+  }).join('');
+
+  document.getElementById('steps').innerHTML=STEPS.map(function(s,i){
+    var fr=s.fric?'<div class="fric"><span class="sev '+s.fric.sev+'">'+s.fric.sev.toUpperCase()+'</span><span>'+s.fric.text+'</span></div>':'';
+    return '<div class="step" id="step-'+i+'">'+
+      '<div class="si">'+(i+1)+'<small>'+mmss(starts[i])+'</small></div>'+
+      '<div class="body"><div class="lab">'+s.label+'</div>'+
+        '<div class="kv"><b>observe</b>'+s.observe+'</div>'+
+        '<div class="kv"><b>act</b>'+s.act+'</div>'+fr+'</div>'+
+      '<div class="meta"><div class="dwell">dwell '+s.dur+'s</div><div class="rw '+s.cls+'">'+s.reward.toFixed(2)+'</div></div>'+
+    '</div>';
+  }).join('');
+
+  // progressive, looping reveal — each step appears after the prior step's dwell
+  (function(){
+    var stepEls=[].slice.call(document.querySelectorAll('.step'));
+    var segEls=[].slice.call(document.querySelectorAll('.dseg'));
+    var TOTAL=starts[STEPS.length-1]+STEPS[STEPS.length-1].dur;
+    var SCALE=0.18, HOLD=3, timers=[];
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      stepEls.forEach(function(s){s.classList.add('show');});
+      return;
+    }
+    function cycle(){
+      timers.forEach(clearTimeout); timers=[];
+      stepEls.forEach(function(s){s.classList.remove('show');});
+      segEls.forEach(function(s){s.classList.remove('active');});
+      STEPS.forEach(function(st,i){
+        timers.push(setTimeout(function(){
+          stepEls[i].classList.add('show');
+          segEls.forEach(function(s,k){s.classList.toggle('active',k===i);});
+        }, 700 + starts[i]*1000*SCALE));
+      });
+      timers.push(setTimeout(cycle, 700 + (TOTAL*SCALE+HOLD)*1000));
+    }
+    cycle();
+  })();
+
+  document.getElementById('export').addEventListener('click',function(){
+    var persona={age_bracket:'35–44',region:'North America',primary_language:'Spanish',english_proficiency:'Intermediate (B1–B2)',device_context:'Mobile, on-the-go',intent:'File a claim',expertise_gap:'Novice asking expert',trust_level:'Verifying',emotional_state:'Frustrated',tech_savviness:'Cautious adopter'};
+    var traj=STEPS.map(function(s,i){return {step:i+1,t:mmss(starts[i]),dwell_s:s.dur,observation:s.observe,action:s.act,reward:s.reward,friction:s.fric?s.fric.text:null};});
+    var rec={id:'mx-walkthrough-hugclaim',target:'hugclaim.com',persona:persona,trajectory:traj,outcome:'submitted',score:0.78};
+    var b=new Blob([JSON.stringify(rec,null,2)+'\n'],{type:'application/x-ndjson'});
+    var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='matraix-walkthrough-hugclaim.jsonl';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u);
+  });
+})();
+</script>
+</body>
+</html>
