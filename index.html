@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="home.css?v=5" />
+  <link rel="stylesheet" href="home.css?v=6" />
 </head>
 <body>
   <!-- Background simulation layers -->
@@ -93,22 +93,30 @@
       <div class="sec-head">
         <span class="idx">02 — TRAINING DATA</span>
         <h2 class="sec-title">Every run becomes training data.</h2>
-        <p class="sec-sub">Each agent session is a structured, rubric-scored trace — rejection-sampled for SFT and paired for RL.</p>
+        <p class="sec-sub">Every simulation feeds back as training data — a self-improving flywheel where each model generation evaluates better than the last.</p>
       </div>
       <div class="data-grid">
-        <div class="data-panel">
-          <div class="data-toggle" id="dataToggle">
-            <button class="dt-btn active" data-kind="sft">SFT trajectory</button>
-            <button class="dt-btn" data-kind="rl">RL preference pair</button>
+        <div class="evolve">
+          <div class="flywheel">
+            <div class="fw-ring"></div>
+            <div class="fw-center">
+              <div class="fw-ver">MODEL <b id="fwVer">v1</b></div>
+              <div class="fw-q" id="fwQ">71%</div>
+              <div class="fw-lab">eval pass rate</div>
+            </div>
+            <span class="fw-node nT">① Simulate</span>
+            <span class="fw-node nR">② Score</span>
+            <span class="fw-node nB">③ Train</span>
+            <span class="fw-node nL">④ Improve</span>
           </div>
-          <pre class="data-sample"><code id="dataSample"></code></pre>
+          <div class="qchart"><div class="qbars" id="qbars"></div><div class="qcap">pass rate climbs each generation · <b id="fwEx">0</b> examples</div></div>
         </div>
         <ul class="data-points">
-          <li><strong>Structured traces</strong> — observation → action → outcome for every agent.</li>
-          <li><strong>Rubric-scored</strong> — keep only high-quality trajectories.</li>
-          <li><strong>Preference pairs</strong> — chosen vs. rejected, ready for DPO / RLHF.</li>
-          <li><strong>Persona-tagged</strong> — train on the exact segments you care about.</li>
-          <li><strong>Streaming export</strong> — JSONL straight into your training stack.</li>
+          <li><strong>Every run is captured &amp; scored</strong> — millions of labeled behaviors, no labeling team.</li>
+          <li><strong>The best examples become training data</strong> — auto-curated for SFT &amp; preference pairs.</li>
+          <li><strong>The model trains and improves</strong> — measurably, every generation.</li>
+          <li><strong>A smarter model runs better simulations</strong> — which produce better data.</li>
+          <li><strong>The flywheel compounds</strong> — data and model improve together.</li>
         </ul>
       </div>
     </section>
@@ -161,7 +169,7 @@
     <span class="foot-meta">SIM-NODE 07 · © 2026 matrAIx</span>
   </footer>
 
-  <script src="home.js?v=3"></script>
+  <script src="home.js?v=4"></script>
   <script>
   (function(){var el=document.getElementById('pgClock');if(!el)return;var p=function(x){return(x<10?'0':'')+x;};function t(){var d=new Date();el.textContent=p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());}t();setInterval(t,1000);})();
   </script>

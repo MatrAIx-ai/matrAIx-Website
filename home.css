@@ -293,6 +293,35 @@ main { position: relative; z-index: 10; }
 .foot-links a:hover { color: var(--phos); }
 .foot-meta { color: var(--ink-dim); letter-spacing: 0.06em; text-transform: uppercase; }
 
+/* ---------- Training-data flywheel (self-improving loop) ---------- */
+.evolve { display: flex; flex-direction: column; align-items: center; }
+.flywheel { position: relative; width: min(280px, 78vw); aspect-ratio: 1; margin: 6px auto 0; }
+.flywheel::before { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--line); }
+.fw-ring { position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(84,246,166,0) 0deg, rgba(84,246,166,0) 250deg, rgba(84,246,166,.75) 332deg, rgba(84,246,166,0) 360deg);
+  -webkit-mask: radial-gradient(circle, transparent 57%, #000 58%); mask: radial-gradient(circle, transparent 57%, #000 58%);
+  filter: drop-shadow(0 0 6px rgba(84,246,166,.5)); animation: spin 4s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.fw-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 46%; height: 46%; border-radius: 50%;
+  background: radial-gradient(circle at 45% 40%, #11241c, #0a0e0c); border: 1px solid var(--phos);
+  box-shadow: 0 0 24px rgba(84,246,166,.22), inset 0 0 16px rgba(84,246,166,.08);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.fw-ver { font-size: 0.6rem; letter-spacing: 0.1em; color: var(--ink-dim); text-transform: uppercase; }
+.fw-ver b { color: var(--phos); }
+.fw-q { font-family: var(--disp); font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.9rem); color: var(--phos); text-shadow: var(--glow); line-height: 1; font-variant-numeric: tabular-nums; transition: color .3s; }
+.fw-lab { font-size: 0.55rem; letter-spacing: 0.06em; color: var(--ink-dim); text-transform: uppercase; }
+.fw-node { position: absolute; font-size: 0.72rem; color: var(--ink); background: var(--bg-2); border: 1px solid var(--line); padding: 5px 11px; border-radius: 100px; white-space: nowrap; }
+.fw-node.nT { top: 0; left: 50%; transform: translate(-50%,-50%); }
+.fw-node.nR { right: 0; top: 50%; transform: translate(50%,-50%); }
+.fw-node.nB { bottom: 0; left: 50%; transform: translate(-50%,50%); }
+.fw-node.nL { left: 0; top: 50%; transform: translate(-50%,-50%); }
+.qchart { width: min(280px, 78vw); margin-top: 22px; }
+.qbars { display: flex; align-items: flex-end; gap: 6px; height: 88px; border-bottom: 1px solid var(--line-soft); }
+.qbar { flex: 1; min-height: 2px; height: 0; border-radius: 2px 2px 0 0; background: linear-gradient(to top, var(--phos-deep), var(--phos)); transition: height .7s cubic-bezier(.2,.8,.2,1); }
+.qbar.on { box-shadow: 0 0 10px rgba(84,246,166,.4); }
+.qcap { margin-top: 10px; font-size: 0.78rem; color: var(--ink-dim); text-align: center; }
+.qcap b { color: var(--phos); font-variant-numeric: tabular-nums; }
+
 /* ---------- Simulation Playground (mirrored matrAIx OS) ---------- */
 .os-card { max-width: 980px; margin: 0 auto; border: 1px solid var(--line); background: var(--bg-2); overflow: hidden; }
 .os-card-bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;

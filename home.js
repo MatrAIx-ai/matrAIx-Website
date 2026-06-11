@@ -249,3 +249,37 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
   });
   show('sft');
 })();
+
+/* ---------- 6. Training-data flywheel: model improves each generation ---------- */
+(() => {
+  const barsEl = document.getElementById('qbars');
+  const verEl = document.getElementById('fwVer'), qEl = document.getElementById('fwQ'), exEl = document.getElementById('fwEx');
+  if (!barsEl || !verEl) return;
+  const Q = [71, 79, 85, 89, 92, 94, 95];        // eval pass rate per model generation
+  const EX = [0.4, 1.1, 2.3, 4.0, 6.2, 8.9, 12.1]; // training examples (millions), compounding
+  const N = Q.length;
+  const h = q => ((q - 60) / (96 - 60) * 100) + '%';
+  const bars = [];
+  for (let i = 0; i < N; i++) { const b = document.createElement('div'); b.className = 'qbar'; barsEl.appendChild(b); bars.push(b); }
+
+  if (reduceMotion) {
+    verEl.textContent = 'v' + N; qEl.textContent = Q[N - 1] + '%'; exEl.textContent = EX[N - 1] + 'M';
+    bars.forEach((b, i) => { b.style.height = h(Q[i]); }); return;
+  }
+  let g = 0;
+  function tick() {
+    bars.forEach(b => b.classList.remove('on'));
+    bars[g].style.height = h(Q[g]); bars[g].classList.add('on');
+    verEl.textContent = 'v' + (g + 1);
+    qEl.textContent = Q[g] + '%';
+    exEl.textContent = EX[g].toFixed(1) + 'M';
+    g++;
+    if (g >= N) {
+      setTimeout(() => { g = 0; bars.forEach(b => { b.style.height = '0%'; b.classList.remove('on'); }); verEl.textContent = 'v1'; qEl.textContent = Q[0] + '%'; exEl.textContent = '0'; }, 2400);
+      setTimeout(tick, 3600);
+    } else {
+      setTimeout(tick, 1500);
+    }
+  }
+  setTimeout(tick, 700);
+})();
