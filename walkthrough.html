@@ -59,6 +59,13 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
 .cap{margin-top:10px;font-size:.8rem;color:var(--ink-dim);text-align:center}
 .cap b{color:var(--phos)}
 
+/* two-column: small recording panel + trajectory */
+.layout{display:grid;grid-template-columns:minmax(300px,390px) 1fr;gap:26px;margin-top:22px;align-items:start}
+.rec-col{position:sticky;top:78px}
+.traj-col{min-width:0}
+.traj-col .sec-h{margin-top:0}
+@media (max-width:860px){.layout{grid-template-columns:1fr} .rec-col{position:static}}
+
 /* duration strip */
 .sec-h{font-family:var(--disp);font-weight:700;font-size:1.25rem;margin:40px 0 6px;letter-spacing:-.01em}
 .sec-h .n{color:var(--phos)}
@@ -134,28 +141,30 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
       </div>
     </section>
 
-    <!-- RECORDING -->
-    <section class="recording">
-      <div class="bw">
-        <div class="bw-bar">
-          <div class="bw-dots"><i></i><i></i><i></i></div>
-          <div class="bw-url">https://hugclaim.com — agent session</div>
-          <span class="rec-badge"><span class="d"></span>REC</span>
+    <!-- RECORDING + TRAJECTORY -->
+    <section class="layout">
+      <div class="rec-col">
+        <div class="bw">
+          <div class="bw-bar">
+            <div class="bw-dots"><i></i><i></i><i></i></div>
+            <div class="bw-url">https://hugclaim.com — agent session</div>
+            <span class="rec-badge"><span class="d"></span>REC</span>
+          </div>
+          <div class="gifwrap">
+            <span class="loading">loading recording…</span>
+            <img src="Assets/hugclaim/HugClaim_Walkthrough_web.gif" alt="HugClaim agent walkthrough recording" loading="lazy" onload="this.previousElementSibling.style.display='none'" />
+          </div>
         </div>
-        <div class="gifwrap">
-          <span class="loading">loading recording…</span>
-          <img src="Assets/hugclaim/HugClaim_Walkthrough_web.gif" alt="HugClaim agent walkthrough recording" loading="lazy" onload="this.previousElementSibling.style.display='none'" />
-        </div>
+        <p class="cap">Actual recording · <b>loops automatically</b></p>
+        <div class="durstrip" id="durstrip"></div>
+        <div class="durlegend">▸ widest segments = the friction points. Click to jump.</div>
       </div>
-      <p class="cap">Actual recording of the agent completing the HugClaim flow · <b>loops automatically</b></p>
+      <div class="traj-col">
+        <h2 class="sec-h"><span class="n">▸</span> Recorded trajectory · 8 steps</h2>
+        <p class="sec-sub">What the agent saw, did, how long it dwelled, and the reward — step by step.</p>
+        <div class="steps" id="steps"></div>
+      </div>
     </section>
-
-    <!-- TRAJECTORY -->
-    <h2 class="sec-h"><span class="n">▸</span> Recorded trajectory · 8 steps</h2>
-    <p class="sec-sub">Segment width = time the agent dwelled at each step. Click to jump.</p>
-    <div class="durstrip" id="durstrip"></div>
-    <div class="durlegend">▸ widest segments are the friction points — evidence upload and the unexplained verifier rejection.</div>
-    <div class="steps" id="steps"></div>
 
     <!-- EVAL -->
     <section class="eval">
