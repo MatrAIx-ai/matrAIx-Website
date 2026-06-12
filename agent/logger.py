@@ -75,8 +75,20 @@ class RunLogger:
         self._jsonl.write(json.dumps(public) + "\n")
         self._jsonl.flush()
 
-    def finalize(self, outcome: str) -> Path:
+    def finalize(self, outcome: str, judge: dict | None = None) -> Path:
         self._jsonl.close()
+        trajectory = [{k: v for k, v in s.items() if k != "_t"} for s in self.steps]
+        score = None
+        summary = None
+        findings: list = []
+        if judge:
+            score = judge.get("score")
+            summary = judge.get("summary")
+            findings = judge.get("findings", [])
+            rewards = {r.get("step"): r.get("reward") for r in judge.get("rewards", [])}
+            for t in trajectory:
+                if t["step"] in rewards:
+                    t["reward"] = rewards[t["step"]]
         run = {
             "id": self.run_id,
             "target": self.cfg.target_url,
@@ -84,10 +96,11 @@ class RunLogger:
             "submit_mode": self.cfg.submit_mode,
             "persona": self.persona,
             "outcome": outcome,
-            "score": None,           # P3 judge
+            "score": score,
+            "summary": summary,
             "steps": len(self.steps),
-            "trajectory": [{k: v for k, v in s.items() if k != "_t"} for s in self.steps],
-            "findings": [],          # P3 judge
+            "trajectory": trajectory,
+            "findings": findings,
             "telemetry": {
                 "console_errors_total": self.console_total,
                 "failed_requests_total": self.fail_total,

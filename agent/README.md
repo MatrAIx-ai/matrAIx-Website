@@ -16,10 +16,12 @@ the matrAIx report schema.
 |------|--------|------|
 | **P0** | `browser.py` | Launch Chromium, extract actionable elements (set-of-marks), annotated screenshot, drain console/network errors |
 | **P1** | `agent.py` | observe → decide (Claude `browser_action` tool) → act loop, guardrails, trajectory + `run.json` logging |
+| **P3** | `judge.py` | One Opus pass scores each step (per-step reward) and surfaces concrete, segment-aware UX/error findings → merged into `run.json` |
+| **P4** | `report.py` | Publish a run into the site: copy `run.json` → `Assets/runs/<id>.json` and update `Assets/runs/index.json`; the report UI renders it |
 
-P2–P4 (per-step reward, end-of-run findings judge, and the `case_study.html?run=`
-/ `demo.html` report wiring) are stubbed — `run.json` already carries the
-`reward`/`findings` fields for them to fill.
+The report UI consumes published runs:
+- **`case_study.html?run=<id>`** — full trajectory + persona + eval findings (falls back to the hand-authored fixture when no `?run`).
+- **`demo.html`** — "From the simulator" lists every published run, linking to its case-study view.
 
 ## Run it (on your own machine — not the shared box)
 
@@ -39,12 +41,18 @@ cd ../HugInsure && ./run.sh           # → http://127.0.0.1:8000
 # 3a. P0 — dump one observation of the landing page
 python -m agent.browser --url http://127.0.0.1:8000/
 
-# 3b. P1 — run the full persona-with-a-goal loop
+# 3b. P1+P3 — run the loop, then judge it (per-step reward + findings)
 python -m agent.run --url http://127.0.0.1:8000/ --no-headless
+
+# 4. P4 — publish the run into the site, then open it in the report UI
+python -m agent.report agent/runs/<run-id>
+#   -> Assets/runs/<run-id>.json + manifest; view at case_study.html?run=<run-id>
 ```
 
 Output lands in `agent/runs/<run-id>/`: `trajectory.jsonl`, `NN.png`
-screenshots, and `run.json`.
+screenshots, and `run.json` (with `reward` per step + `findings` + `score`).
+Publishing copies `run.json` into the committed `Assets/runs/` so GitHub Pages
+serves it. Add `--no-judge` to skip the Opus judging pass.
 
 ## Key flags
 

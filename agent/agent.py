@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 
 import anthropic
 
-from . import guardrails
+from . import guardrails, judge
 from .actions import ACTION_TOOL, execute
 from .browser import Browser
 from .config import Config
@@ -15,6 +15,16 @@ from .logger import RunLogger
 from .observe import obs_content
 from .persona import sample_persona
 from .prompts import system_prompt
+
+
+def _target_name(action: dict, snap: dict) -> str:
+    eid = action.get("id")
+    if eid is None:
+        return ""
+    for e in snap.get("elements", []):
+        if e["id"] == eid:
+            return e.get("name", "")
+    return ""
 
 
 def _blocks_to_dict(content) -> list[dict]:
@@ -83,6 +93,9 @@ def run(cfg: Config) -> str:
                 outcome = "no_action"
                 break
             action = dict(tu.input)
+            name = _target_name(action, snap)
+            if name:
+                action["target"] = name      # resolve id -> label for the log/judge/UI
 
             allowed, reason, terminal = guardrails.check(action, snap, cfg.submit_mode)
             if not allowed:
@@ -128,8 +141,11 @@ def run(cfg: Config) -> str:
                 *obs_content(snap),
             ]
 
-    path = logger.finalize(outcome)
-    print(f"\n[done] outcome={outcome} · steps={len(logger.steps)} · run={path}")
+    judged = judge.judge_run(cfg, persona, logger.steps, outcome) if cfg.judge else None
+    path = logger.finalize(outcome, judged)
+    score = judged.get("score") if judged else None
+    print(f"\n[done] outcome={outcome} · steps={len(logger.steps)} · "
+          f"score={score} · run={path}")
     return outcome
 
 

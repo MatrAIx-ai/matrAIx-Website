@@ -17,6 +17,7 @@ def main() -> None:
                     default=Config.submit_mode)
     ap.add_argument("--persona-seed", type=int, default=None)
     ap.add_argument("--no-headless", action="store_true", help="show the browser window")
+    ap.add_argument("--no-judge", action="store_true", help="skip the end-of-run judge")
     ap.add_argument("--model", default=Config.model_decide, help="decision-loop model id")
     args = ap.parse_args()
 
@@ -27,6 +28,7 @@ def main() -> None:
         submit_mode=args.submit_mode,
         persona_seed=args.persona_seed,
         headless=not args.no_headless,
+        judge=not args.no_judge,
         model_decide=args.model,
     )
     run(cfg)

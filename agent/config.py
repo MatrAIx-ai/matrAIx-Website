@@ -29,7 +29,8 @@ class Config:
 
     # --- models ---
     model_decide: str = "claude-sonnet-4-6"   # per-step decision loop (cheap, fast)
-    model_judge: str = "claude-opus-4-8"       # P3+ end-of-run findings/judge
+    model_judge: str = "claude-opus-4-8"       # end-of-run findings/judge
+    judge: bool = True                          # run the P3 judge after the loop
 
     # --- browser ---
     headless: bool = True
