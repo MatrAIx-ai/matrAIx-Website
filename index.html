@@ -243,7 +243,7 @@
     var canvas=document.getElementById('runway'); if(!canvas) return;
     var ctx=canvas.getContext('2d');
     var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var w=0,h=0,PADX=64,PADT=150,PADB=88,agents=[],N=1000,SPEED=0.0085;
+    var w=0,h=0,PADX=64,PADT=150,PADB=88,agents=[],N=1000,SPEED=0.003;
     var mouse={x:0,y:0,active:false},RAD=95;
     var STAGES=[{x:0.14,name:'LAND'},{x:0.32,name:'EVIDENCE',fric:0.9},{x:0.50,name:'ESTIMATE'},{x:0.68,name:'VERIFY',fric:0.96},{x:0.86,name:'SUBMIT'}];
     var rnd=function(a,b){return a+Math.random()*(b-a);};

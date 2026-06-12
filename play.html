@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=3" />
-  <link rel="stylesheet" href="play.css?v=3" />
+  <link rel="stylesheet" href="play.css?v=4" />
 </head>
 <body class="play-body">
   <div class="grain" aria-hidden="true"></div>
@@ -48,12 +48,13 @@
       </p>
     </section>
 
-    <!-- Quiz (straight to the questions) -->
+    <!-- Quiz: one question at a time, with a per-aspect progress bar -->
     <section class="play-quiz">
-      <form id="quiz"></form>
+      <div class="play-progress" id="progress"></div>
+      <div class="play-step" id="quiz"></div>
 
-      <div class="play-context">
-        <div class="pc-h">Optional — a few quick facts to fill in your profile card</div>
+      <div class="play-context" id="contextPanel" hidden>
+        <div class="pc-h">Last step — optional facts to fill in your profile card</div>
         <div class="pc-grid">
           <label class="pc-field"><span>Age</span>
             <select id="cxAge">
@@ -91,7 +92,8 @@
       </div>
 
       <div class="play-controls">
-        <button id="submitBtn" type="button" class="btn btn-solid">Reveal my persona ✨</button>
+        <button id="backBtn" type="button" class="btn btn-ghost" hidden>← Back</button>
+        <button id="submitBtn" type="button" class="btn btn-solid" hidden>Reveal my persona ✨</button>
         <button id="resetBtn" type="button" class="btn btn-ghost">↻ Start over</button>
         <span id="status" class="play-status"></span>
       </div>
@@ -104,6 +106,6 @@
     <span class="foot-meta">LET'S PLAY · PERSONA FROM PERSONALITY · © 2026</span>
   </footer>
 
-  <script src="play.js?v=3"></script>
+  <script src="play.js?v=4"></script>
 </body>
 </html>

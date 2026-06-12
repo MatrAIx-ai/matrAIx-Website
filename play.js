@@ -190,6 +190,11 @@
   const CHIP_ORDER = ['age_bracket', 'region', 'primary_language', 'english_proficiency', 'device_context',
     'dominant_trait', 'risk_tolerance', 'decision_style', 'values_priority', 'tone_expected', 'learning_style', 'media_diet', 'economic_motivation',
     'intent', 'query_complexity', 'trust_level', 'emotional_state'];
+  // short aspect labels for the progress bar ticks
+  const SHORT = {
+    dominant_trait: 'Trait', risk_tolerance: 'Risk', decision_style: 'Decisions', values_priority: 'Values',
+    tone_expected: 'Tone', learning_style: 'Learning', media_diet: 'Media', economic_motivation: 'Spending',
+  };
 
   /* ---------- helpers ---------- */
   const cxVal = id => { const el = document.getElementById(id); return el ? el.value : ''; };
@@ -254,48 +259,92 @@
     })(start);
   }
 
-  /* ---------- DOM ---------- */
+  /* ---------- DOM + stepper ---------- */
   const quiz = document.getElementById('quiz');
   const statusEl = document.getElementById('status');
   const resultEl = document.getElementById('result');
+  const progressEl = document.getElementById('progress');
+  const contextPanel = document.getElementById('contextPanel');
+  const backBtn = document.getElementById('backBtn');
+  const submitBtn = document.getElementById('submitBtn');
+  const CX_IDS = ['cxAge', 'cxRegion', 'cxLang', 'cxEng', 'cxDevice'];
 
-  function renderQuiz() {
-    quiz.innerHTML = QUESTIONS.map((item, i) => `
-      <div class="play-q">
-        <div class="q-head"><span class="q-emoji">${item.emoji}</span>
-          <span class="q-n">Q${i + 1}</span> ${item.q}</div>
-        <div class="q-opts">
-          ${item.o.map((opt, j) => `
-            <label class="q-opt">
-              <input type="radio" name="q${i}" value="${j}">
-              <span>${opt.t}</span>
-            </label>`).join('')}
-        </div>
-      </div>`).join('');
-    statusEl.textContent = '';
-    resultEl.hidden = true;
-    resultEl.innerHTML = '';
+  const TOTAL = QUESTIONS.length;          // question steps; the final step (index === TOTAL) is the optional profile
+  let step = 0;
+  const answers = new Array(TOTAL).fill(null);
+  const answeredCount = () => answers.reduce((c, a) => c + (a !== null ? 1 : 0), 0);
+
+  function renderProgress() {
+    const reach = answeredCount();         // segments up to here are reachable by click
+    let segs = QUESTIONS.map((item, i) => {
+      const done = answers[i] !== null ? ' done' : '';
+      const active = i === step ? ' active' : '';
+      const click = i <= reach ? ' clickable' : '';
+      return `<div class="pp-seg${done}${active}${click}" data-i="${i}">
+        <span class="pp-bar"></span><span class="pp-lab">${SHORT[item.dim] || item.label}</span></div>`;
+    }).join('');
+    const pActive = step === TOTAL ? ' active' : '';
+    const pClick = reach === TOTAL ? ' clickable' : '';
+    const pDone = reach === TOTAL && step === TOTAL ? ' done' : '';
+    segs += `<div class="pp-seg${pDone}${pActive}${pClick}" data-i="${TOTAL}">
+        <span class="pp-bar"></span><span class="pp-lab">Profile</span></div>`;
+    const caption = step < TOTAL
+      ? `Question ${step + 1} of ${TOTAL} · capturing <b>${QUESTIONS[step].label}</b>`
+      : `All ${TOTAL} aspects captured · add optional profile details, then reveal`;
+    progressEl.innerHTML = `<div class="pp-track">${segs}</div><div class="pp-caption">${caption}</div>`;
   }
 
-  function getAnswers() {
-    const out = [];
-    for (let i = 0; i < QUESTIONS.length; i += 1) {
-      const chosen = document.querySelector(`input[name="q${i}"]:checked`);
-      if (!chosen) return null;
-      out.push(Number(chosen.value));
+  function showStep() {
+    renderProgress();
+    if (step < TOTAL) {
+      const item = QUESTIONS[step];
+      quiz.hidden = false;
+      contextPanel.hidden = true;
+      submitBtn.hidden = true;
+      quiz.innerHTML = `
+        <div class="play-q step-in">
+          <div class="q-head"><span class="q-emoji">${item.emoji}</span>
+            <span class="q-n">Q${step + 1}</span> ${item.q}</div>
+          <div class="q-opts">
+            ${item.o.map((opt, j) => `
+              <button type="button" class="q-opt${answers[step] === j ? ' chosen' : ''}" data-j="${j}">
+                <span>${opt.t}</span></button>`).join('')}
+          </div>
+        </div>`;
+    } else {
+      quiz.hidden = true;
+      contextPanel.hidden = false;
+      contextPanel.classList.add('step-in');
+      submitBtn.hidden = false;
     }
-    return out;
+    backBtn.hidden = step === 0;
+    statusEl.textContent = '';
   }
+
+  // pick an answer → advance (auto-advance for flow)
+  quiz.addEventListener('click', e => {
+    const b = e.target.closest('.q-opt'); if (!b) return;
+    answers[step] = Number(b.dataset.j);
+    Array.prototype.forEach.call(quiz.querySelectorAll('.q-opt'), el => el.classList.toggle('chosen', el === b));
+    setTimeout(() => { step = Math.min(step + 1, TOTAL); showStep(); }, 240);
+  });
+  // jump via the progress bar
+  progressEl.addEventListener('click', e => {
+    const seg = e.target.closest('.pp-seg.clickable'); if (!seg) return;
+    step = Number(seg.dataset.i); showStep();
+  });
+  backBtn.addEventListener('click', () => { if (step > 0) { step -= 1; showStep(); } });
 
   function reveal() {
-    const ans = getAnswers();
-    if (!ans) {
-      const done = QUESTIONS.filter((_, i) => document.querySelector(`input[name="q${i}"]:checked`)).length;
-      statusEl.textContent = `Answer all ${QUESTIONS.length} — ${done}/${QUESTIONS.length} so far.`;
+    if (!answers.every(a => a !== null)) {
+      step = answers.findIndex(a => a === null);
+      showStep();
+      statusEl.textContent = 'One more — pick an answer here.';
       return;
     }
 
     // build the persona from chosen dimension values
+    const ans = answers;
     const persona = {};
     QUESTIONS.forEach((item, i) => { persona[item.dim] = item.o[ans[i]].v; });
 
@@ -423,12 +472,17 @@
   }
 
   function start() {
-    renderQuiz();
+    step = 0;
+    for (let i = 0; i < TOTAL; i += 1) answers[i] = null;
+    CX_IDS.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    resultEl.hidden = true;
+    resultEl.innerHTML = '';
+    showStep();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  document.getElementById('submitBtn').addEventListener('click', reveal);
+  submitBtn.addEventListener('click', reveal);
   document.getElementById('resetBtn').addEventListener('click', start);
 
-  renderQuiz();
+  showStep();
 })();
