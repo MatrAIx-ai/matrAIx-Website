@@ -133,7 +133,8 @@ main { position: relative; z-index: 10; }
   font-family: var(--disp); font-weight: 800; line-height: 0.95;
   letter-spacing: -0.03em; margin-bottom: 34px;
 }
-.headline .line { display: block; white-space: nowrap; font-size: clamp(2.6rem, 8vw, 5.6rem); color: var(--ink); opacity: 0; animation: rise 0.8s forwards; }
+.headline .line { display: block; white-space: nowrap; font-size: clamp(2.2rem, 7vw, 5rem); color: var(--ink); opacity: 0; animation: rise 0.8s forwards; }
+@media (max-width: 480px) { .headline .line { white-space: normal; } }
 .headline .line.dim { color: var(--ink-dim); animation-delay: 0.28s; }
 .headline .line:first-child { animation-delay: 0.18s; }
 
