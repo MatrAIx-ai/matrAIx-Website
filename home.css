@@ -403,7 +403,7 @@ main { position: relative; z-index: 10; }
 /* ---------- Agent runway (moved from the demo portal) ---------- */
 .runway { position: relative; z-index: 4; display: flex; flex-direction: column; overflow: hidden;
   border-block: 1px solid var(--line); background: radial-gradient(120% 90% at 50% 18%, rgba(84,246,166,0.045), transparent 60%); }
-.runway--band { height: clamp(560px, 82vh, 820px); margin: 56px 0; }
+.runway--band { height: clamp(600px, 90vh, 1000px); margin: 56px 0; }
 .runway-stage { position: relative; flex: 1; min-height: 0; }
 #runway { position: absolute; inset: 0; width: 100%; height: 100%; }
 .runway-hud { position: absolute; left: 0; right: 0; top: 0; padding: clamp(20px,5vw,52px) clamp(20px,5vw,52px) 0; pointer-events: none; z-index: 3; }
