@@ -136,7 +136,7 @@
   let running = true;
   let nextId = 1021;
   let activeCount = 600;
-  let currentReport = 'ab';
+  let currentReport = 'score';
   const store = [];
   const agg = { n: 0, pass: 0, rewardSum: 0, hist: new Array(10).fill(0), finishes: [] };
   const sparks = { ag: [], tp: [], rw: [], ps: [] };
@@ -364,9 +364,18 @@
       intelBody.innerHTML = `<table class="seg-table"><thead><tr><th>Persona segment</th><th>A</th><th>B</th><th>Δ</th></tr></thead><tbody>${rows}</tbody></table>`;
     } else if (currentReport === 'score') {
       const max = Math.max(1, ...agg.hist);
-      const bars = agg.hist.map((v, i) => `<i class="${i < 5 ? 'lo' : i < 7 ? 'mid' : ''}" style="height:${v / max * 100}%"></i>`).join('');
+      const bars = agg.hist.map((v, i) => {
+        const h = v / max * 100;
+        const err = v > 0 ? Math.sqrt(v) / max * 100 : 0;      // Poisson counting error ±√n
+        const lo = Math.max(0, h - err), hi = Math.min(100, h + err);
+        const cls = i < 5 ? 'lo' : i < 7 ? 'mid' : '';
+        const whisk = v > 0 ? `<span class="herr" style="bottom:${lo.toFixed(1)}%;height:${(hi - lo).toFixed(1)}%"></span>` : '';
+        return `<span class="hbar" title="score ${(i / 10).toFixed(1)}–${((i + 1) / 10).toFixed(1)} · n=${v} ±${Math.round(Math.sqrt(v))}">${whisk}<i class="${cls}" style="height:${h.toFixed(1)}%"></i></span>`;
+      }).join('');
+      const finds = `<ul class="findings">${r.findings.map(([sev, t]) => `<li class="finding"><span class="sev ${sev}">${sev.toUpperCase()}</span>${t}</li>`).join('')}</ul>`;
       intelBody.innerHTML = `<div class="histo">${bars}</div><div class="histo-axis"><span>0.0</span><span>0.5</span><span>1.0</span></div>
-        <p style="font-size:.76rem;color:var(--ink-dim);margin-top:10px">Live score distribution · ${fmt.format(agg.n)} behaviors this session.</p>`;
+        <p class="histo-cap">Live score distribution · <b>${fmt.format(agg.n)}</b> behaviors · whiskers show ±&radic;n counting error.</p>
+        <div class="dist-find-head">What the simulation found</div>${finds}`;
     } else if (currentReport === 'heat') {
       intelBody.innerHTML = renderHeat();
     } else {
