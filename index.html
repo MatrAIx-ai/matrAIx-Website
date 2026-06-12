@@ -238,19 +238,23 @@
   (function(){var el=document.getElementById('pgClock');if(!el)return;var p=function(x){return(x<10?'0':'')+x;};function t(){var d=new Date();el.textContent=p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());}t();setInterval(t,1000);})();
   </script>
   <script>
-  /* ---------- Runway band: 600+ agents racing the flow as data points (moved from demo portal) ---------- */
+  /* ---------- Runway band: agents race the flow as data points; a few "social"
+     pairs loop around each other, and all of them steer clear of the cursor ---------- */
   (function(){
     var canvas=document.getElementById('runway'); if(!canvas) return;
     var ctx=canvas.getContext('2d');
     var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var w=0,h=0,PADX=64,PADT=150,PADB=88,agents=[],N=620;
+    var w=0,h=0,PADX=64,PADT=150,PADB=88,agents=[],pairs=[],N=620,PAIRS=6;
+    var mouse={x:0,y:0,active:false},RAD=95;
     var STAGES=[{x:0.14,name:'LAND'},{x:0.32,name:'EVIDENCE',fric:0.9},{x:0.50,name:'ESTIMATE'},{x:0.68,name:'VERIFY',fric:0.96},{x:0.86,name:'SUBMIT'}];
     var rnd=function(a,b){return a+Math.random()*(b-a);};
-    function spawn(fromStart){ return {x: fromStart? rnd(-0.05,0): Math.random(), y: Math.random(), base: rnd(0.06,0.20), skill: Math.random(), jit: rnd(0.8,1.2)}; }
-    function resize(){ var r=canvas.getBoundingClientRect(); w=canvas.width=r.width; h=canvas.height=r.height; if(!agents.length) agents=Array.from({length:N},function(){return spawn(false);}); }
+    function spawn(fromStart){ return {x: fromStart? rnd(-0.05,0): Math.random(), y: Math.random(), base: rnd(0.06,0.20), skill: Math.random(), jit: rnd(0.8,1.2), oy:0, voy:0}; }
+    function spawnPair(){ return {cx:rnd(0.12,0.88), cy:rnd(0.15,0.85), vx:rnd(-0.0006,0.0006), vy:rnd(-0.0006,0.0006), r:rnd(14,28), th:rnd(0,6.283), om:rnd(0.018,0.045)*(Math.random()<0.5?-1:1)}; }
+    function resize(){ var r=canvas.getBoundingClientRect(); w=canvas.width=r.width; h=canvas.height=r.height; if(!agents.length) agents=Array.from({length:N},function(){return spawn(false);}); if(!pairs.length) pairs=Array.from({length:PAIRS},spawnPair); }
     function TX(x){ return PADX + x*(w-2*PADX); }
     function TY(y){ return PADT + y*(h-PADT-PADB); }
     function mult(a){ var m=1; for(var i=0;i<STAGES.length;i++){ var s=STAGES[i]; if(!s.fric) continue; var d=Math.abs(a.x-s.x); if(d<0.055){ var hard=s.fric*(1-a.skill); m=Math.min(m, 1-hard*(1-d/0.055)); } } return m; }
+    function repel(px,py){ if(!mouse.active) return null; var ddx=px-mouse.x, ddy=py-mouse.y, d2=ddx*ddx+ddy*ddy; if(d2>=RAD*RAD) return null; var d=Math.sqrt(d2)||1, f=1-d/RAD; return {fx:ddx/d*f, fy:ddy/d*f}; }
     var rate=0,lastSec=0,finN=0;
     function set(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; }
     function frame(ts){
@@ -270,11 +274,32 @@
         var dx=a.base*Math.max(m,0.32)*0.016;                       // floored forward so they eventually escape
         if(m<0.55 && a.x>0.04 && Math.random()<0.012){ dx-=a.base*0.016*rnd(12,24); }  // error loop: dramatic step back & retry
         a.x += dx; if(a.x<0) a.x=0;
-        if(a.x>=1.02){ finN++; var s=spawn(true); a.x=s.x;a.y=s.y;a.base=s.base;a.skill=s.skill;a.jit=s.jit; continue; }
-        var px=TX(a.x>1?1:a.x), py=TY(a.y);
+        if(a.x>=1.02){ finN++; var s=spawn(true); a.x=s.x;a.y=s.y;a.base=s.base;a.skill=s.skill;a.jit=s.jit;a.oy=0;a.voy=0; continue; }
+        var px=TX(a.x>1?1:a.x), baseY=TY(a.y);
+        var rp=repel(px, baseY+a.oy); if(rp) a.voy += rp.fy*1.9;   // flee the cursor (vertical parting)
+        a.voy += -a.oy*0.02; a.voy *= 0.85; a.oy += a.voy;         // spring back to lane + damping
+        var lim=(h-PADT-PADB)*0.5; if(a.oy>lim)a.oy=lim; else if(a.oy<-lim)a.oy=-lim;
+        var py=baseY+a.oy;
         if(m>0.78){ ctx.strokeStyle='rgba(84,246,166,0.22)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(px-13,py); ctx.lineTo(px,py); ctx.stroke(); }
         ctx.fillStyle=col; ctx.shadowBlur=m>0.78?7:0; ctx.shadowColor=col;
         ctx.beginPath(); ctx.arc(px,py,2.1,0,6.283); ctx.fill();
+      }
+      ctx.shadowBlur=0;
+      // social pairs: two agents looping around each other, linked — they interact instead of racing
+      for(var p=0;p<pairs.length;p++){ var pr=pairs[p];
+        pr.cx+=pr.vx; pr.cy+=pr.vy;
+        if(pr.cx<0.08||pr.cx>0.92){ pr.vx=-pr.vx; pr.cx=Math.max(0.08,Math.min(0.92,pr.cx)); }
+        if(pr.cy<0.12||pr.cy>0.88){ pr.vy=-pr.vy; pr.cy=Math.max(0.12,Math.min(0.88,pr.cy)); }
+        var pcx=TX(pr.cx), pcy=TY(pr.cy);
+        var rp2=repel(pcx,pcy); if(rp2){ pr.vx+=rp2.fx*0.0016; pr.vy+=rp2.fy*0.0016; }
+        pr.vx*=0.992; pr.vy*=0.992; pr.th+=pr.om;
+        var ax=pcx+Math.cos(pr.th)*pr.r, ay=pcy+Math.sin(pr.th)*pr.r;
+        var bx=pcx-Math.cos(pr.th)*pr.r, by=pcy-Math.sin(pr.th)*pr.r;
+        ctx.strokeStyle='rgba(138,208,255,0.12)'; ctx.lineWidth=1; ctx.beginPath(); ctx.arc(pcx,pcy,pr.r,0,6.283); ctx.stroke();
+        ctx.strokeStyle='rgba(138,208,255,0.5)'; ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,by); ctx.stroke();
+        ctx.fillStyle='#8ad0ff'; ctx.shadowBlur=8; ctx.shadowColor='#8ad0ff';
+        ctx.beginPath(); ctx.arc(ax,ay,2.6,0,6.283); ctx.fill();
+        ctx.beginPath(); ctx.arc(bx,by,2.6,0,6.283); ctx.fill();
       }
       ctx.shadowBlur=0;
       if(!lastSec) lastSec=ts;
@@ -282,9 +307,12 @@
         set('rRate',Math.round(rate)); set('rSmooth',Math.round(smooth/N*100)+'%'); set('rStall',Math.round(stall/N*100)+'%'); }
       requestAnimationFrame(frame);
     }
+    canvas.addEventListener('mousemove',function(e){ var r=canvas.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top; mouse.active=true; });
+    canvas.addEventListener('mouseleave',function(){ mouse.active=false; });
     resize(); window.addEventListener('resize',resize); set('rAgents', N+'+');
     if(!reduce) requestAnimationFrame(frame);
-    else { for(var k=0;k<agents.length;k++){var a=agents[k];ctx.fillStyle='#54f6a6';ctx.globalAlpha=0.6;ctx.beginPath();ctx.arc(TX(a.x),TY(a.y),2,0,6.283);ctx.fill();} }
+    else { for(var k=0;k<agents.length;k++){var a=agents[k];ctx.fillStyle='#54f6a6';ctx.globalAlpha=0.6;ctx.beginPath();ctx.arc(TX(a.x),TY(a.y),2,0,6.283);ctx.fill();}
+           ctx.globalAlpha=1; for(var p=0;p<pairs.length;p++){var pr=pairs[p],pcx=TX(pr.cx),pcy=TY(pr.cy);ctx.strokeStyle='rgba(138,208,255,0.4)';ctx.beginPath();ctx.moveTo(pcx-pr.r,pcy);ctx.lineTo(pcx+pr.r,pcy);ctx.stroke();ctx.fillStyle='#8ad0ff';ctx.beginPath();ctx.arc(pcx+pr.r,pcy,2.4,0,6.283);ctx.fill();ctx.beginPath();ctx.arc(pcx-pr.r,pcy,2.4,0,6.283);ctx.fill();} }
   })();
   </script>
 </body>
