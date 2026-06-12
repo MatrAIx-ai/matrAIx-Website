@@ -172,7 +172,27 @@
     'Indifferent': 'Keep purchase steps minimal.',
   };
 
+  /* ---------- interaction-state derived from the personality answers ---------- */
+  const INTENT_BY_DECISION = { 'Analytical': 'Verify a claim', 'Intuitive': 'Decide', 'Consensus-driven': 'Learn / explain', 'Deliberative': 'Decide' };
+  const QC_BY_DECISION = { 'Analytical': 'Multi-step', 'Intuitive': 'Simple factual', 'Consensus-driven': 'Open-ended creative', 'Deliberative': 'Ambiguous / underspecified' };
+  const TRUST_BY_RISK = { 'Risk-seeking': 'Trusting', 'Risk-tolerant': 'Trusting', 'Cautious': 'Verifying', 'Risk-averse': 'Skeptical' };
+  const MOOD_BY_TRAIT = { 'High openness': 'Curious', 'High conscientiousness': 'Calm', 'High extraversion': 'Excited', 'High agreeableness': 'Calm', 'High neuroticism': 'Anxious', 'Balanced': 'Calm' };
+
+  /* ---------- dimension labels + display order for the persona card chips ---------- */
+  const LABELS = {
+    age_bracket: 'Age bracket', region: 'Region', primary_language: 'Primary language',
+    english_proficiency: 'English proficiency', device_context: 'Device context',
+    dominant_trait: 'Dominant trait', risk_tolerance: 'Risk tolerance', decision_style: 'Decision style',
+    values_priority: 'Core value', tone_expected: 'Preferred tone', learning_style: 'Learning style',
+    media_diet: 'Media diet', economic_motivation: 'Spending posture',
+    intent: 'Intent', query_complexity: 'Query complexity', trust_level: 'Trust level', emotional_state: 'Emotional state',
+  };
+  const CHIP_ORDER = ['age_bracket', 'region', 'primary_language', 'english_proficiency', 'device_context',
+    'dominant_trait', 'risk_tolerance', 'decision_style', 'values_priority', 'tone_expected', 'learning_style', 'media_diet', 'economic_motivation',
+    'intent', 'query_complexity', 'trust_level', 'emotional_state'];
+
   /* ---------- helpers ---------- */
+  const cxVal = id => { const el = document.getElementById(id); return el ? el.value : ''; };
   const stripTags = s => s.replace(/<[^>]+>/g, '');
   const pad6 = n => String(n).padStart(6, '0');
   function hashId(persona) {                       // deterministic 6-digit id from the answers
@@ -182,8 +202,8 @@
   }
   function today() { return new Date().toISOString().slice(0, 10); }
 
-  function buildPersonaMd(p, title, emoji, summaryText, predictionText, rules, mxid) {
-    const dims = Object.keys(p).map(k => `  ${JSON.stringify(k)}: ${JSON.stringify(p[k])}`).join(',\n');
+  function buildPersonaMd(p, title, emoji, profileText, summaryText, predictionText, rules, mxid) {
+    const dims = CHIP_ORDER.filter(k => p[k]).map(k => `  ${JSON.stringify(k)}: ${JSON.stringify(p[k])}`).join(',\n');
     return [
       '---',
       `name: ${title}`,
@@ -193,6 +213,9 @@
       '---',
       '',
       `# Persona — ${title} ${emoji}`,
+      '',
+      '## Profile',
+      profileText,
       '',
       '## Summary',
       summaryText,
@@ -276,6 +299,30 @@
     const persona = {};
     QUESTIONS.forEach((item, i) => { persona[item.dim] = item.o[ans[i]].v; });
 
+    // interaction-state inferred from the personality answers
+    persona.intent = INTENT_BY_DECISION[persona.decision_style];
+    persona.query_complexity = QC_BY_DECISION[persona.decision_style];
+    persona.trust_level = TRUST_BY_RISK[persona.risk_tolerance];
+    persona.emotional_state = MOOD_BY_TRAIT[persona.dominant_trait];
+
+    // optional self-reported context (blank = skipped)
+    const ctx = {
+      age_bracket: cxVal('cxAge'), region: cxVal('cxRegion'),
+      primary_language: cxVal('cxLang'), english_proficiency: cxVal('cxEng'),
+      device_context: cxVal('cxDevice'),
+    };
+    Object.keys(ctx).forEach(k => { if (ctx[k]) persona[k] = ctx[k]; });
+
+    // descriptor line, in the sampled-persona style
+    const demoHeader = [ctx.age_bracket, ctx.region].filter(Boolean).join(' · ');
+    let descr = '';
+    if (ctx.primary_language || ctx.english_proficiency) {
+      descr += `Speaks ${ctx.primary_language || 'their language'}${ctx.english_proficiency ? ` (${ctx.english_proficiency} English)` : ''}. `;
+    }
+    descr += `Here to ${persona.intent.toLowerCase()} — ${persona.query_complexity.toLowerCase()} request, ` +
+      `${persona.trust_level.toLowerCase()} trust, ${persona.emotional_state.toLowerCase()}.`;
+    if (ctx.device_context) descr += ` On ${ctx.device_context.toLowerCase()}.`;
+
     const adj = TRAIT_ADJ[persona.dominant_trait] || 'Singular';
     const [noun, emoji] = VALUE_NOUN[persona.values_priority] || ['Original', '✨'];
     const title = `The ${adj} ${noun}`;
@@ -299,13 +346,14 @@
       ECON_RULE[persona.economic_motivation],
     ].filter(Boolean);
 
+    const profileText = (demoHeader ? demoHeader + ' — ' : '') + descr;
     const md = buildPersonaMd(persona, title, emoji,
-      stripTags(summaryHtml), stripTags(predictionHtml), rules, mxid);
+      profileText, stripTags(summaryHtml), stripTags(predictionHtml), rules, mxid);
 
-    const chips = QUESTIONS.map(item => `
+    const chips = CHIP_ORDER.filter(k => persona[k]).map(k => `
       <div class="trait">
-        <span class="trait-k">${item.label}</span>
-        <span class="trait-v">${persona[item.dim]}</span>
+        <span class="trait-k">${LABELS[k]}</span>
+        <span class="trait-v">${persona[k]}</span>
       </div>`).join('');
 
     resultEl.innerHTML = `
@@ -317,6 +365,8 @@
           <span class="pv-card-tag"><span class="dot live"></span> PREDICTED PERSONA</span>
           <span class="pv-card-id">${mxid}</span>
         </div>
+        ${demoHeader ? `<div class="pv-demo-name">${demoHeader}</div>` : ''}
+        <p class="pv-demo">${descr}</p>
         <p class="pv-summary">${summaryHtml}</p>
         <div class="pv-traits">${chips}</div>
         <div class="pv-card-foot">

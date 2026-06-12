@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=3" />
-  <link rel="stylesheet" href="play.css?v=2" />
+  <link rel="stylesheet" href="play.css?v=3" />
 </head>
 <body class="play-body">
   <div class="grain" aria-hidden="true"></div>
@@ -51,6 +51,45 @@
     <!-- Quiz (straight to the questions) -->
     <section class="play-quiz">
       <form id="quiz"></form>
+
+      <div class="play-context">
+        <div class="pc-h">Optional — a few quick facts to fill in your profile card</div>
+        <div class="pc-grid">
+          <label class="pc-field"><span>Age</span>
+            <select id="cxAge">
+              <option value="">—</option>
+              <option>13–17</option><option>18–24</option><option>25–34</option><option>35–44</option>
+              <option>45–54</option><option>55–64</option><option>65+</option>
+            </select></label>
+          <label class="pc-field"><span>Region</span>
+            <select id="cxRegion">
+              <option value="">—</option>
+              <option>North America</option><option>Latin America</option><option>Western Europe</option>
+              <option>Eastern Europe</option><option>Sub-Saharan Africa</option><option>MENA</option>
+              <option>South Asia</option><option>East Asia</option><option>Southeast Asia</option><option>Oceania</option>
+            </select></label>
+          <label class="pc-field"><span>Primary language</span>
+            <select id="cxLang">
+              <option value="">—</option>
+              <option>English</option><option>Mandarin</option><option>Spanish</option><option>Hindi</option>
+              <option>Arabic</option><option>French</option><option>Portuguese</option><option>Bengali</option>
+              <option>Russian</option><option>Japanese</option><option>German</option><option>Swahili</option>
+            </select></label>
+          <label class="pc-field"><span>English level</span>
+            <select id="cxEng">
+              <option value="">—</option>
+              <option>Native</option><option>Fluent (C1–C2)</option><option>Intermediate (B1–B2)</option>
+              <option>Basic (A1–A2)</option><option>None</option>
+            </select></label>
+          <label class="pc-field"><span>Right now you're on</span>
+            <select id="cxDevice">
+              <option value="">—</option>
+              <option>Desktop, focused</option><option>Mobile, on-the-go</option><option>Voice assistant</option>
+              <option>Accessibility tool</option><option>Low-bandwidth</option>
+            </select></label>
+        </div>
+      </div>
+
       <div class="play-controls">
         <button id="submitBtn" type="button" class="btn btn-solid">Reveal my persona ✨</button>
         <button id="resetBtn" type="button" class="btn btn-ghost">↻ Start over</button>
@@ -65,6 +104,6 @@
     <span class="foot-meta">LET'S PLAY · PERSONA FROM PERSONALITY · © 2026</span>
   </footer>
 
-  <script src="play.js?v=2"></script>
+  <script src="play.js?v=3"></script>
 </body>
 </html>
