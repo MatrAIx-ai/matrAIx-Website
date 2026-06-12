@@ -88,33 +88,31 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
   setTimeout(() => requestAnimationFrame(step), 400);
 })();
 
-/* ---------- 2b. Reports comparison: count up on scroll into view ---------- */
+/* ---------- 2b. Reports figures: count up as each scrolls into view ---------- */
 (() => {
-  const box = document.querySelector('.reports-compare');
-  if (!box) return;
-  const els = [].slice.call(box.querySelectorAll('.cu'));
+  const els = [].slice.call(document.querySelectorAll('.cu'));
   if (!els.length) return;
   const nf = new Intl.NumberFormat('en-US');
   const ease = t => 1 - Math.pow(1 - t, 3);
+  const to = el => parseFloat(el.dataset.to) || 0;
   function animate(el) {
-    const to = parseFloat(el.dataset.to) || 0;
-    if (reduceMotion) { el.textContent = nf.format(to); return; }
-    const dur = 1500; let start = null;
+    const target = to(el), dur = 1400; let start = null;
     (function step(ts) {
       if (start === null) start = ts;
       const p = Math.min((ts - start) / dur, 1);
-      el.textContent = nf.format(Math.round(ease(p) * to));
-      if (p < 1) requestAnimationFrame(step); else el.textContent = nf.format(to);
+      el.textContent = nf.format(Math.round(ease(p) * target));
+      if (p < 1) requestAnimationFrame(step); else el.textContent = nf.format(target);
     })();
   }
-  const run = () => els.forEach(animate);
-  if (reduceMotion || !('IntersectionObserver' in window)) { run(); return; }
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    els.forEach(el => { el.textContent = nf.format(to(el)); });
+    return;
+  }
   els.forEach(el => { el.textContent = '0'; });   // reset before reveal
-  let done = false;
   const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting && !done) { done = true; run(); io.disconnect(); } });
-  }, { threshold: 0.4 });
-  io.observe(box);
+    entries.forEach(e => { if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); } });
+  }, { threshold: 0.6 });
+  els.forEach(el => io.observe(el));
 })();
 
 /* ---------- 3. Telemetry stream ---------- */
