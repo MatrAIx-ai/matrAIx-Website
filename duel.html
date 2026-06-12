@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>matrAIx — Alignment Duel</title>
+  <meta name="description" content="Human vs. agent: predict how a sampled persona behaves, and see how well the matrAIx simulation matches you." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="duel.css?v=1" />
+</head>
+<body class="duel-body">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="nav">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">▚</span>
+      <span class="brand-name">matr<em>AI</em>x<span class="tld">.ai</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="person.html">Persona</a>
+      <a href="demo.html">Demo</a>
+      <a href="case_study.html">Case Study</a>
+      <a href="duel.html" class="active">Duel</a>
+    </nav>
+    <a href="#" class="btn btn-ghost nav-cta" id="newPersona">
+      <span class="dot live"></span> New persona
+    </a>
+  </header>
+
+  <main class="duel-main">
+    <!-- Title -->
+    <section class="duel-head">
+      <div class="hero-eyebrow">
+        <span class="tick">//</span> HUMAN vs. AGENT · ALIGNMENT DUEL
+        <span class="sep">—</span>
+        <span class="status"><span class="dot live"></span> LIVE SAMPLE</span>
+      </div>
+      <h1 class="duel-title">Outsmart your <span>simulation</span>.</h1>
+      <p class="duel-sub">
+        matrAIx samples a synthetic persona from the 1000-dimension space, then simulates how it behaves.
+        Read the persona and predict the same behaviors — the matrAIx agent predicts them too.
+        Every call the agent gets right that you miss is a behavior matrAIx can surface
+        <em>before you ship</em>.
+      </p>
+    </section>
+
+    <!-- Sampled persona card -->
+    <section class="duel-persona">
+      <div class="dp-head">
+        <span class="dp-eyebrow"><span class="dot live"></span> SAMPLED PERSONA <span class="dp-id" id="personaId">mx-000000</span></span>
+        <h2 class="dp-name" id="personaName">—</h2>
+        <p class="dp-line" id="personaLine">—</p>
+      </div>
+      <div class="dp-traits" id="personaTraits"></div>
+    </section>
+
+    <!-- Quiz -->
+    <section class="duel-quiz">
+      <div class="dq-eyebrow"><span class="tick">//</span> PREDICT THE BEHAVIOR</div>
+      <form id="quiz"></form>
+      <div class="duel-controls">
+        <button id="submitBtn" type="button" class="btn btn-solid">Run the duel ▸</button>
+        <button id="resetBtn" type="button" class="btn btn-ghost">↻ New persona</button>
+        <span id="status" class="duel-status"></span>
+      </div>
+      <div id="result" class="duel-result" hidden></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span class="brand-name small">matr<em>AI</em>x<span class="tld">.ai</span></span>
+    <span class="foot-meta">ALIGNMENT DUEL · HUMAN vs. SIMULATION · © 2026</span>
+  </footer>
+
+  <script src="dimensions.js?v=3"></script>
+  <script src="duel.js?v=1"></script>
+</body>
+</html>

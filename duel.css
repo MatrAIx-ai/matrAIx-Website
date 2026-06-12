@@ -1,0 +1,249 @@
+/* ============================================================
+   matrAIx.ai — Alignment Duel page styling
+   Inherits tokens + nav/brand/btn/foot from styles.css.
+   ============================================================ */
+
+.nav-links a.active { color: var(--phos); }
+.nav-links a.active::after { width: 100%; }
+
+.duel-main {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 40px 22px 64px;
+}
+
+/* ---------- header ---------- */
+.duel-head { margin-bottom: 26px; }
+.duel-title {
+  font-family: var(--disp);
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 14px 0 0;
+}
+.duel-title span { color: var(--phos); text-shadow: var(--glow); }
+.duel-sub {
+  margin: 14px 0 0;
+  max-width: 64ch;
+  color: var(--ink-dim);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.duel-sub em { color: var(--ink); font-style: normal; }
+
+/* ---------- persona card ---------- */
+.duel-persona {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: linear-gradient(180deg, var(--bg-2), var(--bg));
+  padding: 18px 20px;
+  box-shadow: inset 0 0 0 1px var(--line-soft);
+}
+.dp-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--phos);
+}
+.dp-id { color: var(--ink-dim); letter-spacing: 0.08em; }
+.dp-name {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin: 8px 0 0;
+}
+.dp-line {
+  margin: 6px 0 0;
+  color: var(--ink-dim);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+.dp-traits {
+  margin-top: 16px;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+.trait {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid var(--line-soft);
+  border-radius: 9px;
+  padding: 8px 10px;
+  background: rgba(84, 246, 166, 0.03);
+}
+.trait-k {
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.trait-v { font-size: 0.86rem; color: var(--ink); }
+
+/* ---------- quiz ---------- */
+.duel-quiz { margin-top: 30px; }
+.dq-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 14px;
+}
+.dq-eyebrow .tick { color: var(--phos); }
+
+.duel-q {
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 14px 16px;
+  background: var(--bg-2);
+}
+.duel-q + .duel-q { margin-top: 12px; }
+.q-head {
+  font-size: 0.96rem;
+  line-height: 1.45;
+  margin-bottom: 12px;
+}
+.q-n {
+  color: var(--phos);
+  font-weight: 700;
+  margin-right: 6px;
+}
+.q-dim {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.q-opts {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr;
+}
+.q-opt {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.q-opt:hover { border-color: var(--phos-deep); background: rgba(84, 246, 166, 0.04); }
+.q-opt input { margin-top: 2px; accent-color: var(--phos); }
+.q-opt:has(input:checked) {
+  border-color: var(--phos);
+  background: rgba(84, 246, 166, 0.07);
+}
+
+.duel-controls {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.duel-status { color: var(--amber); font-size: 0.86rem; }
+
+/* ---------- result ---------- */
+.duel-result {
+  margin-top: 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  background: var(--bg-2);
+}
+.rv-headline {
+  font-family: var(--disp);
+  font-weight: 800;
+  font-size: 1.45rem;
+  letter-spacing: -0.01em;
+}
+.rv-headline.win  { color: var(--phos); text-shadow: var(--glow); }
+.rv-headline.lose { color: var(--amber); }
+.rv-headline.tie  { color: var(--ink); }
+
+.rv-board {
+  margin-top: 14px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+.rv-box {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: rgba(84, 246, 166, 0.03);
+}
+.rv-box.hi { border-color: var(--phos); box-shadow: var(--glow); }
+.rv-box .k {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.rv-box .v {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.rv-box.hi .v { color: var(--phos); }
+
+.rv-note {
+  margin: 14px 0 0;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--ink-dim);
+}
+
+.rv-detail {
+  margin-top: 14px;
+  border-top: 1px solid var(--line-soft);
+  padding-top: 12px;
+  display: grid;
+  gap: 10px;
+}
+.rv-row {
+  border: 1px solid var(--line-soft);
+  border-radius: 9px;
+  padding: 9px 11px;
+  font-size: 0.82rem;
+}
+.rv-q { color: var(--ink-dim); }
+.rv-q b { color: var(--ink); }
+.rv-cells {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.rv-cell {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 3px 8px;
+  font-size: 0.78rem;
+}
+.rv-cell em { font-style: normal; color: var(--ink-dim); }
+.rv-cell.ok { border-color: var(--phos-deep); color: var(--phos); }
+.rv-cell.no { border-color: var(--rose); color: var(--rose); }
+.rv-cell.ok em, .rv-cell.no em { color: inherit; opacity: 0.8; }
+.rv-truth { margin-top: 6px; color: var(--ink-dim); }
+.rv-truth b { color: var(--ink); }
+
+.duel-empty { color: var(--ink-dim); }
+
+@media (max-width: 560px) {
+  .duel-main { padding: 28px 16px 48px; }
+}

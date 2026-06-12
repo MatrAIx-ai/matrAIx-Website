@@ -16,6 +16,7 @@ the persona **dimension schema** that defines the space those agents are sampled
 | Demo Portal (matrAIx OS) | [`demo.html`](demo.html) | A mission-control interface: a live "Neural Eval Core" brain visualization, an agent swarm simulating the selected app/website, streaming trajectory telemetry, switchable reports (A/B, segments, score distribution, heatmap, findings), and JSONL trajectory export. |
 | Case Study | [`case_study.html`](case_study.html) | A recorded sample trajectory: a matrAIx computer-using agent (10-dimension persona) files an auto-insurance claim on hugclaim.com, with per-step screenshots, observations, actions, rewards, friction findings, and a JSONL export. |
 | Pitch Deck | [`deck.html`](deck.html) | Self-contained investor deck (15 slides) matching the site's dark phosphor design. Arrow-key / swipe navigation, `F` for fullscreen. Business-specific figures are marked as illustrative placeholders to fill in. |
+| Alignment Duel | [`duel.html`](duel.html) | Human-vs-agent mini-game: matrAIx samples a synthetic persona from the dimension space and "simulates" its behavior; you predict the same behaviors, the matrAIx agent predicts them too, and the page scores you, the agent, and your human↔agent **alignment**. An interactive proof of the simulation-fidelity thesis. Adapted from the persona-trivia duel in `HugInsure/persona`. |
 
 No build step — open `index.html` in a browser, or serve the folder:
 
