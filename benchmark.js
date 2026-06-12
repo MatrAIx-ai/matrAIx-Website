@@ -83,124 +83,49 @@
   ];
 
   /* ============================================================
-     NEURAL EVAL CORE — animated brain
+     NEURAL EVAL CORE — skill flow chart
+     Each scored behavior flows through the skill it stressed.
+     Same public interface as before: { pulse(region, verdict) }.
      ============================================================ */
   const Brain = (() => {
-    const canvas = $('#brain');
-    const ctx = canvas.getContext('2d');
-    const regionsEl = $('#regions');
-    const REGIONS = ['Perception', 'Language', 'Reasoning', 'Planning', 'Memory', 'Safety'];
-    let w, h, cx, cy, rx, ry, nodes = [], edges = [], signals = [], scan = 0, activity = 0.3;
-    const regionEls = {}, regionNode = {};
-
-    REGIONS.forEach(r => {
+    const wrap = $('#flowNodes');
+    // Logical cognitive pipeline order, top → bottom.
+    const FLOW = ['Perception', 'Language', 'Memory', 'Reasoning', 'Planning', 'Safety'];
+    const DESC = {
+      Perception: 'reads the screen',
+      Language:   'understands the ask',
+      Memory:     'recalls the context',
+      Reasoning:  'works out the answer',
+      Planning:   'sequences the steps',
+      Safety:     'stays within bounds',
+    };
+    const node = {};
+    FLOW.forEach(r => {
       const el = document.createElement('div');
-      el.className = 'region'; el.textContent = r;
-      regionsEl.appendChild(el); regionEls[r] = el;
+      el.className = 'fnode'; el.dataset.r = r;
+      el.innerHTML =
+        '<div class="fn-top"><span class="fn-name">' + r + '</span>' +
+        '<span class="fn-n"><b>0</b> scored</span></div>' +
+        '<div class="fn-sub">' + DESC[r] + '</div>' +
+        '<i class="fn-bar"><b></b></i>';
+      wrap.appendChild(el);
+      node[r] = { el, bar: el.querySelector('.fn-bar b'), n: el.querySelector('.fn-n b'), total: 0, pass: 0, t: null };
     });
 
-    function layout() {
-      const rect = canvas.getBoundingClientRect();
-      w = canvas.width = rect.width; h = canvas.height = rect.height;
-      cx = w / 2; cy = h / 2 + 4;
-      rx = Math.min(w * 0.42, 260); ry = Math.min(h * 0.40, 190);
-      nodes = [];
-      const target = Math.min(260, Math.floor((rx * ry) / 90));
-      let guard = 0;
-      while (nodes.length < target && guard < target * 40) {
-        guard++;
-        const a = Math.random() * Math.PI * 2, rr = Math.sqrt(Math.random());
-        const x = cx + Math.cos(a) * rx * rr, y = cy + Math.sin(a) * ry * rr;
-        if (Math.abs(x - cx) < 5) continue;
-        nodes.push({ x, y, t: Math.random() * 100, hot: 0 });
-      }
-      edges = [];
-      for (let i = 0; i < nodes.length; i++) {
-        const dists = [];
-        for (let j = 0; j < nodes.length; j++) {
-          if (i === j) continue;
-          const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
-          dists.push([dx * dx + dy * dy, j]);
-        }
-        dists.sort((p, q) => p[0] - q[0]);
-        for (let k = 0; k < 3 && k < dists.length; k++) { const j = dists[k][1]; if (i < j) edges.push([i, j]); }
-      }
-      REGIONS.forEach((r, i) => {
-        const ang = -Math.PI / 2 + (i / REGIONS.length) * Math.PI * 2;
-        regionEls[r].style.left = ((cx + Math.cos(ang) * (rx + 26)) / w * 100) + '%';
-        regionEls[r].style.top = ((cy + Math.sin(ang) * (ry + 18)) / h * 100) + '%';
-        const ax = cx + Math.cos(ang) * rx * 0.7, ay = cy + Math.sin(ang) * ry * 0.7;
-        let best = 0, bd = Infinity;
-        nodes.forEach((n, idx) => { const d = (n.x - ax) ** 2 + (n.y - ay) ** 2; if (d < bd) { bd = d; best = idx; } });
-        regionNode[r] = best;
-      });
-    }
-
-    function spawnSignal(from, verdict) {
-      const a = nodes[from]; if (!a) return;
-      const near = edges.filter(e => e[0] === from || e[1] === from);
-      const e = near.length ? pick(near) : null;
-      const to = e ? (e[0] === from ? e[1] : e[0]) : (Math.random() * nodes.length) | 0;
-      const col = verdict === 'fail' ? '#ff5c6c' : verdict === 'watch' ? '#ffb547' : '#54f6a6';
-      signals.push({ from, to, p: 0, sp: 0.02 + Math.random() * 0.03, col, depth: 0 });
-    }
-
-    function frame() {
-      ctx.clearRect(0, 0, w, h);
-      ctx.strokeStyle = 'rgba(84,246,166,0.12)'; ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx, cy - ry * 0.92); ctx.lineTo(cx, cy + ry * 0.92); ctx.stroke();
-      scan += 1.1; if (scan > h + 40) scan = -40;
-      for (const [i, j] of edges) {
-        const a = nodes[i], b = nodes[j], near = Math.abs((a.y + b.y) / 2 - scan) < 60;
-        ctx.strokeStyle = near ? 'rgba(84,246,166,0.22)' : 'rgba(84,246,166,0.06)';
-        ctx.lineWidth = 0.5; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-      }
-      for (const n of nodes) {
-        n.t += 0.05; if (n.hot > 0) n.hot -= 0.02;
-        const near = Math.abs(n.y - scan) < 55, base = 0.3 + 0.3 * Math.sin(n.t);
-        ctx.globalAlpha = Math.min(1, base + (near ? 0.4 : 0) + n.hot);
-        const r = 1.3 + (n.hot > 0 ? 1.6 * n.hot : 0);
-        ctx.fillStyle = n.hot > 0 ? '#9affd0' : '#54f6a6';
-        ctx.shadowBlur = near || n.hot > 0 ? 10 : 0; ctx.shadowColor = '#54f6a6';
-        ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, Math.PI * 2); ctx.fill();
-      }
-      ctx.globalAlpha = 1; ctx.shadowBlur = 0;
-      for (let s = signals.length - 1; s >= 0; s--) {
-        const sig = signals[s], a = nodes[sig.from], b = nodes[sig.to];
-        if (!a || !b) { signals.splice(s, 1); continue; }
-        sig.p += sig.sp;
-        const x = a.x + (b.x - a.x) * sig.p, y = a.y + (b.y - a.y) * sig.p;
-        ctx.fillStyle = sig.col; ctx.shadowBlur = 12; ctx.shadowColor = sig.col;
-        ctx.beginPath(); ctx.arc(x, y, 2.2, 0, Math.PI * 2); ctx.fill();
-        if (sig.p >= 1) {
-          nodes[sig.to].hot = 1; signals.splice(s, 1);
-          if (sig.depth < 2 && Math.random() < 0.6) {
-            const nx = signals.length;
-            spawnSignal(sig.to, sig.col === '#ff5c6c' ? 'fail' : sig.col === '#ffb547' ? 'watch' : 'pass');
-            if (signals[nx]) signals[nx].depth = sig.depth + 1;
-          }
-        }
-      }
-      ctx.shadowBlur = 0;
-      activity = Math.max(0.25, activity - 0.004);
-      if (!reduceMotion && Math.random() < activity * 0.5 && signals.length < 60) spawnSignal((Math.random() * nodes.length) | 0, 'pass');
-      requestAnimationFrame(frame);
-    }
-
     function pulse(region, verdict) {
-      activity = Math.min(1.5, activity + 0.18);
-      const el = regionEls[region];
-      if (el) { el.classList.add('hot'); setTimeout(() => el.classList.remove('hot'), 600); }
-      const node = regionNode[region] ?? ((Math.random() * nodes.length) | 0);
-      if (nodes[node]) nodes[node].hot = 1;
-      spawnSignal(node, verdict);
+      const nd = node[region] || node.Reasoning;
+      if (!nd) return;
+      nd.total++; if (verdict === 'pass') nd.pass++;
+      nd.n.textContent = nd.total > 999 ? (nd.total / 1000).toFixed(1) + 'k' : nd.total;
+      nd.bar.style.width = Math.round(nd.pass / nd.total * 100) + '%';
+      nd.el.classList.remove('watch', 'fail');
+      if (verdict === 'fail') nd.el.classList.add('fail');
+      else if (verdict === 'watch') nd.el.classList.add('watch');
+      nd.el.classList.add('hot');
+      clearTimeout(nd.t);
+      nd.t = setTimeout(() => nd.el.classList.remove('hot'), 520);
     }
 
-    layout();
-    window.addEventListener('resize', layout);
-    if (reduceMotion) { ctx.fillStyle = '#54f6a6'; nodes.forEach(n => { ctx.globalAlpha = 0.5; ctx.beginPath(); ctx.arc(n.x, n.y, 1.5, 0, 6.3); ctx.fill(); }); }
-    else frame();
     return { pulse };
   })();
 
@@ -366,7 +291,7 @@
     running = !running;
     runBtn.textContent = running ? '■ HALT' : '▶ RUN';
     runBtn.classList.toggle('run', running);
-    $('#scanTag').textContent = running ? '● SCANNING' : '⏸ HALTED';
+    $('#scanTag').textContent = running ? '● LIVE' : '⏸ HALTED';
     $('#scanTag').style.color = running ? '' : 'var(--ink-dim)';
     document.querySelectorAll('.led').forEach(l => l.classList.toggle('on', running));
   });

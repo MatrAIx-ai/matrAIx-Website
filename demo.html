@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="benchmark.css?v=9" />
+  <link rel="stylesheet" href="benchmark.css?v=10" />
 </head>
 <body class="os">
   <div class="grain" aria-hidden="true"></div>
@@ -24,7 +24,7 @@
       <canvas id="runway" aria-hidden="true"></canvas>
       <div class="runway-hud">
         <h1><span class="hl">8.3</span> Billion Agents</h1>
-        <p>Every agent runs your flow as a live data point — the fast ones glide straight through, the slow ones stall at the friction points.</p>
+        <p>Every agent runs your flow as a live data point.</p>
       </div>
       <div class="runway-stats">
         <div class="rstat"><b id="rAgents">620+</b><span>live on this node</span></div>
@@ -72,11 +72,12 @@
 
     <!-- Neural eval core -->
     <section class="win stage">
-      <div class="win-bar"><span>Neural Eval Core · skill map</span><span class="scan-tag" id="scanTag">● SCANNING</span></div>
-      <div class="stage-legend"><b class="hint">What this shows →</b> a live map of the human skills your agents get tested on. Each pulse is one scored behavior, lighting the region (skill) it stressed — Reasoning · Safety · Memory · Language · Planning · Perception. &nbsp;<b class="cp">● pass</b> <b class="ca">● flag</b> <b class="cr">● fail</b></div>
-      <div class="brain-wrap">
-        <canvas id="brain"></canvas>
-        <div class="regions" id="regions"></div>
+      <div class="win-bar"><span>Neural Eval Core · skill flow</span><span class="scan-tag" id="scanTag">● LIVE</span></div>
+      <div class="stage-legend"><b class="hint">What this shows →</b> each scored behavior flows through the skills it tests. &nbsp;<b class="cp">● pass</b> <b class="ca">● flag</b> <b class="cr">● fail</b></div>
+      <div class="flow">
+        <div class="fcap fin">INPUT · agent runs your flow</div>
+        <div class="fnodes" id="flowNodes"></div>
+        <div class="fcap fout">VERDICT · pass / flag / fail</div>
       </div>
       <div class="vitals" id="vitals">
         <div class="vital"><div class="vl">active agents</div><div class="vv" data-v="ag">—</div><div class="spark" data-s="ag"></div></div>
@@ -133,7 +134,7 @@
   </section>
 
   <script src="dimensions.js?v=3"></script>
-  <script src="benchmark.js?v=6"></script>
+  <script src="benchmark.js?v=7"></script>
   <script>
   /* ---------- Runway hero: 600+ agents racing the flow as data points ---------- */
   (function(){
