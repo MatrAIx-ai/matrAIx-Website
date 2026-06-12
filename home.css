@@ -292,11 +292,31 @@ main { position: relative; z-index: 10; }
 .rsnap-lift { font-family: var(--disp); font-weight: 800; font-size: 2rem; color: var(--phos); text-shadow: var(--glow); line-height: 1; }
 .rsnap-metric { font-size: .7rem; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-dim); margin-top: 4px; }
 .rsnap-find { font-size: .8rem; color: var(--ink-dim); line-height: 1.45; margin-top: 12px; border-top: 1px solid var(--line-soft); padding-top: 10px; }
-.reports-foot { text-align: center; margin-top: 22px; }
-.reports-more { display: inline-flex; align-items: center; gap: 8px; font-size: .9rem; color: var(--phos); }
-.reports-more:hover { text-shadow: var(--glow); }
-.reports-more .arr { transition: transform .2s; }
-.reports-more:hover .arr { transform: translateX(4px); }
+.reports-foot { text-align: center; margin-top: 28px; }
+.reports-btn {
+  position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 28px; border-radius: 999px;
+  font-family: var(--mono); font-size: 0.84rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+  color: #04140c;
+  background: linear-gradient(120deg, var(--phos), #76ffbf);
+  border: 1px solid var(--phos);
+  box-shadow: 0 0 24px rgba(84, 246, 166, 0.32);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.reports-btn:hover { transform: translateY(-2px); box-shadow: 0 0 46px rgba(84, 246, 166, 0.6); }
+.reports-btn .rb-ico { font-size: 1rem; line-height: 1; }
+.reports-btn .arr { transition: transform 0.25s; }
+.reports-btn:hover .arr { transform: translateX(5px); }
+/* shine sweep on hover */
+.reports-btn::after {
+  content: ""; position: absolute; top: 0; left: -60%; width: 45%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: skewX(-20deg); transition: left 0.55s ease;
+}
+.reports-btn:hover::after { left: 130%; }
+@media (prefers-reduced-motion: reduce) { .reports-btn::after { display: none; } }
 @media (max-width: 920px) { .report-snaps { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .report-snaps { grid-template-columns: 1fr; } }
 
