@@ -325,6 +325,12 @@ main { position: relative; z-index: 10; }
   .rc-col + .rc-col { border-left: none; border-top: 1px solid var(--line); }
 }
 
+.rsnap-acc {
+  margin-top: 12px; padding-top: 10px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 0.74rem; letter-spacing: 0.02em; color: var(--phos);
+}
+
 .reports-foot { text-align: center; margin-top: 28px; }
 .reports-btn {
   position: relative; overflow: hidden;
