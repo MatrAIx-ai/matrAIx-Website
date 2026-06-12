@@ -140,6 +140,97 @@
     'Indifferent': 'breeze through checkout without reading the fine print',
   };
 
+  /* ---------- agent-facing personalization rules (exported into Persona.md) ---------- */
+  const TONE_RULE = {
+    'Concise': 'Keep replies short and to the point.',
+    'Warm / empathetic': 'Use a warm, supportive tone.',
+    'Playful': 'Be witty and playful.',
+    'Blunt': 'Be blunt and direct — skip the hedging.',
+  };
+  const LEARN_RULE = {
+    'Kinesthetic': 'Lead with hands-on steps I can try.',
+    'Visual': 'Lead with diagrams, visuals, or short demos.',
+    'Reading / writing': 'Give me written detail and references.',
+    'Auditory': 'Explain it conversationally, like a walkthrough.',
+  };
+  const DECISION_RULE = {
+    'Analytical': 'When I decide, give me the data and trade-offs.',
+    'Intuitive': 'When I decide, give me one clear recommendation.',
+    'Consensus-driven': 'When I decide, show me what others chose.',
+    'Deliberative': "When I decide, don't rush me — let me revisit.",
+  };
+  const RISK_RULE = {
+    'Risk-seeking': 'Surface new and experimental options early.',
+    'Risk-tolerant': 'Offer new options, with a quick risk note.',
+    'Cautious': 'Flag risks and prefer proven paths.',
+    'Risk-averse': 'Stick to safe, well-established options.',
+  };
+  const ECON_RULE = {
+    'Cost-sensitive': 'Always highlight price and ways to save.',
+    'Value-driven': 'Justify why something is worth it.',
+    'Premium-seeking': 'Lead with the best option, not the cheapest.',
+    'Indifferent': 'Keep purchase steps minimal.',
+  };
+
+  /* ---------- helpers ---------- */
+  const stripTags = s => s.replace(/<[^>]+>/g, '');
+  const pad6 = n => String(n).padStart(6, '0');
+  function hashId(persona) {                       // deterministic 6-digit id from the answers
+    const s = Object.keys(persona).sort().map(k => persona[k]).join('|');
+    let h = 0; for (let i = 0; i < s.length; i += 1) { h = (h * 31 + s.charCodeAt(i)) >>> 0; }
+    return 'mx-' + pad6(h % 1000000);
+  }
+  function today() { return new Date().toISOString().slice(0, 10); }
+
+  function buildPersonaMd(p, title, emoji, summaryText, predictionText, rules, mxid) {
+    const dims = Object.keys(p).map(k => `  ${JSON.stringify(k)}: ${JSON.stringify(p[k])}`).join(',\n');
+    return [
+      '---',
+      `name: ${title}`,
+      `id: ${mxid}`,
+      'source: matrAIx (matraix.ai)',
+      `generated: ${today()}`,
+      '---',
+      '',
+      `# Persona — ${title} ${emoji}`,
+      '',
+      '## Summary',
+      summaryText,
+      '',
+      '## Predicted behavior',
+      predictionText,
+      '',
+      '## Personalization rules (for your agent)',
+      rules.map(r => `- ${r}`).join('\n'),
+      '',
+      '## matrAIx dimensions',
+      '```json',
+      '{',
+      dims,
+      '}',
+      '```',
+      '',
+    ].join('\n');
+  }
+
+  function downloadMd(md) {
+    const blob = new Blob([md], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'Persona.md';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+  }
+
+  function countUp(el, to, ms) {
+    const start = performance.now();
+    (function step(now) {
+      const t = Math.min(1, (now - start) / ms);
+      el.textContent = Math.round(to * (1 - Math.pow(1 - t, 3))).toLocaleString();
+      if (t < 1) requestAnimationFrame(step);
+    })(start);
+  }
+
   /* ---------- DOM ---------- */
   const quiz = document.getElementById('quiz');
   const statusEl = document.getElementById('status');
@@ -188,16 +279,28 @@
     const adj = TRAIT_ADJ[persona.dominant_trait] || 'Singular';
     const [noun, emoji] = VALUE_NOUN[persona.values_priority] || ['Original', '✨'];
     const title = `The ${adj} ${noun}`;
+    const mxid = hashId(persona);
 
-    const summary =
+    const summaryHtml =
       `You ${RISK_PHRASE[persona.risk_tolerance]} and ${DECISION_PHRASE[persona.decision_style]}. ` +
       `Driven by <b>${persona.values_priority.toLowerCase()}</b>, you learn best ${LEARN_PHRASE[persona.learning_style]}, ` +
       `live on <b>${persona.media_diet.toLowerCase()}</b> media, and like your answers ${TONE_PHRASE[persona.tone_expected]}.`;
 
-    const prediction =
+    const predictionHtml =
       `Dropped into a checkout or onboarding flow, matrAIx would expect you to ` +
       `${DECISION_BEHAVIOR[persona.decision_style]}, ${RISK_BEHAVIOR[persona.risk_tolerance]}, ` +
       `and — as a <b>${persona.economic_motivation.toLowerCase()}</b> shopper — ${ECON_BEHAVIOR[persona.economic_motivation]}.`;
+
+    const rules = [
+      TONE_RULE[persona.tone_expected],
+      LEARN_RULE[persona.learning_style],
+      DECISION_RULE[persona.decision_style],
+      RISK_RULE[persona.risk_tolerance],
+      ECON_RULE[persona.economic_motivation],
+    ].filter(Boolean);
+
+    const md = buildPersonaMd(persona, title, emoji,
+      stripTags(summaryHtml), stripTags(predictionHtml), rules, mxid);
 
     const chips = QUESTIONS.map(item => `
       <div class="trait">
@@ -208,20 +311,64 @@
     resultEl.innerHTML = `
       <div class="pv-eyebrow"><span class="dot live"></span> YOUR PERSONA</div>
       <div class="pv-arch"><span class="pv-emoji">${emoji}</span>${title}</div>
-      <p class="pv-summary">${summary}</p>
-      <div class="pv-traits">${chips}</div>
+
+      <div class="pv-card">
+        <div class="pv-card-top">
+          <span class="pv-card-tag"><span class="dot live"></span> PREDICTED PERSONA</span>
+          <span class="pv-card-id">${mxid}</span>
+        </div>
+        <p class="pv-summary">${summaryHtml}</p>
+        <div class="pv-traits">${chips}</div>
+        <div class="pv-card-foot">
+          <button id="dlBtn" type="button" class="btn btn-solid">⤓ Download Persona.md</button>
+          <span class="pv-card-hint">drop it into your agent's context to personalize it</span>
+        </div>
+      </div>
+
       <div class="pv-predict">
         <div class="pv-predict-h">▸ How matrAIx would predict your behavior</div>
-        <p>${prediction}</p>
+        <p>${predictionHtml}</p>
       </div>
-      <p class="pv-note">That's the whole idea: from a handful of signals, matrAIx builds a persona and forecasts behavior —
-      then runs millions of them across your product before a single real user shows up.</p>
+
+      <div class="pv-share" id="shareBox">
+        <div class="pv-share-q">Willing to share your persona so matrAIx can use it in future agent simulations?</div>
+        <div class="pv-share-actions">
+          <button id="shareYes" type="button" class="btn btn-solid">Yes, use my persona 🚀</button>
+          <button id="shareNo" type="button" class="btn btn-ghost">No thanks</button>
+        </div>
+        <div id="shareOut" class="pv-share-out" hidden></div>
+      </div>
+
+      <p class="pv-note">Everything here runs in your browser — your persona isn't sent anywhere unless you choose to share it.</p>
+
       <div class="pv-actions">
         <button id="againBtn" type="button" class="btn btn-ghost">↻ Play again</button>
-        <a class="btn btn-solid" href="access.html">Contribute your persona <span>→</span></a>
+        <a class="btn btn-ghost" href="access.html">Become a contributor <span>→</span></a>
       </div>`;
+
     resultEl.hidden = false;
+    document.getElementById('dlBtn').addEventListener('click', () => downloadMd(md));
     document.getElementById('againBtn').addEventListener('click', start);
+
+    const shareOut = document.getElementById('shareOut');
+    const shareYes = document.getElementById('shareYes');
+    const shareNo = document.getElementById('shareNo');
+    shareYes.addEventListener('click', () => {
+      const n = 4800 + (parseInt(mxid.slice(3), 10) % 9000);   // a fun, deterministic count
+      shareYes.disabled = true; shareNo.disabled = true;
+      shareOut.hidden = false;
+      shareOut.innerHTML =
+        `<div class="pv-share-ok">✓ You're in — matrAIx is spinning up <b><span id="twinN">0</span></b> simulated twins of <b>${title}</b>…</div>
+         <div class="pv-twins"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+         <div class="pv-share-fine">Demo only — nothing was actually stored.</div>`;
+      countUp(document.getElementById('twinN'), n, 1300);
+    });
+    shareNo.addEventListener('click', () => {
+      shareYes.disabled = true; shareNo.disabled = true;
+      shareOut.hidden = false;
+      shareOut.innerHTML = `<div class="pv-share-ok no">🔒 No problem — your persona stays on your device.</div>`;
+    });
+
     resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 

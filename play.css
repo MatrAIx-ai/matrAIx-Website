@@ -177,6 +177,76 @@
   gap: 12px;
 }
 
+/* ---------- predicted persona card ---------- */
+.pv-card {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 16px 18px;
+  background: var(--bg);
+}
+.pv-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.pv-card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--phos);
+}
+.pv-card-id {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-dim);
+}
+.pv-card .pv-summary { margin-top: 0; }
+.pv-card-foot {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.pv-card-hint { font-size: 0.78rem; color: var(--ink-dim); }
+
+/* ---------- share toggle ---------- */
+.pv-share {
+  margin-top: 18px;
+  border: 1px dashed var(--line);
+  border-radius: 13px;
+  padding: 16px 18px;
+}
+.pv-share-q { font-size: 0.94rem; color: var(--ink); margin-bottom: 12px; line-height: 1.5; }
+.pv-share-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.pv-share-actions .btn:disabled { opacity: 0.45; cursor: default; transform: none; }
+.pv-share-out { margin-top: 14px; }
+.pv-share-ok { color: var(--phos); font-size: 0.94rem; line-height: 1.5; }
+.pv-share-ok.no { color: var(--ink-dim); }
+.pv-share-ok b { color: var(--ink); }
+.pv-share-fine { margin-top: 6px; font-size: 0.74rem; color: var(--ink-dim); }
+.pv-twins { display: flex; gap: 9px; margin-top: 12px; }
+.pv-twins span {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #8ad0ff; box-shadow: 0 0 9px rgba(138, 208, 255, 0.7);
+  animation: twinpulse 1s infinite;
+}
+.pv-twins span:nth-child(2) { animation-delay: 0.08s; }
+.pv-twins span:nth-child(3) { animation-delay: 0.16s; }
+.pv-twins span:nth-child(4) { animation-delay: 0.24s; }
+.pv-twins span:nth-child(5) { animation-delay: 0.32s; }
+.pv-twins span:nth-child(6) { animation-delay: 0.40s; }
+.pv-twins span:nth-child(7) { animation-delay: 0.48s; }
+.pv-twins span:nth-child(8) { animation-delay: 0.56s; }
+@keyframes twinpulse { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.25); } }
+
 @media (max-width: 560px) {
   .play-main { padding: 28px 16px 48px; }
   .q-opts { grid-template-columns: 1fr; }
