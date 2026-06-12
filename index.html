@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="home.css?v=11" />
+  <link rel="stylesheet" href="home.css?v=12" />
 </head>
 <body>
   <!-- Background simulation layers -->
@@ -62,15 +62,34 @@
       <div class="sec-head">
         <span class="idx">01 — REPORTS</span>
         <h2 class="sec-title">A snapshot of the reports we generate.</h2>
-        <div class="target-chips">
-          <span class="chip">Web apps</span><span class="chip">Checkout</span><span class="chip">Onboarding</span>
-          <span class="chip">AI assistants</span><span class="chip">Search</span><span class="chip">Accessibility</span>
-        </div>
       </div>
-      <div class="report-card">
-        <div class="report-tabs" id="reportTabs" role="tablist"></div>
-        <div class="report-body" id="reportBody"></div>
+      <div class="report-snaps">
+        <article class="rsnap">
+          <div class="rsnap-top"><span class="rsnap-name">Checkout flow</span><span class="rsnap-win">B wins</span></div>
+          <div class="rsnap-lift">+14.2%</div>
+          <div class="rsnap-metric">task completion</div>
+          <p class="rsnap-find">Coupon field traps 23% of mobile users.</p>
+        </article>
+        <article class="rsnap">
+          <div class="rsnap-top"><span class="rsnap-name">SaaS onboarding</span><span class="rsnap-win">B wins</span></div>
+          <div class="rsnap-lift">+9.6%</div>
+          <div class="rsnap-metric">day-1 activation</div>
+          <p class="rsnap-find">41% of power users skip the tour.</p>
+        </article>
+        <article class="rsnap">
+          <div class="rsnap-top"><span class="rsnap-name">Fintech signup</span><span class="rsnap-win">B wins</span></div>
+          <div class="rsnap-lift">+11.0%</div>
+          <div class="rsnap-metric">signup completion</div>
+          <p class="rsnap-find">Passkey confuses 39% of users 55+.</p>
+        </article>
+        <article class="rsnap">
+          <div class="rsnap-top"><span class="rsnap-name">AI assistant</span><span class="rsnap-win">B wins</span></div>
+          <div class="rsnap-lift">+18.0%</div>
+          <div class="rsnap-metric">issue resolution</div>
+          <p class="rsnap-find">Prompt-injection succeeds in 9% of sessions.</p>
+        </article>
       </div>
+      <div class="reports-foot"><a class="reports-more" href="demo.html#reports">See the full interactive reports in the demo <span class="arr">→</span></a></div>
     </section>
 
     <!-- Training data -->

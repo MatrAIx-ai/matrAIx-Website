@@ -282,6 +282,24 @@ main { position: relative; z-index: 10; }
 .closing h2 span { color: var(--phos); text-shadow: var(--glow); font-style: italic; }
 .closing-sub { color: var(--ink-dim); font-size: 1.06rem; margin-bottom: 32px; }
 
+/* ---------- Reports snapshot ---------- */
+.report-snaps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.rsnap { border: 1px solid var(--line-soft); background: var(--bg-2); padding: 18px; text-align: left; transition: border-color .25s, transform .25s, background .25s; }
+.rsnap:hover { border-color: var(--line); transform: translateY(-3px); background: #0d1411; }
+.rsnap-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+.rsnap-name { font-size: .85rem; color: var(--ink); font-weight: 600; }
+.rsnap-win { font-size: .56rem; letter-spacing: .06em; text-transform: uppercase; color: #04140c; background: var(--phos); padding: 2px 7px; border-radius: 100px; font-weight: 700; white-space: nowrap; }
+.rsnap-lift { font-family: var(--disp); font-weight: 800; font-size: 2rem; color: var(--phos); text-shadow: var(--glow); line-height: 1; }
+.rsnap-metric { font-size: .7rem; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-dim); margin-top: 4px; }
+.rsnap-find { font-size: .8rem; color: var(--ink-dim); line-height: 1.45; margin-top: 12px; border-top: 1px solid var(--line-soft); padding-top: 10px; }
+.reports-foot { text-align: center; margin-top: 22px; }
+.reports-more { display: inline-flex; align-items: center; gap: 8px; font-size: .9rem; color: var(--phos); }
+.reports-more:hover { text-shadow: var(--glow); }
+.reports-more .arr { transition: transform .2s; }
+.reports-more:hover .arr { transform: translateX(4px); }
+@media (max-width: 920px) { .report-snaps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .report-snaps { grid-template-columns: 1fr; } }
+
 /* ---------- Research papers ---------- */
 .papers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .paper { border: 1px solid var(--line-soft); background: var(--bg-2); padding: 18px; display: flex; flex-direction: column; transition: border-color .25s, transform .25s, background .25s; }
