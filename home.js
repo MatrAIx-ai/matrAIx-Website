@@ -88,6 +88,35 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
   setTimeout(() => requestAnimationFrame(step), 400);
 })();
 
+/* ---------- 2b. Reports comparison: count up on scroll into view ---------- */
+(() => {
+  const box = document.querySelector('.reports-compare');
+  if (!box) return;
+  const els = [].slice.call(box.querySelectorAll('.cu'));
+  if (!els.length) return;
+  const nf = new Intl.NumberFormat('en-US');
+  const ease = t => 1 - Math.pow(1 - t, 3);
+  function animate(el) {
+    const to = parseFloat(el.dataset.to) || 0;
+    if (reduceMotion) { el.textContent = nf.format(to); return; }
+    const dur = 1500; let start = null;
+    (function step(ts) {
+      if (start === null) start = ts;
+      const p = Math.min((ts - start) / dur, 1);
+      el.textContent = nf.format(Math.round(ease(p) * to));
+      if (p < 1) requestAnimationFrame(step); else el.textContent = nf.format(to);
+    })();
+  }
+  const run = () => els.forEach(animate);
+  if (reduceMotion || !('IntersectionObserver' in window)) { run(); return; }
+  els.forEach(el => { el.textContent = '0'; });   // reset before reveal
+  let done = false;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting && !done) { done = true; run(); io.disconnect(); } });
+  }, { threshold: 0.4 });
+  io.observe(box);
+})();
+
 /* ---------- 3. Telemetry stream ---------- */
 (() => {
   const cfg = {
