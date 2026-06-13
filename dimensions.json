@@ -10075,6 +10075,30 @@
       ]
     },
     {
+      "id": "mbti_type",
+      "label": "Myers–Briggs type",
+      "category": "Personality",
+      "description": "The persona's 16-type MBTI profile.",
+      "values": [
+        "INTJ — Architect",
+        "INTP — Logician",
+        "ENTJ — Commander",
+        "ENTP — Debater",
+        "INFJ — Advocate",
+        "INFP — Mediator",
+        "ENFJ — Protagonist",
+        "ENFP — Campaigner",
+        "ISTJ — Logistician",
+        "ISFJ — Defender",
+        "ESTJ — Executive",
+        "ESFJ — Consul",
+        "ISTP — Virtuoso",
+        "ISFP — Adventurer",
+        "ESTP — Entrepreneur",
+        "ESFP — Entertainer"
+      ]
+    },
+    {
       "id": "big5_imagination",
       "label": "Imagination",
       "category": "Personality",

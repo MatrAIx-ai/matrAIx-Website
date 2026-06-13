@@ -15,7 +15,7 @@ const existing = JSON.parse(fs.readFileSync(FILE, 'utf8'));
 // Family id prefixes — used to strip previously generated dims so re-running is idempotent.
 const PREFIXES = ['fam_', 'skill_', 'tool_', 'topic_', 'lang_', 'att_', 'ind_', 'cult_',
   'musg_', 'filmg_', 'bookg_', 'cuis_', 'sport_', 'prog_', 'big5_', 'lstyle_', 'cog_', 'health_',
-  'hob_', 'acad_', 'peeve_', 'trait_', 'val_', 'habit_', 'pref_', 'demo_', 'lifex_'];
+  'hob_', 'acad_', 'peeve_', 'trait_', 'val_', 'habit_', 'pref_', 'demo_', 'lifex_', 'mbti_'];
 
 const core = existing.dimensions.filter(d => !PREFIXES.some(p => d.id.startsWith(p)));
 
@@ -178,6 +178,12 @@ const BIGFIVE = [
   ['Anxiety', 'Neuroticism'], ['Anger', 'Neuroticism'], ['Depression', 'Neuroticism'],
   ['Self-consciousness', 'Neuroticism'], ['Immoderation', 'Neuroticism'], ['Vulnerability', 'Neuroticism'],
 ];
+
+/* ---- Myers–Briggs type — one dimension, the 16 types as values ---- */
+const MBTI = ['INTJ — Architect', 'INTP — Logician', 'ENTJ — Commander', 'ENTP — Debater',
+  'INFJ — Advocate', 'INFP — Mediator', 'ENFJ — Protagonist', 'ENFP — Campaigner',
+  'ISTJ — Logistician', 'ISFJ — Defender', 'ESTJ — Executive', 'ESFJ — Consul',
+  'ISTP — Virtuoso', 'ISFP — Adventurer', 'ESTP — Entrepreneur', 'ESFP — Entertainer'];
 
 /* ---- custom families: lifestyle / cognition / health ---- */
 const LIFESTYLE = [
@@ -417,6 +423,7 @@ BOOKS.forEach(b => push('bookg_' + slug(b), 'Books: ' + b, 'Books', `Taste for $
 CUISINES.forEach(c => push('cuis_' + slug(c), 'Cuisine: ' + c, 'Food', `Taste for ${c} cuisine.`, CUIS));
 SPORTS.forEach(s => push('sport_' + slug(s), 'Sport: ' + s, 'Sports', `Relationship to ${s.toLowerCase()}.`, SPORT));
 PROGRAMMING.forEach(p => push('prog_' + slug(p), 'Programming: ' + p, 'Programming', `Proficiency in ${p}.`, PROG));
+push('mbti_type', 'Myers–Briggs type', 'Personality', 'The persona\'s 16-type MBTI profile.', MBTI);
 BIGFIVE.forEach(([facet, group]) => push('big5_' + slug(facet), facet, 'Personality', `${group} facet — ${facet.toLowerCase()}.`, BIG5));
 LIFESTYLE.forEach(([id, label, vals]) => push('lstyle_' + id, label, 'Lifestyle', label + '.', vals));
 COGNITION.forEach(([id, label, vals]) => push('cog_' + id, label, 'Cognition', label + '.', vals));
