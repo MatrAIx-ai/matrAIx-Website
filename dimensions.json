@@ -12956,6 +12956,1977 @@
         "Neutral",
         "Fine"
       ]
+    },
+    {
+      "id": "trait_curiosity",
+      "label": "Character: Curiosity",
+      "category": "Character",
+      "description": "How present curiosity is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_creativity",
+      "label": "Character: Creativity",
+      "category": "Character",
+      "description": "How present creativity is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_love_of_learning",
+      "label": "Character: Love of learning",
+      "category": "Character",
+      "description": "How present love of learning is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_open_mindedness",
+      "label": "Character: Open-mindedness",
+      "category": "Character",
+      "description": "How present open-mindedness is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_perspective",
+      "label": "Character: Perspective",
+      "category": "Character",
+      "description": "How present perspective is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_bravery",
+      "label": "Character: Bravery",
+      "category": "Character",
+      "description": "How present bravery is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_perseverance",
+      "label": "Character: Perseverance",
+      "category": "Character",
+      "description": "How present perseverance is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_honesty",
+      "label": "Character: Honesty",
+      "category": "Character",
+      "description": "How present honesty is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_zest",
+      "label": "Character: Zest",
+      "category": "Character",
+      "description": "How present zest is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_capacity_for_love",
+      "label": "Character: Capacity for love",
+      "category": "Character",
+      "description": "How present capacity for love is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_kindness",
+      "label": "Character: Kindness",
+      "category": "Character",
+      "description": "How present kindness is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_social_intelligence",
+      "label": "Character: Social intelligence",
+      "category": "Character",
+      "description": "How present social intelligence is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_teamwork",
+      "label": "Character: Teamwork",
+      "category": "Character",
+      "description": "How present teamwork is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_fairness",
+      "label": "Character: Fairness",
+      "category": "Character",
+      "description": "How present fairness is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_leadership",
+      "label": "Character: Leadership",
+      "category": "Character",
+      "description": "How present leadership is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_forgiveness",
+      "label": "Character: Forgiveness",
+      "category": "Character",
+      "description": "How present forgiveness is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_humility",
+      "label": "Character: Humility",
+      "category": "Character",
+      "description": "How present humility is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_prudence",
+      "label": "Character: Prudence",
+      "category": "Character",
+      "description": "How present prudence is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_self_regulation",
+      "label": "Character: Self-regulation",
+      "category": "Character",
+      "description": "How present self-regulation is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_appreciation_of_beauty",
+      "label": "Character: Appreciation of beauty",
+      "category": "Character",
+      "description": "How present appreciation of beauty is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_gratitude",
+      "label": "Character: Gratitude",
+      "category": "Character",
+      "description": "How present gratitude is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_hope_optimism",
+      "label": "Character: Hope / optimism",
+      "category": "Character",
+      "description": "How present hope / optimism is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_playfulness",
+      "label": "Character: Playfulness",
+      "category": "Character",
+      "description": "How present playfulness is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_spirituality",
+      "label": "Character: Spirituality",
+      "category": "Character",
+      "description": "How present spirituality is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_ambition",
+      "label": "Character: Ambition",
+      "category": "Character",
+      "description": "How present ambition is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_empathy",
+      "label": "Character: Empathy",
+      "category": "Character",
+      "description": "How present empathy is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_resilience",
+      "label": "Character: Resilience",
+      "category": "Character",
+      "description": "How present resilience is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_discipline",
+      "label": "Character: Discipline",
+      "category": "Character",
+      "description": "How present discipline is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_generosity",
+      "label": "Character: Generosity",
+      "category": "Character",
+      "description": "How present generosity is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_loyalty",
+      "label": "Character: Loyalty",
+      "category": "Character",
+      "description": "How present loyalty is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_competitiveness",
+      "label": "Character: Competitiveness",
+      "category": "Character",
+      "description": "How present competitiveness is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "trait_adaptability",
+      "label": "Character: Adaptability",
+      "category": "Character",
+      "description": "How present adaptability is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "val_family",
+      "label": "Value: Family",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes family.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_career_success",
+      "label": "Value: Career success",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes career success.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_wealth",
+      "label": "Value: Wealth",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes wealth.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_health",
+      "label": "Value: Health",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes health.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_personal_freedom",
+      "label": "Value: Personal freedom",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes personal freedom.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_security_stability",
+      "label": "Value: Security & stability",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes security & stability.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_adventure",
+      "label": "Value: Adventure",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes adventure.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_tradition",
+      "label": "Value: Tradition",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes tradition.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_power_influence",
+      "label": "Value: Power & influence",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes power & influence.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_achievement",
+      "label": "Value: Achievement",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes achievement.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_creativity_self_expression",
+      "label": "Value: Creativity & self-expression",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes creativity & self-expression.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_community",
+      "label": "Value: Community",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes community.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_spirituality_faith",
+      "label": "Value: Spirituality / faith",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes spirituality / faith.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_knowledge_truth",
+      "label": "Value: Knowledge & truth",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes knowledge & truth.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_social_status",
+      "label": "Value: Social status",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes social status.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_independence",
+      "label": "Value: Independence",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes independence.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_justice_fairness",
+      "label": "Value: Justice & fairness",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes justice & fairness.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_loyalty",
+      "label": "Value: Loyalty",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes loyalty.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_sustainability",
+      "label": "Value: Sustainability",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes sustainability.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_recognition",
+      "label": "Value: Recognition",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes recognition.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_helping_others",
+      "label": "Value: Helping others",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes helping others.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_personal_growth",
+      "label": "Value: Personal growth",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes personal growth.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_fun_enjoyment",
+      "label": "Value: Fun & enjoyment",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes fun & enjoyment.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_integrity_honesty",
+      "label": "Value: Integrity & honesty",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes integrity & honesty.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_beauty_aesthetics",
+      "label": "Value: Beauty & aesthetics",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes beauty & aesthetics.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_order_structure",
+      "label": "Value: Order & structure",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes order & structure.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_patriotism",
+      "label": "Value: Patriotism",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes patriotism.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_equality",
+      "label": "Value: Equality",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes equality.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "val_privacy",
+      "label": "Value: Privacy",
+      "category": "Values",
+      "description": "How strongly the persona prioritizes privacy.",
+      "values": [
+        "Core value",
+        "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ]
+    },
+    {
+      "id": "habit_journaling",
+      "label": "Habit: Journaling",
+      "category": "Habits",
+      "description": "How often the persona engages in journaling.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_meditation",
+      "label": "Habit: Meditation",
+      "category": "Habits",
+      "description": "How often the persona engages in meditation.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_to_do_lists",
+      "label": "Habit: To-do lists",
+      "category": "Habits",
+      "description": "How often the persona engages in to-do lists.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_goal_setting",
+      "label": "Habit: Goal setting",
+      "category": "Habits",
+      "description": "How often the persona engages in goal setting.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_daily_reflection",
+      "label": "Habit: Daily reflection",
+      "category": "Habits",
+      "description": "How often the persona engages in daily reflection.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_budget_tracking",
+      "label": "Habit: Budget tracking",
+      "category": "Habits",
+      "description": "How often the persona engages in budget tracking.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_meal_prepping",
+      "label": "Habit: Meal prepping",
+      "category": "Habits",
+      "description": "How often the persona engages in meal prepping.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_stretching_mobility",
+      "label": "Habit: Stretching / mobility",
+      "category": "Habits",
+      "description": "How often the persona engages in stretching / mobility.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_morning_walk",
+      "label": "Habit: Morning walk",
+      "category": "Habits",
+      "description": "How often the persona engages in morning walk.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_phone_free_downtime",
+      "label": "Habit: Phone-free downtime",
+      "category": "Habits",
+      "description": "How often the persona engages in phone-free downtime.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_gratitude_practice",
+      "label": "Habit: Gratitude practice",
+      "category": "Habits",
+      "description": "How often the persona engages in gratitude practice.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_reading_before_bed",
+      "label": "Habit: Reading before bed",
+      "category": "Habits",
+      "description": "How often the persona engages in reading before bed.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_naps",
+      "label": "Habit: Naps",
+      "category": "Habits",
+      "description": "How often the persona engages in naps.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_power_snoozing_alarm",
+      "label": "Habit: Power-snoozing alarm",
+      "category": "Habits",
+      "description": "How often the persona engages in power-snoozing alarm.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_skipping_breakfast",
+      "label": "Habit: Skipping breakfast",
+      "category": "Habits",
+      "description": "How often the persona engages in skipping breakfast.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_late_night_snacking",
+      "label": "Habit: Late-night snacking",
+      "category": "Habits",
+      "description": "How often the persona engages in late-night snacking.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_nail_biting_fidgeting",
+      "label": "Habit: Nail-biting / fidgeting",
+      "category": "Habits",
+      "description": "How often the persona engages in nail-biting / fidgeting.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_doomscrolling",
+      "label": "Habit: Doomscrolling",
+      "category": "Habits",
+      "description": "How often the persona engages in doomscrolling.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_multitab_browsing",
+      "label": "Habit: Multitab browsing",
+      "category": "Habits",
+      "description": "How often the persona engages in multitab browsing.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_inbox_zero_discipline",
+      "label": "Habit: Inbox-zero discipline",
+      "category": "Habits",
+      "description": "How often the persona engages in inbox-zero discipline.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_saving_receipts",
+      "label": "Habit: Saving receipts",
+      "category": "Habits",
+      "description": "How often the persona engages in saving receipts.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_pre_trip_overpacking",
+      "label": "Habit: Pre-trip overpacking",
+      "category": "Habits",
+      "description": "How often the persona engages in pre-trip overpacking.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_talking_to_oneself",
+      "label": "Habit: Talking to oneself",
+      "category": "Habits",
+      "description": "How often the persona engages in talking to oneself.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_humming_whistling",
+      "label": "Habit: Humming / whistling",
+      "category": "Habits",
+      "description": "How often the persona engages in humming / whistling.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_cold_showers",
+      "label": "Habit: Cold showers",
+      "category": "Habits",
+      "description": "How often the persona engages in cold showers.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_step_counting",
+      "label": "Habit: Step counting",
+      "category": "Habits",
+      "description": "How often the persona engages in step counting.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_hydration_tracking",
+      "label": "Habit: Hydration tracking",
+      "category": "Habits",
+      "description": "How often the persona engages in hydration tracking.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_backing_up_files",
+      "label": "Habit: Backing up files",
+      "category": "Habits",
+      "description": "How often the persona engages in backing up files.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_re_reading_texts_before_sending",
+      "label": "Habit: Re-reading texts before sending",
+      "category": "Habits",
+      "description": "How often the persona engages in re-reading texts before sending.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "habit_procrasti_cleaning",
+      "label": "Habit: Procrasti-cleaning",
+      "category": "Habits",
+      "description": "How often the persona engages in procrasti-cleaning.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    },
+    {
+      "id": "pref_work_location",
+      "label": "Office vs remote",
+      "category": "Preferences",
+      "description": "Office vs remote.",
+      "values": [
+        "Strongly office",
+        "Office-leaning",
+        "Hybrid",
+        "Remote-leaning",
+        "Strongly remote"
+      ]
+    },
+    {
+      "id": "pref_team_vs_solo",
+      "label": "Team vs solo work",
+      "category": "Preferences",
+      "description": "Team vs solo work.",
+      "values": [
+        "Strongly team",
+        "Team-leaning",
+        "Mixed",
+        "Solo-leaning",
+        "Strongly solo"
+      ]
+    },
+    {
+      "id": "pref_plan_vs_spontaneous",
+      "label": "Planned vs spontaneous",
+      "category": "Preferences",
+      "description": "Planned vs spontaneous.",
+      "values": [
+        "Highly planned",
+        "Planned",
+        "Balanced",
+        "Spontaneous",
+        "Highly spontaneous"
+      ]
+    },
+    {
+      "id": "pref_city_vs_nature",
+      "label": "City vs nature",
+      "category": "Preferences",
+      "description": "City vs nature.",
+      "values": [
+        "City lover",
+        "Prefers city",
+        "Either",
+        "Prefers nature",
+        "Nature lover"
+      ]
+    },
+    {
+      "id": "pref_routine_vs_variety",
+      "label": "Routine vs variety",
+      "category": "Preferences",
+      "description": "Routine vs variety.",
+      "values": [
+        "Craves routine",
+        "Routine-leaning",
+        "Balanced",
+        "Variety-leaning",
+        "Craves variety"
+      ]
+    },
+    {
+      "id": "pref_speed_vs_accuracy",
+      "label": "Speed vs accuracy",
+      "category": "Preferences",
+      "description": "Speed vs accuracy.",
+      "values": [
+        "Speed first",
+        "Speed-leaning",
+        "Balanced",
+        "Accuracy-leaning",
+        "Accuracy first"
+      ]
+    },
+    {
+      "id": "pref_quality_vs_quantity",
+      "label": "Quality vs quantity",
+      "category": "Preferences",
+      "description": "Quality vs quantity.",
+      "values": [
+        "Quality first",
+        "Quality-leaning",
+        "Balanced",
+        "Quantity-leaning",
+        "Quantity first"
+      ]
+    },
+    {
+      "id": "pref_logic_vs_intuition",
+      "label": "Logic vs intuition",
+      "category": "Preferences",
+      "description": "Logic vs intuition.",
+      "values": [
+        "Pure logic",
+        "Logic-leaning",
+        "Balanced",
+        "Intuition-leaning",
+        "Pure intuition"
+      ]
+    },
+    {
+      "id": "pref_save_vs_spend",
+      "label": "Save vs spend",
+      "category": "Preferences",
+      "description": "Save vs spend.",
+      "values": [
+        "Hard saver",
+        "Saver-leaning",
+        "Balanced",
+        "Spender-leaning",
+        "Free spender"
+      ]
+    },
+    {
+      "id": "pref_lead_vs_follow",
+      "label": "Lead vs follow",
+      "category": "Preferences",
+      "description": "Lead vs follow.",
+      "values": [
+        "Always leads",
+        "Leans lead",
+        "Situational",
+        "Leans support",
+        "Prefers to follow"
+      ]
+    },
+    {
+      "id": "pref_indoor_vs_outdoor",
+      "label": "Indoor vs outdoor",
+      "category": "Preferences",
+      "description": "Indoor vs outdoor.",
+      "values": [
+        "Strongly indoor",
+        "Indoor-leaning",
+        "Either",
+        "Outdoor-leaning",
+        "Strongly outdoor"
+      ]
+    },
+    {
+      "id": "pref_early_vs_late",
+      "label": "Early vs late adopter",
+      "category": "Preferences",
+      "description": "Early vs late adopter.",
+      "values": [
+        "Bleeding edge",
+        "Early adopter",
+        "Mainstream",
+        "Late adopter",
+        "Laggard"
+      ]
+    },
+    {
+      "id": "pref_text_vs_call",
+      "label": "Texting vs calling",
+      "category": "Preferences",
+      "description": "Texting vs calling.",
+      "values": [
+        "Text only",
+        "Prefers text",
+        "Either",
+        "Prefers calls",
+        "Calls only"
+      ]
+    },
+    {
+      "id": "pref_big_group_vs_one_on_one",
+      "label": "Big group vs one-on-one",
+      "category": "Preferences",
+      "description": "Big group vs one-on-one.",
+      "values": [
+        "Loves big groups",
+        "Group-leaning",
+        "Either",
+        "1-on-1 leaning",
+        "One-on-one only"
+      ]
+    },
+    {
+      "id": "pref_novelty_vs_familiarity",
+      "label": "Novelty vs familiarity",
+      "category": "Preferences",
+      "description": "Novelty vs familiarity.",
+      "values": [
+        "Always novel",
+        "Novelty-leaning",
+        "Balanced",
+        "Comfort-leaning",
+        "Always familiar"
+      ]
+    },
+    {
+      "id": "pref_detail_brief_vs_full",
+      "label": "Brief vs full detail",
+      "category": "Preferences",
+      "description": "Brief vs full detail.",
+      "values": [
+        "Just the gist",
+        "Brief-leaning",
+        "Balanced",
+        "Detail-leaning",
+        "Every detail"
+      ]
+    },
+    {
+      "id": "pref_competition_vs_collab",
+      "label": "Competition vs collaboration",
+      "category": "Preferences",
+      "description": "Competition vs collaboration.",
+      "values": [
+        "Highly competitive",
+        "Competitive",
+        "Balanced",
+        "Collaborative",
+        "Highly collaborative"
+      ]
+    },
+    {
+      "id": "pref_stability_vs_change",
+      "label": "Stability vs change",
+      "category": "Preferences",
+      "description": "Stability vs change.",
+      "values": [
+        "Craves stability",
+        "Stability-leaning",
+        "Balanced",
+        "Change-leaning",
+        "Craves change"
+      ]
+    },
+    {
+      "id": "demo_marital_status",
+      "label": "Marital status",
+      "category": "Demographic",
+      "description": "Marital status.",
+      "values": [
+        "Single",
+        "In a relationship",
+        "Married",
+        "Domestic partnership",
+        "Separated",
+        "Divorced",
+        "Widowed"
+      ]
+    },
+    {
+      "id": "demo_children_count",
+      "label": "Children",
+      "category": "Demographic",
+      "description": "Children.",
+      "values": [
+        "None",
+        "Expecting",
+        "1 child",
+        "2 children",
+        "3+ children",
+        "Adult children"
+      ]
+    },
+    {
+      "id": "demo_household_income",
+      "label": "Household income band",
+      "category": "Demographic",
+      "description": "Household income band.",
+      "values": [
+        "<$25k",
+        "$25k–50k",
+        "$50k–100k",
+        "$100k–200k",
+        "$200k+"
+      ]
+    },
+    {
+      "id": "demo_employment_status",
+      "label": "Employment status",
+      "category": "Demographic",
+      "description": "Employment status.",
+      "values": [
+        "Full-time",
+        "Part-time",
+        "Self-employed",
+        "Gig / freelance",
+        "Student",
+        "Unemployed",
+        "Retired",
+        "Homemaker"
+      ]
+    },
+    {
+      "id": "demo_housing_status",
+      "label": "Housing status",
+      "category": "Demographic",
+      "description": "Housing status.",
+      "values": [
+        "Own outright",
+        "Mortgage",
+        "Renting",
+        "Living with family",
+        "Shared housing",
+        "Temporary / transitional"
+      ]
+    },
+    {
+      "id": "demo_generation",
+      "label": "Generational cohort",
+      "category": "Demographic",
+      "description": "Generational cohort.",
+      "values": [
+        "Gen Alpha",
+        "Gen Z",
+        "Millennial",
+        "Gen X",
+        "Boomer",
+        "Silent"
+      ]
+    },
+    {
+      "id": "demo_religion_affiliation",
+      "label": "Religious affiliation",
+      "category": "Demographic",
+      "description": "Religious affiliation.",
+      "values": [
+        "Christian",
+        "Muslim",
+        "Hindu",
+        "Buddhist",
+        "Jewish",
+        "Sikh",
+        "Folk / traditional",
+        "Spiritual but unaffiliated",
+        "Atheist / agnostic",
+        "None"
+      ]
+    },
+    {
+      "id": "demo_sexual_orientation",
+      "label": "Sexual orientation",
+      "category": "Demographic",
+      "description": "Sexual orientation.",
+      "values": [
+        "Heterosexual",
+        "Gay / lesbian",
+        "Bisexual",
+        "Pansexual",
+        "Asexual",
+        "Queer",
+        "Prefer not to say"
+      ]
+    },
+    {
+      "id": "demo_citizenship_status",
+      "label": "Citizenship status",
+      "category": "Demographic",
+      "description": "Citizenship status.",
+      "values": [
+        "Citizen by birth",
+        "Naturalized citizen",
+        "Permanent resident",
+        "Visa holder",
+        "Dual national",
+        "Undocumented"
+      ]
+    },
+    {
+      "id": "demo_ethnicity_broad",
+      "label": "Ethnic background",
+      "category": "Demographic",
+      "description": "Ethnic background.",
+      "values": [
+        "White / European",
+        "Black / African",
+        "Hispanic / Latino",
+        "East Asian",
+        "South Asian",
+        "Southeast Asian",
+        "Middle Eastern",
+        "Indigenous",
+        "Pacific Islander",
+        "Multiracial"
+      ]
+    },
+    {
+      "id": "demo_disability_status",
+      "label": "Disability status",
+      "category": "Demographic",
+      "description": "Disability status.",
+      "values": [
+        "No disability",
+        "Physical",
+        "Sensory",
+        "Cognitive",
+        "Chronic illness",
+        "Multiple",
+        "Prefers not to say"
+      ]
+    },
+    {
+      "id": "demo_veteran_status",
+      "label": "Veteran status",
+      "category": "Demographic",
+      "description": "Veteran status.",
+      "values": [
+        "Civilian",
+        "Active duty",
+        "Reserve / guard",
+        "Veteran",
+        "Military family"
+      ]
+    },
+    {
+      "id": "demo_birth_order",
+      "label": "Birth order",
+      "category": "Demographic",
+      "description": "Birth order.",
+      "values": [
+        "Only child",
+        "Eldest",
+        "Middle",
+        "Youngest",
+        "Twin / multiple"
+      ]
+    },
+    {
+      "id": "demo_home_language",
+      "label": "Language at home",
+      "category": "Demographic",
+      "description": "Language at home.",
+      "values": [
+        "Same as primary",
+        "Bilingual home",
+        "Heritage language",
+        "Mixed languages"
+      ]
+    },
+    {
+      "id": "demo_political_engagement",
+      "label": "Political engagement",
+      "category": "Demographic",
+      "description": "Political engagement.",
+      "values": [
+        "Activist",
+        "Engaged voter",
+        "Occasional voter",
+        "Disengaged",
+        "Non-voter"
+      ]
+    },
+    {
+      "id": "demo_parental_status",
+      "label": "Parenthood",
+      "category": "Demographic",
+      "description": "Parenthood.",
+      "values": [
+        "Not a parent",
+        "New parent",
+        "Parent of minors",
+        "Parent of adults",
+        "Grandparent",
+        "Step / foster parent"
+      ]
+    },
+    {
+      "id": "demo_relationship_length",
+      "label": "Relationship length",
+      "category": "Demographic",
+      "description": "Relationship length.",
+      "values": [
+        "Not in one",
+        "Under 1 year",
+        "1–5 years",
+        "5–15 years",
+        "15+ years"
+      ]
+    },
+    {
+      "id": "demo_driver_status",
+      "label": "Driving status",
+      "category": "Demographic",
+      "description": "Driving status.",
+      "values": [
+        "Daily driver",
+        "Occasional driver",
+        "Licensed, rarely drives",
+        "Non-driver",
+        "Cannot drive"
+      ]
+    },
+    {
+      "id": "lifex_childhood_environment",
+      "label": "Childhood environment",
+      "category": "Life Experience",
+      "description": "Childhood environment.",
+      "values": [
+        "Stable & secure",
+        "Modest but steady",
+        "Turbulent",
+        "Privileged",
+        "Hardship",
+        "Frequently uprooted"
+      ]
+    },
+    {
+      "id": "lifex_geographic_mobility",
+      "label": "Geographic mobility",
+      "category": "Life Experience",
+      "description": "Geographic mobility.",
+      "values": [
+        "Never left hometown",
+        "Moved within region",
+        "Moved nationally",
+        "Moved internationally",
+        "Serial relocator"
+      ]
+    },
+    {
+      "id": "lifex_travel_breadth",
+      "label": "Travel breadth",
+      "category": "Life Experience",
+      "description": "Travel breadth.",
+      "values": [
+        "Never left country",
+        "A few countries",
+        "Well-traveled",
+        "Lived abroad",
+        "Global nomad"
+      ]
+    },
+    {
+      "id": "lifex_career_path_shape",
+      "label": "Career path shape",
+      "category": "Life Experience",
+      "description": "Career path shape.",
+      "values": [
+        "Linear climb",
+        "Pivoted once",
+        "Multiple pivots",
+        "Entrepreneurial",
+        "Portfolio / patchwork",
+        "Just starting"
+      ]
+    },
+    {
+      "id": "lifex_education_journey",
+      "label": "Education journey",
+      "category": "Life Experience",
+      "description": "Education journey.",
+      "values": [
+        "Traditional track",
+        "Returned as adult",
+        "Largely self-taught",
+        "Dropped out",
+        "Advanced degrees",
+        "Vocational / trade"
+      ]
+    },
+    {
+      "id": "lifex_financial_trajectory",
+      "label": "Financial trajectory",
+      "category": "Life Experience",
+      "description": "Financial trajectory.",
+      "values": [
+        "Steady upward",
+        "Stable",
+        "Volatile",
+        "Downward",
+        "Rebuilt after setback",
+        "Inherited wealth"
+      ]
+    },
+    {
+      "id": "lifex_adversity_level",
+      "label": "Adversity faced",
+      "category": "Life Experience",
+      "description": "Adversity faced.",
+      "values": [
+        "Sheltered",
+        "Minor setbacks",
+        "Significant struggles",
+        "Overcame major hardship",
+        "Ongoing hardship"
+      ]
+    },
+    {
+      "id": "lifex_immigration_generation",
+      "label": "Immigration generation",
+      "category": "Life Experience",
+      "description": "Immigration generation.",
+      "values": [
+        "First-generation immigrant",
+        "Second-generation",
+        "Third+ generation",
+        "Native multi-generational",
+        "Returnee / repatriate"
+      ]
+    },
+    {
+      "id": "lifex_military_history",
+      "label": "Military history",
+      "category": "Life Experience",
+      "description": "Military history.",
+      "values": [
+        "Never served",
+        "Served briefly",
+        "Career veteran",
+        "Combat veteran",
+        "Military family"
+      ]
+    },
+    {
+      "id": "lifex_entrepreneurship_history",
+      "label": "Entrepreneurship history",
+      "category": "Life Experience",
+      "description": "Entrepreneurship history.",
+      "values": [
+        "Never considered",
+        "Considered it",
+        "Side hustle",
+        "Founded once",
+        "Serial founder",
+        "Exited a company"
+      ]
+    },
+    {
+      "id": "lifex_relationship_history",
+      "label": "Relationship history",
+      "category": "Life Experience",
+      "description": "Relationship history.",
+      "values": [
+        "Limited",
+        "A few relationships",
+        "Long-term partnership",
+        "Married once",
+        "Remarried",
+        "Widowed"
+      ]
+    },
+    {
+      "id": "lifex_parenting_journey",
+      "label": "Parenting journey",
+      "category": "Life Experience",
+      "description": "Parenting journey.",
+      "values": [
+        "No children",
+        "Young children",
+        "Teenagers",
+        "Grown children",
+        "Empty nester",
+        "Raising grandchildren"
+      ]
+    },
+    {
+      "id": "lifex_health_journey",
+      "label": "Health journey",
+      "category": "Life Experience",
+      "description": "Health journey.",
+      "values": [
+        "No major events",
+        "Recovered from illness",
+        "Manages chronic condition",
+        "Major surgery / injury",
+        "Mental health journey",
+        "Caregiving for others"
+      ]
+    },
+    {
+      "id": "lifex_loss_experience",
+      "label": "Experience of loss",
+      "category": "Life Experience",
+      "description": "Experience of loss.",
+      "values": [
+        "No major loss",
+        "Lost a grandparent",
+        "Lost a parent",
+        "Lost a partner / child",
+        "Multiple bereavements"
+      ]
+    },
+    {
+      "id": "lifex_faith_journey",
+      "label": "Faith journey",
+      "category": "Life Experience",
+      "description": "Faith journey.",
+      "values": [
+        "Lifelong faith",
+        "Converted",
+        "Lapsed / left faith",
+        "Always secular",
+        "Still searching",
+        "Returned to faith"
+      ]
+    },
+    {
+      "id": "lifex_cultural_exposure",
+      "label": "Cross-cultural exposure",
+      "category": "Life Experience",
+      "description": "Cross-cultural exposure.",
+      "values": [
+        "Monocultural",
+        "Some exposure",
+        "Multicultural upbringing",
+        "Lived across cultures",
+        "Third-culture kid"
+      ]
+    },
+    {
+      "id": "lifex_formative_decade",
+      "label": "Formative decade",
+      "category": "Life Experience",
+      "description": "Formative decade.",
+      "values": [
+        "1960s–70s",
+        "1980s",
+        "1990s",
+        "2000s",
+        "2010s",
+        "2020s"
+      ]
+    },
+    {
+      "id": "lifex_public_recognition",
+      "label": "Public recognition",
+      "category": "Life Experience",
+      "description": "Public recognition.",
+      "values": [
+        "Private life",
+        "Locally known",
+        "Industry-recognized",
+        "Publicly notable",
+        "Famous"
+      ]
+    },
+    {
+      "id": "lifex_service_history",
+      "label": "Community / service history",
+      "category": "Life Experience",
+      "description": "Community / service history.",
+      "values": [
+        "None",
+        "Occasional volunteer",
+        "Long-term volunteer",
+        "Activist / organizer",
+        "Public office"
+      ]
+    },
+    {
+      "id": "lifex_turning_point",
+      "label": "Defining turning point",
+      "category": "Life Experience",
+      "description": "Defining turning point.",
+      "values": [
+        "Career break",
+        "Near-miss / accident",
+        "Spiritual awakening",
+        "Reinvention",
+        "Mentor encounter",
+        "No single one"
+      ]
+    },
+    {
+      "id": "lifex_languages_lifetime",
+      "label": "Languages learned over life",
+      "category": "Life Experience",
+      "description": "Languages learned over life.",
+      "values": [
+        "One",
+        "Two",
+        "Three",
+        "Four+",
+        "Polyglot"
+      ]
+    },
+    {
+      "id": "lifex_hometown_tie",
+      "label": "Tie to hometown",
+      "category": "Life Experience",
+      "description": "Tie to hometown.",
+      "values": [
+        "Still there",
+        "Visits often",
+        "Occasional return",
+        "Rarely returns",
+        "No connection"
+      ]
     }
   ]
 }

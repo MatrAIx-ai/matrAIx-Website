@@ -15,7 +15,7 @@ const existing = JSON.parse(fs.readFileSync(FILE, 'utf8'));
 // Family id prefixes — used to strip previously generated dims so re-running is idempotent.
 const PREFIXES = ['fam_', 'skill_', 'tool_', 'topic_', 'lang_', 'att_', 'ind_', 'cult_',
   'musg_', 'filmg_', 'bookg_', 'cuis_', 'sport_', 'prog_', 'big5_', 'lstyle_', 'cog_', 'health_',
-  'hob_', 'acad_', 'peeve_'];
+  'hob_', 'acad_', 'peeve_', 'trait_', 'val_', 'habit_', 'pref_', 'demo_', 'lifex_'];
 
 const core = existing.dimensions.filter(d => !PREFIXES.some(p => d.id.startsWith(p)));
 
@@ -44,6 +44,8 @@ const PROG  = ['Expert', 'Proficient', 'Familiar', 'None'];
 const BIG5  = ['Very high', 'High', 'Average', 'Low', 'Very low'];
 const FREQ  = ['Daily', 'Weekly', 'Monthly', 'Rarely', 'Never'];
 const LEVEL = ['Very high', 'High', 'Moderate', 'Low', 'None'];
+const IMP   = ['Core value', 'Important', 'Moderate', 'Minor', 'Irrelevant'];
+const STR   = ['Signature', 'Strong', 'Moderate', 'Slight', 'Absent'];
 
 /* ---- subject lists ---- */
 const DOMAINS = ['Machine learning', 'Deep learning', 'Statistics', 'Data science', 'Cardiology', 'Neurology',
@@ -308,6 +310,98 @@ const PEEVES = ['Typos', 'Being interrupted', 'Lateness', 'Loud chewing', 'Slow 
   'Pop-up ads', 'Auto-play video', 'Paywalls'];
 const PEEVE = ['Major peeve', 'Annoys', 'Neutral', 'Fine'];
 
+/* ---- character strengths (VIA-style) — rated by how present the trait is ---- */
+const STRENGTHS = ['Curiosity', 'Creativity', 'Love of learning', 'Open-mindedness', 'Perspective',
+  'Bravery', 'Perseverance', 'Honesty', 'Zest', 'Capacity for love', 'Kindness', 'Social intelligence',
+  'Teamwork', 'Fairness', 'Leadership', 'Forgiveness', 'Humility', 'Prudence', 'Self-regulation',
+  'Appreciation of beauty', 'Gratitude', 'Hope / optimism', 'Playfulness', 'Spirituality', 'Ambition',
+  'Empathy', 'Resilience', 'Discipline', 'Generosity', 'Loyalty', 'Competitiveness', 'Adaptability'];
+
+/* ---- core values — rated by how much the persona prioritizes each ---- */
+const VALUES = ['Family', 'Career success', 'Wealth', 'Health', 'Personal freedom', 'Security & stability',
+  'Adventure', 'Tradition', 'Power & influence', 'Achievement', 'Creativity & self-expression', 'Community',
+  'Spirituality / faith', 'Knowledge & truth', 'Social status', 'Independence', 'Justice & fairness',
+  'Loyalty', 'Sustainability', 'Recognition', 'Helping others', 'Personal growth', 'Fun & enjoyment',
+  'Integrity & honesty', 'Beauty & aesthetics', 'Order & structure', 'Patriotism', 'Equality', 'Privacy'];
+
+/* ---- recurring habits — rated by how often the persona does them ---- */
+const HABITS = ['Journaling', 'Meditation', 'To-do lists', 'Goal setting', 'Daily reflection', 'Budget tracking',
+  'Meal prepping', 'Stretching / mobility', 'Morning walk', 'Phone-free downtime', 'Gratitude practice',
+  'Reading before bed', 'Naps', 'Power-snoozing alarm', 'Skipping breakfast', 'Late-night snacking',
+  'Nail-biting / fidgeting', 'Doomscrolling', 'Multitab browsing', 'Inbox-zero discipline', 'Saving receipts',
+  'Pre-trip overpacking', 'Talking to oneself', 'Humming / whistling', 'Cold showers', 'Step counting',
+  'Hydration tracking', 'Backing up files', 'Re-reading texts before sending', 'Procrasti-cleaning'];
+
+/* ---- preference spectrums (id, label, 5-point scale) ---- */
+const PREFERENCES = [
+  ['work_location', 'Office vs remote', ['Strongly office', 'Office-leaning', 'Hybrid', 'Remote-leaning', 'Strongly remote']],
+  ['team_vs_solo', 'Team vs solo work', ['Strongly team', 'Team-leaning', 'Mixed', 'Solo-leaning', 'Strongly solo']],
+  ['plan_vs_spontaneous', 'Planned vs spontaneous', ['Highly planned', 'Planned', 'Balanced', 'Spontaneous', 'Highly spontaneous']],
+  ['city_vs_nature', 'City vs nature', ['City lover', 'Prefers city', 'Either', 'Prefers nature', 'Nature lover']],
+  ['routine_vs_variety', 'Routine vs variety', ['Craves routine', 'Routine-leaning', 'Balanced', 'Variety-leaning', 'Craves variety']],
+  ['speed_vs_accuracy', 'Speed vs accuracy', ['Speed first', 'Speed-leaning', 'Balanced', 'Accuracy-leaning', 'Accuracy first']],
+  ['quality_vs_quantity', 'Quality vs quantity', ['Quality first', 'Quality-leaning', 'Balanced', 'Quantity-leaning', 'Quantity first']],
+  ['logic_vs_intuition', 'Logic vs intuition', ['Pure logic', 'Logic-leaning', 'Balanced', 'Intuition-leaning', 'Pure intuition']],
+  ['save_vs_spend', 'Save vs spend', ['Hard saver', 'Saver-leaning', 'Balanced', 'Spender-leaning', 'Free spender']],
+  ['lead_vs_follow', 'Lead vs follow', ['Always leads', 'Leans lead', 'Situational', 'Leans support', 'Prefers to follow']],
+  ['indoor_vs_outdoor', 'Indoor vs outdoor', ['Strongly indoor', 'Indoor-leaning', 'Either', 'Outdoor-leaning', 'Strongly outdoor']],
+  ['early_vs_late', 'Early vs late adopter', ['Bleeding edge', 'Early adopter', 'Mainstream', 'Late adopter', 'Laggard']],
+  ['text_vs_call', 'Texting vs calling', ['Text only', 'Prefers text', 'Either', 'Prefers calls', 'Calls only']],
+  ['big_group_vs_one_on_one', 'Big group vs one-on-one', ['Loves big groups', 'Group-leaning', 'Either', '1-on-1 leaning', 'One-on-one only']],
+  ['novelty_vs_familiarity', 'Novelty vs familiarity', ['Always novel', 'Novelty-leaning', 'Balanced', 'Comfort-leaning', 'Always familiar']],
+  ['detail_brief_vs_full', 'Brief vs full detail', ['Just the gist', 'Brief-leaning', 'Balanced', 'Detail-leaning', 'Every detail']],
+  ['competition_vs_collab', 'Competition vs collaboration', ['Highly competitive', 'Competitive', 'Balanced', 'Collaborative', 'Highly collaborative']],
+  ['stability_vs_change', 'Stability vs change', ['Craves stability', 'Stability-leaning', 'Balanced', 'Change-leaning', 'Craves change']],
+];
+
+/* ---- additional demographic facts (id, label, values) ---- */
+const DEMOGRAPHICS = [
+  ['marital_status', 'Marital status', ['Single', 'In a relationship', 'Married', 'Domestic partnership', 'Separated', 'Divorced', 'Widowed']],
+  ['children_count', 'Children', ['None', 'Expecting', '1 child', '2 children', '3+ children', 'Adult children']],
+  ['household_income', 'Household income band', ['<$25k', '$25k–50k', '$50k–100k', '$100k–200k', '$200k+']],
+  ['employment_status', 'Employment status', ['Full-time', 'Part-time', 'Self-employed', 'Gig / freelance', 'Student', 'Unemployed', 'Retired', 'Homemaker']],
+  ['housing_status', 'Housing status', ['Own outright', 'Mortgage', 'Renting', 'Living with family', 'Shared housing', 'Temporary / transitional']],
+  ['generation', 'Generational cohort', ['Gen Alpha', 'Gen Z', 'Millennial', 'Gen X', 'Boomer', 'Silent']],
+  ['religion_affiliation', 'Religious affiliation', ['Christian', 'Muslim', 'Hindu', 'Buddhist', 'Jewish', 'Sikh', 'Folk / traditional', 'Spiritual but unaffiliated', 'Atheist / agnostic', 'None']],
+  ['sexual_orientation', 'Sexual orientation', ['Heterosexual', 'Gay / lesbian', 'Bisexual', 'Pansexual', 'Asexual', 'Queer', 'Prefer not to say']],
+  ['citizenship_status', 'Citizenship status', ['Citizen by birth', 'Naturalized citizen', 'Permanent resident', 'Visa holder', 'Dual national', 'Undocumented']],
+  ['ethnicity_broad', 'Ethnic background', ['White / European', 'Black / African', 'Hispanic / Latino', 'East Asian', 'South Asian', 'Southeast Asian', 'Middle Eastern', 'Indigenous', 'Pacific Islander', 'Multiracial']],
+  ['disability_status', 'Disability status', ['No disability', 'Physical', 'Sensory', 'Cognitive', 'Chronic illness', 'Multiple', 'Prefers not to say']],
+  ['veteran_status', 'Veteran status', ['Civilian', 'Active duty', 'Reserve / guard', 'Veteran', 'Military family']],
+  ['birth_order', 'Birth order', ['Only child', 'Eldest', 'Middle', 'Youngest', 'Twin / multiple']],
+  ['home_language', 'Language at home', ['Same as primary', 'Bilingual home', 'Heritage language', 'Mixed languages']],
+  ['political_engagement', 'Political engagement', ['Activist', 'Engaged voter', 'Occasional voter', 'Disengaged', 'Non-voter']],
+  ['parental_status', 'Parenthood', ['Not a parent', 'New parent', 'Parent of minors', 'Parent of adults', 'Grandparent', 'Step / foster parent']],
+  ['relationship_length', 'Relationship length', ['Not in one', 'Under 1 year', '1–5 years', '5–15 years', '15+ years']],
+  ['driver_status', 'Driving status', ['Daily driver', 'Occasional driver', 'Licensed, rarely drives', 'Non-driver', 'Cannot drive']],
+];
+
+/* ---- life-experience / biography axes (id, label, values) ---- */
+const LIFE_EXPERIENCE = [
+  ['childhood_environment', 'Childhood environment', ['Stable & secure', 'Modest but steady', 'Turbulent', 'Privileged', 'Hardship', 'Frequently uprooted']],
+  ['geographic_mobility', 'Geographic mobility', ['Never left hometown', 'Moved within region', 'Moved nationally', 'Moved internationally', 'Serial relocator']],
+  ['travel_breadth', 'Travel breadth', ['Never left country', 'A few countries', 'Well-traveled', 'Lived abroad', 'Global nomad']],
+  ['career_path_shape', 'Career path shape', ['Linear climb', 'Pivoted once', 'Multiple pivots', 'Entrepreneurial', 'Portfolio / patchwork', 'Just starting']],
+  ['education_journey', 'Education journey', ['Traditional track', 'Returned as adult', 'Largely self-taught', 'Dropped out', 'Advanced degrees', 'Vocational / trade']],
+  ['financial_trajectory', 'Financial trajectory', ['Steady upward', 'Stable', 'Volatile', 'Downward', 'Rebuilt after setback', 'Inherited wealth']],
+  ['adversity_level', 'Adversity faced', ['Sheltered', 'Minor setbacks', 'Significant struggles', 'Overcame major hardship', 'Ongoing hardship']],
+  ['immigration_generation', 'Immigration generation', ['First-generation immigrant', 'Second-generation', 'Third+ generation', 'Native multi-generational', 'Returnee / repatriate']],
+  ['military_history', 'Military history', ['Never served', 'Served briefly', 'Career veteran', 'Combat veteran', 'Military family']],
+  ['entrepreneurship_history', 'Entrepreneurship history', ['Never considered', 'Considered it', 'Side hustle', 'Founded once', 'Serial founder', 'Exited a company']],
+  ['relationship_history', 'Relationship history', ['Limited', 'A few relationships', 'Long-term partnership', 'Married once', 'Remarried', 'Widowed']],
+  ['parenting_journey', 'Parenting journey', ['No children', 'Young children', 'Teenagers', 'Grown children', 'Empty nester', 'Raising grandchildren']],
+  ['health_journey', 'Health journey', ['No major events', 'Recovered from illness', 'Manages chronic condition', 'Major surgery / injury', 'Mental health journey', 'Caregiving for others']],
+  ['loss_experience', 'Experience of loss', ['No major loss', 'Lost a grandparent', 'Lost a parent', 'Lost a partner / child', 'Multiple bereavements']],
+  ['faith_journey', 'Faith journey', ['Lifelong faith', 'Converted', 'Lapsed / left faith', 'Always secular', 'Still searching', 'Returned to faith']],
+  ['cultural_exposure', 'Cross-cultural exposure', ['Monocultural', 'Some exposure', 'Multicultural upbringing', 'Lived across cultures', 'Third-culture kid']],
+  ['formative_decade', 'Formative decade', ['1960s–70s', '1980s', '1990s', '2000s', '2010s', '2020s']],
+  ['public_recognition', 'Public recognition', ['Private life', 'Locally known', 'Industry-recognized', 'Publicly notable', 'Famous']],
+  ['service_history', 'Community / service history', ['None', 'Occasional volunteer', 'Long-term volunteer', 'Activist / organizer', 'Public office']],
+  ['turning_point', 'Defining turning point', ['Career break', 'Near-miss / accident', 'Spiritual awakening', 'Reinvention', 'Mentor encounter', 'No single one']],
+  ['languages_lifetime', 'Languages learned over life', ['One', 'Two', 'Three', 'Four+', 'Polyglot']],
+  ['hometown_tie', 'Tie to hometown', ['Still there', 'Visits often', 'Occasional return', 'Rarely returns', 'No connection']],
+];
+
 /* ---- assemble families ---- */
 DOMAINS.forEach(d => push('fam_' + slug(d), 'Familiarity: ' + d, 'Expertise', `How well the persona knows ${d}.`, FAM));
 SKILLS.forEach(s => push('skill_' + slug(s), 'Skill: ' + s, 'Skills', `Proficiency in ${s.toLowerCase()}.`, SKILL));
@@ -330,6 +424,12 @@ HEALTH.forEach(([id, label, vals]) => push('health_' + id, label, 'Health', labe
 HOBBIES.forEach(h => push('hob_' + slug(h), 'Hobby: ' + h, 'Hobbies', `Engagement with ${h.toLowerCase()}.`, HOBBY));
 ACADEMICS.forEach(a => push('acad_' + slug(a), 'Subject: ' + a, 'Academics', `Interest in ${a.toLowerCase()}.`, INT));
 PEEVES.forEach(p => push('peeve_' + slug(p), 'Pet peeve: ' + p, 'Triggers', `Reaction to ${p.toLowerCase()}.`, PEEVE));
+STRENGTHS.forEach(s => push('trait_' + slug(s), 'Character: ' + s, 'Character', `How present ${s.toLowerCase()} is in the persona.`, STR));
+VALUES.forEach(v => push('val_' + slug(v), 'Value: ' + v, 'Values', `How strongly the persona prioritizes ${v.toLowerCase()}.`, IMP));
+HABITS.forEach(h => push('habit_' + slug(h), 'Habit: ' + h, 'Habits', `How often the persona engages in ${h.toLowerCase()}.`, FREQ));
+PREFERENCES.forEach(([id, label, vals]) => push('pref_' + id, label, 'Preferences', label + '.', vals));
+DEMOGRAPHICS.forEach(([id, label, vals]) => push('demo_' + id, label, 'Demographic', label + '.', vals));
+LIFE_EXPERIENCE.forEach(([id, label, vals]) => push('lifex_' + id, label, 'Life Experience', label + '.', vals));
 
 /* ---- write ---- */
 const result = {
