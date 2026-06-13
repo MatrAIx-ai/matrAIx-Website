@@ -209,14 +209,29 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
   .svy .fill{width:var(--w)}.svy .pct{opacity:1}.cv .b{opacity:1;transform:none}.web .field::after{transform:scaleX(1)}.web .btn3{opacity:1}.web .prog{width:100%}
 }
 
-/* how it works */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:step}
-.step{border-left:2px solid var(--line);padding:6px 0 6px 16px;position:relative}
-.step .n{font-family:var(--disp);font-weight:800;color:var(--phos);font-size:.9rem;letter-spacing:.06em}
-.step h4{font-family:var(--disp);font-weight:700;font-size:1.05rem;margin:6px 0 6px}
-.step p{color:var(--ink-dim);font-size:.88rem;line-height:1.5}
-@media (max-width:860px){.steps{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:460px){.steps{grid-template-columns:1fr}}
+/* how it works — interactive moving pipeline */
+.pipe{margin-top:6px}
+.pipe-track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);--i:0}
+.pipe-track::before{content:"";position:absolute;left:12.5%;right:12.5%;top:21px;height:2px;background:var(--line-soft)}
+.pipe-stream{position:absolute;left:12.5%;right:12.5%;top:20px;height:4px;opacity:.55;background:repeating-linear-gradient(90deg,transparent 0,transparent 11px,var(--phos) 11px,var(--phos) 15px);background-size:22px 100%;animation:pflow .9s linear infinite}
+@keyframes pflow{to{background-position:22px 0}}
+.pipe-fill{position:absolute;left:12.5%;top:21px;height:2px;width:calc(var(--i) * 25%);background:var(--phos);box-shadow:var(--glow);transition:width .55s cubic-bezier(.5,0,.2,1);z-index:1}
+.pipe-flow{position:absolute;top:22px;left:calc(12.5% + var(--i) * 25%);width:11px;height:11px;border-radius:50%;background:var(--phos);box-shadow:0 0 14px var(--phos);transform:translate(-50%,-50%);transition:left .55s cubic-bezier(.5,0,.2,1);z-index:4}
+.pnode{position:relative;z-index:2;background:transparent;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:9px;padding:0;font-family:var(--mono)}
+.pnode .circ{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:var(--bg);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:.92rem;color:var(--ink-dim);transition:all .3s}
+.pnode .lab{font-family:var(--disp);font-weight:700;font-size:.95rem;color:var(--ink-dim);transition:color .3s}
+.pnode:hover .circ{border-color:var(--line)}.pnode:hover .lab{color:var(--ink)}
+.pnode.active .circ{border-color:var(--phos);color:var(--phos);background:var(--bg-3);box-shadow:0 0 16px rgba(84,246,166,.35)}
+.pnode.active .lab{color:var(--ink)}
+.pipe-detail{border:1px solid var(--line-soft);background:var(--bg-2);padding:18px 20px;margin-top:28px;min-height:80px}
+.pd{display:none}.pd.on{display:block;animation:pdin .35s ease}
+@keyframes pdin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.pd h4{font-family:var(--disp);font-weight:800;font-size:1.18rem;margin-bottom:6px}
+.pd h4 .pn{color:var(--phos);font-family:var(--mono);font-size:.78rem;margin-right:9px}
+.pd p{color:var(--ink-dim);font-size:.95rem;line-height:1.55;max-width:760px}
+.pd p b{color:var(--ink)}
+@media (max-width:520px){.pnode .circ{width:36px;height:36px;font-size:.78rem}.pnode .lab{font-size:.78rem}.pipe-track::before,.pipe-fill{top:17px}.pipe-stream{top:16px}.pipe-flow{top:18px}}
+@media (prefers-reduced-motion:reduce){.pipe-stream{animation:none}.pipe-fill,.pipe-flow{transition:none}.pd.on{animation:none}}
 
 /* faq */
 .faq{display:flex;flex-direction:column;gap:10px}
@@ -403,11 +418,22 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
         <span class="idx">03 — HOW IT WORKS</span>
         <h2 class="sec-title">From flow to findings.</h2>
       </div>
-      <div class="steps">
-        <div class="step"><span class="n">01</span><h4>Scope</h4><p>Tell us what to evaluate and which segments matter. We pick the level and tune the persona space.</p></div>
-        <div class="step"><span class="n">02</span><h4>Simulate</h4><p>Millions of agents run your survey, conversation, web flow, or app across 1,162 dimensions.</p></div>
-        <div class="step"><span class="n">03</span><h4>Score</h4><p>Every behavior is captured and scored — segmented, validated against human baselines.</p></div>
-        <div class="step"><span class="n">04</span><h4>Report</h4><p>You get an interactive report with the wins, the friction, and the lift — ready to act on.</p></div>
+      <div class="pipe" id="pipe">
+        <div class="pipe-track">
+          <span class="pipe-stream" aria-hidden="true"></span>
+          <span class="pipe-fill" aria-hidden="true"></span>
+          <span class="pipe-flow" aria-hidden="true"></span>
+          <button class="pnode active" data-i="0" role="tab"><span class="circ">01</span><span class="lab">Scope</span></button>
+          <button class="pnode" data-i="1" role="tab"><span class="circ">02</span><span class="lab">Simulate</span></button>
+          <button class="pnode" data-i="2" role="tab"><span class="circ">03</span><span class="lab">Score</span></button>
+          <button class="pnode" data-i="3" role="tab"><span class="circ">04</span><span class="lab">Report</span></button>
+        </div>
+        <div class="pipe-detail">
+          <div class="pd on" data-i="0"><h4><span class="pn">01</span>Scope</h4><p>Tell us what to evaluate and which segments matter. We pick the right <b>level</b> and tune the persona space to your customers.</p></div>
+          <div class="pd" data-i="1"><h4><span class="pn">02</span>Simulate</h4><p>Millions of agents run your <b>survey, chatbot, web flow, or app</b> across 1,162 dimensions — the long tail included.</p></div>
+          <div class="pd" data-i="2"><h4><span class="pn">03</span>Score</h4><p>Every behavior is captured and <b>scored</b> — segmented, calibrated, and validated against human baselines.</p></div>
+          <div class="pd" data-i="3"><h4><span class="pn">04</span>Report</h4><p>You get an <b>interactive report</b> with the wins, the friction, and the lift — ready to act on.</p></div>
+        </div>
       </div>
     </section>
 
@@ -501,6 +527,31 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
     // only auto-advance while the section is on screen
     if('IntersectionObserver' in window){
       new IntersectionObserver(function(es){ es[0].isIntersecting ? start() : stop(); }, {threshold:.25}).observe(root);
+    } else { start(); }
+  })();
+
+  /* ---- 03 — moving pipeline ---- */
+  (function(){
+    var pipe=document.getElementById('pipe'); if(!pipe) return;
+    var track=pipe.querySelector('.pipe-track');
+    var nodes=[].slice.call(pipe.querySelectorAll('.pnode'));
+    var pds=[].slice.call(pipe.querySelectorAll('.pd'));
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var cur=0, timer=null;
+    function show(i){
+      cur=i;
+      track.style.setProperty('--i', i);
+      nodes.forEach(function(n,k){ n.classList.toggle('active', k===i); });
+      pds.forEach(function(p,k){ p.classList.toggle('on', k===i); });
+    }
+    function next(){ show((cur+1)%nodes.length); }
+    function start(){ if(reduce||timer) return; timer=setInterval(next, 2600); }
+    function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+    nodes.forEach(function(n,i){ n.addEventListener('click', function(){ stop(); show(i); }); });
+    pipe.addEventListener('mouseenter', stop);
+    pipe.addEventListener('mouseleave', start);
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){ es[0].isIntersecting ? start() : stop(); }, {threshold:.3}).observe(pipe);
     } else { start(); }
   })();
   </script>
