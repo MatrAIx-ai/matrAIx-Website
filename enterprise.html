@@ -298,6 +298,18 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
           <summary><span class="qn">Q07</span><span>Can we train future models on these trajectories? Are they SFT / RL friendly?</span><span class="mk">+</span></summary>
           <div class="a"><b>Yes — the data is built for post-training.</b> Every run is captured and scored into training-ready data: the best trajectories export as <b>SFT</b> examples, and scored pairs export as preference data for <b>RL / RLHF</b> and reward modeling. The same simulations that evaluate your product also improve your model or agent each iteration.</div>
         </details>
+        <details>
+          <summary><span class="qn">Q08</span><span>What metrics does matrAIx use to judge whether simulated data is high-quality?</span><span class="mk">+</span></summary>
+          <div class="a">Every trajectory is scored on several axes: <b>fidelity</b> (match to human baselines — 95%+ on benchmarked flows), <b>coverage &amp; diversity</b> across the persona space, <b>task success / completion rate</b>, <b>internal coherence</b> (does the persona behave consistently with its dimensions), <b>calibration</b> (predicted vs. observed outcomes), and <b>reward / preference scores</b> for training use. We also report data-hygiene signals like deduplication and outlier flags, so you can see the quality of every batch before you rely on it.</div>
+        </details>
+        <details>
+          <summary><span class="qn">Q09</span><span>If we're not satisfied with the results, can we get a refund?</span><span class="mk">+</span></summary>
+          <div class="a"><b>Yes.</b> We agree on a quality bar up front, and if a run doesn't meet it we'll re-run it or <b>refund you</b> — we stand behind the results.</div>
+        </details>
+        <details>
+          <summary><span class="qn">Q10</span><span>We're not sure how to integrate matrAIx into our product — how do we get help?</span><span class="mk">+</span></summary>
+          <div class="a">matrAIx provides <b>forward-deployed engineers</b> and <b>go-to-market (GTM) engineers</b> — highly skilled and experienced — who work hands-on with your team to integrate matrAIx directly into your product iteration process, from first run to production.</div>
+        </details>
       </div>
     </section>
 
