@@ -429,6 +429,8 @@ main { position: relative; z-index: 10; }
 .os-card-status .led::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--phos); box-shadow: var(--glow); animation: pulse 1.4s infinite; }
 .os-card-clock { font-family: var(--mono); font-size: 0.85rem; color: var(--phos); font-variant-numeric: tabular-nums; text-shadow: 0 0 10px rgba(84,246,166,0.3); }
 .os-card-body { padding: 22px 18px; display: flex; align-items: center; justify-content: space-between; gap: 22px; flex-wrap: wrap; }
+.pg-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+@media (max-width: 640px) { .pg-actions { width: 100%; justify-content: center; } }
 .os-card-vitals { display: flex; border: 1px solid var(--line-soft); }
 .os-card-vitals > div { padding: 14px 22px; border-right: 1px solid var(--line-soft); }
 .os-card-vitals > div:last-child { border-right: none; }
