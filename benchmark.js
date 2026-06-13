@@ -362,7 +362,7 @@
   }
 
   function setExplain() {
-    explainEl.innerHTML = `▸ <b>${fmt.format(activeCount)}</b> simulated users are completing <em>“${target.label}”</em> on <em>${target.url}</em> — each agent runs the flow step-by-step, and every finished run is scored and rolled into the reports →`;
+    explainEl.innerHTML = `▸ <b>${fmt.format(activeCount)}</b> agents running <em>“${target.label}”</em> <span class="ex-url">${target.url}</span>`;
   }
 
   function resetSession() {

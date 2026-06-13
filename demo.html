@@ -14,6 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="benchmark.css?v=13" />
   <style>
+  .os-explain .ex-url{color:var(--ink-dim)}
   /* --- self-defined evaluation metrics --- */
   .metric-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:9px 14px;border-bottom:1px solid var(--line-soft)}
   .metric-bar .mb-lab{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--phos)}
@@ -127,18 +128,18 @@
     <!-- Agent swarm -->
     <section class="win swarm">
       <div class="win-bar"><span>Agent Swarm</span><span id="swarmCount">— active</span></div>
-      <div class="pop-cap">Live population — each square is a simulated user</div>
+      <div class="pop-cap">each ■ = one agent</div>
       <div class="pop" id="pop"></div>
-      <div class="focus-head">▸ In focus — follow a few agents step through the flow</div>
+      <div class="focus-head">▸ In focus</div>
       <div class="focus-list" id="focusList"></div>
     </section>
 
     <!-- Neural eval core -->
     <section class="win stage">
       <div class="win-bar"><span>Neural Eval Core · metric flow</span><span class="scan-tag" id="scanTag">● LIVE</span></div>
-      <div class="stage-legend"><b class="hint">What this shows →</b> each scored behavior flows through the metrics it tests. &nbsp;<b class="cp">● pass</b> <b class="ca">● flag</b> <b class="cr">● fail</b></div>
+      <div class="stage-legend"><b class="cp">● pass</b> <b class="ca">● flag</b> <b class="cr">● fail</b></div>
       <div class="metric-bar">
-        <span class="mb-lab">Metrics</span><span class="mb-hint">— pick from <a href="metrics.html" style="color:var(--phos)"><b id="metricCount">900+</b></a> or define your own</span>
+        <span class="mb-lab">Metrics</span><span class="mb-hint">— <a href="metrics.html" style="color:var(--phos)"><b id="metricCount">900+</b></a> or your own</span>
         <span class="mb-grow"></span>
         <div class="metric-pick">
           <input id="metricInput" class="metric-input" type="text" maxlength="40" placeholder="search metrics or type your own…" aria-label="Add an evaluation metric" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="metricMenu" />
@@ -176,7 +177,7 @@
 
   <!-- Trajectory telemetry -->
   <section class="console">
-    <div class="win-bar"><span>Trajectory Telemetry</span><span id="conMeta">obs = what the agent sees · act = what it does · r = step reward (0–1)</span></div>
+    <div class="win-bar"><span>Trajectory Telemetry</span><span id="conMeta">obs → act → reward</span></div>
     <div class="con-feed" id="conFeed"></div>
   </section>
   </section>
@@ -191,7 +192,7 @@
     <div class="gr-head">
       <span class="gr-idx">— GENERATED REPORTS</span>
       <h2 class="gr-title">See the report before you ship.</h2>
-      <p class="gr-sub">Thousands of agents run both variants. You get a verdict broken down by the Persona segments that matter — and the exact friction they hit.</p>
+      <p class="gr-sub">A/B verdict by persona segment — and the friction each one hits.</p>
       <div class="gr-chips">
         <span class="gr-chip">Web apps</span><span class="gr-chip">Checkout</span><span class="gr-chip">Onboarding</span>
         <span class="gr-chip">AI assistants</span><span class="gr-chip">Search</span><span class="gr-chip">Accessibility</span>
@@ -280,7 +281,7 @@
 
   <script src="dimensions.js?v=3"></script>
   <script src="metrics.js?v=2"></script>
-  <script src="benchmark.js?v=11"></script>
+  <script src="benchmark.js?v=12"></script>
   <script>
   /* ---------- Live agent runs from the CUA pipeline ---------- */
   (function(){
