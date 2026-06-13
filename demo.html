@@ -11,8 +11,8 @@
   <meta name="description" content="matrAIx OS: hundreds of simulated agents evaluate apps and websites step by step, with live trajectory telemetry and reports." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="benchmark.css?v=12" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="benchmark.css?v=13" />
   <style>
   /* --- self-defined evaluation metrics --- */
   .metric-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:9px 14px;border-bottom:1px solid var(--line-soft)}
@@ -22,12 +22,12 @@
   .metric-pick{position:relative}
   .metric-input{font-family:var(--mono);font-size:.74rem;color:var(--ink);background:var(--bg);border:1px solid var(--line-soft);padding:6px 9px;min-width:170px;width:230px;max-width:46vw}
   .metric-input::placeholder{color:var(--ink-dim)}
-  .metric-input:focus{outline:none;border-color:var(--phos);box-shadow:inset 0 0 10px rgba(84,246,166,.08)}
+  .metric-input:focus{outline:none;border-color:var(--phos);box-shadow:inset 0 0 10px rgba(59,169,255,.08)}
   .metric-menu{position:absolute;top:calc(100% + 4px);right:0;width:min(330px,82vw);max-height:280px;overflow:auto;background:var(--bg-2);border:1px solid var(--line);box-shadow:0 12px 34px rgba(0,0,0,.55);z-index:60;padding:4px}
   .metric-menu[hidden]{display:none}
   .metric-menu .mg-h{font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--phos);padding:8px 8px 3px;position:sticky;top:0;background:var(--bg-2)}
   .metric-menu .mo{display:block;width:100%;text-align:left;font-family:var(--mono);font-size:.73rem;color:var(--ink);background:transparent;border:0;padding:5px 9px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .metric-menu .mo:hover,.metric-menu .mo.kbd{background:rgba(84,246,166,.12);color:var(--phos)}
+  .metric-menu .mo:hover,.metric-menu .mo.kbd{background:rgba(59,169,255,.12);color:var(--phos)}
   .metric-menu .mo mark{background:transparent;color:var(--phos);font-weight:700}
   .metric-menu .mo-add{color:var(--phos);border-bottom:1px solid var(--line-soft);margin-bottom:2px}
   .metric-menu .mo-add b{color:var(--ink)}
@@ -39,11 +39,11 @@
   .fnodes.lone .fn-x{display:none}
   /* --- "Run in your env" API button + modal --- */
   .os-btn.api{color:var(--phos);border-color:var(--line);display:inline-flex;align-items:center;gap:6px}
-  .os-btn.api:hover{border-color:var(--phos);box-shadow:inset 0 0 14px rgba(84,246,166,.12)}
+  .os-btn.api:hover{border-color:var(--phos);box-shadow:inset 0 0 14px rgba(59,169,255,.12)}
   .apim-scrim{position:fixed;inset:0;background:rgba(3,5,4,.8);backdrop-filter:blur(4px);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
   .apim-scrim.open{display:flex;animation:apfade .2s ease}
   @keyframes apfade{from{opacity:0}to{opacity:1}}
-  .apim{width:min(820px,96vw);max-height:92vh;overflow:auto;background:var(--bg-2);border:1px solid var(--line);box-shadow:0 0 60px rgba(0,0,0,.6),0 0 32px rgba(84,246,166,.08)}
+  .apim{width:min(820px,96vw);max-height:92vh;overflow:auto;background:var(--bg-2);border:1px solid var(--line);box-shadow:0 0 60px rgba(0,0,0,.6),0 0 32px rgba(59,169,255,.08)}
   .apim-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 18px;border-bottom:1px solid var(--line-soft);background:var(--bg-3);position:sticky;top:0}
   .apim-bar .t{font-family:var(--disp);font-weight:800;font-size:1rem}
   .apim-bar .t b{color:var(--phos);text-shadow:var(--glow)}
@@ -57,9 +57,9 @@
   .apim-node{display:flex;flex-direction:column;align-items:center;gap:5px;padding:11px 16px;border:1px solid var(--line-soft);background:var(--bg-3);min-width:104px}
   .apim-node .ico{font-size:1.15rem;color:var(--phos)}
   .apim-node span:last-child{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim)}
-  .apim-node.hub{border-color:var(--line);box-shadow:0 0 18px rgba(84,246,166,.12)}
+  .apim-node.hub{border-color:var(--line);box-shadow:0 0 18px rgba(59,169,255,.12)}
   .apim-scrim.open .apim-node.hub .ico{animation:hubpulse 1.6s ease-in-out infinite}
-  @keyframes hubpulse{0%,100%{text-shadow:0 0 6px rgba(84,246,166,.4)}50%{text-shadow:0 0 16px rgba(84,246,166,.9)}}
+  @keyframes hubpulse{0%,100%{text-shadow:0 0 6px rgba(59,169,255,.4)}50%{text-shadow:0 0 16px rgba(59,169,255,.9)}}
   .apim-wire{position:relative;width:56px;height:2px;background:var(--line-soft)}
   .apim-wire i{position:absolute;top:-2px;left:0;width:6px;height:6px;border-radius:50%;background:var(--phos);box-shadow:var(--glow);opacity:0}
   .apim-scrim.open .apim-wire i{animation:wirepkt 1.2s linear infinite}
@@ -72,7 +72,7 @@
   .apim-scrim.open .apim-feat:nth-child(1){animation-delay:.3s}.apim-scrim.open .apim-feat:nth-child(2){animation-delay:.9s}
   .apim-scrim.open .apim-feat:nth-child(3){animation-delay:1.5s}.apim-scrim.open .apim-feat:nth-child(4){animation-delay:2.1s}
   .apim-scrim.open .apim-feat:nth-child(5){animation-delay:2.7s}
-  @keyframes featlit{0%,100%{border-color:var(--line-soft);color:var(--ink-dim);box-shadow:none}8%,16%{border-color:var(--phos);color:var(--ink);box-shadow:0 0 11px rgba(84,246,166,.3)}}
+  @keyframes featlit{0%,100%{border-color:var(--line-soft);color:var(--ink-dim);box-shadow:none}8%,16%{border-color:var(--phos);color:var(--ink);box-shadow:0 0 11px rgba(59,169,255,.3)}}
   /* terminal */
   .apim-term{border:1px solid var(--line-soft);background:var(--bg);overflow:hidden}
   .apim-term-bar{display:flex;align-items:center;gap:6px;padding:7px 11px;background:var(--bg-3);border-bottom:1px solid var(--line-soft);font-size:.68rem;color:var(--ink-dim);letter-spacing:.06em}

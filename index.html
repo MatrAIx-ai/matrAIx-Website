@@ -11,8 +11,8 @@
   <meta name="description" content="matrAIx runs Agent Simulation for Evaluation: 8.3 Billion behaviors across 1,000 persona dimensions — generating segmented A/B reports and high-quality SFT and RL training data." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="home.css?v=17" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="home.css?v=18" />
 </head>
 <body>
   <!-- Background simulation layers -->
@@ -278,13 +278,13 @@
       ctx.clearRect(0,0,w,h);
       ctx.textAlign='center'; ctx.font='10px "JetBrains Mono",monospace'; ctx.lineWidth=1;
       for(var i=0;i<STAGES.length;i++){ var sx=TX(STAGES[i].x);
-        ctx.strokeStyle=STAGES[i].fric?'rgba(255,181,71,0.16)':'rgba(84,246,166,0.08)';
+        ctx.strokeStyle=STAGES[i].fric?'rgba(255,181,71,0.16)':'rgba(59,169,255,0.08)';
         ctx.beginPath(); ctx.moveTo(sx,TY(0)-8); ctx.lineTo(sx,TY(1)+8); ctx.stroke();
         ctx.fillStyle=STAGES[i].fric?'rgba(255,181,71,0.55)':'rgba(111,130,115,0.7)';
         ctx.fillText(STAGES[i].name+(STAGES[i].fric?' ⚠':''), sx, TY(1)+22); }
-      var fx=TX(1)+4; ctx.setLineDash([5,5]); ctx.strokeStyle='rgba(84,246,166,0.5)';
+      var fx=TX(1)+4; ctx.setLineDash([5,5]); ctx.strokeStyle='rgba(59,169,255,0.5)';
       ctx.beginPath(); ctx.moveTo(fx,TY(0)-8); ctx.lineTo(fx,TY(1)+8); ctx.stroke(); ctx.setLineDash([]);
-      ctx.fillStyle='rgba(84,246,166,0.6)'; ctx.fillText('FINISH', fx, TY(0)-16);
+      ctx.fillStyle='rgba(59,169,255,0.6)'; ctx.fillText('FINISH', fx, TY(0)-16);
 
       // ---- physics pass: update + bucket by colour ----
       var smooth=0,stall=0,lim=(h-PADT-PADB)*0.5;
@@ -304,10 +304,10 @@
         else { rdx.push(px); rdy.push(py); stall++; }
       }
       // green motion tails: one path, one stroke
-      ctx.strokeStyle='rgba(84,246,166,0.22)'; ctx.beginPath();
+      ctx.strokeStyle='rgba(59,169,255,0.22)'; ctx.beginPath();
       for(var t=0;t<gx.length;t++){ ctx.moveTo(gx[t]-13,gy[t]); ctx.lineTo(gx[t],gy[t]); } ctx.stroke();
       // dots: one fill per colour, no per-dot shadow
-      blob(gx,gy,'#54f6a6'); blob(amx,amy,'#ffb547'); blob(rdx,rdy,'#ff5c6c');
+      blob(gx,gy,'#3ba9ff'); blob(amx,amy,'#ffb547'); blob(rdx,rdy,'#ff5c6c');
 
       if(!lastSec) lastSec=ts;
       if(ts-lastSec>=1000){ rate=finN/((ts-lastSec)/1000); finN=0; lastSec=ts;
@@ -321,7 +321,7 @@
     canvas.addEventListener('mouseleave',function(){ mouse.active=false; });
     resize(); window.addEventListener('resize',resize); set('rAgents', N+'+');
     if(reduce){
-      for(var k=0;k<agents.length;k++){var a=agents[k];ctx.fillStyle='#54f6a6';ctx.globalAlpha=0.6;ctx.beginPath();ctx.arc(TX(a.x),TY(a.y),2,0,6.283);ctx.fill();}
+      for(var k=0;k<agents.length;k++){var a=agents[k];ctx.fillStyle='#3ba9ff';ctx.globalAlpha=0.6;ctx.beginPath();ctx.arc(TX(a.x),TY(a.y),2,0,6.283);ctx.fill();}
       ctx.globalAlpha=1;
     } else if('IntersectionObserver' in window){
       // only animate while the band is on-screen and the tab is visible — keeps initial load + the rest of the page smooth
