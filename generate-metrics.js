@@ -162,8 +162,12 @@ const cats = {};
 out.forEach(m => (cats[m.category] = (cats[m.category] || 0) + 1));
 fs.writeFileSync(path.join(__dirname, 'metrics.json'),
   JSON.stringify({ name: 'matrAIx evaluation metrics', count: out.length, categories: cats, metrics: out }, null, 2) + '\n');
+const groups = {};
+out.forEach(m => { (groups[m.category] = groups[m.category] || []).push(m.name); });
+const groupsArr = Object.keys(groups).map(c => ({ category: c, metrics: groups[c] }));
 fs.writeFileSync(path.join(__dirname, 'metrics.js'),
-  'window.MATRAIX_METRICS = ' + JSON.stringify(out.map(m => m.name)) + ';\n');
+  'window.MATRAIX_METRICS = ' + JSON.stringify(out.map(m => m.name)) + ';\n' +
+  'window.MATRAIX_METRIC_GROUPS = ' + JSON.stringify(groupsArr) + ';\n');
 
 console.log(`metrics: ${out.length}`);
 console.log('by category: ' + Object.entries(cats).map(([k, v]) => `${k} ${v}`).join(', '));

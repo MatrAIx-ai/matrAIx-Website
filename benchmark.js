@@ -97,10 +97,7 @@
       ['Safety', 'stays within bounds', 0.93],
       ['Latency', 'responds in time', 0.88],
       ['Quality', 'output is correct', 0.90],
-      ['Click-through Rate', 'users click through', 0.64],
-      ['Churn Rate', 'users stay, don’t drop', 0.58],
-      ['Apologize rate', 'avoids needless sorry', 0.80],
-      ['User Satisfaction Rate', 'users are satisfied', 0.85],
+      ['User satisfaction', 'users are satisfied', 0.85],
     ];
     const metrics = [];
     const byKey = {};
@@ -168,18 +165,60 @@
     DEFAULTS.forEach(d => { const m = make(d[0], d[1], d[2]); byKey[keyOf(d[0])] = m; metrics.push(m); });
     render();
 
-    // catalog of selectable metrics (datalist) — users can still type any custom value
-    const CATALOG = (window.MATRAIX_METRICS || []);
-    const listEl = $('#metricList'), countEl = $('#metricCount');
-    if (listEl && CATALOG.length) {
-      listEl.innerHTML = CATALOG.map(n => '<option value="' + esc(n) + '"></option>').join('');
-    }
-    if (countEl && CATALOG.length) countEl.textContent = CATALOG.length.toLocaleString();
+    // selectable catalog, grouped by category — users can still type any custom value
+    const GROUPS = (window.MATRAIX_METRIC_GROUPS || []);
+    const TOTAL = GROUPS.reduce((s, g) => s + g.metrics.length, 0);
+    const inp = $('#metricInput'), addBtn = $('#metricAdd'), menu = $('#metricMenu'), countEl = $('#metricCount');
+    if (countEl && TOTAL) countEl.textContent = TOTAL.toLocaleString();
 
-    const inp = $('#metricInput'), addBtn = $('#metricAdd');
     const submit = () => { if (addMetric(inp.value)) inp.value = ''; inp.focus(); };
-    if (addBtn) addBtn.addEventListener('click', submit);
-    if (inp) inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); submit(); } });
+    if (addBtn) addBtn.addEventListener('click', () => { submit(); if (menu) renderMenu(); });
+
+    function hi(name, q) {
+      if (!q) return esc(name);
+      const i = name.toLowerCase().indexOf(q);
+      if (i < 0) return esc(name);
+      return esc(name.slice(0, i)) + '<mark>' + esc(name.slice(i, i + q.length)) + '</mark>' + esc(name.slice(i + q.length));
+    }
+    function renderMenu() {
+      if (!menu) return;
+      const q = (inp.value || '').trim().toLowerCase();
+      const MAX = 140;
+      let html = '', shown = 0;
+      const exact = GROUPS.some(g => g.metrics.some(m => m.toLowerCase() === q));
+      if (q && !exact) html += '<button class="mo mo-add" type="button" data-add="1">＋ Add “<b>' + esc(inp.value.trim()) + '</b>”</button>';
+      for (const g of GROUPS) {
+        if (shown >= MAX) break;
+        const ms = q ? g.metrics.filter(m => m.toLowerCase().includes(q)) : g.metrics;
+        if (!ms.length) continue;
+        let rows = '';
+        for (const m of ms) { if (shown >= MAX) break; rows += '<button class="mo" type="button" role="option" data-name="' + esc(m) + '">' + hi(m, q) + '</button>'; shown++; }
+        html += '<div class="mg"><div class="mg-h">' + esc(g.category) + '</div>' + rows + '</div>';
+      }
+      if (shown >= MAX) html += '<div class="metric-empty">keep typing to narrow…</div>';
+      if (!html) html = '<div class="metric-empty">no match — press Enter to add it</div>';
+      menu.innerHTML = html;
+    }
+    function openMenu() { if (!menu) return; renderMenu(); menu.hidden = false; inp.setAttribute('aria-expanded', 'true'); }
+    function closeMenu() { if (!menu) return; menu.hidden = true; inp.setAttribute('aria-expanded', 'false'); }
+    if (inp && menu) {
+      menu.addEventListener('mousedown', e => {
+        const b = e.target.closest('.mo'); if (!b) return;
+        e.preventDefault();
+        if (b.dataset.add) { if (addMetric(inp.value)) inp.value = ''; }
+        else { addMetric(b.dataset.name); inp.value = ''; }
+        renderMenu(); inp.focus();
+      });
+      inp.addEventListener('focus', openMenu);
+      inp.addEventListener('input', renderMenu);
+      inp.addEventListener('blur', () => setTimeout(closeMenu, 140));
+      inp.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.preventDefault(); submit(); renderMenu(); }
+        else if (e.key === 'Escape') { closeMenu(); }
+      });
+    } else if (inp) {
+      inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); submit(); } });
+    }
 
     return { pulse, addMetric, removeMetric };
   })();

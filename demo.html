@@ -19,9 +19,19 @@
   .metric-bar .mb-lab{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--phos)}
   .metric-bar .mb-hint{font-size:.7rem;color:var(--ink-dim)}
   .metric-bar .mb-grow{flex:1;min-width:8px}
-  .metric-input{font-family:var(--mono);font-size:.74rem;color:var(--ink);background:var(--bg);border:1px solid var(--line-soft);padding:6px 9px;min-width:130px}
+  .metric-pick{position:relative}
+  .metric-input{font-family:var(--mono);font-size:.74rem;color:var(--ink);background:var(--bg);border:1px solid var(--line-soft);padding:6px 9px;min-width:170px;width:230px;max-width:46vw}
   .metric-input::placeholder{color:var(--ink-dim)}
   .metric-input:focus{outline:none;border-color:var(--phos);box-shadow:inset 0 0 10px rgba(84,246,166,.08)}
+  .metric-menu{position:absolute;top:calc(100% + 4px);right:0;width:min(330px,82vw);max-height:280px;overflow:auto;background:var(--bg-2);border:1px solid var(--line);box-shadow:0 12px 34px rgba(0,0,0,.55);z-index:60;padding:4px}
+  .metric-menu[hidden]{display:none}
+  .metric-menu .mg-h{font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--phos);padding:8px 8px 3px;position:sticky;top:0;background:var(--bg-2)}
+  .metric-menu .mo{display:block;width:100%;text-align:left;font-family:var(--mono);font-size:.73rem;color:var(--ink);background:transparent;border:0;padding:5px 9px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .metric-menu .mo:hover,.metric-menu .mo.kbd{background:rgba(84,246,166,.12);color:var(--phos)}
+  .metric-menu .mo mark{background:transparent;color:var(--phos);font-weight:700}
+  .metric-menu .mo-add{color:var(--phos);border-bottom:1px solid var(--line-soft);margin-bottom:2px}
+  .metric-menu .mo-add b{color:var(--ink)}
+  .metric-menu .metric-empty{padding:9px;color:var(--ink-dim);font-size:.72rem}
   .fn-meta{display:flex;align-items:center;gap:7px}
   .fn-x{width:16px;height:16px;line-height:1;padding:0;border:0;background:transparent;color:var(--ink-dim);cursor:pointer;font-size:.66rem;opacity:0;transition:opacity .15s,color .15s}
   .fnode:hover .fn-x{opacity:.8}
@@ -130,8 +140,10 @@
       <div class="metric-bar">
         <span class="mb-lab">Metrics</span><span class="mb-hint">— pick from <b id="metricCount">900+</b> or define your own</span>
         <span class="mb-grow"></span>
-        <input id="metricInput" class="metric-input" type="text" list="metricList" maxlength="40" placeholder="search metrics or type your own…" aria-label="Add an evaluation metric" autocomplete="off" />
-        <datalist id="metricList"></datalist>
+        <div class="metric-pick">
+          <input id="metricInput" class="metric-input" type="text" maxlength="40" placeholder="search metrics or type your own…" aria-label="Add an evaluation metric" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="metricMenu" />
+          <div class="metric-menu" id="metricMenu" role="listbox" hidden></div>
+        </div>
         <button id="metricAdd" class="os-btn" type="button">＋ Add</button>
       </div>
       <div class="flow">
@@ -267,8 +279,8 @@
   </script>
 
   <script src="dimensions.js?v=3"></script>
-  <script src="metrics.js?v=1"></script>
-  <script src="benchmark.js?v=10"></script>
+  <script src="metrics.js?v=2"></script>
+  <script src="benchmark.js?v=11"></script>
   <script>
   /* ---------- Live agent runs from the CUA pipeline ---------- */
   (function(){
