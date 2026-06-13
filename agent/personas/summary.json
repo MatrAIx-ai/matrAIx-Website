@@ -1,0 +1,964 @@
+{
+  "cohort": "matrAIx synthetic agents",
+  "generatedFrom": "dimensions.json",
+  "schemaVersion": "2.0",
+  "agents": 830,
+  "dimensionsPerAgent": 1162,
+  "uniqueAgents": 830,
+  "valueSpaceCoverage": 100,
+  "distributions": {
+    "gender_identity": {
+      "label": "Gender identity",
+      "balance": 0.996,
+      "rows": [
+        {
+          "value": "Woman",
+          "count": 140,
+          "pct": 16.9
+        },
+        {
+          "value": "Man",
+          "count": 185,
+          "pct": 22.3
+        },
+        {
+          "value": "Non-binary",
+          "count": 183,
+          "pct": 22
+        },
+        {
+          "value": "Self-described",
+          "count": 173,
+          "pct": 20.8
+        },
+        {
+          "value": "Prefer not to say",
+          "count": 149,
+          "pct": 18
+        }
+      ]
+    },
+    "demo_ethnicity_broad": {
+      "label": "Ethnic background",
+      "balance": 0.999,
+      "rows": [
+        {
+          "value": "White / European",
+          "count": 78,
+          "pct": 9.4
+        },
+        {
+          "value": "Black / African",
+          "count": 77,
+          "pct": 9.3
+        },
+        {
+          "value": "Hispanic / Latino",
+          "count": 82,
+          "pct": 9.9
+        },
+        {
+          "value": "East Asian",
+          "count": 79,
+          "pct": 9.5
+        },
+        {
+          "value": "South Asian",
+          "count": 79,
+          "pct": 9.5
+        },
+        {
+          "value": "Southeast Asian",
+          "count": 81,
+          "pct": 9.8
+        },
+        {
+          "value": "Middle Eastern",
+          "count": 85,
+          "pct": 10.2
+        },
+        {
+          "value": "Indigenous",
+          "count": 90,
+          "pct": 10.8
+        },
+        {
+          "value": "Pacific Islander",
+          "count": 89,
+          "pct": 10.7
+        },
+        {
+          "value": "Multiracial",
+          "count": 90,
+          "pct": 10.8
+        }
+      ]
+    },
+    "age_bracket": {
+      "label": "Age bracket",
+      "balance": 0.999,
+      "rows": [
+        {
+          "value": "13–17",
+          "count": 120,
+          "pct": 14.5
+        },
+        {
+          "value": "18–24",
+          "count": 129,
+          "pct": 15.5
+        },
+        {
+          "value": "25–34",
+          "count": 119,
+          "pct": 14.3
+        },
+        {
+          "value": "35–44",
+          "count": 123,
+          "pct": 14.8
+        },
+        {
+          "value": "45–54",
+          "count": 114,
+          "pct": 13.7
+        },
+        {
+          "value": "55–64",
+          "count": 111,
+          "pct": 13.4
+        },
+        {
+          "value": "65+",
+          "count": 114,
+          "pct": 13.7
+        }
+      ]
+    },
+    "demo_generation": {
+      "label": "Generational cohort",
+      "balance": 0.998,
+      "rows": [
+        {
+          "value": "Gen Alpha",
+          "count": 141,
+          "pct": 17
+        },
+        {
+          "value": "Gen Z",
+          "count": 125,
+          "pct": 15.1
+        },
+        {
+          "value": "Millennial",
+          "count": 145,
+          "pct": 17.5
+        },
+        {
+          "value": "Gen X",
+          "count": 125,
+          "pct": 15.1
+        },
+        {
+          "value": "Boomer",
+          "count": 137,
+          "pct": 16.5
+        },
+        {
+          "value": "Silent",
+          "count": 157,
+          "pct": 18.9
+        }
+      ]
+    },
+    "region": {
+      "label": "Region",
+      "balance": 0.998,
+      "rows": [
+        {
+          "value": "North America",
+          "count": 80,
+          "pct": 9.6
+        },
+        {
+          "value": "Latin America",
+          "count": 72,
+          "pct": 8.7
+        },
+        {
+          "value": "Western Europe",
+          "count": 70,
+          "pct": 8.4
+        },
+        {
+          "value": "Eastern Europe",
+          "count": 96,
+          "pct": 11.6
+        },
+        {
+          "value": "Sub-Saharan Africa",
+          "count": 85,
+          "pct": 10.2
+        },
+        {
+          "value": "MENA",
+          "count": 84,
+          "pct": 10.1
+        },
+        {
+          "value": "South Asia",
+          "count": 86,
+          "pct": 10.4
+        },
+        {
+          "value": "East Asia",
+          "count": 83,
+          "pct": 10
+        },
+        {
+          "value": "Southeast Asia",
+          "count": 86,
+          "pct": 10.4
+        },
+        {
+          "value": "Oceania",
+          "count": 88,
+          "pct": 10.6
+        }
+      ]
+    },
+    "urbanicity": {
+      "label": "Urbanicity",
+      "balance": 1,
+      "rows": [
+        {
+          "value": "Dense urban",
+          "count": 161,
+          "pct": 19.4
+        },
+        {
+          "value": "Suburban",
+          "count": 173,
+          "pct": 20.8
+        },
+        {
+          "value": "Small town",
+          "count": 171,
+          "pct": 20.6
+        },
+        {
+          "value": "Rural",
+          "count": 162,
+          "pct": 19.5
+        },
+        {
+          "value": "Nomadic / remote",
+          "count": 163,
+          "pct": 19.6
+        }
+      ]
+    },
+    "socioeconomic_band": {
+      "label": "Socioeconomic band",
+      "balance": 0.998,
+      "rows": [
+        {
+          "value": "Low income",
+          "count": 160,
+          "pct": 19.3
+        },
+        {
+          "value": "Lower-middle",
+          "count": 164,
+          "pct": 19.8
+        },
+        {
+          "value": "Middle",
+          "count": 164,
+          "pct": 19.8
+        },
+        {
+          "value": "Upper-middle",
+          "count": 151,
+          "pct": 18.2
+        },
+        {
+          "value": "High income",
+          "count": 191,
+          "pct": 23
+        }
+      ]
+    },
+    "highest_education": {
+      "label": "Highest education",
+      "balance": 0.999,
+      "rows": [
+        {
+          "value": "No formal",
+          "count": 97,
+          "pct": 11.7
+        },
+        {
+          "value": "Primary",
+          "count": 115,
+          "pct": 13.9
+        },
+        {
+          "value": "Secondary",
+          "count": 95,
+          "pct": 11.4
+        },
+        {
+          "value": "Vocational / cert",
+          "count": 106,
+          "pct": 12.8
+        },
+        {
+          "value": "Bachelor's",
+          "count": 111,
+          "pct": 13.4
+        },
+        {
+          "value": "Master's",
+          "count": 97,
+          "pct": 11.7
+        },
+        {
+          "value": "Doctorate",
+          "count": 101,
+          "pct": 12.2
+        },
+        {
+          "value": "Postdoc",
+          "count": 108,
+          "pct": 13
+        }
+      ]
+    },
+    "academic_field": {
+      "label": "Academic field",
+      "balance": 0.998,
+      "rows": [
+        {
+          "value": "STEM",
+          "count": 97,
+          "pct": 11.7
+        },
+        {
+          "value": "Medicine",
+          "count": 106,
+          "pct": 12.8
+        },
+        {
+          "value": "Law",
+          "count": 122,
+          "pct": 14.7
+        },
+        {
+          "value": "Business",
+          "count": 112,
+          "pct": 13.5
+        },
+        {
+          "value": "Humanities",
+          "count": 97,
+          "pct": 11.7
+        },
+        {
+          "value": "Social science",
+          "count": 105,
+          "pct": 12.7
+        },
+        {
+          "value": "Arts",
+          "count": 98,
+          "pct": 11.8
+        },
+        {
+          "value": "Interdisciplinary",
+          "count": 93,
+          "pct": 11.2
+        }
+      ]
+    },
+    "seniority": {
+      "label": "Seniority",
+      "balance": 0.998,
+      "rows": [
+        {
+          "value": "Student / intern",
+          "count": 69,
+          "pct": 8.3
+        },
+        {
+          "value": "Entry",
+          "count": 88,
+          "pct": 10.6
+        },
+        {
+          "value": "Mid",
+          "count": 74,
+          "pct": 8.9
+        },
+        {
+          "value": "Senior",
+          "count": 64,
+          "pct": 7.7
+        },
+        {
+          "value": "Lead / Principal",
+          "count": 78,
+          "pct": 9.4
+        },
+        {
+          "value": "Manager",
+          "count": 89,
+          "pct": 10.7
+        },
+        {
+          "value": "Director",
+          "count": 75,
+          "pct": 9
+        },
+        {
+          "value": "VP",
+          "count": 75,
+          "pct": 9
+        },
+        {
+          "value": "C-suite",
+          "count": 69,
+          "pct": 8.3
+        },
+        {
+          "value": "Founder",
+          "count": 70,
+          "pct": 8.4
+        },
+        {
+          "value": "Retired",
+          "count": 79,
+          "pct": 9.5
+        }
+      ]
+    },
+    "role_function": {
+      "label": "Role function",
+      "balance": 0.997,
+      "rows": [
+        {
+          "value": "Engineering",
+          "count": 50,
+          "pct": 6
+        },
+        {
+          "value": "Product",
+          "count": 71,
+          "pct": 8.6
+        },
+        {
+          "value": "Research",
+          "count": 67,
+          "pct": 8.1
+        },
+        {
+          "value": "Design",
+          "count": 76,
+          "pct": 9.2
+        },
+        {
+          "value": "Sales / GTM",
+          "count": 54,
+          "pct": 6.5
+        },
+        {
+          "value": "Marketing",
+          "count": 62,
+          "pct": 7.5
+        },
+        {
+          "value": "Operations",
+          "count": 61,
+          "pct": 7.3
+        },
+        {
+          "value": "Finance",
+          "count": 59,
+          "pct": 7.1
+        },
+        {
+          "value": "HR",
+          "count": 80,
+          "pct": 9.6
+        },
+        {
+          "value": "Legal",
+          "count": 60,
+          "pct": 7.2
+        },
+        {
+          "value": "Clinical",
+          "count": 58,
+          "pct": 7
+        },
+        {
+          "value": "Teaching",
+          "count": 59,
+          "pct": 7.1
+        },
+        {
+          "value": "Executive",
+          "count": 73,
+          "pct": 8.8
+        }
+      ]
+    },
+    "demo_employment_status": {
+      "label": "Employment status",
+      "balance": 0.999,
+      "rows": [
+        {
+          "value": "Full-time",
+          "count": 94,
+          "pct": 11.3
+        },
+        {
+          "value": "Part-time",
+          "count": 114,
+          "pct": 13.7
+        },
+        {
+          "value": "Self-employed",
+          "count": 97,
+          "pct": 11.7
+        },
+        {
+          "value": "Gig / freelance",
+          "count": 102,
+          "pct": 12.3
+        },
+        {
+          "value": "Student",
+          "count": 103,
+          "pct": 12.4
+        },
+        {
+          "value": "Unemployed",
+          "count": 96,
+          "pct": 11.6
+        },
+        {
+          "value": "Retired",
+          "count": 114,
+          "pct": 13.7
+        },
+        {
+          "value": "Homemaker",
+          "count": 110,
+          "pct": 13.3
+        }
+      ]
+    },
+    "primary_language": {
+      "label": "Primary language",
+      "balance": 0.998,
+      "rows": [
+        {
+          "value": "English",
+          "count": 64,
+          "pct": 7.7
+        },
+        {
+          "value": "Mandarin",
+          "count": 67,
+          "pct": 8.1
+        },
+        {
+          "value": "Spanish",
+          "count": 74,
+          "pct": 8.9
+        },
+        {
+          "value": "Hindi",
+          "count": 71,
+          "pct": 8.6
+        },
+        {
+          "value": "Arabic",
+          "count": 72,
+          "pct": 8.7
+        },
+        {
+          "value": "French",
+          "count": 72,
+          "pct": 8.7
+        },
+        {
+          "value": "Portuguese",
+          "count": 72,
+          "pct": 8.7
+        },
+        {
+          "value": "Bengali",
+          "count": 66,
+          "pct": 8
+        },
+        {
+          "value": "Russian",
+          "count": 71,
+          "pct": 8.6
+        },
+        {
+          "value": "Japanese",
+          "count": 71,
+          "pct": 8.6
+        },
+        {
+          "value": "German",
+          "count": 53,
+          "pct": 6.4
+        },
+        {
+          "value": "Swahili",
+          "count": 77,
+          "pct": 9.3
+        }
+      ]
+    },
+    "demo_religion_affiliation": {
+      "label": "Religious affiliation",
+      "balance": 0.995,
+      "rows": [
+        {
+          "value": "Christian",
+          "count": 85,
+          "pct": 10.2
+        },
+        {
+          "value": "Muslim",
+          "count": 66,
+          "pct": 8
+        },
+        {
+          "value": "Hindu",
+          "count": 74,
+          "pct": 8.9
+        },
+        {
+          "value": "Buddhist",
+          "count": 77,
+          "pct": 9.3
+        },
+        {
+          "value": "Jewish",
+          "count": 80,
+          "pct": 9.6
+        },
+        {
+          "value": "Sikh",
+          "count": 107,
+          "pct": 12.9
+        },
+        {
+          "value": "Folk / traditional",
+          "count": 78,
+          "pct": 9.4
+        },
+        {
+          "value": "Spiritual but unaffiliated",
+          "count": 81,
+          "pct": 9.8
+        },
+        {
+          "value": "Atheist / agnostic",
+          "count": 76,
+          "pct": 9.2
+        },
+        {
+          "value": "None",
+          "count": 106,
+          "pct": 12.8
+        }
+      ]
+    },
+    "demo_marital_status": {
+      "label": "Marital status",
+      "balance": 0.997,
+      "rows": [
+        {
+          "value": "Single",
+          "count": 105,
+          "pct": 12.7
+        },
+        {
+          "value": "In a relationship",
+          "count": 131,
+          "pct": 15.8
+        },
+        {
+          "value": "Married",
+          "count": 124,
+          "pct": 14.9
+        },
+        {
+          "value": "Domestic partnership",
+          "count": 113,
+          "pct": 13.6
+        },
+        {
+          "value": "Separated",
+          "count": 106,
+          "pct": 12.8
+        },
+        {
+          "value": "Divorced",
+          "count": 140,
+          "pct": 16.9
+        },
+        {
+          "value": "Widowed",
+          "count": 111,
+          "pct": 13.4
+        }
+      ]
+    },
+    "mbti_type": {
+      "label": "Myers–Briggs type",
+      "balance": 0.997,
+      "rows": [
+        {
+          "value": "INTJ — Architect",
+          "count": 42,
+          "pct": 5.1
+        },
+        {
+          "value": "INTP — Logician",
+          "count": 62,
+          "pct": 7.5
+        },
+        {
+          "value": "ENTJ — Commander",
+          "count": 45,
+          "pct": 5.4
+        },
+        {
+          "value": "ENTP — Debater",
+          "count": 61,
+          "pct": 7.3
+        },
+        {
+          "value": "INFJ — Advocate",
+          "count": 56,
+          "pct": 6.7
+        },
+        {
+          "value": "INFP — Mediator",
+          "count": 45,
+          "pct": 5.4
+        },
+        {
+          "value": "ENFJ — Protagonist",
+          "count": 60,
+          "pct": 7.2
+        },
+        {
+          "value": "ENFP — Campaigner",
+          "count": 48,
+          "pct": 5.8
+        },
+        {
+          "value": "ISTJ — Logistician",
+          "count": 61,
+          "pct": 7.3
+        },
+        {
+          "value": "ISFJ — Defender",
+          "count": 54,
+          "pct": 6.5
+        },
+        {
+          "value": "ESTJ — Executive",
+          "count": 41,
+          "pct": 4.9
+        },
+        {
+          "value": "ESFJ — Consul",
+          "count": 48,
+          "pct": 5.8
+        },
+        {
+          "value": "ISTP — Virtuoso",
+          "count": 53,
+          "pct": 6.4
+        },
+        {
+          "value": "ISFP — Adventurer",
+          "count": 51,
+          "pct": 6.1
+        },
+        {
+          "value": "ESTP — Entrepreneur",
+          "count": 49,
+          "pct": 5.9
+        },
+        {
+          "value": "ESFP — Entertainer",
+          "count": 54,
+          "pct": 6.5
+        }
+      ]
+    }
+  },
+  "families": {
+    "skill_": {
+      "label": "Skills",
+      "dims": 64,
+      "rows": [
+        {
+          "value": "Master",
+          "count": 10713,
+          "pct": 20.2
+        },
+        {
+          "value": "Advanced",
+          "count": 10560,
+          "pct": 19.9
+        },
+        {
+          "value": "Intermediate",
+          "count": 10638,
+          "pct": 20
+        },
+        {
+          "value": "Beginner",
+          "count": 10673,
+          "pct": 20.1
+        },
+        {
+          "value": "None",
+          "count": 10536,
+          "pct": 19.8
+        }
+      ]
+    },
+    "fam_": {
+      "label": "Expertise / familiarity",
+      "dims": 143,
+      "rows": [
+        {
+          "value": "Expert",
+          "count": 23565,
+          "pct": 19.9
+        },
+        {
+          "value": "Proficient",
+          "count": 23845,
+          "pct": 20.1
+        },
+        {
+          "value": "Familiar",
+          "count": 23810,
+          "pct": 20.1
+        },
+        {
+          "value": "Aware",
+          "count": 23864,
+          "pct": 20.1
+        },
+        {
+          "value": "None",
+          "count": 23606,
+          "pct": 19.9
+        }
+      ]
+    },
+    "prog_": {
+      "label": "Programming languages",
+      "dims": 33,
+      "rows": [
+        {
+          "value": "Expert",
+          "count": 6775,
+          "pct": 24.7
+        },
+        {
+          "value": "Proficient",
+          "count": 6839,
+          "pct": 25
+        },
+        {
+          "value": "Familiar",
+          "count": 6880,
+          "pct": 25.1
+        },
+        {
+          "value": "None",
+          "count": 6896,
+          "pct": 25.2
+        }
+      ]
+    },
+    "lang_": {
+      "label": "Spoken languages",
+      "dims": 50,
+      "rows": [
+        {
+          "value": "Native",
+          "count": 8297,
+          "pct": 20
+        },
+        {
+          "value": "Fluent",
+          "count": 8257,
+          "pct": 19.9
+        },
+        {
+          "value": "Conversational",
+          "count": 8369,
+          "pct": 20.2
+        },
+        {
+          "value": "Basic",
+          "count": 8305,
+          "pct": 20
+        },
+        {
+          "value": "None",
+          "count": 8272,
+          "pct": 19.9
+        }
+      ]
+    },
+    "big5_": {
+      "label": "Big Five facets",
+      "dims": 30,
+      "rows": [
+        {
+          "value": "Very high",
+          "count": 4935,
+          "pct": 19.8
+        },
+        {
+          "value": "High",
+          "count": 5044,
+          "pct": 20.3
+        },
+        {
+          "value": "Average",
+          "count": 5040,
+          "pct": 20.2
+        },
+        {
+          "value": "Low",
+          "count": 4961,
+          "pct": 19.9
+        },
+        {
+          "value": "Very low",
+          "count": 4920,
+          "pct": 19.8
+        }
+      ]
+    }
+  }
+}
