@@ -80,30 +80,96 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
 @media (max-width:860px){.svc{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:460px){.svc{grid-template-columns:1fr}}
 
-/* levels ladder */
-.ladder{display:flex;flex-direction:column;gap:14px;position:relative}
-.axis{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim);display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-bottom:-6px}
-.axis .ar{color:var(--phos)}
-.lvl{display:grid;grid-template-columns:88px 1fr;gap:0;border:1px solid var(--line-soft);background:var(--bg-2);overflow:hidden;transition:border-color .2s,transform .2s}
-.lvl:hover{border-color:var(--line);transform:translateX(3px)}
-.lvl .badge{background:var(--bg-3);border-right:1px solid var(--line-soft);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:18px 8px}
-.lvl .badge .lv{font-family:var(--disp);font-weight:800;font-size:1.5rem;color:var(--phos);text-shadow:var(--glow);line-height:1}
-.lvl .badge .meter{display:flex;gap:3px}
-.lvl .badge .meter i{width:6px;height:6px;border-radius:50%;background:var(--line);display:block}
-.lvl .badge .meter i.on{background:var(--phos);box-shadow:0 0 7px rgba(84,246,166,.6)}
-.lvl .body{padding:20px 22px}
-.lvl .body .top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
-.lvl .body h3{font-family:var(--disp);font-weight:800;font-size:1.32rem;letter-spacing:-.01em}
-.lvl .body .tag{font-size:.78rem;color:var(--amber);letter-spacing:.04em}
-.lvl .body .desc{color:var(--ink-dim);font-size:.95rem;line-height:1.55;margin-bottom:14px;max-width:760px}
-.lvl .body .desc b{color:var(--ink)}
-.lvl .meta{display:grid;grid-template-columns:1.6fr 1fr;gap:18px}
-.lvl .meta .lab{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--phos);margin-bottom:7px;display:block}
-.lvl .meta ul{list-style:none;display:flex;flex-wrap:wrap;gap:7px}
-.lvl .meta ul li{font-size:.82rem;color:var(--ink);border:1px solid var(--line-soft);background:var(--bg-3);padding:5px 10px}
-.lvl .meta .best{font-size:.9rem;color:var(--ink-dim);line-height:1.5}
-.lvl .meta .best b{color:var(--ink)}
-@media (max-width:680px){.lvl{grid-template-columns:1fr}.lvl .badge{flex-direction:row;border-right:0;border-bottom:1px solid var(--line-soft);justify-content:flex-start;gap:14px;padding:12px 18px}.lvl .meta{grid-template-columns:1fr}}
+/* levels — interactive selector */
+.eaas{display:grid;grid-template-columns:260px 1fr;gap:16px;margin-top:8px}
+.eaas-rail{display:flex;flex-direction:column;gap:10px}
+.eaas-tab{text-align:left;font-family:var(--mono);color:var(--ink-dim);background:var(--bg-2);border:1px solid var(--line-soft);border-left:3px solid transparent;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s}
+.eaas-tab:hover{border-color:var(--line);color:var(--ink)}
+.eaas-tab.active{border-color:var(--line);border-left-color:var(--phos);background:var(--bg-3);color:var(--ink)}
+.eaas-tab .lv{font-family:var(--disp);font-weight:800;font-size:1.15rem;color:var(--ink-dim);flex:none;width:30px}
+.eaas-tab.active .lv{color:var(--phos);text-shadow:var(--glow)}
+.eaas-tab .tx{display:flex;flex-direction:column;gap:5px;flex:1}
+.eaas-tab .nm{font-family:var(--disp);font-weight:700;font-size:1.02rem}
+.eaas-tab .meter{display:flex;gap:3px}
+.eaas-tab .meter i{width:6px;height:6px;border-radius:50%;background:var(--line);display:block}
+.eaas-tab .meter i.on{background:var(--phos);box-shadow:0 0 7px rgba(84,246,166,.6)}
+
+.eaas-stage{border:1px solid var(--line-soft);background:var(--bg-2);display:flex;flex-direction:column;overflow:hidden}
+.stage-viz{position:relative;height:230px;background:radial-gradient(120% 140% at 50% 0,rgba(84,246,166,.05),transparent 60%);border-bottom:1px solid var(--line-soft);overflow:hidden}
+.viz{position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:22px}
+.viz.on{display:flex}
+.stage-info{padding:18px 20px}
+.stage-info .top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.stage-info h3{font-family:var(--disp);font-weight:800;font-size:1.3rem}
+.stage-info .tag{font-size:.78rem;color:var(--amber)}
+.stage-info .desc{color:var(--ink-dim);font-size:.93rem;line-height:1.55;margin-bottom:14px}
+.stage-info .desc b{color:var(--ink)}
+.stage-info .meta{display:grid;grid-template-columns:1.7fr 1fr;gap:18px}
+.stage-info .lab{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--phos);margin-bottom:7px;display:block}
+.stage-info ul{list-style:none;display:flex;flex-wrap:wrap;gap:7px}
+.stage-info ul li{font-size:.8rem;color:var(--ink);border:1px solid var(--line-soft);background:var(--bg-3);padding:5px 10px}
+.stage-info .best{font-size:.88rem;color:var(--ink-dim);line-height:1.5}
+.stage-info .best b{color:var(--ink)}
+.info{display:none}.info.on{display:block}
+@media (max-width:760px){.eaas{grid-template-columns:1fr}.eaas-rail{flex-direction:row;flex-wrap:wrap}.eaas-tab{flex:1;min-width:130px}.stage-info .meta{grid-template-columns:1fr}}
+
+/* shared viz primitives */
+.scr{width:100%;max-width:340px}
+.scr-chrome{display:flex;align-items:center;gap:6px;padding:7px 10px;background:var(--bg-3);border:1px solid var(--line-soft);border-bottom:0}
+.scr-chrome .d{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.scr-chrome .url{margin-left:8px;flex:1;height:14px;background:var(--bg);border:1px solid var(--line-soft);border-radius:3px}
+.scr-body{border:1px solid var(--line-soft);background:rgba(6,8,7,.6);padding:16px;min-height:150px}
+
+/* L1 survey: bars filling */
+.svy{width:100%;max-width:330px;display:flex;flex-direction:column;gap:11px}
+.svy .row{display:flex;align-items:center;gap:10px}
+.svy .lab2{font-size:.72rem;color:var(--ink-dim);width:64px;flex:none;text-align:right}
+.svy .track{flex:1;height:13px;background:var(--bg-3);border:1px solid var(--line-soft);overflow:hidden}
+.svy .fill{height:100%;width:0;background:linear-gradient(90deg,var(--phos-deep),var(--phos));box-shadow:var(--glow);animation:svyfill 4.5s ease-in-out infinite}
+@keyframes svyfill{0%{width:0}28%{width:var(--w)}82%{width:var(--w)}100%{width:0}}
+.svy .cap{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--phos);margin-bottom:4px}
+
+/* L2 conversation: bubbles */
+.cv{width:100%;max-width:320px;display:flex;flex-direction:column;gap:9px}
+.cv .b{max-width:75%;padding:8px 12px;font-size:.78rem;line-height:1.35;border:1px solid var(--line-soft);opacity:0;transform:translateY(8px);animation:cvpop 7s ease-in-out infinite}
+.cv .me{align-self:flex-start;background:var(--bg-3);color:var(--ink);border-bottom-left-radius:0}
+.cv .ai{align-self:flex-end;background:rgba(84,246,166,.1);border-color:var(--line);color:var(--ink);border-bottom-right-radius:0}
+.cv .b:nth-child(1){animation-delay:.2s}.cv .b:nth-child(2){animation-delay:1.4s}
+.cv .b:nth-child(3){animation-delay:2.7s}.cv .b:nth-child(4){animation-delay:4s}
+@keyframes cvpop{0%{opacity:0;transform:translateY(8px)}6%{opacity:1;transform:translateY(0)}88%{opacity:1;transform:translateY(0)}96%,100%{opacity:0}}
+
+/* L3 web: cursor drives a form */
+.web .scr-body{position:relative}
+.web .field{height:16px;background:var(--bg-3);border:1px solid var(--line-soft);margin-bottom:11px;position:relative;overflow:hidden}
+.web .field::after{content:"";position:absolute;inset:0;background:rgba(84,246,166,.18);transform:scaleX(0);transform-origin:left;animation:webfill 5s ease-in-out infinite}
+.web .field:nth-child(1)::after{animation-delay:.3s}
+.web .field:nth-child(2)::after{animation-delay:1.3s}
+.web .field:nth-child(3)::after{animation-delay:2.3s}
+.web .btn3{height:22px;width:90px;background:var(--phos);box-shadow:var(--glow);animation:webbtn 5s ease-in-out infinite}
+@keyframes webfill{0%,4%{transform:scaleX(0)}16%,100%{transform:scaleX(1)}}
+@keyframes webbtn{0%,68%{opacity:.4;transform:scale(1)}74%{opacity:1;transform:scale(1.06)}80%,100%{opacity:.4;transform:scale(1)}}
+.web .cursor{position:absolute;width:14px;height:14px;color:var(--phos);font-size:14px;left:0;top:0;animation:webcur 5s ease-in-out infinite;filter:drop-shadow(0 0 4px rgba(84,246,166,.7))}
+@keyframes webcur{0%{left:30px;top:18px}20%{left:30px;top:18px}40%{left:60px;top:45px}60%{left:90px;top:72px}80%,100%{left:64px;top:104px}}
+.web .prog{position:absolute;left:0;bottom:-1px;height:3px;background:var(--phos);box-shadow:var(--glow);width:0;animation:webprog 5s ease-in-out infinite}
+@keyframes webprog{0%{width:0}80%{width:100%}100%{width:100%}}
+
+/* L4 app: phone with screen swipes + taps */
+.app{display:flex;align-items:center;justify-content:center}
+.phone{width:124px;height:200px;border:2px solid var(--line);border-radius:18px;background:var(--bg);position:relative;overflow:hidden;box-shadow:0 0 26px rgba(84,246,166,.12)}
+.phone .notch{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:34px;height:5px;border-radius:3px;background:var(--line);z-index:3}
+.phone .screens{display:flex;width:300%;height:100%;animation:appslide 7.5s ease-in-out infinite}
+.phone .s{width:33.333%;height:100%;padding:20px 12px 12px;display:flex;flex-direction:column;gap:8px}
+.phone .s .ln{height:9px;background:var(--bg-3);border:1px solid var(--line-soft)}
+.phone .s .ln.hl{background:rgba(84,246,166,.18);border-color:var(--line)}
+.phone .s .blk{flex:1;border:1px solid var(--line-soft);background:rgba(84,246,166,.05)}
+@keyframes appslide{0%,22%{transform:translateX(0)}33%,55%{transform:translateX(-33.333%)}66%,88%{transform:translateX(-66.666%)}100%{transform:translateX(0)}}
+.phone .tap{position:absolute;width:18px;height:18px;border-radius:50%;border:2px solid var(--phos);z-index:4;opacity:0;animation:apptap 7.5s ease-in-out infinite}
+@keyframes apptap{0%,18%{opacity:0;transform:scale(.4)}21%{opacity:.9;transform:scale(.6);left:64px;top:150px}28%{opacity:0;transform:scale(1.5)}50%{opacity:0}53%{opacity:.9;transform:scale(.6);left:40px;top:60px}60%{opacity:0;transform:scale(1.5)}100%{opacity:0}}
+
+@media (prefers-reduced-motion:reduce){
+  .svy .fill,.cv .b,.web .field::after,.web .btn3,.web .cursor,.web .prog,.phone .screens,.phone .tap{animation:none!important}
+  .svy .fill{width:var(--w)}.cv .b{opacity:1;transform:none}.web .field::after{transform:scaleX(1)}.web .prog{width:100%}
+}
 
 /* how it works */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:step}
@@ -191,61 +257,104 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
         <span class="idx">02 — EVALUATION-AS-A-SERVICE</span>
         <h2 class="sec-title">Four levels of evaluation.</h2>
       </div>
-      <p class="sec-sub">Pick the level that matches what you're shipping. Each step up adds fidelity — from a quick synthetic survey to agents operating your live app end-to-end.</p>
-      <div class="axis"><span>lower lift, faster</span> <span class="ar">— fidelity &amp; realism →</span> <span>full product, end-to-end</span></div>
+      <p class="sec-sub">Pick what you're shipping — each level adds fidelity.</p>
 
-      <div class="ladder">
-        <!-- L1 Survey -->
-        <article class="lvl">
-          <div class="badge"><span class="lv">L1</span><span class="meter"><i class="on"></i><i></i><i></i><i></i></span></div>
-          <div class="body">
-            <div class="top"><h3>Survey</h3><span class="tag">// synthetic panels, instant</span></div>
-            <p class="desc">Put a questionnaire, concept test, pricing question, or message in front of millions of persona-weighted agents. Get <b>segmented, statistically-grounded responses</b> in hours — no recruiting, no panel fees, no incentives.</p>
-            <div class="meta">
-              <div><span class="lab">You get</span><ul><li>Segmented distributions</li><li>Cross-tabs by 1,162 dimensions</li><li>Open-ended verbatims</li><li>Significance vs. control</li></ul></div>
-              <div><span class="lab">Best for</span><p class="best">Concept &amp; message testing, <b>pricing</b>, positioning, market sizing.</p></div>
+      <div class="eaas" id="eaas">
+        <div class="eaas-rail" role="tablist">
+          <button class="eaas-tab active" data-i="0" role="tab"><span class="lv">L1</span><span class="tx"><span class="nm">Survey</span><span class="meter"><i class="on"></i><i></i><i></i><i></i></span></span></button>
+          <button class="eaas-tab" data-i="1" role="tab"><span class="lv">L2</span><span class="tx"><span class="nm">Conversation</span><span class="meter"><i class="on"></i><i class="on"></i><i></i><i></i></span></span></button>
+          <button class="eaas-tab" data-i="2" role="tab"><span class="lv">L3</span><span class="tx"><span class="nm">Web</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></span></button>
+          <button class="eaas-tab" data-i="3" role="tab"><span class="lv">L4</span><span class="tx"><span class="nm">App</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span></button>
+        </div>
+
+        <div class="eaas-stage">
+          <div class="stage-viz">
+            <!-- L1 viz: survey bars -->
+            <div class="viz on" data-i="0">
+              <div class="svy">
+                <span class="cap">// segmented responses</span>
+                <div class="row"><span class="lab2">18–24</span><div class="track"><span class="fill" style="--w:74%"></span></div></div>
+                <div class="row"><span class="lab2">25–44</span><div class="track"><span class="fill" style="--w:91%;animation-delay:.25s"></span></div></div>
+                <div class="row"><span class="lab2">45–64</span><div class="track"><span class="fill" style="--w:58%;animation-delay:.5s"></span></div></div>
+                <div class="row"><span class="lab2">65+</span><div class="track"><span class="fill" style="--w:39%;animation-delay:.75s"></span></div></div>
+              </div>
+            </div>
+            <!-- L2 viz: conversation -->
+            <div class="viz" data-i="1">
+              <div class="cv">
+                <div class="b me">How do I dispute this charge?</div>
+                <div class="b ai">I can help with that — was the charge unauthorized or incorrect?</div>
+                <div class="b me">Incorrect amount.</div>
+                <div class="b ai">Got it. I've opened a dispute and emailed you a confirmation. ✓</div>
+              </div>
+            </div>
+            <!-- L3 viz: web form -->
+            <div class="viz" data-i="2">
+              <div class="scr web">
+                <div class="scr-chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url"></span></div>
+                <div class="scr-body">
+                  <div class="field"></div>
+                  <div class="field"></div>
+                  <div class="field"></div>
+                  <div class="btn3"></div>
+                  <span class="cursor">▲</span>
+                  <span class="prog"></span>
+                </div>
+              </div>
+            </div>
+            <!-- L4 viz: app phone -->
+            <div class="viz app" data-i="3">
+              <div class="phone">
+                <span class="notch"></span>
+                <div class="screens">
+                  <div class="s"><span class="ln hl"></span><span class="ln"></span><span class="blk"></span><span class="ln"></span></div>
+                  <div class="s"><span class="ln"></span><span class="blk"></span><span class="ln hl"></span><span class="ln"></span></div>
+                  <div class="s"><span class="ln hl"></span><span class="ln"></span><span class="ln"></span><span class="blk"></span></div>
+                </div>
+                <span class="tap"></span>
+              </div>
             </div>
           </div>
-        </article>
 
-        <!-- L2 Conversation system -->
-        <article class="lvl">
-          <div class="badge"><span class="lv">L2</span><span class="meter"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
-          <div class="body">
-            <div class="top"><h3>Conversation system</h3><span class="tag">// multi-turn stress tests</span></div>
-            <p class="desc">Diverse personas hold real <b>multi-turn conversations</b> with your chatbot, voice agent, or LLM assistant — probing helpfulness, safety, tone fit, and task completion across the edge cases real users will find.</p>
-            <div class="meta">
-              <div><span class="lab">You get</span><ul><li>Per-persona transcripts &amp; scores</li><li>Safety / refusal analysis</li><li>Tone &amp; sentiment fit</li><li>Task-completion &amp; escalation rates</li></ul></div>
-              <div><span class="lab">Best for</span><p class="best">Support bots, <b>copilots</b>, voice IVR, LLM agents.</p></div>
+          <div class="stage-info">
+            <!-- L1 -->
+            <div class="info on" data-i="0">
+              <div class="top"><h3>Survey</h3><span class="tag">// synthetic panels, instant</span></div>
+              <p class="desc">A questionnaire in front of millions of persona-weighted agents — <b>segmented responses</b> in hours, no recruiting or panel fees.</p>
+              <div class="meta">
+                <div><span class="lab">You get</span><ul><li>Segmented distributions</li><li>Cross-tabs by 1,162 dims</li><li>Open-ended verbatims</li></ul></div>
+                <div><span class="lab">Best for</span><p class="best">Concept testing, <b>pricing</b>, positioning.</p></div>
+              </div>
+            </div>
+            <!-- L2 -->
+            <div class="info" data-i="1">
+              <div class="top"><h3>Conversation system</h3><span class="tag">// multi-turn stress tests</span></div>
+              <p class="desc">Personas hold real <b>multi-turn conversations</b> with your chatbot or assistant — probing helpfulness, safety, tone, and task completion.</p>
+              <div class="meta">
+                <div><span class="lab">You get</span><ul><li>Transcripts &amp; scores</li><li>Safety / refusal analysis</li><li>Task-completion rates</li></ul></div>
+                <div><span class="lab">Best for</span><p class="best">Support bots, <b>copilots</b>, voice IVR.</p></div>
+              </div>
+            </div>
+            <!-- L3 -->
+            <div class="info" data-i="2">
+              <div class="top"><h3>Web</h3><span class="tag">// agents drive your site</span></div>
+              <p class="desc">Agents navigate your site end-to-end — <b>checkout, onboarding, signup</b> — surfacing friction and how much each fix is worth.</p>
+              <div class="meta">
+                <div><span class="lab">You get</span><ul><li>Segmented A/B reports</li><li>Funnel friction map</li><li>Conversion-lift estimates</li></ul></div>
+                <div><span class="lab">Best for</span><p class="best">Checkout, <b>conversion</b> flows, onboarding.</p></div>
+              </div>
+            </div>
+            <!-- L4 -->
+            <div class="info" data-i="3">
+              <div class="top"><h3>App</h3><span class="tag">// full computer-use, end-to-end</span></div>
+              <p class="desc">Agents operate your <b>native mobile or desktop app</b> the way people do — real taps and screens — the highest-fidelity evaluation.</p>
+              <div class="meta">
+                <div><span class="lab">You get</span><ul><li>End-to-end task sims</li><li>Cross-device coverage</li><li>Full session replays</li></ul></div>
+                <div><span class="lab">Best for</span><p class="best">Mobile apps, desktop software, <b>complex products</b>.</p></div>
+              </div>
             </div>
           </div>
-        </article>
-
-        <!-- L3 Web -->
-        <article class="lvl">
-          <div class="badge"><span class="lv">L3</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
-          <div class="body">
-            <div class="top"><h3>Web</h3><span class="tag">// agents drive your site</span></div>
-            <p class="desc">Computer-using agents navigate your website end-to-end — <b>checkout, onboarding, signup</b> — surfacing where users get stuck and how much each fix is worth, validated to 95%+ against real human trajectories.</p>
-            <div class="meta">
-              <div><span class="lab">You get</span><ul><li>Segmented A/B reports</li><li>Funnel drop-off &amp; friction map</li><li>Conversion-lift estimates</li><li>Failure heat by segment</li></ul></div>
-              <div><span class="lab">Best for</span><p class="best">Checkout &amp; <b>conversion</b> flows, onboarding, signup, landing pages.</p></div>
-            </div>
-          </div>
-        </article>
-
-        <!-- L4 App -->
-        <article class="lvl">
-          <div class="badge"><span class="lv">L4</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
-          <div class="body">
-            <div class="top"><h3>App</h3><span class="tag">// full computer-use, end-to-end</span></div>
-            <p class="desc">Our agents operate your <b>native mobile or desktop app</b> the way people do — real taps, gestures, and screens — for the highest-fidelity evaluation of complex, stateful product experiences.</p>
-            <div class="meta">
-              <div><span class="lab">You get</span><ul><li>End-to-end task simulations</li><li>Cross-device / OS coverage</li><li>Accessibility &amp; edge-case probing</li><li>Full session replays</li></ul></div>
-              <div><span class="lab">Best for</span><p class="best">Mobile apps, desktop software, <b>complex products</b>.</p></div>
-            </div>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
 
@@ -329,5 +438,32 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
     <span><a href="index.html">Home</a> · <a href="person.html">Persona</a> · <a href="demo.html">Demo</a> · <a href="enterprise.html">Enterprise</a> · <a href="case_study.html">Case Study</a></span>
     <span>© 2026 matrAIx</span>
   </footer>
+
+  <script>
+  (function(){
+    var root=document.getElementById('eaas'); if(!root) return;
+    var tabs=[].slice.call(root.querySelectorAll('.eaas-tab'));
+    var vizs=[].slice.call(root.querySelectorAll('.viz'));
+    var infos=[].slice.call(root.querySelectorAll('.info'));
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var cur=0, timer=null;
+    function show(i){
+      cur=i;
+      tabs.forEach(function(t,k){ t.classList.toggle('active', k===i); });
+      vizs.forEach(function(v,k){ v.classList.toggle('on', k===i); });
+      infos.forEach(function(f,k){ f.classList.toggle('on', k===i); });
+    }
+    function next(){ show((cur+1)%tabs.length); }
+    function start(){ if(reduce||timer) return; timer=setInterval(next, 4500); }
+    function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+    tabs.forEach(function(t,i){ t.addEventListener('click', function(){ stop(); show(i); }); });
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    // only auto-advance while the section is on screen
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){ es[0].isIntersecting ? start() : stop(); }, {threshold:.25}).observe(root);
+    } else { start(); }
+  })();
+  </script>
 </body>
 </html>
