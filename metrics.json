@@ -1,0 +1,3771 @@
+{
+  "name": "matrAIx evaluation metrics",
+  "count": 935,
+  "categories": {
+    "Quality": 160,
+    "Safety": 66,
+    "Performance": 81,
+    "Cost": 13,
+    "Engagement": 16,
+    "Retention": 64,
+    "Conversion": 15,
+    "Task": 26,
+    "Satisfaction": 15,
+    "Support": 9,
+    "Accessibility": 12,
+    "Reliability": 14,
+    "Compliance": 11,
+    "Channel": 110,
+    "Segment": 113,
+    "Funnel": 60,
+    "Locale": 40,
+    "Device": 24,
+    "Intent": 24,
+    "Fairness": 18,
+    "Conversation": 14,
+    "Search & reco": 16,
+    "Business": 14
+  },
+  "metrics": [
+    {
+      "name": "Output quality",
+      "category": "Quality"
+    },
+    {
+      "name": "Response accuracy",
+      "category": "Quality"
+    },
+    {
+      "name": "Factual accuracy",
+      "category": "Quality"
+    },
+    {
+      "name": "Hallucination rate",
+      "category": "Quality"
+    },
+    {
+      "name": "Relevance",
+      "category": "Quality"
+    },
+    {
+      "name": "Coherence",
+      "category": "Quality"
+    },
+    {
+      "name": "Completeness",
+      "category": "Quality"
+    },
+    {
+      "name": "Correctness",
+      "category": "Quality"
+    },
+    {
+      "name": "Groundedness",
+      "category": "Quality"
+    },
+    {
+      "name": "Faithfulness",
+      "category": "Quality"
+    },
+    {
+      "name": "Citation accuracy",
+      "category": "Quality"
+    },
+    {
+      "name": "Source attribution",
+      "category": "Quality"
+    },
+    {
+      "name": "Format adherence",
+      "category": "Quality"
+    },
+    {
+      "name": "Instruction-following",
+      "category": "Quality"
+    },
+    {
+      "name": "Helpfulness",
+      "category": "Quality"
+    },
+    {
+      "name": "Harmlessness",
+      "category": "Quality"
+    },
+    {
+      "name": "Honesty",
+      "category": "Quality"
+    },
+    {
+      "name": "Conciseness",
+      "category": "Quality"
+    },
+    {
+      "name": "Verbosity",
+      "category": "Quality"
+    },
+    {
+      "name": "Readability",
+      "category": "Quality"
+    },
+    {
+      "name": "Fluency",
+      "category": "Quality"
+    },
+    {
+      "name": "Grammaticality",
+      "category": "Quality"
+    },
+    {
+      "name": "Tone appropriateness",
+      "category": "Quality"
+    },
+    {
+      "name": "Style consistency",
+      "category": "Quality"
+    },
+    {
+      "name": "Answer relevance",
+      "category": "Quality"
+    },
+    {
+      "name": "Context relevance",
+      "category": "Quality"
+    },
+    {
+      "name": "Context precision",
+      "category": "Quality"
+    },
+    {
+      "name": "Context recall",
+      "category": "Quality"
+    },
+    {
+      "name": "Semantic similarity",
+      "category": "Quality"
+    },
+    {
+      "name": "BLEU score",
+      "category": "Quality"
+    },
+    {
+      "name": "ROUGE score",
+      "category": "Quality"
+    },
+    {
+      "name": "Exact-match rate",
+      "category": "Quality"
+    },
+    {
+      "name": "F1 score",
+      "category": "Quality"
+    },
+    {
+      "name": "Precision",
+      "category": "Quality"
+    },
+    {
+      "name": "Recall",
+      "category": "Quality"
+    },
+    {
+      "name": "Specificity",
+      "category": "Quality"
+    },
+    {
+      "name": "Calibration error",
+      "category": "Quality"
+    },
+    {
+      "name": "Confidence calibration",
+      "category": "Quality"
+    },
+    {
+      "name": "Overconfidence rate",
+      "category": "Quality"
+    },
+    {
+      "name": "Abstention rate",
+      "category": "Quality"
+    },
+    {
+      "name": "Safety",
+      "category": "Safety"
+    },
+    {
+      "name": "Toxicity rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Hate-speech rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Harassment rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Violence-content rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Self-harm safety",
+      "category": "Safety"
+    },
+    {
+      "name": "Sexual-content rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Bias rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Demographic parity",
+      "category": "Safety"
+    },
+    {
+      "name": "Stereotype rate",
+      "category": "Safety"
+    },
+    {
+      "name": "PII leakage rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Data-leakage rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Secret-exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Jailbreak resistance",
+      "category": "Safety"
+    },
+    {
+      "name": "Prompt-injection resistance",
+      "category": "Safety"
+    },
+    {
+      "name": "Adversarial robustness",
+      "category": "Safety"
+    },
+    {
+      "name": "Refusal appropriateness",
+      "category": "Safety"
+    },
+    {
+      "name": "Over-refusal rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Under-refusal rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Harmful-instruction rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Misinformation rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Unsafe-output rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Content-policy adherence",
+      "category": "Safety"
+    },
+    {
+      "name": "Guardrail trigger rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Red-team pass rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Profanity rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Privacy compliance",
+      "category": "Safety"
+    },
+    {
+      "name": "Latency",
+      "category": "Performance"
+    },
+    {
+      "name": "Response time",
+      "category": "Performance"
+    },
+    {
+      "name": "Time to first token",
+      "category": "Performance"
+    },
+    {
+      "name": "Time to last token",
+      "category": "Performance"
+    },
+    {
+      "name": "Inference latency",
+      "category": "Performance"
+    },
+    {
+      "name": "API latency",
+      "category": "Performance"
+    },
+    {
+      "name": "End-to-end latency",
+      "category": "Performance"
+    },
+    {
+      "name": "Throughput",
+      "category": "Performance"
+    },
+    {
+      "name": "Tokens per second",
+      "category": "Performance"
+    },
+    {
+      "name": "Requests per second",
+      "category": "Performance"
+    },
+    {
+      "name": "Queue time",
+      "category": "Performance"
+    },
+    {
+      "name": "Cold-start time",
+      "category": "Performance"
+    },
+    {
+      "name": "Render time",
+      "category": "Performance"
+    },
+    {
+      "name": "Page load time",
+      "category": "Performance"
+    },
+    {
+      "name": "Time to interactive",
+      "category": "Performance"
+    },
+    {
+      "name": "Processing time",
+      "category": "Performance"
+    },
+    {
+      "name": "Round-trip time",
+      "category": "Performance"
+    },
+    {
+      "name": "Cost per request",
+      "category": "Cost"
+    },
+    {
+      "name": "Cost per task",
+      "category": "Cost"
+    },
+    {
+      "name": "Cost per resolution",
+      "category": "Cost"
+    },
+    {
+      "name": "Cost per token",
+      "category": "Cost"
+    },
+    {
+      "name": "Token usage",
+      "category": "Cost"
+    },
+    {
+      "name": "Prompt-token count",
+      "category": "Cost"
+    },
+    {
+      "name": "Completion-token count",
+      "category": "Cost"
+    },
+    {
+      "name": "Compute cost",
+      "category": "Cost"
+    },
+    {
+      "name": "GPU utilization",
+      "category": "Cost"
+    },
+    {
+      "name": "Token efficiency",
+      "category": "Cost"
+    },
+    {
+      "name": "Cache-hit rate",
+      "category": "Cost"
+    },
+    {
+      "name": "Cost efficiency",
+      "category": "Cost"
+    },
+    {
+      "name": "Budget adherence",
+      "category": "Cost"
+    },
+    {
+      "name": "Click-through rate",
+      "category": "Engagement"
+    },
+    {
+      "name": "Engagement rate",
+      "category": "Engagement"
+    },
+    {
+      "name": "Interaction rate",
+      "category": "Engagement"
+    },
+    {
+      "name": "Session length",
+      "category": "Engagement"
+    },
+    {
+      "name": "Session depth",
+      "category": "Engagement"
+    },
+    {
+      "name": "Scroll depth",
+      "category": "Engagement"
+    },
+    {
+      "name": "Bounce rate",
+      "category": "Engagement"
+    },
+    {
+      "name": "Dwell time",
+      "category": "Engagement"
+    },
+    {
+      "name": "Pages per session",
+      "category": "Engagement"
+    },
+    {
+      "name": "Feature adoption rate",
+      "category": "Engagement"
+    },
+    {
+      "name": "Feature usage rate",
+      "category": "Engagement"
+    },
+    {
+      "name": "Active-use rate",
+      "category": "Engagement"
+    },
+    {
+      "name": "Stickiness",
+      "category": "Engagement"
+    },
+    {
+      "name": "Return-visit rate",
+      "category": "Engagement"
+    },
+    {
+      "name": "Time on task",
+      "category": "Engagement"
+    },
+    {
+      "name": "Time in app",
+      "category": "Engagement"
+    },
+    {
+      "name": "Retention rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Churn rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Reactivation rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Resurrection rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Renewal rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Repeat-usage rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Loyalty rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Lifetime value",
+      "category": "Retention"
+    },
+    {
+      "name": "Cohort retention",
+      "category": "Retention"
+    },
+    {
+      "name": "Conversion rate",
+      "category": "Conversion"
+    },
+    {
+      "name": "Signup completion",
+      "category": "Conversion"
+    },
+    {
+      "name": "Checkout completion",
+      "category": "Conversion"
+    },
+    {
+      "name": "Cart-abandonment rate",
+      "category": "Conversion"
+    },
+    {
+      "name": "Activation rate",
+      "category": "Conversion"
+    },
+    {
+      "name": "Onboarding completion",
+      "category": "Conversion"
+    },
+    {
+      "name": "Upgrade rate",
+      "category": "Conversion"
+    },
+    {
+      "name": "Cross-sell rate",
+      "category": "Conversion"
+    },
+    {
+      "name": "Upsell rate",
+      "category": "Conversion"
+    },
+    {
+      "name": "Trial-conversion rate",
+      "category": "Conversion"
+    },
+    {
+      "name": "Lead-conversion rate",
+      "category": "Conversion"
+    },
+    {
+      "name": "Form-completion rate",
+      "category": "Conversion"
+    },
+    {
+      "name": "Funnel drop-off",
+      "category": "Conversion"
+    },
+    {
+      "name": "Add-to-cart rate",
+      "category": "Conversion"
+    },
+    {
+      "name": "Purchase rate",
+      "category": "Conversion"
+    },
+    {
+      "name": "Task completion rate",
+      "category": "Task"
+    },
+    {
+      "name": "Task success rate",
+      "category": "Task"
+    },
+    {
+      "name": "Goal completion rate",
+      "category": "Task"
+    },
+    {
+      "name": "Subtask success rate",
+      "category": "Task"
+    },
+    {
+      "name": "Steps to completion",
+      "category": "Task"
+    },
+    {
+      "name": "Action efficiency",
+      "category": "Task"
+    },
+    {
+      "name": "Error rate",
+      "category": "Task"
+    },
+    {
+      "name": "Retry rate",
+      "category": "Task"
+    },
+    {
+      "name": "Recovery rate",
+      "category": "Task"
+    },
+    {
+      "name": "Self-correction rate",
+      "category": "Task"
+    },
+    {
+      "name": "Escalation rate",
+      "category": "Task"
+    },
+    {
+      "name": "Handoff rate",
+      "category": "Task"
+    },
+    {
+      "name": "Tool-use accuracy",
+      "category": "Task"
+    },
+    {
+      "name": "Tool-selection accuracy",
+      "category": "Task"
+    },
+    {
+      "name": "Tool-call success rate",
+      "category": "Task"
+    },
+    {
+      "name": "Function-call accuracy",
+      "category": "Task"
+    },
+    {
+      "name": "API-call success rate",
+      "category": "Task"
+    },
+    {
+      "name": "Planning quality",
+      "category": "Task"
+    },
+    {
+      "name": "Plan validity",
+      "category": "Task"
+    },
+    {
+      "name": "Reasoning accuracy",
+      "category": "Task"
+    },
+    {
+      "name": "Multi-step accuracy",
+      "category": "Task"
+    },
+    {
+      "name": "Stuck / loop rate",
+      "category": "Task"
+    },
+    {
+      "name": "Timeout rate",
+      "category": "Task"
+    },
+    {
+      "name": "Abandonment rate",
+      "category": "Task"
+    },
+    {
+      "name": "Intervention rate",
+      "category": "Task"
+    },
+    {
+      "name": "First-attempt success",
+      "category": "Task"
+    },
+    {
+      "name": "User satisfaction",
+      "category": "Satisfaction"
+    },
+    {
+      "name": "CSAT",
+      "category": "Satisfaction"
+    },
+    {
+      "name": "NPS",
+      "category": "Satisfaction"
+    },
+    {
+      "name": "Customer effort score",
+      "category": "Satisfaction"
+    },
+    {
+      "name": "Sentiment positivity",
+      "category": "Satisfaction"
+    },
+    {
+      "name": "Sentiment negativity",
+      "category": "Satisfaction"
+    },
+    {
+      "name": "Frustration rate",
+      "category": "Satisfaction"
+    },
+    {
+      "name": "Apologize rate",
+      "category": "Satisfaction"
+    },
+    {
+      "name": "Complaint rate",
+      "category": "Satisfaction"
+    },
+    {
+      "name": "Praise rate",
+      "category": "Satisfaction"
+    },
+    {
+      "name": "Delight rate",
+      "category": "Satisfaction"
+    },
+    {
+      "name": "Trust score",
+      "category": "Satisfaction"
+    },
+    {
+      "name": "Perceived helpfulness",
+      "category": "Satisfaction"
+    },
+    {
+      "name": "Perceived accuracy",
+      "category": "Satisfaction"
+    },
+    {
+      "name": "Recommendation rate",
+      "category": "Satisfaction"
+    },
+    {
+      "name": "First-contact resolution",
+      "category": "Support"
+    },
+    {
+      "name": "Resolution rate",
+      "category": "Support"
+    },
+    {
+      "name": "Mean time to resolution",
+      "category": "Support"
+    },
+    {
+      "name": "Deflection rate",
+      "category": "Support"
+    },
+    {
+      "name": "Escalation-to-human rate",
+      "category": "Support"
+    },
+    {
+      "name": "Reopen rate",
+      "category": "Support"
+    },
+    {
+      "name": "Backlog rate",
+      "category": "Support"
+    },
+    {
+      "name": "Response rate",
+      "category": "Support"
+    },
+    {
+      "name": "Containment rate",
+      "category": "Support"
+    },
+    {
+      "name": "Accessibility score",
+      "category": "Accessibility"
+    },
+    {
+      "name": "Screen-reader compatibility",
+      "category": "Accessibility"
+    },
+    {
+      "name": "Keyboard navigability",
+      "category": "Accessibility"
+    },
+    {
+      "name": "Contrast adequacy",
+      "category": "Accessibility"
+    },
+    {
+      "name": "Alt-text coverage",
+      "category": "Accessibility"
+    },
+    {
+      "name": "ARIA correctness",
+      "category": "Accessibility"
+    },
+    {
+      "name": "Focus-order correctness",
+      "category": "Accessibility"
+    },
+    {
+      "name": "Caption coverage",
+      "category": "Accessibility"
+    },
+    {
+      "name": "Readability grade",
+      "category": "Accessibility"
+    },
+    {
+      "name": "Color-blind safety",
+      "category": "Accessibility"
+    },
+    {
+      "name": "Motion-safety adherence",
+      "category": "Accessibility"
+    },
+    {
+      "name": "Touch-target adequacy",
+      "category": "Accessibility"
+    },
+    {
+      "name": "Robustness",
+      "category": "Reliability"
+    },
+    {
+      "name": "Consistency",
+      "category": "Reliability"
+    },
+    {
+      "name": "Determinism",
+      "category": "Reliability"
+    },
+    {
+      "name": "Stability",
+      "category": "Reliability"
+    },
+    {
+      "name": "Reproducibility",
+      "category": "Reliability"
+    },
+    {
+      "name": "Edge-case handling",
+      "category": "Reliability"
+    },
+    {
+      "name": "Out-of-distribution detection",
+      "category": "Reliability"
+    },
+    {
+      "name": "Graceful-degradation rate",
+      "category": "Reliability"
+    },
+    {
+      "name": "Uptime",
+      "category": "Reliability"
+    },
+    {
+      "name": "Availability",
+      "category": "Reliability"
+    },
+    {
+      "name": "Failure rate",
+      "category": "Reliability"
+    },
+    {
+      "name": "Crash rate",
+      "category": "Reliability"
+    },
+    {
+      "name": "Recovery time",
+      "category": "Reliability"
+    },
+    {
+      "name": "Fault tolerance",
+      "category": "Reliability"
+    },
+    {
+      "name": "Compliance rate",
+      "category": "Compliance"
+    },
+    {
+      "name": "Policy adherence",
+      "category": "Compliance"
+    },
+    {
+      "name": "Regulatory adherence",
+      "category": "Compliance"
+    },
+    {
+      "name": "Audit pass rate",
+      "category": "Compliance"
+    },
+    {
+      "name": "Explainability",
+      "category": "Compliance"
+    },
+    {
+      "name": "Transparency",
+      "category": "Compliance"
+    },
+    {
+      "name": "Traceability",
+      "category": "Compliance"
+    },
+    {
+      "name": "Consent adherence",
+      "category": "Compliance"
+    },
+    {
+      "name": "Data-retention compliance",
+      "category": "Compliance"
+    },
+    {
+      "name": "Fairness",
+      "category": "Compliance"
+    },
+    {
+      "name": "Equal-opportunity gap",
+      "category": "Compliance"
+    },
+    {
+      "name": "Latency — P50",
+      "category": "Performance"
+    },
+    {
+      "name": "Latency — P75",
+      "category": "Performance"
+    },
+    {
+      "name": "Latency — P90",
+      "category": "Performance"
+    },
+    {
+      "name": "Latency — P95",
+      "category": "Performance"
+    },
+    {
+      "name": "Latency — P99",
+      "category": "Performance"
+    },
+    {
+      "name": "Latency — P99.9",
+      "category": "Performance"
+    },
+    {
+      "name": "Latency — mean",
+      "category": "Performance"
+    },
+    {
+      "name": "Latency — max",
+      "category": "Performance"
+    },
+    {
+      "name": "Response time — P50",
+      "category": "Performance"
+    },
+    {
+      "name": "Response time — P75",
+      "category": "Performance"
+    },
+    {
+      "name": "Response time — P90",
+      "category": "Performance"
+    },
+    {
+      "name": "Response time — P95",
+      "category": "Performance"
+    },
+    {
+      "name": "Response time — P99",
+      "category": "Performance"
+    },
+    {
+      "name": "Response time — P99.9",
+      "category": "Performance"
+    },
+    {
+      "name": "Response time — mean",
+      "category": "Performance"
+    },
+    {
+      "name": "Response time — max",
+      "category": "Performance"
+    },
+    {
+      "name": "Time to first token — P50",
+      "category": "Performance"
+    },
+    {
+      "name": "Time to first token — P75",
+      "category": "Performance"
+    },
+    {
+      "name": "Time to first token — P90",
+      "category": "Performance"
+    },
+    {
+      "name": "Time to first token — P95",
+      "category": "Performance"
+    },
+    {
+      "name": "Time to first token — P99",
+      "category": "Performance"
+    },
+    {
+      "name": "Time to first token — P99.9",
+      "category": "Performance"
+    },
+    {
+      "name": "Time to first token — mean",
+      "category": "Performance"
+    },
+    {
+      "name": "Time to first token — max",
+      "category": "Performance"
+    },
+    {
+      "name": "Inference latency — P50",
+      "category": "Performance"
+    },
+    {
+      "name": "Inference latency — P75",
+      "category": "Performance"
+    },
+    {
+      "name": "Inference latency — P90",
+      "category": "Performance"
+    },
+    {
+      "name": "Inference latency — P95",
+      "category": "Performance"
+    },
+    {
+      "name": "Inference latency — P99",
+      "category": "Performance"
+    },
+    {
+      "name": "Inference latency — P99.9",
+      "category": "Performance"
+    },
+    {
+      "name": "Inference latency — mean",
+      "category": "Performance"
+    },
+    {
+      "name": "Inference latency — max",
+      "category": "Performance"
+    },
+    {
+      "name": "API latency — P50",
+      "category": "Performance"
+    },
+    {
+      "name": "API latency — P75",
+      "category": "Performance"
+    },
+    {
+      "name": "API latency — P90",
+      "category": "Performance"
+    },
+    {
+      "name": "API latency — P95",
+      "category": "Performance"
+    },
+    {
+      "name": "API latency — P99",
+      "category": "Performance"
+    },
+    {
+      "name": "API latency — P99.9",
+      "category": "Performance"
+    },
+    {
+      "name": "API latency — mean",
+      "category": "Performance"
+    },
+    {
+      "name": "API latency — max",
+      "category": "Performance"
+    },
+    {
+      "name": "Render time — P50",
+      "category": "Performance"
+    },
+    {
+      "name": "Render time — P75",
+      "category": "Performance"
+    },
+    {
+      "name": "Render time — P90",
+      "category": "Performance"
+    },
+    {
+      "name": "Render time — P95",
+      "category": "Performance"
+    },
+    {
+      "name": "Render time — P99",
+      "category": "Performance"
+    },
+    {
+      "name": "Render time — P99.9",
+      "category": "Performance"
+    },
+    {
+      "name": "Render time — mean",
+      "category": "Performance"
+    },
+    {
+      "name": "Render time — max",
+      "category": "Performance"
+    },
+    {
+      "name": "Queue time — P50",
+      "category": "Performance"
+    },
+    {
+      "name": "Queue time — P75",
+      "category": "Performance"
+    },
+    {
+      "name": "Queue time — P90",
+      "category": "Performance"
+    },
+    {
+      "name": "Queue time — P95",
+      "category": "Performance"
+    },
+    {
+      "name": "Queue time — P99",
+      "category": "Performance"
+    },
+    {
+      "name": "Queue time — P99.9",
+      "category": "Performance"
+    },
+    {
+      "name": "Queue time — mean",
+      "category": "Performance"
+    },
+    {
+      "name": "Queue time — max",
+      "category": "Performance"
+    },
+    {
+      "name": "Processing time — P50",
+      "category": "Performance"
+    },
+    {
+      "name": "Processing time — P75",
+      "category": "Performance"
+    },
+    {
+      "name": "Processing time — P90",
+      "category": "Performance"
+    },
+    {
+      "name": "Processing time — P95",
+      "category": "Performance"
+    },
+    {
+      "name": "Processing time — P99",
+      "category": "Performance"
+    },
+    {
+      "name": "Processing time — P99.9",
+      "category": "Performance"
+    },
+    {
+      "name": "Processing time — mean",
+      "category": "Performance"
+    },
+    {
+      "name": "Processing time — max",
+      "category": "Performance"
+    },
+    {
+      "name": "Day-1 retention rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-3 retention rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-7 retention rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-14 retention rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-30 retention rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-60 retention rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-90 retention rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Week-1 retention rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Month-1 retention rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Month-3 retention rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Month-6 retention rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-1 churn rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-3 churn rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-7 churn rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-14 churn rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-30 churn rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-60 churn rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-90 churn rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Week-1 churn rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Month-1 churn rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Month-3 churn rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Month-6 churn rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-1 reactivation rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-3 reactivation rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-7 reactivation rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-14 reactivation rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-30 reactivation rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-60 reactivation rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-90 reactivation rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Week-1 reactivation rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Month-1 reactivation rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Month-3 reactivation rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Month-6 reactivation rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-1 active-use rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-3 active-use rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-7 active-use rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-14 active-use rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-30 active-use rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-60 active-use rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-90 active-use rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Week-1 active-use rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Month-1 active-use rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Month-3 active-use rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Month-6 active-use rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-1 repeat-usage rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-3 repeat-usage rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-7 repeat-usage rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-14 repeat-usage rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-30 repeat-usage rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-60 repeat-usage rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Day-90 repeat-usage rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Week-1 repeat-usage rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Month-1 repeat-usage rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Month-3 repeat-usage rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Month-6 repeat-usage rate",
+      "category": "Retention"
+    },
+    {
+      "name": "Mobile click-through rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Desktop click-through rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Tablet click-through rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Web click-through rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Voice click-through rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Email click-through rate",
+      "category": "Channel"
+    },
+    {
+      "name": "In-app click-through rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Push click-through rate",
+      "category": "Channel"
+    },
+    {
+      "name": "SMS click-through rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Chat click-through rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Kiosk click-through rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Mobile conversion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Desktop conversion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Tablet conversion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Web conversion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Voice conversion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Email conversion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "In-app conversion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Push conversion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "SMS conversion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Chat conversion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Kiosk conversion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Mobile bounce rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Desktop bounce rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Tablet bounce rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Web bounce rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Voice bounce rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Email bounce rate",
+      "category": "Channel"
+    },
+    {
+      "name": "In-app bounce rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Push bounce rate",
+      "category": "Channel"
+    },
+    {
+      "name": "SMS bounce rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Chat bounce rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Kiosk bounce rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Mobile engagement rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Desktop engagement rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Tablet engagement rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Web engagement rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Voice engagement rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Email engagement rate",
+      "category": "Channel"
+    },
+    {
+      "name": "In-app engagement rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Push engagement rate",
+      "category": "Channel"
+    },
+    {
+      "name": "SMS engagement rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Chat engagement rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Kiosk engagement rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Mobile completion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Desktop completion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Tablet completion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Web completion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Voice completion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Email completion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "In-app completion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Push completion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "SMS completion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Chat completion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Kiosk completion rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Mobile drop-off rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Desktop drop-off rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Tablet drop-off rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Web drop-off rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Voice drop-off rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Email drop-off rate",
+      "category": "Channel"
+    },
+    {
+      "name": "In-app drop-off rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Push drop-off rate",
+      "category": "Channel"
+    },
+    {
+      "name": "SMS drop-off rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Chat drop-off rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Kiosk drop-off rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Mobile error rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Desktop error rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Tablet error rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Web error rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Voice error rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Email error rate",
+      "category": "Channel"
+    },
+    {
+      "name": "In-app error rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Push error rate",
+      "category": "Channel"
+    },
+    {
+      "name": "SMS error rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Chat error rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Kiosk error rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Mobile satisfaction",
+      "category": "Channel"
+    },
+    {
+      "name": "Desktop satisfaction",
+      "category": "Channel"
+    },
+    {
+      "name": "Tablet satisfaction",
+      "category": "Channel"
+    },
+    {
+      "name": "Web satisfaction",
+      "category": "Channel"
+    },
+    {
+      "name": "Voice satisfaction",
+      "category": "Channel"
+    },
+    {
+      "name": "Email satisfaction",
+      "category": "Channel"
+    },
+    {
+      "name": "In-app satisfaction",
+      "category": "Channel"
+    },
+    {
+      "name": "Push satisfaction",
+      "category": "Channel"
+    },
+    {
+      "name": "SMS satisfaction",
+      "category": "Channel"
+    },
+    {
+      "name": "Chat satisfaction",
+      "category": "Channel"
+    },
+    {
+      "name": "Kiosk satisfaction",
+      "category": "Channel"
+    },
+    {
+      "name": "Mobile task success rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Desktop task success rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Tablet task success rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Web task success rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Voice task success rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Email task success rate",
+      "category": "Channel"
+    },
+    {
+      "name": "In-app task success rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Push task success rate",
+      "category": "Channel"
+    },
+    {
+      "name": "SMS task success rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Chat task success rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Kiosk task success rate",
+      "category": "Channel"
+    },
+    {
+      "name": "Mobile latency",
+      "category": "Channel"
+    },
+    {
+      "name": "Desktop latency",
+      "category": "Channel"
+    },
+    {
+      "name": "Tablet latency",
+      "category": "Channel"
+    },
+    {
+      "name": "Web latency",
+      "category": "Channel"
+    },
+    {
+      "name": "Voice latency",
+      "category": "Channel"
+    },
+    {
+      "name": "Email latency",
+      "category": "Channel"
+    },
+    {
+      "name": "In-app latency",
+      "category": "Channel"
+    },
+    {
+      "name": "Push latency",
+      "category": "Channel"
+    },
+    {
+      "name": "SMS latency",
+      "category": "Channel"
+    },
+    {
+      "name": "Chat latency",
+      "category": "Channel"
+    },
+    {
+      "name": "Kiosk latency",
+      "category": "Channel"
+    },
+    {
+      "name": "New-user conversion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Returning-user conversion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Power-user conversion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Low-bandwidth conversion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Non-native English conversion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Age 55+ conversion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Accessibility-needs conversion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Enterprise conversion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "SMB conversion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Free-tier conversion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Paid-tier conversion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "New-user task completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Returning-user task completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Power-user task completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Mobile task completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Low-bandwidth task completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Non-native English task completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Age 55+ task completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Accessibility-needs task completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Enterprise task completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "SMB task completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Free-tier task completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Paid-tier task completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "New-user satisfaction",
+      "category": "Segment"
+    },
+    {
+      "name": "Returning-user satisfaction",
+      "category": "Segment"
+    },
+    {
+      "name": "Power-user satisfaction",
+      "category": "Segment"
+    },
+    {
+      "name": "Low-bandwidth satisfaction",
+      "category": "Segment"
+    },
+    {
+      "name": "Non-native English satisfaction",
+      "category": "Segment"
+    },
+    {
+      "name": "Age 55+ satisfaction",
+      "category": "Segment"
+    },
+    {
+      "name": "Accessibility-needs satisfaction",
+      "category": "Segment"
+    },
+    {
+      "name": "Enterprise satisfaction",
+      "category": "Segment"
+    },
+    {
+      "name": "SMB satisfaction",
+      "category": "Segment"
+    },
+    {
+      "name": "Free-tier satisfaction",
+      "category": "Segment"
+    },
+    {
+      "name": "Paid-tier satisfaction",
+      "category": "Segment"
+    },
+    {
+      "name": "New-user churn rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Returning-user churn rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Power-user churn rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Mobile churn rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Low-bandwidth churn rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Non-native English churn rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Age 55+ churn rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Accessibility-needs churn rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Enterprise churn rate",
+      "category": "Segment"
+    },
+    {
+      "name": "SMB churn rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Free-tier churn rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Paid-tier churn rate",
+      "category": "Segment"
+    },
+    {
+      "name": "New-user error rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Returning-user error rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Power-user error rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Low-bandwidth error rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Non-native English error rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Age 55+ error rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Accessibility-needs error rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Enterprise error rate",
+      "category": "Segment"
+    },
+    {
+      "name": "SMB error rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Free-tier error rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Paid-tier error rate",
+      "category": "Segment"
+    },
+    {
+      "name": "New-user completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Returning-user completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Power-user completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Low-bandwidth completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Non-native English completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Age 55+ completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Accessibility-needs completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Enterprise completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "SMB completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Free-tier completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Paid-tier completion rate",
+      "category": "Segment"
+    },
+    {
+      "name": "New-user engagement rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Returning-user engagement rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Power-user engagement rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Low-bandwidth engagement rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Non-native English engagement rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Age 55+ engagement rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Accessibility-needs engagement rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Enterprise engagement rate",
+      "category": "Segment"
+    },
+    {
+      "name": "SMB engagement rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Free-tier engagement rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Paid-tier engagement rate",
+      "category": "Segment"
+    },
+    {
+      "name": "New-user drop-off rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Returning-user drop-off rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Power-user drop-off rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Low-bandwidth drop-off rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Non-native English drop-off rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Age 55+ drop-off rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Accessibility-needs drop-off rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Enterprise drop-off rate",
+      "category": "Segment"
+    },
+    {
+      "name": "SMB drop-off rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Free-tier drop-off rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Paid-tier drop-off rate",
+      "category": "Segment"
+    },
+    {
+      "name": "New-user resolution rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Returning-user resolution rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Power-user resolution rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Mobile resolution rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Low-bandwidth resolution rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Non-native English resolution rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Age 55+ resolution rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Accessibility-needs resolution rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Enterprise resolution rate",
+      "category": "Segment"
+    },
+    {
+      "name": "SMB resolution rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Free-tier resolution rate",
+      "category": "Segment"
+    },
+    {
+      "name": "Paid-tier resolution rate",
+      "category": "Segment"
+    },
+    {
+      "name": "New-user latency",
+      "category": "Segment"
+    },
+    {
+      "name": "Returning-user latency",
+      "category": "Segment"
+    },
+    {
+      "name": "Power-user latency",
+      "category": "Segment"
+    },
+    {
+      "name": "Low-bandwidth latency",
+      "category": "Segment"
+    },
+    {
+      "name": "Non-native English latency",
+      "category": "Segment"
+    },
+    {
+      "name": "Age 55+ latency",
+      "category": "Segment"
+    },
+    {
+      "name": "Accessibility-needs latency",
+      "category": "Segment"
+    },
+    {
+      "name": "Enterprise latency",
+      "category": "Segment"
+    },
+    {
+      "name": "SMB latency",
+      "category": "Segment"
+    },
+    {
+      "name": "Free-tier latency",
+      "category": "Segment"
+    },
+    {
+      "name": "Paid-tier latency",
+      "category": "Segment"
+    },
+    {
+      "name": "Accuracy (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Accuracy (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Accuracy (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Accuracy (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Accuracy (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Accuracy (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Relevance (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Relevance (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Relevance (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Relevance (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Relevance (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Relevance (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Coherence (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Coherence (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Coherence (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Coherence (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Coherence (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Coherence (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Completeness (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Completeness (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Completeness (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Completeness (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Completeness (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Completeness (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Fluency (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Fluency (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Fluency (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Fluency (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Fluency (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Fluency (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Faithfulness (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Faithfulness (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Faithfulness (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Faithfulness (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Faithfulness (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Faithfulness (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Groundedness (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Groundedness (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Groundedness (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Groundedness (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Groundedness (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Groundedness (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Helpfulness (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Helpfulness (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Helpfulness (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Helpfulness (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Helpfulness (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Helpfulness (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Conciseness (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Conciseness (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Conciseness (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Conciseness (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Conciseness (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Conciseness (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Factuality (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Factuality (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Factuality (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Factuality (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Factuality (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Factuality (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Consistency (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Consistency (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Consistency (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Consistency (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Consistency (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Consistency (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Correctness (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Correctness (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Correctness (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Correctness (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Correctness (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Correctness (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Toxicity (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Toxicity (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Toxicity (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Toxicity (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Toxicity (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Toxicity (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Bias (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Bias (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Bias (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Bias (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Bias (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Bias (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Refusal rate (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Refusal rate (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Refusal rate (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Refusal rate (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Refusal rate (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Refusal rate (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Hallucination rate (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Hallucination rate (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Hallucination rate (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Hallucination rate (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Hallucination rate (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Hallucination rate (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Citation accuracy (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Citation accuracy (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Citation accuracy (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Citation accuracy (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Citation accuracy (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Citation accuracy (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Instruction adherence (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Instruction adherence (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Instruction adherence (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Instruction adherence (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Instruction adherence (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Instruction adherence (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Tone match (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Tone match (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Tone match (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Tone match (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Tone match (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Tone match (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Sentiment (per response)",
+      "category": "Quality"
+    },
+    {
+      "name": "Sentiment (per session)",
+      "category": "Quality"
+    },
+    {
+      "name": "Sentiment (per turn)",
+      "category": "Quality"
+    },
+    {
+      "name": "Sentiment (per task)",
+      "category": "Quality"
+    },
+    {
+      "name": "Sentiment (overall)",
+      "category": "Quality"
+    },
+    {
+      "name": "Sentiment (per user)",
+      "category": "Quality"
+    },
+    {
+      "name": "Drop-off rate — landing",
+      "category": "Funnel"
+    },
+    {
+      "name": "Drop-off rate — signup",
+      "category": "Funnel"
+    },
+    {
+      "name": "Drop-off rate — onboarding",
+      "category": "Funnel"
+    },
+    {
+      "name": "Drop-off rate — search",
+      "category": "Funnel"
+    },
+    {
+      "name": "Drop-off rate — results",
+      "category": "Funnel"
+    },
+    {
+      "name": "Drop-off rate — add-to-cart",
+      "category": "Funnel"
+    },
+    {
+      "name": "Drop-off rate — checkout",
+      "category": "Funnel"
+    },
+    {
+      "name": "Drop-off rate — payment",
+      "category": "Funnel"
+    },
+    {
+      "name": "Drop-off rate — confirmation",
+      "category": "Funnel"
+    },
+    {
+      "name": "Drop-off rate — support",
+      "category": "Funnel"
+    },
+    {
+      "name": "Completion rate — landing",
+      "category": "Funnel"
+    },
+    {
+      "name": "Completion rate — signup",
+      "category": "Funnel"
+    },
+    {
+      "name": "Completion rate — onboarding",
+      "category": "Funnel"
+    },
+    {
+      "name": "Completion rate — search",
+      "category": "Funnel"
+    },
+    {
+      "name": "Completion rate — results",
+      "category": "Funnel"
+    },
+    {
+      "name": "Completion rate — add-to-cart",
+      "category": "Funnel"
+    },
+    {
+      "name": "Completion rate — checkout",
+      "category": "Funnel"
+    },
+    {
+      "name": "Completion rate — payment",
+      "category": "Funnel"
+    },
+    {
+      "name": "Completion rate — confirmation",
+      "category": "Funnel"
+    },
+    {
+      "name": "Completion rate — support",
+      "category": "Funnel"
+    },
+    {
+      "name": "Time spent — landing",
+      "category": "Funnel"
+    },
+    {
+      "name": "Time spent — signup",
+      "category": "Funnel"
+    },
+    {
+      "name": "Time spent — onboarding",
+      "category": "Funnel"
+    },
+    {
+      "name": "Time spent — search",
+      "category": "Funnel"
+    },
+    {
+      "name": "Time spent — results",
+      "category": "Funnel"
+    },
+    {
+      "name": "Time spent — add-to-cart",
+      "category": "Funnel"
+    },
+    {
+      "name": "Time spent — checkout",
+      "category": "Funnel"
+    },
+    {
+      "name": "Time spent — payment",
+      "category": "Funnel"
+    },
+    {
+      "name": "Time spent — confirmation",
+      "category": "Funnel"
+    },
+    {
+      "name": "Time spent — support",
+      "category": "Funnel"
+    },
+    {
+      "name": "Error rate — landing",
+      "category": "Funnel"
+    },
+    {
+      "name": "Error rate — signup",
+      "category": "Funnel"
+    },
+    {
+      "name": "Error rate — onboarding",
+      "category": "Funnel"
+    },
+    {
+      "name": "Error rate — search",
+      "category": "Funnel"
+    },
+    {
+      "name": "Error rate — results",
+      "category": "Funnel"
+    },
+    {
+      "name": "Error rate — add-to-cart",
+      "category": "Funnel"
+    },
+    {
+      "name": "Error rate — checkout",
+      "category": "Funnel"
+    },
+    {
+      "name": "Error rate — payment",
+      "category": "Funnel"
+    },
+    {
+      "name": "Error rate — confirmation",
+      "category": "Funnel"
+    },
+    {
+      "name": "Error rate — support",
+      "category": "Funnel"
+    },
+    {
+      "name": "Retry rate — landing",
+      "category": "Funnel"
+    },
+    {
+      "name": "Retry rate — signup",
+      "category": "Funnel"
+    },
+    {
+      "name": "Retry rate — onboarding",
+      "category": "Funnel"
+    },
+    {
+      "name": "Retry rate — search",
+      "category": "Funnel"
+    },
+    {
+      "name": "Retry rate — results",
+      "category": "Funnel"
+    },
+    {
+      "name": "Retry rate — add-to-cart",
+      "category": "Funnel"
+    },
+    {
+      "name": "Retry rate — checkout",
+      "category": "Funnel"
+    },
+    {
+      "name": "Retry rate — payment",
+      "category": "Funnel"
+    },
+    {
+      "name": "Retry rate — confirmation",
+      "category": "Funnel"
+    },
+    {
+      "name": "Retry rate — support",
+      "category": "Funnel"
+    },
+    {
+      "name": "Abandonment rate — landing",
+      "category": "Funnel"
+    },
+    {
+      "name": "Abandonment rate — signup",
+      "category": "Funnel"
+    },
+    {
+      "name": "Abandonment rate — onboarding",
+      "category": "Funnel"
+    },
+    {
+      "name": "Abandonment rate — search",
+      "category": "Funnel"
+    },
+    {
+      "name": "Abandonment rate — results",
+      "category": "Funnel"
+    },
+    {
+      "name": "Abandonment rate — add-to-cart",
+      "category": "Funnel"
+    },
+    {
+      "name": "Abandonment rate — checkout",
+      "category": "Funnel"
+    },
+    {
+      "name": "Abandonment rate — payment",
+      "category": "Funnel"
+    },
+    {
+      "name": "Abandonment rate — confirmation",
+      "category": "Funnel"
+    },
+    {
+      "name": "Abandonment rate — support",
+      "category": "Funnel"
+    },
+    {
+      "name": "Toxicity exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Hate speech rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Hate speech exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Harassment exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Violence rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Violence exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Self-harm rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Self-harm exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Sexual content rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Sexual content exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Misinformation exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Privacy violation rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Privacy violation exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "PII exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "PII exposure exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Bias exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Stereotyping rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Stereotyping exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Profanity exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Extremism rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Extremism exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Fraud / scam rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Fraud / scam exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Malware / unsafe code rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Malware / unsafe code exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Medical misinformation rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Medical misinformation exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Legal misinformation rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Legal misinformation exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Financial misinformation rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Financial misinformation exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Prompt injection rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Prompt injection exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Data exfiltration rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Data exfiltration exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Copyright violation rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Copyright violation exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Defamation rate",
+      "category": "Safety"
+    },
+    {
+      "name": "Defamation exposure rate",
+      "category": "Safety"
+    },
+    {
+      "name": "North America conversion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "Europe conversion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "LATAM conversion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "South Asia conversion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "East Asia conversion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "MENA conversion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "Africa conversion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "Oceania conversion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "North America latency",
+      "category": "Locale"
+    },
+    {
+      "name": "Europe latency",
+      "category": "Locale"
+    },
+    {
+      "name": "LATAM latency",
+      "category": "Locale"
+    },
+    {
+      "name": "South Asia latency",
+      "category": "Locale"
+    },
+    {
+      "name": "East Asia latency",
+      "category": "Locale"
+    },
+    {
+      "name": "MENA latency",
+      "category": "Locale"
+    },
+    {
+      "name": "Africa latency",
+      "category": "Locale"
+    },
+    {
+      "name": "Oceania latency",
+      "category": "Locale"
+    },
+    {
+      "name": "North America satisfaction",
+      "category": "Locale"
+    },
+    {
+      "name": "Europe satisfaction",
+      "category": "Locale"
+    },
+    {
+      "name": "LATAM satisfaction",
+      "category": "Locale"
+    },
+    {
+      "name": "South Asia satisfaction",
+      "category": "Locale"
+    },
+    {
+      "name": "East Asia satisfaction",
+      "category": "Locale"
+    },
+    {
+      "name": "MENA satisfaction",
+      "category": "Locale"
+    },
+    {
+      "name": "Africa satisfaction",
+      "category": "Locale"
+    },
+    {
+      "name": "Oceania satisfaction",
+      "category": "Locale"
+    },
+    {
+      "name": "North America task completion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "Europe task completion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "LATAM task completion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "South Asia task completion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "East Asia task completion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "MENA task completion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "Africa task completion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "Oceania task completion rate",
+      "category": "Locale"
+    },
+    {
+      "name": "North America error rate",
+      "category": "Locale"
+    },
+    {
+      "name": "Europe error rate",
+      "category": "Locale"
+    },
+    {
+      "name": "LATAM error rate",
+      "category": "Locale"
+    },
+    {
+      "name": "South Asia error rate",
+      "category": "Locale"
+    },
+    {
+      "name": "East Asia error rate",
+      "category": "Locale"
+    },
+    {
+      "name": "MENA error rate",
+      "category": "Locale"
+    },
+    {
+      "name": "Africa error rate",
+      "category": "Locale"
+    },
+    {
+      "name": "Oceania error rate",
+      "category": "Locale"
+    },
+    {
+      "name": "iOS crash rate",
+      "category": "Device"
+    },
+    {
+      "name": "Android crash rate",
+      "category": "Device"
+    },
+    {
+      "name": "Windows crash rate",
+      "category": "Device"
+    },
+    {
+      "name": "macOS crash rate",
+      "category": "Device"
+    },
+    {
+      "name": "Linux crash rate",
+      "category": "Device"
+    },
+    {
+      "name": "ChromeOS crash rate",
+      "category": "Device"
+    },
+    {
+      "name": "iOS latency",
+      "category": "Device"
+    },
+    {
+      "name": "Android latency",
+      "category": "Device"
+    },
+    {
+      "name": "Windows latency",
+      "category": "Device"
+    },
+    {
+      "name": "macOS latency",
+      "category": "Device"
+    },
+    {
+      "name": "Linux latency",
+      "category": "Device"
+    },
+    {
+      "name": "ChromeOS latency",
+      "category": "Device"
+    },
+    {
+      "name": "iOS completion rate",
+      "category": "Device"
+    },
+    {
+      "name": "Android completion rate",
+      "category": "Device"
+    },
+    {
+      "name": "Windows completion rate",
+      "category": "Device"
+    },
+    {
+      "name": "macOS completion rate",
+      "category": "Device"
+    },
+    {
+      "name": "Linux completion rate",
+      "category": "Device"
+    },
+    {
+      "name": "ChromeOS completion rate",
+      "category": "Device"
+    },
+    {
+      "name": "iOS error rate",
+      "category": "Device"
+    },
+    {
+      "name": "Android error rate",
+      "category": "Device"
+    },
+    {
+      "name": "Windows error rate",
+      "category": "Device"
+    },
+    {
+      "name": "macOS error rate",
+      "category": "Device"
+    },
+    {
+      "name": "Linux error rate",
+      "category": "Device"
+    },
+    {
+      "name": "ChromeOS error rate",
+      "category": "Device"
+    },
+    {
+      "name": "Troubleshooting task success rate",
+      "category": "Intent"
+    },
+    {
+      "name": "Billing task success rate",
+      "category": "Intent"
+    },
+    {
+      "name": "How-to task success rate",
+      "category": "Intent"
+    },
+    {
+      "name": "Account task success rate",
+      "category": "Intent"
+    },
+    {
+      "name": "Returns task success rate",
+      "category": "Intent"
+    },
+    {
+      "name": "Complaints task success rate",
+      "category": "Intent"
+    },
+    {
+      "name": "Troubleshooting satisfaction",
+      "category": "Intent"
+    },
+    {
+      "name": "Billing satisfaction",
+      "category": "Intent"
+    },
+    {
+      "name": "How-to satisfaction",
+      "category": "Intent"
+    },
+    {
+      "name": "Account satisfaction",
+      "category": "Intent"
+    },
+    {
+      "name": "Returns satisfaction",
+      "category": "Intent"
+    },
+    {
+      "name": "Complaints satisfaction",
+      "category": "Intent"
+    },
+    {
+      "name": "Troubleshooting resolution rate",
+      "category": "Intent"
+    },
+    {
+      "name": "Billing resolution rate",
+      "category": "Intent"
+    },
+    {
+      "name": "How-to resolution rate",
+      "category": "Intent"
+    },
+    {
+      "name": "Account resolution rate",
+      "category": "Intent"
+    },
+    {
+      "name": "Returns resolution rate",
+      "category": "Intent"
+    },
+    {
+      "name": "Complaints resolution rate",
+      "category": "Intent"
+    },
+    {
+      "name": "Troubleshooting escalation rate",
+      "category": "Intent"
+    },
+    {
+      "name": "Billing escalation rate",
+      "category": "Intent"
+    },
+    {
+      "name": "How-to escalation rate",
+      "category": "Intent"
+    },
+    {
+      "name": "Account escalation rate",
+      "category": "Intent"
+    },
+    {
+      "name": "Returns escalation rate",
+      "category": "Intent"
+    },
+    {
+      "name": "Complaints escalation rate",
+      "category": "Intent"
+    },
+    {
+      "name": "Bias rate by gender",
+      "category": "Fairness"
+    },
+    {
+      "name": "Bias rate by age",
+      "category": "Fairness"
+    },
+    {
+      "name": "Bias rate by race / ethnicity",
+      "category": "Fairness"
+    },
+    {
+      "name": "Bias rate by language",
+      "category": "Fairness"
+    },
+    {
+      "name": "Bias rate by disability",
+      "category": "Fairness"
+    },
+    {
+      "name": "Bias rate by geography",
+      "category": "Fairness"
+    },
+    {
+      "name": "Fairness gap by gender",
+      "category": "Fairness"
+    },
+    {
+      "name": "Fairness gap by age",
+      "category": "Fairness"
+    },
+    {
+      "name": "Fairness gap by race / ethnicity",
+      "category": "Fairness"
+    },
+    {
+      "name": "Fairness gap by language",
+      "category": "Fairness"
+    },
+    {
+      "name": "Fairness gap by disability",
+      "category": "Fairness"
+    },
+    {
+      "name": "Fairness gap by geography",
+      "category": "Fairness"
+    },
+    {
+      "name": "Accuracy gap by gender",
+      "category": "Fairness"
+    },
+    {
+      "name": "Accuracy gap by age",
+      "category": "Fairness"
+    },
+    {
+      "name": "Accuracy gap by race / ethnicity",
+      "category": "Fairness"
+    },
+    {
+      "name": "Accuracy gap by language",
+      "category": "Fairness"
+    },
+    {
+      "name": "Accuracy gap by disability",
+      "category": "Fairness"
+    },
+    {
+      "name": "Accuracy gap by geography",
+      "category": "Fairness"
+    },
+    {
+      "name": "Word error rate",
+      "category": "Conversation"
+    },
+    {
+      "name": "Speech-recognition accuracy",
+      "category": "Conversation"
+    },
+    {
+      "name": "Barge-in rate",
+      "category": "Conversation"
+    },
+    {
+      "name": "Turn-taking latency",
+      "category": "Conversation"
+    },
+    {
+      "name": "Interruption rate",
+      "category": "Conversation"
+    },
+    {
+      "name": "Wake-word accuracy",
+      "category": "Conversation"
+    },
+    {
+      "name": "Transcription accuracy",
+      "category": "Conversation"
+    },
+    {
+      "name": "Intent-recognition accuracy",
+      "category": "Conversation"
+    },
+    {
+      "name": "Slot-filling accuracy",
+      "category": "Conversation"
+    },
+    {
+      "name": "Dialog success rate",
+      "category": "Conversation"
+    },
+    {
+      "name": "Turns to resolution",
+      "category": "Conversation"
+    },
+    {
+      "name": "Repair rate",
+      "category": "Conversation"
+    },
+    {
+      "name": "Mispronunciation rate",
+      "category": "Conversation"
+    },
+    {
+      "name": "Endpointing accuracy",
+      "category": "Conversation"
+    },
+    {
+      "name": "Search success rate",
+      "category": "Search & reco"
+    },
+    {
+      "name": "Zero-result rate",
+      "category": "Search & reco"
+    },
+    {
+      "name": "Result relevance",
+      "category": "Search & reco"
+    },
+    {
+      "name": "Mean reciprocal rank",
+      "category": "Search & reco"
+    },
+    {
+      "name": "NDCG",
+      "category": "Search & reco"
+    },
+    {
+      "name": "Recall@k",
+      "category": "Search & reco"
+    },
+    {
+      "name": "Precision@k",
+      "category": "Search & reco"
+    },
+    {
+      "name": "Click position",
+      "category": "Search & reco"
+    },
+    {
+      "name": "Query-reformulation rate",
+      "category": "Search & reco"
+    },
+    {
+      "name": "Recommendation CTR",
+      "category": "Search & reco"
+    },
+    {
+      "name": "Recommendation acceptance",
+      "category": "Search & reco"
+    },
+    {
+      "name": "Catalog coverage",
+      "category": "Search & reco"
+    },
+    {
+      "name": "Diversity",
+      "category": "Search & reco"
+    },
+    {
+      "name": "Novelty",
+      "category": "Search & reco"
+    },
+    {
+      "name": "Serendipity",
+      "category": "Search & reco"
+    },
+    {
+      "name": "Personalization lift",
+      "category": "Search & reco"
+    },
+    {
+      "name": "Revenue per user",
+      "category": "Business"
+    },
+    {
+      "name": "ARPU",
+      "category": "Business"
+    },
+    {
+      "name": "Gross margin",
+      "category": "Business"
+    },
+    {
+      "name": "Customer-acquisition cost",
+      "category": "Business"
+    },
+    {
+      "name": "Payback period",
+      "category": "Business"
+    },
+    {
+      "name": "Win rate",
+      "category": "Business"
+    },
+    {
+      "name": "Pipeline conversion",
+      "category": "Business"
+    },
+    {
+      "name": "Net revenue retention",
+      "category": "Business"
+    },
+    {
+      "name": "Gross revenue retention",
+      "category": "Business"
+    },
+    {
+      "name": "Expansion rate",
+      "category": "Business"
+    },
+    {
+      "name": "Refund rate",
+      "category": "Business"
+    },
+    {
+      "name": "Dispute rate",
+      "category": "Business"
+    },
+    {
+      "name": "Chargeback rate",
+      "category": "Business"
+    },
+    {
+      "name": "Average order value",
+      "category": "Business"
+    }
+  ]
+}

@@ -168,6 +168,14 @@
     DEFAULTS.forEach(d => { const m = make(d[0], d[1], d[2]); byKey[keyOf(d[0])] = m; metrics.push(m); });
     render();
 
+    // catalog of selectable metrics (datalist) — users can still type any custom value
+    const CATALOG = (window.MATRAIX_METRICS || []);
+    const listEl = $('#metricList'), countEl = $('#metricCount');
+    if (listEl && CATALOG.length) {
+      listEl.innerHTML = CATALOG.map(n => '<option value="' + esc(n) + '"></option>').join('');
+    }
+    if (countEl && CATALOG.length) countEl.textContent = CATALOG.length.toLocaleString();
+
     const inp = $('#metricInput'), addBtn = $('#metricAdd');
     const submit = () => { if (addMetric(inp.value)) inp.value = ''; inp.focus(); };
     if (addBtn) addBtn.addEventListener('click', submit);
