@@ -56,12 +56,6 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
 .btn.ghost:hover{border-color:var(--phos);background:rgba(84,246,166,.06)}
 .email{font-size:.95rem;color:var(--ink-dim)} .email b{color:var(--phos);font-weight:500}
 
-/* ROI strip */
-.roi{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);margin:50px 0 8px}
-.roi .cell{background:var(--bg-2);padding:20px 18px}
-.roi b{display:block;font-family:var(--disp);font-weight:800;font-size:clamp(1.4rem,3vw,1.9rem);color:var(--phos);font-variant-numeric:tabular-nums;text-shadow:var(--glow)}
-.roi span{font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
-@media (max-width:640px){.roi{grid-template-columns:repeat(2,1fr)}}
 
 /* section heads */
 .sec{margin-top:72px}
@@ -235,6 +229,10 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
 
 /* faq */
 .faq{display:flex;flex-direction:column;gap:10px}
+.faq-cat{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:800;font-size:1rem;color:var(--ink);margin-top:18px}
+.faq-cat:first-child{margin-top:0}
+.faq-cat .ix{font-family:var(--mono);font-weight:700;font-size:.72rem;letter-spacing:.12em;color:#04140c;background:var(--phos);padding:3px 8px;box-shadow:0 0 12px rgba(84,246,166,.3)}
+.faq-cat .rule{flex:1;height:1px;background:var(--line-soft)}
 .faq details{border:1px solid var(--line-soft);background:var(--bg-2);transition:border-color .2s}
 .faq details[open]{border-color:var(--line)}
 .faq summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;align-items:flex-start;gap:14px;font-family:var(--disp);font-weight:700;font-size:1.06rem;line-height:1.4;color:var(--ink)}
@@ -279,14 +277,6 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
         <a class="btn" href="access.html">Talk to us <span>→</span></a>
         <a class="btn ghost" href="demo.html">▶ Try the plAIground</a>
         <span class="email">or write to <b>info@matraix.ai</b></span>
-      </div>
-
-      <!-- ROI strip -->
-      <div class="roi">
-        <div class="cell"><b>~6 hrs</b><span>run time · vs ~weeks</span></div>
-        <div class="cell"><b>~$2K</b><span>per study · vs ~$2M+</span></div>
-        <div class="cell"><b>95%+</b><span>match to humans</span></div>
-        <div class="cell"><b>8.3B</b><span>agents on tap</span></div>
       </div>
     </section>
 
@@ -444,37 +434,44 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
         <h2 class="sec-title">What teams ask us.</h2>
       </div>
       <div class="faq">
+        <div class="faq-cat"><span class="ix">A</span> Simulation quality &amp; accuracy <span class="rule"></span></div>
         <details>
           <summary><span class="qn">Q01</span><span>Is the matrAIx simulation diverse enough?</span><span class="mk">+</span></summary>
           <div class="a">Yes. Every agent is drawn from <b>1,162 persona dimensions</b> — demographics, life experience, personality (Big Five + MBTI), values, habits, skills, attitudes, 50 languages, accessibility needs, and live interaction state. Multiplied together that's <b>billions of distinct, internally-coherent personas</b>, so your evaluation covers the long tail and edge cases — not just the median user. You can also weight or constrain the space to mirror your real customer mix.</div>
         </details>
         <details>
           <summary><span class="qn">Q02</span><span>How accurate is the simulation without real-world human data?</span><span class="mk">+</span></summary>
-          <div class="a">We calibrate against published human studies and held-out human baselines — matrAIx reproduces real human trajectories to <b>95%+</b> on the flows we've benchmarked. Where you have ground-truth data, we anchor the simulation to it; where you don't, we report <b>confidence intervals and flag low-confidence segments</b> rather than overclaim. You can also run a small human-in-the-loop validation (see Q06) to spot-check accuracy on your specific case.</div>
+          <div class="a">We calibrate against published human studies and held-out human baselines — matrAIx reproduces real human trajectories to <b>95%+</b> on the flows we've benchmarked. Where you have ground-truth data, we anchor the simulation to it; where you don't, we report <b>confidence intervals and flag low-confidence segments</b> rather than overclaim. You can also run a small human-in-the-loop validation (see Q07) to spot-check accuracy on your specific case.</div>
         </details>
         <details>
-          <summary><span class="qn">Q03</span><span>Can we provide our own customer segments to simulate?</span><span class="mk">+</span></summary>
+          <summary><span class="qn">Q03</span><span>What metrics judge whether the simulated data is high-quality?</span><span class="mk">+</span></summary>
+          <div class="a">Every trajectory is scored on several axes: <b>fidelity</b> (match to human baselines — 95%+ on benchmarked flows), <b>coverage &amp; diversity</b> across the persona space, <b>task success / completion rate</b>, <b>internal coherence</b> (does the persona behave consistently with its dimensions), <b>calibration</b> (predicted vs. observed outcomes), and <b>reward / preference scores</b> for training use. We also report data-hygiene signals like deduplication and outlier flags, so you can see the quality of every batch before you rely on it.</div>
+        </details>
+
+        <div class="faq-cat"><span class="ix">B</span> Your data, privacy &amp; customization <span class="rule"></span></div>
+        <details>
+          <summary><span class="qn">Q04</span><span>Can we provide our own customer segments to simulate?</span><span class="mk">+</span></summary>
           <div class="a"><b>Yes — and it makes the results sharper.</b> Share your segments (personas, cohorts, geographies, account tiers, or anonymized analytics) and we map them onto the persona dimension space so the agent population matches your real user base. You then get reports sliced by <b>your</b> segments, not just generic ones.</div>
         </details>
         <details>
-          <summary><span class="qn">Q04</span><span>Are there ethical or privacy concerns? Is trajectory data stored safely?</span><span class="mk">+</span></summary>
+          <summary><span class="qn">Q05</span><span>Are there ethical or privacy concerns? Is trajectory data stored safely?</span><span class="mk">+</span></summary>
           <div class="a">matrAIx agents are <b>synthetic</b> — no real personal data is needed to run a simulation, so there's no PII exposure by design. If you share customer segments, we accept <b>aggregated / anonymized inputs under NDA</b>. Trajectory data is <b>encrypted in transit and at rest</b>, access-controlled, isolated per customer, and deletable on request. Your data is never used to train shared models without your explicit opt-in.</div>
         </details>
+
+        <div class="faq-cat"><span class="ix">C</span> Auditing &amp; validation <span class="rule"></span></div>
         <details>
-          <summary><span class="qn">Q05</span><span>How can we audit the matrAIx trajectories?</span><span class="mk">+</span></summary>
+          <summary><span class="qn">Q06</span><span>How can we audit the matrAIx trajectories?</span><span class="mk">+</span></summary>
           <div class="a">We run <b>smoke tests that evaluate the matrAIx agents online</b> against known-good cases, and you get <b>full session replays</b> of every trajectory — so you can step through, inspect, and audit each agent's decisions. You can define your own acceptance checks and we surface any that fail.</div>
         </details>
         <details>
-          <summary><span class="qn">Q06</span><span>Is there a human-in-the-loop option to validate the simulations at small scale?</span><span class="mk">+</span></summary>
+          <summary><span class="qn">Q07</span><span>Is there a human-in-the-loop option to validate the simulations at small scale?</span><span class="mk">+</span></summary>
           <div class="a"><b>Yes.</b> We offer a <b>human-in-the-loop validation service</b>: a small, representative sample of simulated trajectories is reviewed and scored by humans to confirm the simulation matches reality before you trust the full run. It's the fastest way to build confidence on a new flow.</div>
         </details>
+
+        <div class="faq-cat"><span class="ix">D</span> Using the results &amp; working with us <span class="rule"></span></div>
         <details>
-          <summary><span class="qn">Q07</span><span>Can we train future models on these trajectories? Are they SFT / RL friendly?</span><span class="mk">+</span></summary>
+          <summary><span class="qn">Q08</span><span>Can we train future models on these trajectories? Are they SFT / RL friendly?</span><span class="mk">+</span></summary>
           <div class="a"><b>Yes — the data is built for post-training.</b> Every run is captured and scored into training-ready data: the best trajectories export as <b>SFT</b> examples, and scored pairs export as preference data for <b>RL / RLHF</b> and reward modeling. The same simulations that evaluate your product also improve your model or agent each iteration.</div>
-        </details>
-        <details>
-          <summary><span class="qn">Q08</span><span>What metrics does matrAIx use to judge whether simulated data is high-quality?</span><span class="mk">+</span></summary>
-          <div class="a">Every trajectory is scored on several axes: <b>fidelity</b> (match to human baselines — 95%+ on benchmarked flows), <b>coverage &amp; diversity</b> across the persona space, <b>task success / completion rate</b>, <b>internal coherence</b> (does the persona behave consistently with its dimensions), <b>calibration</b> (predicted vs. observed outcomes), and <b>reward / preference scores</b> for training use. We also report data-hygiene signals like deduplication and outlier flags, so you can see the quality of every batch before you rely on it.</div>
         </details>
         <details>
           <summary><span class="qn">Q09</span><span>If we're not satisfied with the results, can we get a refund?</span><span class="mk">+</span></summary>
