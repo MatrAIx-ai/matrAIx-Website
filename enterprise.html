@@ -114,6 +114,20 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
 @media (max-width:860px){.steps{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:460px){.steps{grid-template-columns:1fr}}
 
+/* faq */
+.faq{display:flex;flex-direction:column;gap:10px}
+.faq details{border:1px solid var(--line-soft);background:var(--bg-2);transition:border-color .2s}
+.faq details[open]{border-color:var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;align-items:flex-start;gap:14px;font-family:var(--disp);font-weight:700;font-size:1.06rem;line-height:1.4;color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .qn{color:var(--phos);font-family:var(--mono);font-size:.82rem;font-weight:700;flex:none;padding-top:.18em}
+.faq summary .mk{margin-left:auto;color:var(--phos);font-weight:400;transition:transform .22s;flex:none;padding-left:10px}
+.faq details[open] summary .mk{transform:rotate(45deg)}
+.faq .a{padding:0 20px 20px 56px;color:var(--ink-dim);font-size:.95rem;line-height:1.62;max-width:820px}
+.faq .a b{color:var(--ink)}
+.faq .a .hl{color:var(--phos)}
+@media (max-width:560px){.faq .a{padding-left:20px}}
+
 /* closing */
 .closing{margin-top:80px;border:1px solid var(--line-soft);background:var(--bg-2);padding:clamp(28px,5vw,52px);text-align:center}
 .closing h2{font-family:var(--disp);font-weight:800;font-size:clamp(1.6rem,4vw,2.6rem);letter-spacing:-.02em;line-height:1.05;margin-bottom:14px}
@@ -246,6 +260,44 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
         <div class="step"><span class="n">02</span><h4>Simulate</h4><p>Millions of agents run your survey, conversation, web flow, or app across 1,162 dimensions.</p></div>
         <div class="step"><span class="n">03</span><h4>Score</h4><p>Every behavior is captured and scored — segmented, validated against human baselines.</p></div>
         <div class="step"><span class="n">04</span><h4>Report</h4><p>You get an interactive report with the wins, the friction, and the lift — ready to act on.</p></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="sec">
+      <div class="sec-head">
+        <span class="idx">04 — QUESTIONS &amp; ANSWERS</span>
+        <h2 class="sec-title">What teams ask us.</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary><span class="qn">Q01</span><span>Is the matrAIx simulation diverse enough?</span><span class="mk">+</span></summary>
+          <div class="a">Yes. Every agent is drawn from <b>1,162 persona dimensions</b> — demographics, life experience, personality (Big Five + MBTI), values, habits, skills, attitudes, 50 languages, accessibility needs, and live interaction state. Multiplied together that's <b>billions of distinct, internally-coherent personas</b>, so your evaluation covers the long tail and edge cases — not just the median user. You can also weight or constrain the space to mirror your real customer mix.</div>
+        </details>
+        <details>
+          <summary><span class="qn">Q02</span><span>How accurate is the simulation without real-world human data?</span><span class="mk">+</span></summary>
+          <div class="a">We calibrate against published human studies and held-out human baselines — matrAIx reproduces real human trajectories to <b>95%+</b> on the flows we've benchmarked. Where you have ground-truth data, we anchor the simulation to it; where you don't, we report <b>confidence intervals and flag low-confidence segments</b> rather than overclaim. You can also run a small human-in-the-loop validation (see Q06) to spot-check accuracy on your specific case.</div>
+        </details>
+        <details>
+          <summary><span class="qn">Q03</span><span>Can we provide our own customer segments to simulate?</span><span class="mk">+</span></summary>
+          <div class="a"><b>Yes — and it makes the results sharper.</b> Share your segments (personas, cohorts, geographies, account tiers, or anonymized analytics) and we map them onto the persona dimension space so the agent population matches your real user base. You then get reports sliced by <b>your</b> segments, not just generic ones.</div>
+        </details>
+        <details>
+          <summary><span class="qn">Q04</span><span>Are there ethical or privacy concerns? Is trajectory data stored safely?</span><span class="mk">+</span></summary>
+          <div class="a">matrAIx agents are <b>synthetic</b> — no real personal data is needed to run a simulation, so there's no PII exposure by design. If you share customer segments, we accept <b>aggregated / anonymized inputs under NDA</b>. Trajectory data is <b>encrypted in transit and at rest</b>, access-controlled, isolated per customer, and deletable on request. Your data is never used to train shared models without your explicit opt-in.</div>
+        </details>
+        <details>
+          <summary><span class="qn">Q05</span><span>How can we audit the matrAIx trajectories?</span><span class="mk">+</span></summary>
+          <div class="a">We run <b>smoke tests that evaluate the matrAIx agents online</b> against known-good cases, and you get <b>full session replays</b> of every trajectory — so you can step through, inspect, and audit each agent's decisions. You can define your own acceptance checks and we surface any that fail.</div>
+        </details>
+        <details>
+          <summary><span class="qn">Q06</span><span>Is there a human-in-the-loop option to validate the simulations at small scale?</span><span class="mk">+</span></summary>
+          <div class="a"><b>Yes.</b> We offer a <b>human-in-the-loop validation service</b>: a small, representative sample of simulated trajectories is reviewed and scored by humans to confirm the simulation matches reality before you trust the full run. It's the fastest way to build confidence on a new flow.</div>
+        </details>
+        <details>
+          <summary><span class="qn">Q07</span><span>Can we train future models on these trajectories? Are they SFT / RL friendly?</span><span class="mk">+</span></summary>
+          <div class="a"><b>Yes — the data is built for post-training.</b> Every run is captured and scored into training-ready data: the best trajectories export as <b>SFT</b> examples, and scored pairs export as preference data for <b>RL / RLHF</b> and reward modeling. The same simulations that evaluate your product also improve your model or agent each iteration.</div>
+        </details>
       </div>
     </section>
 
