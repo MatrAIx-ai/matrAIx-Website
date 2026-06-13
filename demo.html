@@ -14,6 +14,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="benchmark.css?v=12" />
   <style>
+  /* --- self-defined evaluation metrics --- */
+  .metric-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:9px 14px;border-bottom:1px solid var(--line-soft)}
+  .metric-bar .mb-lab{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--phos)}
+  .metric-bar .mb-hint{font-size:.7rem;color:var(--ink-dim)}
+  .metric-bar .mb-grow{flex:1;min-width:8px}
+  .metric-input{font-family:var(--mono);font-size:.74rem;color:var(--ink);background:var(--bg);border:1px solid var(--line-soft);padding:6px 9px;min-width:130px}
+  .metric-input::placeholder{color:var(--ink-dim)}
+  .metric-input:focus{outline:none;border-color:var(--phos);box-shadow:inset 0 0 10px rgba(84,246,166,.08)}
+  .fn-meta{display:flex;align-items:center;gap:7px}
+  .fn-x{width:16px;height:16px;line-height:1;padding:0;border:0;background:transparent;color:var(--ink-dim);cursor:pointer;font-size:.66rem;opacity:0;transition:opacity .15s,color .15s}
+  .fnode:hover .fn-x{opacity:.8}
+  .fn-x:hover{color:var(--rose);opacity:1}
+  .fnodes.lone .fn-x{display:none}
   /* --- "Run in your env" API button + modal --- */
   .os-btn.api{color:var(--phos);border-color:var(--line);display:inline-flex;align-items:center;gap:6px}
   .os-btn.api:hover{border-color:var(--phos);box-shadow:inset 0 0 14px rgba(84,246,166,.12)}
@@ -112,8 +125,14 @@
 
     <!-- Neural eval core -->
     <section class="win stage">
-      <div class="win-bar"><span>Neural Eval Core · skill flow</span><span class="scan-tag" id="scanTag">● LIVE</span></div>
-      <div class="stage-legend"><b class="hint">What this shows →</b> each scored behavior flows through the skills it tests. &nbsp;<b class="cp">● pass</b> <b class="ca">● flag</b> <b class="cr">● fail</b></div>
+      <div class="win-bar"><span>Neural Eval Core · metric flow</span><span class="scan-tag" id="scanTag">● LIVE</span></div>
+      <div class="stage-legend"><b class="hint">What this shows →</b> each scored behavior flows through the metrics it tests. &nbsp;<b class="cp">● pass</b> <b class="ca">● flag</b> <b class="cr">● fail</b></div>
+      <div class="metric-bar">
+        <span class="mb-lab">Metrics</span><span class="mb-hint">— self-define what to score</span>
+        <span class="mb-grow"></span>
+        <input id="metricInput" class="metric-input" type="text" maxlength="28" placeholder="add a metric…" aria-label="Add an evaluation metric" />
+        <button id="metricAdd" class="os-btn" type="button">＋ Add</button>
+      </div>
       <div class="flow">
         <div class="fcap fin">INPUT · agent runs your flow</div>
         <div class="fnodes" id="flowNodes"></div>
@@ -247,7 +266,7 @@
   </script>
 
   <script src="dimensions.js?v=3"></script>
-  <script src="benchmark.js?v=8"></script>
+  <script src="benchmark.js?v=9"></script>
   <script>
   /* ---------- Live agent runs from the CUA pipeline ---------- */
   (function(){

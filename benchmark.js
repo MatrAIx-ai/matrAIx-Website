@@ -89,44 +89,91 @@
      ============================================================ */
   const Brain = (() => {
     const wrap = $('#flowNodes');
-    // Logical cognitive pipeline order, top → bottom.
-    const FLOW = ['Perception', 'Language', 'Memory', 'Reasoning', 'Planning', 'Safety'];
-    const DESC = {
-      Perception: 'reads the screen',
-      Language:   'understands the ask',
-      Memory:     'recalls the context',
-      Reasoning:  'works out the answer',
-      Planning:   'sequences the steps',
-      Safety:     'stays within bounds',
-    };
-    const node = {};
-    FLOW.forEach(r => {
-      const el = document.createElement('div');
-      el.className = 'fnode'; el.dataset.r = r;
-      el.innerHTML =
-        '<div class="fn-top"><span class="fn-name">' + r + '</span>' +
-        '<span class="fn-n"><b>0</b> scored</span></div>' +
-        '<div class="fn-sub">' + DESC[r] + '</div>' +
-        '<i class="fn-bar"><b></b></i>';
-      wrap.appendChild(el);
-      node[r] = { el, bar: el.querySelector('.fn-bar b'), n: el.querySelector('.fn-n b'), total: 0, pass: 0, t: null };
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const keyOf = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
+    // Editable evaluation metrics — users start from these defaults and add their own.
+    // [name, description, target pass-rate]
+    const DEFAULTS = [
+      ['Safety', 'stays within bounds', 0.93],
+      ['Latency', 'responds in time', 0.88],
+      ['Quality', 'output is correct', 0.90],
+      ['Click-through Rate', 'users click through', 0.64],
+      ['Churn Rate', 'users stay, don’t drop', 0.58],
+      ['Apologize rate', 'avoids needless sorry', 0.80],
+      ['User Satisfaction Rate', 'users are satisfied', 0.85],
+    ];
+    const metrics = [];
+    const byKey = {};
+
+    const make = (name, desc, base) => ({
+      name, desc: desc || 'custom metric',
+      base: base == null ? (0.6 + Math.random() * 0.32) : base,
+      weight: 0.6 + Math.random() * 0.8, total: 0, pass: 0, el: null, bar: null, n: null, t: null,
     });
 
-    function pulse(region, verdict) {
-      const nd = node[region] || node.Reasoning;
-      if (!nd) return;
-      nd.total++; if (verdict === 'pass') nd.pass++;
-      nd.n.textContent = nd.total > 999 ? (nd.total / 1000).toFixed(1) + 'k' : nd.total;
-      nd.bar.style.width = Math.round(nd.pass / nd.total * 100) + '%';
-      nd.el.classList.remove('watch', 'fail');
-      if (verdict === 'fail') nd.el.classList.add('fail');
-      else if (verdict === 'watch') nd.el.classList.add('watch');
-      nd.el.classList.add('hot');
-      clearTimeout(nd.t);
-      nd.t = setTimeout(() => nd.el.classList.remove('hot'), 520);
+    function render() {
+      wrap.innerHTML = '';
+      metrics.forEach(m => {
+        const el = document.createElement('div');
+        el.className = 'fnode'; el.dataset.r = m.name;
+        el.innerHTML =
+          '<div class="fn-top"><span class="fn-name">' + esc(m.name) + '</span>' +
+          '<span class="fn-meta"><span class="fn-n"><b>' + (m.total > 999 ? (m.total / 1000).toFixed(1) + 'k' : m.total) + '</b> scored</span>' +
+          '<button class="fn-x" type="button" title="Remove metric" aria-label="Remove ' + esc(m.name) + '">✕</button></span></div>' +
+          '<div class="fn-sub">' + esc(m.desc) + '</div>' +
+          '<i class="fn-bar"><b></b></i>';
+        wrap.appendChild(el);
+        m.el = el; m.bar = el.querySelector('.fn-bar b'); m.n = el.querySelector('.fn-n b');
+        if (m.total) m.bar.style.width = Math.round(m.pass / m.total * 100) + '%';
+        el.querySelector('.fn-x').addEventListener('click', () => removeMetric(m.name));
+      });
+      wrap.classList.toggle('lone', metrics.length <= 1);
     }
 
-    return { pulse };
+    function addMetric(name) {
+      name = String(name || '').trim();
+      const k = keyOf(name);
+      if (!k || byKey[k]) return false;
+      const m = make(name); byKey[k] = m; metrics.push(m); render(); return true;
+    }
+    function removeMetric(name) {
+      if (metrics.length <= 1) return;
+      const k = keyOf(name), i = metrics.findIndex(m => keyOf(m.name) === k);
+      if (i < 0) return;
+      delete byKey[k]; metrics.splice(i, 1); render();
+    }
+    function pick() {
+      let sum = 0; for (const m of metrics) sum += m.weight;
+      let r = Math.random() * sum;
+      for (const m of metrics) { r -= m.weight; if (r <= 0) return m; }
+      return metrics[metrics.length - 1];
+    }
+
+    function pulse(verdict) {
+      if (!metrics.length) return;
+      const m = pick();
+      m.total++;
+      let passed = Math.random() < m.base;                 // each metric stabilises around its own rate
+      if (verdict === 'fail' && Math.random() < 0.5) passed = false;
+      if (passed) m.pass++;
+      m.n.textContent = m.total > 999 ? (m.total / 1000).toFixed(1) + 'k' : m.total;
+      m.bar.style.width = Math.round(m.pass / m.total * 100) + '%';
+      m.el.classList.remove('watch', 'fail');
+      if (!passed) m.el.classList.add(verdict === 'fail' ? 'fail' : 'watch');
+      m.el.classList.add('hot');
+      clearTimeout(m.t);
+      m.t = setTimeout(() => m.el.classList.remove('hot'), 520);
+    }
+
+    DEFAULTS.forEach(d => { const m = make(d[0], d[1], d[2]); byKey[keyOf(d[0])] = m; metrics.push(m); });
+    render();
+
+    const inp = $('#metricInput'), addBtn = $('#metricAdd');
+    const submit = () => { if (addMetric(inp.value)) inp.value = ''; inp.focus(); };
+    if (addBtn) addBtn.addEventListener('click', submit);
+    if (inp) inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); submit(); } });
+
+    return { pulse, addMetric, removeMetric };
   })();
 
   /* ============================================================
@@ -180,7 +227,7 @@
     agg.hist[Math.min(9, (b.score * 10) | 0)]++;
     agg.finishes.push(performance.now());
     if (agg.finishes.length > 300) agg.finishes = agg.finishes.filter(t => performance.now() - t < 8000);
-    Brain.pulse(b.region, b.verdict);
+    Brain.pulse(b.verdict);
     store.push({ id: `mx-${pad(id, 6)}`, target: target.id, persona: b.persona, trajectory: b.traj, score: +b.score.toFixed(4), verdict: b.verdict });
     if (store.length > 5000) store.shift();
     if (currentReport === 'score' || currentReport === 'heat') renderReport();
