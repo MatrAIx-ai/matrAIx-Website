@@ -245,6 +245,15 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
 .faq .a .hl{color:var(--phos)}
 @media (max-width:560px){.faq .a{padding-left:20px}}
 
+/* clients */
+.clients-panel{border:1px solid var(--line-soft);background:var(--bg-2);padding:clamp(22px,4vw,34px)}
+.clients-kpi{display:inline-flex;align-items:baseline;gap:10px;font-family:var(--disp);margin-bottom:12px}
+.clients-kpi .num{font-size:clamp(1.8rem,4.2vw,2.8rem);font-weight:800;color:var(--phos);text-shadow:var(--glow);line-height:1}
+.clients-kpi .lbl{font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
+.clients-copy{color:var(--ink-dim);font-size:.98rem;max-width:760px}
+.clients-copy b{color:var(--ink)}
+.clients-panel .cta{margin-top:18px;margin-bottom:0}
+
 /* closing */
 .closing{margin-top:80px;border:1px solid var(--line-soft);background:var(--bg-2);padding:clamp(28px,5vw,52px);text-align:center}
 .closing h2{font-family:var(--disp);font-weight:800;font-size:clamp(1.6rem,4vw,2.6rem);letter-spacing:-.02em;line-height:1.05;margin-bottom:14px}
@@ -427,10 +436,29 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
       </div>
     </section>
 
+    <!-- Clients -->
+    <section class="sec">
+      <div class="sec-head">
+        <span class="idx">04 — CLIENTS</span>
+        <h2 class="sec-title">Teams already deploying matrAIx agents.</h2>
+      </div>
+      <div class="clients-panel">
+        <div class="clients-kpi">
+          <span class="num">6</span>
+          <span class="lbl">start-ups and industry teams deploying</span>
+        </div>
+        <p class="clients-copy">We are already working with <b>6 start-ups and industry teams</b> actively deploying matrAIx agents in production-like workflows. If your team is interested in using our agents, start with the onboarding template and share your stack.</p>
+        <div class="cta">
+          <a class="btn" href="template.html" target="_blank" rel="noopener noreferrer">Open Client Template <span>↗</span></a>
+          <a class="btn ghost" href="access.html">Talk to us</a>
+        </div>
+      </div>
+    </section>
+
     <!-- FAQ -->
     <section class="sec">
       <div class="sec-head">
-        <span class="idx">04 — QUESTIONS &amp; ANSWERS</span>
+        <span class="idx">05 — QUESTIONS &amp; ANSWERS</span>
         <h2 class="sec-title">What teams ask us.</h2>
       </div>
       <div class="faq">
