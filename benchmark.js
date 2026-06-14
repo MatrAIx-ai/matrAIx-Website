@@ -496,9 +496,9 @@
   focus = Array.from({ length: FOCUS_N }, spawnFocus);
   renderFocusCards();
   vitals(); setExplain(); renderReport(); clock();
-  setInterval(popTick, 240);
-  setInterval(bgTick, 300);
-  setInterval(focusTick, 1300);   // slow & readable
-  setInterval(vitals, 900);
+  setInterval(popTick, 460);
+  setInterval(bgTick, 620);
+  setInterval(focusTick, 1800);   // slow & readable
+  setInterval(vitals, 1150);
   setInterval(clock, 1000);
 })();
