@@ -99,6 +99,12 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
 .tpl-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .tpl-actions .btn{font-size:.9rem;padding:12px 22px}
 
+/* tutorial: language switcher */
+.lang-switch{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 20px}
+.lang-switch button{font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--ink-dim);background:transparent;border:1px solid var(--line-soft);padding:6px 13px;cursor:pointer;transition:all .18s}
+.lang-switch button:hover{border-color:var(--line);color:var(--ink)}
+.lang-switch button.active{color:#04121f;background:var(--phos);border-color:var(--phos);font-weight:700;box-shadow:0 0 14px rgba(59,169,255,.28)}
+
 /* tutorial: required/optional legend */
 .legend{display:flex;gap:18px;flex-wrap:wrap;margin:14px 0 22px;font-size:.82rem;color:var(--ink-dim)}
 .legend span{display:inline-flex;align-items:center;gap:7px}
@@ -234,12 +240,19 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
     <section class="sec" id="template">
       <div class="sec-head">
         <span class="idx">02 — THE TEMPLATE</span>
-        <h2 class="sec-title">One file describes it all.</h2>
+        <h2 class="sec-title" data-i18n="title">One file describes it all.</h2>
       </div>
-      <p class="sec-sub">One <b>matraix.yaml</b> is the entire handoff. It points us at your <b>frontend, backend, and data</b>, defines the <b>input each flow expects</b>, and declares the <b>output you want back</b> — so the report drops straight into your pipeline. Copy the file below, fill in your values, and send it over (or drop it in your repo root). We'll walk through every block underneath.</p>
+      <div class="lang-switch" id="langSwitch" role="tablist" aria-label="Language">
+        <button type="button" data-lang="en" class="active">EN</button>
+        <button type="button" data-lang="zh" lang="zh">中文</button>
+        <button type="button" data-lang="ja" lang="ja">日本語</button>
+        <button type="button" data-lang="ko" lang="ko">한국어</button>
+        <button type="button" data-lang="es" lang="es">Español</button>
+      </div>
+      <p class="sec-sub" data-i18n="sub">One <b>matraix.yaml</b> is the entire handoff. It points us at your <b>frontend, backend, and data</b>, defines the <b>input each flow expects</b>, and declares the <b>output you want back</b> — so the report drops straight into your pipeline. Copy the file below, fill in your values, and send it over (or drop it in your repo root). We'll walk through every block underneath.</p>
       <div class="legend">
-        <span><span class="tag req">Required</span> the minimum to start a run</span>
-        <span><span class="tag opt">Optional</span> sharpens results, never blocks</span>
+        <span data-i18n="legendReq"><span class="tag req">Required</span> the minimum to start a run</span>
+        <span data-i18n="legendOpt"><span class="tag opt">Optional</span> sharpens results, never blocks</span>
       </div>
       <div class="term">
         <div class="term-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="nm">matraix.yaml</span></div>
@@ -295,59 +308,59 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
       </div>
 
       <!-- field-by-field walkthrough -->
-      <h3 class="guide-head">Block by block</h3>
-      <p class="guide-sub">Six blocks. Here's what each one is for, and the exact format we expect.</p>
+      <h3 class="guide-head" data-i18n="gh1">Block by block</h3>
+      <p class="guide-sub" data-i18n="gs1">Six blocks. Here's what each one is for, and the exact format we expect.</p>
       <div class="guide">
         <div class="gblock">
-          <div class="gtop"><span class="gkey">project / contact</span><span class="tag req">Required</span></div>
-          <p>A short <b>slug</b> we use to name and isolate your sandbox, plus a <b>human to reach</b> when something's ambiguous.</p>
-          <div class="gfmt"><b>Format —</b> <code>project</code>: kebab-case string. <code>contact</code>: any email.</div>
+          <div class="gtop"><span class="gkey">project / contact</span><span class="tag req" data-i18n="tagReq">Required</span></div>
+          <p data-i18n="b1p">A short <b>slug</b> we use to name and isolate your sandbox, plus a <b>human to reach</b> when something's ambiguous.</p>
+          <div class="gfmt" data-i18n="b1f"><b>Format —</b> <code>project</code>: kebab-case string. <code>contact</code>: any email.</div>
         </div>
 
         <div class="gblock">
-          <div class="gtop"><span class="gkey">frontend</span><span class="tag req">Required</span></div>
-          <p>The surface the agents actually click through. Give us a <b>reachable staging URL</b> (or a build we can host) and an <b>auth</b> block so the agents can sign in like a real user.</p>
-          <div class="gfmt"><b>Format —</b> <code>url</code>: HTTPS URL. <code>auth.type</code>: <code>test-account</code>, <code>magic-link</code>, or <code>none</code>. Pass credentials by reference — <code>env:VAR_NAME</code> or a shared secret link — <b>never paste real secrets into the file</b>.</div>
+          <div class="gtop"><span class="gkey">frontend</span><span class="tag req" data-i18n="tagReq">Required</span></div>
+          <p data-i18n="b2p">The surface the agents actually click through. Give us a <b>reachable staging URL</b> (or a build we can host) and an <b>auth</b> block so the agents can sign in like a real user.</p>
+          <div class="gfmt" data-i18n="b2f"><b>Format —</b> <code>url</code>: HTTPS URL. <code>auth.type</code>: <code>test-account</code>, <code>magic-link</code>, or <code>none</code>. Pass credentials by reference — <code>env:VAR_NAME</code> or a shared secret link — <b>never paste real secrets into the file</b>.</div>
         </div>
 
         <div class="gblock">
-          <div class="gtop"><span class="gkey">backend</span><span class="tag opt">Recommended</span></div>
-          <p>So we can read and verify the I/O behind each click, not just the pixels. The <b>spec is the contract</b>: it tells us every endpoint's request and response shape, so the agents send well-formed input and we can grade the output precisely. No spec? A reachable API plus the staging URL still works as a black box.</p>
-          <div class="gfmt"><b>Format —</b> <code>spec</code>: <b>OpenAPI 3</b> (YAML/JSON) or <b>GraphQL SDL</b>. <code>sandbox</code>: a <code>docker-compose.yml</code> or image ref (<code>ghcr.io/acme/api:tag</code>) if you'd rather we run it isolated.</div>
+          <div class="gtop"><span class="gkey">backend</span><span class="tag opt" data-i18n="tagRec">Recommended</span></div>
+          <p data-i18n="b3p">So we can read and verify the I/O behind each click, not just the pixels. The <b>spec is the contract</b>: it tells us every endpoint's request and response shape, so the agents send well-formed input and we can grade the output precisely. No spec? A reachable API plus the staging URL still works as a black box.</p>
+          <div class="gfmt" data-i18n="b3f"><b>Format —</b> <code>spec</code>: <b>OpenAPI 3</b> (YAML/JSON) or <b>GraphQL SDL</b>. <code>sandbox</code>: a <code>docker-compose.yml</code> or image ref (<code>ghcr.io/acme/api:tag</code>) if you'd rather we run it isolated.</div>
         </div>
 
         <div class="gblock">
-          <div class="gtop"><span class="gkey">data</span><span class="tag req">Required</span></div>
-          <p>Enough state that flows behave like production — products in a catalog, a user with a cart, etc. A <b>schema</b> plus a small <b>seed</b> is plenty.</p>
-          <div class="gfmt"><b>Format —</b> <code>schema</code>: <code>.sql</code>, Prisma/ORM models, or JSON Schema. <code>seed</code>: <code>.csv</code>, <code>.json</code>, or a DB dump — <b>synthetic or anonymized</b>. <code>pii: none</code> is the expected value; we require no real PII.</div>
+          <div class="gtop"><span class="gkey">data</span><span class="tag req" data-i18n="tagReq">Required</span></div>
+          <p data-i18n="b4p">Enough state that flows behave like production — products in a catalog, a user with a cart, etc. A <b>schema</b> plus a small <b>seed</b> is plenty.</p>
+          <div class="gfmt" data-i18n="b4f"><b>Format —</b> <code>schema</code>: <code>.sql</code>, Prisma/ORM models, or JSON Schema. <code>seed</code>: <code>.csv</code>, <code>.json</code>, or a DB dump — <b>synthetic or anonymized</b>. <code>pii: none</code> is the expected value; we require no real PII.</div>
         </div>
 
         <div class="gblock">
-          <div class="gtop"><span class="gkey">goals</span><span class="tag req">Required — the heart of the file</span></div>
-          <p>This is where you define the <b>input/output contract</b> the agents are graded against. Each flow names where it <b>starts</b> (<code>entry</code>), what counts as a <b>win</b> (<code>success</code>), the <b>inputs</b> the agent must supply (each with a <code>type</code> and human-readable <code>format</code>), and the <b>output</b> you want captured per attempt — a result schema plus the metrics that matter.</p>
-          <div class="gfmt"><b>Input format —</b> a list of <code>{ field, type, format }</code> so agents generate valid, realistic values. <b>Output format —</b> <code>output.schema</code> points at a <b>JSON Schema</b> for the result we record; <code>output.metrics</code> is any of our <a href="metrics.html" style="color:var(--phos)">900+ metrics</a>. Add as many <code>flow</code> entries as you have journeys.</div>
+          <div class="gtop"><span class="gkey">goals</span><span class="tag req" data-i18n="tagHeart">Required — the heart of the file</span></div>
+          <p data-i18n="b5p">This is where you define the <b>input/output contract</b> the agents are graded against. Each flow names where it <b>starts</b> (<code>entry</code>), what counts as a <b>win</b> (<code>success</code>), the <b>inputs</b> the agent must supply (each with a <code>type</code> and human-readable <code>format</code>), and the <b>output</b> you want captured per attempt — a result schema plus the metrics that matter.</p>
+          <div class="gfmt" data-i18n="b5f"><b>Input format —</b> a list of <code>{ field, type, format }</code> so agents generate valid, realistic values. <b>Output format —</b> <code>output.schema</code> points at a <b>JSON Schema</b> for the result we record; <code>output.metrics</code> is any of our <a href="metrics.html" style="color:var(--phos)">900+ metrics</a>. Add as many <code>flow</code> entries as you have journeys.</div>
         </div>
 
         <div class="gblock">
-          <div class="gtop"><span class="gkey">segments</span><span class="tag opt">Optional</span></div>
-          <p>The personas to weight the simulated population by, so results are sliced the way <b>you</b> think about users. Skip it and we run a balanced default population.</p>
-          <div class="gfmt"><b>Format —</b> a list of tags (<code>mobile</code>, <code>new_users</code>, <code>enterprise</code>, <code>non-native English</code>…) or named segments we map onto the persona dimension space.</div>
+          <div class="gtop"><span class="gkey">segments</span><span class="tag opt" data-i18n="tagOpt">Optional</span></div>
+          <p data-i18n="b6p">The personas to weight the simulated population by, so results are sliced the way <b>you</b> think about users. Skip it and we run a balanced default population.</p>
+          <div class="gfmt" data-i18n="b6f"><b>Format —</b> a list of tags (<code>mobile</code>, <code>new_users</code>, <code>enterprise</code>, <code>non-native English</code>…) or named segments we map onto the persona dimension space.</div>
         </div>
 
         <div class="gblock">
-          <div class="gtop"><span class="gkey">report</span><span class="tag opt">Optional</span></div>
-          <p>Where the results should go. Pick the <b>output formats</b> you want and give us a <b>webhook</b> and the report lands in your pipeline automatically — no portal round-trip.</p>
-          <div class="gfmt"><b>Format —</b> <code>format</code>: any of <code>json</code>, <code>html</code>, <code>jsonl</code>. <code>webhook</code>: an HTTPS endpoint we <code>POST</code> to on completion. Omit it and you pull results from the dashboard instead.</div>
+          <div class="gtop"><span class="gkey">report</span><span class="tag opt" data-i18n="tagOpt">Optional</span></div>
+          <p data-i18n="b7p">Where the results should go. Pick the <b>output formats</b> you want and give us a <b>webhook</b> and the report lands in your pipeline automatically — no portal round-trip.</p>
+          <div class="gfmt" data-i18n="b7f"><b>Format —</b> <code>format</code>: any of <code>json</code>, <code>html</code>, <code>jsonl</code>. <code>webhook</code>: an HTTPS endpoint we <code>POST</code> to on completion. Omit it and you pull results from the dashboard instead.</div>
         </div>
       </div>
 
       <!-- what you get back -->
-      <h3 class="guide-head">What you get back</h3>
-      <p class="guide-sub">Two artifacts per run — one for your team to read, one for your machines to consume.</p>
+      <h3 class="guide-head" data-i18n="gh2">What you get back</h3>
+      <p class="guide-sub" data-i18n="gs2">Two artifacts per run — one for your team to read, one for your machines to consume.</p>
       <div class="io">
         <div class="card">
           <h4><span class="ar">←</span>report.json / .html</h4>
-          <ul>
+          <ul data-i18n="io1">
             <li>A <b>segmented A/B report</b> — friction, conversion lift, and failure points sliced by your <code>segments</code></li>
             <li>Per-flow <b>metrics</b> exactly as you named them in <code>goals[].output.metrics</code></li>
             <li>A <b>funnel friction map</b> with the step where each segment drops off</li>
@@ -356,7 +369,7 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
         </div>
         <div class="card">
           <h4><span class="ar">←</span>trajectories.jsonl</h4>
-          <ul>
+          <ul data-i18n="io2">
             <li>Every agent run as <b>obs → action → reward</b> steps — full session replays you can audit</li>
             <li>Results validated against your <code>output.schema</code>, so they slot straight into your stores</li>
             <li><b>SFT / RL-ready</b> trajectories for training, one JSON object per line</li>
@@ -444,6 +457,146 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
         var t=copy.textContent; copy.textContent='✓ Copied'; setTimeout(function(){ copy.textContent=t; },1400);
       }).catch(function(){});
     });
+  })();
+
+  /* ---- section 02 language switcher ---- */
+  (function(){
+    var box=document.getElementById('template'); if(!box) return;
+    var sw=document.getElementById('langSwitch'); if(!sw) return;
+    var nodes=[].slice.call(box.querySelectorAll('[data-i18n]'));
+
+    // capture the in-page English as the baseline so we don't duplicate it
+    var en={};
+    nodes.forEach(function(n){ en[n.getAttribute('data-i18n')]=n.innerHTML; });
+
+    var T={
+      zh:{
+        title:'一个文件，说明一切。',
+        sub:'一份 <b>matraix.yaml</b> 就是全部交接内容。它会指向你的<b>前端、后端和数据</b>，定义<b>每个流程所需的输入</b>，并声明<b>你想要的输出</b>——这样报告就能直接进入你的流水线。复制下面的文件，填入你的值，然后发给我们（或放进仓库根目录）。下面我们会逐个模块讲解。',
+        legendReq:'<span class="tag req">必填</span> 启动一次运行的最低要求',
+        legendOpt:'<span class="tag opt">可选</span> 让结果更精准，但不会阻塞运行',
+        gh1:'逐个模块讲解',
+        gs1:'六个模块。下面说明每个模块的用途，以及我们期望的确切格式。',
+        b1p:'一个简短的<b>标识符（slug）</b>，我们用它来命名并隔离你的沙盒；以及一个在有疑问时<b>可联系的人</b>。',
+        b1f:'<b>格式 —</b> <code>project</code>：kebab-case 字符串。<code>contact</code>：任意邮箱。',
+        b2p:'智能体实际点击操作的界面。请提供一个<b>可访问的预发布（staging）URL</b>（或一个我们可以托管的构建包），以及一个 <b>auth</b> 模块，让智能体能像真实用户一样登录。',
+        b2f:'<b>格式 —</b> <code>url</code>：HTTPS URL。<code>auth.type</code>：<code>test-account</code>、<code>magic-link</code> 或 <code>none</code>。请通过引用方式传递凭据——<code>env:VAR_NAME</code> 或共享密钥链接——<b>切勿把真实密钥粘贴进文件</b>。',
+        b3p:'让我们能读取并验证每次点击背后的输入/输出，而不只是看到画面。<b>规范即契约</b>：它告诉我们每个接口的请求和响应结构，这样智能体就能发送格式正确的输入，我们也能精确评估输出。没有规范？一个可访问的 API 加上预发布 URL，仍可作为黑盒运行。',
+        b3f:'<b>格式 —</b> <code>spec</code>：<b>OpenAPI 3</b>（YAML/JSON）或 <b>GraphQL SDL</b>。<code>sandbox</code>：一个 <code>docker-compose.yml</code> 或镜像引用（<code>ghcr.io/acme/api:tag</code>），如果你更希望由我们隔离运行。',
+        b4p:'足够的状态，让流程表现得像生产环境——目录里的商品、带购物车的用户等等。一个<b>结构（schema）</b>加上少量<b>种子数据（seed）</b>就足够了。',
+        b4f:'<b>格式 —</b> <code>schema</code>：<code>.sql</code>、Prisma/ORM 模型或 JSON Schema。<code>seed</code>：<code>.csv</code>、<code>.json</code> 或数据库导出——<b>合成或匿名化</b>的数据。<code>pii: none</code> 是期望值；我们不需要任何真实 PII。',
+        b5p:'这里定义评估智能体所依据的<b>输入/输出契约</b>。每个流程会指明它从哪里<b>开始</b>（<code>entry</code>）、什么算<b>成功</b>（<code>success</code>）、智能体必须提供的<b>输入</b>（每项带有 <code>type</code> 和可读的 <code>format</code>），以及你希望在每次尝试中捕获的<b>输出</b>——一个结果结构加上你关心的指标。',
+        b5f:'<b>输入格式 —</b> 一个 <code>{ field, type, format }</code> 列表，让智能体生成有效、真实的值。<b>输出格式 —</b> <code>output.schema</code> 指向我们记录结果所用的 <b>JSON Schema</b>；<code>output.metrics</code> 可以是我们 <a href="metrics.html" style="color:var(--phos)">900+ 项指标</a> 中的任意一项。有多少条用户旅程，就添加多少个 <code>flow</code> 条目。',
+        b6p:'用于加权模拟人群的角色画像，让结果按<b>你</b>看待用户的方式进行切分。不填则使用均衡的默认人群。',
+        b6f:'<b>格式 —</b> 一组标签（<code>mobile</code>、<code>new_users</code>、<code>enterprise</code>、<code>non-native English</code> 等），或我们映射到角色维度空间的命名分群。',
+        b7p:'结果应送往何处。选择你想要的<b>输出格式</b>，并提供一个 <b>webhook</b>，报告就会自动进入你的流水线——无需登录门户来回操作。',
+        b7f:'<b>格式 —</b> <code>format</code>：<code>json</code>、<code>html</code>、<code>jsonl</code> 中的任意几种。<code>webhook</code>：完成时我们会向其 <code>POST</code> 的 HTTPS 端点。省略它，则从仪表板拉取结果。',
+        gh2:'你会得到什么',
+        gs2:'每次运行产出两份成果——一份给你的团队阅读，一份给你的机器使用。',
+        io1:'<li>一份<b>分群 A/B 报告</b>——按你的 <code>segments</code> 切分的摩擦点、转化提升和失败点</li><li>每个流程的<b>指标</b>，与你在 <code>goals[].output.metrics</code> 中命名的完全一致</li><li>一张<b>漏斗摩擦图</b>，标出每个分群流失的步骤</li><li>按严重程度排序的<b>发现项</b>，让你知道先修复什么</li>',
+        io2:'<li>每次智能体运行都记录为 <b>obs → action → reward</b> 步骤——可供审计的完整会话回放</li><li>结果会依据你的 <code>output.schema</code> 校验，可直接写入你的存储</li><li><b>可用于 SFT / RL</b> 的轨迹数据，每行一个 JSON 对象</li><li>投递到你的 <code>report.webhook</code>，或通过仪表板 / API 拉取</li>',
+        tagReq:'必填', tagRec:'推荐', tagOpt:'可选', tagHeart:'必填 — 文件的核心'
+      },
+      ja:{
+        title:'1つのファイルで、すべてを記述。',
+        sub:'1つの <b>matraix.yaml</b> が引き継ぎのすべてです。これは <b>フロントエンド・バックエンド・データ</b> を指し示し、<b>各フローが必要とする入力</b> を定義し、<b>受け取りたい出力</b> を宣言します——レポートがそのままあなたのパイプラインに流れ込みます。下のファイルをコピーして値を埋め、送ってください（またはリポジトリのルートに置いてください）。各ブロックは下で順に説明します。',
+        legendReq:'<span class="tag req">必須</span> 実行を開始するための最小限',
+        legendOpt:'<span class="tag opt">任意</span> 結果をより精緻にしますが、実行を妨げません',
+        gh1:'ブロックごとの解説',
+        gs1:'6つのブロック。それぞれの目的と、期待する正確なフォーマットを説明します。',
+        b1p:'サンドボックスの命名・分離に使う短い<b>スラッグ（slug）</b>と、不明点が出たときに<b>連絡できる担当者</b>。',
+        b1f:'<b>フォーマット —</b> <code>project</code>：kebab-case の文字列。<code>contact</code>：任意のメールアドレス。',
+        b2p:'エージェントが実際にクリックして操作する画面です。<b>アクセス可能なステージング URL</b>（または当方でホストできるビルド）と、エージェントが実ユーザーのようにサインインするための <b>auth</b> ブロックを提供してください。',
+        b2f:'<b>フォーマット —</b> <code>url</code>：HTTPS URL。<code>auth.type</code>：<code>test-account</code>、<code>magic-link</code>、または <code>none</code>。認証情報は参照で渡してください——<code>env:VAR_NAME</code> または共有シークレットリンク——<b>実際のシークレットをファイルに貼り付けないでください</b>。',
+        b3p:'画面の見た目だけでなく、各クリックの背後にある入出力を読み取り検証できるようにします。<b>仕様が契約です</b>：各エンドポイントのリクエストとレスポンスの形を示すことで、エージェントは正しい形式の入力を送り、当方は出力を正確に評価できます。仕様がない場合でも、アクセス可能な API とステージング URL があればブラックボックスとして動作します。',
+        b3f:'<b>フォーマット —</b> <code>spec</code>：<b>OpenAPI 3</b>（YAML/JSON）または <b>GraphQL SDL</b>。<code>sandbox</code>：当方が隔離して実行することを望む場合は <code>docker-compose.yml</code> またはイメージ参照（<code>ghcr.io/acme/api:tag</code>）。',
+        b4p:'フローが本番のように動くだけの状態——カタログ内の商品、カート保持中のユーザーなど。<b>スキーマ</b>と小さな<b>シード</b>があれば十分です。',
+        b4f:'<b>フォーマット —</b> <code>schema</code>：<code>.sql</code>、Prisma/ORM モデル、または JSON Schema。<code>seed</code>：<code>.csv</code>、<code>.json</code>、または DB ダンプ——<b>合成または匿名化</b>されたもの。<code>pii: none</code> が期待値で、実際の PII は不要です。',
+        b5p:'ここで、エージェントが評価される<b>入出力契約</b>を定義します。各フローは、どこから<b>開始</b>するか（<code>entry</code>）、何を<b>成功</b>とみなすか（<code>success</code>）、エージェントが供給すべき<b>入力</b>（それぞれ <code>type</code> と人が読める <code>format</code> 付き）、そして試行ごとに捕捉したい<b>出力</b>——結果スキーマと重要な指標——を指定します。',
+        b5f:'<b>入力フォーマット —</b> エージェントが有効で現実的な値を生成できるよう、<code>{ field, type, format }</code> のリスト。<b>出力フォーマット —</b> <code>output.schema</code> は当方が記録する結果の <b>JSON Schema</b> を指します。<code>output.metrics</code> は当方の <a href="metrics.html" style="color:var(--phos)">900以上の指標</a> のいずれでも構いません。ユーザージャーニーの数だけ <code>flow</code> エントリを追加してください。',
+        b6p:'シミュレーション母集団を重み付けするためのペルソナで、結果を<b>あなた</b>のユーザーの捉え方に沿って切り分けます。省略すると、バランスの取れた既定の母集団で実行します。',
+        b6f:'<b>フォーマット —</b> タグのリスト（<code>mobile</code>、<code>new_users</code>、<code>enterprise</code>、<code>non-native English</code> など）、または当方がペルソナ次元空間にマッピングする名前付きセグメント。',
+        b7p:'結果の送り先です。希望する<b>出力フォーマット</b>を選び、<b>webhook</b> を指定すれば、レポートは自動的にあなたのパイプラインに届きます——ポータルを行き来する必要はありません。',
+        b7f:'<b>フォーマット —</b> <code>format</code>：<code>json</code>、<code>html</code>、<code>jsonl</code> のいずれか。<code>webhook</code>：完了時に当方が <code>POST</code> する HTTPS エンドポイント。省略した場合はダッシュボードから結果を取得します。',
+        gh2:'受け取れるもの',
+        gs2:'1回の実行で2つの成果物——チームが読むためのものと、機械が処理するためのもの。',
+        io1:'<li><b>セグメント別 A/B レポート</b>——あなたの <code>segments</code> で切り分けた摩擦・コンバージョン向上・失敗ポイント</li><li>フローごとの<b>指標</b>。<code>goals[].output.metrics</code> で名付けたとおり</li><li>各セグメントが離脱するステップを示す<b>ファネル摩擦マップ</b></li><li>重大度付きでランク付けされた<b>発見事項</b>。何から直すべきかが分かります</li>',
+        io2:'<li>各エージェントの実行を <b>obs → action → reward</b> ステップとして記録——監査可能な完全なセッション再生</li><li>結果はあなたの <code>output.schema</code> に対して検証され、そのままストアに収まります</li><li>学習用の <b>SFT / RL 対応</b> トラジェクトリ。1行につき1つの JSON オブジェクト</li><li>あなたの <code>report.webhook</code> に配信、またはダッシュボード / API から取得</li>',
+        tagReq:'必須', tagRec:'推奨', tagOpt:'任意', tagHeart:'必須 — ファイルの中核'
+      },
+      ko:{
+        title:'파일 하나로 모든 것을 설명합니다.',
+        sub:'<b>matraix.yaml</b> 하나가 인수인계의 전부입니다. 이 파일은 당신의 <b>프런트엔드, 백엔드, 데이터</b>를 가리키고, <b>각 플로우가 기대하는 입력</b>을 정의하며, <b>받고 싶은 출력</b>을 선언합니다——그래서 리포트가 곧바로 당신의 파이프라인으로 들어갑니다. 아래 파일을 복사해 값을 채우고 보내 주세요(또는 저장소 루트에 넣어 주세요). 각 블록은 아래에서 차례로 설명합니다.',
+        legendReq:'<span class="tag req">필수</span> 실행을 시작하기 위한 최소 사항',
+        legendOpt:'<span class="tag opt">선택</span> 결과를 더 정교하게 하지만 실행을 막지 않음',
+        gh1:'블록별 설명',
+        gs1:'여섯 개의 블록. 각 블록의 용도와 우리가 기대하는 정확한 형식을 설명합니다.',
+        b1p:'샌드박스의 이름을 지정하고 격리하는 데 사용하는 짧은 <b>슬러그(slug)</b>와, 모호한 점이 있을 때 <b>연락할 담당자</b>.',
+        b1f:'<b>형식 —</b> <code>project</code>: kebab-case 문자열. <code>contact</code>: 임의의 이메일.',
+        b2p:'에이전트가 실제로 클릭하며 사용하는 화면입니다. <b>접근 가능한 스테이징 URL</b>(또는 우리가 호스팅할 수 있는 빌드)과, 에이전트가 실제 사용자처럼 로그인할 수 있도록 <b>auth</b> 블록을 제공해 주세요.',
+        b2f:'<b>형식 —</b> <code>url</code>: HTTPS URL. <code>auth.type</code>: <code>test-account</code>, <code>magic-link</code> 또는 <code>none</code>. 자격 증명은 참조로 전달하세요——<code>env:VAR_NAME</code> 또는 공유 시크릿 링크——<b>실제 시크릿을 파일에 붙여넣지 마세요</b>.',
+        b3p:'화면의 픽셀만이 아니라 각 클릭 뒤의 입출력을 읽고 검증할 수 있게 합니다. <b>스펙이 곧 계약입니다</b>: 모든 엔드포인트의 요청과 응답 형태를 알려 주므로, 에이전트는 올바른 형식의 입력을 보내고 우리는 출력을 정확히 평가할 수 있습니다. 스펙이 없나요? 접근 가능한 API와 스테이징 URL만 있어도 블랙박스로 동작합니다.',
+        b3f:'<b>형식 —</b> <code>spec</code>: <b>OpenAPI 3</b>(YAML/JSON) 또는 <b>GraphQL SDL</b>. <code>sandbox</code>: 우리가 격리해서 실행하길 원하면 <code>docker-compose.yml</code> 또는 이미지 참조(<code>ghcr.io/acme/api:tag</code>).',
+        b4p:'플로우가 운영 환경처럼 동작할 만큼의 상태——카탈로그의 상품, 장바구니가 있는 사용자 등. <b>스키마</b>와 작은 <b>시드</b>면 충분합니다.',
+        b4f:'<b>형식 —</b> <code>schema</code>: <code>.sql</code>, Prisma/ORM 모델 또는 JSON Schema. <code>seed</code>: <code>.csv</code>, <code>.json</code> 또는 DB 덤프——<b>합성 또는 익명화</b>된 것. <code>pii: none</code>이 기대값이며, 실제 PII는 필요하지 않습니다.',
+        b5p:'여기에서 에이전트가 평가받는 <b>입출력 계약</b>을 정의합니다. 각 플로우는 어디서 <b>시작</b>하는지(<code>entry</code>), 무엇을 <b>성공</b>으로 보는지(<code>success</code>), 에이전트가 제공해야 할 <b>입력</b>(각각 <code>type</code>과 사람이 읽을 수 있는 <code>format</code> 포함), 그리고 시도마다 포착하고 싶은 <b>출력</b>——결과 스키마와 중요한 지표——을 지정합니다.',
+        b5f:'<b>입력 형식 —</b> 에이전트가 유효하고 현실적인 값을 생성하도록 하는 <code>{ field, type, format }</code> 목록. <b>출력 형식 —</b> <code>output.schema</code>는 우리가 기록하는 결과의 <b>JSON Schema</b>를 가리킵니다. <code>output.metrics</code>는 우리의 <a href="metrics.html" style="color:var(--phos)">900개 이상의 지표</a> 중 무엇이든 가능합니다. 사용자 여정 수만큼 <code>flow</code> 항목을 추가하세요.',
+        b6p:'시뮬레이션 모집단에 가중치를 두는 페르소나로, 결과를 <b>당신</b>이 사용자를 바라보는 방식대로 나눕니다. 생략하면 균형 잡힌 기본 모집단으로 실행합니다.',
+        b6f:'<b>형식 —</b> 태그 목록(<code>mobile</code>, <code>new_users</code>, <code>enterprise</code>, <code>non-native English</code> 등) 또는 우리가 페르소나 차원 공간에 매핑하는 명명된 세그먼트.',
+        b7p:'결과가 갈 곳입니다. 원하는 <b>출력 형식</b>을 고르고 <b>webhook</b>을 알려 주면, 리포트가 자동으로 당신의 파이프라인에 도착합니다——포털을 오갈 필요가 없습니다.',
+        b7f:'<b>형식 —</b> <code>format</code>: <code>json</code>, <code>html</code>, <code>jsonl</code> 중 무엇이든. <code>webhook</code>: 완료 시 우리가 <code>POST</code>하는 HTTPS 엔드포인트. 생략하면 대시보드에서 결과를 가져옵니다.',
+        gh2:'무엇을 받게 되나요',
+        gs2:'실행마다 두 가지 산출물——팀이 읽을 것 하나, 기계가 사용할 것 하나.',
+        io1:'<li><b>세그먼트별 A/B 리포트</b>——당신의 <code>segments</code>로 나눈 마찰 지점, 전환 상승, 실패 지점</li><li>플로우별 <b>지표</b>, <code>goals[].output.metrics</code>에서 이름 붙인 그대로</li><li>각 세그먼트가 이탈하는 단계를 보여 주는 <b>퍼널 마찰 맵</b></li><li>심각도순으로 정렬된 <b>발견 사항</b>, 무엇부터 고칠지 알 수 있습니다</li>',
+        io2:'<li>각 에이전트 실행을 <b>obs → action → reward</b> 단계로 기록——감사 가능한 전체 세션 재생</li><li>결과는 당신의 <code>output.schema</code>로 검증되어 그대로 저장소에 들어갑니다</li><li>학습용 <b>SFT / RL 준비</b> 트라젝토리, 한 줄에 JSON 객체 하나</li><li>당신의 <code>report.webhook</code>으로 전달되거나 대시보드 / API로 가져옵니다</li>',
+        tagReq:'필수', tagRec:'권장', tagOpt:'선택', tagHeart:'필수 — 파일의 핵심'
+      },
+      es:{
+        title:'Un archivo lo describe todo.',
+        sub:'Un solo <b>matraix.yaml</b> es toda la entrega. Apunta a tu <b>frontend, backend y datos</b>, define la <b>entrada que espera cada flujo</b> y declara la <b>salida que quieres recibir</b>, de modo que el informe llega directo a tu pipeline. Copia el archivo de abajo, completa tus valores y envíanoslo (o déjalo en la raíz de tu repositorio). Repasaremos cada bloque a continuación.',
+        legendReq:'<span class="tag req">Obligatorio</span> lo mínimo para iniciar una ejecución',
+        legendOpt:'<span class="tag opt">Opcional</span> afina los resultados, nunca bloquea',
+        gh1:'Bloque por bloque',
+        gs1:'Seis bloques. Esto es para qué sirve cada uno y el formato exacto que esperamos.',
+        b1p:'Un <b>slug</b> corto que usamos para nombrar y aislar tu sandbox, más una <b>persona de contacto</b> para cuando algo sea ambiguo.',
+        b1f:'<b>Formato —</b> <code>project</code>: cadena en kebab-case. <code>contact</code>: cualquier correo.',
+        b2p:'La superficie por la que los agentes realmente navegan. Danos una <b>URL de staging accesible</b> (o un build que podamos alojar) y un bloque <b>auth</b> para que los agentes inicien sesión como un usuario real.',
+        b2f:'<b>Formato —</b> <code>url</code>: URL HTTPS. <code>auth.type</code>: <code>test-account</code>, <code>magic-link</code> o <code>none</code>. Pasa las credenciales por referencia——<code>env:VAR_NAME</code> o un enlace secreto compartido——<b>nunca pegues secretos reales en el archivo</b>.',
+        b3p:'Para poder leer y verificar la E/S detrás de cada clic, no solo los píxeles. La <b>especificación es el contrato</b>: nos dice la forma de la solicitud y la respuesta de cada endpoint, así los agentes envían entradas bien formadas y podemos evaluar la salida con precisión. ¿Sin especificación? Una API accesible más la URL de staging también funcionan como caja negra.',
+        b3f:'<b>Formato —</b> <code>spec</code>: <b>OpenAPI 3</b> (YAML/JSON) o <b>GraphQL SDL</b>. <code>sandbox</code>: un <code>docker-compose.yml</code> o una referencia de imagen (<code>ghcr.io/acme/api:tag</code>) si prefieres que lo ejecutemos aislado.',
+        b4p:'Estado suficiente para que los flujos se comporten como en producción——productos en un catálogo, un usuario con un carrito, etc. Un <b>schema</b> más una pequeña <b>semilla</b> es suficiente.',
+        b4f:'<b>Formato —</b> <code>schema</code>: <code>.sql</code>, modelos Prisma/ORM o JSON Schema. <code>seed</code>: <code>.csv</code>, <code>.json</code> o un volcado de BD——<b>sintético o anonimizado</b>. <code>pii: none</code> es el valor esperado; no requerimos PII real.',
+        b5p:'Aquí defines el <b>contrato de entrada/salida</b> con el que se evalúa a los agentes. Cada flujo indica dónde <b>empieza</b> (<code>entry</code>), qué cuenta como <b>éxito</b> (<code>success</code>), las <b>entradas</b> que el agente debe aportar (cada una con un <code>type</code> y un <code>format</code> legible) y la <b>salida</b> que quieres capturar por intento——un schema de resultado más las métricas que importan.',
+        b5f:'<b>Formato de entrada —</b> una lista de <code>{ field, type, format }</code> para que los agentes generen valores válidos y realistas. <b>Formato de salida —</b> <code>output.schema</code> apunta a un <b>JSON Schema</b> del resultado que registramos; <code>output.metrics</code> es cualquiera de nuestras <a href="metrics.html" style="color:var(--phos)">más de 900 métricas</a>. Añade tantas entradas <code>flow</code> como recorridos tengas.',
+        b6p:'Las personas para ponderar la población simulada, de modo que los resultados se segmenten como <b>tú</b> piensas en tus usuarios. Omítelo y ejecutamos una población por defecto equilibrada.',
+        b6f:'<b>Formato —</b> una lista de etiquetas (<code>mobile</code>, <code>new_users</code>, <code>enterprise</code>, <code>non-native English</code>…) o segmentos con nombre que mapeamos al espacio de dimensiones de persona.',
+        b7p:'Adónde deben ir los resultados. Elige los <b>formatos de salida</b> que quieras y danos un <b>webhook</b>: el informe llega a tu pipeline automáticamente——sin idas y vueltas al portal.',
+        b7f:'<b>Formato —</b> <code>format</code>: cualquiera de <code>json</code>, <code>html</code>, <code>jsonl</code>. <code>webhook</code>: un endpoint HTTPS al que hacemos <code>POST</code> al terminar. Omítelo y obtienes los resultados desde el panel.',
+        gh2:'Lo que recibes',
+        gs2:'Dos artefactos por ejecución——uno para que lo lea tu equipo, otro para que lo consuman tus máquinas.',
+        io1:'<li>Un <b>informe A/B segmentado</b>——fricción, aumento de conversión y puntos de fallo divididos por tus <code>segments</code></li><li><b>Métricas</b> por flujo, exactamente como las nombraste en <code>goals[].output.metrics</code></li><li>Un <b>mapa de fricción del embudo</b> con el paso en el que abandona cada segmento</li><li><b>Hallazgos</b> clasificados por severidad, para saber qué corregir primero</li>',
+        io2:'<li>Cada ejecución de agente como pasos <b>obs → action → reward</b>——repeticiones de sesión completas que puedes auditar</li><li>Resultados validados contra tu <code>output.schema</code>, listos para entrar en tus almacenes</li><li>Trayectorias <b>listas para SFT / RL</b> para entrenamiento, un objeto JSON por línea</li><li>Entregadas a tu <code>report.webhook</code>, o descargadas vía panel / API</li>',
+        tagReq:'Obligatorio', tagRec:'Recomendado', tagOpt:'Opcional', tagHeart:'Obligatorio — el corazón del archivo'
+      }
+    };
+
+    var btns=[].slice.call(sw.querySelectorAll('button'));
+    function apply(lang){
+      var dict=(lang==='en')?en:T[lang];
+      if(!dict) lang='en', dict=en;
+      nodes.forEach(function(n){
+        var k=n.getAttribute('data-i18n');
+        var v=(dict[k]!=null)?dict[k]:en[k];
+        if(v!=null) n.innerHTML=v;
+      });
+      box.setAttribute('lang', lang);
+      btns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang')===lang); });
+      try{ localStorage.setItem('mx_tpl_lang', lang); }catch(e){}
+    }
+    btns.forEach(function(b){ b.addEventListener('click', function(){ apply(b.getAttribute('data-lang')); }); });
+
+    var saved=null; try{ saved=localStorage.getItem('mx_tpl_lang'); }catch(e){}
+    if(saved && (saved==='en' || T[saved])) apply(saved);
   })();
 
   /* ---- moving pipeline ---- */
