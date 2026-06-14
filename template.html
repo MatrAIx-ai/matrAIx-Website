@@ -99,6 +99,39 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
 .tpl-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .tpl-actions .btn{font-size:.9rem;padding:12px 22px}
 
+/* tutorial: required/optional legend */
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin:14px 0 22px;font-size:.82rem;color:var(--ink-dim)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend .tag{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--line)}
+.tag.req{color:var(--amber);border-color:rgba(255,181,71,.42)}
+.tag.opt{color:var(--ink-dim)}
+
+/* tutorial: annotated field-by-field guide */
+.guide-head{font-family:var(--disp);font-weight:800;font-size:1.18rem;margin:38px 0 4px}
+.guide-sub{color:var(--ink-dim);font-size:.92rem;margin-bottom:18px}
+.guide{display:flex;flex-direction:column;gap:12px}
+.gblock{border:1px solid var(--line-soft);background:var(--bg-2);padding:18px 20px;transition:border-color .2s}
+.gblock:hover{border-color:var(--line)}
+.gtop{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-bottom:8px}
+.gkey{font-family:var(--mono);font-weight:700;color:var(--phos);font-size:1rem}
+.gblock>p{color:var(--ink-dim);font-size:.92rem;line-height:1.58}
+.gblock>p b{color:var(--ink)}
+.gfmt{margin-top:10px;padding-top:10px;border-top:1px solid var(--line-soft);font-size:.83rem;color:var(--ink-dim);line-height:1.7}
+.gfmt b{color:var(--phos);font-weight:500}
+.gfmt code{font-family:var(--mono);color:var(--amber);font-size:.96em}
+
+/* tutorial: what you get back */
+.io{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.io .card{border:1px solid var(--line-soft);background:var(--bg-2);padding:20px}
+.io h4{font-family:var(--disp);font-weight:800;font-size:1.06rem;margin-bottom:8px}
+.io h4 .ar{color:var(--phos);margin-right:8px}
+.io ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.io li{color:var(--ink-dim);font-size:.88rem;line-height:1.5;padding-left:16px;position:relative}
+.io li::before{content:"›";position:absolute;left:0;color:var(--phos)}
+.io li b{color:var(--ink)}
+.io li code{font-family:var(--mono);color:var(--amber);font-size:.92em}
+@media (max-width:640px){.io{grid-template-columns:1fr}}
+
 /* how it works — moving pipeline */
 .pipe{margin-top:6px}
 .pipe-track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);--i:0}
@@ -203,38 +236,133 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
         <span class="idx">02 — THE TEMPLATE</span>
         <h2 class="sec-title">One file describes it all.</h2>
       </div>
-      <p class="sec-sub">Drop a <b>matraix.yaml</b> in your repo (or send it over) — it points us at your frontend, backend, and data, and tells the agents what to evaluate.</p>
+      <p class="sec-sub">One <b>matraix.yaml</b> is the entire handoff. It points us at your <b>frontend, backend, and data</b>, defines the <b>input each flow expects</b>, and declares the <b>output you want back</b> — so the report drops straight into your pipeline. Copy the file below, fill in your values, and send it over (or drop it in your repo root). We'll walk through every block underneath.</p>
+      <div class="legend">
+        <span><span class="tag req">Required</span> the minimum to start a run</span>
+        <span><span class="tag opt">Optional</span> sharpens results, never blocks</span>
+      </div>
       <div class="term">
         <div class="term-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="nm">matraix.yaml</span></div>
-<pre class="code" id="tplCode"><code><span class="cm"># matraix.yaml — describe your stack for the agents</span>
-<span class="k">project</span>: acme-checkout
+<pre class="code" id="tplCode"><code><span class="cm"># matraix.yaml — describe your stack so the agents can run it</span>
+<span class="k">project</span>: acme-checkout                  <span class="cm"># slug we use to name your sandbox</span>
+<span class="k">contact</span>: <span class="s">"eng@acme.com"</span>                 <span class="cm"># who we ping with questions</span>
 
+<span class="cm"># ── 1. The surface the agents click through ──────────────</span>
 <span class="k">frontend</span>:
-  <span class="k">url</span>: <span class="s">"https://staging.acme.com"</span>      <span class="cm"># live URL the agents drive</span>
-  <span class="k">repo</span>: <span class="s">"github.com/acme/web"</span>          <span class="cm"># optional, for context</span>
-  <span class="k">auth</span>: { <span class="k">type</span>: test-account, <span class="k">user</span>: <span class="s">"bot@acme.com"</span> }
+  <span class="k">url</span>: <span class="s">"https://staging.acme.com"</span>      <span class="cm"># reachable HTTPS URL the agents drive</span>
+  <span class="k">repo</span>: <span class="s">"github.com/acme/web"</span>          <span class="cm"># optional, for deeper context</span>
+  <span class="k">auth</span>:                              <span class="cm"># how agents sign in</span>
+    <span class="k">type</span>: test-account
+    <span class="k">user</span>: <span class="s">"bot@acme.com"</span>
+    <span class="k">secret</span>: <span class="s">env:MATRAIX_PW</span>            <span class="cm"># reference a secret — never paste it</span>
 
+<span class="cm"># ── 2. The API behind every click (the I/O contract) ─────</span>
 <span class="k">backend</span>:
   <span class="k">api</span>:     <span class="s">"https://staging.acme.com/api"</span>
-  <span class="k">spec</span>:    <span class="s">"openapi.yaml"</span>              <span class="cm"># OpenAPI / GraphQL schema</span>
-  <span class="k">sandbox</span>: <span class="s">"docker-compose.yml"</span>        <span class="cm"># or a container image to run</span>
-  <span class="k">repo</span>:    <span class="s">"github.com/acme/api"</span>       <span class="cm"># optional source for tracing</span>
+  <span class="k">spec</span>:    <span class="s">"openapi.yaml"</span>              <span class="cm"># OpenAPI 3 / GraphQL SDL — request+response shapes</span>
+  <span class="k">sandbox</span>: <span class="s">"docker-compose.yml"</span>        <span class="cm"># or a container image we spin up</span>
+  <span class="k">repo</span>:    <span class="s">"github.com/acme/api"</span>       <span class="cm"># optional source for tracing failures</span>
 
+<span class="cm"># ── 3. Enough state to make flows realistic ──────────────</span>
 <span class="k">data</span>:
-  <span class="k">schema</span>: <span class="s">"schema.sql"</span>               <span class="cm"># table / model definitions</span>
-  <span class="k">seed</span>:   <span class="s">"anonymized_sample.csv"</span>     <span class="cm"># synthetic or anonymized rows</span>
+  <span class="k">schema</span>: <span class="s">"schema.sql"</span>               <span class="cm"># table / model definitions (.sql, prisma, JSON Schema)</span>
+  <span class="k">seed</span>:   <span class="s">"anonymized_sample.csv"</span>     <span class="cm"># synthetic or anonymized rows (.csv / .json / dump)</span>
   <span class="k">pii</span>:    none                        <span class="cm"># we require no real PII</span>
 
+<span class="cm"># ── 4. What a successful run looks like, end to end ──────</span>
 <span class="k">goals</span>:
   - <span class="k">flow</span>: checkout
-    <span class="k">success</span>: order_confirmed
-    <span class="k">metrics</span>: [conversion rate, latency, error rate]
+    <span class="k">entry</span>:   <span class="s">"/cart"</span>                 <span class="cm"># where the agent starts</span>
+    <span class="k">success</span>: order_confirmed          <span class="cm"># event/state that counts as a win</span>
+    <span class="k">inputs</span>:                          <span class="cm"># data the agent supplies, WITH format</span>
+      - { <span class="k">field</span>: card,         <span class="k">type</span>: string, <span class="k">format</span>: <span class="s">"test PAN, e.g. 4242 4242 4242 4242"</span> }
+      - { <span class="k">field</span>: shipping_zip, <span class="k">type</span>: string, <span class="k">format</span>: <span class="s">"5-digit US ZIP"</span> }
+    <span class="k">output</span>:                          <span class="cm"># what you want captured per attempt</span>
+      <span class="k">schema</span>:  <span class="s">"order.schema.json"</span>     <span class="cm"># JSON Schema of the result we record</span>
+      <span class="k">metrics</span>: [conversion rate, latency_ms, error rate]
 
-<span class="k">segments</span>: [mobile, new_users, non-native English]</code></pre>
+<span class="cm"># ── 5. Who the agents emulate ───────────────────────────</span>
+<span class="k">segments</span>: [mobile, new_users, non-native English]
+
+<span class="cm"># ── 6. Where the report lands in your pipeline ──────────</span>
+<span class="k">report</span>:
+  <span class="k">format</span>:  [json, html]            <span class="cm"># machine-readable + human-readable</span>
+  <span class="k">webhook</span>: <span class="s">"https://acme.com/hooks/matraix"</span>  <span class="cm"># we POST results here when done</span></code></pre>
       </div>
       <div class="tpl-actions">
         <button class="btn" id="tplCopy" type="button">⧉ Copy template</button>
         <a class="btn ghost" href="metrics.html">Browse 900+ metrics →</a>
+      </div>
+
+      <!-- field-by-field walkthrough -->
+      <h3 class="guide-head">Block by block</h3>
+      <p class="guide-sub">Six blocks. Here's what each one is for, and the exact format we expect.</p>
+      <div class="guide">
+        <div class="gblock">
+          <div class="gtop"><span class="gkey">project / contact</span><span class="tag req">Required</span></div>
+          <p>A short <b>slug</b> we use to name and isolate your sandbox, plus a <b>human to reach</b> when something's ambiguous.</p>
+          <div class="gfmt"><b>Format —</b> <code>project</code>: kebab-case string. <code>contact</code>: any email.</div>
+        </div>
+
+        <div class="gblock">
+          <div class="gtop"><span class="gkey">frontend</span><span class="tag req">Required</span></div>
+          <p>The surface the agents actually click through. Give us a <b>reachable staging URL</b> (or a build we can host) and an <b>auth</b> block so the agents can sign in like a real user.</p>
+          <div class="gfmt"><b>Format —</b> <code>url</code>: HTTPS URL. <code>auth.type</code>: <code>test-account</code>, <code>magic-link</code>, or <code>none</code>. Pass credentials by reference — <code>env:VAR_NAME</code> or a shared secret link — <b>never paste real secrets into the file</b>.</div>
+        </div>
+
+        <div class="gblock">
+          <div class="gtop"><span class="gkey">backend</span><span class="tag opt">Recommended</span></div>
+          <p>So we can read and verify the I/O behind each click, not just the pixels. The <b>spec is the contract</b>: it tells us every endpoint's request and response shape, so the agents send well-formed input and we can grade the output precisely. No spec? A reachable API plus the staging URL still works as a black box.</p>
+          <div class="gfmt"><b>Format —</b> <code>spec</code>: <b>OpenAPI 3</b> (YAML/JSON) or <b>GraphQL SDL</b>. <code>sandbox</code>: a <code>docker-compose.yml</code> or image ref (<code>ghcr.io/acme/api:tag</code>) if you'd rather we run it isolated.</div>
+        </div>
+
+        <div class="gblock">
+          <div class="gtop"><span class="gkey">data</span><span class="tag req">Required</span></div>
+          <p>Enough state that flows behave like production — products in a catalog, a user with a cart, etc. A <b>schema</b> plus a small <b>seed</b> is plenty.</p>
+          <div class="gfmt"><b>Format —</b> <code>schema</code>: <code>.sql</code>, Prisma/ORM models, or JSON Schema. <code>seed</code>: <code>.csv</code>, <code>.json</code>, or a DB dump — <b>synthetic or anonymized</b>. <code>pii: none</code> is the expected value; we require no real PII.</div>
+        </div>
+
+        <div class="gblock">
+          <div class="gtop"><span class="gkey">goals</span><span class="tag req">Required — the heart of the file</span></div>
+          <p>This is where you define the <b>input/output contract</b> the agents are graded against. Each flow names where it <b>starts</b> (<code>entry</code>), what counts as a <b>win</b> (<code>success</code>), the <b>inputs</b> the agent must supply (each with a <code>type</code> and human-readable <code>format</code>), and the <b>output</b> you want captured per attempt — a result schema plus the metrics that matter.</p>
+          <div class="gfmt"><b>Input format —</b> a list of <code>{ field, type, format }</code> so agents generate valid, realistic values. <b>Output format —</b> <code>output.schema</code> points at a <b>JSON Schema</b> for the result we record; <code>output.metrics</code> is any of our <a href="metrics.html" style="color:var(--phos)">900+ metrics</a>. Add as many <code>flow</code> entries as you have journeys.</div>
+        </div>
+
+        <div class="gblock">
+          <div class="gtop"><span class="gkey">segments</span><span class="tag opt">Optional</span></div>
+          <p>The personas to weight the simulated population by, so results are sliced the way <b>you</b> think about users. Skip it and we run a balanced default population.</p>
+          <div class="gfmt"><b>Format —</b> a list of tags (<code>mobile</code>, <code>new_users</code>, <code>enterprise</code>, <code>non-native English</code>…) or named segments we map onto the persona dimension space.</div>
+        </div>
+
+        <div class="gblock">
+          <div class="gtop"><span class="gkey">report</span><span class="tag opt">Optional</span></div>
+          <p>Where the results should go. Pick the <b>output formats</b> you want and give us a <b>webhook</b> and the report lands in your pipeline automatically — no portal round-trip.</p>
+          <div class="gfmt"><b>Format —</b> <code>format</code>: any of <code>json</code>, <code>html</code>, <code>jsonl</code>. <code>webhook</code>: an HTTPS endpoint we <code>POST</code> to on completion. Omit it and you pull results from the dashboard instead.</div>
+        </div>
+      </div>
+
+      <!-- what you get back -->
+      <h3 class="guide-head">What you get back</h3>
+      <p class="guide-sub">Two artifacts per run — one for your team to read, one for your machines to consume.</p>
+      <div class="io">
+        <div class="card">
+          <h4><span class="ar">←</span>report.json / .html</h4>
+          <ul>
+            <li>A <b>segmented A/B report</b> — friction, conversion lift, and failure points sliced by your <code>segments</code></li>
+            <li>Per-flow <b>metrics</b> exactly as you named them in <code>goals[].output.metrics</code></li>
+            <li>A <b>funnel friction map</b> with the step where each segment drops off</li>
+            <li>Ranked <b>findings</b> with severity, so you know what to fix first</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4><span class="ar">←</span>trajectories.jsonl</h4>
+          <ul>
+            <li>Every agent run as <b>obs → action → reward</b> steps — full session replays you can audit</li>
+            <li>Results validated against your <code>output.schema</code>, so they slot straight into your stores</li>
+            <li><b>SFT / RL-ready</b> trajectories for training, one JSON object per line</li>
+            <li>Delivered to your <code>report.webhook</code>, or pulled via the dashboard / API</li>
+          </ul>
+        </div>
       </div>
     </section>
 
