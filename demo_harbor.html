@@ -770,6 +770,9 @@
         freshFrom: Number.POSITIVE_INFINITY
       };
 
+      // Sample data placeholder - will be loaded from samples/data.json
+      let SAMPLE_DATA = null;
+
       const qp = new URLSearchParams(location.search);
       const storedApi = localStorage.getItem("harbor_live_api_base");
       state.apiBase = (qp.get("api") || storedApi || "http://127.0.0.1:18080").replace(/\/+$/, "");
@@ -799,11 +802,68 @@
       }
 
       async function fetchJson(path){
-        const res = await fetch(api(path), { cache: "no-store" });
-        if(!res.ok){
-          throw new Error(path + " -> HTTP " + res.status);
+        try {
+          const res = await fetch(api(path), { cache: "no-store" });
+          if(!res.ok){
+            throw new Error(path + " -> HTTP " + res.status);
+          }
+          return res.json();
+        } catch (err) {
+          // Fallback to sample data when API is unavailable
+          if(!SAMPLE_DATA) {
+            throw err;  // No sample data available yet
+          }
+
+          if(path === "/api/health"){
+            return { status: "ok", note: "Using sample data (API unavailable)" };
+          }
+
+          if(path === "/api/jobs?page=1&page_size=100"){
+            return { items: SAMPLE_DATA.jobs };
+          }
+
+          // Handle specific job trials endpoint: /api/jobs/{jobName}/trials
+          const jobTrialsMatch = path.match(/\/api\/jobs\/([^\/]+)\/trials$/);
+          if(jobTrialsMatch){
+            const jobName = decodeURIComponent(jobTrialsMatch[1]);
+            if(SAMPLE_DATA.trials[jobName]){
+              return { items: SAMPLE_DATA.trials[jobName] };
+            }
+            return { items: [] };
+          }
+
+          // Handle specific trial detail endpoint: /api/jobs/{jobName}/trials/{trialName}
+          const trialDetailMatch = path.match(/\/api\/jobs\/([^\/]+)\/trials\/([^\/]+)$/);
+          if(trialDetailMatch){
+            const jobName = decodeURIComponent(trialDetailMatch[1]);
+            const trialName = decodeURIComponent(trialDetailMatch[2]);
+            if(SAMPLE_DATA.trajectories[jobName] && SAMPLE_DATA.trajectories[jobName][trialName]){
+              const trajectory = SAMPLE_DATA.trajectories[jobName][trialName];
+              return {
+                task_name: trajectory.task_name,
+                started_at: trajectory.started_at,
+                finished_at: trajectory.finished_at,
+                config: { task: { source: "sample", path: "demo" } },
+                agent_info: { model_info: { provider: "anthropic", name: "claude-opus-4-8" } }
+              };
+            }
+            return {};
+          }
+
+          // Handle trajectory steps endpoint: /api/jobs/{jobName}/trials/{trialName}/trajectory
+          const trajectoryMatch = path.match(/\/api\/jobs\/([^\/]+)\/trials\/([^\/]+)\/trajectory/);
+          if(trajectoryMatch){
+            const jobName = decodeURIComponent(trajectoryMatch[1]);
+            const trialName = decodeURIComponent(trajectoryMatch[2]);
+            if(SAMPLE_DATA.trajectories[jobName] && SAMPLE_DATA.trajectories[jobName][trialName]){
+              return { steps: SAMPLE_DATA.trajectories[jobName][trialName].steps };
+            }
+            return { steps: [] };
+          }
+
+          // If no fallback matched, re-throw
+          throw err;
         }
-        return res.json();
       }
 
       function setApiState(ok, msg){
@@ -1484,6 +1544,18 @@
           state.expandedSections[key] = true;
         }
       });
+
+      // Load sample data from samples/data.json
+      (async () => {
+        try {
+          const res = await fetch("samples/data.json");
+          if(res.ok){
+            SAMPLE_DATA = await res.json();
+          }
+        } catch (_err){
+          console.warn("Could not load sample data from samples/data.json");
+        }
+      })();
 
       renderStepControls();
       setRightTab(state.rightTab);
