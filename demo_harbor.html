@@ -748,143 +748,518 @@
         runSummary: $("runSummary")
       };
 
-      // Sample data for demo when API is unavailable
+      // Real trajectory data from actual bookstore job runs
       const SAMPLE_DATA = {
-        jobs: [
-          { name: "bookstore_batch_001", started_at: "2026-06-20T14:30:00Z", status: "completed" },
-          { name: "bookstore_batch_002", started_at: "2026-06-20T13:15:00Z", status: "completed" },
-          { name: "bookstore_batch_003", started_at: "2026-06-20T12:45:00Z", status: "completed" },
-          { name: "bookstore_eval_004", started_at: "2026-06-20T11:30:00Z", status: "completed" },
-          { name: "bookstore_validation_005", started_at: "2026-06-20T10:00:00Z", status: "completed" },
-          { name: "bookstore_regression_006", started_at: "2026-06-19T22:30:00Z", status: "completed" },
-          { name: "bookstore_perf_007", started_at: "2026-06-19T18:45:00Z", status: "completed" },
-          { name: "bookstore_integration_008", started_at: "2026-06-19T15:20:00Z", status: "completed" },
-          { name: "bookstore_smoke_009", started_at: "2026-06-19T12:10:00Z", status: "completed" }
-        ],
-        trials: {
-          "bookstore_batch_001": [
-            { name: "trial_fiction_seeker_001", task_name: "Browse fiction and find a sci-fi novel", reward: 1.0, error_type: null, finished_at: "2026-06-20T14:35:00Z", source: "books-interest", model_provider: "anthropic", model_name: "claude-opus-4-8", input_tokens: 1450, output_tokens: 2100 },
-            { name: "trial_mystery_reader_001", task_name: "Find a mystery thriller book", reward: 1.0, error_type: null, finished_at: "2026-06-20T14:40:00Z", source: "books-interest", model_provider: "anthropic", model_name: "claude-opus-4-8", input_tokens: 1320, output_tokens: 1850 },
-            { name: "trial_education_learner_001", task_name: "Locate educational programming book", reward: 1.0, error_type: null, finished_at: "2026-06-20T14:45:00Z", source: "books-interest", model_provider: "anthropic", model_name: "claude-opus-4-8", input_tokens: 1580, output_tokens: 2350 }
-          ],
-          "bookstore_batch_002": [
-            { name: "trial_fantasy_explorer_001", task_name: "Browse and select fantasy novel", reward: 1.0, error_type: null, finished_at: "2026-06-20T13:25:00Z", source: "books-interest", model_provider: "anthropic", model_name: "claude-sonnet-4-6", input_tokens: 1290, output_tokens: 1950 },
-            { name: "trial_history_buff_001", task_name: "Find historical fiction book", reward: 1.0, error_type: null, finished_at: "2026-06-20T13:32:00Z", source: "books-interest", model_provider: "anthropic", model_name: "claude-sonnet-4-6", input_tokens: 1410, output_tokens: 2020 }
-          ],
-          "bookstore_batch_003": [
-            { name: "trial_poetry_enthusiast_001", task_name: "Browse poetry section and pick collection", reward: 0.95, error_type: null, finished_at: "2026-06-20T12:55:00Z", source: "books-interest", model_provider: "anthropic", model_name: "claude-haiku-4-5", input_tokens: 980, output_tokens: 1480 },
-            { name: "trial_romance_lover_001", task_name: "Find contemporary romance book", reward: 1.0, error_type: null, finished_at: "2026-06-20T13:05:00Z", source: "books-interest", model_provider: "anthropic", model_name: "claude-haiku-4-5", input_tokens: 1100, output_tokens: 1620 }
-          ]
-        },
-        trajectories: {
-          "bookstore_batch_001": {
-            "trial_fiction_seeker_001": {
-              steps: [
-                { step_id: 1, source: "user", timestamp: "2026-06-20T14:30:15Z", message: "Browse fiction and find a sci-fi novel to purchase", model_name: null, tool_calls: [], metrics: {}, observation: {} },
-                { step_id: 2, source: "assistant", timestamp: "2026-06-20T14:30:22Z", message: "I'll navigate to the bookstore and browse the fiction section", model_name: "claude-opus-4-8", tool_calls: [{ name: "browser_action", arguments: { action: "navigate", url: "https://books.toscrape.com/" } }], metrics: {}, observation: {} },
-                { step_id: 3, source: "environment", timestamp: "2026-06-20T14:30:30Z", message: "Page loaded successfully", model_name: null, tool_calls: [], metrics: {}, observation: { page_title: "Books to Scrape", books_visible: 20 } },
-                { step_id: 4, source: "assistant", timestamp: "2026-06-20T14:30:38Z", message: "I see the book catalog. Let me look for sci-fi novels", model_name: "claude-opus-4-8", tool_calls: [{ name: "browser_action", arguments: { action: "click", selector: "a[href*='science-fiction']" } }], metrics: {}, observation: {} },
-                { step_id: 5, source: "environment", timestamp: "2026-06-20T14:30:45Z", message: "Navigated to sci-fi category", model_name: null, tool_calls: [], metrics: {}, observation: { category: "Science Fiction", book_count: 28 } },
-                { step_id: 6, source: "assistant", timestamp: "2026-06-20T14:30:52Z", message: "Found sci-fi books. I'll select 'A Light in the Attic' by Alice Johnson - £51.77", model_name: "claude-opus-4-8", tool_calls: [{ name: "browser_action", arguments: { action: "click", selector: "article:contains('A Light in the Attic')" } }], metrics: {}, observation: {} },
-                { step_id: 7, source: "environment", timestamp: "2026-06-20T14:31:00Z", message: "Book detail page loaded", model_name: null, tool_calls: [], metrics: {}, observation: { title: "A Light in the Attic", price: "£51.77", rating: "Three" } },
-                { step_id: 8, source: "assistant", timestamp: "2026-06-20T14:31:08Z", message: "I found an excellent sci-fi choice. Submitting selection.", model_name: "claude-opus-4-8", tool_calls: [{ name: "submit_result", arguments: { title: "A Light in the Attic", price_gbp: "£51.77", interested: true, reason: "Highly recommended science fiction that explores themes of consciousness and artificial intelligence" } }], metrics: { decision_confidence: 0.92 }, observation: {} },
-                { step_id: 9, source: "environment", timestamp: "2026-06-20T14:31:15Z", message: "Selection submitted successfully", model_name: null, tool_calls: [], metrics: {}, observation: { submission_status: "success", task_status: "completed" } }
-              ],
-              task_name: "Browse fiction and find a sci-fi novel",
-              started_at: "2026-06-20T14:30:00Z",
-              finished_at: "2026-06-20T14:35:00Z"
-            },
-            "trial_mystery_reader_001": {
-              steps: [
-                { step_id: 1, source: "user", timestamp: "2026-06-20T14:35:15Z", message: "Find a mystery thriller book at the bookstore", model_name: null, tool_calls: [], metrics: {}, observation: {} },
-                { step_id: 2, source: "assistant", timestamp: "2026-06-20T14:35:22Z", message: "Starting bookstore browsing for mystery thrillers", model_name: "claude-opus-4-8", tool_calls: [{ name: "browser_action", arguments: { action: "navigate", url: "https://books.toscrape.com/" } }], metrics: {}, observation: {} },
-                { step_id: 3, source: "environment", timestamp: "2026-06-20T14:35:30Z", message: "Bookstore homepage loaded", model_name: null, tool_calls: [], metrics: {}, observation: { total_books: 1000 } },
-                { step_id: 4, source: "assistant", timestamp: "2026-06-20T14:35:38Z", message: "Looking for mystery section", model_name: "claude-opus-4-8", tool_calls: [{ name: "browser_action", arguments: { action: "click", selector: "a[href*='mystery']" } }], metrics: {}, observation: {} },
-                { step_id: 5, source: "environment", timestamp: "2026-06-20T14:35:45Z", message: "Mystery category loaded with 32 books", model_name: null, tool_calls: [], metrics: {}, observation: { category: "Mystery", books_found: 32 } },
-                { step_id: 6, source: "assistant", timestamp: "2026-06-20T14:35:52Z", message: "Found mystery selection. Selecting 'Tipping Point' by Malcolm Gladwell - £48.92", model_name: "claude-opus-4-8", tool_calls: [{ name: "submit_result", arguments: { title: "Tipping Point", price_gbp: "£48.92", interested: true, reason: "Fascinating exploration of how small changes lead to major social consequences through compelling real-world examples" } }], metrics: { decision_confidence: 0.88 }, observation: {} },
-                { step_id: 7, source: "environment", timestamp: "2026-06-20T14:36:00Z", message: "Selection submitted and validated", model_name: null, tool_calls: [], metrics: {}, observation: { submission_status: "success" } }
-              ],
-              task_name: "Find a mystery thriller book",
-              started_at: "2026-06-20T14:35:00Z",
-              finished_at: "2026-06-20T14:40:00Z"
-            },
-            "trial_education_learner_001": {
-              steps: [
-                { step_id: 1, source: "user", timestamp: "2026-06-20T14:40:15Z", message: "Locate an educational programming or technology book", model_name: null, tool_calls: [], metrics: {}, observation: {} },
-                { step_id: 2, source: "assistant", timestamp: "2026-06-20T14:40:22Z", message: "I'll search for programming and technology books", model_name: "claude-opus-4-8", tool_calls: [{ name: "browser_action", arguments: { action: "navigate", url: "https://books.toscrape.com/" } }], metrics: {}, observation: {} },
-                { step_id: 3, source: "environment", timestamp: "2026-06-20T14:40:30Z", message: "Catalog loaded", model_name: null, tool_calls: [], metrics: {}, observation: {} },
-                { step_id: 4, source: "assistant", timestamp: "2026-06-20T14:40:38Z", message: "Browsing technology category", model_name: "claude-opus-4-8", tool_calls: [{ name: "browser_action", arguments: { action: "click", selector: "a[href*='technology']" } }], metrics: {}, observation: {} },
-                { step_id: 5, source: "environment", timestamp: "2026-06-20T14:40:45Z", message: "Technology books displayed (24 total)", model_name: null, tool_calls: [], metrics: {}, observation: { category: "Technology", count: 24 } },
-                { step_id: 6, source: "assistant", timestamp: "2026-06-20T14:40:52Z", message: "Found excellent tech book. Selecting 'Sapiens' - £17.99", model_name: "claude-opus-4-8", tool_calls: [{ name: "submit_result", arguments: { title: "Sapiens", price_gbp: "£17.99", interested: true, reason: "Essential reading about human history and social evolution; provides critical perspective for understanding technology's role in society" } }], metrics: { decision_confidence: 0.95 }, observation: {} },
-                { step_id: 7, source: "environment", timestamp: "2026-06-20T14:41:00Z", message: "Selection confirmed and recorded", model_name: null, tool_calls: [], metrics: {}, observation: { submission_status: "success", task_completed: true } }
-              ],
-              task_name: "Locate educational programming book",
-              started_at: "2026-06-20T14:40:00Z",
-              finished_at: "2026-06-20T14:45:00Z"
-            }
+  "jobs": [
+    {
+      "name": "books-browser-use-001",
+      "started_at": "2026-06-17T04:40:00Z",
+      "status": "completed"
+    },
+    {
+      "name": "books-linux-cua-001",
+      "started_at": "2026-06-17T04:39:17.020568+00:00",
+      "status": "completed"
+    }
+  ],
+  "trials": {
+    "books-browser-use-001": [
+      {
+        "name": "trial_browser_use_001",
+        "task_name": "Bookshop browsing (Browser-Use)",
+        "reward": 1.0,
+        "error_type": null,
+        "finished_at": "2026-06-17T04:40:34.708557+00:00",
+        "source": "books-interest",
+        "model_provider": "anthropic",
+        "model_name": "claude-sonnet-4-6",
+        "input_tokens": 1500,
+        "output_tokens": 2500
+      }
+    ],
+    "books-linux-cua-001": [
+      {
+        "name": "trial_linux_cua_001",
+        "task_name": "Bookshop browsing (Linux CUA)",
+        "reward": 1.0,
+        "error_type": null,
+        "finished_at": "2026-06-17T04:40:39.521510+00:00",
+        "source": "books-interest",
+        "model_provider": "anthropic",
+        "model_name": "claude-sonnet-4-6",
+        "input_tokens": 2500,
+        "output_tokens": 3500
+      }
+    ]
+  },
+  "trajectories": {
+    "books-browser-use-001": {
+      "trial_browser_use_001": {
+        "steps": [
+          {
+            "step_id": 1,
+            "timestamp": "2026-06-17T04:40:00Z",
+            "source": "user",
+            "message": "# Bookshop browsing (browser-use + live web)\n\nBrowse the public book catalog at:\n\nhttps://books.toscrape.com/\n\nUse the **browser-use** agent loop (Chr",
+            "model_name": null,
+            "tool_calls": [],
+            "observation": {},
+            "metrics": {}
           },
-          "bookstore_batch_002": {
-            "trial_fantasy_explorer_001": {
-              steps: [
-                { step_id: 1, source: "user", timestamp: "2026-06-20T13:15:15Z", message: "Browse and select a fantasy novel from the bookstore", model_name: null, tool_calls: [], metrics: {}, observation: {} },
-                { step_id: 2, source: "assistant", timestamp: "2026-06-20T13:15:22Z", message: "Navigating to bookstore to find fantasy novels", model_name: "claude-sonnet-4-6", tool_calls: [{ name: "browser_action", arguments: { action: "navigate", url: "https://books.toscrape.com/" } }], metrics: {}, observation: {} },
-                { step_id: 3, source: "environment", timestamp: "2026-06-20T13:15:30Z", message: "Homepage loaded", model_name: null, tool_calls: [], metrics: {}, observation: {} },
-                { step_id: 4, source: "assistant", timestamp: "2026-06-20T13:15:38Z", message: "Accessing fantasy category", model_name: "claude-sonnet-4-6", tool_calls: [{ name: "browser_action", arguments: { action: "click", selector: "a[href*='fantasy']" } }], metrics: {}, observation: {} },
-                { step_id: 5, source: "environment", timestamp: "2026-06-20T13:15:45Z", message: "Fantasy section loaded (43 books)", model_name: null, tool_calls: [], metrics: {}, observation: { category: "Fantasy", total: 43 } },
-                { step_id: 6, source: "assistant", timestamp: "2026-06-20T13:15:52Z", message: "Excellent fantasy selection available. Selecting 'The Wise Man's Fear' - £35.50", model_name: "claude-sonnet-4-6", tool_calls: [{ name: "submit_result", arguments: { title: "The Wise Man's Fear", price_gbp: "£35.50", interested: true, reason: "Compelling fantasy epic with rich world-building and complex character development; sequel to acclaimed original" } }], metrics: { decision_confidence: 0.91 }, observation: {} },
-                { step_id: 7, source: "environment", timestamp: "2026-06-20T13:16:00Z", message: "Book selection recorded", model_name: null, tool_calls: [], metrics: {}, observation: { status: "completed" } }
-              ],
-              task_name: "Browse and select fantasy novel",
-              started_at: "2026-06-20T13:15:00Z",
-              finished_at: "2026-06-20T13:25:00Z"
+          {
+            "step_id": 2,
+            "timestamp": "2026-06-17T04:40:19.306702+00:00",
+            "source": "agent",
+            "message": "Eval: Start\nNext goal: Initial navigation",
+            "model_name": "anthropic/claude-sonnet-4-6",
+            "tool_calls": [
+              {
+                "name": "navigate",
+                "arguments": {
+                  "url": "https://books.toscrape.com/",
+                  "new_tab": false
+                }
+              }
+            ],
+            "observation": {
+              "results": [
+                {
+                  "source_call_id": "step1_action1",
+                  "content": "\ud83d\udd17 Navigated to https://books.toscrape.com/\nFound initial url and automatically loaded it. Navigated to https://books.toscrape.com/"
+                }
+              ]
             },
-            "trial_history_buff_001": {
-              steps: [
-                { step_id: 1, source: "user", timestamp: "2026-06-20T13:25:15Z", message: "Find a historical fiction book at the bookstore", model_name: null, tool_calls: [], metrics: {}, observation: {} },
-                { step_id: 2, source: "assistant", timestamp: "2026-06-20T13:25:22Z", message: "Starting search for historical fiction", model_name: "claude-sonnet-4-6", tool_calls: [{ name: "browser_action", arguments: { action: "navigate", url: "https://books.toscrape.com/" } }], metrics: {}, observation: {} },
-                { step_id: 3, source: "environment", timestamp: "2026-06-20T13:25:30Z", message: "Bookstore loaded", model_name: null, tool_calls: [], metrics: {}, observation: {} },
-                { step_id: 4, source: "assistant", timestamp: "2026-06-20T13:25:38Z", message: "Browsing historical fiction collection", model_name: "claude-sonnet-4-6", tool_calls: [{ name: "browser_action", arguments: { action: "click", selector: "a[href*='historical-fiction']" } }], metrics: {}, observation: {} },
-                { step_id: 5, source: "environment", timestamp: "2026-06-20T13:25:45Z", message: "Historical fiction books shown (31 available)", model_name: null, tool_calls: [], metrics: {}, observation: { genre: "Historical Fiction", count: 31 } },
-                { step_id: 6, source: "assistant", timestamp: "2026-06-20T13:25:52Z", message: "Selecting 'The Name of the Wind' - £29.95", model_name: "claude-sonnet-4-6", tool_calls: [{ name: "submit_result", arguments: { title: "The Name of the Wind", price_gbp: "£29.95", interested: true, reason: "Historical narrative with immersive storytelling, exploring interconnected human experiences across time periods" } }], metrics: { decision_confidence: 0.89 }, observation: {} },
-                { step_id: 7, source: "environment", timestamp: "2026-06-20T13:26:00Z", message: "Selection submitted successfully", model_name: null, tool_calls: [], metrics: {}, observation: { confirmation: "success" } }
-              ],
-              task_name: "Find historical fiction book",
-              started_at: "2026-06-20T13:25:00Z",
-              finished_at: "2026-06-20T13:32:00Z"
-            }
+            "metrics": {}
           },
-          "bookstore_batch_003": {
-            "trial_poetry_enthusiast_001": {
-              steps: [
-                { step_id: 1, source: "user", timestamp: "2026-06-20T12:45:15Z", message: "Browse poetry section and pick a poetry collection", model_name: null, tool_calls: [], metrics: {}, observation: {} },
-                { step_id: 2, source: "assistant", timestamp: "2026-06-20T12:45:22Z", message: "Navigating to poetry section", model_name: "claude-haiku-4-5", tool_calls: [{ name: "browser_action", arguments: { action: "navigate", url: "https://books.toscrape.com/" } }], metrics: {}, observation: {} },
-                { step_id: 3, source: "environment", timestamp: "2026-06-20T12:45:30Z", message: "Catalog ready", model_name: null, tool_calls: [], metrics: {}, observation: {} },
-                { step_id: 4, source: "assistant", timestamp: "2026-06-20T12:45:38Z", message: "Looking for poetry", model_name: "claude-haiku-4-5", tool_calls: [{ name: "browser_action", arguments: { action: "click", selector: "a[href*='poetry']" } }], metrics: {}, observation: {} },
-                { step_id: 5, source: "environment", timestamp: "2026-06-20T12:45:45Z", message: "Poetry books available (18 total)", model_name: null, tool_calls: [], metrics: {}, observation: { section: "Poetry", count: 18 } },
-                { step_id: 6, source: "assistant", timestamp: "2026-06-20T12:45:52Z", message: "Found poetry collection. Selecting 'Sharp Objects' - £23.88", model_name: "claude-haiku-4-5", tool_calls: [{ name: "submit_result", arguments: { title: "Sharp Objects", price_gbp: "£23.88", interested: true, reason: "Modern poetry collection with intricate word choices and emotionally resonant verses exploring human vulnerability" } }], metrics: { decision_confidence: 0.85 }, observation: {} },
-                { step_id: 7, source: "environment", timestamp: "2026-06-20T12:46:00Z", message: "Selection recorded", model_name: null, tool_calls: [], metrics: {}, observation: { completion: "success" } }
-              ],
-              task_name: "Browse poetry section and pick collection",
-              started_at: "2026-06-20T12:45:00Z",
-              finished_at: "2026-06-20T12:55:00Z"
+          {
+            "step_id": 3,
+            "timestamp": "2026-06-17T04:40:19.307428+00:00",
+            "source": "agent",
+            "message": "Eval: Successfully navigated to books.toscrape.com and can see the catalog with books listed including titles and prices. Verdict: Success\nMemory: On ",
+            "model_name": "anthropic/claude-sonnet-4-6",
+            "tool_calls": [
+              {
+                "name": "write_file",
+                "arguments": {
+                  "file_name": "/app/output/book_interest.json",
+                  "content": "{\n  \"title\": \"Sapiens: A Brief History of Humankind\",\n  \"price_gbp\": \"\u00a354.23\",\n  \"interested\": true,\n  \"reason\": \"As a product manager who thinks a lot about systems and human behavior, Sapiens is exactly the kind of book I'd put on my reading list. Harari's sweep across human history helps me zoom out from daily sprint planning and think about the bigger picture \u2014 why we organize the way we do, how collective narratives shape markets and teams. It's the kind of non-fiction that earns its place on a busy professional's shelf.\"\n}",
+                  "append": false,
+                  "trailing_newline": true,
+                  "leading_newline": false
+                }
+              }
+            ],
+            "observation": {
+              "results": [
+                {
+                  "source_call_id": "step2_action1",
+                  "content": "Data written to file book_interest.json successfully. (auto-corrected from '/app/output/book_interest.json')\nData written to file book_interest.json successfully. (auto-corrected from '/app/output/book_interest.json')"
+                }
+              ]
             },
-            "trial_romance_lover_001": {
-              steps: [
-                { step_id: 1, source: "user", timestamp: "2026-06-20T13:00:15Z", message: "Find a contemporary romance book to read", model_name: null, tool_calls: [], metrics: {}, observation: {} },
-                { step_id: 2, source: "assistant", timestamp: "2026-06-20T13:00:22Z", message: "Starting romance book search", model_name: "claude-haiku-4-5", tool_calls: [{ name: "browser_action", arguments: { action: "navigate", url: "https://books.toscrape.com/" } }], metrics: {}, observation: {} },
-                { step_id: 3, source: "environment", timestamp: "2026-06-20T13:00:30Z", message: "Bookstore homepage ready", model_name: null, tool_calls: [], metrics: {}, observation: {} },
-                { step_id: 4, source: "assistant", timestamp: "2026-06-20T13:00:38Z", message: "Accessing romance category", model_name: "claude-haiku-4-5", tool_calls: [{ name: "browser_action", arguments: { action: "click", selector: "a[href*='romance']" } }], metrics: {}, observation: {} },
-                { step_id: 5, source: "environment", timestamp: "2026-06-20T13:00:45Z", message: "Romance books listed (37 available)", model_name: null, tool_calls: [], metrics: {}, observation: { section: "Romance", available: 37 } },
-                { step_id: 6, source: "assistant", timestamp: "2026-06-20T13:00:52Z", message: "Found great romance option. Selecting 'Soumission' - £22.65", model_name: "claude-haiku-4-5", tool_calls: [{ name: "submit_result", arguments: { title: "Soumission", price_gbp: "£22.65", interested: true, reason: "Contemporary romance exploring modern relationship dynamics with thoughtful character development and authentic emotional depth" } }], metrics: { decision_confidence: 0.86 }, observation: {} },
-                { step_id: 7, source: "environment", timestamp: "2026-06-20T13:01:00Z", message: "Selection finalized", model_name: null, tool_calls: [], metrics: {}, observation: { status: "completed" } }
-              ],
-              task_name: "Find contemporary romance book",
-              started_at: "2026-06-20T13:00:00Z",
-              finished_at: "2026-06-20T13:05:00Z"
-            }
+            "metrics": {}
+          },
+          {
+            "step_id": 4,
+            "timestamp": "2026-06-17T04:40:34.708557+00:00",
+            "source": "agent",
+            "message": "Eval: The file book_interest.json was successfully written with the correct title \"Sapiens: A Brief History of Humankind\" and price \"\u00a354.23\" as seen o",
+            "model_name": "anthropic/claude-sonnet-4-6",
+            "tool_calls": [
+              {
+                "name": "done",
+                "arguments": {
+                  "text": "I browsed books.toscrape.com and selected **Sapiens: A Brief History of Humankind** at **\u00a354.23** as my pick. The book was visible on the front page of the catalog with a 5-star rating.\n\nThe file `/app/output/book_interest.json` has been written with:\n```json\n{\n  \"title\": \"Sapiens: A Brief History of Humankind\",\n  \"price_gbp\": \"\u00a354.23\",\n  \"interested\": true,\n  \"reason\": \"As a product manager who thinks a lot about systems and human behavior, Sapiens is exactly the kind of book I'd put on my reading list. Harari's sweep across human history helps me zoom out from daily sprint planning and think about the bigger picture \u2014 why we organize the way we do, how collective narratives shape markets and teams. It's the kind of non-fiction that earns its place on a busy professional's shelf.\"\n}\n```\nTitle and price were read directly from the live page.",
+                  "success": true,
+                  "files_to_display": [
+                    "book_interest.json"
+                  ]
+                }
+              }
+            ],
+            "observation": {
+              "results": [
+                {
+                  "source_call_id": "step3_action1",
+                  "content": "I browsed books.toscrape.com and selected **Sapiens: A Brief History of Humankind** at **\u00a354.23** as my pick. The book was visible on the front page of the catalog with a 5-star rating.\n\nThe file `/app/output/book_interest.json` has been written with:\n```json\n{\n  \"title\": \"Sapiens: A Brief History of Humankind\",\n  \"price_gbp\": \"\u00a354.23\",\n  \"interested\": true,\n  \"reason\": \"As a product manager who thinks a lot about systems and human behavior, Sapiens is exactly the kind of book I'd put on my reading list. Harari's sweep across human history helps me zoom out from daily sprint planning and think about the bigger picture \u2014 why we organize the way we do, how collective narratives shape markets and teams. It's the kind of non-fiction that earns its place on a busy professional's shelf.\"\n}\n```\nTitle and price were read directly from the live page.\n\nAttachments:\n\nbook_interest.json:\n{\n  \"title\": \"Sapiens: A Brief History of Humankind\",\n  \"price_gbp\": \"\u00a354.23\",\n  \"interested\": true,\n  \"reason\": \"As a product manager who thinks a lot about systems and human behavior, Sapiens is exactly the kind of book I'd put on my reading list. Harari's sweep across human history helps me zoom out from daily sprint planning and think about the bigger picture \u2014 why we organize the way we do, how collective narratives shape markets and teams. It's the kind of non-fiction that earns its place on a busy professional's shelf.\"\n}\n\nTask completed: True - I browsed books.toscrape.com and selected **Sapiens: A Brief History of Humankind** at **\u00a354.23** as - 753 more characters"
+                }
+              ]
+            },
+            "metrics": {}
           }
-        }
-      };
+        ],
+        "task_name": "Bookshop browsing (Browser-Use)",
+        "started_at": "2026-06-17T04:40:00Z",
+        "finished_at": "2026-06-17T04:40:34.708557+00:00"
+      }
+    },
+    "books-linux-cua-001": {
+      "trial_linux_cua_001": {
+        "steps": [
+          {
+            "step_id": 1,
+            "timestamp": "2026-06-17T04:39:17.020568+00:00",
+            "source": "user",
+            "message": "# Simulated person: 0042 (schema 1.0)\n## Demographics\n- Age: 34\n- Gender: female\n- Location: Shanghai, CN\n- Occupation: Product Manager\n- Education: M",
+            "model_name": null,
+            "tool_calls": [],
+            "observation": {},
+            "metrics": {}
+          },
+          {
+            "step_id": 2,
+            "timestamp": "2026-06-17T04:39:20.317417+00:00",
+            "source": "agent",
+            "message": "Analysis: I'll browse the bookshop catalog to find a suitable book. Let me navigate there first.",
+            "model_name": "claude-sonnet-4-6",
+            "tool_calls": [
+              {
+                "name": "computer_action",
+                "arguments": {
+                  "type": "click",
+                  "x": 534,
+                  "y": 62,
+                  "end_x": null,
+                  "end_y": null,
+                  "text": null,
+                  "keys": null,
+                  "url": null,
+                  "scroll_x": null,
+                  "scroll_y": null,
+                  "button": null,
+                  "result": null,
+                  "model_x": 534,
+                  "model_y": 62,
+                  "source": "anthropic_scaled"
+                }
+              }
+            ],
+            "observation": {
+              "results": [
+                {
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": ""
+                    },
+                    {
+                      "type": "image",
+                      "source": {
+                        "media_type": "image/webp",
+                        "path": "screenshot_ep0.webp"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "metrics": {}
+          },
+          {
+            "step_id": 3,
+            "timestamp": "2026-06-17T04:39:24.407623+00:00",
+            "source": "agent",
+            "message": "",
+            "model_name": "claude-sonnet-4-6",
+            "tool_calls": [
+              {
+                "name": "computer_action",
+                "arguments": {
+                  "type": "type",
+                  "x": null,
+                  "y": null,
+                  "end_x": null,
+                  "end_y": null,
+                  "text": "https://books.toscrape.com/\n",
+                  "keys": null,
+                  "url": null,
+                  "scroll_x": null,
+                  "scroll_y": null,
+                  "button": null,
+                  "result": null,
+                  "model_x": null,
+                  "model_y": null,
+                  "source": "anthropic_scaled"
+                }
+              }
+            ],
+            "observation": {
+              "results": [
+                {
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": ""
+                    },
+                    {
+                      "type": "image",
+                      "source": {
+                        "media_type": "image/webp",
+                        "path": "screenshot_ep1.webp"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "metrics": {}
+          },
+          {
+            "step_id": 4,
+            "timestamp": "2026-06-17T04:39:28.531488+00:00",
+            "source": "agent",
+            "message": "Analysis: I see the URL got concatenated. Let me clear the address bar and type the correct URL.",
+            "model_name": "claude-sonnet-4-6",
+            "tool_calls": [
+              {
+                "name": "computer_action",
+                "arguments": {
+                  "type": "triple_click",
+                  "x": 534,
+                  "y": 62,
+                  "end_x": null,
+                  "end_y": null,
+                  "text": null,
+                  "keys": null,
+                  "url": null,
+                  "scroll_x": null,
+                  "scroll_y": null,
+                  "button": null,
+                  "result": null,
+                  "model_x": 534,
+                  "model_y": 62,
+                  "source": "anthropic_scaled"
+                }
+              }
+            ],
+            "observation": {
+              "results": [
+                {
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": ""
+                    },
+                    {
+                      "type": "image",
+                      "source": {
+                        "media_type": "image/webp",
+                        "path": "screenshot_ep2.webp"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "metrics": {}
+          },
+          {
+            "step_id": 5,
+            "timestamp": "2026-06-17T04:39:32.369646+00:00",
+            "source": "agent",
+            "message": "Analysis: I see the URL is malformed. Let me fix it by typing the correct URL.",
+            "model_name": "claude-sonnet-4-6",
+            "tool_calls": [
+              {
+                "name": "computer_action",
+                "arguments": {
+                  "type": "triple_click",
+                  "x": 534,
+                  "y": 62,
+                  "end_x": null,
+                  "end_y": null,
+                  "text": null,
+                  "keys": null,
+                  "url": null,
+                  "scroll_x": null,
+                  "scroll_y": null,
+                  "button": null,
+                  "result": null,
+                  "model_x": 534,
+                  "model_y": 62,
+                  "source": "anthropic_scaled"
+                }
+              }
+            ],
+            "observation": {
+              "results": [
+                {
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": ""
+                    },
+                    {
+                      "type": "image",
+                      "source": {
+                        "media_type": "image/webp",
+                        "path": "screenshot_ep3.webp"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "metrics": {}
+          },
+          {
+            "step_id": 6,
+            "timestamp": "2026-06-17T04:39:36.395482+00:00",
+            "source": "agent",
+            "message": "Analysis: The URL bar is selected. Let me type the correct URL now.",
+            "model_name": "claude-sonnet-4-6",
+            "tool_calls": [
+              {
+                "name": "computer_action",
+                "arguments": {
+                  "type": "type",
+                  "x": null,
+                  "y": null,
+                  "end_x": null,
+                  "end_y": null,
+                  "text": "https://books.toscrape.com/",
+                  "keys": null,
+                  "url": null,
+                  "scroll_x": null,
+                  "scroll_y": null,
+                  "button": null,
+                  "result": null,
+                  "model_x": null,
+                  "model_y": null,
+                  "source": "anthropic_scaled"
+                }
+              }
+            ],
+            "observation": {
+              "results": [
+                {
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": ""
+                    },
+                    {
+                      "type": "image",
+                      "source": {
+                        "media_type": "image/webp",
+                        "path": "screenshot_ep4.webp"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "metrics": {}
+          },
+          {
+            "step_id": 7,
+            "timestamp": "2026-06-17T04:39:41.523263+00:00",
+            "source": "agent",
+            "message": "Analysis: I can see the autocomplete suggestion for the correct URL. Let me click on it.",
+            "model_name": "claude-sonnet-4-6",
+            "tool_calls": [
+              {
+                "name": "computer_action",
+                "arguments": {
+                  "type": "click",
+                  "x": 266,
+                  "y": 103,
+                  "end_x": null,
+                  "end_y": null,
+                  "text": null,
+                  "keys": null,
+                  "url": null,
+                  "scroll_x": null,
+                  "scroll_y": null,
+                  "button": null,
+                  "result": null,
+                  "model_x": 266,
+                  "model_y": 103,
+                  "source": "anthropic_scaled"
+                }
+              }
+            ],
+            "observation": {
+              "results": [
+                {
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": ""
+                    },
+                    {
+                      "type": "image",
+                      "source": {
+                        "media_type": "image/webp",
+                        "path": "screenshot_ep5.webp"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "metrics": {}
+          },
+          {
+            "step_id": 8,
+            "timestamp": "2026-06-17T04:39:49.971067+00:00",
+            "source": "agent",
+            "message": "Analysis: The page title shows \"chrome://blankhttps//books...\" which means the URL got corrupted. The address bar shows \"books.toscrape.com\" - it seem",
+            "model_name": "claude-sonnet-4-6",
+            "tool_calls": [
+              {
+                "name": "computer_action",
+                "arguments": {
+                  "type": "keypress",
+                  "x": null,
+                  "y": null,
+                  "end_x": null,
+                  "end_y": null,
+                  "text": null,
+                  "keys": [
+                    "ctrl",
+                    "l"
+                  ],
+                  "url": null,
+                  "scroll_x": null,
+                  "scroll_y": null,
+                  "button": null,
+                  "result": null,
+                  "model_x": null,
+                  "model_y": null,
+                  "source": "anthropic_scaled"
+                }
+              }
+            ],
+            "observation": {
+              "results": [
+                {
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": ""
+                    },
+                    {
+                      "type": "image",
+                      "source": {
+                        "media_type": "image/webp",
+                        "path": "screenshot_ep6.webp"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "metrics": {}
+          }
+        ],
+        "task_name": "Bookshop browsing (Linux CUA)",
+        "started_at": "2026-06-17T04:39:17.020568+00:00",
+        "finished_at": "2026-06-17T04:40:39.521510+00:00"
+      }
+    }
+  }
+};
 
       const state = {
         apiBase: "",
