@@ -715,7 +715,7 @@
   </section>
 
   <script>
-    (function(){
+    (async function(){
       const $ = (id) => document.getElementById(id);
       const els = {
         apiBase: $("apiBase"),
@@ -1546,11 +1546,12 @@
       });
 
       // Load sample data from samples/data.json
-      (async () => {
+      await (async () => {
         try {
           const res = await fetch("samples/data.json");
           if(res.ok){
             SAMPLE_DATA = await res.json();
+            console.log("✓ Sample data loaded:", SAMPLE_DATA.jobs.length, "jobs");
           }
         } catch (_err){
           console.warn("Could not load sample data from samples/data.json");
