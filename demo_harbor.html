@@ -4124,7 +4124,8 @@
 
       async function connectAndLoad(){
         try {
-          state.apiBase = String(els.apiBase.value || "").trim().replace(/\/+$/, "");
+          // Use current input value, or fall back to stored apiBase
+          state.apiBase = String(els.apiBase.value || state.apiBase || "").trim().replace(/\/+$/, "");
           if(!state.apiBase){
             throw new Error("API base is empty");
           }
