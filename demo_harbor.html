@@ -748,6 +748,72 @@
         runSummary: $("runSummary")
       };
 
+      // Sample data for demo when API is unavailable
+      const SAMPLE_DATA = {
+        jobs: [
+          { name: "agentic_eval_001", started_at: "2026-06-20T10:30:00Z", status: "completed" },
+          { name: "benchmark_run_002", started_at: "2026-06-20T09:15:00Z", status: "completed" },
+          { name: "qa_batch_003", started_at: "2026-06-20T08:45:00Z", status: "completed" },
+          { name: "test_suite_004", started_at: "2026-06-20T07:30:00Z", status: "completed" },
+          { name: "validation_005", started_at: "2026-06-20T06:00:00Z", status: "completed" },
+          { name: "performance_006", started_at: "2026-06-19T22:30:00Z", status: "completed" },
+          { name: "integration_007", started_at: "2026-06-19T18:45:00Z", status: "completed" },
+          { name: "regression_008", started_at: "2026-06-19T15:20:00Z", status: "completed" },
+          { name: "smoke_009", started_at: "2026-06-19T12:10:00Z", status: "completed" }
+        ],
+        trials: {
+          "agentic_eval_001": [
+            { name: "trial_web_search", task_name: "Web Search Agent", reward: 0.95, error_type: null, finished_at: "2026-06-20T10:35:00Z", source: "benchmark", model_provider: "anthropic", model_name: "claude-opus-4-8", input_tokens: 1250, output_tokens: 3200 },
+            { name: "trial_code_gen", task_name: "Code Generation", reward: 0.88, error_type: null, finished_at: "2026-06-20T10:40:00Z", source: "benchmark", model_provider: "anthropic", model_name: "claude-opus-4-8", input_tokens: 2100, output_tokens: 4500 },
+            { name: "trial_reasoning", task_name: "Complex Reasoning", reward: 0.92, error_type: null, finished_at: "2026-06-20T10:45:00Z", source: "benchmark", model_provider: "anthropic", model_name: "claude-opus-4-8", input_tokens: 1800, output_tokens: 2900 }
+          ],
+          "benchmark_run_002": [
+            { name: "trial_math", task_name: "Mathematical Problem Solving", reward: 0.85, error_type: null, finished_at: "2026-06-20T09:25:00Z", source: "benchmark", model_provider: "anthropic", model_name: "claude-sonnet-4-6", input_tokens: 1100, output_tokens: 2800 },
+            { name: "trial_logic", task_name: "Logic Puzzle", reward: 0.91, error_type: null, finished_at: "2026-06-20T09:32:00Z", source: "benchmark", model_provider: "anthropic", model_name: "claude-sonnet-4-6", input_tokens: 950, output_tokens: 2100 }
+          ],
+          "qa_batch_003": [
+            { name: "trial_qa_001", task_name: "Question Answering Task 1", reward: 0.89, error_type: null, finished_at: "2026-06-20T08:55:00Z", source: "qa", model_provider: "anthropic", model_name: "claude-haiku-4-5", input_tokens: 800, output_tokens: 1600 },
+            { name: "trial_qa_002", task_name: "Question Answering Task 2", reward: 0.87, error_type: null, finished_at: "2026-06-20T09:05:00Z", source: "qa", model_provider: "anthropic", model_name: "claude-haiku-4-5", input_tokens: 900, output_tokens: 1800 }
+          ]
+        },
+        trajectories: {
+          "agentic_eval_001": {
+            "trial_web_search": {
+              steps: [
+                { step_id: 1, source: "user", timestamp: "2026-06-20T10:30:15Z", message: "Search for information about Claude 3 capabilities", model_name: null, tool_calls: [], metrics: {}, observation: {} },
+                { step_id: 2, source: "assistant", timestamp: "2026-06-20T10:30:20Z", message: "I'll search for Claude 3 capabilities", model_name: "claude-opus-4-8", tool_calls: [{ name: "web_search", arguments: { query: "Claude 3 capabilities features" } }], metrics: {}, observation: {} },
+                { step_id: 3, source: "environment", timestamp: "2026-06-20T10:30:25Z", message: "Search completed", model_name: null, tool_calls: [], metrics: {}, observation: { results: [{ title: "Claude 3 Models Overview", url: "https://example.com/claude-3", snippet: "Claude 3 offers state-of-the-art capabilities..." }] } },
+                { step_id: 4, source: "assistant", timestamp: "2026-06-20T10:30:30Z", message: "Based on the search results, Claude 3 provides...", model_name: "claude-opus-4-8", tool_calls: [], metrics: { confidence: 0.95 }, observation: {} }
+              ],
+              task_name: "Web Search Agent",
+              started_at: "2026-06-20T10:30:00Z",
+              finished_at: "2026-06-20T10:35:00Z"
+            },
+            "trial_code_gen": {
+              steps: [
+                { step_id: 1, source: "user", timestamp: "2026-06-20T10:35:15Z", message: "Write a Python function to calculate Fibonacci numbers", model_name: null, tool_calls: [], metrics: {}, observation: {} },
+                { step_id: 2, source: "assistant", timestamp: "2026-06-20T10:35:20Z", message: "I'll write an efficient Fibonacci function", model_name: "claude-opus-4-8", tool_calls: [{ name: "execute_code", arguments: { code: "def fib(n):\\n    if n <= 1:\\n        return n\\n    return fib(n-1) + fib(n-2)" } }], metrics: {}, observation: {} },
+                { step_id: 3, source: "environment", timestamp: "2026-06-20T10:35:30Z", message: "Code execution completed", model_name: null, tool_calls: [], metrics: {}, observation: { output: "Function defined successfully" } },
+                { step_id: 4, source: "assistant", timestamp: "2026-06-20T10:35:35Z", message: "Here's the Fibonacci function. For better performance with larger inputs, consider using memoization.", model_name: "claude-opus-4-8", tool_calls: [], metrics: { code_quality: 0.88 }, observation: {} }
+              ],
+              task_name: "Code Generation",
+              started_at: "2026-06-20T10:35:00Z",
+              finished_at: "2026-06-20T10:40:00Z"
+            },
+            "trial_reasoning": {
+              steps: [
+                { step_id: 1, source: "user", timestamp: "2026-06-20T10:40:15Z", message: "If all roses are flowers and some flowers fade quickly, can we conclude that all roses fade quickly?", model_name: null, tool_calls: [], metrics: {}, observation: {} },
+                { step_id: 2, source: "assistant", timestamp: "2026-06-20T10:40:20Z", message: "Let me analyze this logical reasoning problem step by step", model_name: "claude-opus-4-8", tool_calls: [], metrics: {}, observation: {} },
+                { step_id: 3, source: "assistant", timestamp: "2026-06-20T10:40:25Z", message: "No, we cannot conclude that. Here's why: While all roses are flowers, only 'some' flowers fade quickly, not all. This is a case of logical fallacy (hasty generalization).", model_name: "claude-opus-4-8", tool_calls: [], metrics: { reasoning_depth: 0.92 }, observation: {} }
+              ],
+              task_name: "Complex Reasoning",
+              started_at: "2026-06-20T10:40:00Z",
+              finished_at: "2026-06-20T10:45:00Z"
+            }
+          }
+        }
+      };
+
       const state = {
         apiBase: "",
         connected: false,
@@ -799,11 +865,59 @@
       }
 
       async function fetchJson(path){
-        const res = await fetch(api(path), { cache: "no-store" });
-        if(!res.ok){
-          throw new Error(path + " -> HTTP " + res.status);
+        try {
+          const res = await fetch(api(path), { cache: "no-store" });
+          if(!res.ok){
+            throw new Error(path + " -> HTTP " + res.status);
+          }
+          return res.json();
+        } catch (err) {
+          // Fallback to sample data when API is unavailable
+          if(path === "/api/health"){
+            return { status: "ok", note: "Using sample data (API unavailable)" };
+          }
+          if(path === "/api/jobs?page=1&page_size=100"){
+            return { items: SAMPLE_DATA.jobs };
+          }
+          // Handle specific job trials endpoint: /api/jobs/{jobName}/trials
+          const jobTrialsMatch = path.match(/\/api\/jobs\/(.+)\/trials$/);
+          if(jobTrialsMatch){
+            const jobName = decodeURIComponent(jobTrialsMatch[1]);
+            if(SAMPLE_DATA.trials[jobName]){
+              return { items: SAMPLE_DATA.trials[jobName] };
+            }
+            return { items: [] };
+          }
+          // Handle specific trial detail endpoint: /api/jobs/{jobName}/trials/{trialName}
+          const trialDetailMatch = path.match(/\/api\/jobs\/(.+)\/trials\/(.+)$/);
+          if(trialDetailMatch){
+            const jobName = decodeURIComponent(trialDetailMatch[1]);
+            const trialName = decodeURIComponent(trialDetailMatch[2]);
+            if(SAMPLE_DATA.trajectories[jobName] && SAMPLE_DATA.trajectories[jobName][trialName]){
+              const trajectory = SAMPLE_DATA.trajectories[jobName][trialName];
+              return {
+                task_name: trajectory.task_name,
+                started_at: trajectory.started_at,
+                finished_at: trajectory.finished_at,
+                config: { task: { source: "sample", path: "demo" } },
+                agent_info: { model_info: { provider: "anthropic", name: "claude-opus-4-8" } }
+              };
+            }
+            return {};
+          }
+          // Handle trajectory steps endpoint: /api/jobs/{jobName}/trials/{trialName}/trajectory
+          const trajectoryMatch = path.match(/\/api\/jobs\/(.+)\/trials\/(.+)\/trajectory/);
+          if(trajectoryMatch){
+            const jobName = decodeURIComponent(trajectoryMatch[1]);
+            const trialName = decodeURIComponent(trajectoryMatch[2]);
+            if(SAMPLE_DATA.trajectories[jobName] && SAMPLE_DATA.trajectories[jobName][trialName]){
+              return { steps: SAMPLE_DATA.trajectories[jobName][trialName].steps };
+            }
+            return { steps: [] };
+          }
+          // Re-throw if it's not a recognized endpoint
+          throw err;
         }
-        return res.json();
       }
 
       function setApiState(ok, msg){
@@ -1365,12 +1479,21 @@
             throw new Error("health check failed");
           }
 
-          setApiState(true, "API connected · " + state.apiBase);
+          const apiStatus = health.note ? "API connected · " + state.apiBase + " (demo mode)" : "API connected · " + state.apiBase;
+          setApiState(true, apiStatus);
           await loadJobs();
           startPolling();
         } catch (err){
           stopPlayback();
-          setApiState(false, "API error · " + (err && err.message ? err.message : "unknown"));
+          // Try loading with sample data as fallback
+          try {
+            setApiState(true, "Using sample data for demo");
+            state.apiBase = "";  // Clear API base to use sample data
+            await loadJobs();
+            startPolling();
+          } catch (_err2) {
+            setApiState(false, "API error · " + (err && err.message ? err.message : "unknown"));
+          }
         }
       }
 
