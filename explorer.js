@@ -74,6 +74,37 @@
   const grid = document.getElementById('grid');
   const emptyMsg = document.getElementById('emptyMsg');
 
+  // Extract dataset name from dimension ID
+  function getSourceName(dimId) {
+    const sources = {
+      'nemotron_': 'Nemotron',
+      'personahub_': 'PersonaHub',
+      'oasis_': 'OASIS',
+      'apple_': 'Apple PRIMEX',
+      'pandora_': 'PANDORA',
+      'synthetic_': 'Synthetic Chat',
+      'personachat_': 'PersonaChat',
+      'wildchat_': 'WildChat',
+      'horizonbench_': 'HorizonBench'
+    };
+    for (const [prefix, name] of Object.entries(sources)) {
+      if (dimId.toLowerCase().startsWith(prefix)) return name;
+    }
+    return null;
+  }
+
+  // Clean label by removing dataset prefix
+  function getCleanLabel(label, dimId) {
+    const prefixes = ['Nemotron_', 'PersonaHub_', 'OASIS_', 'ApplePRIMEX_', 'PANDORA_',
+                     'SyntheticPersonaChat_', 'PersonaChat_', 'WildChat_', 'HorizonBench_'];
+    for (const prefix of prefixes) {
+      if (label.startsWith(prefix)) {
+        return label.slice(prefix.length);
+      }
+    }
+    return label;
+  }
+
   function render() {
     const list = dims.filter(d => {
       const catOk = activeCat === 'All' || d.category === activeCat;
@@ -86,20 +117,25 @@
     });
 
     emptyMsg.hidden = list.length > 0;
-    grid.innerHTML = list.map((d, i) => `
+    grid.innerHTML = list.map((d, i) => {
+      const source = getSourceName(d.id);
+      const cleanLabel = getCleanLabel(d.label, d.id);
+      return `
       <article class="dim-card" data-id="${d.id}" style="animation-delay:${Math.min(i * 20, 300)}ms">
         <div class="dim-top">
           <span class="dim-cat">${d.category}</span>
           <span class="dim-count">${d.values.length} values</span>
         </div>
-        <h3 class="dim-label">${d.label}</h3>
+        <h3 class="dim-label">${cleanLabel}</h3>
         <p class="dim-desc">${d.description}</p>
+        ${source ? `<p class="dim-source">Source: ${source}</p>` : ''}
         <div class="dim-values">
           ${d.values.map(v => `<span class="val-chip">${v}</span>`).join('')}
         </div>
         <p class="dim-hint">▸ click to ${'expand'}</p>
       </article>
-    `).join('');
+    `;
+    }).join('');
   }
 
   grid.addEventListener('click', e => {
