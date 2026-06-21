@@ -2,7 +2,7 @@ window.MATRAIX_DIMENSIONS = {
   "schemaVersion": "2.0",
   "name": "matrAIx Persona Dimension Space",
   "headlineBehaviors": 8300000000,
-  "targetDimensions": 1295,
+  "targetDimensions": 1378,
   "note": "Flat unified dimension set. Every sampled persona is assigned exactly one value per dimension. The 'category' tag is for UI grouping/filtering only — it does not nest the schema. The full reachable persona space is the product of all value counts; the 8.3B headline is the corpus of behaviors already simulated within it.",
   "dimensions": [
     {
@@ -16691,6 +16691,2063 @@ window.MATRAIX_DIMENSIONS = {
         "Rarely refactors",
         "Never refactors"
       ]
+    },
+    {
+      "id": "prog_python",
+      "label": "Programming: Python",
+      "category": "Programming",
+      "description": "Proficiency in Python.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_javascript",
+      "label": "Programming: JavaScript",
+      "category": "Programming",
+      "description": "Proficiency in JavaScript.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_typescript",
+      "label": "Programming: TypeScript",
+      "category": "Programming",
+      "description": "Proficiency in TypeScript.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_java",
+      "label": "Programming: Java",
+      "category": "Programming",
+      "description": "Proficiency in Java.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_c",
+      "label": "Programming: C",
+      "category": "Programming",
+      "description": "Proficiency in C.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_go",
+      "label": "Programming: Go",
+      "category": "Programming",
+      "description": "Proficiency in Go.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_rust",
+      "label": "Programming: Rust",
+      "category": "Programming",
+      "description": "Proficiency in Rust.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_ruby",
+      "label": "Programming: Ruby",
+      "category": "Programming",
+      "description": "Proficiency in Ruby.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_php",
+      "label": "Programming: PHP",
+      "category": "Programming",
+      "description": "Proficiency in PHP.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_swift",
+      "label": "Programming: Swift",
+      "category": "Programming",
+      "description": "Proficiency in Swift.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_kotlin",
+      "label": "Programming: Kotlin",
+      "category": "Programming",
+      "description": "Proficiency in Kotlin.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_objective_c",
+      "label": "Programming: Objective-C",
+      "category": "Programming",
+      "description": "Proficiency in Objective-C.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_scala",
+      "label": "Programming: Scala",
+      "category": "Programming",
+      "description": "Proficiency in Scala.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_haskell",
+      "label": "Programming: Haskell",
+      "category": "Programming",
+      "description": "Proficiency in Haskell.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_elixir",
+      "label": "Programming: Elixir",
+      "category": "Programming",
+      "description": "Proficiency in Elixir.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_erlang",
+      "label": "Programming: Erlang",
+      "category": "Programming",
+      "description": "Proficiency in Erlang.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_clojure",
+      "label": "Programming: Clojure",
+      "category": "Programming",
+      "description": "Proficiency in Clojure.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_lua",
+      "label": "Programming: Lua",
+      "category": "Programming",
+      "description": "Proficiency in Lua.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_perl",
+      "label": "Programming: Perl",
+      "category": "Programming",
+      "description": "Proficiency in Perl.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_r",
+      "label": "Programming: R",
+      "category": "Programming",
+      "description": "Proficiency in R.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_julia",
+      "label": "Programming: Julia",
+      "category": "Programming",
+      "description": "Proficiency in Julia.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_matlab",
+      "label": "Programming: MATLAB",
+      "category": "Programming",
+      "description": "Proficiency in MATLAB.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_sql",
+      "label": "Programming: SQL",
+      "category": "Programming",
+      "description": "Proficiency in SQL.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_bash",
+      "label": "Programming: Bash",
+      "category": "Programming",
+      "description": "Proficiency in Bash.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_powershell",
+      "label": "Programming: PowerShell",
+      "category": "Programming",
+      "description": "Proficiency in PowerShell.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_dart",
+      "label": "Programming: Dart",
+      "category": "Programming",
+      "description": "Proficiency in Dart.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_f",
+      "label": "Programming: F#",
+      "category": "Programming",
+      "description": "Proficiency in F#.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_ocaml",
+      "label": "Programming: OCaml",
+      "category": "Programming",
+      "description": "Proficiency in OCaml.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_assembly",
+      "label": "Programming: Assembly",
+      "category": "Programming",
+      "description": "Proficiency in Assembly.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_cobol",
+      "label": "Programming: COBOL",
+      "category": "Programming",
+      "description": "Proficiency in COBOL.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_fortran",
+      "label": "Programming: Fortran",
+      "category": "Programming",
+      "description": "Proficiency in Fortran.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_solidity",
+      "label": "Programming: Solidity",
+      "category": "Programming",
+      "description": "Proficiency in Solidity.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "prog_graphql",
+      "label": "Programming: GraphQL",
+      "category": "Programming",
+      "description": "Proficiency in GraphQL.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "None"
+      ]
+    },
+    {
+      "id": "bfi2_domain_extraversion",
+      "label": "BFI-2 Extraversion",
+      "category": "Personality",
+      "description": "BFI-2 Big Five domain construct: Extraversion.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "domain",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_domain_agreeableness",
+      "label": "BFI-2 Agreeableness",
+      "category": "Personality",
+      "description": "BFI-2 Big Five domain construct: Agreeableness.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "domain",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_domain_conscientiousness",
+      "label": "BFI-2 Conscientiousness",
+      "category": "Personality",
+      "description": "BFI-2 Big Five domain construct: Conscientiousness.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "domain",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_domain_negative_emotionality",
+      "label": "BFI-2 Negative Emotionality",
+      "category": "Personality",
+      "description": "BFI-2 Big Five domain construct: Negative Emotionality.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "domain",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_domain_open_mindedness",
+      "label": "BFI-2 Open-Mindedness",
+      "category": "Personality",
+      "description": "BFI-2 Big Five domain construct: Open-Mindedness.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "domain",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_facet_sociability",
+      "label": "BFI-2 Sociability",
+      "category": "Personality",
+      "description": "BFI-2 Extraversion facet construct: Sociability.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "facet",
+        "parent_domain": "Extraversion",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_facet_assertiveness",
+      "label": "BFI-2 Assertiveness",
+      "category": "Personality",
+      "description": "BFI-2 Extraversion facet construct: Assertiveness.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "facet",
+        "parent_domain": "Extraversion",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_facet_energy_level",
+      "label": "BFI-2 Energy Level",
+      "category": "Personality",
+      "description": "BFI-2 Extraversion facet construct: Energy Level.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "facet",
+        "parent_domain": "Extraversion",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_facet_compassion",
+      "label": "BFI-2 Compassion",
+      "category": "Personality",
+      "description": "BFI-2 Agreeableness facet construct: Compassion.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "facet",
+        "parent_domain": "Agreeableness",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_facet_respectfulness",
+      "label": "BFI-2 Respectfulness",
+      "category": "Personality",
+      "description": "BFI-2 Agreeableness facet construct: Respectfulness.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "facet",
+        "parent_domain": "Agreeableness",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_facet_trust",
+      "label": "BFI-2 Trust",
+      "category": "Personality",
+      "description": "BFI-2 Agreeableness facet construct: Trust.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "facet",
+        "parent_domain": "Agreeableness",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_facet_organization",
+      "label": "BFI-2 Organization",
+      "category": "Personality",
+      "description": "BFI-2 Conscientiousness facet construct: Organization.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "facet",
+        "parent_domain": "Conscientiousness",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_facet_productiveness",
+      "label": "BFI-2 Productiveness",
+      "category": "Personality",
+      "description": "BFI-2 Conscientiousness facet construct: Productiveness.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "facet",
+        "parent_domain": "Conscientiousness",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_facet_responsibility",
+      "label": "BFI-2 Responsibility",
+      "category": "Personality",
+      "description": "BFI-2 Conscientiousness facet construct: Responsibility.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "facet",
+        "parent_domain": "Conscientiousness",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_facet_anxiety",
+      "label": "BFI-2 Anxiety",
+      "category": "Personality",
+      "description": "BFI-2 Negative Emotionality facet construct: Anxiety.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "facet",
+        "parent_domain": "Negative Emotionality",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_facet_depression",
+      "label": "BFI-2 Depression",
+      "category": "Personality",
+      "description": "BFI-2 Negative Emotionality facet construct: Depression.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "facet",
+        "parent_domain": "Negative Emotionality",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_facet_emotional_volatility",
+      "label": "BFI-2 Emotional Volatility",
+      "category": "Personality",
+      "description": "BFI-2 Negative Emotionality facet construct: Emotional Volatility.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "facet",
+        "parent_domain": "Negative Emotionality",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_facet_intellectual_curiosity",
+      "label": "BFI-2 Intellectual Curiosity",
+      "category": "Personality",
+      "description": "BFI-2 Open-Mindedness facet construct: Intellectual Curiosity.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "facet",
+        "parent_domain": "Open-Mindedness",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_facet_aesthetic_sensitivity",
+      "label": "BFI-2 Aesthetic Sensitivity",
+      "category": "Personality",
+      "description": "BFI-2 Open-Mindedness facet construct: Aesthetic Sensitivity.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "facet",
+        "parent_domain": "Open-Mindedness",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "bfi2_facet_creative_imagination",
+      "label": "BFI-2 Creative Imagination",
+      "category": "Personality",
+      "description": "BFI-2 Open-Mindedness facet construct: Creative Imagination.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "bfi2_big_five_inventory_2",
+        "source_name": "Big Five Inventory-2 (BFI-2)",
+        "source_type": "psychometric_reference",
+        "paper_title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
+        "paper_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+        "doi": "10.1037/pspp0000096",
+        "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
+        "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "construct_level": "facet",
+        "parent_domain": "Open-Mindedness",
+        "dimensions_claimed": 20,
+        "license": "research-use-reference",
+        "note": "Construct label only; questionnaire items are not copied.",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "schwartz_value_self_direction",
+      "label": "Schwartz Self-Direction",
+      "category": "Values",
+      "description": "Schwartz basic value construct: independent thought and action.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "schwartz_basic_values",
+        "source_name": "Schwartz Theory of Basic Human Values",
+        "source_type": "theory_reference",
+        "source_url": "https://scholarworks.gvsu.edu/orpc/vol2/iss1/11/",
+        "manifest_file": "personas/existing_data_curation/manifests/schwartz_basic_values.json",
+        "dimensions_claimed": 10,
+        "license": "citation-only",
+        "paper_title": "An Overview of the Schwartz Theory of Basic Values",
+        "construct_level": "basic_value",
+        "note": "Theory construct label only; survey/questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "value_name": "Self-direction",
+        "persona_category": "Values, Goals & Motivations",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "schwartz_value_stimulation",
+      "label": "Schwartz Stimulation",
+      "category": "Values",
+      "description": "Schwartz basic value construct: excitement, novelty, and challenge.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "schwartz_basic_values",
+        "source_name": "Schwartz Theory of Basic Human Values",
+        "source_type": "theory_reference",
+        "source_url": "https://scholarworks.gvsu.edu/orpc/vol2/iss1/11/",
+        "manifest_file": "personas/existing_data_curation/manifests/schwartz_basic_values.json",
+        "dimensions_claimed": 10,
+        "license": "citation-only",
+        "paper_title": "An Overview of the Schwartz Theory of Basic Values",
+        "construct_level": "basic_value",
+        "note": "Theory construct label only; survey/questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "value_name": "Stimulation",
+        "persona_category": "Values, Goals & Motivations",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "schwartz_value_hedonism",
+      "label": "Schwartz Hedonism",
+      "category": "Values",
+      "description": "Schwartz basic value construct: pleasure and sensuous gratification.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "schwartz_basic_values",
+        "source_name": "Schwartz Theory of Basic Human Values",
+        "source_type": "theory_reference",
+        "source_url": "https://scholarworks.gvsu.edu/orpc/vol2/iss1/11/",
+        "manifest_file": "personas/existing_data_curation/manifests/schwartz_basic_values.json",
+        "dimensions_claimed": 10,
+        "license": "citation-only",
+        "paper_title": "An Overview of the Schwartz Theory of Basic Values",
+        "construct_level": "basic_value",
+        "note": "Theory construct label only; survey/questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "value_name": "Hedonism",
+        "persona_category": "Values, Goals & Motivations",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "schwartz_value_achievement",
+      "label": "Schwartz Achievement",
+      "category": "Values",
+      "description": "Schwartz basic value construct: personal success through demonstrated competence.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "schwartz_basic_values",
+        "source_name": "Schwartz Theory of Basic Human Values",
+        "source_type": "theory_reference",
+        "source_url": "https://scholarworks.gvsu.edu/orpc/vol2/iss1/11/",
+        "manifest_file": "personas/existing_data_curation/manifests/schwartz_basic_values.json",
+        "dimensions_claimed": 10,
+        "license": "citation-only",
+        "paper_title": "An Overview of the Schwartz Theory of Basic Values",
+        "construct_level": "basic_value",
+        "note": "Theory construct label only; survey/questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "value_name": "Achievement",
+        "persona_category": "Values, Goals & Motivations",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "schwartz_value_power",
+      "label": "Schwartz Power",
+      "category": "Values",
+      "description": "Schwartz basic value construct: social status, prestige, and control over resources or people.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "schwartz_basic_values",
+        "source_name": "Schwartz Theory of Basic Human Values",
+        "source_type": "theory_reference",
+        "source_url": "https://scholarworks.gvsu.edu/orpc/vol2/iss1/11/",
+        "manifest_file": "personas/existing_data_curation/manifests/schwartz_basic_values.json",
+        "dimensions_claimed": 10,
+        "license": "citation-only",
+        "paper_title": "An Overview of the Schwartz Theory of Basic Values",
+        "construct_level": "basic_value",
+        "note": "Theory construct label only; survey/questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "value_name": "Power",
+        "persona_category": "Values, Goals & Motivations",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "schwartz_value_security",
+      "label": "Schwartz Security",
+      "category": "Values",
+      "description": "Schwartz basic value construct: safety, harmony, and stability.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "schwartz_basic_values",
+        "source_name": "Schwartz Theory of Basic Human Values",
+        "source_type": "theory_reference",
+        "source_url": "https://scholarworks.gvsu.edu/orpc/vol2/iss1/11/",
+        "manifest_file": "personas/existing_data_curation/manifests/schwartz_basic_values.json",
+        "dimensions_claimed": 10,
+        "license": "citation-only",
+        "paper_title": "An Overview of the Schwartz Theory of Basic Values",
+        "construct_level": "basic_value",
+        "note": "Theory construct label only; survey/questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "value_name": "Security",
+        "persona_category": "Values, Goals & Motivations",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "schwartz_value_conformity",
+      "label": "Schwartz Conformity",
+      "category": "Values",
+      "description": "Schwartz basic value construct: restraint of actions likely to upset others or violate expectations.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "schwartz_basic_values",
+        "source_name": "Schwartz Theory of Basic Human Values",
+        "source_type": "theory_reference",
+        "source_url": "https://scholarworks.gvsu.edu/orpc/vol2/iss1/11/",
+        "manifest_file": "personas/existing_data_curation/manifests/schwartz_basic_values.json",
+        "dimensions_claimed": 10,
+        "license": "citation-only",
+        "paper_title": "An Overview of the Schwartz Theory of Basic Values",
+        "construct_level": "basic_value",
+        "note": "Theory construct label only; survey/questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "value_name": "Conformity",
+        "persona_category": "Values, Goals & Motivations",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "schwartz_value_tradition",
+      "label": "Schwartz Tradition",
+      "category": "Values",
+      "description": "Schwartz basic value construct: respect and commitment to cultural, religious, or family customs.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "schwartz_basic_values",
+        "source_name": "Schwartz Theory of Basic Human Values",
+        "source_type": "theory_reference",
+        "source_url": "https://scholarworks.gvsu.edu/orpc/vol2/iss1/11/",
+        "manifest_file": "personas/existing_data_curation/manifests/schwartz_basic_values.json",
+        "dimensions_claimed": 10,
+        "license": "citation-only",
+        "paper_title": "An Overview of the Schwartz Theory of Basic Values",
+        "construct_level": "basic_value",
+        "note": "Theory construct label only; survey/questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "value_name": "Tradition",
+        "persona_category": "Values, Goals & Motivations",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "schwartz_value_benevolence",
+      "label": "Schwartz Benevolence",
+      "category": "Values",
+      "description": "Schwartz basic value construct: preserving and enhancing the welfare of close others.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "schwartz_basic_values",
+        "source_name": "Schwartz Theory of Basic Human Values",
+        "source_type": "theory_reference",
+        "source_url": "https://scholarworks.gvsu.edu/orpc/vol2/iss1/11/",
+        "manifest_file": "personas/existing_data_curation/manifests/schwartz_basic_values.json",
+        "dimensions_claimed": 10,
+        "license": "citation-only",
+        "paper_title": "An Overview of the Schwartz Theory of Basic Values",
+        "construct_level": "basic_value",
+        "note": "Theory construct label only; survey/questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "value_name": "Benevolence",
+        "persona_category": "Values, Goals & Motivations",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "schwartz_value_universalism",
+      "label": "Schwartz Universalism",
+      "category": "Values",
+      "description": "Schwartz basic value construct: understanding, tolerance, and protection for all people and nature.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "schwartz_basic_values",
+        "source_name": "Schwartz Theory of Basic Human Values",
+        "source_type": "theory_reference",
+        "source_url": "https://scholarworks.gvsu.edu/orpc/vol2/iss1/11/",
+        "manifest_file": "personas/existing_data_curation/manifests/schwartz_basic_values.json",
+        "dimensions_claimed": 10,
+        "license": "citation-only",
+        "paper_title": "An Overview of the Schwartz Theory of Basic Values",
+        "construct_level": "basic_value",
+        "note": "Theory construct label only; survey/questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "value_name": "Universalism",
+        "persona_category": "Values, Goals & Motivations",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "sdt_need_autonomy",
+      "label": "SDT Autonomy Need",
+      "category": "Values",
+      "description": "Self-Determination Theory basic psychological need: autonomy.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "self_determination_theory",
+        "source_name": "Self-Determination Theory",
+        "source_type": "theory_reference",
+        "source_url": "https://selfdeterminationtheory.org/theory/",
+        "manifest_file": "personas/existing_data_curation/manifests/self_determination_theory.json",
+        "dimensions_claimed": 3,
+        "license": "citation-only",
+        "construct_level": "basic_psychological_need",
+        "note": "Theory construct label only; questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "need_name": "Autonomy",
+        "persona_category": "Values, Goals & Motivations",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "sdt_need_competence",
+      "label": "SDT Competence Need",
+      "category": "Values",
+      "description": "Self-Determination Theory basic psychological need: competence.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "self_determination_theory",
+        "source_name": "Self-Determination Theory",
+        "source_type": "theory_reference",
+        "source_url": "https://selfdeterminationtheory.org/theory/",
+        "manifest_file": "personas/existing_data_curation/manifests/self_determination_theory.json",
+        "dimensions_claimed": 3,
+        "license": "citation-only",
+        "construct_level": "basic_psychological_need",
+        "note": "Theory construct label only; questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "need_name": "Competence",
+        "persona_category": "Values, Goals & Motivations",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "sdt_need_relatedness",
+      "label": "SDT Relatedness Need",
+      "category": "Values",
+      "description": "Self-Determination Theory basic psychological need: relatedness.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "self_determination_theory",
+        "source_name": "Self-Determination Theory",
+        "source_type": "theory_reference",
+        "source_url": "https://selfdeterminationtheory.org/theory/",
+        "manifest_file": "personas/existing_data_curation/manifests/self_determination_theory.json",
+        "dimensions_claimed": 3,
+        "license": "citation-only",
+        "construct_level": "basic_psychological_need",
+        "note": "Theory construct label only; questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "need_name": "Relatedness",
+        "persona_category": "Values, Goals & Motivations",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "mft_care_harm",
+      "label": "Moral Foundation Care/Harm",
+      "category": "Attitudes",
+      "description": "Moral Foundations Theory construct: sensitivity to care versus harm.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "moral_foundations_theory",
+        "source_name": "Moral Foundations Theory",
+        "source_type": "theory_reference",
+        "source_url": "https://moralfoundations.org/",
+        "manifest_file": "personas/existing_data_curation/manifests/moral_foundations_theory.json",
+        "dimensions_claimed": 6,
+        "license": "citation-only",
+        "construct_level": "moral_foundation",
+        "note": "Theory construct label only; questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "foundation_name": "Care/Harm",
+        "persona_category": "Worldview, Beliefs & Attitudes",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "mft_fairness_cheating",
+      "label": "Moral Foundation Fairness/Cheating",
+      "category": "Attitudes",
+      "description": "Moral Foundations Theory construct: sensitivity to fairness versus cheating.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "moral_foundations_theory",
+        "source_name": "Moral Foundations Theory",
+        "source_type": "theory_reference",
+        "source_url": "https://moralfoundations.org/",
+        "manifest_file": "personas/existing_data_curation/manifests/moral_foundations_theory.json",
+        "dimensions_claimed": 6,
+        "license": "citation-only",
+        "construct_level": "moral_foundation",
+        "note": "Theory construct label only; questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "foundation_name": "Fairness/Cheating",
+        "persona_category": "Worldview, Beliefs & Attitudes",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "mft_loyalty_betrayal",
+      "label": "Moral Foundation Loyalty/Betrayal",
+      "category": "Attitudes",
+      "description": "Moral Foundations Theory construct: sensitivity to loyalty versus betrayal.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "moral_foundations_theory",
+        "source_name": "Moral Foundations Theory",
+        "source_type": "theory_reference",
+        "source_url": "https://moralfoundations.org/",
+        "manifest_file": "personas/existing_data_curation/manifests/moral_foundations_theory.json",
+        "dimensions_claimed": 6,
+        "license": "citation-only",
+        "construct_level": "moral_foundation",
+        "note": "Theory construct label only; questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "foundation_name": "Loyalty/Betrayal",
+        "persona_category": "Worldview, Beliefs & Attitudes",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "mft_authority_subversion",
+      "label": "Moral Foundation Authority/Subversion",
+      "category": "Attitudes",
+      "description": "Moral Foundations Theory construct: sensitivity to authority versus subversion.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "moral_foundations_theory",
+        "source_name": "Moral Foundations Theory",
+        "source_type": "theory_reference",
+        "source_url": "https://moralfoundations.org/",
+        "manifest_file": "personas/existing_data_curation/manifests/moral_foundations_theory.json",
+        "dimensions_claimed": 6,
+        "license": "citation-only",
+        "construct_level": "moral_foundation",
+        "note": "Theory construct label only; questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "foundation_name": "Authority/Subversion",
+        "persona_category": "Worldview, Beliefs & Attitudes",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "mft_sanctity_degradation",
+      "label": "Moral Foundation Sanctity/Degradation",
+      "category": "Attitudes",
+      "description": "Moral Foundations Theory construct: sensitivity to sanctity versus degradation.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "moral_foundations_theory",
+        "source_name": "Moral Foundations Theory",
+        "source_type": "theory_reference",
+        "source_url": "https://moralfoundations.org/",
+        "manifest_file": "personas/existing_data_curation/manifests/moral_foundations_theory.json",
+        "dimensions_claimed": 6,
+        "license": "citation-only",
+        "construct_level": "moral_foundation",
+        "note": "Theory construct label only; questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "foundation_name": "Sanctity/Degradation",
+        "persona_category": "Worldview, Beliefs & Attitudes",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "mft_liberty_oppression",
+      "label": "Moral Foundation Liberty/Oppression",
+      "category": "Attitudes",
+      "description": "Moral Foundations Theory construct: sensitivity to liberty versus oppression.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "moral_foundations_theory",
+        "source_name": "Moral Foundations Theory",
+        "source_type": "theory_reference",
+        "source_url": "https://moralfoundations.org/",
+        "manifest_file": "personas/existing_data_curation/manifests/moral_foundations_theory.json",
+        "dimensions_claimed": 6,
+        "license": "citation-only",
+        "construct_level": "moral_foundation",
+        "note": "Theory construct label only; questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "foundation_name": "Liberty/Oppression",
+        "persona_category": "Worldview, Beliefs & Attitudes",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "need_for_cognition",
+      "label": "Need for Cognition",
+      "category": "Cognition",
+      "description": "Preference for engaging in and enjoying effortful thinking.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "need_for_cognition",
+        "source_name": "Need for Cognition",
+        "source_type": "psychometric_reference",
+        "source_url": "https://doi.org/10.1037/0022-3514.42.1.116",
+        "doi": "10.1037/0022-3514.42.1.116",
+        "manifest_file": "personas/existing_data_curation/manifests/need_for_cognition.json",
+        "dimensions_claimed": 1,
+        "license": "citation-only",
+        "construct_level": "cognitive_motivation_construct",
+        "note": "Psychometric construct label only; questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "persona_category": "Cognitive & Capability Profile",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "need_for_closure",
+      "label": "Need for Closure",
+      "category": "Cognition",
+      "description": "Preference for firm answers, certainty, and closure under ambiguity.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "need_for_closure",
+        "source_name": "Need for Closure",
+        "source_type": "psychometric_reference",
+        "source_url": "https://doi.org/10.1037/0022-3514.67.6.1049",
+        "doi": "10.1037/0022-3514.67.6.1049",
+        "manifest_file": "personas/existing_data_curation/manifests/need_for_closure.json",
+        "dimensions_claimed": 1,
+        "license": "citation-only",
+        "construct_level": "cognitive_style_construct",
+        "note": "Collapsed construct-level dimension for certainty/closure preference; questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "persona_category": "Cognitive & Capability Profile",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "dospert_ethical_risk_tolerance",
+      "label": "DOSPERT Ethical Risk Tolerance",
+      "category": "Attitudes",
+      "description": "Domain-specific risk orientation for ethical risks.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "dospert_risk_attitudes",
+        "source_name": "DOSPERT Domain-Specific Risk Attitudes",
+        "source_type": "psychometric_reference",
+        "source_url": "https://doi.org/10.1017/S1930297500000334",
+        "doi": "10.1017/S1930297500000334",
+        "manifest_file": "personas/existing_data_curation/manifests/dospert_risk_attitudes.json",
+        "dimensions_claimed": 5,
+        "license": "citation-only",
+        "construct_level": "risk_domain",
+        "note": "Domain-level risk orientation labels only; DOSPERT item text is not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "risk_domain": "Ethical",
+        "persona_category": "Behavioral Patterns",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "dospert_financial_risk_tolerance",
+      "label": "DOSPERT Financial Risk Tolerance",
+      "category": "Attitudes",
+      "description": "Domain-specific risk orientation for financial risks.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "dospert_risk_attitudes",
+        "source_name": "DOSPERT Domain-Specific Risk Attitudes",
+        "source_type": "psychometric_reference",
+        "source_url": "https://doi.org/10.1017/S1930297500000334",
+        "doi": "10.1017/S1930297500000334",
+        "manifest_file": "personas/existing_data_curation/manifests/dospert_risk_attitudes.json",
+        "dimensions_claimed": 5,
+        "license": "citation-only",
+        "construct_level": "risk_domain",
+        "note": "Domain-level risk orientation labels only; DOSPERT item text is not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "risk_domain": "Financial",
+        "persona_category": "Behavioral Patterns",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "dospert_health_safety_risk_tolerance",
+      "label": "DOSPERT Health/Safety Risk Tolerance",
+      "category": "Attitudes",
+      "description": "Domain-specific risk orientation for health and safety risks.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "dospert_risk_attitudes",
+        "source_name": "DOSPERT Domain-Specific Risk Attitudes",
+        "source_type": "psychometric_reference",
+        "source_url": "https://doi.org/10.1017/S1930297500000334",
+        "doi": "10.1017/S1930297500000334",
+        "manifest_file": "personas/existing_data_curation/manifests/dospert_risk_attitudes.json",
+        "dimensions_claimed": 5,
+        "license": "citation-only",
+        "construct_level": "risk_domain",
+        "note": "Domain-level risk orientation labels only; DOSPERT item text is not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "risk_domain": "Health/Safety",
+        "persona_category": "Behavioral Patterns",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "dospert_recreational_risk_tolerance",
+      "label": "DOSPERT Recreational Risk Tolerance",
+      "category": "Attitudes",
+      "description": "Domain-specific risk orientation for recreational risks.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "dospert_risk_attitudes",
+        "source_name": "DOSPERT Domain-Specific Risk Attitudes",
+        "source_type": "psychometric_reference",
+        "source_url": "https://doi.org/10.1017/S1930297500000334",
+        "doi": "10.1017/S1930297500000334",
+        "manifest_file": "personas/existing_data_curation/manifests/dospert_risk_attitudes.json",
+        "dimensions_claimed": 5,
+        "license": "citation-only",
+        "construct_level": "risk_domain",
+        "note": "Domain-level risk orientation labels only; DOSPERT item text is not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "risk_domain": "Recreational",
+        "persona_category": "Behavioral Patterns",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "dospert_social_risk_tolerance",
+      "label": "DOSPERT Social Risk Tolerance",
+      "category": "Attitudes",
+      "description": "Domain-specific risk orientation for social risks.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "dospert_risk_attitudes",
+        "source_name": "DOSPERT Domain-Specific Risk Attitudes",
+        "source_type": "psychometric_reference",
+        "source_url": "https://doi.org/10.1017/S1930297500000334",
+        "doi": "10.1017/S1930297500000334",
+        "manifest_file": "personas/existing_data_curation/manifests/dospert_risk_attitudes.json",
+        "dimensions_claimed": 5,
+        "license": "citation-only",
+        "construct_level": "risk_domain",
+        "note": "Domain-level risk orientation labels only; DOSPERT item text is not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "risk_domain": "Social",
+        "persona_category": "Behavioral Patterns",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "attachment_anxiety",
+      "label": "Attachment Anxiety",
+      "category": "Personality",
+      "description": "Adult attachment dimension: fear of rejection, abandonment, or partner unavailability.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "attachment_style",
+        "source_name": "Adult Attachment Style / ECR-R",
+        "source_type": "psychometric_reference",
+        "source_url": "https://labs.psychology.illinois.edu/~rcfraley/measures/ecrr.htm",
+        "manifest_file": "personas/existing_data_curation/manifests/attachment_style.json",
+        "dimensions_claimed": 2,
+        "license": "research-use-reference",
+        "construct_level": "adult_attachment_dimension",
+        "note": "Uses the common adult attachment dimensions of anxiety and avoidance; questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "attachment_dimension": "Anxiety",
+        "persona_category": "Social Identity & Relationships",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "attachment_avoidance",
+      "label": "Attachment Avoidance",
+      "category": "Personality",
+      "description": "Adult attachment dimension: discomfort with closeness, dependence, or intimacy.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "attachment_style",
+        "source_name": "Adult Attachment Style / ECR-R",
+        "source_type": "psychometric_reference",
+        "source_url": "https://labs.psychology.illinois.edu/~rcfraley/measures/ecrr.htm",
+        "manifest_file": "personas/existing_data_curation/manifests/attachment_style.json",
+        "dimensions_claimed": 2,
+        "license": "research-use-reference",
+        "construct_level": "adult_attachment_dimension",
+        "note": "Uses the common adult attachment dimensions of anxiety and avoidance; questionnaire items are not copied.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "attachment_dimension": "Avoidance",
+        "persona_category": "Social Identity & Relationships",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "interpersonal_agency_dominance",
+      "label": "Interpersonal Agency/Dominance",
+      "category": "Personality",
+      "description": "Interpersonal circumplex axis: agency, dominance, status, control, and assertive interpersonal stance.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "interpersonal_circumplex",
+        "source_name": "Interpersonal Circumplex",
+        "source_type": "theory_reference",
+        "source_url": "https://doi.org/10.1037/0033-295X.64.2.112",
+        "doi": "10.1037/0033-295X.64.2.112",
+        "manifest_file": "personas/existing_data_curation/manifests/interpersonal_circumplex.json",
+        "dimensions_claimed": 2,
+        "license": "citation-only",
+        "construct_level": "interpersonal_axis",
+        "note": "Adds the two broad interpersonal circumplex axes rather than octant-level scales.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "axis_name": "Agency/Dominance",
+        "persona_category": "Social Identity & Relationships",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "interpersonal_communion_warmth",
+      "label": "Interpersonal Communion/Warmth",
+      "category": "Personality",
+      "description": "Interpersonal circumplex axis: communion, warmth, affiliation, friendliness, and care.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ],
+      "source_origin": {
+        "source_id": "interpersonal_circumplex",
+        "source_name": "Interpersonal Circumplex",
+        "source_type": "theory_reference",
+        "source_url": "https://doi.org/10.1037/0033-295X.64.2.112",
+        "doi": "10.1037/0033-295X.64.2.112",
+        "manifest_file": "personas/existing_data_curation/manifests/interpersonal_circumplex.json",
+        "dimensions_claimed": 2,
+        "license": "citation-only",
+        "construct_level": "interpersonal_axis",
+        "note": "Adds the two broad interpersonal circumplex axes rather than octant-level scales.",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "axis_name": "Communion/Warmth",
+        "persona_category": "Social Identity & Relationships",
+        "added_date": "2026-06-20",
+        "contributor_github": "elizabeth-fan"
+      }
+    }
+  ],
+  "reference_sources": [
+    {
+      "source_id": "hexaco_pi_r",
+      "source_name": "HEXACO-PI-R",
+      "source_type": "psychometric_reference",
+      "source_url": "https://hexaco.org/scaledescriptions",
+      "manifest_file": "personas/existing_data_curation/manifests/hexaco_pi_r.json",
+      "dimensions_claimed": 31,
+      "license": "research-use-reference",
+      "note": "6 domains + 25 facets. HEXACO personality trait grounding. Register domains/facets as constructs; do not copy full scale items without checking official terms.",
+      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "intended_use": "Personality trait grounding"
+    },
+    {
+      "source_id": "facet_map_70_facets",
+      "source_name": "Facet MAP",
+      "source_type": "psychometric_reference",
+      "source_url": "https://facetmap.org/facet-labels-and-definitions/",
+      "manifest_file": "personas/existing_data_curation/manifests/facet_map_70_facets.json",
+      "dimensions_claimed": 70,
+      "license": "open-web-reference",
+      "note": "70 Big Five facet labels. Fine-grained personality trait grounding.",
+      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "intended_use": "Fine-grained personality traits"
+    },
+    {
+      "source_id": "ipip_constructs_and_items",
+      "source_name": "IPIP constructs and item pool",
+      "source_type": "psychometric_reference",
+      "source_url": "https://ipip.ori.org/",
+      "manifest_file": "personas/existing_data_curation/manifests/ipip_constructs_and_items.json",
+      "dimensions_claimed": 276,
+      "license": "public-domain-reference",
+      "note": "276 scale labels; 3319 item pool entries. Public-domain trait construct and item reference.",
+      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "intended_use": "Trait construct and item reference"
+    },
+    {
+      "source_id": "deep_persona",
+      "source_name": "DeepPersona",
+      "source_type": "persona_taxonomy_reference",
+      "source_url": "https://arxiv.org/abs/2511.07338",
+      "project_url": "https://deeppersona-ai.github.io",
+      "manifest_file": "personas/existing_data_curation/manifests/deep_persona.json",
+      "dimensions_claimed": 12,
+      "license": "arxiv paper/reference; verify project, code, dataset, and generated taxonomy license before reuse",
+      "note": "12 top-level categories; long-tail persona attribute taxonomy. Candidate attribute coverage and subcategory grounding; requires review before becoming dimensions.",
+      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "intended_use": "Candidate attribute coverage and subcategory grounding"
+    },
+    {
+      "source_id": "scope_persona_salesforce",
+      "source_name": "SCOPE-Persona",
+      "source_type": "huggingface_dataset_reference",
+      "source_url": "https://huggingface.co/datasets/Salesforce/SCOPE-Persona",
+      "manifest_file": "personas/existing_data_curation/manifests/scope_persona_salesforce.json",
+      "dimensions_claimed": 135,
+      "license": "dataset-terms-unknown",
+      "note": "135 protocol fields. Sociopsychological persona protocol reference.",
+      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "intended_use": "Sociopsychological persona protocol reference"
+    },
+    {
+      "source_id": "gss_cumulative_codebook",
+      "source_name": "GSS cumulative codebook",
+      "source_type": "official_survey_reference",
+      "source_url": "https://gss.norc.org/us/en/gss/get-the-data.html",
+      "manifest_file": "personas/existing_data_curation/manifests/gss_cumulative_codebook.json",
+      "dimensions_claimed": 6518,
+      "license": "official-survey-terms",
+      "note": "6518 variables. Official social survey grounding for attitudes, trust, religion, politics, work, family, behavior, and life context.",
+      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "intended_use": "Official social survey grounding"
+    },
+    {
+      "source_id": "world_values_survey_wave7",
+      "source_name": "World Values Survey Wave 7",
+      "source_type": "official_survey_reference",
+      "source_url": "https://www.worldvaluessurvey.org/WVSDocumentationWV7.jsp",
+      "manifest_file": "personas/existing_data_curation/manifests/world_values_survey_wave7.json",
+      "dimensions_claimed": 153,
+      "license": "official-survey-terms",
+      "note": "153 questionnaire items. Values, beliefs, trust, politics, religion, and social attitudes grounding.",
+      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "intended_use": "Values, beliefs, trust, politics, religion, and social attitudes"
+    },
+    {
+      "source_id": "acs_pums_curated_variables",
+      "source_name": "ACS PUMS",
+      "source_type": "official_population_survey_reference",
+      "source_url": "https://www.census.gov/programs-surveys/acs/microdata.html",
+      "manifest_file": "personas/existing_data_curation/manifests/acs_pums_curated_variables.json",
+      "dimensions_claimed": 135,
+      "license": "us-government-public-data",
+      "note": "Curated demographic and population variables. Official demographic grounding layer.",
+      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "intended_use": "Official demographic grounding"
+    },
+    {
+      "source_id": "mcadams_three_levels_personality",
+      "source_name": "McAdams Three Levels of Personality",
+      "source_type": "theory_reference",
+      "source_url": "https://doi.org/10.1037/0003-066X.50.5.365",
+      "manifest_file": "personas/existing_data_curation/manifests/mcadams_three_levels_personality.json",
+      "dimensions_claimed": 3,
+      "license": "citation-only",
+      "note": "3 theoretical levels: dispositional traits, characteristic adaptations, narrative identity. Schema theory and narrative identity grounding.",
+      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "intended_use": "Schema theory and narrative identity grounding"
+    },
+    {
+      "source_id": "primal_world_beliefs",
+      "source_name": "Primal World Beliefs",
+      "source_type": "psychometric_reference",
+      "source_url": "https://myprimals.com/",
+      "manifest_file": "personas/existing_data_curation/manifests/primal_world_beliefs.json",
+      "dimensions_claimed": 26,
+      "license": "research-use-reference",
+      "note": "World-belief constructs including safe, enticing, alive and associated facets. Worldview grounding.",
+      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "intended_use": "Worldview grounding"
+    },
+    {
+      "source_id": "bis_bas_scales",
+      "source_name": "BIS/BAS",
+      "source_type": "psychometric_reference",
+      "source_url": "https://doi.org/10.1037/0022-3514.67.2.319",
+      "manifest_file": "personas/existing_data_curation/manifests/bis_bas_scales.json",
+      "dimensions_claimed": 4,
+      "license": "citation-only",
+      "note": "Behavioral inhibition and activation constructs. Motivation and affective disposition grounding.",
+      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "intended_use": "Motivation and affective disposition grounding"
+    },
+    {
+      "source_id": "grit_perseverance",
+      "source_name": "Grit / perseverance",
+      "source_type": "psychometric_reference",
+      "source_url": "https://doi.org/10.1037/0022-3514.92.6.1087",
+      "manifest_file": "personas/existing_data_curation/manifests/grit_perseverance.json",
+      "dimensions_claimed": 2,
+      "license": "citation-only",
+      "note": "Perseverance and long-term effort constructs. Motivation and persistence grounding.",
+      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "intended_use": "Motivation and persistence grounding"
+    },
+    {
+      "source_id": "growth_mindset",
+      "source_name": "Growth mindset",
+      "source_type": "theory_reference",
+      "source_url": "https://www.mindsetworks.com/science/",
+      "manifest_file": "personas/existing_data_curation/manifests/growth_mindset.json",
+      "dimensions_claimed": 1,
+      "license": "citation-only",
+      "note": "Malleability-of-ability belief construct. Cognitive and motivation grounding.",
+      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "intended_use": "Cognitive and motivation grounding"
     }
   ]
 };
