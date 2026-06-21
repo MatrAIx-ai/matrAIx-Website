@@ -1183,22 +1183,27 @@
 
         const texts = [];
         const imgs = [];
+        let hasImages = false;
 
         obs.results.forEach((r) => {
           const parts = Array.isArray(r.content) ? r.content : [];
           parts.forEach((p) => {
             if(p && p.type === "text" && typeof p.text === "string"){
-              texts.push(p.text);
+              if(p.text.trim()) texts.push(p.text);
             }
             if(p && p.type === "image" && p.source && typeof p.source.path === "string"){
-              let fp = p.source.path.replace(/^\/+/, "");
-              if(!fp.startsWith("agent/")) fp = "agent/" + fp;
-              const src = api(
-                "/api/jobs/" + encodeURIComponent(state.jobName) +
-                "/trials/" + encodeURIComponent(state.trialName) +
-                "/files/" + encodePath(fp)
-              );
-              imgs.push(src);
+              hasImages = true;
+              // For sample data, images are not available; only show when API is connected
+              if(state.connected){
+                let fp = p.source.path.replace(/^\/+/, "");
+                if(!fp.startsWith("agent/")) fp = "agent/" + fp;
+                const src = api(
+                  "/api/jobs/" + encodeURIComponent(state.jobName) +
+                  "/trials/" + encodeURIComponent(state.trialName) +
+                  "/files/" + encodePath(fp)
+                );
+                imgs.push(src);
+              }
             }
           });
         });
@@ -1207,10 +1212,14 @@
         if(texts.length){
           html += '<div class="hb-card hb-d4"><h3>Observation Text</h3><pre class="hb-code">' + escapeHtml(texts.join("\n")) + '</pre></div>';
         }
-        if(imgs.length){
-          html += '<div class="hb-card hb-d4"><h3>Observation Images</h3><div class="hb-images">' +
-            imgs.map((src) => '<div class="hb-img"><img loading="lazy" src="' + src + '" alt="Observation image" /></div>').join("") +
-            '</div></div>';
+        if(hasImages){
+          if(imgs.length){
+            html += '<div class="hb-card hb-d4"><h3>Observation Images</h3><div class="hb-images">' +
+              imgs.map((src) => '<div class="hb-img"><img loading="lazy" src="' + src + '" alt="Observation image" /></div>').join("") +
+              '</div></div>';
+          } else if(!state.connected){
+            html += '<div class="hb-card hb-d4"><h3>Observation Images</h3><p style="color:var(--ink-dim);font-size:0.85rem;">📸 Screenshots available only when connected to API (using sample data)</p></div>';
+          }
         }
         return html;
       }
