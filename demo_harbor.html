@@ -686,6 +686,9 @@
                 <div class="hb-row" style="margin-top:10px">
                   <input id="stepSlider" class="hb-range" type="range" min="0" max="0" value="0" />
                 </div>
+                <div class="hb-row" style="margin-top:12px">
+                  <button id="exportBtn" class="hb-btn" title="Export trajectory as JSONL">⬇ Export Trajectory</button>
+                </div>
               </div>
 
               <div class="hb-mini">This page reads live Harbor trajectory APIs and animates each step in sequence.</div>
@@ -745,7 +748,8 @@
         jobMeta: $("jobMeta"),
         rightTabs: $("rightTabs"),
         taskBrief: $("taskBrief"),
-        runSummary: $("runSummary")
+        runSummary: $("runSummary"),
+        exportBtn: $("exportBtn")
       };
 
       const state = {
@@ -1502,6 +1506,23 @@
       els.stepSlider.addEventListener("input", () => {
         stopPlayback();
         setStep(Number(els.stepSlider.value || 0));
+      });
+
+      els.exportBtn.addEventListener("click", () => {
+        if(!state.steps || state.steps.length === 0){
+          alert("No trajectory loaded. Load a trial first.");
+          return;
+        }
+        const lines = state.steps.map(step => JSON.stringify(step)).join("\n");
+        const blob = new Blob([lines + "\n"], {type: "text/plain"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = (state.jobName || "trajectory") + "_" + (state.trialName || "trial") + ".jsonl";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
       });
 
       els.timeline.addEventListener("click", (ev) => {
