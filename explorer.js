@@ -38,13 +38,31 @@
     const el = document.querySelector(`[data-stat="${k}"]`);
     if (el) el.textContent = v;
   };
+
+  // Count unique datasets from dimensions
+  const datasetCount = (() => {
+    const datasets = new Set();
+    dims.forEach(d => {
+      if (d.source_origin && d.source_origin.source_id) {
+        datasets.add(d.source_origin.source_id);
+      }
+    });
+    // Add reference sources
+    if (DATA.reference_sources) {
+      DATA.reference_sources.forEach(r => {
+        datasets.add(r.source_id);
+      });
+    }
+    return datasets.size;
+  })();
+
   setStat('dims', dims.length);
   setStat('vals', fmtInt.format(totalValues));
   setStat('space', sciFromLog(log10space));
-  setStat('target', fmtInt.format(DATA.targetDimensions));
+  setStat('datasets', datasetCount);
   document.getElementById('verTag').textContent = 'v' + DATA.schemaVersion;
   document.getElementById('footMeta').textContent =
-    `SCHEMA v${DATA.schemaVersion} · ${dims.length} DIMS · FLAT UNIFIED · © 2026`;
+    `SCHEMA v${DATA.schemaVersion} · ${dims.length} DIMS · ${datasetCount} DATASETS · © 2026`;
 
   /* ---------- Categories / chips ---------- */
   const cats = [...new Set(dims.map(d => d.category))];
