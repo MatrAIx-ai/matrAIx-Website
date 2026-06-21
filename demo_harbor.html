@@ -822,8 +822,8 @@
             return { items: SAMPLE_DATA.jobs };
           }
 
-          // Handle specific job trials endpoint: /api/jobs/{jobName}/trials
-          const jobTrialsMatch = path.match(/\/api\/jobs\/([^\/]+)\/trials$/);
+          // Handle specific job trials endpoint: /api/jobs/{jobName}/trials (with optional query params)
+          const jobTrialsMatch = path.match(/\/api\/jobs\/([^\/]+)\/trials(?:\?|$)/);
           if(jobTrialsMatch){
             const jobName = decodeURIComponent(jobTrialsMatch[1]);
             if(SAMPLE_DATA.trials[jobName]){
@@ -833,7 +833,7 @@
           }
 
           // Handle specific trial detail endpoint: /api/jobs/{jobName}/trials/{trialName}
-          const trialDetailMatch = path.match(/\/api\/jobs\/([^\/]+)\/trials\/([^\/]+)$/);
+          const trialDetailMatch = path.match(/\/api\/jobs\/([^\/]+)\/trials\/([^\/]+)(?:\?|$)/);
           if(trialDetailMatch){
             const jobName = decodeURIComponent(trialDetailMatch[1]);
             const trialName = decodeURIComponent(trialDetailMatch[2]);
@@ -851,7 +851,7 @@
           }
 
           // Handle trajectory steps endpoint: /api/jobs/{jobName}/trials/{trialName}/trajectory
-          const trajectoryMatch = path.match(/\/api\/jobs\/([^\/]+)\/trials\/([^\/]+)\/trajectory/);
+          const trajectoryMatch = path.match(/\/api\/jobs\/([^\/]+)\/trials\/([^\/]+)\/trajectory(?:\?|$)/);
           if(trajectoryMatch){
             const jobName = decodeURIComponent(trajectoryMatch[1]);
             const trialName = decodeURIComponent(trajectoryMatch[2]);
