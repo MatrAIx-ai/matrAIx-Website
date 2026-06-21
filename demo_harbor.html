@@ -1430,7 +1430,15 @@
           startPolling();
         } catch (err){
           stopPlayback();
-          setApiState(false, "API error · " + (err && err.message ? err.message : "unknown"));
+
+          // If API fails but sample data is available, use it as fallback
+          if(SAMPLE_DATA && SAMPLE_DATA.jobs && SAMPLE_DATA.jobs.length > 0){
+            setApiState(false, "Using sample data (API unavailable)");
+            await loadJobs();
+            // Don't start polling when using sample data
+          } else {
+            setApiState(false, "API error · " + (err && err.message ? err.message : "unknown"));
+          }
         }
       }
 
