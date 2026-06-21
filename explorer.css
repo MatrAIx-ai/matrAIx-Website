@@ -141,6 +141,20 @@
   transform: translateY(-3px);
 }
 .dim-card.open { border-color: var(--phos); box-shadow: 0 0 0 1px rgba(59,169,255,0.25); }
+
+/* External dataset dimensions: slightly different background */
+.dim-card.has-source {
+  background: rgba(59,169,255,0.04);
+  border-color: rgba(59,169,255,0.12);
+}
+.dim-card.has-source:hover {
+  background: rgba(59,169,255,0.08);
+  border-color: rgba(59,169,255,0.2);
+}
+.dim-card.has-source.open {
+  border-color: var(--phos);
+  box-shadow: 0 0 0 1px rgba(59,169,255,0.3), inset 0 0 20px rgba(59,169,255,0.05);
+}
 .dim-top {
   display: flex;
   align-items: baseline;

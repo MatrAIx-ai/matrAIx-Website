@@ -120,15 +120,16 @@
     grid.innerHTML = list.map((d, i) => {
       const source = getSourceName(d.id);
       const cleanLabel = getCleanLabel(d.label, d.id);
+      const sourceClass = source ? 'has-source' : '';
       return `
-      <article class="dim-card" data-id="${d.id}" style="animation-delay:${Math.min(i * 20, 300)}ms">
+      <article class="dim-card ${sourceClass}" data-id="${d.id}" data-source="${source || ''}" style="animation-delay:${Math.min(i * 20, 300)}ms">
         <div class="dim-top">
           <span class="dim-cat">${d.category}</span>
           <span class="dim-count">${d.values.length} values</span>
         </div>
         <h3 class="dim-label">${cleanLabel}</h3>
         <p class="dim-desc">${d.description}</p>
-        ${source ? `<p class="dim-source">Source: ${source}</p>` : ''}
+        ${source ? `<p class="dim-source">📊 Source: ${source}</p>` : ''}
         <div class="dim-values">
           ${d.values.map(v => `<span class="val-chip">${v}</span>`).join('')}
         </div>
