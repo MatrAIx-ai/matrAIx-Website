@@ -1,4 +1,4 @@
-window.MATRAIX_DIMENSIONS = {
+{
   "schemaVersion": "2.0",
   "name": "matrAIx Persona Dimension Space",
   "headlineBehaviors": 8300000000,
@@ -16693,4 +16693,4 @@ window.MATRAIX_DIMENSIONS = {
       ]
     }
   ]
-};
+}
