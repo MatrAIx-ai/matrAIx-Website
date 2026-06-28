@@ -12,7 +12,7 @@ the persona **dimension schema** that defines the space those agents are sampled
 | Page | File | What it is |
 |------|------|------------|
 | Landing | [`index.html`](index.html) | Hero with the 8.3-billion-behavior headline, "Open-Source Community" badge, and a live agent-field simulation (canvas), telemetry strip, and eval methodology. |
-| Blog | [`blog.html`](blog.html) | Blog index page with 3 research papers in a single-column layout. Gateway to research insights on persona grounding, evaluation frameworks, and agent simulation. |
+| Blog | [`blog/`](blog/) | Blog index page with 3 research papers in a single-column layout. Gateway to research insights on persona grounding, evaluation frameworks, and agent simulation. |
 | Persona Explorer | [`person.html`](person.html) | Browse the flat persona schema: filter by category, search, expand value pools, and sample a full synthetic persona. |
 | Demo Portal (matrAIx OS) | [`demo.html`](demo.html) | A mission-control interface: a live "Neural Eval Core" brain visualization, an agent swarm simulating the selected app/website, streaming trajectory telemetry, switchable reports (A/B, segments, score distribution, heatmap, findings), and JSONL trajectory export. |
 | Case Study | [`case_study.html`](case_study.html) | A recorded sample trajectory: a matrAIx computer-using agent (10-dimension persona) files an auto-insurance claim on hugclaim.com, with per-step screenshots, observations, actions, rewards, friction findings, and a JSONL export. |
@@ -114,10 +114,11 @@ home.css                        Landing page styling — dark phosphor console (
 home.js                         Agent-field sim, count-up, telemetry, A/B report viewer, SFT/RL toggle
 styles.css                      Shared console styling for the tool pages (CSS variables, base look)
 
-blog.html                       Blog index page (links to research papers)
-blog-synthetic-grounding.html   Research: Synthetic Persona Grounding & Standardized Reporting
-blog-personaeval.html           Research: PersonaEval Framework for Interactive App Evaluation
-blog-microverse.html            Research: MicroVerse — Measuring Identity Drift in Simulations
+blog/
+├── index.html                  Blog index page (links to research papers)
+├── position-colm.html          Research: Synthetic Persona Grounding & Standardized Reporting
+├── application-colm.html       Research: PersonaEval Framework for Interactive App Evaluation
+└── env-colm.html               Research: MicroVerse — Measuring Identity Drift in Simulations
 
 person.html                     Persona explorer markup
 explorer.html                   Redirect stub -> person.html
