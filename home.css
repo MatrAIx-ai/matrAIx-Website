@@ -129,6 +129,26 @@ main { position: relative; z-index: 10; }
 .eyebrow .sep { color: var(--line); }
 .eyebrow .status { display: inline-flex; align-items: center; gap: 7px; color: var(--phos); }
 
+/* Community badge */
+.community-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 28px; padding: 10px 18px;
+  background: rgba(59, 169, 255, 0.06); border: 1px solid rgba(59, 169, 255, 0.25);
+  border-radius: 6px; font-size: 0.85rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--phos);
+  opacity: 0; animation: rise 0.7s 0.05s forwards;
+  box-shadow: inset 0 0 20px rgba(59, 169, 255, 0.08);
+}
+.community-badge .badge-dot {
+  width: 8px; height: 8px; background: var(--phos);
+  border-radius: 50%; box-shadow: 0 0 12px rgba(59, 169, 255, 0.8), inset 0 0 4px rgba(255, 255, 255, 0.3);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 12px rgba(59, 169, 255, 0.8), inset 0 0 4px rgba(255, 255, 255, 0.3); }
+  50% { opacity: 0.6; box-shadow: 0 0 18px rgba(59, 169, 255, 1), inset 0 0 4px rgba(255, 255, 255, 0.5); }
+}
+
 .headline {
   font-family: var(--disp); font-weight: 800; line-height: 0.95;
   letter-spacing: -0.03em; margin-bottom: 34px;
