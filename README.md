@@ -11,11 +11,11 @@ the persona **dimension schema** that defines the space those agents are sampled
 
 | Page | File | What it is |
 |------|------|------------|
-| Landing | [`index.html`](index.html) | Hero with the 8.3-billion-behavior headline and a live agent-field simulation (canvas), telemetry strip, and eval methodology. |
+| Landing | [`index.html`](index.html) | Hero with the 8.3-billion-behavior headline, "Open-Source Community" badge, and a live agent-field simulation (canvas), telemetry strip, and eval methodology. |
+| Blog | [`blog.html`](blog.html) | Blog index page with 3 research papers in a single-column layout. Gateway to research insights on persona grounding, evaluation frameworks, and agent simulation. |
 | Persona Explorer | [`person.html`](person.html) | Browse the flat persona schema: filter by category, search, expand value pools, and sample a full synthetic persona. |
 | Demo Portal (matrAIx OS) | [`demo.html`](demo.html) | A mission-control interface: a live "Neural Eval Core" brain visualization, an agent swarm simulating the selected app/website, streaming trajectory telemetry, switchable reports (A/B, segments, score distribution, heatmap, findings), and JSONL trajectory export. |
 | Case Study | [`case_study.html`](case_study.html) | A recorded sample trajectory: a matrAIx computer-using agent (10-dimension persona) files an auto-insurance claim on hugclaim.com, with per-step screenshots, observations, actions, rewards, friction findings, and a JSONL export. |
-| Pitch Deck | [`deck.html`](deck.html) | Self-contained investor deck (15 slides) matching the site's dark phosphor design. Arrow-key / swipe navigation, `F` for fullscreen. Business-specific figures are marked as illustrative placeholders to fill in. |
 | Let's Play! | [`play.html`](play.html) | A fun 8-question personality quiz. Each answer maps to a real persona dimension value (`dominant_trait`, `risk_tolerance`, `decision_style`, `values_priority`, `tone_expected`, `learning_style`, `media_diet`, `economic_motivation`); after answering, matrAIx synthesizes the player's **persona**, names their archetype, and **predicts how they'd behave** inside a product flow — the simulation-fidelity thesis, made playable. Self-contained (no schema file needed). |
 
 No build step — open `index.html` in a browser, or serve the folder:
@@ -109,21 +109,30 @@ readable LinkedIn-style summary, and offers the result as JSON:
 ## Files
 
 ```
-index.html        Landing page markup
-home.css          Landing page styling — dark phosphor console (Syne + JetBrains Mono)
-home.js           Agent-field sim, count-up, telemetry, A/B report viewer, SFT/RL toggle
-styles.css        Shared console styling for the tool pages (CSS variables, base look)
-person.html       Persona explorer markup
-explorer.html     Redirect stub -> person.html
-explorer.css      Persona-explorer styling
-explorer.js       Schema loading, filtering, search, persona sampler
-demo.html         Demo / benchmark console markup (runway hero + OS portal)
-benchmark.html    Redirect stub -> demo.html
-benchmark.css     Benchmark-specific styling
-benchmark.js      Sampling, structured scoring, live stream, heatmap, JSONL export
-deck.html         Self-contained investor pitch deck (15 slides)
-generate-dimensions.js  Builds the 1,000-dimension schema (curated core + families)
-dimensions.json   Canonical flat dimension schema (source of truth)
-dimensions.js     Browser-loadable mirror of dimensions.json
-CNAME             Custom domain for GitHub Pages (matraix.ai)
+index.html                      Landing page markup
+home.css                        Landing page styling — dark phosphor console (Space Grotesk + JetBrains Mono)
+home.js                         Agent-field sim, count-up, telemetry, A/B report viewer, SFT/RL toggle
+styles.css                      Shared console styling for the tool pages (CSS variables, base look)
+
+blog.html                       Blog index page (links to research papers)
+blog-synthetic-grounding.html   Research: Synthetic Persona Grounding & Standardized Reporting
+blog-personaeval.html           Research: PersonaEval Framework for Interactive App Evaluation
+blog-microverse.html            Research: MicroVerse — Measuring Identity Drift in Simulations
+
+person.html                     Persona explorer markup
+explorer.html                   Redirect stub -> person.html
+explorer.css                    Persona-explorer styling
+explorer.js                     Schema loading, filtering, search, persona sampler
+
+demo.html                       Demo / benchmark console markup (runway hero + OS portal)
+benchmark.html                  Redirect stub -> demo.html
+benchmark.css                   Benchmark-specific styling
+benchmark.js                    Sampling, structured scoring, live stream, heatmap, JSONL export
+
+deck.html                       (Local only — not tracked in git) Self-contained investor pitch deck (15 slides)
+
+generate-dimensions.js          Builds the 1,000-dimension schema (curated core + families)
+dimensions.json                 Canonical flat dimension schema (source of truth)
+dimensions.js                   Browser-loadable mirror of dimensions.json
+CNAME                           Custom domain for GitHub Pages (matraix.ai)
 ```
