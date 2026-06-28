@@ -384,9 +384,10 @@
     /* Blog grid */
     .blog-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: 1fr;
       gap: 24px;
       margin: 50px 0;
+      max-width: 700px;
     }
 
     .blog-card {
@@ -404,7 +405,6 @@
     .blog-card:nth-child(1) { animation-delay: 0.1s; }
     .blog-card:nth-child(2) { animation-delay: 0.2s; }
     .blog-card:nth-child(3) { animation-delay: 0.3s; }
-    .blog-card:nth-child(4) { animation-delay: 0.4s; }
 
     .blog-card:hover {
       border-color: var(--phos);
@@ -508,22 +508,7 @@
 
     <!-- Blog posts grid -->
     <div class="blog-grid">
-      <!-- Post 1: Community Journey -->
-      <a href="blog-community.html" class="blog-card">
-        <span class="blog-card-tag">Community</span>
-        <h3 class="blog-card-title">Building a 1,000-Dimension Persona Space</h3>
-        <p class="blog-card-desc">How the matrAIx community reached 1.07M synthetic personas and what it means for AI evaluation.</p>
-        <div class="blog-card-meta">
-          <div class="blog-card-author">
-            <span class="blog-avatar" style="width: 28px; height: 28px; font-size: 0.75rem;">YH</span>
-            <span>MatrAIx Team</span>
-          </div>
-          <span>8 min</span>
-          <span>Jun 28</span>
-        </div>
-      </a>
-
-      <!-- Post 2: Synthetic Grounding -->
+      <!-- Post 1: Synthetic Grounding -->
       <a href="blog-synthetic-grounding.html" class="blog-card">
         <span class="blog-card-tag">Research</span>
         <h3 class="blog-card-title">Synthetic Persona Grounding & Standardized Reporting</h3>
