@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>matrAIx Blog — Agent Simulation Insights</title>
+  <title>matrAIx Blog — Research & Community Insights</title>
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
@@ -381,6 +381,78 @@
       }
     }
 
+    /* Blog grid */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin: 50px 0;
+    }
+
+    .blog-card {
+      background: rgba(59, 169, 255, 0.04);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 28px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .blog-card:nth-child(1) { animation-delay: 0.1s; }
+    .blog-card:nth-child(2) { animation-delay: 0.2s; }
+    .blog-card:nth-child(3) { animation-delay: 0.3s; }
+    .blog-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .blog-card:hover {
+      border-color: var(--phos);
+      background: rgba(59, 169, 255, 0.08);
+      box-shadow: 0 0 20px rgba(59, 169, 255, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .blog-card-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .blog-card-title {
+      font-family: var(--disp);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .blog-card-desc {
+      color: var(--ink-dim);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      flex-grow: 1;
+      line-height: 1.6;
+    }
+
+    .blog-card-meta {
+      display: flex;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: var(--ink-dim);
+    }
+
+    .blog-card-author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .blog-title {
@@ -400,6 +472,10 @@
         gap: 20px;
         font-size: 0.8rem;
       }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -416,185 +492,89 @@
   </header>
 
   <main>
-    <!-- Blog header -->
+    <!-- Blog index header -->
     <div class="blog-header">
       <div class="blog-breadcrumb">
         <a href="/">Home</a>
         <span>/</span>
-        <a href="/blog.html">Blog</a>
-        <span>/</span>
-        <span>Latest</span>
+        <span>Blog</span>
       </div>
 
-      <h1 class="blog-title">Building a 1,000-Dimension Persona Space: The matrAIx Community Journey</h1>
-
-      <div class="blog-meta">
-        <div class="blog-meta-item">
-          <span class="blog-avatar">YH</span>
-          <div>
-            <strong>Yuexing Hao</strong>
-            <div style="font-size: 0.85rem;">Core Team</div>
-          </div>
-        </div>
-        <div class="blog-meta-item">
-          📅 <strong>June 28, 2026</strong>
-        </div>
-        <div class="blog-meta-item">
-          ⏱ <strong>8 min read</strong>
-        </div>
-      </div>
+      <h1 class="blog-title">Blog</h1>
+      <p style="color: var(--ink-dim); font-size: 1.05rem; margin-top: 20px; max-width: 600px;">
+        Research, insights, and community updates from the matrAIx team. Explore our latest work on persona grounding, agent simulation, and evaluation frameworks.
+      </p>
     </div>
 
-    <!-- Article content -->
-    <article class="article">
-      <p>
-        Six months ago, we set out on an ambitious mission: to create the world's largest open-source persona dataset for agent simulation. What started as a hypothesis—that <strong>synthetic personas at scale could rival real-world user testing</strong>—has evolved into something far more meaningful: a thriving global community building the future of evaluation.
-      </p>
-
-      <p>
-        Today, we're sharing how the matrAIx community reached 1.07 million synthetic personas across 1,000 dimensions, and what this achievement means for AI evaluation.
-      </p>
-
-      <h2>The Genesis: Why Personas Matter</h2>
-
-      <p>
-        Evaluating LLM agents at scale has always been a bottleneck. Traditional A/B testing with real users takes weeks, costs millions, and doesn't capture edge cases. We asked: <em>What if we could simulate the diversity of human behavior with synthetic agents?</em>
-      </p>
-
-      <p>
-        A persona is more than a demographic profile. It's a behavioral model: the way someone navigates a checkout flow, responds to errors, interprets unclear UI. By grounding personas in real data—LinkedIn profiles, geographic distributions, domain expertise—we could create agents that behave like actual humans.
-      </p>
-
-      <div class="highlight-box">
-        <strong>Key insight:</strong> 95%+ alignment between synthetic agent behavior and real human trajectories in A/B testing. This wasn't luck. It was the result of rigorous dimension selection, iterative grounding, and community validation.
-      </div>
-
-      <h2>From 10K to 1.07M: Community Momentum</h2>
-
-      <p>
-        In January, we shipped PersonaHub Elite with 561K personas across professional domains (tech, finance, healthcare). The response was immediate. Within weeks, researchers from Stanford, MIT, and industry teams began contributing data, suggesting new dimensions, and running simulations.
-      </p>
-
-      <p>
-        By March, the Nemotron dataset (multi-country synthetic personas) was integrated. Researchers in Brazil, Japan, and the USA contributed localized behavior models. Each region contributed ~50–210K personas, reflecting cultural differences in decision-making, risk tolerance, and technology adoption.
-      </p>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">1.07M</div>
-          <div class="stat-label">Personas</div>
+    <!-- Blog posts grid -->
+    <div class="blog-grid">
+      <!-- Post 1: Community Journey -->
+      <a href="blog-community.html" class="blog-card">
+        <span class="blog-card-tag">Community</span>
+        <h3 class="blog-card-title">Building a 1,000-Dimension Persona Space</h3>
+        <p class="blog-card-desc">How the matrAIx community reached 1.07M synthetic personas and what it means for AI evaluation.</p>
+        <div class="blog-card-meta">
+          <div class="blog-card-author">
+            <span class="blog-avatar" style="width: 28px; height: 28px; font-size: 0.75rem;">YH</span>
+            <span>Yuexing Hao</span>
+          </div>
+          <span>8 min</span>
+          <span>Jun 28</span>
         </div>
-        <div class="stat-card">
-          <div class="stat-number">1,000</div>
-          <div class="stat-label">Dimensions</div>
+      </a>
+
+      <!-- Post 2: Synthetic Grounding -->
+      <a href="blog-synthetic-grounding.html" class="blog-card">
+        <span class="blog-card-tag">Research</span>
+        <h3 class="blog-card-title">Synthetic Persona Grounding & Standardized Reporting</h3>
+        <p class="blog-card-desc">Why explicit grounding and standardized persona report cards are critical for trustworthy agent simulation.</p>
+        <div class="blog-card-meta">
+          <div class="blog-card-author">
+            <span class="blog-avatar" style="width: 28px; height: 28px; font-size: 0.75rem;">XL</span>
+            <span>Xiaomin Li</span>
+          </div>
+          <span>10 min</span>
+          <span>Jun 24</span>
         </div>
-        <div class="stat-card">
-          <div class="stat-number">95%+</div>
-          <div class="stat-label">Human alignment</div>
+      </a>
+
+      <!-- Post 3: PersonaEval -->
+      <a href="blog-personaeval.html" class="blog-card">
+        <span class="blog-card-tag">Framework</span>
+        <h3 class="blog-card-title">PersonaEval: Persona-Based User Simulation</h3>
+        <p class="blog-card-desc">Evaluate interactive applications using 1M synthetic personas. Results in hours, not weeks.</p>
+        <div class="blog-card-meta">
+          <div class="blog-card-author">
+            <span class="blog-avatar" style="width: 28px; height: 28px; font-size: 0.75rem;">YH</span>
+            <span>Yuexing Hao</span>
+          </div>
+          <span>12 min</span>
+          <span>Jun 22</span>
         </div>
-        <div class="stat-card">
-          <div class="stat-number">50+</div>
-          <div class="stat-label">Contributors</div>
+      </a>
+
+      <!-- Post 4: MicroVerse -->
+      <a href="blog-microverse.html" class="blog-card">
+        <span class="blog-card-tag">Research</span>
+        <h3 class="blog-card-title">MicroVerse: Identity Drift in Multi-Agent Simulations</h3>
+        <p class="blog-card-desc">Measuring and correcting persona drift in long-horizon LLM agent interactions.</p>
+        <div class="blog-card-meta">
+          <div class="blog-card-author">
+            <span class="blog-avatar" style="width: 28px; height: 28px; font-size: 0.75rem;">YH</span>
+            <span>Yuexing Hao</span>
+          </div>
+          <span>11 min</span>
+          <span>Jun 20</span>
         </div>
-      </div>
+      </a>
+    </div>
 
-      <h2>Dimension Design: The Art & Science</h2>
-
-      <p>
-        Creating 1,000 meaningful dimensions is non-trivial. We couldn't just sample demographics; we needed behavioral axes that matter for product evaluation.
+    <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--line); text-align: center;">
+      <p style="color: var(--ink-dim); margin-bottom: 16px;">
+        Have research or insights to share? We welcome community contributions.
       </p>
-
-      <p>
-        Our framework includes:
-      </p>
-
-      <ul>
-        <li><strong>Cognitive dimensions:</strong> Attention span, information processing speed, pattern recognition bias</li>
-        <li><strong>Behavioral dimensions:</strong> Risk tolerance, exploration vs. exploitation, error recovery strategies</li>
-        <li><strong>Domain dimensions:</strong> Technical literacy, financial acumen, healthcare knowledge, industry-specific jargon comprehension</li>
-        <li><strong>Demographic dimensions:</strong> Age, geography, language, socioeconomic status</li>
-        <li><strong>Temporal dimensions:</strong> Generational cohorts, early adopter vs. laggard profiles</li>
-      </ul>
-
-      <p>
-        Each dimension was validated against real behavioral data. We didn't invent personas from imagination; we extracted them from LinkedIn, survey responses, app usage logs, and e-commerce trajectories.
-      </p>
-
-      <h2>The Community Effect</h2>
-
-      <p>
-        What surprised us most was the network effect. Once the dataset hit 500K personas, researchers started discovering unexpected correlations:
-      </p>
-
-      <ul>
-        <li>A team at Berkeley found that persona age + technical literacy + mobile device type predicted checkout abandonment more accurately than any single behavioral signal.</li>
-        <li>Researchers in São Paulo used Brazilian personas to identify cultural biases in UI patterns designed for Western audiences.</li>
-        <li>A fintech startup used the dataset to run 8.3 billion agent simulations, discovering edge cases that would have taken 50 human researchers 6 months to find.</li>
-      </ul>
-
-      <p>
-        These weren't predictions we could have made. They were emergent properties of scale and diversity.
-      </p>
-
-      <div class="highlight-box">
-        <strong>Lesson:</strong> Open-source data at scale unlocks insights that closed, proprietary datasets can never achieve. The community's creativity—applied across thousands of experiments—is our competitive advantage.
-      </div>
-
-      <h2>What's Next: Toward 8.3B</h2>
-
-      <p>
-        Our north star remains ambitious: 8.3 billion personas (one per person on Earth). We're not there yet, but the trajectory is clear.
-      </p>
-
-      <p>
-        In the next six months:
-      </p>
-
-      <ul>
-        <li><strong>Singapore & India expansion:</strong> We're working with researchers in APAC to add 200M+ localized personas</li>
-        <li><strong>Temporal dimension:</strong> Building cohort-specific personas for Gen Z, Gen X, Boomers with evolving behavior over time</li>
-        <li><strong>Adversarial dimensions:</strong> Intentionally modeling corner cases—users with disabilities, non-native speakers, high-anxiety profiles—to pressure-test products</li>
-        <li><strong>Open contributor program:</strong> Any researcher can submit a dimension or dataset to the core; the community votes on integration</li>
-      </ul>
-
-      <h2>For Builders & Researchers</h2>
-
-      <p>
-        If you're evaluating an LLM agent, simulating user behavior, or building products for global audiences: this is your signal that matrAIx is ready.
-      </p>
-
-      <p>
-        You can:
-      </p>
-
-      <ul>
-        <li><strong>Run simulations instantly</strong> — 8.3B agents on standby, results in hours instead of weeks</li>
-        <li><strong>Access the dataset</strong> — 1.07M personas on HuggingFace, free for research and commercial use</li>
-        <li><strong>Join the community</strong> — Discord, GitHub, or Discord; contribute dimensions, validate personas, propose features</li>
-        <li><strong>Deploy to production</strong> — Enterprise SLA, dedicated support, custom dimension tuning</li>
-      </ul>
-
-      <div style="margin-top: 40px; padding: 20px; background: rgba(59, 169, 255, 0.05); border-radius: 6px;">
-        <p style="margin-bottom: 16px;">
-          <strong>Ready to evaluate like you mean it?</strong>
-        </p>
-        <a href="/access.html" class="btn">Request access →</a>
-      </div>
-
-      <h2>Acknowledgments</h2>
-
-      <p>
-        This wouldn't have been possible without the matrAIx community: researchers at Stanford, MIT, UC Berkeley; contributors from Nemotron, PersonaHub, and StackExchange; and the dozens of teams running production simulations and sharing feedback.
-      </p>
-
-      <p>
-        Special thanks to <strong>Xiaomin Li</strong>, <strong>Mingye Gao</strong>, and the entire core team for building the infrastructure and pedagogy that made this scale possible.
-      </p>
-
-      <p style="margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-dim); font-size: 0.9rem;">
-        Have thoughts? Found a bug in a persona? Interested in contributing a dimension? <a href="mailto:info@matraix.ai" style="color: var(--phos);">Reach out.</a>
-      </p>
-    </article>
+      <a href="mailto:info@matraix.ai" class="btn">Submit a post →</a>
+    </div>
   </main>
 
   <footer>
