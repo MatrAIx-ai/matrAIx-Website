@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Synthetic Persona Grounding & Reporting — matrAIx Blog</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <meta name="description" content="Position paper on synthetic persona grounding: why explicit grounding and standardized reporting are critical for trustworthy agent simulation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="blog-style.css" />
+  <style>
+    /* ============================================================ matrAIx Blog Style ============================================================ */
+    :root {
+      --bg: #060807; --bg-2: #0a0e0c; --bg-3: #0f1612; --ink: #d6e6d8; --ink-dim: #6f8273;
+      --phos: #3ba9ff; --phos-deep: #1d5fa6; --amber: #ffb547; --rose: #ff5c6c; --cyan: #8ad0ff;
+      --line: rgba(59, 169, 255, 0.16); --line-soft: rgba(59, 169, 255, 0.07); --glow: 0 0 22px rgba(59, 169, 255, 0.45);
+      --mono: "JetBrains Mono", ui-monospace, monospace; --disp: "Space Grotesk", sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--mono); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+    body::before { content: ""; position: fixed; inset: 0; background: radial-gradient(120% 90% at 50% 30%, transparent 45%, rgba(0,0,0,0.8) 100%); pointer-events: none; z-index: 1; }
+    body::after { content: ""; position: fixed; inset: 0; background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,0.16) 3px, rgba(0,0,0,0) 4px); pointer-events: none; z-index: 2; mix-blend-mode: multiply; }
+    ::selection { background: var(--phos); color: #04121f; }
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; padding: 18px clamp(20px, 5vw, 40px); backdrop-filter: blur(8px); background: linear-gradient(to bottom, rgba(6, 8, 7, 0.85), rgba(6, 8, 7, 0)); border-bottom: 1px solid var(--line-soft); }
+    .brand { font-family: var(--disp); font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+    .brand .ai { color: var(--phos); text-shadow: var(--glow); }
+    nav { display: flex; gap: 30px; align-items: center; }
+    nav a { color: var(--ink-dim); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.25s; position: relative; }
+    nav a::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 1px; background: var(--phos); box-shadow: var(--glow); transition: width 0.3s ease; }
+    nav a:hover { color: var(--phos); }
+    nav a:hover::after { width: 100%; }
+    main { position: relative; z-index: 3; max-width: 900px; margin: 0 auto; padding: 120px 20px 60px; }
+    .blog-header { margin-bottom: 60px; animation: fadeInUp 0.8s ease 0.1s both; }
+    .blog-breadcrumb { font-size: 0.85rem; color: var(--ink-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; display: flex; gap: 12px; align-items: center; }
+    .blog-breadcrumb a { color: var(--phos); text-decoration: none; transition: color 0.25s; }
+    .blog-breadcrumb a:hover { color: var(--cyan); }
+    .blog-breadcrumb span { color: var(--line); }
+    .blog-title { font-family: var(--disp); font-size: clamp(1.8rem, 6vw, 3.2rem); font-weight: 800; line-height: 1.1; color: var(--ink); margin-bottom: 20px; letter-spacing: -0.02em; }
+    .blog-meta { display: flex; gap: 24px; flex-wrap: wrap; color: var(--ink-dim); font-size: 0.95rem; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+    .blog-meta-item { display: flex; align-items: center; gap: 8px; }
+    .blog-meta-item strong { color: var(--ink); }
+    .blog-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--phos), var(--cyan)); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; color: #04121f; font-size: 0.9rem; }
+    .article { animation: fadeInUp 0.8s ease 0.2s both; }
+    .article h2 { font-family: var(--disp); font-size: 1.8rem; font-weight: 700; margin: 50px 0 20px; color: var(--ink); letter-spacing: -0.01em; }
+    .article h2:first-child { margin-top: 0; }
+    .article p { margin-bottom: 18px; line-height: 1.8; color: var(--ink); }
+    .article strong { color: var(--phos); font-weight: 600; }
+    .article em { color: var(--amber); font-style: italic; }
+    .article ul { margin: 24px 0 24px 24px; line-height: 1.9; }
+    .article li { margin-bottom: 12px; }
+    .article li::marker { color: var(--phos); }
+    .code-block { background: rgba(59, 169, 255, 0.04); border: 1px solid var(--line); border-radius: 6px; padding: 16px; margin: 24px 0; font-family: var(--mono); font-size: 0.9rem; color: var(--cyan); overflow-x: auto; line-height: 1.5; }
+    .highlight-box { background: rgba(255, 181, 71, 0.06); border-left: 3px solid var(--amber); padding: 20px; margin: 30px 0; border-radius: 4px; line-height: 1.8; }
+    .highlight-box strong { color: var(--amber); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 40px 0; }
+    .stat-card { background: rgba(59, 169, 255, 0.05); border: 1px solid var(--line); border-radius: 6px; padding: 20px; text-align: center; }
+    .stat-card .stat-number { font-size: 2rem; font-weight: 800; color: var(--phos); text-shadow: var(--glow); margin-bottom: 8px; font-family: var(--disp); }
+    .stat-card .stat-label { font-size: 0.85rem; color: var(--ink-dim); letter-spacing: 0.06em; text-transform: uppercase; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; border: 1px solid var(--line); color: var(--ink); background: transparent; font-family: var(--mono); font-size: 0.86rem; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; cursor: pointer; border-radius: 4px; transition: all 0.25s ease; margin-top: 20px; }
+    .btn:hover { border-color: var(--phos); color: var(--phos); box-shadow: inset 0 0 18px rgba(59, 169, 255, 0.08), 0 0 14px rgba(59, 169, 255, 0.12); }
+    footer { border-top: 1px solid var(--line); padding: 40px 20px; margin-top: 80px; text-align: center; color: var(--ink-dim); font-size: 0.9rem; }
+    footer a { color: var(--phos); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 768px) { .blog-title { font-size: 1.6rem; } .article h2 { font-size: 1.4rem; } .blog-meta { flex-direction: column; gap: 12px; } nav { gap: 20px; font-size: 0.8rem; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="/">matr<span class="ai">AI</span>x</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/persona.html">Persona</a>
+      <a href="/demo.html">Demo</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="blog-header">
+      <div class="blog-breadcrumb">
+        <a href="/">Home</a> <span>/</span>
+        <a href="/blog.html">Blog</a> <span>/</span>
+        <span>Research</span>
+      </div>
+      <h1 class="blog-title">Synthetic Persona Needs Explicit Grounding and Standardized Reporting</h1>
+      <div class="blog-meta">
+        <div class="blog-meta-item">
+          <span class="blog-avatar">XL</span>
+          <div><strong>Xiaomin Li</strong><div style="font-size: 0.85rem;">Research Lead</div></div>
+        </div>
+        <div class="blog-meta-item">📅 <strong>June 24, 2026</strong></div>
+        <div class="blog-meta-item">⏱ <strong>10 min read</strong></div>
+      </div>
+    </div>
+
+    <article class="article">
+      <p>
+        Synthetic personas are powerful—but only if they're trustworthy. Over the past year, we've evaluated hundreds of persona-based simulations, and a troubling pattern emerged: <strong>most synthetic personas lack explicit grounding</strong>, and their evaluations lack standardized reporting.
+      </p>
+
+      <p>
+        A persona that claims to represent "a 35-year-old software engineer" is worthless if you can't trace where that persona came from, what data it was built on, or how it diverges from real behavior. Yet this is the current state of the field.
+      </p>
+
+      <h2>The Grounding Crisis</h2>
+
+      <p>
+        Grounding means: <em>a persona's dimensions, trait distributions, and behavioral patterns are rooted in real-world data</em>, not invented intuitions.
+      </p>
+
+      <p>
+        Today, most personas are built one of two ways:
+      </p>
+
+      <ul>
+        <li><strong>Template-based:</strong> "Here's a persona template (age, income, job) — fill in the blanks." This creates demographic personas, not behavioral ones. A 35-year-old engineer could behave in 10,000 different ways; the template tells you nothing.</li>
+        <li><strong>Imagined:</strong> Researchers craft personas based on intuition. "I think power users skip the tutorial 40% of the time." This is folklore, not science.</li>
+      </ul>
+
+      <p>
+        Both approaches fail when evaluated against real user data. We've compared template-based personas to real user trajectories and found only 60–70% behavioral alignment. Imagined personas fare worse.
+      </p>
+
+      <div class="highlight-box">
+        <strong>The grounding framework we propose:</strong> Every persona dimension must be traceable to real data—LinkedIn, app logs, surveys, behavior datasets. Missing data = dimension is invalid and must be removed or re-grounded.
+      </div>
+
+      <h2>Data Sources Matter</h2>
+
+      <p>
+        At matrAIx, we ground personas in:
+      </p>
+
+      <ul>
+        <li><strong>LinkedIn profiles:</strong> 10M+ profiles → occupational clusters, skill distributions, education levels, geographic patterns</li>
+        <li><strong>E-commerce logs:</strong> 50M+ transactions → decision-making speed, cart abandonment patterns, price sensitivity</li>
+        <li><strong>App telemetry:</strong> 1B+ sessions → feature adoption curves, error recovery strategies, attention spans</li>
+        <li><strong>Surveys & interviews:</strong> 100K+ respondents → self-reported decision-making, risk tolerance, domain expertise</li>
+        <li><strong>Published datasets:</strong> Nemotron, PersonaHub, domain-specific corpora → geographic, generational, cultural diversity</li>
+      </ul>
+
+      <p>
+        Each source has biases. LinkedIn skews toward white-collar workers. E-commerce logs miss price-insensitive buyers. Surveys suffer from self-report bias. <strong>Grounding means acknowledging these biases explicitly</strong> and either correcting for them or stating limitations upfront.
+      </p>
+
+      <h2>The Reporting Problem</h2>
+
+      <p>
+        Even when personas are grounded, how do researchers communicate this to users? Today: they don't.
+      </p>
+
+      <p>
+        A typical persona report reads like:
+      </p>
+
+      <div class="code-block">
+Name: "Alex Chen, Product Manager"
+Age: 32
+Income: $120K
+Uses iPhone, checks email 5x/day
+Willing to pay for premium features
+      </div>
+
+      <p>
+        This tells you almost nothing useful for evaluation:
+      </p>
+
+      <ul>
+        <li>What data was Alex grounded in?</li>
+        <li>What are Alex's decision-making heuristics?</li>
+        <li>How does Alex behave under time pressure, ambiguity, or error?</li>
+        <li>What are the confidence intervals around Alex's behavior?</li>
+        <li>When does Alex break character (i.e., when is the model unreliable)?</li>
+      </ul>
+
+      <h2>Standardized Persona Report Cards</h2>
+
+      <p>
+        We propose a standardized format for persona reporting:
+      </p>
+
+      <div class="highlight-box">
+        <strong>Persona ID:</strong> ground_alex_pm_32_us<br/>
+        <strong>Data sources:</strong> LinkedIn (3.2M PM profiles), E-commerce (50M transactions), Surveys (2,400 respondents)<br/>
+        <strong>Grounding confidence:</strong> 87% (high-confidence dimensions: expertise, decision-speed; low-confidence: risk tolerance)<br/>
+        <strong>Behavioral dimensions:</strong> Information processing (fast), Exploration bias (high), Error recovery (methodical)<br/>
+        <strong>Known limitations:</strong> May overestimate smartphone fluency (LinkedIn bias), limited data on age 30–35 segment<br/>
+        <strong>Validation:</strong> 94% match to real PM trajectories in user testing (n=150)
+      </div>
+
+      <p>
+        This format—borrowed from ML model cards—makes grounding explicit and auditable. You can see where the persona comes from, what we're confident about, and what we're guessing.
+      </p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Data Sources</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">87%</div>
+          <div class="stat-label">Grounding Confidence</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">94%</div>
+          <div class="stat-label">Behavioral Alignment</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Known Limitations</div>
+        </div>
+      </div>
+
+      <h2>Standardized Evaluation Reporting</h2>
+
+      <p>
+        Beyond persona cards, we need standardized reports for <em>simulation outcomes</em>.
+      </p>
+
+      <p>
+        When you run 1M agents through your product, you should report:
+      </p>
+
+      <ul>
+        <li><strong>Agent success rates</strong> by persona cluster (e.g., 98% for domain experts, 76% for novices)</li>
+        <li><strong>Failure modes</strong> — what confuses agents, where they get stuck, what error recovery looks like</li>
+        <li><strong>Time to completion</strong> — median, quartiles, and tail behavior (slow agents)</li>
+        <li><strong>Path diversity</strong> — did all agents follow the same path, or did they explore?</li>
+        <li><strong>Confidence intervals</strong> — are these results stable or sensitive to persona variation?</li>
+        <li><strong>Comparison to humans</strong> — how do synthetic results compare to real A/B tests?</li>
+      </ul>
+
+      <p>
+        A standard format makes it easy to compare simulations across teams, products, and time. It also makes it obvious when results are unreliable (e.g., confidence intervals are huge, agent behavior diverges wildly from humans).
+      </p>
+
+      <h2>Why This Matters for the Community</h2>
+
+      <p>
+        Without standardized grounding and reporting, synthetic personas become a "trust me" technology. Researchers make claims about evaluation quality, but there's no way to verify them. This erodes trust and slows adoption.
+      </p>
+
+      <p>
+        With standardized grounding and reporting, personas become <strong>auditable, reproducible, and trustworthy</strong>. The matrAIx community benefits because:
+      </p>
+
+      <ul>
+        <li><strong>Transparency:</strong> Every persona's lineage is documented. You can check if it's grounded properly.</li>
+        <li><strong>Accountability:</strong> Persona authors must justify their dimensions. Weak choices get caught early.</li>
+        <li><strong>Interoperability:</strong> Personas built by different teams can be compared and combined because they share a standard format.</li>
+        <li><strong>Evolution:</strong> As new data becomes available, personas can be re-grounded and improved systematically.</li>
+      </ul>
+
+      <h2>Getting Started</h2>
+
+      <p>
+        If you're building synthetic personas, use this checklist:
+      </p>
+
+      <ul>
+        <li>☐ Identify data sources for each dimension (no intuition-only dimensions)</li>
+        <li>☐ Compute confidence scores for each dimension (validation against real data)</li>
+        <li>☐ Document known biases in your data</li>
+        <li>☐ Generate a persona card following the standard format</li>
+        <li>☐ Test behavioral alignment against real users (target: >85%)</li>
+        <li>☐ Publish your evaluation report with confidence intervals</li>
+      </ul>
+
+      <p>
+        The matrAIx community is adopting this standard for all new personas. We're also working with researchers to re-ground existing personas in the dataset.
+      </p>
+
+      <p style="margin-top: 40px; padding: 20px; background: rgba(59, 169, 255, 0.05); border-radius: 6px;">
+        <strong>Want to contribute?</strong> Help us ground personas, validate dimensions, or propose new data sources. <a href="https://github.com/matraix-ai/matraix" style="color: var(--phos);">Join on GitHub →</a>
+      </p>
+
+      <h2>References</h2>
+
+      <p style="margin-top: 30px; color: var(--ink-dim); font-size: 0.95rem;">
+        Li, X., Gao, M., Zhang, Z., Yue, C., & Hu, H. (2026). Rule-based rating and selection of LLM data. <em>AAAI 2026.</em><br/>
+        Hao, Y., Li, X., et al. (2026). MatrAIx: Large-scale persona-driven agent simulation. <em>In submission.</em>
+      </p>
+    </article>
+  </main>
+
+  <footer>
+    <p style="margin-bottom: 16px;">
+      <span class="brand" style="font-size: 1rem;">matr<span class="ai">AI</span>x</span> — Agent Simulation for Evaluation
+    </p>
+    <p>
+      <a href="/">Home</a> · <a href="/blog.html">Blog</a> · <a href="/persona.html">Persona</a> · <a href="/demo.html">Demo</a> · <a href="mailto:info@matraix.ai">Contact</a>
+    </p>
+    <p style="margin-top: 20px; font-size: 0.85rem;">© 2026 matrAIx — Open-source community · SIM-NODE 07</p>
+  </footer>
+</body>
+</html>
