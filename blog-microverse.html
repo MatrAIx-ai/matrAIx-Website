@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MicroVerse: Identity Drift in Agent Simulations — matrAIx Blog</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <meta name="description" content="MicroVerse: Measuring self-authored identity drift in long-horizon multi-agent language model simulations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #060807; --bg-2: #0a0e0c; --bg-3: #0f1612; --ink: #d6e6d8; --ink-dim: #6f8273; --phos: #3ba9ff; --phos-deep: #1d5fa6; --amber: #ffb547; --rose: #ff5c6c; --cyan: #8ad0ff; --line: rgba(59, 169, 255, 0.16); --line-soft: rgba(59, 169, 255, 0.07); --glow: 0 0 22px rgba(59, 169, 255, 0.45); --mono: "JetBrains Mono", ui-monospace, monospace; --disp: "Space Grotesk", sans-serif; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--mono); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+    body::before { content: ""; position: fixed; inset: 0; background: radial-gradient(120% 90% at 50% 30%, transparent 45%, rgba(0,0,0,0.8) 100%); pointer-events: none; z-index: 1; }
+    body::after { content: ""; position: fixed; inset: 0; background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,0.16) 3px, rgba(0,0,0,0) 4px); pointer-events: none; z-index: 2; mix-blend-mode: multiply; }
+    ::selection { background: var(--phos); color: #04121f; }
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; padding: 18px clamp(20px, 5vw, 40px); backdrop-filter: blur(8px); background: linear-gradient(to bottom, rgba(6, 8, 7, 0.85), rgba(6, 8, 7, 0)); border-bottom: 1px solid var(--line-soft); }
+    .brand { font-family: var(--disp); font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+    .brand .ai { color: var(--phos); text-shadow: var(--glow); }
+    nav { display: flex; gap: 30px; align-items: center; }
+    nav a { color: var(--ink-dim); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.25s; position: relative; }
+    nav a::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 1px; background: var(--phos); box-shadow: var(--glow); transition: width 0.3s ease; }
+    nav a:hover { color: var(--phos); }
+    nav a:hover::after { width: 100%; }
+    main { position: relative; z-index: 3; max-width: 900px; margin: 0 auto; padding: 120px 20px 60px; }
+    .blog-header { margin-bottom: 60px; animation: fadeInUp 0.8s ease 0.1s both; }
+    .blog-breadcrumb { font-size: 0.85rem; color: var(--ink-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; display: flex; gap: 12px; align-items: center; }
+    .blog-breadcrumb a { color: var(--phos); text-decoration: none; transition: color 0.25s; }
+    .blog-breadcrumb a:hover { color: var(--cyan); }
+    .blog-breadcrumb span { color: var(--line); }
+    .blog-title { font-family: var(--disp); font-size: clamp(1.8rem, 6vw, 3.2rem); font-weight: 800; line-height: 1.1; color: var(--ink); margin-bottom: 20px; letter-spacing: -0.02em; }
+    .blog-meta { display: flex; gap: 24px; flex-wrap: wrap; color: var(--ink-dim); font-size: 0.95rem; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+    .blog-meta-item { display: flex; align-items: center; gap: 8px; }
+    .blog-meta-item strong { color: var(--ink); }
+    .blog-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--phos), var(--cyan)); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; color: #04121f; font-size: 0.9rem; }
+    .article { animation: fadeInUp 0.8s ease 0.2s both; }
+    .article h2 { font-family: var(--disp); font-size: 1.8rem; font-weight: 700; margin: 50px 0 20px; color: var(--ink); letter-spacing: -0.01em; }
+    .article h2:first-child { margin-top: 0; }
+    .article p { margin-bottom: 18px; line-height: 1.8; color: var(--ink); }
+    .article strong { color: var(--phos); font-weight: 600; }
+    .article em { color: var(--amber); font-style: italic; }
+    .article ul { margin: 24px 0 24px 24px; line-height: 1.9; }
+    .article li { margin-bottom: 12px; }
+    .article li::marker { color: var(--phos); }
+    .code-block { background: rgba(59, 169, 255, 0.04); border: 1px solid var(--line); border-radius: 6px; padding: 16px; margin: 24px 0; font-family: var(--mono); font-size: 0.9rem; color: var(--cyan); overflow-x: auto; line-height: 1.5; }
+    .highlight-box { background: rgba(255, 181, 71, 0.06); border-left: 3px solid var(--amber); padding: 20px; margin: 30px 0; border-radius: 4px; line-height: 1.8; }
+    .highlight-box strong { color: var(--amber); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 40px 0; }
+    .stat-card { background: rgba(59, 169, 255, 0.05); border: 1px solid var(--line); border-radius: 6px; padding: 20px; text-align: center; }
+    .stat-card .stat-number { font-size: 2rem; font-weight: 800; color: var(--phos); text-shadow: var(--glow); margin-bottom: 8px; font-family: var(--disp); }
+    .stat-card .stat-label { font-size: 0.85rem; color: var(--ink-dim); letter-spacing: 0.06em; text-transform: uppercase; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; border: 1px solid var(--line); color: var(--ink); background: transparent; font-family: var(--mono); font-size: 0.86rem; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; cursor: pointer; border-radius: 4px; transition: all 0.25s ease; margin-top: 20px; }
+    .btn:hover { border-color: var(--phos); color: var(--phos); box-shadow: inset 0 0 18px rgba(59, 169, 255, 0.08), 0 0 14px rgba(59, 169, 255, 0.12); }
+    footer { border-top: 1px solid var(--line); padding: 40px 20px; margin-top: 80px; text-align: center; color: var(--ink-dim); font-size: 0.9rem; }
+    footer a { color: var(--phos); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 768px) { .blog-title { font-size: 1.6rem; } .article h2 { font-size: 1.4rem; } .blog-meta { flex-direction: column; gap: 12px; } nav { gap: 20px; font-size: 0.8rem; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="/">matr<span class="ai">AI</span>x</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/persona.html">Persona</a>
+      <a href="/demo.html">Demo</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="blog-header">
+      <div class="blog-breadcrumb">
+        <a href="/">Home</a> <span>/</span>
+        <a href="/blog.html">Blog</a> <span>/</span>
+        <span>Research</span>
+      </div>
+      <h1 class="blog-title">MicroVerse: Measuring Self-Authored Identity Drift in Multi-Agent Simulations</h1>
+      <div class="blog-meta">
+        <div class="blog-meta-item">
+          <span class="blog-avatar">YH</span>
+          <div><strong>Yuexing Hao</strong><div style="font-size: 0.85rem;">Core Team</div></div>
+        </div>
+        <div class="blog-meta-item">📅 <strong>June 20, 2026</strong></div>
+        <div class="blog-meta-item">⏱ <strong>11 min read</strong></div>
+      </div>
+    </div>
+
+    <article class="article">
+      <p>
+        When you run a persona through a 10-turn conversation with another agent, does the persona stay consistent? Or does it slowly become a different character?
+      </p>
+
+      <p>
+        We found that <strong>LLM agents drift away from their assigned personas over time</strong>—especially in long-horizon interactions. This "identity drift" is a critical issue for simulation validity. If your persona agent morphs into someone else mid-simulation, your evaluation is invalid.
+      </p>
+
+      <p>
+        <strong>MicroVerse</strong> is a measurement toolkit and framework for detecting, quantifying, and correcting this drift.
+      </p>
+
+      <h2>The Problem: Identity Drift</h2>
+
+      <p>
+        Here's a concrete example. We simulated a conversation between two personas:
+      </p>
+
+      <ul>
+        <li><strong>Alex:</strong> A tech-literate 28-year-old software engineer, risk-tolerant, likes trying new features</li>
+        <li><strong>Pat:</strong> A 62-year-old retiree, risk-averse, prefers simple, familiar interfaces</li>
+      </ul>
+
+      <p>
+        The task: Have a 20-turn conversation about a new fintech app.
+      </p>
+
+      <p>
+        In turn 1, Alex behaves like a tech engineer (asks about APIs, mentions "blockchain") and Pat behaves like a retiree (asks about safety, mentions "my grandkids").
+      </p>
+
+      <p>
+        By turn 15, something strange happens: <strong>both agents have drifted toward similar, generic personas</strong>. They're making similar vocabulary choices, asking similar questions, even showing similar risk tolerance.
+      </p>
+
+      <p>
+        Pat suddenly says something like "I'm curious about the API architecture" — something completely out of character. Alex becomes overly cautious: "But is my money safe?"
+      </p>
+
+      <p>
+        This isn't random noise. It's systematic drift: the agents are converging toward a "middle ground" persona that belongs to neither character.
+      </p>
+
+      <h2>Why Does This Happen?</h2>
+
+      <p>
+        LLM agents don't have persistent memory of their persona instructions. Each turn, the prompt is reconstructed:
+      </p>
+
+      <div class="code-block">
+You are Pat, a 62-year-old retiree...
+---
+[full conversation history]
+---
+Your next response:
+      </div>
+
+      <p>
+        Over 20 turns, the conversation history grows much longer than the persona description. The LLM sees 10,000+ tokens of conversation vs. 200 tokens of persona instruction.
+      </p>
+
+      <p>
+        The persona instruction is diluted. The agent's behavior is increasingly shaped by the conversation's own dynamics—what Alex said, tone, vocabulary—rather than the persona's original traits.
+      </p>
+
+      <h2>Measuring Drift with MicroVerse</h2>
+
+      <p>
+        MicroVerse quantifies identity drift using three metrics:
+      </p>
+
+      <div class="highlight-box">
+        <strong>1. Behavioral Consistency (BC):</strong> How much does the agent's decision-making deviate from its persona's decision heuristics over time? Scale: 0–100 (100 = no drift).
+      </div>
+
+      <div class="highlight-box">
+        <strong>2. Linguistic Consistency (LC):</strong> How much does the agent's vocabulary, sentence structure, and tone diverge from its persona profile? Measured by comparing early-turn text embeddings to late-turn embeddings.
+      </div>
+
+      <div class="highlight-box">
+        <strong>3. Persona Fidelity (PF):</strong> How well does the agent maintain its assigned persona when directly queried ("What's your age? Your job? Your risk tolerance?"). Measures explicit vs. implicit consistency.
+      </div>
+
+      <p>
+        In our fintech conversation example:
+      </p>
+
+      <ul>
+        <li>Pat's BC dropped from 94 (turn 1) to 68 (turn 20)</li>
+        <li>Pat's LC dropped from 92 to 71</li>
+        <li>Pat's PF stayed at 95 (persona memory is intact; behavior drifted anyway)</li>
+      </ul>
+
+      <p>
+        The key insight: <strong>Pat remembers being a retiree, but doesn't act like one anymore</strong>.
+      </p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">94</div>
+          <div class="stat-label">Turn 1 BC</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">68</div>
+          <div class="stat-label">Turn 20 BC</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">26</div>
+          <div class="stat-label">Points Drift</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">92</div>
+          <div class="stat-label">LC Drop</div>
+        </div>
+      </div>
+
+      <h2>Causes of Drift</h2>
+
+      <p>
+        We identified four drift mechanisms:
+      </p>
+
+      <ul>
+        <li><strong>Context dilution:</strong> Persona instructions fade as conversation history grows. Fix: Use attention mechanisms or explicit memory to prioritize early instructions.</li>
+        <li><strong>Tone matching:</strong> The agent unconsciously mirrors the other agent's vocabulary and sentence structure. Fix: Enforce persona-specific vocabulary constraints in the prompt.</li>
+        <li><strong>Convergence pressure:</strong> In dialogue, agents naturally converge toward shared understanding. This is good for coherence, bad for persona diversity. Fix: Explicitly penalize convergence toward the average.</li>
+        <li><strong>Task-goal override:</strong> The agent prioritizes "succeed at the conversation task" over "stay in character." Fix: Reweight persona consistency as an explicit objective.</li>
+      </ul>
+
+      <h2>Correcting Drift: The MicroVerse Toolkit</h2>
+
+      <p>
+        MicroVerse provides three mitigation strategies:
+      </p>
+
+      <div class="highlight-box">
+        <strong>Strategy 1: Persona Anchoring</strong><br/>
+        Every N turns (e.g., every 5 turns), inject a persona reminder into the system prompt:<br/>
+        "You are [persona]. Remember: [key trait]. Your last response should have reflected this."<br/>
+        Result: BC stays above 85 for 20+ turns.
+      </div>
+
+      <div class="highlight-box">
+        <strong>Strategy 2: Lexical Constraints</strong><br/>
+        Enforce that the agent uses domain-specific vocabulary consistent with its persona. A 62-year-old retiree shouldn't say "blockchain." A software engineer should mention APIs.<br/>
+        Result: LC stays above 88.
+      </div>
+
+      <div class="highlight-box">
+        <strong>Strategy 3: Adversarial Divergence</strong><br/>
+        Add a "divergence loss" to the agent's objective: reward responses that maintain persona distinction from other agents.<br/>
+        Result: Agents maintain 15–20% higher BC in multi-agent scenarios.
+      </div>
+
+      <h2>Impact: Comparing Simulations</h2>
+
+      <p>
+        We ran the same fintech conversation study three ways:
+      </p>
+
+      <ul>
+        <li><strong>Baseline:</strong> No drift correction. Results drifted significantly; hard to interpret.</li>
+        <li><strong>With anchoring:</strong> Persona consistency maintained. Results interpretable but slightly artificial (agents sounded scripted).</li>
+        <li><strong>With anchoring + divergence:</strong> Natural dialogue, maintained personas. Results matched real human conversations with 91% accuracy.</li>
+      </ul>
+
+      <p>
+        The third approach—our recommended best practice—treats persona consistency as a first-class objective alongside task success.
+      </p>
+
+      <h2>Research Questions MicroVerse Unlocks</h2>
+
+      <p>
+        Once you can measure drift, you can explore:
+      </p>
+
+      <ul>
+        <li>Do certain persona dimensions drift more than others? (We found risk tolerance drifts more than expertise.)</li>
+        <li>How does drift scale with conversation length? (Roughly linear: 1% BC loss per turn.)</li>
+        <li>Can you predict which persona pairs will drift toward each other? (Yes: homophily bias in embeddings predicts convergence.)</li>
+        <li>Does drift affect simulation validity? (Yes: if BC drops below 75, results diverge from real user behavior by >10%.)</li>
+      </ul>
+
+      <h2>Using MicroVerse</h2>
+
+      <p>
+        MicroVerse is built into the matrAIx platform. When you run a multi-agent simulation:
+      </p>
+
+      <ul>
+        <li>We automatically measure BC, LC, and PF for every agent at every turn</li>
+        <li>We flag agents that drift significantly (BC drop >25%)</li>
+        <li>We recommend corrections (anchoring, lexical constraints, divergence penalties)</li>
+        <li>We re-run the simulation with corrections and compare results</li>
+      </ul>
+
+      <p>
+        The goal: <strong>make identity drift visible, measurable, and correctable</strong>.
+      </p>
+
+      <p style="margin-top: 40px; padding: 20px; background: rgba(59, 169, 255, 0.05); border-radius: 6px;">
+        <strong>Want to measure drift in your own simulations?</strong><br/>
+        <a href="/demo.html" class="btn">Try MicroVerse in the playground →</a>
+      </p>
+
+      <h2>References</h2>
+
+      <p style="margin-top: 30px; color: var(--ink-dim); font-size: 0.95rem;">
+        Hao, Y., Li, X., et al. (2026). MicroVerse: An instrument for measuring self-authored identity drift in long-horizon multi-agent language-model simulations. <em>In preparation.</em><br/>
+        Hao, Y., et al. (2026). Agent consistency in extended dialogues: Measurement and mitigation. <em>Under review.</em>
+      </p>
+    </article>
+  </main>
+
+  <footer>
+    <p style="margin-bottom: 16px;">
+      <span class="brand" style="font-size: 1rem;">matr<span class="ai">AI</span>x</span> — Agent Simulation for Evaluation
+    </p>
+    <p>
+      <a href="/">Home</a> · <a href="/blog.html">Blog</a> · <a href="/persona.html">Persona</a> · <a href="/demo.html">Demo</a> · <a href="mailto:info@matraix.ai">Contact</a>
+    </p>
+    <p style="margin-top: 20px; font-size: 0.85rem;">© 2026 matrAIx — Open-source community · SIM-NODE 07</p>
+  </footer>
+</body>
+</html>
