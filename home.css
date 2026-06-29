@@ -205,6 +205,11 @@ main { position: relative; z-index: 10; }
 }
 .stat-cap { display: block; margin-top: 14px; font-size: 1.02rem; color: var(--ink-dim); }
 .stat-cap strong { color: var(--ink); font-weight: 500; }
+.hero-subheading {
+  max-width: 700px; margin: 20px auto 34px; font-size: 1.1rem;
+  color: var(--ink-dim); line-height: 1.7;
+  opacity: 0; animation: rise 0.8s 0.3s forwards;
+}
 
 .subhead {
   max-width: 600px; margin: 0 auto 38px; font-size: 1.02rem;
@@ -530,7 +535,7 @@ main { position: relative; z-index: 10; }
 }
 
 /* ---------- Agent runway (moved from the demo portal) ---------- */
-.runway { position: relative; z-index: 4; display: flex; flex-direction: column; overflow: hidden;
+.runway { position: relative; z-index: 4; display: none; flex-direction: column; overflow: hidden;
   border-block: 1px solid var(--line); background: radial-gradient(120% 90% at 50% 18%, rgba(59,169,255,0.045), transparent 60%); }
 .runway--band { height: clamp(600px, 90vh, 1000px); margin: 56px 0; }
 .runway-stage { position: relative; flex: 1; min-height: 0; }
