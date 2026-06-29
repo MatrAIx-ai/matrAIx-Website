@@ -28,7 +28,13 @@
       <a href="blog/">Blog</a>
       <a href="persona.html">Persona</a>
       <a href="demo.html">Demo</a>
+      <a href="access.html" class="btn btn-solid nav-cta-mobile">
+        <span class="dot live"></span> Request access
+      </a>
     </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation menu">
+      <span class="hamburger"></span>
+    </button>
     <a href="access.html" class="btn btn-solid nav-cta">
       <span class="dot live"></span> Request access
     </a>
@@ -256,6 +262,30 @@
   </footer>
 
   <script src="home.js?v=7"></script>
+  <script>
+  /* Mobile nav toggle */
+  (function(){
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (!toggle || !navLinks) return;
+    toggle.addEventListener('click', function(){
+      toggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function(){
+        toggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+    window.addEventListener('resize', function(){
+      if (window.innerWidth > 760) {
+        toggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      }
+    });
+  })();
+  </script>
   <script>
   (function(){var el=document.getElementById('pgClock');if(!el)return;var p=function(x){return(x<10?'0':'')+x;};function t(){var d=new Date();el.textContent=p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());}t();setInterval(t,1000);})();
   </script>
