@@ -61,6 +61,9 @@
     .demo-video { flex: 0 0 40%; min-width: 300px; }
     .demo-video video { width: 100%; border: 1px solid var(--line); border-radius: 6px; display: block; }
     .demo-text { flex: 1; min-width: 300px; }
+    .article-figure { margin: 34px 0; }
+    .article-figure img { width: 100%; display: block; border: 1px solid var(--line); border-radius: 10px; background: rgba(59, 169, 255, 0.04); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28); }
+    .article-figure figcaption { margin-top: 12px; color: var(--ink-dim); font-size: 0.9rem; line-height: 1.6; text-align: center; }
     @media (max-width: 900px) { .demo-section { flex-direction: column; } .demo-video { flex: 1 1 100%; } .demo-text { flex: 1 1 100%; } }
     footer { border-top: 1px solid var(--line); padding: 40px 20px; margin-top: 80px; text-align: center; color: var(--ink-dim); font-size: 0.9rem; }
     footer a { color: var(--phos); text-decoration: none; }
@@ -110,6 +113,13 @@
       <p>
         Our research sets an experimental instrument built to catch that slippage. Twenty-five AI agents, each carrying a locked "soul file" of values and moral limits, are placed in a desert grid where water drains every tick and there's structurally not enough for everyone. They can trade, talk, steal, or attack, all choices that press directly against their stated codes.
       </p>
+
+      <figure class="article-figure">
+        <img src="assets/env-colm-pic1.png" alt="Desert-grid simulation with multiple agents moving across scarce terrain and resource nodes." />
+        <figcaption>
+          The testing environment places agents in a harsh desert grid where scarcity turns every move into a behavioral test.
+        </figcaption>
+      </figure>
 
       <p>
         We'd like to think of it as two diaries. The soul file is a birth certificate, fixed forever. The "current identity" is a living journal the agent can revise after periods of reflection. Researchers track the gap between them.
