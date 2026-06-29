@@ -57,6 +57,11 @@
     .stat-card .stat-label { font-size: 0.85rem; color: var(--ink-dim); letter-spacing: 0.06em; text-transform: uppercase; }
     .btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; border: 1px solid var(--line); color: var(--ink); background: transparent; font-family: var(--mono); font-size: 0.86rem; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; cursor: pointer; border-radius: 4px; transition: all 0.25s ease; margin-top: 20px; }
     .btn:hover { border-color: var(--phos); color: var(--phos); box-shadow: inset 0 0 18px rgba(59, 169, 255, 0.08), 0 0 14px rgba(59, 169, 255, 0.12); }
+    .demo-section { display: flex; gap: 30px; align-items: flex-start; margin: 50px 0; flex-wrap: wrap; }
+    .demo-video { flex: 0 0 40%; min-width: 300px; }
+    .demo-video video { width: 100%; border: 1px solid var(--line); border-radius: 6px; display: block; }
+    .demo-text { flex: 1; min-width: 300px; }
+    @media (max-width: 900px) { .demo-section { flex-direction: column; } .demo-video { flex: 1 1 100%; } .demo-text { flex: 1 1 100%; } }
     footer { border-top: 1px solid var(--line); padding: 40px 20px; margin-top: 80px; text-align: center; color: var(--ink-dim); font-size: 0.9rem; }
     footer a { color: var(--phos); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
@@ -266,14 +271,31 @@ Your next response:
 
       <h2>See MicroVerse in Action</h2>
 
-      <p style="margin-bottom: 20px;">
-        Watch how MicroVerse detects and corrects identity drift across multiple agents:
-      </p>
-
-      <video width="100%" style="border: 1px solid var(--line); border-radius: 6px; margin: 30px 0; background: #000;" controls>
-        <source src="../Assets/media/microverse_demo.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <div class="demo-section">
+        <div class="demo-video">
+          <video autoplay muted loop style="background: #000;">
+            <source src="../Assets/media/microverse_demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="demo-text">
+          <p>
+            Watch how MicroVerse detects and corrects identity drift in real-time. As agents interact over multiple turns, their responses naturally diverge from their original personas. MicroVerse applies our three mitigation strategies to keep personas consistent.
+          </p>
+          <p>
+            In this demo, you'll see:
+          </p>
+          <ul>
+            <li>A multi-agent conversation where drift would typically occur</li>
+            <li>Real-time behavioral drift metrics (BC, LC scores)</li>
+            <li>How persona anchoring maintains character consistency</li>
+            <li>Comparison of uncorrected vs. corrected persona behavior</li>
+          </ul>
+          <p>
+            The result: agents maintain 15–20% higher behavioral consistency while still having natural, context-aware conversations.
+          </p>
+        </div>
+      </div>
 
       <h2>Research Questions MicroVerse Unlocks</h2>
 
