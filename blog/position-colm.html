@@ -89,7 +89,7 @@
         <a href="/blog/">Blog</a> <span>/</span>
         <span>Research</span>
       </div>
-      <h1 class="blog-title">Synthetic Persona Needs Explicit Grounding and Standardized Reporting</h1>
+      <h1 class="blog-title">Synthetic Personas Need Explicit Grounding</h1>
       <div class="blog-meta">
         <div class="blog-meta-item">
           <span class="blog-avatar">XL</span>
@@ -102,190 +102,35 @@
 
     <article class="article">
       <p>
-        Synthetic personas are powerful—but only if they're trustworthy. Over the past year, we've evaluated hundreds of persona-based simulations, and a troubling pattern emerged: <strong>most synthetic personas lack explicit grounding</strong>, and their evaluations lack standardized reporting.
+        Suppose a city wants to know how residents might react to a new housing rule. Instead of waiting months for surveys and town halls, it asks a thousand AI-generated "people." They answer in ordinary language. Some worry about rent. Some defend landlords. Some sound exactly like voters.
       </p>
 
       <p>
-        A persona that claims to represent "a 35-year-old software engineer" is worthless if you can't trace where that persona came from, what data it was built on, or how it diverges from real behavior. Yet this is the current state of the field.
-      </p>
-
-      <h2>The Grounding Crisis</h2>
-
-      <p>
-        Grounding means: <em>a persona's dimensions, trait distributions, and behavioral patterns are rooted in real-world data</em>, not invented intuitions.
+        This is no longer a strange idea. Large language models can now play roles with startling fluency. Give one a name, age, job, income, political leaning, and a few personal worries, and it can produce a believable response. Researchers call these profiles <strong>synthetic personas</strong>: artificial descriptions of people used to make AI agents behave differently. The trouble is that believable is not the same as real.
       </p>
 
       <p>
-        Today, most personas are built one of two ways:
-      </p>
-
-      <ul>
-        <li><strong>Template-based:</strong> "Here's a persona template (age, income, job) — fill in the blanks." This creates demographic personas, not behavioral ones. A 35-year-old engineer could behave in 10,000 different ways; the template tells you nothing.</li>
-        <li><strong>Imagined:</strong> Researchers craft personas based on intuition. "I think power users skip the tutorial 40% of the time." This is folklore, not science.</li>
-      </ul>
-
-      <p>
-        Both approaches fail when evaluated against real user data. We've compared template-based personas to real user trajectories and found only 60–70% behavioral alignment. Imagined personas fare worse.
-      </p>
-
-      <div class="highlight-box">
-        <strong>The grounding framework we propose:</strong> Every persona dimension must be traceable to real data—LinkedIn, app logs, surveys, behavior datasets. Missing data = dimension is invalid and must be removed or re-grounded.
-      </div>
-
-      <h2>Data Sources Matter</h2>
-
-      <p>
-        At matrAIx, we ground personas in:
-      </p>
-
-      <ul>
-        <li><strong>LinkedIn profiles:</strong> 10M+ profiles → occupational clusters, skill distributions, education levels, geographic patterns</li>
-        <li><strong>E-commerce logs:</strong> 50M+ transactions → decision-making speed, cart abandonment patterns, price sensitivity</li>
-        <li><strong>App telemetry:</strong> 1B+ sessions → feature adoption curves, error recovery strategies, attention spans</li>
-        <li><strong>Surveys & interviews:</strong> 100K+ respondents → self-reported decision-making, risk tolerance, domain expertise</li>
-        <li><strong>Published datasets:</strong> Nemotron, PersonaHub, domain-specific corpora → geographic, generational, cultural diversity</li>
-      </ul>
-
-      <p>
-        Each source has biases. LinkedIn skews toward white-collar workers. E-commerce logs miss price-insensitive buyers. Surveys suffer from self-report bias. <strong>Grounding means acknowledging these biases explicitly</strong> and either correcting for them or stating limitations upfront.
-      </p>
-
-      <h2>The Reporting Problem</h2>
-
-      <p>
-        Even when personas are grounded, how do researchers communicate this to users? Today: they don't.
+        Our recent position paper asks a practical question: <em>when an AI persona speaks, what gives that voice authority?</em> The researchers argue that every persona should come with <strong>grounding</strong>, meaning a clear account of where its details came from and what kind of claim they can support.
       </p>
 
       <p>
-        A typical persona report reads like:
-      </p>
-
-      <div class="code-block">
-Name: "Alex Chen, Product Manager"
-Age: 32
-Income: $120K
-Uses iPhone, checks email 5x/day
-Willing to pay for premium features
-      </div>
-
-      <p>
-        This tells you almost nothing useful for evaluation:
-      </p>
-
-      <ul>
-        <li>What data was Alex grounded in?</li>
-        <li>What are Alex's decision-making heuristics?</li>
-        <li>How does Alex behave under time pressure, ambiguity, or error?</li>
-        <li>What are the confidence intervals around Alex's behavior?</li>
-        <li>When does Alex break character (i.e., when is the model unreliable)?</li>
-      </ul>
-
-      <h2>Standardized Persona Report Cards</h2>
-
-      <p>
-        We propose a standardized format for persona reporting:
-      </p>
-
-      <div class="highlight-box">
-        <strong>Persona ID:</strong> ground_alex_pm_32_us<br/>
-        <strong>Data sources:</strong> LinkedIn (3.2M PM profiles), E-commerce (50M transactions), Surveys (2,400 respondents)<br/>
-        <strong>Grounding confidence:</strong> 87% (high-confidence dimensions: expertise, decision-speed; low-confidence: risk tolerance)<br/>
-        <strong>Behavioral dimensions:</strong> Information processing (fast), Exploration bias (high), Error recovery (methodical)<br/>
-        <strong>Known limitations:</strong> May overestimate smartphone fluency (LinkedIn bias), limited data on age 30–35 segment<br/>
-        <strong>Validation:</strong> 94% match to real PM trajectories in user testing (n=150)
-      </div>
-
-      <p>
-        This format—borrowed from ML model cards—makes grounding explicit and auditable. You can see where the persona comes from, what we're confident about, and what we're guessing.
-      </p>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">5</div>
-          <div class="stat-label">Data Sources</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">87%</div>
-          <div class="stat-label">Grounding Confidence</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">94%</div>
-          <div class="stat-label">Behavioral Alignment</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">4</div>
-          <div class="stat-label">Known Limitations</div>
-        </div>
-      </div>
-
-      <h2>Standardized Evaluation Reporting</h2>
-
-      <p>
-        Beyond persona cards, we need standardized reports for <em>simulation outcomes</em>.
+        Their central idea is simple: <strong>a persona needs a receipt</strong>. If a profile was written by a designer, it may be useful for imagining a user in a product meeting. If it was invented by a model, it may help generate varied examples, but its hidden assumptions matter. If it was sampled from survey or census data, it may support claims about a population, but only if the sampling preserves important combinations such as age, education, income, location, and technology access. If it was built from traces of a real person, it raises another set of questions about privacy, consent, and whether one person can stand for anyone else.
       </p>
 
       <p>
-        When you run 1M agents through your product, you should report:
-      </p>
-
-      <ul>
-        <li><strong>Agent success rates</strong> by persona cluster (e.g., 98% for domain experts, 76% for novices)</li>
-        <li><strong>Failure modes</strong> — what confuses agents, where they get stuck, what error recovery looks like</li>
-        <li><strong>Time to completion</strong> — median, quartiles, and tail behavior (slow agents)</li>
-        <li><strong>Path diversity</strong> — did all agents follow the same path, or did they explore?</li>
-        <li><strong>Confidence intervals</strong> — are these results stable or sensitive to persona variation?</li>
-        <li><strong>Comparison to humans</strong> — how do synthetic results compare to real A/B tests?</li>
-      </ul>
-
-      <p>
-        A standard format makes it easy to compare simulations across teams, products, and time. It also makes it obvious when results are unreliable (e.g., confidence intervals are huge, agent behavior diverges wildly from humans).
-      </p>
-
-      <h2>Why This Matters for the Community</h2>
-
-      <p>
-        Without standardized grounding and reporting, synthetic personas become a "trust me" technology. Researchers make claims about evaluation quality, but there's no way to verify them. This erodes trust and slows adoption.
+        The authors also point out a second weakness. Even a carefully built persona does not guarantee that the AI will actually act according to it. The model may ignore details, contradict itself, or drift toward a generic answer after a few turns. So persona-based simulations still need checks for some extras. Does the model remember the assigned traits, use them when relevant, and change its answers when the persona changes? These are all critical questions.
       </p>
 
       <p>
-        With standardized grounding and reporting, personas become <strong>auditable, reproducible, and trustworthy</strong>. The matrAIx community benefits because:
+        This matters because synthetic personas are moving into places where decisions get made, including market research, policy analysis, social simulation, and AI evaluation. A vivid artificial person can be useful. It can also smuggle in stereotypes and call them evidence.
       </p>
 
-      <ul>
-        <li><strong>Transparency:</strong> Every persona's lineage is documented. You can check if it's grounded properly.</li>
-        <li><strong>Accountability:</strong> Persona authors must justify their dimensions. Weak choices get caught early.</li>
-        <li><strong>Interoperability:</strong> Personas built by different teams can be compared and combined because they share a standard format.</li>
-        <li><strong>Evolution:</strong> As new data becomes available, personas can be re-grounded and improved systematically.</li>
-      </ul>
-
-      <h2>Getting Started</h2>
-
       <p>
-        If you're building synthetic personas, use this checklist:
-      </p>
-
-      <ul>
-        <li>☐ Identify data sources for each dimension (no intuition-only dimensions)</li>
-        <li>☐ Compute confidence scores for each dimension (validation against real data)</li>
-        <li>☐ Document known biases in your data</li>
-        <li>☐ Generate a persona card following the standard format</li>
-        <li>☐ Test behavioral alignment against real users (target: >85%)</li>
-        <li>☐ Publish your evaluation report with confidence intervals</li>
-      </ul>
-
-      <p>
-        The matrAIx community is adopting this standard for all new personas. We're also working with researchers to re-ground existing personas in the dataset.
+        The better future is not to stop using synthetic people. It is to label them carefully, so we know when we are hearing from a population, a character, or just a model filling the silence.
       </p>
 
       <p style="margin-top: 40px; padding: 20px; background: rgba(59, 169, 255, 0.05); border-radius: 6px;">
-        <strong>Want to contribute?</strong> Help us ground personas, validate dimensions, or propose new data sources. <a href="https://github.com/matraix-ai/matraix" style="color: var(--phos);">Join on GitHub →</a>
-      </p>
-
-      <h2>References</h2>
-
-      <p style="margin-top: 30px; color: var(--ink-dim); font-size: 0.95rem;">
-        Li, X., Gao, M., Zhang, Z., Yue, C., & Hu, H. (2026). Rule-based rating and selection of LLM data. <em>AAAI 2026.</em><br/>
-        Hao, Y., Li, X., et al. (2026). MatrAIx: Large-scale persona-driven agent simulation. <em>In submission.</em>
+        <strong>The full paper of our research will be linked here once the review process allows it!</strong>
       </p>
     </article>
   </main>
