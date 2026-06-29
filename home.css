@@ -510,12 +510,6 @@ main { position: relative; z-index: 10; }
     color: var(--ink-dim);
   }
   .nav-links a:hover { color: var(--phos); }
-  .nav-links a::after { display: none; }
-  .nav-cta-mobile {
-    width: 100%; margin-top: 8px !important; padding: 10px 16px !important;
-    font-size: 0.8rem !important;
-    justify-content: center;
-  }
   .telemetry { grid-template-columns: repeat(2, 1fr); }
   .tele-cell:nth-child(2) { border-right: none; }
   .verdict-lift { font-size: 1.9rem; }
