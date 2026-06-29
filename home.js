@@ -365,3 +365,20 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
   }
   globes.forEach(initGlobe);
 })();
+
+/* ---------- 8. Mobile menu toggle ---------- */
+(() => {
+  const toggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (!toggle || !navLinks) return;
+
+  toggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+  navLinks.addEventListener('click', e => {
+    if (e.target.tagName === 'A') {
+      navLinks.classList.remove('active');
+    }
+  });
+})();
