@@ -87,7 +87,7 @@
         <a href="/blog/">Blog</a> <span>/</span>
         <span>Research</span>
       </div>
-      <h1 class="blog-title">PersonaEval: Persona-Based User Simulation for Evaluating Interactive Applications</h1>
+      <h1 class="blog-title">A Dress Rehearsal for App Testing</h1>
       <div class="blog-meta">
         <div class="blog-meta-item">
           <span class="blog-avatar">YH</span>
@@ -100,254 +100,59 @@
 
     <article class="article">
       <p>
-        <strong>PersonaEval</strong> is a framework and toolkit for evaluating interactive applications using persona-based synthetic user agents. Instead of recruiting 1,000 human testers, you spawn 1,000 synthetic agents with different personas and measure how they interact with your product.
+        A developer makes a small change to a shopping app before leaving work. The buttons look cleaner. The chatbot sounds more helpful. By the next morning, the app has already been tried by dozens of different users, each with a different need.
       </p>
 
       <p>
-        The result: <strong>evaluation at scale, in hours, not weeks</strong>. And the surprising part: synthetic results predict real human behavior with 95%+ accuracy.
+        That is the promise behind our new prototype for testing interactive software with simulated users.
       </p>
 
-      <h2>The Core Insight: Personas as Behavioral Models</h2>
+      <h2>The Problem: One App, Many Users</h2>
 
       <p>
-        A persona isn't a demographic profile (age, income, job title). It's a <em>behavioral model</em>—a set of decision rules, heuristics, and constraints that determine how someone interacts with a product.
+        Modern apps rarely have one simple audience. A movie recommender may work well for someone who wants a Friday-night comedy, but fail a filmmaker looking for Korean-American stories with bilingual dialogue. A beauty chatbot may satisfy a casual shopper, but disappoint a nail artist who needs professional, non-toxic polish. Real user studies can reveal these gaps. They are also slow, expensive, and hard to repeat after every design change.
+      </p>
+
+      <h2>A Wind Tunnel for Software</h2>
+
+      <p>
+        Our prototype gives developers a faster way to look for those gaps early. It starts with short user profiles. A profile might describe someone's job, hobbies, budget, habits, and preferences. A language model then acts as that user. It can answer a survey, chat with a recommendation system, or browse a web store. After the interaction, it leaves behind a record of what happened and why the experience did or did not work.
       </p>
 
       <p>
-        PersonaEval personas encode:
+        A useful way to think about the system is a <strong>wind tunnel</strong>. Engineers still need real flight tests, but they first use controlled air to see where a design shakes. This prototype does the same for software. It does not prove how every real person will behave. It helps teams find weak spots before asking real people to spend their time.
       </p>
 
-      <ul>
-        <li><strong>Cognitive traits:</strong> Information processing speed, attention span, memory capacity, pattern recognition bias</li>
-        <li><strong>Decision heuristics:</strong> Risk aversion, loss aversion, status quo bias, how they weigh options</li>
-        <li><strong>Domain knowledge:</strong> Technical literacy, financial acumen, healthcare understanding (varies by domain)</li>
-        <li><strong>Behavioral strategies:</strong> Exploration vs. exploitation, help-seeking behavior, error recovery patterns</li>
-      </ul>
+      <h2>Testing at Scale</h2>
 
       <p>
-        When you run a persona through your application (say, a fintech onboarding flow), the agent:
+        We tested the system on three kinds of applications: surveys, chatbots, and a web shopping task. For each application, the system selected fifty relevant user profiles and let them interact with the software. The most interesting results were not the average scores. They were the <strong>differences between user groups</strong>.
       </p>
 
-      <ul>
-        <li>Reads the interface elements (buttons, forms, text)</li>
-        <li>Interprets them through the persona's knowledge lens (e.g., a novice may not understand "passkey")</li>
-        <li>Makes decisions based on the persona's heuristics (e.g., risk-averse users avoid unfamiliar auth methods)</li>
-        <li>Completes or abandons the flow based on success/friction thresholds</li>
-      </ul>
-
       <p>
-        The persona doesn't just take random actions. It acts like a real user would.
+        In one beauty-product test, a simulated nail professional asked for vivid, non-toxic nail polish. The recommender offered removers, top coats, and cleaning products. That was not a vague failure. It showed exactly where the system misunderstood the user's goal.
       </p>
 
-      <h2>The PersonaEval Architecture</h2>
+      <h2>Beyond the Average User</h2>
 
       <p>
-        PersonaEval has three layers:
+        This matters because <em>"the average user"</em> is often a convenient fiction. A product that works for beginners may fail experts. A tool that helps casual shoppers may frustrate professionals. <strong>Simulated testing could let teams study these differences earlier, cheaper, and more often.</strong>
       </p>
 
       <div class="highlight-box">
-        <strong>Layer 1: Persona Dataset</strong><br/>
-        1.07M grounded personas spanning 1,000 dimensions (age, domain expertise, risk tolerance, cultural background, disability status, etc.). Each persona is auditable—you can see where it came from and how confident we are about its dimensions.
+        <strong>Key insight:</strong> The most valuable findings are rarely "everyone succeeded" or "everyone failed." They're "this group of people encountered a specific problem that we can fix."
       </div>
 
-      <div class="highlight-box">
-        <strong>Layer 2: Simulation Runtime</strong><br/>
-        An agent orchestration system that spawns personas as LLM agents, runs them through your application (web, mobile, API), and captures trajectories. Supports parallel execution (1,000s of agents simultaneously), streaming updates, and cost tracking.
-      </div>
-
-      <div class="highlight-box">
-        <strong>Layer 3: Evaluation Metrics</strong><br/>
-        Standardized metrics for measuring persona behavior: success rates, time to completion, path diversity, error recovery patterns, and comparisons to real user data (if available).
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">1.07M</div>
-          <div class="stat-label">Personas</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">1,000</div>
-          <div class="stat-label">Dimensions</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">8.3B</div>
-          <div class="stat-label">Possible Combinations</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">95%+</div>
-          <div class="stat-label">Alignment to Humans</div>
-        </div>
-      </div>
-
-      <h2>Use Case: Fintech Onboarding</h2>
+      <h2>The Open Question</h2>
 
       <p>
-        Imagine you're building a password-less signup flow using passkeys. You want to know:
+        The open question is how closely simulated users match real ones. If future work can calibrate these rehearsals against human studies, app testing may become less like guessing and more like listening.
       </p>
-
-      <ul>
-        <li>How many users will understand "passkey"?</li>
-        <li>Which personas get confused and abandon the flow?</li>
-        <li>Where do users get stuck?</li>
-        <li>Does age matter? Technical literacy?</li>
-      </ul>
-
-      <p>
-        Traditional approach: recruit 500 users, run a study, wait 3 weeks, get qualitative feedback. Cost: $50K+.
-      </p>
-
-      <p>
-        PersonaEval approach: Simulate 500K personas through your flow in 2 hours. Cost: $200.
-      </p>
-
-      <p>
-        The results:
-      </p>
-
-      <ul>
-        <li>39% of personas 55+ get confused by "passkey"</li>
-        <li>23% of low-technical personas skip the passkey flow entirely</li>
-        <li>Adding a one-sentence explanation ("it's like Face ID for web") increases adoption by 14%</li>
-      </ul>
-
-      <p>
-        When you later run a real A/B test with humans, the results match the simulation almost exactly. Not because we got lucky, but because the personas were grounded in real data.
-      </p>
-
-      <h2>Key Metrics PersonaEval Tracks</h2>
-
-      <p>
-        When you run a simulation, PersonaEval captures:
-      </p>
-
-      <ul>
-        <li><strong>Success rate:</strong> % of personas who complete the flow</li>
-        <li><strong>Time to completion:</strong> Median, quartiles, tail percentiles</li>
-        <li><strong>Abandonment points:</strong> Where do personas give up? What friction point breaks them?</li>
-        <li><strong>Error recovery:</strong> When a persona encounters an error, do they retry, seek help, or quit?</li>
-        <li><strong>Path diversity:</strong> Did all personas follow the same happy path, or did they explore alternatives?</li>
-        <li><strong>Persona breakdowns:</strong> Success rates stratified by dimension (age, domain, risk tolerance, etc.)</li>
-        <li><strong>Confidence intervals:</strong> Are results stable, or are they sensitive to small persona variations?</li>
-      </ul>
-
-      <p>
-        This granularity is impossible with traditional user testing. With 500 real users, you can't segment deeply enough to detect "39% of 55+ personas fail here." PersonaEval does it automatically across 1M personas.
-      </p>
-
-      <h2>Integration with matrAIx Playground</h2>
-
-      <p>
-        PersonaEval runs inside the matrAIx playground—a web-based IDE for designing and executing simulations. You can:
-      </p>
-
-      <ul>
-        <li><strong>Define a task:</strong> Point the system at your application (web URL, API endpoint, mobile app)</li>
-        <li><strong>Select personas:</strong> Filter by dimension (age range, domain, geography) or upload custom persona sets</li>
-        <li><strong>Run simulation:</strong> Spawn N agents and watch them interact with your product in real-time</li>
-        <li><strong>Inspect trajectories:</strong> Replay any agent's session—see what it saw, what decisions it made, where it got stuck</li>
-        <li><strong>Generate reports:</strong> Auto-generate evaluation reports with breakdowns by persona cluster</li>
-      </ul>
-
-      <p>
-        The playground integrates with your existing evaluation stack (A/B testing platforms, analytics, CRMs) so you can compare synthetic results to real data.
-      </p>
-
-      <h2>See It in Action</h2>
-
-      <div class="demo-section">
-        <div class="demo-video">
-          <video autoplay muted loop style="background: #000;">
-            <source src="../Assets/media/demo.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="demo-text">
-          <p>
-            Watch how PersonaEval simulates user interactions in real-time. The system spawns synthetic personas with different behavioral traits and watches them interact with your product. Each persona's journey is captured and analyzed.
-          </p>
-          <p>
-            The simulation captures:
-          </p>
-          <ul>
-            <li>Real-time interaction flows</li>
-            <li>Decision points where personas get stuck</li>
-            <li>Completion rates by persona segment</li>
-            <li>Detailed trajectory logs for replay and analysis</li>
-          </ul>
-          <p>
-            All of this happens in parallel across 1,000s of agents, generating comprehensive evaluation data in hours instead of weeks.
-          </p>
-        </div>
-      </div>
-
-      <h2>Limitations & When NOT to Use PersonaEval</h2>
-
-      <p>
-        PersonaEval is powerful, but not a replacement for real users. It's best for:
-      </p>
-
-      <ul>
-        <li>Early-stage evaluation (before human testing)</li>
-        <li>Rapid iteration (hours vs. weeks)</li>
-        <li>Edge case detection (personas designed to stress-test your UX)</li>
-        <li>Cost-constrained evaluation (better than no testing)</li>
-      </ul>
-
-      <p>
-        It's NOT good for:
-      </p>
-
-      <ul>
-        <li>Emotional response capture (emotions are hard to model)</li>
-        <li>Accessibility testing (you need real users with real disabilities)</li>
-        <li>Truly novel interactions (personas are trained on historical data)</li>
-        <li>High-stakes decisions (always validate with real users before launch)</li>
-      </ul>
-
-      <div class="highlight-box">
-        <strong>Best practice:</strong> Use PersonaEval for rapid iteration and hypothesis generation. Then validate surprising results with real users.
-      </div>
-
-      <h2>Research Validation</h2>
-
-      <p>
-        We've published results from PersonaEval across 10+ product domains:
-      </p>
-
-      <ul>
-        <li><strong>Fintech signup flows:</strong> 97% accuracy compared to real A/B tests (n=150 real users)</li>
-        <li><strong>SaaS onboarding:</strong> 95% accuracy in predicting feature adoption (n=200 real users)</li>
-        <li><strong>E-commerce checkout:</strong> 94% accuracy in identifying abandonment points (n=500 real users)</li>
-        <li><strong>Healthcare portals:</strong> 92% accuracy for form completion rates (n=100 real patients)</li>
-      </ul>
-
-      <p>
-        The accuracy varies by domain and task complexity, but the baseline is clear: <strong>synthetic personas predict human behavior better than any other automated method</strong>.
-      </p>
-
-      <h2>Getting Started with PersonaEval</h2>
-
-      <p>
-        If you want to try PersonaEval:
-      </p>
-
-      <ul>
-        <li><strong>Free tier:</strong> 1,000 personas/month, limited reporting</li>
-        <li><strong>Research tier:</strong> 1M personas/month, full reporting, API access</li>
-        <li><strong>Enterprise:</strong> Unlimited personas, custom dimensions, dedicated support</li>
-      </ul>
 
       <p style="margin-top: 40px; padding: 20px; background: rgba(59, 169, 255, 0.05); border-radius: 6px;">
-        <strong>Ready to evaluate your application?</strong><br/>
-        <a href="/demo.html" class="btn">Launch the playground →</a>
+        <strong>A technical write-up will be shared when the review process allows.</strong>
       </p>
 
-      <h2>References</h2>
-
-      <p style="margin-top: 30px; color: var(--ink-dim); font-size: 0.95rem;">
-        Hao, Y., Li, X., et al. (2026). PersonaEval: Persona-based user simulation for interactive application evaluation. <em>In preparation.</em><br/>
-        Hao, Y., et al. (2026). NARRA-Gym: Benchmarking narrative agents. <em>ICML 2026.</em>
-      </p>
     </article>
   </main>
 
