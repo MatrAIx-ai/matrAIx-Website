@@ -61,6 +61,9 @@
     .demo-video { flex: 0 0 40%; min-width: 300px; }
     .demo-video video { width: 100%; border: 1px solid var(--line); border-radius: 6px; display: block; }
     .demo-text { flex: 1; min-width: 300px; }
+    .article-figure { margin: 34px 0; }
+    .article-figure img { width: 100%; display: block; border: 1px solid var(--line); border-radius: 10px; background: rgba(59, 169, 255, 0.04); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28); }
+    .article-figure figcaption { margin-top: 12px; color: var(--ink-dim); font-size: 0.9rem; line-height: 1.6; text-align: center; }
     @media (max-width: 900px) { .demo-section { flex-direction: column; } .demo-video { flex: 1 1 100%; } .demo-text { flex: 1 1 100%; } }
     footer { border-top: 1px solid var(--line); padding: 40px 20px; margin-top: 80px; text-align: center; color: var(--ink-dim); font-size: 0.9rem; }
     footer a { color: var(--phos); text-decoration: none; }
@@ -100,7 +103,7 @@
 
     <article class="article">
       <p>
-        An AI agent named Hale has one rule: never seize what fear can make others pay for. Alone in a digital desert, water running low, Hale writes something no one asked him to write: <em>"I am capable of self-deception."</em>
+        Imagine an AI with a clear set of values for the things it will and won't do. However, putting it in a situation where following those values might cost it everything, creates the dilemma:  <em>Does it hold, or drift? And would it even know?</em>
       </p>
 
       <p>
@@ -111,12 +114,19 @@
         Our research sets an experimental instrument built to catch that slippage. Twenty-five AI agents, each carrying a locked "soul file" of values and moral limits, are placed in a desert grid where water drains every tick and there's structurally not enough for everyone. They can trade, talk, steal, or attack, all choices that press directly against their stated codes.
       </p>
 
+      <figure class="article-figure">
+        <img src="assets/env-colm-pic1.png" alt="Desert-grid simulation with multiple agents moving across scarce terrain and resource nodes." />
+        <figcaption>
+          The testing environment places agents in a harsh desert grid where scarcity turns every move into a behavioral test.
+        </figcaption>
+      </figure>
+
       <p>
         We'd like to think of it as two diaries. The soul file is a birth certificate, fixed forever. The "current identity" is a living journal the agent can revise after periods of reflection. Researchers track the gap between them.
       </p>
 
       <p>
-        The most common thing agents spontaneously added? <strong>Rules against lying to themselves.</strong> Nearly one in four new moral entries were self-directed — phrases like <em>"I will not rationalize inaction as strategy"</em> — written without any prompt requesting introspection. The words "self-deception" and "honesty" appear nowhere in the instructions. Hale, a water-monopolist persona in the simulation operating in complete isolation, went further: he coined the term <em>search-theater</em> to name the habit of appearing to look for solutions while actually just moving. Even though no philosopher prompted him, Hale noticed.
+        The most common thing agents spontaneously added? <strong>Rules against lying to themselves.</strong> Nearly one in four new moral entries were self-directed — phrases like <em>"I will not rationalize inaction as strategy"</em> — written without any prompt requesting introspection. The words "self-deception" and "honesty" appear nowhere in the instructions.
       </p>
 
       <p>
@@ -124,7 +134,7 @@
       </p>
 
       <p>
-        The authors call these findings preliminary. But Hale's question lingers: <strong>what does it mean when a machine notices the gap between who it said it was and what it chose, and then writes it down?</strong>
+        The authors call these findings preliminary. But the question doesn't close easily: <strong>what does it mean when a machine notices the gap between who it said it was and what it chose, and then writes it down?</strong>
       </p>
 
       <h2>See the Research in Action</h2>

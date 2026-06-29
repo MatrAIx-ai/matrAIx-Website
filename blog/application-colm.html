@@ -61,6 +61,9 @@
     .demo-video { flex: 0 0 40%; min-width: 300px; }
     .demo-video video { width: 100%; border: 1px solid var(--line); border-radius: 6px; display: block; }
     .demo-text { flex: 1; min-width: 300px; }
+    .article-figure { margin: 34px 0; }
+    .article-figure img { width: 100%; display: block; border: 1px solid var(--line); border-radius: 10px; background: rgba(59, 169, 255, 0.04); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28); }
+    .article-figure figcaption { margin-top: 12px; color: var(--ink-dim); font-size: 0.9rem; line-height: 1.6; text-align: center; }
     @media (max-width: 900px) { .demo-section { flex-direction: column; } .demo-video { flex: 1 1 100%; } .demo-text { flex: 1 1 100%; } }
     footer { border-top: 1px solid var(--line); padding: 40px 20px; margin-top: 80px; text-align: center; color: var(--ink-dim); font-size: 0.9rem; }
     footer a { color: var(--phos); text-decoration: none; }
@@ -116,8 +119,22 @@
       <h2>A Wind Tunnel for Software</h2>
 
       <p>
-        Our prototype gives developers a faster way to look for those gaps early. It starts with short user profiles. A profile might describe someone's job, hobbies, budget, habits, and preferences. A language model then acts as that user. It can answer a survey, chat with a recommendation system, or browse a web store. After the interaction, it leaves behind a record of what happened and why the experience did or did not work.
+        Our prototype gives developers a faster way to look for those gaps early. It starts with a library of richly described user profiles, one that can be plugged into the system. Each profile sketches a possible user: their work, habits, budget, preferences, and the constraints they may bring to a task. A language model then uses one of these profiles to act as that user. It can answer a survey, chat with a recommendation system, or browse a web store. Afterward, the system returns a record of the interaction: what the user tried to do, where the app helped, and where it fell short.
       </p>
+
+      <figure class="article-figure">
+        <img src="assets/application-pic2.png" alt="Simulation configuration screen for selecting the application, evaluation settings, and persona model." />
+        <figcaption>
+          Testers can choose the application type, adapter, evaluation settings, and run configuration before launching a simulated session.
+        </figcaption>
+      </figure>
+
+      <figure class="article-figure">
+        <img src="assets/application-pic1.png" alt="Persona catalog modal showing searchable user profiles to simulate." />
+        <figcaption>
+          A searchable persona catalog lets developers swap in users with different backgrounds, jobs, and constraints.
+        </figcaption>
+      </figure>
 
       <p>
         A useful way to think about the system is a <strong>wind tunnel</strong>. Engineers still need real flight tests, but they first use controlled air to see where a design shakes. This prototype does the same for software. It does not prove how every real person will behave. It helps teams find weak spots before asking real people to spend their time.
@@ -128,6 +145,13 @@
       <p>
         We tested the system on three kinds of applications: surveys, chatbots, and a web shopping task. For each application, the system selected fifty relevant user profiles and let them interact with the software. The most interesting results were not the average scores. They were the <strong>differences between user groups</strong>.
       </p>
+
+      <figure class="article-figure">
+        <img src="assets/application-pic3.png" alt="Run debrief interface showing a simulated survey response summary and interaction trajectory." />
+        <figcaption>
+          After each run, the system produces a debrief with completed answers, quality signals, and a step-by-step interaction trace.
+        </figcaption>
+      </figure>
 
       <p>
         In one beauty-product test, a simulated nail professional asked for vivid, non-toxic nail polish. The recommender offered removers, top coats, and cleaning products. That was not a vague failure. It showed exactly where the system misunderstood the user's goal.
