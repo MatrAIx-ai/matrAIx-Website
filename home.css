@@ -500,7 +500,7 @@ main { position: relative; z-index: 10; }
   .nav { gap: 0; flex-wrap: nowrap; }
   .brand { flex: 1; }
   .nav-links { flex: 0; }
-  .nav-toggle { display: flex; order: 2; }
+  .nav-toggle { display: none; }
   .nav-cta { display: none; }
   .nav-links {
     position: absolute; top: 100%; left: 0; right: 0;
