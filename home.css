@@ -487,7 +487,6 @@ main { position: relative; z-index: 10; }
 @media (max-width: 760px) {
   .nav { gap: 0; flex-wrap: nowrap; justify-content: space-between; }
   .brand { flex: 0; }
-  .nav-links { flex: 0; }
   .nav-toggle { display: flex; order: 2; }
   .nav-cta { display: none; }
   .nav-links {
