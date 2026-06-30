@@ -367,18 +367,30 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 })();
 
 /* ---------- 8. Mobile menu toggle ---------- */
-(() => {
+function initMenuToggle() {
   const toggle = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
-  if (!toggle || !navLinks) return;
+  if (!toggle || !navLinks) {
+    console.warn('Menu toggle: elements not found');
+    return;
+  }
 
+  console.log('Menu toggle initialized');
   toggle.addEventListener('click', () => {
+    console.log('Menu clicked, toggling nav-links.active');
     navLinks.classList.toggle('active');
   });
 
   navLinks.addEventListener('click', e => {
     if (e.target.tagName === 'A') {
+      console.log('Nav link clicked, closing menu');
       navLinks.classList.remove('active');
     }
   });
-})();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMenuToggle);
+} else {
+  initMenuToggle();
+}
