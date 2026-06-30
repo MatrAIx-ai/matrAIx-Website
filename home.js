@@ -370,15 +370,23 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 function initMenuToggle() {
   const toggle = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
+
+  console.log('initMenuToggle called');
+  console.log('toggle element:', toggle);
+  console.log('navLinks element:', navLinks);
+
   if (!toggle || !navLinks) {
     console.warn('Menu toggle: elements not found');
     return;
   }
 
-  console.log('Menu toggle initialized');
-  toggle.addEventListener('click', () => {
-    console.log('Menu clicked, toggling nav-links.active');
+  console.log('Menu toggle initialized successfully');
+
+  toggle.addEventListener('click', (e) => {
+    console.log('Menu button clicked!');
+    console.log('Current classes:', navLinks.className);
     navLinks.classList.toggle('active');
+    console.log('Classes after toggle:', navLinks.className);
   });
 
   navLinks.addEventListener('click', e => {
