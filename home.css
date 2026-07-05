@@ -59,11 +59,20 @@ body {
 
 /* ---------- Brand ---------- */
 .brand {
-  font-family: var(--disp); font-weight: 800; font-size: 1.5rem;
-  letter-spacing: -0.02em; color: var(--ink); text-decoration: none;
+  display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink);
 }
-.brand .ai { color: var(--phos); text-shadow: var(--glow); }
-.brand.small { font-size: 1.2rem; }
+.brand-mark {
+  color: var(--phos); font-size: 1.25rem; text-shadow: var(--glow);
+  animation: flick 4s infinite;
+}
+.brand-name {
+  font-family: var(--disp); font-weight: 800; font-size: 1.375rem;
+  letter-spacing: -0.02em;
+}
+.brand-name em { color: var(--phos); font-style: normal; text-shadow: var(--glow); }
+.brand-name .tld { color: var(--ink-dim); font-weight: 600; }
+.brand-name.small { font-size: 1.1rem; }
+@keyframes flick { 0%, 10%, 90%, 100% { opacity: 1; } 45%, 55% { opacity: 0.5; } }
 
 /* ---------- Nav ---------- */
 .nav {
