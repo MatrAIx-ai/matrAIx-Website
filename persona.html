@@ -21,17 +21,18 @@
 
   <!-- Header -->
   <header class="nav">
-    <a class="brand" href="index.html">
-      <span class="brand-mark">▚</span>
-      <span class="brand-name">matr<em>AI</em>x<span class="tld">.ai</span></span>
-    </a>
+    <a class="brand" href="/">matr<span class="ai">AI</span>x</a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <a href="persona.html" class="active">Persona</a>
+      <a href="/">Home</a>
+      <a href="blog/">Blog</a>
+      <a href="persona.html">Persona</a>
       <a href="demo.html">Demo</a>
     </nav>
-    <a href="#" class="btn btn-ghost nav-cta" id="sampleTop">
-      <span class="dot live"></span> Sample persona
+    <button class="nav-toggle" aria-label="Toggle navigation menu">
+      Menu
+    </button>
+    <a href="access.html" class="btn btn-solid nav-cta">
+      <span class="dot live"></span> Join community
     </a>
   </header>
 
@@ -94,9 +95,34 @@
   <div class="drawer-scrim" id="scrim" hidden></div>
 
   <footer class="foot">
-    <span class="brand-name small">matr<em>AI</em>x<span class="tld">.ai</span></span>
+    <span class="brand small">matr<span class="ai">AI</span>x</span>
     <span class="foot-meta" id="footMeta">SCHEMA v1.0 · FLAT UNIFIED · © 2026</span>
   </footer>
+
+  <script>
+  /* Mobile nav toggle */
+  (function(){
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (!toggle || !navLinks) return;
+    toggle.addEventListener('click', function(){
+      toggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function(){
+        toggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+    window.addEventListener('resize', function(){
+      if (window.innerWidth > 760) {
+        toggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      }
+    });
+  })();
+  </script>
 
   <script src="dimensions.js?v=3"></script>
   <script src="explorer.js?v=3"></script>
