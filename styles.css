@@ -102,21 +102,27 @@ body {
 }
 
 .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.brand-mark {
+  color: var(--phos);
+  font-size: 20px;
+  text-shadow: var(--glow);
+  animation: flick 4s infinite;
+}
+.brand-name {
   font-family: var(--disp);
   font-weight: 800;
-  font-size: 24px;
+  font-size: 22px;
   letter-spacing: -0.02em;
-  color: var(--ink);
-  text-decoration: none;
-  flex-shrink: 0;
 }
-.brand .ai {
-  color: var(--phos);
-  text-shadow: var(--glow);
-}
-.brand.small {
-  font-size: 20px;
-}
+.brand-name em { color: var(--phos); font-style: normal; text-shadow: var(--glow); }
+.brand-name .tld { color: var(--ink-dim); font-weight: 600; }
+.brand-name.small { font-size: 16px; }
 
 .nav-toggle {
   display: none;
