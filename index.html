@@ -177,10 +177,53 @@
 
         <div class="eaas-stage">
           <div class="stage-viz">
-            <div class="viz on" data-i="0"><div style="color: var(--ink-dim); font-size: 0.9rem;">L1 Survey visualization</div></div>
-            <div class="viz" data-i="1"><div style="color: var(--ink-dim); font-size: 0.9rem;">L2 Chatbot visualization</div></div>
-            <div class="viz" data-i="2"><div style="color: var(--ink-dim); font-size: 0.9rem;">L3 Web form visualization</div></div>
-            <div class="viz app" data-i="3"><div style="color: var(--ink-dim); font-size: 0.9rem;">L4 App visualization</div></div>
+            <!-- L1 viz: survey bars -->
+            <div class="viz on" data-i="0">
+              <div class="svy">
+                <span class="cap">// segmented responses<b></b></span>
+                <div class="row"><span class="lab2">18–24</span><div class="track"><span class="fill" style="--w:74%"></span></div><span class="pct">74%</span></div>
+                <div class="row"><span class="lab2">25–44</span><div class="track"><span class="fill" style="--w:91%;animation-delay:.25s"></span></div><span class="pct" style="animation-delay:.25s">91%</span></div>
+                <div class="row"><span class="lab2">45–64</span><div class="track"><span class="fill" style="--w:58%;animation-delay:.5s"></span></div><span class="pct" style="animation-delay:.5s">58%</span></div>
+                <div class="row"><span class="lab2">65+</span><div class="track"><span class="fill" style="--w:39%;animation-delay:.75s"></span></div><span class="pct" style="animation-delay:.75s">39%</span></div>
+              </div>
+            </div>
+            <!-- L2 viz: conversation -->
+            <div class="viz" data-i="1">
+              <div class="cv">
+                <div class="b me">How do I dispute this charge?</div>
+                <div class="b ai">I can help with that — was the charge unauthorized or incorrect?</div>
+                <div class="b me">Incorrect amount.</div>
+                <div class="b ai">Got it. I've opened a dispute and emailed you a confirmation. ✓</div>
+              </div>
+            </div>
+            <!-- L3 viz: web form -->
+            <div class="viz" data-i="2">
+              <div class="scr web">
+                <div class="scr-chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url"></span></div>
+                <div class="scr-body">
+                  <div class="field"></div>
+                  <div class="field"></div>
+                  <div class="field"></div>
+                  <div class="btn3"></div>
+                  <span class="ring"></span>
+                  <span class="cursor">▲</span>
+                  <span class="prog"></span>
+                </div>
+              </div>
+            </div>
+            <!-- L4 viz: app phone -->
+            <div class="viz app" data-i="3">
+              <div class="phone">
+                <span class="notch"></span>
+                <div class="screens">
+                  <div class="s"><span class="ln hl"></span><span class="ln"></span><span class="blk"></span><span class="ln"></span></div>
+                  <div class="s"><span class="ln"></span><span class="blk"></span><span class="ln hl"></span><span class="ln"></span></div>
+                  <div class="s"><span class="ln hl"></span><span class="ln"></span><span class="ln"></span><span class="blk"></span></div>
+                </div>
+                <span class="tap"></span>
+                <div class="dots"><i></i><i></i><i></i></div>
+              </div>
+            </div>
           </div>
 
           <div class="stage-info">
