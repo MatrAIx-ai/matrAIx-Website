@@ -496,10 +496,10 @@ main { position: relative; z-index: 10; }
 @media (max-width: 760px) {
   .nav { gap: 0; flex-wrap: nowrap; justify-content: space-between; }
   .brand { flex: 0; }
-  .nav-toggle { display: flex; order: 2; }
+  .nav-toggle { display: flex; order: 2; position: relative; z-index: 21; }
   .nav-cta { display: none; }
   .nav-links {
-    position: absolute; top: 100%; left: 0; right: 0;
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 20;
     display: flex; flex-direction: column;
     gap: 0; padding: 0; margin-top: 0;
     max-height: 0; opacity: 0; visibility: hidden;
