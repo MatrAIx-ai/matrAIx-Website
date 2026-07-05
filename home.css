@@ -491,6 +491,83 @@ main { position: relative; z-index: 10; }
 .os-card-vitals span { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-dim); }
 @media (max-width: 640px) { .os-card-body { justify-content: center; text-align: center; } .os-card-vitals { width: 100%; justify-content: center; } }
 
+/* ---------- Services grid (from enterprise.html) ---------- */
+.svc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.svc .card { border: 1px solid var(--line-soft); background: var(--bg-2); padding: 22px; transition: border-color 0.2s, transform 0.2s; }
+.svc .card:hover { border-color: var(--line); transform: translateY(-2px); }
+.svc h3 { font-family: var(--disp); font-weight: 700; font-size: 1.04rem; margin-top: 14px; }
+
+.svc-anim { height: 50px; display: flex; align-items: center; justify-content: flex-start; }
+.a-run { position: relative; width: 62px; height: 34px; border: 1px solid var(--line-soft); background: var(--bg-3); overflow: hidden; }
+.a-run i { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: var(--phos); box-shadow: var(--glow); animation: arun 1.8s linear infinite; }
+.a-run i:nth-child(1) { top: 7px; animation-delay: 0s; }
+.a-run i:nth-child(2) { top: 15px; animation-delay: 0.5s; }
+.a-run i:nth-child(3) { top: 23px; animation-delay: 1s; }
+@keyframes arun { 0% { left: -6px; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { left: 64px; opacity: 0; } }
+
+.a-bars { display: flex; align-items: flex-end; gap: 5px; height: 38px; }
+.a-bars i { width: 8px; background: linear-gradient(var(--phos), var(--phos-deep)); box-shadow: 0 0 8px rgba(59, 169, 255, 0.4); animation: abar 2.2s ease-in-out infinite; }
+.a-bars i:nth-child(1) { animation-delay: 0s; }
+.a-bars i:nth-child(2) { animation-delay: 0.3s; }
+.a-bars i:nth-child(3) { animation-delay: 0.6s; }
+.a-bars i:nth-child(4) { animation-delay: 0.9s; }
+@keyframes abar { 0%, 100% { height: 24%; } 50% { height: 100%; } }
+
+.a-loop { width: 38px; height: 38px; border: 3px solid var(--line-soft); border-top-color: var(--phos); border-right-color: var(--phos); border-radius: 50%; box-shadow: 0 0 10px rgba(59, 169, 255, 0.25); animation: aspin 1.5s linear infinite; }
+@keyframes aspin { to { transform: rotate(360deg); } }
+
+.a-grid { display: grid; grid-template-columns: repeat(4, 8px); gap: 4px; }
+.a-grid i { width: 8px; height: 8px; background: var(--bg-3); border: 1px solid var(--line-soft); animation: acell 2.8s ease-in-out infinite; }
+.a-grid i:nth-child(3n) { animation-delay: 0.4s; }
+.a-grid i:nth-child(3n+1) { animation-delay: 1.1s; }
+.a-grid i:nth-child(3n+2) { animation-delay: 1.8s; }
+@keyframes acell { 0%, 100% { background: var(--bg-3); box-shadow: none; } 45%, 60% { background: var(--phos); box-shadow: 0 0 7px rgba(59, 169, 255, 0.6); } }
+
+@media (max-width: 860px) { .svc { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 460px) { .svc { grid-template-columns: 1fr; } }
+
+/* ---------- EAAS: Evaluation-as-a-Service levels ---------- */
+.eaas { display: grid; grid-template-columns: 260px 1fr; gap: 16px; margin-top: 8px; }
+.eaas-rail { display: flex; flex-direction: column; gap: 10px; }
+.eaas-tab { text-align: left; font-family: var(--mono); color: var(--ink-dim); background: var(--bg-2); border: 1px solid var(--line-soft); border-left: 3px solid transparent; padding: 14px 16px; cursor: pointer; display: flex; align-items: center; gap: 12px; transition: all 0.2s; }
+.eaas-tab:hover { border-color: var(--line); color: var(--ink); }
+.eaas-tab.active { border-color: var(--line); border-left-color: var(--phos); background: var(--bg-3); color: var(--ink); }
+.eaas-tab .lv { font-family: var(--disp); font-weight: 800; font-size: 1.15rem; color: var(--ink-dim); flex: none; width: 30px; }
+.eaas-tab.active .lv { color: var(--phos); text-shadow: var(--glow); }
+.eaas-tab .tx { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.eaas-tab .nm { font-family: var(--disp); font-weight: 700; font-size: 1.02rem; }
+.eaas-tab .meter { display: flex; gap: 3px; }
+.eaas-tab .meter i { width: 6px; height: 6px; border-radius: 50%; background: var(--line); display: block; }
+.eaas-tab .meter i.on { background: var(--phos); box-shadow: 0 0 7px rgba(59, 169, 255, 0.6); }
+
+.eaas-stage { border: 1px solid var(--line-soft); background: var(--bg-2); display: flex; flex-direction: column; overflow: hidden; }
+.stage-viz { position: relative; min-height: 230px; background: radial-gradient(120% 140% at 50% 0, rgba(59, 169, 255, 0.05), transparent 60%); border-bottom: 1px solid var(--line-soft); overflow: hidden; }
+.viz { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; padding: 22px; }
+.viz.on { display: flex; }
+
+.stage-info { padding: 18px 20px; }
+.stage-info .top { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.stage-info h3 { font-family: var(--disp); font-weight: 800; font-size: 1.3rem; }
+.stage-info .tag { font-size: 0.78rem; color: var(--amber); }
+.stage-info .desc { color: var(--ink-dim); font-size: 0.93rem; line-height: 1.55; margin-bottom: 14px; }
+.stage-info .desc b { color: var(--ink); }
+.stage-info .meta { display: grid; grid-template-columns: 1.7fr 1fr; gap: 18px; }
+.stage-info .lab { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--phos); margin-bottom: 7px; display: block; }
+.stage-info ul { list-style: none; display: flex; flex-wrap: wrap; gap: 7px; }
+.stage-info ul li { font-size: 0.8rem; color: var(--ink); border: 1px solid var(--line-soft); background: var(--bg-3); padding: 5px 10px; }
+.stage-info .best { font-size: 0.88rem; color: var(--ink-dim); line-height: 1.5; }
+.stage-info .best b { color: var(--ink); }
+
+.info { display: none; }
+.info.on { display: block; }
+
+@media (max-width: 760px) {
+  .eaas { grid-template-columns: 1fr; }
+  .eaas-rail { flex-direction: row; flex-wrap: wrap; }
+  .eaas-tab { flex: 1; min-width: 130px; }
+  .stage-info .meta { grid-template-columns: 1fr; }
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) { .data-grid { grid-template-columns: 1fr; } }
 @media (max-width: 760px) {
