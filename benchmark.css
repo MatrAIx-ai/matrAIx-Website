@@ -90,9 +90,9 @@ a { color: inherit; text-decoration: none; }
 .os-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
 .os-status { display: flex; align-items: center; gap: 14px; white-space: nowrap; }
-.os-nav { display: flex; gap: 14px; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); }
+.os-nav { display: flex; gap: 14px; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); font-family: var(--disp); }
 .os-nav a:hover { color: var(--phos); }
-.led { display: inline-flex; align-items: center; gap: 6px; font-size: 0.74rem; letter-spacing: 0.1em; color: var(--ink-dim); }
+.led { display: inline-flex; align-items: center; gap: 6px; font-size: 0.74rem; letter-spacing: 0.1em; color: var(--ink); font-family: var(--disp); }
 .led::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--phos-deep); }
 .led.on::before { background: var(--phos); box-shadow: var(--glow); animation: blink 1.4s infinite; }
 @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
