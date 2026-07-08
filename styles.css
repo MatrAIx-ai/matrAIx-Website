@@ -17,7 +17,7 @@
   --glow:      0 0 22px rgba(59, 169, 255, 0.45);
 
   --mono: "JetBrains Mono", ui-monospace, monospace;
-  --disp: "Space Grotesk", sans-serif;
+  --disp: "Neuton", Georgia, serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }

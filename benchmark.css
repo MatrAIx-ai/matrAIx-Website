@@ -1,7 +1,9 @@
 /* ============================================================
    matrAIx OS — evaluation portal (mission-control interface)
-   Self-contained dark phosphor theme.
+   Self-contained light theme with Neuton serif.
    ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,200;0,300;0,400;0,700&display=swap');
 
 :root {
   --bg:        #050706;
@@ -18,7 +20,7 @@
   --line-soft: rgba(59, 169, 255, 0.07);
   --glow:      0 0 18px rgba(59, 169, 255, 0.45);
   --mono: "JetBrains Mono", ui-monospace, monospace;
-  --disp: "Space Grotesk", sans-serif;
+  --disp: "Neuton", Georgia, serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }

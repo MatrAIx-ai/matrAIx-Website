@@ -1,7 +1,7 @@
 /* ============================================================
-   matrAIx — landing page (dark / phosphor console)
+   matrAIx — landing page (light theme with Neuton serif)
    Self-contained so the tool pages (styles.css) stay untouched.
-   Space Grotesk (display) + JetBrains Mono (body).
+   Neuton (serif) + JetBrains Mono (monospace).
    ============================================================ */
 
 :root {
@@ -19,7 +19,7 @@
   --glow:      0 0 22px rgba(59, 169, 255, 0.45);
 
   --mono: "JetBrains Mono", ui-monospace, monospace;
-  --disp: "Space Grotesk", sans-serif;
+  --disp: "Neuton", Georgia, serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }

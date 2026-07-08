@@ -3,7 +3,10 @@
    Clean white background with dark text and adjusted accents
    ============================================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,200;0,300;0,400;0,700&display=swap');
+
 :root {
+  /* Colors */
   --bg:        #ffffff;
   --bg-2:      #f8f9fa;
   --ink:       #1a1a1a;      /* primary text */
@@ -15,6 +18,11 @@
   --line:      rgba(0, 102, 204, 0.12);
   --line-soft: rgba(0, 102, 204, 0.06);
   --glow:      0 0 22px rgba(0, 102, 204, 0.25);
+
+  /* Typography - Easy to customize */
+  --font-serif: "Neuton", Georgia, serif;
+  --font-mono:  "JetBrains Mono", ui-monospace, monospace;
+  --font-disp:  "Neuton", Georgia, serif;
 }
 
 /* ---------- Header ---------- */
@@ -176,4 +184,28 @@
 .nav-links a::after {
   background: var(--phos);
   box-shadow: 0 0 8px rgba(0,102,204,0.4);
+}
+
+/* ---------- Typography: Apply Neuton serif to all text except brand logo ---------- */
+
+body {
+  font-family: var(--font-serif);
+}
+
+h1, h2, h3, h4, h5, h6,
+.headline, .sec-title, .panel-head h2, .closing h2,
+.brand-name, .brand-mark {
+  font-family: var(--font-serif);
+}
+
+/* Keep the brand mark (logo) as is - no font change needed */
+.brand-mark {
+  font-family: inherit;
+}
+
+/* Preserve monospace where needed */
+.nav-toggle, .btn,
+.nav-links,
+code, pre {
+  font-family: var(--font-mono);
 }
