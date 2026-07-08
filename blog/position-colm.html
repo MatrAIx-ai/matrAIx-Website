@@ -18,19 +18,19 @@
        ============================================================ */
 
     :root {
-      --bg:        #060807;
-      --bg-2:      #0a0e0c;
-      --bg-3:      #0f1612;
-      --ink:       #d6e6d8;
-      --ink-dim:   #6f8273;
-      --phos:      #3ba9ff;
-      --phos-deep: #1d5fa6;
-      --amber:     #ffb547;
-      --rose:      #ff5c6c;
-      --cyan:      #8ad0ff;
-      --line:      rgba(59, 169, 255, 0.16);
-      --line-soft: rgba(59, 169, 255, 0.07);
-      --glow:      0 0 22px rgba(59, 169, 255, 0.45);
+      --bg:        #ffffff;
+      --bg-2:      #f8f9fa;
+      --bg-3:      #f3f4f6;
+      --ink:       #1a1a1a;
+      --ink-dim:   #6b7280;
+      --phos:      #0066cc;
+      --phos-deep: #003d99;
+      --amber:     #d97706;
+      --rose:      #dc2626;
+      --cyan:      #0088ff;
+      --line:      rgba(0, 102, 204, 0.12);
+      --line-soft: rgba(0, 102, 204, 0.06);
+      --glow:      0 0 22px rgba(0, 102, 204, 0.25);
 
       --mono: "JetBrains Mono", ui-monospace, monospace;
       --disp: "Space Grotesk", sans-serif;
@@ -137,6 +137,41 @@
     .nav-toggle:hover {
       border-color: var(--phos);
       color: var(--phos);
+    }
+
+    .btn-nav {
+      font-family: var(--mono);
+      font-size: 0.86rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 18px;
+      border: none;
+      background: var(--phos);
+      color: #04121f;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 0 26px rgba(59,169,255,0.3);
+      transition: all 0.25s ease;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .btn-nav:hover {
+      background: #6fc4ff;
+      box-shadow: 0 0 40px rgba(59,169,255,0.55);
+      transform: translateY(-2px);
+    }
+
+    .dot.live {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #04121f;
+      display: inline-block;
+      box-shadow: none;
     }
 
     nav {
@@ -282,6 +317,10 @@
         text-align: center;
       }
 
+      .btn-nav {
+        display: none;
+      }
+
       .blog-title {
         font-size: 1.6rem;
       }
@@ -317,6 +356,9 @@
       <a href="/persona.html">Persona</a>
       <a href="/demo.html">Demo</a>
     </nav>
+    <a href="access.html" class="btn-nav">
+      <span class="dot live"></span> Join community
+    </a>
     <button class="nav-toggle" aria-label="Toggle navigation menu">Menu</button>
   </header>
 
