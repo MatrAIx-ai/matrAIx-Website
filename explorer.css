@@ -21,7 +21,7 @@
 .ex-title {
   font-family: var(--disp);
   font-weight: 600;
-  font-size: clamp(2.2rem, 6vw, 4.4rem);
+  font-size: clamp(1.95rem, 5vw, 3.05rem);
   letter-spacing: -0.03em;
   line-height: 0.95;
   margin: 14px 0 20px;
@@ -30,8 +30,8 @@
 .ex-sub {
   max-width: 720px;
   color: var(--ink);
-  font-size: 15.5px;
-  line-height: 1.75;
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
 }
 .ex-sub em { color: var(--ink); font-style: italic; }
 
@@ -53,16 +53,16 @@
 .stat:last-child { border-right: none; }
 .stat-val {
   font-family: var(--disp);
-  font-weight: 600;
-  font-size: clamp(1.3rem, 2.6vw, 2rem);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.5vw, 1.95rem);
   color: var(--phos);
   text-shadow: 0 0 14px rgba(59,169,255,0.3);
   font-variant-numeric: tabular-nums;
-  line-height: 1;
+  line-height: var(--leading-tight);
 }
 .stat-label {
-  font-size: 11px;
-  letter-spacing: 0.1em;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
   color: var(--ink);
 }
@@ -82,7 +82,7 @@
 }
 .ex-search {
   font-family: var(--mono);
-  font-size: 14px;
+  font-size: var(--text-sm);
   color: var(--ink);
   background: var(--bg-2);
   border: 1px solid var(--line);
@@ -100,8 +100,8 @@
 .ex-chips { display: flex; gap: 8px; flex-wrap: wrap; }
 .chip {
   font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.05em;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
   color: var(--ink);
   background: transparent;
@@ -162,34 +162,34 @@
   gap: 10px;
 }
 .dim-cat {
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
   color: var(--phos);
   opacity: 0.8;
 }
 .dim-count {
-  font-size: 11px;
+  font-size: var(--text-xs);
   color: var(--ink);
   font-variant-numeric: tabular-nums;
 }
 .dim-label {
   font-family: var(--disp);
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: var(--text-lg);
   margin: 8px 0 6px;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--tracking-snug);
   word-break: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
 }
-.dim-desc { font-size: 13px; color: var(--ink); line-height: 1.6; }
+.dim-desc { font-size: var(--text-sm); color: var(--ink); line-height: var(--leading-normal); }
 .dim-source {
-  font-size: 11px;
+  font-size: var(--text-xs);
   color: #ff9933;
   opacity: 0.85;
   margin: 4px 0 0;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--tracking-wide);
   font-weight: 500;
 }
 .dim-values {
@@ -208,7 +208,7 @@
   margin-top: 16px;
 }
 .val-chip {
-  font-size: 11.5px;
+  font-size: var(--text-xs);
   color: var(--ink);
   background: rgba(59,169,255,0.06);
   border: 1px solid var(--line-soft);
@@ -217,9 +217,9 @@
 }
 .dim-hint {
   margin-top: 12px;
-  font-size: 11px;
+  font-size: var(--text-xs);
   color: var(--ink);
-  letter-spacing: 0.06em;
+  letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
   opacity: 0.7;
 }
@@ -229,7 +229,7 @@
   text-align: center;
   color: var(--ink);
   padding: 60px 0;
-  font-size: 14px;
+  font-size: var(--text-sm);
 }
 
 /* ---------- Persona drawer ---------- */
@@ -262,23 +262,23 @@
 .drawer-head { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; }
 .drawer-eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
-  font-size: 11px; letter-spacing: 0.14em; color: var(--phos);
+  font-size: var(--text-xs); letter-spacing: var(--tracking-widest); color: var(--phos);
 }
 .drawer-name {
   font-family: var(--disp); font-weight: 600;
-  font-size: 1.7rem; letter-spacing: -0.02em;
-  margin: 12px 0 6px; line-height: 1.05;
+  font-size: var(--text-2xl); letter-spacing: var(--tracking-snug);
+  margin: 12px 0 6px; line-height: var(--leading-snug);
 }
-.drawer-line { font-size: 13.5px; color: var(--ink); line-height: 1.5; }
+.drawer-line { font-size: var(--text-sm); color: var(--ink); line-height: var(--leading-normal); }
 .drawer-close {
   background: transparent; border: 1px solid var(--line);
   color: var(--ink); width: 34px; height: 34px;
-  cursor: pointer; font-size: 14px; flex: 0 0 auto;
+  cursor: pointer; font-size: var(--text-sm); flex: 0 0 auto;
   transition: all 0.2s;
 }
 .drawer-close:hover { color: var(--rose); border-color: var(--rose); }
 .drawer-actions { display: flex; gap: 10px; margin: 22px 0 18px; }
-.drawer-actions .btn { padding: 10px 16px; font-size: 12px; }
+.drawer-actions .btn { padding: 10px 16px; font-size: var(--text-xs); }
 
 .drawer-traits {
   overflow-y: auto;
@@ -294,7 +294,7 @@
   gap: 14px;
   padding: 9px 0;
   border-bottom: 1px solid var(--line-soft);
-  font-size: 13px;
+  font-size: var(--text-sm);
   animation: rise 0.35s backwards;
 }
 .trait-key { color: var(--ink); letter-spacing: 0.03em; }
