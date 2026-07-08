@@ -223,7 +223,7 @@ main { position: relative; z-index: 10; }
   padding: clamp(70px, 10vw, 110px) clamp(20px, 5vw, 40px) 0;
 }
 .sec-head { max-width: 760px; margin: 0 auto 44px; text-align: center; }
-.sec-head .idx { font-size: 0.78rem; letter-spacing: 0.2em; color: var(--phos); }
+.sec-head .idx { font-family: var(--disp); font-size: 0.78rem; letter-spacing: 0.2em; color: var(--phos); font-weight: 400; }
 .sec-title {
   font-family: var(--disp); font-weight: 600;
   font-size: clamp(2rem, 4.6vw, 3rem); letter-spacing: -0.02em;
