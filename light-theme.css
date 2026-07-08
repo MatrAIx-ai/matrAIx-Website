@@ -226,3 +226,20 @@ h1, h2, h3, h4, h5, h6,
 code, pre {
   font-family: var(--font-mono);
 }
+
+/* ---------- Playground Card Styling ---------- */
+
+.os-card {
+  background: #ffffff;
+  border: 2px solid var(--line);
+  box-shadow: 0 4px 12px rgba(0, 61, 122, 0.08);
+}
+
+.os-card-bar {
+  background: linear-gradient(to right, #f8f9fa, #ffffff);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.os-card-body {
+  background: #ffffff;
+}

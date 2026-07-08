@@ -1,0 +1,428 @@
+{
+  "schemaVersion": "2.0",
+  "name": "matrAIx Persona Dimension Space (Curated 30)",
+  "headlineBehaviors": 8300000000,
+  "targetDimensions": 30,
+  "note": "Curated subset of 30 dimensions selected for comprehensiveness with minimal overlap. Covers demographics, linguistics, expertise, personality, cognition, skills, interests, tools, attitudes, and lifestyle.",
+  "dimensions": [
+    {
+      "id": "age_bracket",
+      "label": "Age bracket",
+      "category": "Demographic",
+      "description": "Life-age band of the persona.",
+      "values": [
+        "13\u201317",
+        "18\u201324",
+        "25\u201334",
+        "35\u201344",
+        "45\u201354",
+        "55\u201364",
+        "65+"
+      ]
+    },
+    {
+      "id": "region",
+      "label": "Region",
+      "category": "Demographic",
+      "description": "World region the persona is based in.",
+      "values": [
+        "North America",
+        "Latin America",
+        "Western Europe",
+        "Eastern Europe",
+        "Sub-Saharan Africa",
+        "MENA",
+        "South Asia",
+        "East Asia",
+        "Southeast Asia",
+        "Oceania"
+      ]
+    },
+    {
+      "id": "gender_identity",
+      "label": "Gender identity",
+      "category": "Demographic",
+      "description": "Self-identified gender.",
+      "values": [
+        "Woman",
+        "Man",
+        "Non-binary",
+        "Self-described",
+        "Prefer not to say"
+      ]
+    },
+    {
+      "id": "urbanicity",
+      "label": "Urbanicity",
+      "category": "Demographic",
+      "description": "Settlement density of where they live.",
+      "values": [
+        "Dense urban",
+        "Suburban",
+        "Small town",
+        "Rural",
+        "Nomadic / remote"
+      ]
+    },
+    {
+      "id": "socioeconomic_band",
+      "label": "Socioeconomic band",
+      "category": "Demographic",
+      "description": "Relative income/wealth band.",
+      "values": [
+        "Low income",
+        "Lower-middle",
+        "Middle",
+        "Upper-middle",
+        "High income"
+      ]
+    },
+    {
+      "id": "primary_language",
+      "label": "Primary language",
+      "category": "Linguistic",
+      "description": "First / dominant language.",
+      "values": [
+        "English",
+        "Mandarin",
+        "Spanish",
+        "Hindi",
+        "Arabic",
+        "French",
+        "Portuguese",
+        "Bengali",
+        "Russian",
+        "Japanese",
+        "German",
+        "Swahili"
+      ]
+    },
+    {
+      "id": "english_proficiency",
+      "label": "English proficiency",
+      "category": "Linguistic",
+      "description": "Command of English (the eval lingua franca).",
+      "values": [
+        "Native",
+        "Fluent (C1\u2013C2)",
+        "Intermediate (B1\u2013B2)",
+        "Basic (A1\u2013A2)",
+        "None"
+      ]
+    },
+    {
+      "id": "domain",
+      "label": "Domain",
+      "category": "Domain",
+      "description": "Primary field of work or study.",
+      "values": [
+        "Software & AI",
+        "Healthcare & Medicine",
+        "Law & Policy",
+        "Finance & Economics",
+        "Education",
+        "Engineering",
+        "Natural Sciences",
+        "Social Sciences",
+        "Arts & Humanities",
+        "Business & Management",
+        "Agriculture",
+        "Manufacturing",
+        "Media & Journalism",
+        "Public Sector",
+        "Hospitality",
+        "Skilled Trades"
+      ]
+    },
+    {
+      "id": "highest_education",
+      "label": "Highest education",
+      "category": "Academic",
+      "description": "Highest level of formal education completed.",
+      "values": [
+        "No formal",
+        "Primary",
+        "Secondary",
+        "Vocational / cert",
+        "Bachelor's",
+        "Master's",
+        "Doctorate",
+        "Postdoc"
+      ]
+    },
+    {
+      "id": "life_stage",
+      "label": "Life stage",
+      "category": "Life Experience",
+      "description": "Current stage of life.",
+      "values": [
+        "Student",
+        "Early career",
+        "Parent of young kids",
+        "Mid-life",
+        "Career change",
+        "Empty nester",
+        "Retirement"
+      ]
+    },
+    {
+      "id": "major_life_events",
+      "label": "Major life events",
+      "category": "Life Experience",
+      "description": "Defining experience shaping their outlook.",
+      "values": [
+        "Migration / immigration",
+        "Started a business",
+        "Health journey",
+        "Military service",
+        "Caregiving",
+        "Bereavement",
+        "Major relocation",
+        "None notable"
+      ]
+    },
+    {
+      "id": "emotional_state",
+      "label": "Emotional state",
+      "category": "Interaction",
+      "description": "Mood at the moment of interaction.",
+      "values": [
+        "Calm",
+        "Curious",
+        "Frustrated",
+        "Anxious",
+        "Excited",
+        "Skeptical",
+        "Urgent"
+      ]
+    },
+    {
+      "id": "learning_style",
+      "label": "Learning style",
+      "category": "Psychographic",
+      "description": "How they best absorb information.",
+      "values": [
+        "Visual",
+        "Auditory",
+        "Reading / writing",
+        "Kinesthetic",
+        "Mixed"
+      ]
+    },
+    {
+      "id": "fam_machine_learning",
+      "label": "Familiarity: Machine learning",
+      "category": "Expertise",
+      "description": "How well the persona knows Machine learning.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "Aware",
+        "None"
+      ]
+    },
+    {
+      "id": "topic_politics",
+      "label": "Interest: Politics",
+      "category": "Interests",
+      "description": "Level of interest in politics.",
+      "values": [
+        "Passionate",
+        "Interested",
+        "Neutral",
+        "Indifferent",
+        "Averse"
+      ]
+    },
+    {
+      "id": "lang_english",
+      "label": "Language: English",
+      "category": "Languages",
+      "description": "Spoken proficiency in English.",
+      "values": [
+        "Native",
+        "Fluent",
+        "Conversational",
+        "Basic",
+        "None"
+      ]
+    },
+    {
+      "id": "att_ai",
+      "label": "Attitude: AI",
+      "category": "Attitudes",
+      "description": "Stance toward ai.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "ind_technology",
+      "label": "Industry: Technology",
+      "category": "Industry",
+      "description": "Work experience in technology.",
+      "values": [
+        "Veteran",
+        "Experienced",
+        "Some exposure",
+        "None"
+      ]
+    },
+    {
+      "id": "cult_united_states",
+      "label": "Culture: United States",
+      "category": "Cultural",
+      "description": "Familiarity with United States culture.",
+      "values": [
+        "Native",
+        "Lived there",
+        "Visited",
+        "Studied",
+        "Unfamiliar"
+      ]
+    },
+    {
+      "id": "musg_pop",
+      "label": "Music: Pop",
+      "category": "Music",
+      "description": "Taste for Pop music.",
+      "values": [
+        "Love",
+        "Like",
+        "Neutral",
+        "Dislike"
+      ]
+    },
+    {
+      "id": "filmg_action",
+      "label": "Film: Action",
+      "category": "Film",
+      "description": "Taste for action films.",
+      "values": [
+        "Love",
+        "Like",
+        "Neutral",
+        "Dislike"
+      ]
+    },
+    {
+      "id": "bookg_literary_fiction",
+      "label": "Books: Literary fiction",
+      "category": "Books",
+      "description": "Taste for literary fiction.",
+      "values": [
+        "Love",
+        "Like",
+        "Neutral",
+        "Dislike"
+      ]
+    },
+    {
+      "id": "cuis_italian",
+      "label": "Cuisine: Italian",
+      "category": "Food",
+      "description": "Taste for Italian cuisine.",
+      "values": [
+        "Love",
+        "Like",
+        "Neutral",
+        "Avoid"
+      ]
+    },
+    {
+      "id": "lstyle_sleep_schedule",
+      "label": "Sleep schedule",
+      "category": "Lifestyle",
+      "description": "Sleep schedule.",
+      "values": [
+        "Early bird",
+        "Night owl",
+        "Irregular",
+        "Flexible",
+        "Shift-based"
+      ]
+    },
+    {
+      "id": "cog_verbosity",
+      "label": "Verbosity",
+      "category": "Cognition",
+      "description": "Verbosity.",
+      "values": [
+        "Terse",
+        "Concise",
+        "Balanced",
+        "Wordy",
+        "Rambling"
+      ]
+    },
+    {
+      "id": "health_general_health",
+      "label": "General health",
+      "category": "Health",
+      "description": "General health.",
+      "values": [
+        "Excellent",
+        "Good",
+        "Fair",
+        "Poor"
+      ]
+    },
+    {
+      "id": "hob_knitting",
+      "label": "Hobby: Knitting",
+      "category": "Hobbies",
+      "description": "Engagement with knitting.",
+      "values": [
+        "Avid",
+        "Active",
+        "Occasional",
+        "Curious",
+        "Never"
+      ]
+    },
+    {
+      "id": "acad_algebra",
+      "label": "Subject: Algebra",
+      "category": "Academics",
+      "description": "Interest in algebra.",
+      "values": [
+        "Passionate",
+        "Interested",
+        "Neutral",
+        "Indifferent",
+        "Averse"
+      ]
+    },
+    {
+      "id": "trait_curiosity",
+      "label": "Character: Curiosity",
+      "category": "Character",
+      "description": "How present curiosity is in the persona.",
+      "values": [
+        "Signature",
+        "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ]
+    },
+    {
+      "id": "habit_journaling",
+      "label": "Habit: Journaling",
+      "category": "Habits",
+      "description": "How often the persona engages in journaling.",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ]
+    }
+  ]
+}
