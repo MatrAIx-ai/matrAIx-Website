@@ -459,7 +459,7 @@ main { position: relative; z-index: 10; }
 /* ---------- Simulation Playground (mirrored matrAIx OS) ---------- */
 .os-card { max-width: 980px; margin: 0 auto; border: 1px solid var(--line); background: var(--bg-2); overflow: hidden; }
 .os-card-bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
-  padding: 14px 18px; border-bottom: 1px solid var(--line-soft); background: linear-gradient(to bottom, #0a100d, #070a09); }
+  padding: 14px 18px; border-bottom: 1px solid var(--line-soft); background: linear-gradient(to bottom, rgba(0, 61, 122, 0.08), rgba(0, 52, 163, 0.05)); }
 .os-card-id { font-family: var(--disp); font-weight: 800; font-size: 1.45rem; letter-spacing: -0.01em; color: var(--ink); }
 .os-card-id em { color: var(--phos); font-style: normal; text-shadow: var(--glow); }
 .os-card-id .v { color: var(--amber); font-size: 0.82rem; border: 1px solid rgba(255,181,71,0.3); padding: 1px 7px; margin: 0 5px; }
