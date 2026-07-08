@@ -49,7 +49,7 @@
   margin-bottom: 14px;
 }
 .q-emoji { margin-right: 8px; font-size: var(--text-lg); }
-.q-n { color: var(--phos); font-weight: 600; margin-right: 6px; }
+.q-n { color: var(--phos); font-weight: 700; margin-right: 6px; }
 .q-opts {
   display: grid;
   gap: 9px;
@@ -200,7 +200,7 @@
   line-height: var(--leading-normal);
   color: var(--ink);
 }
-.pv-summary b { color: var(--phos); font-weight: 600; }
+.pv-summary b { color: var(--phos); font-weight: 700; }
 
 .pv-traits {
   margin-top: 18px;

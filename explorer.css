@@ -20,10 +20,10 @@
 .ex-head { margin-bottom: 46px; }
 .ex-title {
   font-family: var(--disp);
-  font-weight: 600;
+  font-weight: 700;
   font-size: clamp(1.95rem, 5vw, 3.05rem);
-  letter-spacing: -0.03em;
-  line-height: 0.95;
+  letter-spacing: var(--tracking-snug);
+  line-height: var(--leading-snug);
   margin: 14px 0 20px;
 }
 .ex-title span { color: var(--phos); text-shadow: var(--glow); }
@@ -115,7 +115,7 @@
   color: #04121f;
   background: var(--phos);
   border-color: var(--phos);
-  font-weight: 600;
+  font-weight: 700;
   box-shadow: 0 0 16px rgba(59,169,255,0.3);
 }
 .chip .chip-n { opacity: 0.6; margin-left: 6px; }
@@ -175,7 +175,7 @@
 }
 .dim-label {
   font-family: var(--disp);
-  font-weight: 600;
+  font-weight: 700;
   font-size: var(--text-lg);
   margin: 8px 0 6px;
   letter-spacing: var(--tracking-snug);
@@ -265,7 +265,7 @@
   font-size: var(--text-xs); letter-spacing: var(--tracking-widest); color: var(--phos);
 }
 .drawer-name {
-  font-family: var(--disp); font-weight: 600;
+  font-family: var(--disp); font-weight: 700;
   font-size: var(--text-2xl); letter-spacing: var(--tracking-snug);
   margin: 12px 0 6px; line-height: var(--leading-snug);
 }

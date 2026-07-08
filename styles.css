@@ -191,7 +191,7 @@ body {
   background: var(--phos);
   color: #04121f;
   border-color: var(--phos);
-  font-weight: 600;
+  font-weight: 700;
   box-shadow: 0 0 26px rgba(59,169,255,0.32);
 }
 .btn-solid:hover {
@@ -471,9 +471,9 @@ main { position: relative; z-index: 10; }
 }
 .closing h2 {
   font-family: var(--disp);
-  font-weight: 600;
+  font-weight: 700;
   font-size: clamp(2rem, 6vw, 4.2rem);
-  letter-spacing: -0.03em;
+  letter-spacing: var(--tracking-snug);
   line-height: 1;
   margin-bottom: 40px;
 }
