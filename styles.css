@@ -4,20 +4,8 @@
    ============================================================ */
 
 :root {
-  --bg:        #060807;
-  --bg-2:      #0a0e0c;
-  --ink:       #d6e6d8;      /* primary text */
-  --ink-dim:   #d0d0d0;      /* muted text */
-  --phos:      #3ba9ff;      /* accent */
-  --phos-deep: #1d5fa6;
-  --amber:     #ffb547;      /* warning accent */
-  --rose:      #ff5c6c;      /* fail accent */
-  --line:      rgba(59, 169, 255, 0.16);
-  --line-soft: rgba(59, 169, 255, 0.07);
-  --glow:      0 0 22px rgba(59, 169, 255, 0.45);
-
-  --mono: "JetBrains Mono", ui-monospace, monospace;
-  --disp: "Neuton", Georgia, serif;
+  /* Color and font variables are defined in light-theme.css */
+  /* This file only defines layout and component styles */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
