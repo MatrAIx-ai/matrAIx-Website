@@ -18,10 +18,8 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--ink); font-family: var(--mono); font-size: 16px; line-height: 1.7; overflow-x: hidden; min-height: 100vh; }
-    body::before { content: ""; position: fixed; inset: 0; background: radial-gradient(120% 90% at 50% 30%, transparent 45%, rgba(0,0,0,0.8) 100%); pointer-events: none; z-index: 1; }
-    body::after { content: ""; position: fixed; inset: 0; background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,0.16) 3px, rgba(0,0,0,0) 4px); pointer-events: none; z-index: 2; mix-blend-mode: multiply; }
     ::selection { background: var(--phos); color: #04121f; }
-    header { position: fixed; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; padding: 18px clamp(20px, 5vw, 40px); backdrop-filter: blur(8px); background: linear-gradient(to bottom, rgba(6, 8, 7, 0.85), rgba(6, 8, 7, 0)); border-bottom: 1px solid var(--line-soft); }
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; padding: 18px clamp(20px, 5vw, 40px); backdrop-filter: blur(8px); background: linear-gradient(to bottom, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0)); border-bottom: 1px solid var(--line-soft); }
     .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
     .brand-mark { color: var(--phos); font-size: 1.25rem; text-shadow: var(--glow); animation: flick 4s infinite; }
     .brand-name { font-family: var(--disp); font-weight: 800; font-size: 1.375rem; letter-spacing: -0.02em; }
