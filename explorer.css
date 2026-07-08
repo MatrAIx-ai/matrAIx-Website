@@ -29,7 +29,7 @@
 .ex-title span { color: var(--phos); text-shadow: var(--glow); }
 .ex-sub {
   max-width: 720px;
-  color: var(--ink-dim);
+  color: var(--ink);
   font-size: 15.5px;
   line-height: 1.75;
 }
@@ -40,8 +40,7 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   border: 1px solid var(--line);
-  background: rgba(10,14,12,0.55);
-  backdrop-filter: blur(6px);
+  background: var(--bg-2);
   margin-top: 38px;
 }
 .stat {
@@ -65,7 +64,7 @@
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-dim);
+  color: var(--ink);
 }
 
 /* ---------- Controls ---------- */
@@ -174,7 +173,7 @@
 }
 .dim-count {
   font-size: 11px;
-  color: var(--ink-dim);
+  color: var(--ink);
   font-variant-numeric: tabular-nums;
 }
 .dim-label {
@@ -187,7 +186,7 @@
   overflow-wrap: break-word;
   hyphens: auto;
 }
-.dim-desc { font-size: 13px; color: var(--ink-dim); line-height: 1.6; }
+.dim-desc { font-size: 13px; color: var(--ink); line-height: 1.6; }
 .dim-source {
   font-size: 11px;
   color: #ff9933;
@@ -222,7 +221,7 @@
 .dim-hint {
   margin-top: 12px;
   font-size: 11px;
-  color: var(--ink-dim);
+  color: var(--ink);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   opacity: 0.7;
@@ -273,10 +272,10 @@
   font-size: 1.7rem; letter-spacing: -0.02em;
   margin: 12px 0 6px; line-height: 1.05;
 }
-.drawer-line { font-size: 13.5px; color: var(--ink-dim); line-height: 1.5; }
+.drawer-line { font-size: 13.5px; color: var(--ink); line-height: 1.5; }
 .drawer-close {
   background: transparent; border: 1px solid var(--line);
-  color: var(--ink-dim); width: 34px; height: 34px;
+  color: var(--ink); width: 34px; height: 34px;
   cursor: pointer; font-size: 14px; flex: 0 0 auto;
   transition: all 0.2s;
 }
@@ -301,7 +300,7 @@
   font-size: 13px;
   animation: rise 0.35s backwards;
 }
-.trait-key { color: var(--ink-dim); letter-spacing: 0.03em; }
+.trait-key { color: var(--ink); letter-spacing: 0.03em; }
 .trait-val { color: var(--phos); text-align: right; font-weight: 500; }
 
 .copied { color: var(--phos) !important; border-color: var(--phos) !important; }
