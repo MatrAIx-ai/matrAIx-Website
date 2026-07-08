@@ -64,7 +64,7 @@ a { color: inherit; text-decoration: none; }
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   height: 50px; padding: 0 16px;
   border-bottom: 1px solid var(--line);
-  background: linear-gradient(to bottom, #0a100d, #070a09);
+  background: var(--bg);
 }
 .os-id { font-family: var(--disp); font-weight: 600; font-size: 1.35rem; letter-spacing: -0.01em; white-space: nowrap; }
 .os-id .ai { color: var(--phos); text-shadow: var(--glow); }
