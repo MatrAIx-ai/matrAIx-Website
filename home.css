@@ -16,8 +16,8 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--mono);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
   overflow-x: hidden;
   min-height: 100vh;
 }
@@ -58,7 +58,7 @@ body {
 }
 .brand-name em { color: var(--phos); font-style: normal; text-shadow: var(--glow); }
 .brand-name .tld { color: var(--ink); font-weight: 500; }
-.brand-name.small { font-size: 1.1rem; }
+.brand-name.small { font-size: var(--text-base); }
 @keyframes flick { 0%, 10%, 90%, 100% { opacity: 1; } 45%, 55% { opacity: 0.5; } }
 
 /* ---------- Nav ---------- */
@@ -87,7 +87,7 @@ body {
 }
 .nav-links a {
   color: var(--ink); text-decoration: none; font-family: var(--disp);
-  font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase;
+  font-size: var(--text-sm); letter-spacing: var(--tracking-wide); text-transform: uppercase;
   position: relative; transition: color 0.25s;
 }
 .nav-links a::after {
@@ -111,7 +111,7 @@ body {
   font-weight: 600; box-shadow: 0 0 26px rgba(59,169,255,0.3);
 }
 .btn-solid:hover { background: #6fc4ff; box-shadow: 0 0 40px rgba(59,169,255,0.55); transform: translateY(-2px); }
-.btn-lg { padding: 16px 30px; font-size: 0.95rem; }
+.btn-lg { padding: 16px 30px; font-size: var(--text-sm); }
 .btn .arr { transition: transform 0.25s; }
 .btn:hover .arr { transform: translateX(5px); }
 .nav-cta {
@@ -148,7 +148,7 @@ main { position: relative; z-index: 10; }
   display: inline-flex; align-items: center; gap: 10px;
   margin-bottom: 28px; padding: 10px 18px;
   background: rgba(59, 169, 255, 0.06); border: 1px solid rgba(59, 169, 255, 0.25);
-  border-radius: 6px; font-size: 0.85rem; letter-spacing: 0.08em;
+  border-radius: 6px; font-size: var(--text-xs); letter-spacing: var(--tracking-wider);
   text-transform: uppercase; color: var(--phos);
   opacity: 0; animation: rise 0.7s 0.05s forwards;
   box-shadow: inset 0 0 20px rgba(59, 169, 255, 0.08);
@@ -287,7 +287,7 @@ main { position: relative; z-index: 10; }
 .findings h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-dim); margin-bottom: 14px; }
 .findings ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
 .finding { display: flex; align-items: flex-start; gap: 12px; font-size: 1rem; color: var(--ink); line-height: 1.5; }
-.sev { flex: 0 0 auto; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.06em; padding: 3px 8px; margin-top: 3px; }
+.sev { flex: 0 0 auto; font-size: var(--text-xs); font-weight: 600; letter-spacing: var(--tracking-wider); padding: 3px 8px; margin-top: 3px; }
 .sev.high { background: rgba(255,92,108,0.15); color: var(--rose); }
 .sev.med  { background: rgba(255,181,71,0.15); color: var(--amber); }
 .sev.low  { background: rgba(59,169,255,0.13); color: var(--phos); }
@@ -377,7 +377,7 @@ main { position: relative; z-index: 10; }
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .reports-btn:hover { transform: translateY(-2px); box-shadow: 0 0 46px rgba(59, 169, 255, 0.6); }
-.reports-btn .rb-ico { font-size: 1rem; line-height: 1; }
+.reports-btn .rb-ico { font-size: var(--text-base); line-height: 1; }
 .reports-btn .arr { transition: transform 0.25s; }
 .reports-btn:hover .arr { transform: translateX(5px); }
 /* shine sweep on hover */
@@ -419,7 +419,7 @@ main { position: relative; z-index: 10; }
   position: relative; z-index: 10;
   display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;
   padding: 26px clamp(20px, 5vw, 40px); border-top: 1px solid var(--line);
-  background: rgba(6,8,7,0.7); font-size: 0.82rem;
+  background: rgba(6,8,7,0.7); font-size: var(--text-sm);
 }
 .foot-links { display: flex; gap: 22px; flex-wrap: wrap; }
 .foot-links a { color: var(--ink-dim); text-decoration: none; transition: color 0.2s; }
@@ -650,8 +650,8 @@ main { position: relative; z-index: 10; }
   .nav-links a:hover { color: var(--phos); }
   .telemetry { grid-template-columns: repeat(2, 1fr); }
   .tele-cell:nth-child(2) { border-right: none; }
-  .verdict-lift { font-size: 1.9rem; }
-  .seg-table th, .seg-table td { padding-left: 8px; padding-right: 8px; font-size: 0.92rem; }
+  .verdict-lift { font-size: var(--text-2xl); }
+  .seg-table th, .seg-table td { padding-left: 8px; padding-right: 8px; font-size: var(--text-sm); }
 }
 @media (max-width: 460px) { .telemetry { grid-template-columns: 1fr; } .tele-cell { border-right: none; border-bottom: 1px solid var(--line-soft); } }
 

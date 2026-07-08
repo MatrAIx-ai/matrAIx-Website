@@ -167,8 +167,8 @@ body {
 
 .btn {
   font-family: var(--mono);
-  font-size: 13px;
-  letter-spacing: 0.06em;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   text-decoration: none;
   padding: 12px 22px;
@@ -451,14 +451,14 @@ main { position: relative; z-index: 10; }
   transition: background 0.3s, transform 0.3s;
 }
 .card:hover { background: #0d1411; transform: translateY(-4px); }
-.card-no { color: var(--phos); font-size: 13px; letter-spacing: 0.1em; }
+.card-no { color: var(--phos); font-size: var(--text-xs); letter-spacing: var(--tracking-wider); }
 .card h3 {
   font-family: var(--disp);
-  font-weight: 600;
-  font-size: 1.5rem;
+  font-weight: 700;
+  font-size: var(--text-xl);
   margin: 14px 0 12px;
 }
-.card p { color: var(--ink-dim); font-size: 14.5px; line-height: 1.7; }
+.card p { color: var(--ink); font-size: var(--text-sm); line-height: var(--leading-normal); }
 
 /* ---------- Closing ---------- */
 
@@ -490,10 +490,10 @@ main { position: relative; z-index: 10; }
   padding: 26px 32px;
   border-top: 1px solid var(--line);
   background: rgba(6,8,7,0.7);
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
 }
-.foot-meta { color: var(--ink-dim); text-transform: uppercase; }
+.foot-meta { color: var(--ink); text-transform: uppercase; }
 
 /* ---------- Responsive ---------- */
 
