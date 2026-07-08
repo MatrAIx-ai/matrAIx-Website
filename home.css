@@ -622,14 +622,14 @@ main { position: relative; z-index: 10; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) { .data-grid { grid-template-columns: 1fr; } }
-@media (max-width: 760px) {
+@media (max-width: 820px) {
   .nav { gap: 0; flex-wrap: nowrap; justify-content: space-between; }
   .brand { flex: 0; }
-  .nav-toggle { display: flex; order: 2; position: relative; z-index: 21; }
+  .nav-toggle { display: flex !important; order: 2; position: relative; z-index: 21; pointer-events: auto; }
   .nav-cta { display: none; }
   .nav-links {
     position: absolute; top: 100%; left: 0; right: 0; z-index: 20;
-    display: flex; flex-direction: column;
+    display: flex !important; flex-direction: column;
     gap: 0; padding: 0; margin-top: 0;
     max-height: 0; opacity: 0; visibility: hidden;
     overflow: hidden; transition: max-height 0.3s ease, opacity 0.3s ease, visibility 0.3s;
