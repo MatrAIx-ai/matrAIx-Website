@@ -16,8 +16,8 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--mono);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
   overflow-x: hidden;
   position: relative;
   min-height: 100vh;
@@ -98,19 +98,19 @@ body {
 }
 .brand-mark {
   color: var(--phos);
-  font-size: 20px;
+  font-size: var(--text-xl);
   text-shadow: var(--glow);
   animation: flick 4s infinite;
 }
 .brand-name {
   font-family: var(--disp);
-  font-weight: 600;
-  font-size: 22px;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  font-size: var(--text-2xl);
+  letter-spacing: var(--tracking-snug);
 }
 .brand-name em { color: var(--phos); font-style: normal; text-shadow: var(--glow); }
-.brand-name .tld { color: var(--ink-dim); font-weight: 500; }
-.brand-name.small { font-size: 16px; }
+.brand-name .tld { color: var(--ink); font-weight: 500; }
+.brand-name.small { font-size: var(--text-base); }
 
 .nav-toggle {
   display: none;
@@ -127,8 +127,8 @@ body {
   flex-shrink: 0;
   padding: 10px 18px;
   font-family: var(--mono);
-  font-size: 0.86rem;
-  letter-spacing: 0.06em;
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
 }
 .nav-toggle:hover {
@@ -139,14 +139,14 @@ body {
 .nav-links {
   display: flex;
   gap: 30px;
-  font-size: 13px;
-  letter-spacing: 0.04em;
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   flex: 1;
   justify-content: center;
 }
 .nav-links a {
-  color: var(--ink-dim);
+  color: var(--ink);
   text-decoration: none;
   position: relative;
   transition: color 0.25s;
