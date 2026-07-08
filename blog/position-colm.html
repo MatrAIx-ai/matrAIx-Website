@@ -22,7 +22,7 @@
       --bg-2:      #f8f9fa;
       --bg-3:      #f3f4f6;
       --ink:       #1a1a1a;
-      --ink-dim:   #6b7280;
+      --ink-dim:   #404040;
       --phos:      #0066cc;
       --phos-deep: #003d99;
       --amber:     #d97706;
@@ -34,6 +34,12 @@
 
       --mono: "JetBrains Mono", ui-monospace, monospace;
       --disp: "Neuton", Georgia, serif;
+    }
+
+    /* Ensure no grey text - use dark text everywhere */
+    body, p, li, span, div, a {
+      color: var(--ink);
+    }
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }

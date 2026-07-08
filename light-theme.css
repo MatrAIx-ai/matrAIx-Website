@@ -11,7 +11,7 @@
   --bg-2:      #f8f9fa;
   --bg-3:      #f3f4f6;
   --ink:       #1a1a1a;      /* primary text */
-  --ink-dim:   #6b7280;      /* muted text */
+  --ink-dim:   #404040;      /* muted text - darker for better readability */
   --phos:      #0066cc;      /* accent */
   --phos-deep: #003d99;
   --amber:     #d97706;      /* warning accent */
@@ -164,6 +164,11 @@
 
 /* ---------- Specific component adjustments for light theme ---------- */
 
+/* Ensure no grey text - use dark text everywhere */
+body, p, li, span, div, a {
+  color: var(--ink);
+}
+
 .dot {
   background: var(--ink-dim);
 }
@@ -177,8 +182,9 @@
   border: 1px solid rgba(0,102,204,0.3);
 }
 
+/* Navigation links - use dark ink for better contrast */
 .nav-links a {
-  color: var(--ink-dim);
+  color: var(--ink);
 }
 
 .nav-links a:hover {
@@ -188,6 +194,13 @@
 .nav-links a::after {
   background: var(--phos);
   box-shadow: 0 0 8px rgba(0,102,204,0.4);
+}
+
+/* Labels and secondary text - still dark but slightly muted if needed */
+.label, .caption, .subtitle, .description,
+.hero-eyebrow, .panel-head p, .subhead,
+.tele-label, .stat-cap {
+  color: var(--ink);
 }
 
 /* ---------- Typography: Apply Neuton serif to all text except brand logo ---------- */
