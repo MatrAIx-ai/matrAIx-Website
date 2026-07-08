@@ -15,16 +15,15 @@
   <link rel="stylesheet" href="benchmark.css?v=15" />
   <link rel="stylesheet" href="light-theme.css" />
   <style>
-  :root { --ink-dim: #d0d0d0; }
-  .os-explain .ex-url{color:var(--ink-dim)}
+  .os-explain .ex-url{color:var(--ink)}
   /* --- self-defined evaluation metrics --- */
   .metric-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:9px 14px;border-bottom:1px solid var(--line-soft)}
   .metric-bar .mb-lab{font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--phos)}
-  .metric-bar .mb-hint{font-size:.76rem;color:var(--ink-dim)}
+  .metric-bar .mb-hint{font-size:.76rem;color:var(--ink)}
   .metric-bar .mb-grow{flex:1;min-width:8px}
   .metric-pick{position:relative}
   .metric-input{font-family:var(--mono);font-size:.8rem;color:var(--ink);background:var(--bg);border:1px solid var(--line-soft);padding:6px 9px;min-width:170px;width:230px;max-width:46vw}
-  .metric-input::placeholder{color:var(--ink-dim)}
+  .metric-input::placeholder{color:var(--ink)}
   .metric-input:focus{outline:none;border-color:var(--phos);box-shadow:inset 0 0 10px rgba(59,169,255,.08)}
   .metric-menu{position:absolute;top:calc(100% + 4px);right:0;width:min(330px,82vw);max-height:280px;overflow:auto;background:var(--bg-2);border:1px solid var(--line);box-shadow:0 12px 34px rgba(0,0,0,.55);z-index:60;padding:4px}
   .metric-menu[hidden]{display:none}
@@ -34,9 +33,9 @@
   .metric-menu .mo mark{background:transparent;color:var(--phos);font-weight:700}
   .metric-menu .mo-add{color:var(--phos);border-bottom:1px solid var(--line-soft);margin-bottom:2px}
   .metric-menu .mo-add b{color:var(--ink)}
-  .metric-menu .metric-empty{padding:9px;color:var(--ink-dim);font-size:.78rem}
+  .metric-menu .metric-empty{padding:9px;color:var(--ink);font-size:.78rem}
   .fn-meta{display:flex;align-items:center;gap:7px}
-  .fn-x{width:16px;height:16px;line-height:1;padding:0;border:0;background:transparent;color:var(--ink-dim);cursor:pointer;font-size:.72rem;opacity:0;transition:opacity .15s,color .15s}
+  .fn-x{width:16px;height:16px;line-height:1;padding:0;border:0;background:transparent;color:var(--ink);cursor:pointer;font-size:.72rem;opacity:0;transition:opacity .15s,color .15s}
   .fnode:hover .fn-x{opacity:.8}
   .fn-x:hover{color:var(--rose);opacity:1}
   .fnodes.lone .fn-x{display:none}
@@ -50,16 +49,16 @@
   .apim-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 18px;border-bottom:1px solid var(--line-soft);background:var(--bg-3);position:sticky;top:0}
   .apim-bar .t{font-family:var(--disp);font-weight:800;font-size:1rem}
   .apim-bar .t b{color:var(--phos);text-shadow:var(--glow)}
-  .apim-x{background:transparent;border:1px solid var(--line-soft);color:var(--ink-dim);width:28px;height:28px;cursor:pointer;font-size:.86rem;transition:all .2s}
+  .apim-x{background:transparent;border:1px solid var(--line-soft);color:var(--ink);width:28px;height:28px;cursor:pointer;font-size:.86rem;transition:all .2s}
   .apim-x:hover{border-color:var(--phos);color:var(--phos)}
   .apim-in{padding:18px}
-  .apim-lead{color:var(--ink-dim);font-size:.9rem;line-height:1.5;max-width:640px;margin-bottom:18px}
+  .apim-lead{color:var(--ink);font-size:.9rem;line-height:1.5;max-width:640px;margin-bottom:18px}
   .apim-lead b{color:var(--ink)}
   /* connection animation */
   .apim-net{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin-bottom:14px}
   .apim-node{display:flex;flex-direction:column;align-items:center;gap:5px;padding:11px 16px;border:1px solid var(--line-soft);background:var(--bg-3);min-width:104px}
   .apim-node .ico{font-size:1.15rem;color:var(--phos)}
-  .apim-node span:last-child{font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim)}
+  .apim-node span:last-child{font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
   .apim-node.hub{border-color:var(--line);box-shadow:0 0 18px rgba(59,169,255,.12)}
   .apim-scrim.open .apim-node.hub .ico{animation:hubpulse 1.6s ease-in-out infinite}
   @keyframes hubpulse{0%,100%{text-shadow:0 0 6px rgba(59,169,255,.4)}50%{text-shadow:0 0 16px rgba(59,169,255,.9)}}
@@ -69,23 +68,23 @@
   .apim-scrim.open .apim-wire.w2 i{animation-delay:.6s}
   @keyframes wirepkt{0%{left:-4px;opacity:0}15%{opacity:1}85%{opacity:1}100%{left:54px;opacity:0}}
   .apim-feats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:18px}
-  .apim-feat{font-size:.78rem;color:var(--ink-dim);border:1px solid var(--line-soft);background:var(--bg-3);padding:6px 11px}
+  .apim-feat{font-size:.78rem;color:var(--ink);border:1px solid var(--line-soft);background:var(--bg-3);padding:6px 11px}
   .apim-feat b{color:var(--ink)}
   .apim-scrim.open .apim-feat{animation:featlit 5s ease infinite}
   .apim-scrim.open .apim-feat:nth-child(1){animation-delay:.3s}.apim-scrim.open .apim-feat:nth-child(2){animation-delay:.9s}
   .apim-scrim.open .apim-feat:nth-child(3){animation-delay:1.5s}.apim-scrim.open .apim-feat:nth-child(4){animation-delay:2.1s}
   .apim-scrim.open .apim-feat:nth-child(5){animation-delay:2.7s}
-  @keyframes featlit{0%,100%{border-color:var(--line-soft);color:var(--ink-dim);box-shadow:none}8%,16%{border-color:var(--phos);color:var(--ink);box-shadow:0 0 11px rgba(59,169,255,.3)}}
+  @keyframes featlit{0%,100%{border-color:var(--line-soft);color:var(--ink);box-shadow:none}8%,16%{border-color:var(--phos);color:var(--ink);box-shadow:0 0 11px rgba(59,169,255,.3)}}
   /* terminal */
   .apim-term{border:1px solid var(--line-soft);background:var(--bg);overflow:hidden}
-  .apim-term-bar{display:flex;align-items:center;gap:6px;padding:7px 11px;background:var(--bg-3);border-bottom:1px solid var(--line-soft);font-size:.74rem;color:var(--ink-dim);letter-spacing:.06em}
+  .apim-term-bar{display:flex;align-items:center;gap:6px;padding:7px 11px;background:var(--bg-3);border-bottom:1px solid var(--line-soft);font-size:.74rem;color:var(--ink);letter-spacing:.06em}
   .apim-term-bar .d{width:8px;height:8px;border-radius:50%;background:var(--line)}
   .apim-term-bar span:last-child{margin-left:auto}
   .apim-code{margin:0;padding:14px 16px;font-family:var(--mono);font-size:.84rem;line-height:1.65;color:var(--ink);white-space:pre;overflow-x:auto}
   .apim-code .cl{opacity:0}
   .apim-scrim.open .apim-code .cl{animation:clin .25s ease forwards;animation-delay:calc(.15s + var(--n,0) * .13s)}
   @keyframes clin{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
-  .apim-code .cm{color:var(--ink-dim)}
+  .apim-code .cm{color:var(--ink)}
   .apim-code .st{color:var(--phos)}
   .apim-code .kw{color:var(--cyan)}
   .apim-code .pr{color:var(--phos-deep)}
