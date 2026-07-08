@@ -13,8 +13,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="home.css?v=21" />
+  <link rel="stylesheet" href="light-theme.css" />
 </head>
 <body>
+  <!-- Theme toggle -->
+  <button class="theme-toggle" aria-label="Switch to light theme" title="Light mode">☀️</button>
+
   <!-- Background simulation layers -->
   <canvas id="sim" aria-hidden="true"></canvas>
   <div class="grain" aria-hidden="true"></div>
@@ -473,5 +477,6 @@
     });
   })();
   </script>
+  <script src="theme-toggle.js"></script>
 </body>
 </html>

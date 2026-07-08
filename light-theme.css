@@ -1,0 +1,228 @@
+/* ============================================================
+   matrAIx.ai — Light Theme
+   Clean white background with dark text and adjusted accents
+   ============================================================ */
+
+html[data-theme="light"] {
+  --bg:        #ffffff;
+  --bg-2:      #f8f9fa;
+  --ink:       #1a1a1a;      /* primary text */
+  --ink-dim:   #6b7280;      /* muted text */
+  --phos:      #0066cc;      /* accent */
+  --phos-deep: #003d99;
+  --amber:     #d97706;      /* warning accent */
+  --rose:      #dc2626;      /* fail accent */
+  --line:      rgba(0, 102, 204, 0.12);
+  --line-soft: rgba(0, 102, 204, 0.06);
+  --glow:      0 0 22px rgba(0, 102, 204, 0.25);
+}
+
+/* ---------- Header ---------- */
+
+html[data-theme="light"] .nav {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.92), rgba(255,255,255,0));
+  border-bottom: 1px solid var(--line-soft);
+  backdrop-filter: blur(8px);
+}
+
+html[data-theme="light"] .nav-toggle {
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+html[data-theme="light"] .nav-toggle:hover {
+  border-color: var(--phos);
+  color: var(--phos);
+}
+
+/* ---------- Background layers ---------- */
+
+html[data-theme="light"] #sim {
+  opacity: 0.3;
+}
+
+html[data-theme="light"] .grain {
+  opacity: 0.02;
+}
+
+html[data-theme="light"] .scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0px,
+    rgba(0,0,0,0) 2px,
+    rgba(0,0,0,0.03) 3px,
+    rgba(0,0,0,0) 4px
+  );
+  opacity: 0.3;
+}
+
+html[data-theme="light"] .vignette {
+  background: radial-gradient(120% 90% at 50% 35%, transparent 45%, rgba(0,0,0,0.08) 100%);
+}
+
+/* ---------- Buttons ---------- */
+
+html[data-theme="light"] .btn-ghost:hover {
+  border-color: var(--phos);
+  color: var(--phos);
+  box-shadow: inset 0 0 18px rgba(0,102,204,0.06), 0 0 14px rgba(0,102,204,0.1);
+}
+
+html[data-theme="light"] .btn-solid {
+  background: var(--phos);
+  color: #ffffff;
+  border-color: var(--phos);
+}
+
+html[data-theme="light"] .btn-solid:hover {
+  background: #0052a3;
+  box-shadow: 0 0 40px rgba(0,102,204,0.3);
+}
+
+/* ---------- Cards & Panels ---------- */
+
+html[data-theme="light"] .card {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+}
+
+html[data-theme="light"] .card:hover {
+  background: #eff1f5;
+  transform: translateY(-4px);
+}
+
+html[data-theme="light"] .telemetry {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(6px);
+}
+
+html[data-theme="light"] .tele-cell {
+  border-right: 1px solid var(--line-soft);
+}
+
+html[data-theme="light"] .panel {
+  border-top: 1px solid var(--line-soft);
+}
+
+html[data-theme="light"] .closing {
+  border-top: 1px solid var(--line-soft);
+}
+
+html[data-theme="light"] .foot {
+  border-top: 1px solid var(--line);
+  background: rgba(255,255,255,0.8);
+}
+
+/* ---------- Behavior grid & status indicators ---------- */
+
+html[data-theme="light"] .cell {
+  background: rgba(0,102,204,0.05);
+  border: 1px solid var(--line-soft);
+}
+
+html[data-theme="light"] .cell.pass {
+  background: var(--phos);
+  box-shadow: 0 0 8px rgba(0,102,204,0.4);
+}
+
+html[data-theme="light"] .cell.watch {
+  background: var(--amber);
+  box-shadow: 0 0 8px rgba(217,119,6,0.4);
+}
+
+html[data-theme="light"] .cell.fail {
+  background: var(--rose);
+  box-shadow: 0 0 8px rgba(220,38,38,0.4);
+}
+
+html[data-theme="light"] .sw-idle {
+  background: rgba(0,102,204,0.08);
+  border: 1px solid var(--line);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 820px) {
+  html[data-theme="light"] .nav-links {
+    background: linear-gradient(to bottom, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
+    border-bottom: 1px solid var(--line-soft);
+  }
+}
+
+/* ---------- Specific component adjustments for light theme ---------- */
+
+html[data-theme="light"] .dot {
+  background: var(--ink-dim);
+}
+
+html[data-theme="light"] .dot.live {
+  background: var(--phos);
+  box-shadow: 0 0 8px rgba(0,102,204,0.5);
+}
+
+html[data-theme="light"] .hero-eyebrow .ver {
+  border: 1px solid rgba(0,102,204,0.3);
+}
+
+html[data-theme="light"] .nav-links a {
+  color: var(--ink-dim);
+}
+
+html[data-theme="light"] .nav-links a:hover {
+  color: var(--phos);
+}
+
+html[data-theme="light"] .nav-links a::after {
+  background: var(--phos);
+  box-shadow: 0 0 8px rgba(0,102,204,0.4);
+}
+
+/* Theme toggle button */
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+html[data-theme="light"] .theme-toggle {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.theme-toggle:hover {
+  border-color: var(--phos);
+  box-shadow: 0 0 14px rgba(59,169,255,0.2);
+  transform: scale(1.05);
+}
+
+html[data-theme="light"] .theme-toggle:hover {
+  border-color: var(--phos);
+  box-shadow: 0 0 14px rgba(0,102,204,0.2);
+}
+
+@media (max-width: 480px) {
+  .theme-toggle {
+    top: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+}

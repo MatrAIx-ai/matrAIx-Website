@@ -13,7 +13,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="benchmark.css?v=15" />
+  <link rel="stylesheet" href="light-theme.css" />
   <style>
+  :root { --ink-dim: #d0d0d0; }
   .os-explain .ex-url{color:var(--ink-dim)}
   /* --- self-defined evaluation metrics --- */
   .metric-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:9px 14px;border-bottom:1px solid var(--line-soft)}
@@ -96,6 +98,8 @@
   </style>
 </head>
 <body class="os">
+  <button class="theme-toggle" aria-label="Switch to light theme" title="Light mode">☀️</button>
+
   <div class="grain" aria-hidden="true"></div>
   <div class="scanlines" aria-hidden="true"></div>
 
@@ -425,5 +429,6 @@
     </div>
   </section>
 
+  <script src="theme-toggle.js"></script>
 </body>
 </html>

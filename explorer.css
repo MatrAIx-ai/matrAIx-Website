@@ -20,7 +20,7 @@
 .ex-head { margin-bottom: 46px; }
 .ex-title {
   font-family: var(--disp);
-  font-weight: 800;
+  font-weight: 600;
   font-size: clamp(2.2rem, 6vw, 4.4rem);
   letter-spacing: -0.03em;
   line-height: 0.95;
@@ -54,7 +54,7 @@
 .stat:last-child { border-right: none; }
 .stat-val {
   font-family: var(--disp);
-  font-weight: 800;
+  font-weight: 600;
   font-size: clamp(1.3rem, 2.6vw, 2rem);
   color: var(--phos);
   text-shadow: 0 0 14px rgba(59,169,255,0.3);
@@ -116,10 +116,14 @@
   color: #04121f;
   background: var(--phos);
   border-color: var(--phos);
-  font-weight: 700;
+  font-weight: 600;
   box-shadow: 0 0 16px rgba(59,169,255,0.3);
 }
 .chip .chip-n { opacity: 0.6; margin-left: 6px; }
+
+:root {
+  --ink-dim: #d0d0d0 !important;
+}
 
 /* ---------- Dimension grid ---------- */
 .ex-grid {
@@ -175,7 +179,7 @@
 }
 .dim-label {
   font-family: var(--disp);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.25rem;
   margin: 8px 0 6px;
   letter-spacing: -0.01em;
@@ -265,7 +269,7 @@
   font-size: 11px; letter-spacing: 0.14em; color: var(--phos);
 }
 .drawer-name {
-  font-family: var(--disp); font-weight: 800;
+  font-family: var(--disp); font-weight: 600;
   font-size: 1.7rem; letter-spacing: -0.02em;
   margin: 12px 0 6px; line-height: 1.05;
 }

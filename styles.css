@@ -7,7 +7,7 @@
   --bg:        #060807;
   --bg-2:      #0a0e0c;
   --ink:       #d6e6d8;      /* primary text */
-  --ink-dim:   #6f8273;      /* muted text */
+  --ink-dim:   #d0d0d0;      /* muted text */
   --phos:      #3ba9ff;      /* accent */
   --phos-deep: #1d5fa6;
   --amber:     #ffb547;      /* warning accent */
@@ -116,12 +116,12 @@ body {
 }
 .brand-name {
   font-family: var(--disp);
-  font-weight: 800;
+  font-weight: 600;
   font-size: 22px;
   letter-spacing: -0.02em;
 }
 .brand-name em { color: var(--phos); font-style: normal; text-shadow: var(--glow); }
-.brand-name .tld { color: var(--ink-dim); font-weight: 600; }
+.brand-name .tld { color: var(--ink-dim); font-weight: 500; }
 .brand-name.small { font-size: 16px; }
 
 .nav-toggle {
@@ -203,7 +203,7 @@ body {
   background: var(--phos);
   color: #04121f;
   border-color: var(--phos);
-  font-weight: 700;
+  font-weight: 600;
   box-shadow: 0 0 26px rgba(59,169,255,0.32);
 }
 .btn-solid:hover {
@@ -270,7 +270,7 @@ main { position: relative; z-index: 10; }
 
 .headline {
   font-family: var(--disp);
-  font-weight: 800;
+  font-weight: 600;
   line-height: 0.92;
   letter-spacing: -0.03em;
   margin-bottom: 34px;
@@ -293,7 +293,7 @@ main { position: relative; z-index: 10; }
 }
 .megacount .count {
   font-family: var(--disp);
-  font-weight: 800;
+  font-weight: 600;
   font-size: clamp(3rem, 13vw, 10.5rem);
   line-height: 0.85;
   color: var(--phos);
@@ -374,7 +374,7 @@ main { position: relative; z-index: 10; }
 }
 .tele-val {
   font-size: clamp(1.1rem, 2.2vw, 1.6rem);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--phos);
   text-shadow: 0 0 14px rgba(59,169,255,0.3);
   font-variant-numeric: tabular-nums;
@@ -408,7 +408,7 @@ main { position: relative; z-index: 10; }
 }
 .panel-head h2 {
   font-family: var(--disp);
-  font-weight: 700;
+  font-weight: 600;
   font-size: clamp(1.7rem, 4vw, 2.8rem);
   letter-spacing: -0.02em;
   margin: 10px 0 12px;
@@ -466,7 +466,7 @@ main { position: relative; z-index: 10; }
 .card-no { color: var(--phos); font-size: 13px; letter-spacing: 0.1em; }
 .card h3 {
   font-family: var(--disp);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.5rem;
   margin: 14px 0 12px;
 }
@@ -483,7 +483,7 @@ main { position: relative; z-index: 10; }
 }
 .closing h2 {
   font-family: var(--disp);
-  font-weight: 800;
+  font-weight: 600;
   font-size: clamp(2rem, 6vw, 4.2rem);
   letter-spacing: -0.03em;
   line-height: 1;
