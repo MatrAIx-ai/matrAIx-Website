@@ -78,7 +78,7 @@
   top: 0;
   z-index: 12;
   padding: 18px 0;
-  background: linear-gradient(to bottom, var(--bg) 70%, rgba(6,8,7,0));
+  background: linear-gradient(to bottom, var(--bg) 70%, rgba(255,255,255,0));
 }
 .ex-search {
   font-family: var(--mono);
@@ -92,7 +92,7 @@
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-.ex-search::placeholder { color: var(--ink-dim); }
+.ex-search::placeholder { color: var(--ink); }
 .ex-search:focus {
   border-color: var(--phos);
   box-shadow: 0 0 0 1px var(--phos), 0 0 16px rgba(59,169,255,0.15);
@@ -103,7 +103,7 @@
   font-size: 12px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--ink-dim);
+  color: var(--ink);
   background: transparent;
   border: 1px solid var(--line-soft);
   padding: 8px 14px;
@@ -120,9 +120,6 @@
 }
 .chip .chip-n { opacity: 0.6; margin-left: 6px; }
 
-:root {
-  --ink-dim: #d0d0d0 !important;
-}
 
 /* ---------- Dimension grid ---------- */
 .ex-grid {
@@ -140,7 +137,7 @@
 }
 .dim-card:hover {
   border-color: var(--line);
-  background: #0d1411;
+  background: var(--bg-3);
   transform: translateY(-3px);
 }
 .dim-card.open { border-color: var(--phos); box-shadow: 0 0 0 1px rgba(59,169,255,0.25); }
@@ -230,7 +227,7 @@
 
 .ex-empty {
   text-align: center;
-  color: var(--ink-dim);
+  color: var(--ink);
   padding: 60px 0;
   font-size: 14px;
 }
@@ -240,7 +237,7 @@
   position: fixed;
   inset: 0;
   z-index: 30;
-  background: rgba(3,5,4,0.7);
+  background: rgba(0,0,0,0.3);
   backdrop-filter: blur(3px);
   animation: fade 0.3s;
 }
