@@ -27,6 +27,31 @@
   --font-disp:  "Neuton", Georgia, serif;
   --mono:       "JetBrains Mono", ui-monospace, monospace;
   --disp:       "Neuton", Georgia, serif;
+
+  /* Modern Typography Scale (1.25 ratio) */
+  --text-xs:   0.64rem;   /* 10px */
+  --text-sm:   0.8rem;    /* 12px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg:   1.25rem;   /* 20px */
+  --text-xl:   1.56rem;   /* 25px */
+  --text-2xl:  1.95rem;   /* 31px */
+  --text-3xl:  2.44rem;   /* 39px */
+  --text-4xl:  3.05rem;   /* 49px */
+  --text-5xl:  3.81rem;   /* 61px */
+
+  /* Line Heights */
+  --leading-tight:  1.1;
+  --leading-snug:   1.2;
+  --leading-normal: 1.6;
+  --leading-loose:  1.8;
+
+  /* Letter Spacing */
+  --tracking-tight:   -0.02em;
+  --tracking-snug:    -0.01em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.05em;
+  --tracking-wider:   0.1em;
+  --tracking-widest:  0.15em;
 }
 
 /* ---------- Header ---------- */
