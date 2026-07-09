@@ -81,7 +81,7 @@
   background: linear-gradient(to bottom, var(--bg) 70%, rgba(255,255,255,0));
 }
 .ex-search {
-  font-family: var(--mono);
+  font-family: var(--disp);
   font-size: var(--text-sm);
   color: var(--ink);
   background: var(--bg-2);
@@ -99,7 +99,7 @@
 }
 .ex-chips { display: flex; gap: 8px; flex-wrap: wrap; }
 .chip {
-  font-family: var(--mono);
+  font-family: var(--disp);
   font-size: var(--text-xs);
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;

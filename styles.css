@@ -15,7 +15,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--mono);
+  font-family: var(--disp);
   font-size: var(--text-base);
   line-height: var(--leading-normal);
   overflow-x: hidden;
@@ -134,7 +134,7 @@ body {
   transition: all 0.25s ease;
   flex-shrink: 0;
   padding: 10px 18px;
-  font-family: var(--mono);
+  font-family: var(--disp);
   font-size: var(--text-sm);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
@@ -174,7 +174,7 @@ body {
 /* ---------- Buttons ---------- */
 
 .btn {
-  font-family: var(--mono);
+  font-family: var(--disp);
   font-size: var(--text-xs);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
@@ -297,7 +297,7 @@ main { position: relative; z-index: 10; }
   font-variant-numeric: tabular-nums;
 }
 .megacount .count-unit {
-  font-family: var(--mono);
+  font-family: var(--disp);
   font-size: clamp(var(--text-base), 2vw, var(--text-xl));
   font-weight: 400;
   letter-spacing: var(--tracking-wide);
@@ -307,7 +307,7 @@ main { position: relative; z-index: 10; }
 
 .headline .line-3 {
   display: block;
-  font-family: var(--mono);
+  font-family: var(--disp);
   font-weight: 500;
   font-size: clamp(var(--text-base), 2vw, var(--text-xl));
   letter-spacing: var(--tracking-wide);
