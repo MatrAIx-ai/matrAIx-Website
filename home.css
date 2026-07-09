@@ -70,7 +70,19 @@ body {
   border-bottom: 1px solid var(--line-soft);
   gap: 20px;
 }
-.brand { flex-shrink: 0; }
+.brand { flex-shrink: 0; display: flex; align-items: center; gap: 6px; }
+.brand-mark { display: none; }
+.brand-name em {
+  background: linear-gradient(90deg, #a855f7, #5089B8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientFlow 3s ease-in-out infinite;
+}
+@keyframes gradientFlow {
+  0%, 100% { background: linear-gradient(90deg, #a855f7, #5089B8); }
+  50% { background: linear-gradient(90deg, #5089B8, #a855f7); }
+}
 .nav-toggle {
   display: none; align-items: center; justify-content: center;
   width: auto; height: auto; background: transparent; border: 1px solid var(--line);

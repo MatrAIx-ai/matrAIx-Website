@@ -78,10 +78,7 @@
     }
 
     .brand-mark {
-      color: var(--phos);
-      font-size: 1.25rem;
-      text-shadow: var(--glow);
-      animation: flick 4s infinite;
+      display: none;
     }
 
     .brand-name {
@@ -91,7 +88,19 @@
       letter-spacing: -0.02em;
     }
 
-    .brand-name em { color: var(--phos); font-style: normal; text-shadow: var(--glow); }
+    .brand-name em {
+      background: linear-gradient(90deg, #a855f7, #5089B8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-style: normal;
+      animation: gradientFlow 3s ease-in-out infinite;
+    }
+
+    @keyframes gradientFlow {
+      0%, 100% { background: linear-gradient(90deg, #a855f7, #5089B8); }
+      50% { background: linear-gradient(90deg, #5089B8, #a855f7); }
+    }
     .brand-name .tld { color: var(--ink-dim); font-weight: 600; }
 
     @keyframes flick { 0%, 10%, 90%, 100% { opacity: 1; } 45%, 55% { opacity: 0.5; } }
@@ -631,7 +640,6 @@
   <!-- Navigation -->
   <header>
     <a class="brand" href="/">
-      <span class="brand-mark">▚</span>
       <span class="brand-name">Matr<em>AI</em>x</span>
     </a>
     <nav>
@@ -724,7 +732,7 @@
   <footer>
     <p style="margin-bottom: 16px;">
       <span class="brand" style="font-size: 1rem;">
-        <span class="brand-mark">▚</span>
+        
         <span class="brand-name">Matr<em>AI</em>x</span>
       </span> — Agent Simulation for Evaluation
     </p>
