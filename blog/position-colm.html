@@ -23,14 +23,14 @@
       --bg-3:      #f3f4f6;
       --ink:       #1a1a1a;
       --ink-dim:   #404040;
-      --phos:      #1B2A41;
-      --phos-deep: #0F1823;
+      --phos:      #5089B8;
+      --phos-deep: #3d6a8a;
       --amber:     #d97706;
       --rose:      #dc2626;
-      --cyan:      #4E7A82;
-      --line:      rgba(27, 42, 65, 0.12);
-      --line-soft: rgba(27, 42, 65, 0.06);
-      --glow:      0 0 22px rgba(27, 42, 65, 0.25);
+      --cyan:      #5db8d8;
+      --line:      rgba(80, 137, 184, 0.12);
+      --line-soft: rgba(80, 137, 184, 0.06);
+      --glow:      0 0 22px rgba(80, 137, 184, 0.25);
 
       --mono: "JetBrains Mono", ui-monospace, monospace;
       --disp: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -47,7 +47,7 @@
     body {
       background: var(--bg);
       color: var(--ink);
-      font-family: var(--mono);
+      font-family: var(--disp);
       font-size: 16px;
       line-height: 1.7;
       overflow-x: hidden;
@@ -94,8 +94,20 @@
       letter-spacing: -0.02em;
     }
 
-    .brand-name em { color: var(--phos); font-style: normal; text-shadow: var(--glow); }
+    .brand-name em {
+      font-style: normal;
+      background: linear-gradient(90deg, #8b5cf6, #5089B8);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 4s ease-in-out infinite;
+    }
     .brand-name .tld { color: var(--ink-dim); font-weight: 600; }
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+    }
 
     @keyframes flick { 0%, 10%, 90%, 100% { opacity: 1; } 45%, 55% { opacity: 0.5; } }
 
@@ -338,7 +350,7 @@
   <header>
     <a class="brand" href="/">
       
-      <span class="brand-name">Matr<em>AI</em>x<span class="tld">.ai</span></span>
+      <span class="brand-name">Matr<em>AI</em>x</span>
     </a>
     <nav>
       <a href="/">Home</a>
@@ -409,7 +421,7 @@
     <p style="margin-bottom: 16px;">
       <span class="brand" style="font-size: 1rem;">
         
-        <span class="brand-name">Matr<em>AI</em>x<span class="tld">.ai</span></span>
+        <span class="brand-name">Matr<em>AI</em>x</span>
       </span> — Agent Simulation for Evaluation
     </p>
     <p>
