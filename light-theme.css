@@ -3,7 +3,7 @@
    Clean white background with dark text and adjusted accents
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,200;0,300;0,400;0,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 :root {
   /* Colors - Light Theme (Default) */
@@ -22,11 +22,11 @@
   --glow:      0 0 22px rgba(0, 61, 122, 0.25);
 
   /* Typography - Easy to customize */
-  --font-serif: "Neuton", Georgia, serif;
+  --font-serif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono:  "JetBrains Mono", ui-monospace, monospace;
-  --font-disp:  "Neuton", Georgia, serif;
+  --font-disp:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --mono:       "JetBrains Mono", ui-monospace, monospace;
-  --disp:       "Neuton", Georgia, serif;
+  --disp:       "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   /* Modern Typography Scale (1.25 ratio) */
   --text-xs:   0.64rem;   /* 10px */
