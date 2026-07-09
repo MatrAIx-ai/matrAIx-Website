@@ -31,8 +31,8 @@
     document.documentElement.setAttribute('data-theme', theme);
     document.documentElement.style.colorScheme = theme;
 
-    // Save preference
-    localStorage.setItem(THEME_KEY, theme);
+    // Save preference (wrapped: localStorage can throw in iOS Safari Private mode)
+    try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
 
     // Update button
     updateToggleButton(isDark);
