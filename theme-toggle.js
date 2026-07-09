@@ -15,11 +15,11 @@
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? DARK : LIGHT;
   }
 
-  // Get current theme (saved preference or system default)
+  // Get current theme (saved preference, else default to dark)
   function getCurrentTheme() {
     const saved = localStorage.getItem(THEME_KEY);
     if (saved) return saved;
-    return getSystemTheme();
+    return DARK;
   }
 
   // Apply theme to document and dispatch event
@@ -60,13 +60,8 @@
     const theme = getCurrentTheme();
     setTheme(theme);
 
-    // Listen for system preference changes (only if user hasn't set preference)
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    mediaQuery.addEventListener('change', (e) => {
-      if (!localStorage.getItem(THEME_KEY)) {
-        setTheme(e.matches ? DARK : LIGHT);
-      }
-    });
+    // Default is dark; we intentionally do NOT auto-switch with the system
+    // preference so the site stays dark unless the user picks light.
 
     // Setup toggle button click handler
     const btn = document.getElementById('theme-toggle');

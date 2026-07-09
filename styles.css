@@ -513,6 +513,8 @@ main { position: relative; z-index: 10; }
   .brand { flex: 0; }
   .nav-toggle { display: flex; order: 2; }
   .nav-cta { display: none; }
+  /* Keep the dark/light theme toggle visible on mobile, left of the menu button */
+  #theme-toggle.nav-cta { display: inline-flex !important; order: 1; margin-left: auto; margin-right: 10px; }
   .nav-links {
     position: absolute;
     top: 100%;
