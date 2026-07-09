@@ -72,16 +72,18 @@ body {
 .brand { flex-shrink: 0; display: flex; align-items: center; gap: 6px; }
 .brand-mark { display: none; }
 .brand-name em {
-  background: linear-gradient(90deg, #a855f7 0%, #5089B8 100%);
-  background-size: 200% 200%;
+  font-style: normal;
+  background: linear-gradient(90deg, #a855f7, #5089B8);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradientFlow 4s ease-in-out infinite;
+  animation: gradientShift 4s ease-in-out infinite;
 }
-@keyframes gradientFlow {
-  0%, 100% { background-position: 0% center; }
-  50% { background-position: 100% center; }
+@keyframes gradientShift {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 0%; }
+  100% { background-position: 0% 0%; }
 }
 .nav-toggle {
   display: none; align-items: center; justify-content: center;
