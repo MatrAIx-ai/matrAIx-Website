@@ -16,7 +16,7 @@
   --phos-deep: #0F1823;      /* deeper accent - darker slate blue */
   --amber:     #d97706;      /* warning accent */
   --rose:      #dc2626;      /* fail accent */
-  --cyan:      #3D5A7D;      /* adjusted cyan to match slate blue palette */
+  --cyan:      #4E7A82;      /* data/highlight - muted cyan-blue */
   --line:      rgba(27, 42, 65, 0.12);
   --line-soft: rgba(27, 42, 65, 0.06);
   --glow:      0 0 22px rgba(27, 42, 65, 0.25);
