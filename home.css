@@ -56,7 +56,6 @@ body {
   font-family: var(--disp); font-weight: 700; font-size: var(--text-2xl);
   letter-spacing: -0.02em;
 }
-.brand-name em { color: var(--phos); font-style: normal; text-shadow: var(--glow); }
 .brand-name .tld { color: var(--ink); font-weight: 500; }
 .brand-name.small { font-size: var(--text-base); }
 @keyframes flick { 0%, 10%, 90%, 100% { opacity: 1; } 45%, 55% { opacity: 0.5; } }
