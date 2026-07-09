@@ -26,14 +26,10 @@
   function setTheme(theme) {
     const isDark = theme === DARK;
 
-    // Update DOM
-    if (isDark) {
-      document.documentElement.setAttribute('data-theme', DARK);
-      document.documentElement.style.colorScheme = 'dark';
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-      document.documentElement.style.colorScheme = 'light';
-    }
+    // Always set data-theme attribute explicitly (don't remove it)
+    // This ensures manual theme choice overrides system preference
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
 
     // Save preference
     localStorage.setItem(THEME_KEY, theme);
