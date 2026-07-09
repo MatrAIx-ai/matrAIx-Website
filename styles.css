@@ -185,7 +185,7 @@ body {
 .btn-ghost:hover {
   border-color: var(--phos);
   color: var(--phos);
-  box-shadow: inset 0 0 18px rgba(59,169,255,0.08), 0 0 14px rgba(59,169,255,0.12);
+  box-shadow: inset 0 0 18px rgba(80,137,184,0.08), 0 0 14px rgba(80,137,184,0.12);
 }
 .btn-solid {
   background: var(--phos);
@@ -284,7 +284,7 @@ main { position: relative; z-index: 10; }
   font-size: clamp(2.44rem, 10vw, 3.81rem);
   line-height: var(--leading-tight);
   color: var(--phos);
-  text-shadow: 0 0 38px rgba(59,169,255,0.4);
+  text-shadow: 0 0 38px rgba(80,137,184,0.4);
   letter-spacing: var(--tracking-tight);
   font-variant-numeric: tabular-nums;
 }
@@ -363,7 +363,7 @@ main { position: relative; z-index: 10; }
   font-size: clamp(var(--text-lg), 2vw, var(--text-xl));
   font-weight: 700;
   color: var(--phos);
-  text-shadow: 0 0 14px rgba(59,169,255,0.3);
+  text-shadow: 0 0 14px rgba(80,137,184,0.3);
   font-variant-numeric: tabular-nums;
 }
 
@@ -412,11 +412,11 @@ main { position: relative; z-index: 10; }
 }
 .cell {
   aspect-ratio: 1;
-  background: rgba(59,169,255,0.05);
+  background: rgba(80,137,184,0.05);
   border: 1px solid var(--line-soft);
   transition: background 0.5s, box-shadow 0.5s;
 }
-.cell.pass  { background: var(--phos);  box-shadow: 0 0 8px rgba(59,169,255,0.6); }
+.cell.pass  { background: var(--phos);  box-shadow: 0 0 8px rgba(80,137,184,0.6); }
 .cell.watch { background: var(--amber); box-shadow: 0 0 8px rgba(255,181,71,0.5); }
 .cell.fail  { background: var(--rose);  box-shadow: 0 0 8px rgba(255,92,108,0.5); }
 
@@ -434,7 +434,7 @@ main { position: relative; z-index: 10; }
 .sw-pass  { background: var(--phos); }
 .sw-watch { background: var(--amber); }
 .sw-fail  { background: var(--rose); }
-.sw-idle  { background: rgba(59,169,255,0.12); border: 1px solid var(--line); }
+.sw-idle  { background: rgba(80,137,184,0.12); border: 1px solid var(--line); }
 
 /* Eval cards */
 .cards {

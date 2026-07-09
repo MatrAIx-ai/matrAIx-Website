@@ -71,10 +71,10 @@
   background: var(--bg-2);
   transition: border-color 0.15s, background 0.15s, transform 0.1s;
 }
-.q-opt:hover { border-color: var(--phos-deep); background: rgba(59, 169, 255, 0.05); transform: translateY(-1px); }
+.q-opt:hover { border-color: var(--phos-deep); background: rgba(80, 137, 184, 0.05); transform: translateY(-1px); }
 .q-opt.chosen {
   border-color: var(--phos);
-  background: rgba(59, 169, 255, 0.10);
+  background: rgba(80, 137, 184, 0.10);
   box-shadow: inset 0 0 0 1px var(--phos-deep);
 }
 
@@ -173,7 +173,7 @@
   border: 1px solid var(--phos);
   border-radius: 16px;
   padding: 22px 22px 20px;
-  background: linear-gradient(180deg, rgba(59,169,255,0.06), var(--bg-2));
+  background: linear-gradient(180deg, rgba(80,137,184,0.06), var(--bg-2));
   box-shadow: var(--glow);
 }
 .pv-eyebrow {
@@ -215,7 +215,7 @@
   border: 1px solid var(--line-soft);
   border-radius: 9px;
   padding: 8px 10px;
-  background: rgba(59, 169, 255, 0.03);
+  background: rgba(80, 137, 184, 0.03);
 }
 .trait-k {
   font-size: var(--text-xs);
