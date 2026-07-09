@@ -149,6 +149,7 @@ body {
 .nav-links {
   display: flex;
   gap: 30px;
+  font-family: var(--disp);
   font-size: var(--text-sm);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
