@@ -1,5 +1,5 @@
 /* ============================================================
-   matrAIx.ai — Dark Theme (Auto-detected)
+   matrAIx.ai — Dark Theme (Auto-detected or explicit)
    Dark background with white text
    ============================================================ */
 
@@ -9,6 +9,24 @@ html.theme-transitioning * {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
+/* Light theme override - highest priority (overrides media query) */
+[data-theme="light"] {
+  --bg:        #ffffff !important;
+  --bg-2:      #f8f9fa !important;
+  --bg-3:      #f3f4f6 !important;
+  --ink:       #1a1a1a !important;
+  --ink-dim:   #404040 !important;
+  --phos:      #4A8FC2 !important;
+  --phos-deep: #365B8F !important;
+  --amber:     #d97706 !important;
+  --rose:      #dc2626 !important;
+  --cyan:      #6BC0E8 !important;
+  --line:      rgba(74, 143, 194, 0.12) !important;
+  --line-soft: rgba(74, 143, 194, 0.06) !important;
+  --glow:      0 0 22px rgba(74, 143, 194, 0.25) !important;
+}
+
+/* Dark mode: system preference */
 @media (prefers-color-scheme: dark) {
   :root {
     /* Colors - Dark Theme */
