@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="styles.css?v=6" />
   <link rel="stylesheet" href="explorer.css?v=6" />
   <link rel="stylesheet" href="light-theme.css?v=3" />
+  <link rel="stylesheet" href="dark-theme.css?v=1" />
 </head>
 <body class="explorer-body">
   <div class="grain" aria-hidden="true"></div>
@@ -33,6 +34,9 @@
     </nav>
     <button class="nav-toggle" aria-label="Toggle navigation menu">
       Menu
+    </button>
+    <button id="theme-toggle" class="btn btn-ghost nav-cta" style="padding: 8px 14px; border: 1px solid var(--line); background: transparent; min-width: auto;">
+      🌙
     </button>
     <a href="access.html" class="btn btn-solid nav-cta">
       <span class="dot live"></span> Join community
@@ -129,5 +133,6 @@
 
   <script src="dimensions.js?v=5"></script>
   <script src="explorer.js?v=5"></script>
+  <script src="theme-toggle.js"></script>
 </body>
 </html>

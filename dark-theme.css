@@ -1,0 +1,301 @@
+/* ============================================================
+   matrAIx.ai — Dark Theme (Auto-detected)
+   Dark background with white text
+   ============================================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Colors - Dark Theme */
+    --bg:        #0a0a0a;      /* near-black background */
+    --bg-2:      #1a1a1a;      /* slightly lighter dark */
+    --bg-3:      #262626;      /* darker cards */
+    --ink:       #f5f5f5;      /* primary text - white */
+    --ink-dim:   #b0b0b0;      /* muted text - lighter grey */
+    --phos:      #4A8FC2;      /* accent remains same saturated blue */
+    --phos-deep: #365B8F;      /* deeper accent */
+    --amber:     #d97706;      /* warning accent */
+    --rose:      #dc2626;      /* fail accent */
+    --cyan:      #6BC0E8;      /* data/highlight - cyan-blue */
+    --line:      rgba(74, 143, 194, 0.2);
+    --line-soft: rgba(74, 143, 194, 0.1);
+    --glow:      0 0 22px rgba(74, 143, 194, 0.35);
+  }
+
+  /* ---------- Header ---------- */
+
+  .nav {
+    background: linear-gradient(to bottom, rgba(10,10,10,0.92), rgba(10,10,10,0));
+    border-bottom: 1px solid var(--line-soft);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-toggle {
+    border: 1px solid var(--line);
+    color: var(--ink);
+  }
+
+  .nav-toggle:hover {
+    border-color: var(--phos);
+    color: var(--phos);
+  }
+
+  /* ---------- Background layers ---------- */
+
+  #sim {
+    opacity: 0.15;
+  }
+
+  .grain {
+    opacity: 0.03;
+  }
+
+  .scanlines {
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0) 0px,
+      rgba(255,255,255,0) 2px,
+      rgba(255,255,255,0.02) 3px,
+      rgba(255,255,255,0) 4px
+    );
+    opacity: 0.5;
+  }
+
+  .vignette {
+    background: radial-gradient(120% 90% at 50% 35%, transparent 45%, rgba(0,0,0,0.4) 100%);
+  }
+
+  /* ---------- Buttons ---------- */
+
+  .btn-ghost {
+    border: 1px solid var(--line);
+    color: var(--ink);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--phos);
+    color: var(--phos);
+    box-shadow: inset 0 0 18px rgba(74, 143, 194, 0.12), 0 0 14px rgba(74, 143, 194, 0.2);
+  }
+
+  .btn-solid {
+    background: var(--phos);
+    color: #ffffff;
+    border-color: var(--phos);
+  }
+
+  .btn-solid:hover {
+    background: #5a9fd4;
+    box-shadow: 0 0 40px rgba(74, 143, 194, 0.4);
+  }
+
+  /* ---------- Cards & Panels ---------- */
+
+  .card {
+    background: #1a1a1a;
+    border: 1px solid rgba(74, 143, 194, 0.15);
+  }
+
+  .card:hover {
+    background: #262626;
+    transform: translateY(-4px);
+  }
+
+  .telemetry {
+    border: 1px solid var(--line);
+    background: rgba(10,10,10,0.75);
+    backdrop-filter: blur(6px);
+  }
+
+  .tele-cell {
+    border-right: 1px solid var(--line-soft);
+  }
+
+  .panel {
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .closing {
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .foot {
+    border-top: 1px solid var(--line);
+    background: rgba(10,10,10,0.8);
+  }
+
+  /* ---------- Behavior grid & status indicators ---------- */
+
+  .cell {
+    background: rgba(74, 143, 194, 0.1);
+    border: 1px solid var(--line-soft);
+  }
+
+  .cell.pass {
+    background: rgba(74, 143, 194, 0.25);
+    box-shadow: 0 0 8px rgba(74, 143, 194, 0.5);
+  }
+
+  .cell.watch {
+    background: rgba(217, 119, 6, 0.25);
+    box-shadow: 0 0 8px rgba(217, 119, 6, 0.4);
+  }
+
+  .cell.fail {
+    background: rgba(220, 38, 38, 0.25);
+    box-shadow: 0 0 8px rgba(220, 38, 38, 0.4);
+  }
+
+  .sw-idle {
+    background: rgba(74, 143, 194, 0.1);
+    border: 1px solid var(--line);
+  }
+
+  /* ---------- Responsive ---------- */
+
+  @media (max-width: 820px) {
+    .nav-links {
+      background: linear-gradient(to bottom, rgba(10,10,10,0.98), rgba(10,10,10,0.95));
+      border-bottom: 1px solid var(--line-soft);
+    }
+  }
+
+  /* ---------- Text and dots ---------- */
+
+  body, p, li, span, div, a {
+    color: var(--ink);
+  }
+
+  .dot {
+    background: var(--ink-dim);
+  }
+
+  .dot.live {
+    background: var(--phos);
+    box-shadow: 0 0 8px rgba(74, 143, 194, 0.6);
+  }
+
+  .hero-eyebrow .ver {
+    border: 1px solid rgba(74, 143, 194, 0.4);
+  }
+
+  .nav-links a {
+    color: var(--ink);
+  }
+
+  .nav-links a:hover {
+    color: var(--phos);
+  }
+
+  .nav-links a::after {
+    background: var(--phos);
+    box-shadow: 0 0 8px rgba(74, 143, 194, 0.5);
+  }
+
+  .label, .caption, .subtitle, .description,
+  .hero-eyebrow, .panel-head p, .subhead,
+  .tele-label, .stat-cap {
+    color: var(--ink);
+  }
+
+  /* ---------- OS Card Styling (dark theme) ---------- */
+
+  .os-card {
+    background: #1a1a1a;
+    border: 2px solid var(--line);
+    box-shadow: 0 4px 12px rgba(74, 143, 194, 0.15);
+  }
+
+  .os-card-bar {
+    background: linear-gradient(to right, #262626, #1a1a1a);
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .os-card-body {
+    background: #1a1a1a;
+  }
+}
+
+/* Allow manual toggle via data-theme attribute */
+[data-theme="dark"] {
+  --bg:        #0a0a0a;
+  --bg-2:      #1a1a1a;
+  --bg-3:      #262626;
+  --ink:       #f5f5f5;
+  --ink-dim:   #b0b0b0;
+  --phos:      #4A8FC2;
+  --phos-deep: #365B8F;
+  --line:      rgba(74, 143, 194, 0.2);
+  --line-soft: rgba(74, 143, 194, 0.1);
+  --glow:      0 0 22px rgba(74, 143, 194, 0.35);
+}
+
+[data-theme="dark"] .nav {
+  background: linear-gradient(to bottom, rgba(10,10,10,0.92), rgba(10,10,10,0));
+}
+
+[data-theme="dark"] #sim {
+  opacity: 0.15;
+}
+
+[data-theme="dark"] .grain {
+  opacity: 0.03;
+}
+
+[data-theme="dark"] .scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0) 0px,
+    rgba(255,255,255,0) 2px,
+    rgba(255,255,255,0.02) 3px,
+    rgba(255,255,255,0) 4px
+  );
+  opacity: 0.5;
+}
+
+[data-theme="dark"] .vignette {
+  background: radial-gradient(120% 90% at 50% 35%, transparent 45%, rgba(0,0,0,0.4) 100%);
+}
+
+[data-theme="dark"] .btn-ghost {
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+[data-theme="dark"] .btn-ghost:hover {
+  border-color: var(--phos);
+  color: var(--phos);
+  box-shadow: inset 0 0 18px rgba(74, 143, 194, 0.12), 0 0 14px rgba(74, 143, 194, 0.2);
+}
+
+[data-theme="dark"] .btn-solid {
+  background: var(--phos);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .btn-solid:hover {
+  background: #5a9fd4;
+  box-shadow: 0 0 40px rgba(74, 143, 194, 0.4);
+}
+
+[data-theme="dark"] .card {
+  background: #1a1a1a;
+  border: 1px solid rgba(74, 143, 194, 0.15);
+}
+
+[data-theme="dark"] .card:hover {
+  background: #262626;
+}
+
+[data-theme="dark"] .os-card {
+  background: #1a1a1a;
+  border: 2px solid var(--line);
+  box-shadow: 0 4px 12px rgba(74, 143, 194, 0.15);
+}
+
+[data-theme="dark"] .os-card-bar {
+  background: linear-gradient(to right, #262626, #1a1a1a);
+}
+
+[data-theme="dark"] .os-card-body {
+  background: #1a1a1a;
+}

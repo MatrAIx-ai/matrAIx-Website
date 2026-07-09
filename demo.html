@@ -14,6 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="benchmark.css?v=15" />
   <link rel="stylesheet" href="light-theme.css?v=3" />
+  <link rel="stylesheet" href="dark-theme.css?v=1" />
   <style>
   .os-explain .ex-url{color:var(--ink)}
   /* --- self-defined evaluation metrics --- */
@@ -110,6 +111,7 @@
     </div>
     <div class="os-status">
       <nav class="os-nav"><a href="index.html">Home</a><a href="persona.html">Persona</a><a href="demo.html">Demo</a><a href="demo_harbor.html">Harbor Live</a></nav>
+      <button id="theme-toggle" class="os-btn" style="background: transparent; border: 1px solid var(--line); color: var(--ink); padding: 6px 11px;">🌙</button>
       <button class="os-btn api" id="apiBtn" title="Run matrAIx in your own environment">&#123; &#125; API</button>
       <span class="led on" data-led="core">CORE</span>
       <span class="led on" data-led="eval">EVAL</span>
@@ -422,6 +424,6 @@
       </iframe>
     </div>
   </section>
-
+  <script src="theme-toggle.js"></script>
 </body>
 </html>

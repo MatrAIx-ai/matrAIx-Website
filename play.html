@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="styles.css?v=4" />
   <link rel="stylesheet" href="play.css?v=6" />
   <link rel="stylesheet" href="light-theme.css?v=3" />
+  <link rel="stylesheet" href="dark-theme.css?v=1" />
 </head>
 <body class="play-body">
   <div class="grain" aria-hidden="true"></div>
@@ -30,6 +31,9 @@
       <a href="persona.html">Persona</a>
       <a href="demo.html">Demo</a>
     </nav>
+    <button id="theme-toggle" class="btn btn-ghost nav-cta" style="padding: 8px 14px; border: 1px solid var(--line); background: transparent; min-width: auto;">
+      🌙
+    </button>
     <a href="access.html" class="btn btn-ghost nav-cta">
       <span class="dot live"></span> Request access
     </a>
@@ -109,5 +113,6 @@
   </footer>
 
   <script src="play.js?v=5"></script>
+  <script src="theme-toggle.js"></script>
 </body>
 </html>
