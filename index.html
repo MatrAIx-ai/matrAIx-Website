@@ -343,24 +343,35 @@
     </section>
     -->
 
-    <!-- Twin globes (visual separator before closing) -->
-    <section style="padding: 80px clamp(20px,5vw,40px) 60px; text-align: center; background: var(--bg);">
-      <div class="globes" style="justify-content: center; gap: clamp(20px,8vw,60px); max-width: none; margin: 0 auto;">
-        <div class="globe-wrap" style="gap: 0;">
-          <canvas class="globe" data-kind="human" style="opacity: 0.85;"></canvas>
-        </div>
-        <div class="globe-link" style="opacity: 0.4;"><span class="sym">⇄</span></div>
-        <div class="globe-wrap" style="gap: 0;">
-          <canvas class="globe" data-kind="agent" style="opacity: 0.85;"></canvas>
-        </div>
+    <!-- Interactive Agent Globe -->
+    <section style="position: relative; padding: 120px clamp(20px,5vw,40px); text-align: center; overflow: hidden; background: var(--bg); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <!-- Large backdrop globe -->
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 1;">
+        <canvas id="globe-huge" style="width: 120vw; height: 120vh; max-width: 1400px; max-height: 1400px; opacity: 0.15;" aria-hidden="true"></canvas>
       </div>
-    </section>
 
-    <!-- Closing CTA -->
-    <section class="closing" id="contact">
-      <h2>Ready to contribute to persona simulation for evaluation?</h2>
-      <p class="closing-sub">Join 160+ contributors from Harvard, MIT, xAI, Cornell, Stanford, Anthropic, Microsoft, Google DeepMind, Google Research, CMU, Meta, and more.</p>
-      <a href="access.html" class="btn btn-solid btn-lg">Join community <span class="arr">→</span></a>
+      <!-- Content overlay (can overlap) -->
+      <div style="position: relative; z-index: 2; max-width: 700px;">
+        <h2 style="font-family: var(--disp); font-weight: 700; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.1; margin-bottom: 20px; color: var(--ink);">
+          Ready to contribute to persona simulation for evaluation?
+        </h2>
+
+        <!-- Persona card (appears on hover) -->
+        <div id="persona-card" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border: 1px solid var(--line); border-radius: 12px; padding: 24px 32px; z-index: 10; opacity: 0; pointer-events: none; transition: opacity 0.3s; min-width: 280px; box-shadow: 0 20px 60px rgba(27,42,65,0.15);">
+          <div style="font-family: var(--disp); font-weight: 700; font-size: 1.3rem; color: var(--phos); margin-bottom: 8px;" id="persona-name">Alex Chen</div>
+          <div style="font-size: 0.85rem; color: var(--ink-dim); margin-bottom: 12px;" id="persona-role">Product Manager · San Francisco</div>
+          <div style="border-top: 1px solid var(--line-soft); padding-top: 12px;">
+            <div style="font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cyan); font-weight: 600; margin-bottom: 6px;">Currently Simulating</div>
+            <div style="font-family: var(--mono); font-size: 1.8rem; font-weight: 700; color: var(--phos); text-shadow: 0 0 12px rgba(59,169,255,0.3);" id="persona-tasks">230</div>
+            <div style="font-size: 0.7rem; color: var(--ink-dim); margin-top: 4px;">concurrent evaluation tasks</div>
+          </div>
+        </div>
+
+        <p style="font-size: clamp(1rem, 2.5vw, 1.25rem); line-height: 1.6; color: var(--ink); margin-bottom: 32px;">
+          Join 160+ contributors from Harvard, MIT, xAI, Cornell, Stanford, Anthropic, Microsoft, Google DeepMind, Google Research, CMU, Meta, and more.
+        </p>
+        <a href="access.html" class="btn btn-solid btn-lg">Join community <span class="arr">→</span></a>
+      </div>
     </section>
   </main>
 
@@ -377,6 +388,145 @@
   </footer>
 
   <script src="home.js?v=9"></script>
+  <script>
+  /* ---------- Interactive Agent Globe with Persona Hover ---------- */
+  (() => {
+    const canvas = document.getElementById('globe-huge');
+    if (!canvas) return;
+
+    // Persona data pool
+    const firstNames = ['Alex', 'Jordan', 'Casey', 'Morgan', 'Riley', 'Taylor', 'Avery', 'Quinn', 'Dakota', 'Skylar', 'Cameron', 'Blake', 'Reese', 'Parker', 'Sage', 'Phoenix'];
+    const lastNames = ['Chen', 'Kumar', 'Johnson', 'Silva', 'Müller', 'García', 'Ivanov', 'O\'Brien', 'Patel', 'Kim', 'Thompson', 'Santos', 'Zhang', 'Anderson', 'Martinez', 'Brown'];
+    const roles = ['Data Scientist', 'Product Manager', 'Software Engineer', 'Designer', 'Researcher', 'Analyst', 'Developer', 'Founder', 'Manager', 'Consultant', 'Architect', 'Lead'];
+    const cities = ['San Francisco', 'New York', 'London', 'Tokyo', 'Berlin', 'Toronto', 'Sydney', 'Singapore', 'Amsterdam', 'Toronto', 'Austin', 'Seattle'];
+
+    function randomPersona() {
+      const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+      const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+      const role = roles[Math.floor(Math.random() * roles.length)];
+      const city = cities[Math.floor(Math.random() * cities.length)];
+      const tasks = Math.floor(Math.random() * 150) + 100; // 100-250
+
+      return {
+        name: `${firstName} ${lastName}`,
+        role: `${role} · ${city}`,
+        tasks: tasks
+      };
+    }
+
+    const ctx = canvas.getContext('2d');
+    const N = 640;
+    const PTS = [];
+    const ga = Math.PI * (3 - Math.sqrt(5));
+    for (let i = 0; i < N; i++) {
+      const y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), t = ga * i;
+      PTS.push([Math.cos(t) * r, y, Math.sin(t) * r]);
+    }
+
+    let w, h, cx, cy, R, dpr, rot = Math.random() * 6;
+    const col = '59,169,255'; // Deep blue from design tokens
+    let hoverActive = false;
+    let lastPersona = randomPersona();
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = rect.width;
+      h = rect.height;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cx = w / 2;
+      cy = h / 2;
+      R = Math.min(w, h) * 0.35;
+    }
+
+    function step() {
+      ctx.clearRect(0, 0, w, h);
+
+      // Rotating gradient glow
+      const g = ctx.createRadialGradient(cx, cy, R * 0.2, cx, cy, R * 1.4);
+      g.addColorStop(0, `rgba(${col},0.8)`);
+      g.addColorStop(0.5, `rgba(${col},0.3)`);
+      g.addColorStop(1, `rgba(${col},0)`);
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+
+      rot += 0.0008;
+      const cp = Math.cos(rot), sp = Math.sin(rot);
+
+      // Plot points with depth sorting
+      const pts = PTS.map(p => {
+        const x = p[0] * cp - p[2] * sp;
+        const y = p[1];
+        const z = p[0] * sp + p[2] * cp;
+        return { x: x * R + cx, y: y * R + cy, z: z };
+      }).sort((a, b) => a.z - b.z);
+
+      // Draw points with size based on depth
+      pts.forEach(pt => {
+        const opacity = Math.max(0.2, (pt.z + 1) / 2);
+        const size = 1 + (pt.z + 1) * 1.5;
+        ctx.fillStyle = `rgba(${col},${opacity * 0.9})`;
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, size, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Glow on front points when hovering
+        if (hoverActive && opacity > 0.6) {
+          ctx.strokeStyle = `rgba(${col},${opacity * 0.4})`;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y, size + 3, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      });
+
+      requestAnimationFrame(step);
+    }
+
+    // Persona card interaction
+    const personaCard = document.getElementById('persona-card');
+    const personaName = document.getElementById('persona-name');
+    const personaRole = document.getElementById('persona-role');
+    const personaTasks = document.getElementById('persona-tasks');
+
+    function updatePersona() {
+      lastPersona = randomPersona();
+      personaName.textContent = lastPersona.name;
+      personaRole.textContent = lastPersona.role;
+      personaTasks.textContent = lastPersona.tasks;
+    }
+
+    canvas.addEventListener('mouseenter', () => {
+      hoverActive = true;
+      updatePersona();
+      personaCard.style.opacity = '1';
+      personaCard.style.pointerEvents = 'auto';
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+      hoverActive = false;
+      personaCard.style.opacity = '0';
+      personaCard.style.pointerEvents = 'none';
+    });
+
+    // Update persona every 2 seconds while hovering
+    let personaInterval;
+    canvas.addEventListener('mouseenter', () => {
+      clearInterval(personaInterval);
+      personaInterval = setInterval(updatePersona, 2000);
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+      clearInterval(personaInterval);
+    });
+
+    resize();
+    window.addEventListener('resize', resize);
+    step();
+  })();
+  </script>
   <script>
   /* Mobile nav toggle */
   (function(){
