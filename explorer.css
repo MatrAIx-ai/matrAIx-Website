@@ -162,6 +162,7 @@
   gap: 10px;
 }
 .dim-cat {
+  font-family: var(--disp);
   font-size: var(--text-xs);
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
@@ -169,6 +170,7 @@
   opacity: 0.8;
 }
 .dim-count {
+  font-family: var(--disp);
   font-size: var(--text-xs);
   color: var(--ink);
   font-variant-numeric: tabular-nums;
@@ -183,8 +185,9 @@
   overflow-wrap: break-word;
   hyphens: auto;
 }
-.dim-desc { font-size: var(--text-sm); color: var(--ink); line-height: var(--leading-normal); }
+.dim-desc { font-family: var(--disp); font-size: var(--text-sm); color: var(--ink); line-height: var(--leading-normal); }
 .dim-source {
+  font-family: var(--disp);
   font-size: var(--text-xs);
   color: #ff9933;
   opacity: 0.85;
@@ -208,6 +211,7 @@
   margin-top: 16px;
 }
 .val-chip {
+  font-family: var(--disp);
   font-size: var(--text-xs);
   color: var(--ink);
   background: rgba(59,169,255,0.06);
@@ -216,6 +220,7 @@
   white-space: nowrap;
 }
 .dim-hint {
+  font-family: var(--disp);
   margin-top: 12px;
   font-size: var(--text-xs);
   color: var(--ink);
@@ -261,6 +266,7 @@
 .drawer-inner { display: flex; flex-direction: column; height: 100%; padding: 26px; overflow: hidden; }
 .drawer-head { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; }
 .drawer-eyebrow {
+  font-family: var(--disp);
   display: inline-flex; align-items: center; gap: 8px;
   font-size: var(--text-xs); letter-spacing: var(--tracking-widest); color: var(--phos);
 }
@@ -269,8 +275,9 @@
   font-size: var(--text-2xl); letter-spacing: var(--tracking-snug);
   margin: 12px 0 6px; line-height: var(--leading-snug);
 }
-.drawer-line { font-size: var(--text-sm); color: var(--ink); line-height: var(--leading-normal); }
+.drawer-line { font-family: var(--disp); font-size: var(--text-sm); color: var(--ink); line-height: var(--leading-normal); }
 .drawer-close {
+  font-family: var(--disp);
   background: transparent; border: 1px solid var(--line);
   color: var(--ink); width: 34px; height: 34px;
   cursor: pointer; font-size: var(--text-sm); flex: 0 0 auto;
@@ -289,6 +296,7 @@
   scrollbar-color: var(--phos-deep) transparent;
 }
 .trait-row {
+  font-family: var(--disp);
   display: flex;
   justify-content: space-between;
   gap: 14px;
