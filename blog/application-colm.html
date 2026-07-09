@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
-    :root { --bg: #ffffff; --bg-2: #f8f9fa; --bg-3: #f3f4f6; --ink: #1a1a1a; --ink-dim: #404040; --phos: #5089B8; --phos-deep: #3d6a8a; --amber: #d97706; --rose: #dc2626; --cyan: #5db8d8; --line: rgba(80, 137, 184, 0.12); --line-soft: rgba(80, 137, 184, 0.06); --glow: 0 0 22px rgba(80, 137, 184, 0.25); --mono: "JetBrains Mono", ui-monospace, monospace; --disp: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    :root { --bg: #ffffff; --bg-2: #f8f9fa; --bg-3: #f3f4f6; --ink: #1a1a1a; --ink-dim: #404040; --phos: #4A8FC2; --phos-deep: #365B8F; --amber: #d97706; --rose: #dc2626; --cyan: #6BC0E8; --line: rgba(80, 137, 184, 0.12); --line-soft: rgba(80, 137, 184, 0.06); --glow: 0 0 22px rgba(80, 137, 184, 0.25); --mono: "JetBrains Mono", ui-monospace, monospace; --disp: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
     body, p, li, span, div, a { color: var(--ink); }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -25,7 +25,7 @@
     .brand-name { font-family: var(--disp); font-weight: 800; font-size: 1.375rem; letter-spacing: -0.02em; }
     .brand-name em {
       font-style: normal;
-      background: linear-gradient(90deg, #8b5cf6, #5089B8);
+      background: linear-gradient(90deg, #8b5cf6, #4A8FC2);
       background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -52,7 +52,7 @@
       color: #04121f;
       cursor: pointer;
       font-weight: 700;
-      box-shadow: 0 0 26px rgba(80,137,184,0.3);
+      box-shadow: 0 0 26px rgba(74,143,194,0.3);
       transition: all 0.25s ease;
       flex-shrink: 0;
       display: inline-flex;
@@ -60,8 +60,8 @@
       gap: 7px;
     }
     .btn-nav:hover {
-      background: #5089B8;
-      box-shadow: 0 0 40px rgba(80,137,184,0.55);
+      background: #4A8FC2;
+      box-shadow: 0 0 40px rgba(74,143,194,0.55);
       transform: translateY(-2px);
     }
     .dot.live {

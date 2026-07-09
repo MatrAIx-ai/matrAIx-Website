@@ -15,8 +15,8 @@
 <style>
 :root{
   --bg:#060807;--bg-2:#0a0e0c;--bg-3:#0d1411;--ink:#d6e6d8;--ink-dim:#6f8273;
-  --phos:#5089B8;--phos-deep:#3d6a8a;--amber:#ffb547;--rose:#ff5c6c;
-  --line:rgba(80,137,184,.16);--line-soft:rgba(80,137,184,.07);--glow:0 0 18px rgba(80,137,184,.45);
+  --phos:#4A8FC2;--phos-deep:#365B8F;--amber:#ffb547;--rose:#ff5c6c;
+  --line:rgba(74,143,194,.16);--line-soft:rgba(74,143,194,.07);--glow:0 0 18px rgba(74,143,194,.45);
   --mono:"JetBrains Mono",ui-monospace,monospace;--disp:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -30,8 +30,8 @@ a{color:inherit;text-decoration:none}
 .brand .mk{color:var(--phos);text-shadow:var(--glow)} .brand .ai{color:var(--phos);text-shadow:var(--glow)} .brand .tld{color:var(--ink-dim);font-weight:600}
 .nav-links{display:flex;gap:22px;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase}
 .nav-links a{color:var(--ink-dim)} .nav-links a:hover{color:var(--phos)}
-.nav-cta{font-family:var(--mono);font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;color:#04121f;background:var(--phos);padding:10px 16px;display:inline-flex;align-items:center;gap:8px;box-shadow:0 0 22px rgba(80,137,184,.28);transition:all .2s}
-.nav-cta:hover{background:#5089B8;transform:translateY(-1px)}
+.nav-cta{font-family:var(--mono);font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;color:#04121f;background:var(--phos);padding:10px 16px;display:inline-flex;align-items:center;gap:8px;box-shadow:0 0 22px rgba(74,143,194,.28);transition:all .2s}
+.nav-cta:hover{background:#4A8FC2;transform:translateY(-1px)}
 @media (max-width:720px){.nav-links{display:none}}
 
 .wrap{flex:1;width:100%;max-width:1180px;margin:0 auto;padding:clamp(36px,6vw,72px) clamp(16px,4vw,40px) 80px}
@@ -51,7 +51,7 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
 .controls{display:flex;flex-direction:column;gap:14px;margin-bottom:8px;position:sticky;top:61px;background:var(--bg);padding:14px 0;z-index:10;border-bottom:1px solid var(--line-soft)}
 .search{font-family:var(--mono);font-size:.92rem;color:var(--ink);background:var(--bg-2);border:1px solid var(--line-soft);padding:12px 14px;width:100%}
 .search::placeholder{color:var(--ink-dim)}
-.search:focus{outline:none;border-color:var(--phos);box-shadow:inset 0 0 12px rgba(80,137,184,.08)}
+.search:focus{outline:none;border-color:var(--phos);box-shadow:inset 0 0 12px rgba(74,143,194,.08)}
 .chips{display:flex;flex-wrap:wrap;gap:7px}
 .chip{font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;color:var(--ink-dim);background:var(--bg-2);border:1px solid var(--line-soft);padding:6px 11px;cursor:pointer;transition:all .15s;white-space:nowrap}
 .chip:hover{border-color:var(--line);color:var(--ink)}

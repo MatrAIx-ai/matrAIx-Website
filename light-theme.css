@@ -12,14 +12,14 @@
   --bg-3:      #f3f4f6;
   --ink:       #1a1a1a;      /* primary text */
   --ink-dim:   #404040;      /* muted text - darker for better readability */
-  --phos:      #5089B8;      /* accent - Sky Steel */
-  --phos-deep: #3d6a8a;      /* deeper accent */
+  --phos:      #4A8FC2;      /* accent - saturated blue */
+  --phos-deep: #365B8F;      /* deeper accent */
   --amber:     #d97706;      /* warning accent */
   --rose:      #dc2626;      /* fail accent */
-  --cyan:      #5db8d8;      /* data/highlight - cyan-blue */
-  --line:      rgba(80, 137, 184, 0.12);
-  --line-soft: rgba(80, 137, 184, 0.06);
-  --glow:      0 0 22px rgba(80, 137, 184, 0.25);
+  --cyan:      #6BC0E8;      /* data/highlight - cyan-blue */
+  --line:      rgba(74, 143, 194, 0.12);
+  --line-soft: rgba(74, 143, 194, 0.06);
+  --glow:      0 0 22px rgba(74, 143, 194, 0.25);
 
   /* Typography - Easy to customize */
   --font-serif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
