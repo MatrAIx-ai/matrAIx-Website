@@ -343,6 +343,19 @@
     </section>
     -->
 
+    <!-- Twin globes (visual separator before closing) -->
+    <section style="padding: 80px clamp(20px,5vw,40px) 60px; text-align: center; background: var(--bg);">
+      <div class="globes" style="justify-content: center; gap: clamp(20px,8vw,60px); max-width: none; margin: 0 auto;">
+        <div class="globe-wrap" style="gap: 0;">
+          <canvas class="globe" data-kind="human" style="opacity: 0.85;"></canvas>
+        </div>
+        <div class="globe-link" style="opacity: 0.4;"><span class="sym">⇄</span></div>
+        <div class="globe-wrap" style="gap: 0;">
+          <canvas class="globe" data-kind="agent" style="opacity: 0.85;"></canvas>
+        </div>
+      </div>
+    </section>
+
     <!-- Closing CTA -->
     <section class="closing" id="contact">
       <h2>Ready to contribute to persona simulation for evaluation?</h2>
