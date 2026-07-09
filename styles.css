@@ -99,11 +99,12 @@ body {
 .brand-mark {
   display: none;
 }
+.brand-logo {
+  height: 32px;
+  width: auto;
+}
 .brand-name {
-  font-family: var(--disp);
-  font-weight: 700;
-  font-size: var(--text-2xl);
-  letter-spacing: var(--tracking-snug);
+  display: none;
 }
 .brand-name em {
   font-style: normal;
