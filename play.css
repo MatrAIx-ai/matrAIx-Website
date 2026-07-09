@@ -65,7 +65,7 @@
   border-radius: 10px;
   padding: 14px 15px;
   cursor: pointer;
-  font-family: var(--mono);
+  font-family: var(--disp);
   font-size: var(--text-sm);
   color: var(--ink);
   background: var(--bg-2);
@@ -147,7 +147,7 @@
   color: var(--ink);
 }
 .pc-field select {
-  font-family: var(--mono);
+  font-family: var(--disp);
   font-size: var(--text-sm);
   color: var(--ink);
   background: var(--bg);
@@ -285,7 +285,7 @@
   color: var(--phos);
 }
 .pv-card-id {
-  font-family: var(--mono);
+  font-family: var(--disp);
   font-size: var(--text-xs);
   letter-spacing: var(--tracking-wider);
   color: var(--ink);
