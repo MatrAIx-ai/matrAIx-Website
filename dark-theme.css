@@ -193,8 +193,13 @@
 
   .label, .caption, .subtitle, .description,
   .hero-eyebrow, .panel-head p, .subhead,
-  .tele-label, .stat-cap {
-    color: var(--ink);
+  .tele-label, .stat-cap, .stat-label, .stat-val,
+  .eyebrow, .lead, h1, h2, h3, h4, h5, h6,
+  .panel-head, .closing h2, .closing,
+  .headline, .sec-title, .tele-val,
+  .card, .card *, .telemetry, .telemetry *,
+  .btn-ghost, .os-btn {
+    color: var(--ink) !important;
   }
 
   /* ---------- OS Card Styling (dark theme) ---------- */
@@ -298,4 +303,38 @@
 
 [data-theme="dark"] .os-card-body {
   background: #1a1a1a;
+}
+
+[data-theme="dark"] .label,
+[data-theme="dark"] .caption,
+[data-theme="dark"] .subtitle,
+[data-theme="dark"] .description,
+[data-theme="dark"] .hero-eyebrow,
+[data-theme="dark"] .panel-head p,
+[data-theme="dark"] .subhead,
+[data-theme="dark"] .tele-label,
+[data-theme="dark"] .stat-cap,
+[data-theme="dark"] .stat-label,
+[data-theme="dark"] .stat-val,
+[data-theme="dark"] .eyebrow,
+[data-theme="dark"] .lead,
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6,
+[data-theme="dark"] .panel-head,
+[data-theme="dark"] .closing h2,
+[data-theme="dark"] .closing,
+[data-theme="dark"] .headline,
+[data-theme="dark"] .sec-title,
+[data-theme="dark"] .tele-val,
+[data-theme="dark"] .card,
+[data-theme="dark"] .card *,
+[data-theme="dark"] .telemetry,
+[data-theme="dark"] .telemetry *,
+[data-theme="dark"] .btn-ghost,
+[data-theme="dark"] .os-btn {
+  color: var(--ink) !important;
 }
