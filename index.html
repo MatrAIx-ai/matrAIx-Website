@@ -344,64 +344,64 @@
     </section>
     -->
 
-    <!-- Interactive Agent Globe: Touch to Explore Personas -->
-    <section style="position: relative; padding: 120px clamp(20px,5vw,40px); text-align: center; overflow: hidden; background: var(--bg); min-height: 120vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-      <!-- Globe canvas: interactive, full-screen, clickable -->
-      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 1;">
-        <canvas id="globe-interactive" style="width: 100%; height: 100%; cursor: pointer;" aria-hidden="true"></canvas>
-      </div>
+    <!-- Interactive 3D Globe: Left text + Right animated globe -->
+    <section class="panel" style="padding: 80px clamp(20px,5vw,40px);">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 8vw, 80px); align-items: center; max-width: 1400px; margin: 0 auto;">
 
-      <!-- Section heading + CTA overlay -->
-      <div style="position: relative; z-index: 2; max-width: 700px;">
-        <div class="sec-head" style="margin-bottom: 40px;">
-          <span class="idx">00 — INTERACTIVE EXPLORATION</span>
-          <h2 class="sec-title">8.3 Billion Personas<br />Click the globe to meet them</h2>
+        <!-- Left: Content -->
+        <div style="text-align: left;">
+          <div class="sec-head" style="text-align: left; margin-bottom: 32px;">
+            <span class="idx">00 — INTERACTIVE EXPLORATION</span>
+            <h2 class="sec-title" style="text-align: left;">8.3 Billion Personas<br />Simulation for Evaluation</h2>
+          </div>
+
+          <p style="font-size: 1.1rem; line-height: 1.7; color: var(--ink); margin-bottom: 24px;">
+            Move your mouse across the globe to explore. Each point represents millions of diverse personas — drag to rotate, hover to discover their stories.
+          </p>
+
+          <!-- Persona card (appears on hover/click) -->
+          <div id="persona-card-interactive" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border: 1px solid var(--line); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; transition: all 0.3s ease; opacity: 0; pointer-events: none; max-height: 0; overflow: hidden;">
+
+            <!-- Persona header -->
+            <div style="margin-bottom: 12px;">
+              <div style="font-family: var(--disp); font-weight: 700; font-size: 1.2rem; color: var(--phos);" id="persona-name-interactive">Alex Chen</div>
+              <div style="font-size: 0.85rem; color: var(--ink-dim); font-weight: 500;" id="persona-role-interactive">Product Manager · San Francisco</div>
+            </div>
+
+            <!-- Avatar -->
+            <div style="font-size: 2rem; margin-bottom: 12px; opacity: 0.8;" id="persona-avatar">👤</div>
+
+            <!-- Simulation stats -->
+            <div style="background: rgba(59,169,255,0.08); border-radius: 8px; padding: 12px; margin-bottom: 12px; border: 1px solid rgba(59,169,255,0.2); font-size: 0.9rem;">
+              <div style="font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: #3ba9ff; font-weight: 700; margin-bottom: 4px;">Simulating</div>
+              <div style="font-family: var(--mono); font-size: 1.6rem; font-weight: 700; color: var(--phos);" id="persona-tasks-interactive">230</div>
+              <div style="font-size: 0.75rem; color: var(--ink-dim);">concurrent tasks</div>
+            </div>
+
+            <!-- Quick stats row -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem;">
+              <div style="padding: 8px; background: rgba(111,130,115,0.08); border-radius: 6px; border-left: 2px solid #6f8273;">
+                <div style="color: var(--ink-dim); font-weight: 600; font-size: 0.7rem;">Score</div>
+                <div style="font-family: var(--mono); font-weight: 700; color: var(--phos);" id="persona-score">94%</div>
+              </div>
+              <div style="padding: 8px; background: rgba(59,169,255,0.08); border-radius: 6px; border-left: 2px solid #3ba9ff;">
+                <div style="color: var(--ink-dim); font-weight: 600; font-size: 0.7rem;">Dimensions</div>
+                <div style="font-family: var(--mono); font-weight: 700; color: var(--phos);" id="persona-dims">847</div>
+              </div>
+            </div>
+          </div>
+
+          <p style="font-size: 0.95rem; line-height: 1.6; color: var(--ink-dim); margin-bottom: 28px;">
+            Join 160+ contributors from Harvard, MIT, xAI, Cornell, Stanford, Anthropic, Microsoft, Google DeepMind, Google Research, CMU, Meta, and more.
+          </p>
+          <a href="access.html" class="btn btn-solid btn-lg">Join community <span class="arr">→</span></a>
         </div>
 
-        <!-- Persona card (appears on click) -->
-        <div id="persona-card-interactive" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,0.98); backdrop-filter: blur(16px); border: 1px solid var(--line); border-radius: 16px; padding: 28px 36px; z-index: 10; opacity: 0; pointer-events: auto; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); min-width: 320px; box-shadow: 0 25px 80px rgba(27,42,65,0.2); transform: translate(-50%, -50%) scale(0.95);">
-
-          <!-- Close button -->
-          <button id="close-persona-card" style="position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--ink-dim); opacity: 0.6; transition: opacity 0.2s;" aria-label="Close persona card">×</button>
-
-          <!-- Persona header -->
-          <div style="margin-bottom: 4px;">
-            <div style="font-family: var(--disp); font-weight: 700; font-size: 1.4rem; color: var(--phos);" id="persona-name-interactive">Alex Chen</div>
-            <div style="font-size: 0.85rem; color: var(--ink-dim); font-weight: 500;" id="persona-role-interactive">Product Manager · San Francisco</div>
-          </div>
-
-          <!-- Avatar (emoji-based) -->
-          <div style="font-size: 2.2rem; margin: 12px 0 16px; opacity: 0.8;" id="persona-avatar">👤</div>
-
-          <!-- Simulation stats -->
-          <div style="background: rgba(59,169,255,0.08); border-radius: 8px; padding: 14px; margin-bottom: 12px; border: 1px solid rgba(59,169,255,0.2);">
-            <div style="font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: #3ba9ff; font-weight: 700; margin-bottom: 8px;">Currently Simulating</div>
-            <div style="font-family: var(--mono); font-size: 2rem; font-weight: 700; color: var(--phos); line-height: 1;" id="persona-tasks-interactive">230</div>
-            <div style="font-size: 0.75rem; color: var(--ink-dim); margin-top: 4px;">concurrent evaluation tasks</div>
-          </div>
-
-          <!-- Quick stats row -->
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; margin-bottom: 12px;">
-            <div style="padding: 8px; background: rgba(111,130,115,0.08); border-radius: 6px; border-left: 2px solid #6f8273;">
-              <div style="color: var(--ink-dim); font-weight: 600;">Behavior Score</div>
-              <div style="font-family: var(--mono); font-weight: 700; color: var(--phos); font-size: 1rem;" id="persona-score">94%</div>
-            </div>
-            <div style="padding: 8px; background: rgba(59,169,255,0.08); border-radius: 6px; border-left: 2px solid #3ba9ff;">
-              <div style="color: var(--ink-dim); font-weight: 600;">Dimensions</div>
-              <div style="font-family: var(--mono); font-weight: 700; color: var(--phos); font-size: 1rem;" id="persona-dims">847</div>
-            </div>
-          </div>
-
-          <!-- Footer hint -->
-          <div style="font-size: 0.7rem; color: var(--ink-dim); text-align: center; padding-top: 12px; border-top: 1px solid var(--line-soft);">
-            <span>💡 Click the globe again to meet another persona</span>
-          </div>
+        <!-- Right: Interactive 3D Globe -->
+        <div style="position: relative; width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center;">
+          <canvas id="globe-interactive" style="width: 100%; height: 100%; cursor: grab; border-radius: 16px; box-shadow: 0 20px 60px rgba(59,169,255,0.2);" aria-hidden="true"></canvas>
+          <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 0.85rem; color: var(--ink-dim); background: rgba(255,255,255,0.9); padding: 8px 16px; border-radius: 6px; pointer-events: none; font-weight: 500;">🖱️ Drag to rotate · Hover to explore</div>
         </div>
-
-        <p style="font-size: clamp(1rem, 2.5vw, 1.25rem); line-height: 1.6; color: var(--ink); margin-bottom: 32px;">
-          Join 160+ contributors from Harvard, MIT, xAI, Cornell, Stanford, Anthropic, Microsoft, Google DeepMind, Google Research, CMU, Meta, and more.
-        </p>
-        <a href="access.html" class="btn btn-solid btn-lg">Join community <span class="arr">→</span></a>
       </div>
     </section>
   </main>
@@ -420,12 +420,12 @@
 
   <script src="home.js?v=9"></script>
   <script>
-  /* ---------- Interactive Agent Globe: Click to Meet Personas ---------- */
+  /* ---------- 3D Interactive Earth Globe ---------- */
   (() => {
     const canvas = document.getElementById('globe-interactive');
     if (!canvas) return;
 
-    // Persona data pools
+    // Persona data
     const firstNames = ['Alex', 'Jordan', 'Casey', 'Morgan', 'Riley', 'Taylor', 'Avery', 'Quinn', 'Dakota', 'Skylar', 'Cameron', 'Blake', 'Reese', 'Parker', 'Sage', 'Phoenix', 'Sam', 'Jamie', 'Robin', 'Drew'];
     const lastNames = ['Chen', 'Kumar', 'Johnson', 'Silva', 'Müller', 'García', 'Ivanov', 'O\'Brien', 'Patel', 'Kim', 'Thompson', 'Santos', 'Zhang', 'Anderson', 'Martinez', 'Brown', 'Lee', 'Smith', 'Williams', 'Davis'];
     const roles = ['Data Scientist', 'Product Manager', 'Software Engineer', 'Designer', 'Researcher', 'Analyst', 'Developer', 'Founder', 'Manager', 'Consultant', 'Architect', 'Lead', 'Marketer', 'CEO', 'VP', 'Specialist'];
@@ -433,38 +433,37 @@
     const avatars = ['👤', '👨‍💼', '👩‍💼', '🧑‍💻', '👨‍🔬', '👩‍🔬', '🧑‍🎓', '👨‍🎨', '👩‍🎨', '🧑‍⚕️'];
 
     function randomPersona() {
-      const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-      const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-      const role = roles[Math.floor(Math.random() * roles.length)];
-      const city = cities[Math.floor(Math.random() * cities.length)];
-      const tasks = Math.floor(Math.random() * 150) + 100;
-      const score = Math.floor(Math.random() * 15) + 85;
-      const dims = Math.floor(Math.random() * 300) + 600;
-      const avatar = avatars[Math.floor(Math.random() * avatars.length)];
-
       return {
-        name: `${firstName} ${lastName}`,
-        role: `${role} · ${city}`,
-        tasks: tasks,
-        score: score,
-        dims: dims,
-        avatar: avatar
+        name: firstNames[Math.floor(Math.random() * firstNames.length)] + ' ' + lastNames[Math.floor(Math.random() * lastNames.length)],
+        role: roles[Math.floor(Math.random() * roles.length)] + ' · ' + cities[Math.floor(Math.random() * cities.length)],
+        tasks: Math.floor(Math.random() * 150) + 100,
+        score: Math.floor(Math.random() * 15) + 85,
+        dims: Math.floor(Math.random() * 300) + 600,
+        avatar: avatars[Math.floor(Math.random() * avatars.length)]
       };
     }
 
     const ctx = canvas.getContext('2d');
-    const N = 640;
-    const PTS = [];
-    const ga = Math.PI * (3 - Math.sqrt(5));
-    for (let i = 0; i < N; i++) {
-      const y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), t = ga * i;
-      PTS.push([Math.cos(t) * r, y, Math.sin(t) * r]);
-    }
+    let w, h, dpr;
+    let rotX = 0.5, rotY = 0;
+    let targetRotX = 0.5, targetRotY = 0;
+    let mouseX = 0, mouseY = 0;
+    let isMouseOver = false;
 
-    let w, h, cx, cy, R, dpr, rot = Math.random() * 6;
-    const col = '59,169,255';
-    let particles = []; // Particle bursts on click
-    let lastClickPersona = randomPersona();
+    const CONTINENTS = [
+      // North America
+      {x: -100, y: 40, w: 80, h: 50, label: 'N.America'},
+      // South America
+      {x: -60, y: -15, w: 50, h: 60, label: 'S.America'},
+      // Europe
+      {x: 10, y: 50, w: 35, h: 30, label: 'Europe'},
+      // Africa
+      {x: 20, y: 0, w: 50, h: 60, label: 'Africa'},
+      // Asia
+      {x: 80, y: 45, w: 100, h: 60, label: 'Asia'},
+      // Oceania
+      {x: 130, y: -25, w: 45, h: 40, label: 'Oceania'}
+    ];
 
     function resize() {
       const rect = canvas.getBoundingClientRect();
@@ -474,144 +473,165 @@
       canvas.width = w * dpr;
       canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      cx = w / 2;
-      cy = h / 2;
-      R = Math.min(w, h) * 0.25;
     }
 
-    function createParticleBurst(x, y) {
-      const burstCount = 12;
-      for (let i = 0; i < burstCount; i++) {
-        const angle = (i / burstCount) * Math.PI * 2;
-        const speed = 4 + Math.random() * 3;
-        particles.push({
-          x: x,
-          y: y,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-          life: 1.0,
-          decay: 0.02 + Math.random() * 0.02
-        });
-      }
+    function project(lon, lat, rotX, rotY) {
+      // Convert to radians
+      lon = lon * Math.PI / 180;
+      lat = lat * Math.PI / 180;
+      rotY = rotY * Math.PI / 180;
+
+      // Rotate around Y axis
+      let x = Math.cos(lat) * Math.cos(lon + rotY);
+      let y = Math.sin(lat);
+      let z = Math.cos(lat) * Math.sin(lon + rotY);
+
+      // Rotate around X axis
+      let y2 = y * Math.cos(rotX) - z * Math.sin(rotX);
+      let z2 = y * Math.sin(rotX) + z * Math.cos(rotX);
+
+      if (z2 < 0) return null; // Behind globe
+
+      const scale = 200 / (1 + z2);
+      return {
+        x: w / 2 + x * scale,
+        y: h / 2 - y2 * scale,
+        z: z2,
+        scale: scale
+      };
     }
 
-    function step() {
+    function drawGlobe() {
       ctx.clearRect(0, 0, w, h);
 
-      // Rotating gradient glow
-      const g = ctx.createRadialGradient(cx, cy, R * 0.2, cx, cy, R * 1.5);
-      g.addColorStop(0, `rgba(${col},0.9)`);
-      g.addColorStop(0.5, `rgba(${col},0.4)`);
-      g.addColorStop(1, `rgba(${col},0)`);
-      ctx.fillStyle = g;
+      // Smooth interpolation
+      rotX += (targetRotX - rotX) * 0.05;
+      rotY += (targetRotY - rotY) * 0.05;
+      if (!isMouseOver) rotY += 0.3; // Auto-rotate when not hovering
+
+      // Draw background
+      const bgGrad = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, 250);
+      bgGrad.addColorStop(0, 'rgba(59, 169, 255, 0.05)');
+      bgGrad.addColorStop(1, 'rgba(59, 169, 255, 0)');
+      ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, w, h);
 
-      rot += 0.0008;
-      const cp = Math.cos(rot), sp = Math.sin(rot);
+      // Draw sphere
+      const sphereGrad = ctx.createRadialGradient(w / 2 - 40, h / 2 - 40, 80, w / 2, h / 2, 250);
+      sphereGrad.addColorStop(0, '#e8f4ff');
+      sphereGrad.addColorStop(0.5, '#a8d8ff');
+      sphereGrad.addColorStop(1, '#3ba9ff');
+      ctx.fillStyle = sphereGrad;
+      ctx.beginPath();
+      ctx.arc(w / 2, h / 2, 220, 0, Math.PI * 2);
+      ctx.fill();
 
-      // Plot globe points with depth sorting
-      const pts = PTS.map(p => {
-        const x = p[0] * cp - p[2] * sp;
-        const y = p[1];
-        const z = p[0] * sp + p[2] * cp;
-        return { x: x * R + cx, y: y * R + cy, z: z };
-      }).sort((a, b) => a.z - b.z);
-
-      pts.forEach(pt => {
-        const opacity = Math.max(0.2, (pt.z + 1) / 2);
-        const size = 1 + (pt.z + 1) * 1.5;
-        ctx.fillStyle = `rgba(${col},${opacity * 0.9})`;
-        ctx.beginPath();
-        ctx.arc(pt.x, pt.y, size, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // Update and draw particles
-      particles = particles.filter(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.life -= p.decay;
-        p.vy += 0.15; // gravity
-
-        if (p.life > 0) {
-          ctx.fillStyle = `rgba(59,169,255,${p.life * 0.7})`;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, 2 + p.life * 1.5, 0, Math.PI * 2);
-          ctx.fill();
-          return true;
+      // Draw continents
+      CONTINENTS.forEach(cont => {
+        const bounds = [];
+        for (let lon = cont.x; lon < cont.x + cont.w; lon += 10) {
+          for (let lat = cont.y; lat < cont.y + cont.h; lat += 10) {
+            const p = project(lon, lat, rotX, rotY);
+            if (p) bounds.push(p);
+          }
         }
-        return false;
+
+        if (bounds.length > 0) {
+          const avgZ = bounds.reduce((a, b) => a + b.z, 0) / bounds.length;
+          if (avgZ > 0) {
+            ctx.fillStyle = `rgba(76, 175, 80, ${0.4 + avgZ * 0.4})`;
+            ctx.beginPath();
+            bounds.forEach((p, i) => {
+              if (i === 0) ctx.moveTo(p.x, p.y);
+              else ctx.lineTo(p.x, p.y);
+            });
+            ctx.closePath();
+            ctx.fill();
+            ctx.strokeStyle = `rgba(56, 142, 60, ${0.6 + avgZ * 0.2})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
       });
 
-      requestAnimationFrame(step);
-    }
-
-    // Persona card interaction
-    const personaCardEl = document.getElementById('persona-card-interactive');
-    const personaNameEl = document.getElementById('persona-name-interactive');
-    const personaRoleEl = document.getElementById('persona-role-interactive');
-    const personaTasksEl = document.getElementById('persona-tasks-interactive');
-    const personaScoreEl = document.getElementById('persona-score');
-    const personaDimsEl = document.getElementById('persona-dims');
-    const personaAvatarEl = document.getElementById('persona-avatar');
-    const closeBtn = document.getElementById('close-persona-card');
-
-    function showPersonaCard(persona) {
-      personaNameEl.textContent = persona.name;
-      personaRoleEl.textContent = persona.role;
-      personaTasksEl.textContent = persona.tasks;
-      personaScoreEl.textContent = persona.score + '%';
-      personaDimsEl.textContent = persona.dims;
-      personaAvatarEl.textContent = persona.avatar;
-
-      personaCardEl.style.opacity = '1';
-      personaCardEl.style.pointerEvents = 'auto';
-      personaCardEl.style.transform = 'translate(-50%, -50%) scale(1)';
-    }
-
-    function hidePersonaCard() {
-      personaCardEl.style.opacity = '0';
-      personaCardEl.style.pointerEvents = 'none';
-      personaCardEl.style.transform = 'translate(-50%, -50%) scale(0.95)';
-    }
-
-    canvas.addEventListener('click', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      lastClickPersona = randomPersona();
-      createParticleBurst(x, y);
-      showPersonaCard(lastClickPersona);
-    });
-
-    closeBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      hidePersonaCard();
-    });
-
-    // Close card on outside click
-    document.addEventListener('click', (e) => {
-      if (!canvas.contains(e.target) && !personaCardEl.contains(e.target) && personaCardEl.style.opacity === '1') {
-        hidePersonaCard();
+      // Draw latitude/longitude grid
+      ctx.strokeStyle = 'rgba(59, 169, 255, 0.15)';
+      ctx.lineWidth = 0.5;
+      for (let lat = -60; lat <= 60; lat += 30) {
+        let points = [];
+        for (let lon = -180; lon <= 180; lon += 10) {
+          const p = project(lon, lat, rotX, rotY);
+          if (p && p.z > 0) points.push(p);
+        }
+        if (points.length > 1) {
+          ctx.beginPath();
+          points.forEach((p, i) => {
+            if (i === 0) ctx.moveTo(p.x, p.y);
+            else ctx.lineTo(p.x, p.y);
+          });
+          ctx.stroke();
+        }
       }
-    });
 
-    // Touch support
-    canvas.addEventListener('touchend', (e) => {
-      const touch = e.changedTouches[0];
+      // Draw atmosphere glow
+      const atmoGrad = ctx.createRadialGradient(w / 2, h / 2, 220, w / 2, h / 2, 240);
+      atmoGrad.addColorStop(0, 'rgba(59, 169, 255, 0)');
+      atmoGrad.addColorStop(1, 'rgba(59, 169, 255, 0.2)');
+      ctx.fillStyle = atmoGrad;
+      ctx.beginPath();
+      ctx.arc(w / 2, h / 2, 230, 0, Math.PI * 2);
+      ctx.fill();
+
+      requestAnimationFrame(drawGlobe);
+    }
+
+    // Mouse interactions
+    canvas.addEventListener('mousemove', (e) => {
       const rect = canvas.getBoundingClientRect();
-      const x = touch.clientX - rect.left;
-      const y = touch.clientY - rect.top;
+      mouseX = (e.clientX - rect.left) / rect.width;
+      mouseY = (e.clientY - rect.top) / rect.height;
+      isMouseOver = true;
 
-      lastClickPersona = randomPersona();
-      createParticleBurst(x, y);
-      showPersonaCard(lastClickPersona);
+      targetRotY = (mouseX - 0.5) * 180;
+      targetRotX = (mouseY - 0.5) * 90;
+
+      // Show persona card on hover
+      const personaCard = document.getElementById('persona-card-interactive');
+      if (!personaCard._persona) {
+        personaCard._persona = randomPersona();
+      }
+      updatePersonaCard(personaCard._persona);
+      personaCard.style.opacity = '1';
+      personaCard.style.pointerEvents = 'auto';
+      personaCard.style.maxHeight = '400px';
     });
+
+    canvas.addEventListener('mouseleave', () => {
+      isMouseOver = false;
+      const personaCard = document.getElementById('persona-card-interactive');
+      personaCard.style.opacity = '0';
+      personaCard.style.maxHeight = '0';
+      personaCard.style.pointerEvents = 'none';
+    });
+
+    canvas.addEventListener('click', () => {
+      const personaCard = document.getElementById('persona-card-interactive');
+      personaCard._persona = randomPersona();
+      updatePersonaCard(personaCard._persona);
+    });
+
+    function updatePersonaCard(persona) {
+      document.getElementById('persona-name-interactive').textContent = persona.name;
+      document.getElementById('persona-role-interactive').textContent = persona.role;
+      document.getElementById('persona-tasks-interactive').textContent = persona.tasks;
+      document.getElementById('persona-score').textContent = persona.score + '%';
+      document.getElementById('persona-dims').textContent = persona.dims;
+      document.getElementById('persona-avatar').textContent = persona.avatar;
+    }
 
     resize();
     window.addEventListener('resize', resize);
-    step();
+    drawGlobe();
   })();
   </script>
   <script>
