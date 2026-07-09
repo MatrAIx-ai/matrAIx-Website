@@ -161,6 +161,7 @@ body {
   text-decoration: none;
   position: relative;
   transition: color 0.25s;
+  font-family: var(--disp);
 }
 .nav-links a::after {
   content: "";
