@@ -102,7 +102,7 @@
 .btn-ghost:hover {
   border-color: var(--phos);
   color: var(--phos);
-  box-shadow: inset 0 0 18px rgba(0,102,204,0.06), 0 0 14px rgba(0,102,204,0.1);
+  box-shadow: inset 0 0 18px rgba(74,143,194,0.06), 0 0 14px rgba(74,143,194,0.1);
 }
 
 .btn-solid {
@@ -112,8 +112,8 @@
 }
 
 .btn-solid:hover {
-  background: #0052a3;
-  box-shadow: 0 0 40px rgba(0,102,204,0.3);
+  background: #3a7fb8;
+  box-shadow: 0 0 40px rgba(74,143,194,0.3);
 }
 
 /* ---------- Cards & Panels ---------- */
@@ -154,13 +154,13 @@
 /* ---------- Behavior grid & status indicators ---------- */
 
 .cell {
-  background: rgba(0,102,204,0.05);
+  background: rgba(74,143,194,0.05);
   border: 1px solid var(--line-soft);
 }
 
 .cell.pass {
   background: var(--phos);
-  box-shadow: 0 0 8px rgba(0,102,204,0.4);
+  box-shadow: 0 0 8px rgba(74,143,194,0.4);
 }
 
 .cell.watch {
@@ -174,7 +174,7 @@
 }
 
 .sw-idle {
-  background: rgba(0,102,204,0.08);
+  background: rgba(74,143,194,0.08);
   border: 1px solid var(--line);
 }
 
@@ -200,11 +200,11 @@ body, p, li, span, div, a {
 
 .dot.live {
   background: var(--phos);
-  box-shadow: 0 0 8px rgba(0,102,204,0.5);
+  box-shadow: 0 0 8px rgba(74,143,194,0.5);
 }
 
 .hero-eyebrow .ver {
-  border: 1px solid rgba(0,102,204,0.3);
+  border: 1px solid rgba(74,143,194,0.3);
 }
 
 /* Navigation links - use dark ink for better contrast */
@@ -218,7 +218,7 @@ body, p, li, span, div, a {
 
 .nav-links a::after {
   background: var(--phos);
-  box-shadow: 0 0 8px rgba(0,102,204,0.4);
+  box-shadow: 0 0 8px rgba(74,143,194,0.4);
 }
 
 /* Labels and secondary text - still dark but slightly muted if needed */
