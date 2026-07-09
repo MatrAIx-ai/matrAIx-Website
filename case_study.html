@@ -17,10 +17,10 @@
   --bg:#060807;--bg-2:#0a0e0c;--bg-3:#0d1411;--ink:#d6e6d8;--ink-dim:#6f8273;
   --phos:#5089B8;--phos-deep:#3d6a8a;--amber:#ffb547;--rose:#ff5c6c;--cyan:#5db8d8;
   --line:rgba(80,137,184,.16);--line-soft:rgba(80,137,184,.07);--glow:0 0 18px rgba(80,137,184,.45);
-  --mono:"JetBrains Mono",ui-monospace,monospace;--disp:"Space Grotesk",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;--disp:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:14px;line-height:1.55;
+body{background:var(--bg);color:var(--ink);font-family:var(--disp);font-size:14px;line-height:1.55;
   background-image:repeating-linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,0,0,.14) 3px,rgba(0,0,0,0) 4px);background-attachment:fixed}
 ::selection{background:var(--phos);color:#04121f}
 a{color:inherit;text-decoration:none}
@@ -116,7 +116,7 @@ h1 .hl{color:var(--phos);text-shadow:var(--glow)}
 .eval .findings{list-style:none;display:flex;flex-direction:column;gap:11px}
 .eval .findings li{display:flex;gap:10px;font-size:.94rem;line-height:1.45}
 .eval .close{margin-top:18px;color:var(--ink);font-size:.94rem}
-.btn{display:inline-flex;align-items:center;gap:9px;margin-top:20px;font-family:var(--mono);font-size:.84rem;letter-spacing:.06em;text-transform:uppercase;
+.btn{display:inline-flex;align-items:center;gap:9px;margin-top:20px;font-family:var(--disp);font-size:.84rem;letter-spacing:.06em;text-transform:uppercase;
   color:#04121f;background:var(--phos);border:0;padding:12px 22px;cursor:pointer;font-weight:700;box-shadow:0 0 24px rgba(80,137,184,.3)}
 .btn:hover{background:#5089B8}
 
