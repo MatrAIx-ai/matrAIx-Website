@@ -14,7 +14,7 @@ html, body { height: 100%; }
 body.os {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--mono);
+  font-family: var(--disp);
   font-size: var(--text-sm);
   line-height: var(--leading-normal);
 }
@@ -69,18 +69,18 @@ a { color: inherit; text-decoration: none; }
 .os-id { font-family: var(--disp); font-weight: 700; font-size: var(--text-xl); letter-spacing: var(--tracking-snug); white-space: nowrap; }
 .os-id .ai { color: var(--phos); text-shadow: var(--glow); }
 .os-id .v { color: var(--amber); font-size: var(--text-sm); border: 1px solid rgba(255,181,71,0.3); padding: 1px 6px; margin: 0 5px; }
-.os-id .node { color: var(--ink); font-weight: 400; font-family: var(--mono); font-size: var(--text-sm); }
+.os-id .node { color: var(--ink); font-weight: 400; font-family: var(--disp); font-size: var(--text-sm); }
 
 .os-target { display: flex; align-items: center; gap: 10px; flex: 1; justify-content: center; min-width: 0; }
 .os-target .lbl { font-size: var(--text-xs); letter-spacing: var(--tracking-wider); color: var(--ink); }
 .os-select {
-  font-family: var(--mono); font-size: var(--text-sm); color: var(--phos);
+  font-family: var(--disp); font-size: var(--text-sm); color: var(--phos);
   background: var(--bg-2); border: 1px solid var(--line); padding: 7px 12px; cursor: pointer; outline: none;
   max-width: 320px;
 }
 .os-select:focus { border-color: var(--phos); box-shadow: 0 0 0 1px var(--phos); }
 .os-btn {
-  font-family: var(--mono); font-size: var(--text-sm); letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  font-family: var(--disp); font-size: var(--text-sm); letter-spacing: var(--tracking-wide); text-transform: uppercase;
   color: var(--phos); background: transparent; border: 1px solid var(--line);
   padding: 7px 12px; cursor: pointer; transition: all 0.2s;
 }
@@ -218,7 +218,7 @@ a { color: inherit; text-decoration: none; }
 .rpt-sub { color: var(--ink-dim) !important; font-size: 0.72rem; text-transform: none; letter-spacing: 0; }
 .report-tabs { display: flex; gap: 4px; padding: 8px 10px; border-bottom: 1px solid var(--line-soft); background: rgba(80,137,184,0.02); }
 .rtab {
-  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+  font-family: var(--disp); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
   color: var(--ink-dim); background: transparent; border: 1px solid var(--line-soft); padding: 5px 10px; cursor: pointer; transition: all 0.15s;
 }
 .rtab:hover { color: var(--ink); border-color: var(--line); }
@@ -335,7 +335,7 @@ a { color: inherit; text-decoration: none; }
 .gr-card { border: 1px solid var(--line); background: var(--bg-2); overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
 .gr-tabs { display: flex; gap: 6px; padding: 14px 16px; border-bottom: 1px solid var(--line-soft); background: rgba(80,137,184,.03); overflow-x: auto; scrollbar-width: none; }
 .gr-tabs::-webkit-scrollbar { display: none; }
-.gr-tab { font-family: var(--mono); font-weight: 500; font-size: .86rem; color: var(--ink-dim); background: transparent; border: 1px solid var(--line-soft); padding: 8px 16px; cursor: pointer; white-space: nowrap; transition: all .18s; }
+.gr-tab { font-family: var(--disp); font-weight: 500; font-size: .86rem; color: var(--ink-dim); background: transparent; border: 1px solid var(--line-soft); padding: 8px 16px; cursor: pointer; white-space: nowrap; transition: all .18s; }
 .gr-tab:hover { color: var(--ink); border-color: var(--line); }
 .gr-tab.active { color: #04121f; background: var(--phos); border-color: var(--phos); font-weight: 700; }
 .gr-body { padding: clamp(20px,4vw,32px); }
@@ -366,7 +366,7 @@ a { color: inherit; text-decoration: none; }
 .gr-sev.med { background: rgba(255,181,71,.16); color: var(--amber); }
 .gr-sev.low { background: rgba(80,137,184,.13); color: var(--phos); }
 @media (max-width:600px){ .gr-table th,.gr-table td{ padding-left:8px; padding-right:8px; font-size:.9rem; } .gr-lift{ font-size:1.8rem; } }
-.gr-print { margin-top: 18px; font-family: var(--mono); font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; color: var(--phos); background: transparent; border: 1px solid var(--line); padding: 9px 18px; cursor: pointer; transition: all .2s; }
+.gr-print { margin-top: 18px; font-family: var(--disp); font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; color: var(--phos); background: transparent; border: 1px solid var(--line); padding: 9px 18px; cursor: pointer; transition: all .2s; }
 .gr-print:hover { border-color: var(--phos); box-shadow: inset 0 0 14px rgba(80,137,184,.1); }
 .print-head, .print-foot { display: none; }
 
