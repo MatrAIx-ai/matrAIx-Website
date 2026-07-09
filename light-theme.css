@@ -12,14 +12,14 @@
   --bg-3:      #f3f4f6;
   --ink:       #1a1a1a;      /* primary text */
   --ink-dim:   #404040;      /* muted text - darker for better readability */
-  --phos:      #5C7A94;      /* accent - steel blue */
-  --phos-deep: #3d4f63;      /* deeper accent - darker steel blue */
+  --phos:      #1B2A41;      /* accent - deep slate blue */
+  --phos-deep: #0F1823;      /* deeper accent - darker slate blue */
   --amber:     #d97706;      /* warning accent */
   --rose:      #dc2626;      /* fail accent */
-  --cyan:      #6b8fb3;      /* adjusted cyan to match steel blue palette */
-  --line:      rgba(92, 122, 148, 0.12);
-  --line-soft: rgba(92, 122, 148, 0.06);
-  --glow:      0 0 22px rgba(92, 122, 148, 0.25);
+  --cyan:      #3D5A7D;      /* adjusted cyan to match slate blue palette */
+  --line:      rgba(27, 42, 65, 0.12);
+  --line-soft: rgba(27, 42, 65, 0.06);
+  --glow:      0 0 22px rgba(27, 42, 65, 0.25);
 
   /* Typography - Easy to customize */
   --font-serif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
