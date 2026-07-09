@@ -63,11 +63,17 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
       }
     }
     ctx.globalAlpha = 1; ctx.shadowBlur = 0;
-    requestAnimationFrame(frame);
+    raf = requestAnimationFrame(frame);
   }
+  let raf = 0, animating = false;
+  function start() { if (!animating && !reduceMotion) { animating = true; raf = requestAnimationFrame(frame); } }
+  function stop() { animating = false; cancelAnimationFrame(raf); }
   resize();
   window.addEventListener('resize', resize);
-  if (!reduceMotion) frame();
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') stop(); else start();
+  });
+  if (!reduceMotion) start();
   else { for (const a of agents) { ctx.globalAlpha = 0.5; ctx.fillStyle = a.c; ctx.fillRect(a.x, a.y, a.s, a.s); } }
 })();
 
@@ -401,3 +407,277 @@ if (document.readyState === 'loading') {
 } else {
   initMenuToggle();
 }
+
+/* ---------- 9. Interactive population globe (hero) ---------- */
+(() => {
+  const canvas = document.getElementById('heroGlobe');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  // Accent color (phosphor blue) + warm highlight
+  const BLUE = [74, 143, 194];
+  const WARM = [217, 119, 6];
+
+  // Build a fibonacci-sphere point cloud: each point ≈ a person/agent.
+  const N = 560;
+  const PTS = new Array(N);
+  const ga = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < N; i++) {
+    const y = 1 - (i / (N - 1)) * 2;
+    const r = Math.sqrt(1 - y * y);
+    const t = ga * i;
+    PTS[i] = {
+      x: Math.cos(t) * r, y: y, z: Math.sin(t) * r,
+      warm: Math.random() < 0.06,           // a few "highlighted" agents
+      tw: Math.random() * Math.PI * 2,        // twinkle phase
+      tws: 0.6 + Math.random() * 1.6,         // twinkle speed
+    };
+  }
+
+  // Free-floating particles drifting around the globe (cursor-reactive).
+  const PARTICLES = [];
+  const PN = 30;
+
+  let w, h, cx, cy, R, dpr;
+  let rot = Math.random() * 6;          // auto Y-rotation
+  let tilt = 0;                          // current X-tilt
+  let tiltTarget = 0;
+  let spinTarget = 0;                    // extra spin from mouse X
+  let spinVel = 0;
+  // Mouse in canvas pixel space; -9999 = outside
+  let mx = -9999, my = -9999, hasMouse = false;
+  let raf = 0, time = 0, running = false;
+  let inView = true, tabVisible = true;
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    w = rect.width; h = rect.height;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cx = w / 2; cy = h / 2;
+    R = Math.min(w, h) * 0.40;
+    if (PARTICLES.length === 0) seedParticles();
+  }
+
+  function seedParticles() {
+    for (let i = 0; i < PN; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const rad = R * (1.05 + Math.random() * 0.55);
+      PARTICLES.push({
+        x: cx + Math.cos(a) * rad,
+        y: cy + Math.sin(a) * rad,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        s: 0.6 + Math.random() * 1.4,
+        warm: Math.random() < 0.15,
+      });
+    }
+  }
+
+  // --- Pointer interaction ---
+  function pointerMove(clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+    mx = clientX - rect.left;
+    my = clientY - rect.top;
+    hasMouse = true;
+    // Tilt/spin the globe toward the cursor for a parallax feel.
+    tiltTarget = ((my - cy) / h) * 0.9;
+    spinTarget = ((mx - cx) / w) * 0.9;
+  }
+  canvas.addEventListener('mousemove', e => pointerMove(e.clientX, e.clientY));
+  canvas.addEventListener('mouseleave', () => {
+    hasMouse = false; mx = my = -9999; tiltTarget = 0; spinTarget = 0;
+  });
+  canvas.addEventListener('touchmove', e => {
+    if (e.touches[0]) pointerMove(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: true });
+  canvas.addEventListener('touchend', () => {
+    hasMouse = false; mx = my = -9999; tiltTarget = 0; spinTarget = 0;
+  });
+
+  function draw() {
+    time += 0.016;
+    ctx.clearRect(0, 0, w, h);
+
+    // Ease camera toward targets.
+    tilt += (tiltTarget - tilt) * 0.06;
+    spinVel += (spinTarget * 0.02 - spinVel) * 0.05;
+    rot += 0.0016 + spinVel;
+
+    const ca = Math.cos(rot), sa = Math.sin(rot);
+    const ct = Math.cos(tilt), st = Math.sin(tilt);
+
+    // Faint wire halo.
+    ctx.strokeStyle = `rgba(${BLUE.join(',')},0.10)`;
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, 6.283); ctx.stroke();
+
+    // Project points.
+    const proj = new Array(N);
+    for (let i = 0; i < N; i++) {
+      const p = PTS[i];
+      // rotate around Y
+      let x = p.x * ca - p.z * sa;
+      let z = p.x * sa + p.z * ca;
+      let y = p.y;
+      // tilt around X
+      const y2 = y * ct - z * st;
+      const z2 = y * st + z * ct;
+      proj[i] = {
+        sx: cx + x * R,
+        sy: cy + y2 * R,
+        z: z2,
+        p,
+      };
+    }
+    proj.sort((a, b) => a.z - b.z);
+
+    // Constellation lines: connect near, front-facing points close on screen.
+    ctx.lineWidth = 1;
+    for (let i = 0; i < proj.length; i++) {
+      const a = proj[i];
+      if (a.z < 0.15) continue;
+      for (let j = i + 1; j < Math.min(i + 7, proj.length); j++) {
+        const b = proj[j];
+        if (b.z < 0.15) continue;
+        const dx = a.sx - b.sx, dy = a.sy - b.sy;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < (R * 0.16) * (R * 0.16)) {
+          const alpha = (1 - Math.sqrt(d2) / (R * 0.16)) * 0.16 * ((a.z + b.z) / 2);
+          ctx.strokeStyle = `rgba(${BLUE.join(',')},${alpha.toFixed(3)})`;
+          ctx.beginPath();
+          ctx.moveTo(a.sx, a.sy);
+          ctx.lineTo(b.sx, b.sy);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw people points (back-to-front).
+    for (let i = 0; i < proj.length; i++) {
+      const q = proj[i];
+      const p = q.p;
+      const f = (q.z + 1) / 2;                 // depth 0..1
+      const tw = 0.75 + 0.25 * Math.sin(time * p.tws + p.tw); // twinkle
+
+      // Cursor proximity glow.
+      let boost = 0;
+      if (hasMouse) {
+        const dx = q.sx - mx, dy = q.sy - my;
+        const dd = Math.sqrt(dx * dx + dy * dy);
+        const rad = R * 0.34;
+        if (dd < rad) boost = (1 - dd / rad);
+      }
+
+      const col = p.warm ? WARM : BLUE;
+      const size = (0.6 + f * 1.7) * tw + boost * 2.4;
+      const alpha = Math.min(1, (0.10 + f * 0.8) * tw + boost * 0.6);
+
+      // Cheap glow for cursor-highlighted points (a soft translucent halo
+      // instead of the costly canvas shadowBlur).
+      if (boost > 0.15) {
+        ctx.fillStyle = `rgba(${col.join(',')},${(0.18 * boost).toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(q.sx, q.sy, size + 3.5 * boost, 0, 6.283);
+        ctx.fill();
+      }
+      ctx.fillStyle = `rgba(${col.join(',')},${alpha.toFixed(3)})`;
+      ctx.beginPath();
+      ctx.arc(q.sx, q.sy, size, 0, 6.283);
+      ctx.fill();
+    }
+
+    // Free-floating particles with cursor attraction/repulsion.
+    for (let i = 0; i < PARTICLES.length; i++) {
+      const pt = PARTICLES[i];
+      if (hasMouse) {
+        const dx = mx - pt.x, dy = my - pt.y;
+        const dd = Math.sqrt(dx * dx + dy * dy) || 1;
+        if (dd < R * 0.9) {
+          // gentle swirl: attract + tangential push
+          const pull = (1 - dd / (R * 0.9)) * 0.06;
+          pt.vx += (dx / dd) * pull - (dy / dd) * pull * 0.8;
+          pt.vy += (dy / dd) * pull + (dx / dd) * pull * 0.8;
+        }
+      }
+      pt.x += pt.vx; pt.y += pt.vy;
+      pt.vx *= 0.96; pt.vy *= 0.96;
+
+      // Drift back toward an orbit band around the globe.
+      const ox = pt.x - cx, oy = pt.y - cy;
+      const orad = Math.sqrt(ox * ox + oy * oy) || 1;
+      const want = R * 1.28;
+      const k = (want - orad) * 0.0009;
+      pt.vx += (ox / orad) * k;
+      pt.vy += (oy / orad) * k;
+
+      const col = pt.warm ? WARM : BLUE;
+      ctx.fillStyle = `rgba(${col.join(',')},0.55)`;
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, pt.s, 0, 6.283);
+      ctx.fill();
+    }
+
+    // Cursor focus ring.
+    if (hasMouse) {
+      ctx.strokeStyle = `rgba(${BLUE.join(',')},0.28)`;
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(mx, my, R * 0.18, 0, 6.283); ctx.stroke();
+    }
+  }
+
+  function loop() {
+    if (!running) return;
+    draw();
+    raf = requestAnimationFrame(loop);
+  }
+
+  function updateActive() {
+    const shouldRun = inView && tabVisible && !reduceMotion;
+    if (shouldRun && !running) {
+      running = true;
+      raf = requestAnimationFrame(loop);
+    } else if (!shouldRun && running) {
+      running = false;
+      cancelAnimationFrame(raf);
+    }
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Pause the animation whenever the globe is scrolled out of view.
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      inView = entries[0].isIntersecting;
+      updateActive();
+    }, { threshold: 0.01 });
+    io.observe(canvas);
+  }
+  // Pause when the tab is hidden.
+  document.addEventListener('visibilitychange', () => {
+    tabVisible = document.visibilityState !== 'hidden';
+    updateActive();
+  });
+
+  if (reduceMotion) {
+    draw();
+  } else {
+    updateActive();
+  }
+
+  // Animate the live count in the tag (only while visible).
+  const countEl = document.getElementById('hgCount');
+  if (countEl && !reduceMotion) {
+    let base = 8300000000;
+    setInterval(() => {
+      if (!inView || !tabVisible) return;
+      const jitter = Math.floor((Math.random() - 0.3) * 900);
+      base += jitter;
+      countEl.textContent = base.toLocaleString('en-US');
+    }, 1200);
+  }
+})();
+
