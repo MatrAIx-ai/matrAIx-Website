@@ -1,7 +1,8 @@
 /* Theme Toggle System
-   - Detects system preference (prefers-color-scheme)
+   - Auto-detects system preference (prefers-color-scheme)
    - Saves user preference to localStorage
-   - Provides icon button in header to switch themes
+   - Modern toggle with smooth transitions
+   - Dispatch custom events for theme changes
 */
 
 (function() {
@@ -9,50 +10,63 @@
   const DARK = 'dark';
   const LIGHT = 'light';
 
-  // Detect system preference
+  // Get system preference
   function getSystemTheme() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? DARK : LIGHT;
   }
 
-  // Get user's saved preference or system default
-  function getSavedTheme() {
+  // Get current theme (saved preference or system default)
+  function getCurrentTheme() {
     const saved = localStorage.getItem(THEME_KEY);
     if (saved) return saved;
     return getSystemTheme();
   }
 
-  // Apply theme to document
+  // Apply theme to document and dispatch event
   function setTheme(theme) {
-    if (theme === DARK) {
+    const isDark = theme === DARK;
+
+    // Update DOM
+    if (isDark) {
       document.documentElement.setAttribute('data-theme', DARK);
-      localStorage.setItem(THEME_KEY, DARK);
+      document.documentElement.style.colorScheme = 'dark';
     } else {
       document.documentElement.removeAttribute('data-theme');
-      localStorage.setItem(THEME_KEY, LIGHT);
+      document.documentElement.style.colorScheme = 'light';
     }
-    updateToggleIcon(theme);
+
+    // Save preference
+    localStorage.setItem(THEME_KEY, theme);
+
+    // Update button
+    updateToggleButton(isDark);
+
+    // Dispatch custom event
+    document.dispatchEvent(new CustomEvent('themechange', { detail: { theme, isDark } }));
+
+    // Add transition class for smooth effect
+    document.documentElement.classList.add('theme-transitioning');
+    setTimeout(() => document.documentElement.classList.remove('theme-transitioning'), 300);
   }
 
-  // Update icon to reflect current theme
-  function updateToggleIcon(theme) {
+  // Update toggle button icon
+  function updateToggleButton(isDark) {
     const btn = document.getElementById('theme-toggle');
     if (!btn) return;
-    if (theme === DARK) {
-      btn.innerHTML = '☀️'; // Sun icon for light mode
-      btn.setAttribute('aria-label', 'Switch to light mode');
-    } else {
-      btn.innerHTML = '🌙'; // Moon icon for dark mode
-      btn.setAttribute('aria-label', 'Switch to dark mode');
-    }
+
+    btn.innerHTML = isDark ? '☀️' : '🌙';
+    btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    btn.setAttribute('title', isDark ? 'Light mode' : 'Dark mode');
   }
 
-  // Initialize theme on page load
+  // Initialize on page load
   function init() {
-    const currentTheme = getSavedTheme();
-    setTheme(currentTheme);
+    const theme = getCurrentTheme();
+    setTheme(theme);
 
-    // Listen for system preference changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    // Listen for system preference changes (only if user hasn't set preference)
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    mediaQuery.addEventListener('change', (e) => {
       if (!localStorage.getItem(THEME_KEY)) {
         setTheme(e.matches ? DARK : LIGHT);
       }
@@ -61,24 +75,27 @@
     // Setup toggle button click handler
     const btn = document.getElementById('theme-toggle');
     if (btn) {
-      btn.addEventListener('click', () => {
-        const newTheme = currentTheme === DARK ? LIGHT : DARK;
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const newTheme = getCurrentTheme() === DARK ? LIGHT : DARK;
         setTheme(newTheme);
       });
     }
   }
 
-  // Initialize when DOM is ready
+  // Run on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
 
-  // Expose for manual control if needed
+  // Expose API
   window.matrAIxTheme = {
     set: setTheme,
-    get: getSavedTheme,
-    isDark: () => getSavedTheme() === DARK
+    get: getCurrentTheme,
+    isDark: () => getCurrentTheme() === DARK,
+    toggle: () => setTheme(getCurrentTheme() === DARK ? LIGHT : DARK)
   };
 })();
