@@ -228,7 +228,7 @@ body, p, li, span, div, a {
   color: var(--ink);
 }
 
-/* ---------- Typography: Apply Neuton serif to all text except brand logo ---------- */
+/* ---------- Typography: Apply Inter sans-serif to all text ---------- */
 
 body {
   font-family: var(--font-serif);
