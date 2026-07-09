@@ -405,3 +405,10 @@ a { color: inherit; text-decoration: none; }
   .print-foot { display: block !important; margin-top: 26px; padding-top: 12px; border-top: 1px solid #ddd; font-size: 8.5pt; color: #777; text-align: center; }
   @page { margin: 16mm; }
 }
+
+/* ---------- Softer corners: gentle rounding on boxes (kept subtle) ---------- */
+.os-btn { border-radius: 8px; }
+.os-select { border-radius: 8px; }
+.win, .console { border-radius: 12px; }
+.agent, .verdict, .focus { border-radius: 8px; }
+.rtab { border-radius: 6px; }

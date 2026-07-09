@@ -561,3 +561,10 @@ main { position: relative; z-index: 10; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .hero-eyebrow, .headline span, .subhead, .cta-row, .telemetry { opacity: 1; }
 }
+
+/* ---------- Softer corners: gentle rounding on boxes (kept subtle) ---------- */
+.btn { border-radius: 8px; }
+.telemetry { border-radius: 12px; }
+.card { border-radius: 10px; }
+.hero-eyebrow .ver { border-radius: 5px; }
+.cell { border-radius: 2px; }

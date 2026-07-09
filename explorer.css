@@ -322,3 +322,11 @@
   .stat { border-right: none; border-bottom: 1px solid var(--line-soft); }
   .ex-search { width: 100%; min-width: 0; }
 }
+
+/* ---------- Softer corners: gentle rounding on boxes (kept subtle) ---------- */
+.ex-stats { border-radius: 12px; }
+.dim-card { border-radius: 10px; }
+.ex-search { border-radius: 8px; }
+.chip { border-radius: 8px; }
+.val-chip { border-radius: 6px; }
+.drawer-close { border-radius: 8px; }

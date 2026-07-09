@@ -52,8 +52,25 @@ body {
   color: var(--phos); font-size: 1.25rem; text-shadow: var(--glow);
   animation: flick 4s infinite;
 }
+/* ---------------------------------------------------------------
+   Logo wordmark font — pick ONE (comment out the others).
+   All options are preloaded in index.html, so switching is instant.
+   Vibe: professional + tech, designed but not flashy.
+     1. Space Grotesk — geometric, modern, subtle techy character  (recommended)
+     2. Sora          — clean geometric, understated & corporate-tech
+     3. Chakra Petch  — squared/engineered, stronger "tech" feel
+     4. Michroma      — wide, futuristic, minimal (a touch more sci-fi)
+     5. JetBrains Mono— monospace, developer/terminal vibe
+     6. Inter         — the current neutral default
+   Tip: Chakra Petch / Michroma read better with a little more
+   letter-spacing (e.g. 0.01em); Space Grotesk / Sora with -0.02em.
+   --------------------------------------------------------------- */
 .brand-name {
-  font-family: var(--disp); font-weight: 700; font-size: var(--text-2xl);
+  /* To try another wordmark font, replace "Space Grotesk" below with one of:
+     "Sora", "Chakra Petch", "Michroma", "JetBrains Mono", or use var(--disp) for Inter.
+     (All are preloaded in index.html.) */
+  font-family: "Space Grotesk", var(--disp);
+  font-weight: 700; font-size: 2.15rem;
   letter-spacing: -0.02em;
 }
 .brand-name .tld { color: var(--ink); font-weight: 500; }
@@ -785,3 +802,33 @@ main { position: relative; z-index: 10; }
 .scrollcue:hover { color: var(--phos); }
 @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
 @media (max-width:620px){ .runway-stats{flex-wrap:wrap;gap:8px} }
+
+/* ---------- Softer corners: gentle rounding on boxes (kept subtle) ---------- */
+/* Buttons & small pills */
+.btn { border-radius: 8px; }
+.report-agents { border-radius: 7px; }
+
+/* Primary containers / cards */
+.telemetry,
+.report-card,
+.data-panel,
+.os-card,
+.eaas-stage { border-radius: 12px; }
+
+.rsnap,
+.paper,
+.svc .card,
+.eaas-tab { border-radius: 10px; }
+
+/* Small inner boxes */
+.a-run,
+.stage-info ul li,
+.svy .track,
+.web .field { border-radius: 6px; }
+
+/* Browser mockup: round outer corners only so chrome + body meet flush */
+.scr-chrome { border-radius: 6px 6px 0 0; }
+.scr-body { border-radius: 0 0 6px 6px; }
+
+.a-grid i { border-radius: 2px; }
+

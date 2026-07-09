@@ -14,7 +14,7 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
   const canvas = document.getElementById('sim');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let w, h, agents = [], sweep = 0;
+  let w, h, agents = [];
   const COLORS = ['#54f6a6', '#54f6a6', '#54f6a6', '#ffb547', '#ff5c6c'];
 
   function spawn() {
@@ -33,36 +33,17 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
   }
   function frame() {
     ctx.clearRect(0, 0, w, h);
-    sweep += 1.4;
-    if (sweep > w + 120) sweep = -120;
-    const grad = ctx.createLinearGradient(sweep - 80, 0, sweep + 80, 0);
-    grad.addColorStop(0, 'rgba(84,246,166,0)');
-    grad.addColorStop(0.5, 'rgba(84,246,166,0.06)');
-    grad.addColorStop(1, 'rgba(84,246,166,0)');
-    ctx.fillStyle = grad; ctx.fillRect(sweep - 80, 0, 160, h);
 
     for (const a of agents) {
       a.x += a.vx; a.y += a.vy; a.t += 0.05;
       if (a.x < 0) a.x = w; if (a.x > w) a.x = 0;
       if (a.y < 0) a.y = h; if (a.y > h) a.y = 0;
-      const near = Math.abs(a.x - sweep) < 70;
       const flick = 0.35 + 0.35 * Math.sin(a.t);
-      ctx.globalAlpha = near ? Math.min(1, flick + 0.5) : flick * 0.6;
-      ctx.fillStyle = a.c; ctx.shadowBlur = near ? 12 : 0; ctx.shadowColor = a.c;
+      ctx.globalAlpha = flick * 0.6;
+      ctx.fillStyle = a.c;
       ctx.fillRect(a.x, a.y, a.s, a.s);
-      if (near) {
-        for (const b of agents) {
-          if (b === a) continue;
-          const dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy;
-          if (d2 < 5200) {
-            ctx.globalAlpha = (1 - d2 / 5200) * 0.18;
-            ctx.strokeStyle = '#54f6a6'; ctx.lineWidth = 0.5;
-            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-          }
-        }
-      }
     }
-    ctx.globalAlpha = 1; ctx.shadowBlur = 0;
+    ctx.globalAlpha = 1;
     raf = requestAnimationFrame(frame);
   }
   let raf = 0, animating = false;
