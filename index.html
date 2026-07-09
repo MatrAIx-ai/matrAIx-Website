@@ -356,7 +356,7 @@
           </div>
 
           <p style="font-size: 1.1rem; line-height: 1.7; color: var(--ink); margin-bottom: 24px;">
-            The globe continuously spins with 8.3 billion personas distributed across every continent. Each persona brings unique behaviors, preferences, and interaction patterns that help evaluate how real users engage with applications.
+            The globe continuously spins with 8.3 billion personas distributed across every continent. Click anywhere on the globe to randomly discover and interact with a single persona from our vast simulation.
           </p>
 
           <p style="font-size: 0.95rem; line-height: 1.6; color: var(--ink-dim); margin-bottom: 28px;">
@@ -365,12 +365,74 @@
           <a href="access.html" class="btn btn-solid btn-lg">Join community <span class="arr">→</span></a>
         </div>
 
-        <!-- Right: Animated 3D Globe -->
+        <!-- Right: Interactive 3D Globe -->
         <div style="position: relative; width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center;">
-          <canvas id="globe-interactive" style="width: 100%; height: 100%; border-radius: 16px; box-shadow: 0 20px 60px rgba(80,137,184,0.2);" aria-hidden="true"></canvas>
+          <canvas id="globe-interactive" style="width: 100%; height: 100%; cursor: pointer; border-radius: 16px; box-shadow: 0 20px 60px rgba(80,137,184,0.2);" aria-hidden="true"></canvas>
+          <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 0.85rem; color: var(--ink-dim); background: rgba(255,255,255,0.9); padding: 8px 16px; border-radius: 6px; pointer-events: none; font-weight: 500;">👆 Click to discover a persona</div>
         </div>
       </div>
     </section>
+
+    <!-- Persona Modal Popup -->
+    <div id="persona-modal" style="position: fixed; inset: 0; background: rgba(27,42,65,0.6); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 100; animation: fadeIn 0.3s ease;">
+      <div style="background: white; border-radius: 20px; padding: 40px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 80px rgba(27,42,65,0.3); animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+
+        <!-- Close button -->
+        <button id="modal-close" style="position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--ink-dim); opacity: 0.6; transition: opacity 0.2s; padding: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">×</button>
+
+        <!-- Avatar -->
+        <div style="font-size: 4rem; text-align: center; margin-bottom: 16px;" id="modal-avatar">👤</div>
+
+        <!-- Name & Role -->
+        <div style="text-align: center; margin-bottom: 28px;">
+          <h2 style="font-family: var(--disp); font-weight: 700; font-size: 1.8rem; color: var(--ink); margin: 0 0 8px 0;" id="modal-name">Alex Chen</h2>
+          <p style="font-size: 1rem; color: var(--ink-dim); margin: 0; font-weight: 500;" id="modal-role">Product Manager · San Francisco</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px;">
+          <div style="background: rgba(80,137,184,0.08); border: 1px solid rgba(80,137,184,0.2); border-radius: 12px; padding: 16px; text-align: center;">
+            <div style="font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: #5089B8; font-weight: 700; margin-bottom: 6px;">Tasks</div>
+            <div style="font-family: var(--mono); font-size: 1.6rem; font-weight: 700; color: var(--phos);" id="modal-tasks">230</div>
+          </div>
+          <div style="background: rgba(111,130,115,0.08); border: 1px solid rgba(111,130,115,0.2); border-radius: 12px; padding: 16px; text-align: center;">
+            <div style="font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: #6f8273; font-weight: 700; margin-bottom: 6px;">Score</div>
+            <div style="font-family: var(--mono); font-size: 1.6rem; font-weight: 700; color: var(--phos);" id="modal-score">94%</div>
+          </div>
+          <div style="background: rgba(255,152,0,0.08); border: 1px solid rgba(255,152,0,0.2); border-radius: 12px; padding: 16px; text-align: center;">
+            <div style="font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: #ff9800; font-weight: 700; margin-bottom: 6px;">Dims</div>
+            <div style="font-family: var(--mono); font-size: 1.6rem; font-weight: 700; color: var(--phos);" id="modal-dims">847</div>
+          </div>
+        </div>
+
+        <!-- Persona Details -->
+        <div style="background: rgba(80,137,184,0.05); border-left: 4px solid #5089B8; padding: 16px; border-radius: 8px; margin-bottom: 24px;">
+          <h3 style="font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: #5089B8; font-weight: 700; margin: 0 0 8px 0;">Currently Simulating</h3>
+          <p style="margin: 0; color: var(--ink); line-height: 1.6;">This persona is actively running <strong id="modal-tasks-label">230</strong> concurrent evaluation tasks across <strong id="modal-dims-label">847</strong> behavior dimensions, generating real-time insights into user interaction patterns.</p>
+        </div>
+
+        <!-- CTA -->
+        <button id="modal-discover" style="width: 100%; background: linear-gradient(135deg, #5089B8, #3f6a8f); color: white; border: none; border-radius: 10px; padding: 14px 24px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-bottom: 12px;">
+          Discover Another Persona
+        </button>
+
+        <button id="modal-learn-more" style="width: 100%; background: rgba(80,137,184,0.1); color: #5089B8; border: 1px solid rgba(80,137,184,0.3); border-radius: 10px; padding: 12px 24px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+          Learn About Personas
+        </button>
+      </div>
+    </div>
+
+    <!-- Add keyframe animations -->
+    <style>
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+    </style>
 
   </main>
 
@@ -388,15 +450,33 @@
 
   <script src="home.js?v=9"></script>
   <script>
-  /* ---------- 3D Animated Earth Globe (Slowly Rotating) ---------- */
+  /* ---------- 3D Interactive Earth Globe with Modal Popup ---------- */
   (() => {
     const canvas = document.getElementById('globe-interactive');
     if (!canvas) return;
 
+    // Persona data pools
+    const firstNames = ['Alex', 'Jordan', 'Casey', 'Morgan', 'Riley', 'Taylor', 'Avery', 'Quinn', 'Dakota', 'Skylar', 'Cameron', 'Blake', 'Reese', 'Parker', 'Sage', 'Phoenix', 'Sam', 'Jamie', 'Robin', 'Drew', 'Casey', 'Morgan', 'River', 'Ash'];
+    const lastNames = ['Chen', 'Kumar', 'Johnson', 'Silva', 'Müller', 'García', 'Ivanov', 'O\'Brien', 'Patel', 'Kim', 'Thompson', 'Santos', 'Zhang', 'Anderson', 'Martinez', 'Brown', 'Lee', 'Smith', 'Williams', 'Davis', 'Wilson', 'Moore', 'Taylor', 'Jackson'];
+    const roles = ['Data Scientist', 'Product Manager', 'Software Engineer', 'Designer', 'Researcher', 'Analyst', 'Developer', 'Founder', 'Manager', 'Consultant', 'Architect', 'Lead', 'Marketer', 'CEO', 'VP', 'Specialist', 'Engineer', 'Coordinator', 'Officer', 'Director'];
+    const cities = ['San Francisco', 'New York', 'London', 'Tokyo', 'Berlin', 'Toronto', 'Sydney', 'Singapore', 'Amsterdam', 'Austin', 'Seattle', 'Los Angeles', 'Chicago', 'Boston', 'Paris', 'Singapore', 'Dubai', 'Mumbai', 'Seoul', 'Mexico City'];
+    const avatars = ['👤', '👨‍💼', '👩‍💼', '🧑‍💻', '👨‍🔬', '👩‍🔬', '🧑‍🎓', '👨‍🎨', '👩‍🎨', '🧑‍⚕️', '👨‍💻', '👩‍💻', '🧑‍🔧', '👨‍🏫', '👩‍📱'];
+
+    function randomPersona() {
+      return {
+        name: firstNames[Math.floor(Math.random() * firstNames.length)] + ' ' + lastNames[Math.floor(Math.random() * lastNames.length)],
+        role: roles[Math.floor(Math.random() * roles.length)] + ' · ' + cities[Math.floor(Math.random() * cities.length)],
+        tasks: Math.floor(Math.random() * 150) + 100,
+        score: Math.floor(Math.random() * 15) + 85,
+        dims: Math.floor(Math.random() * 300) + 600,
+        avatar: avatars[Math.floor(Math.random() * avatars.length)]
+      };
+    }
+
     const ctx = canvas.getContext('2d');
     let w, h, dpr;
-    let rotX = 0.5;
-    let rotY = 0;
+    let rotX = 0.5, rotY = 0;
+    let autoRotateY = 0;
 
     const CONTINENTS = [
       {x: -100, y: 40, w: 80, h: 50}, {x: -60, y: -15, w: 50, h: 60},
@@ -435,17 +515,18 @@
     function drawGlobe() {
       ctx.clearRect(0, 0, w, h);
 
-      // Slow rotation
-      rotY += 0.03;
+      // Continuous auto-rotation
+      autoRotateY += 0.15;
+      rotY = autoRotateY;
 
       // Background
       const bgGrad = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, 250);
-      bgGrad.addColorStop(0, 'rgba(80, 137, 184, 0.08)');
+      bgGrad.addColorStop(0, 'rgba(80, 137, 184, 0.05)');
       bgGrad.addColorStop(1, 'rgba(80, 137, 184, 0)');
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, w, h);
 
-      // Sphere base
+      // Sphere
       const sphereGrad = ctx.createRadialGradient(w / 2 - 40, h / 2 - 40, 80, w / 2, h / 2, 250);
       sphereGrad.addColorStop(0, '#e8f4ff');
       sphereGrad.addColorStop(0.5, '#a8d8ff');
@@ -455,7 +536,7 @@
       ctx.arc(w / 2, h / 2, 220, 0, Math.PI * 2);
       ctx.fill();
 
-      // Continents with smooth depth effect
+      // Continents
       CONTINENTS.forEach(cont => {
         const bounds = [];
         for (let lon = cont.x; lon < cont.x + cont.w; lon += 10) {
@@ -468,7 +549,7 @@
         if (bounds.length > 0) {
           const avgZ = bounds.reduce((a, b) => a + b.z, 0) / bounds.length;
           if (avgZ > 0) {
-            ctx.fillStyle = `rgba(76, 175, 80, ${0.35 + avgZ * 0.45})`;
+            ctx.fillStyle = `rgba(76, 175, 80, ${0.4 + avgZ * 0.4})`;
             ctx.beginPath();
             bounds.forEach((p, i) => {
               if (i === 0) ctx.moveTo(p.x, p.y);
@@ -476,15 +557,15 @@
             });
             ctx.closePath();
             ctx.fill();
-            ctx.strokeStyle = `rgba(56, 142, 60, ${0.5 + avgZ * 0.3})`;
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = `rgba(56, 142, 60, ${0.6 + avgZ * 0.2})`;
+            ctx.lineWidth = 1;
             ctx.stroke();
           }
         }
       });
 
-      // Latitude/longitude grid
-      ctx.strokeStyle = 'rgba(80, 137, 184, 0.12)';
+      // Grid
+      ctx.strokeStyle = 'rgba(80, 137, 184, 0.15)';
       ctx.lineWidth = 0.5;
       for (let lat = -60; lat <= 60; lat += 30) {
         let points = [];
@@ -502,10 +583,10 @@
         }
       }
 
-      // Atmospheric glow
+      // Atmosphere glow
       const atmoGrad = ctx.createRadialGradient(w / 2, h / 2, 220, w / 2, h / 2, 240);
       atmoGrad.addColorStop(0, 'rgba(80, 137, 184, 0)');
-      atmoGrad.addColorStop(1, 'rgba(80, 137, 184, 0.25)');
+      atmoGrad.addColorStop(1, 'rgba(80, 137, 184, 0.2)');
       ctx.fillStyle = atmoGrad;
       ctx.beginPath();
       ctx.arc(w / 2, h / 2, 230, 0, Math.PI * 2);
@@ -513,6 +594,44 @@
 
       requestAnimationFrame(drawGlobe);
     }
+
+    // Modal interaction
+    const modal = document.getElementById('persona-modal');
+    const closeBtn = document.getElementById('modal-close');
+    const discoverBtn = document.getElementById('modal-discover');
+
+    function showModal(persona) {
+      document.getElementById('modal-avatar').textContent = persona.avatar;
+      document.getElementById('modal-name').textContent = persona.name;
+      document.getElementById('modal-role').textContent = persona.role;
+      document.getElementById('modal-tasks').textContent = persona.tasks;
+      document.getElementById('modal-score').textContent = persona.score + '%';
+      document.getElementById('modal-dims').textContent = persona.dims;
+      document.getElementById('modal-tasks-label').textContent = persona.tasks;
+      document.getElementById('modal-dims-label').textContent = persona.dims;
+      modal.style.display = 'flex';
+    }
+
+    function hideModal() {
+      modal.style.display = 'none';
+    }
+
+    canvas.addEventListener('click', () => {
+      showModal(randomPersona());
+    });
+
+    closeBtn.addEventListener('click', hideModal);
+    discoverBtn.addEventListener('click', () => {
+      showModal(randomPersona());
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) hideModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') hideModal();
+    });
 
     resize();
     window.addEventListener('resize', resize);
