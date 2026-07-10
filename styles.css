@@ -100,6 +100,10 @@ body {
   display: none;
 }
 .brand-name {
+  display: inline-block;
+  white-space: nowrap;
+  word-break: keep-all;
+  flex: none;
   font-family: var(--disp);
   font-weight: 700;
   font-size: var(--text-2xl);
@@ -120,7 +124,7 @@ body {
   100% { background-position: 0% 0%; }
 }
 .brand-name .tld { color: var(--ink); font-weight: 500; }
-.brand-name.small { font-size: var(--text-base); }
+.brand-name.small { font-size: var(--text-base); white-space: nowrap; word-break: keep-all; flex: none; }
 
 .nav-toggle {
   display: none;

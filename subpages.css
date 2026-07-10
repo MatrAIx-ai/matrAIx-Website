@@ -1,3 +1,4 @@
+.mx-brand{display:inline-block!important;white-space:nowrap!important;word-break:keep-all!important;flex:none!important}
 /* MatrAIx shared dark page shell */
 :root{--mx-bg:#0a0a0a;--mx-panel:#151719;--mx-panel-2:#1b1e21;--mx-ink:#f5f5f5;--mx-dim:#aeb4bb;--mx-blue:#4A8FC2;--mx-amber:#d98a24;--mx-line:rgba(74,143,194,.18);--mx-soft:rgba(74,143,194,.09);--mx-disp:"Inter",sans-serif;--mx-mono:"JetBrains Mono",monospace}
 *{box-sizing:border-box}html{color-scheme:dark}body{margin:0;background:var(--mx-bg);color:var(--mx-ink);font-family:var(--mx-disp)}
