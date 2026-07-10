@@ -679,7 +679,8 @@ if (document.readyState === 'loading') {
       const sx = cx + x * R;
       const sy = cy - y2 * R;
       const f = (z2 + 1) / 2;                 // depth 0..1
-      const tw = 0.75 + 0.25 * Math.sin(time * p.tws + p.tw); // twinkle
+      const pulse = 0.5 + 0.5 * Math.sin(time * p.tws + p.tw);
+      const tw = 0.62 + 0.38 * pulse;          // asynchronous twinkle
 
       // Cursor proximity glow.
       let boost = 0;
@@ -696,16 +697,38 @@ if (document.readyState === 'loading') {
       alpha *= Math.min(1, 0.48 + p.power * 0.62);
       if (!p.land) { alpha *= 0.52; size *= 0.88; }
 
+      // Soft bloom around brighter land points, without expensive shadowBlur.
+      if (p.land && p.power > 0.56) {
+        const haloRadius = Math.min(4.2, 1.35 + size * (1.35 + pulse * 0.7));
+        ctx.fillStyle = `rgba(${col.join(',')},${(alpha * (0.07 + pulse * 0.11)).toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(sx, sy, haloRadius, 0, 6.283);
+        ctx.fill();
+      }
+
       if (boost > 0.15) {
         ctx.fillStyle = `rgba(${col.join(',')},${(PAL.haloBoost * boost).toFixed(3)})`;
         ctx.beginPath();
         ctx.arc(sx, sy, size + 3.5 * boost, 0, 6.283);
         ctx.fill();
       }
+      // Tiny bright cores read as city lights instead of solid dots.
+      const coreSize = Math.max(0.28, Math.min(1.18, size * 0.58));
       ctx.fillStyle = `rgba(${col.join(',')},${alpha.toFixed(3)})`;
       ctx.beginPath();
-      ctx.arc(sx, sy, size, 0, 6.283);
+      ctx.arc(sx, sy, coreSize, 0, 6.283);
       ctx.fill();
+
+      // Sparse prominent lights get a subtle star-like glint near peak.
+      if (p.land && p.power > 0.86 && pulse > 0.58) {
+        const glint = 1.6 + pulse * 1.8;
+        ctx.strokeStyle = `rgba(${col.join(',')},${(alpha * pulse * 0.42).toFixed(3)})`;
+        ctx.lineWidth = 0.55;
+        ctx.beginPath();
+        ctx.moveTo(sx - glint, sy); ctx.lineTo(sx + glint, sy);
+        ctx.moveTo(sx, sy - glint); ctx.lineTo(sx, sy + glint);
+        ctx.stroke();
+      }
     }
 
     // Glowing coastline outlines (batched: a wide soft glow + a thin bright core).
