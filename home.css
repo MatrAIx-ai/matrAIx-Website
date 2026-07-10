@@ -12,7 +12,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--mono);
+  font-family: var(--disp);
   font-size: var(--text-base);
   line-height: var(--leading-normal);
   overflow-x: hidden;
