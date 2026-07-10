@@ -64,6 +64,9 @@ body {
    --------------------------------------------------------------- */
 .brand-name {
   display: inline-block;
+  white-space: nowrap;
+  word-break: keep-all;
+  flex: none;
   font-family: "Orbitron", "Space Grotesk", var(--disp) !important;
   font-weight: 700; font-size: 1.92rem;
   letter-spacing: .025em;
@@ -73,6 +76,9 @@ body {
 }
 .brand-name .tld { color: var(--ink); font-weight: 500; }
 .brand-name.small {
+  white-space: nowrap;
+  word-break: keep-all;
+  flex: none;
   font-size: 1.02rem; letter-spacing: .02em;
   transform: scaleX(1.05) scaleY(.9);
 }
