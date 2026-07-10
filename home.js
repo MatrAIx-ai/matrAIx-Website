@@ -389,6 +389,27 @@ if (document.readyState === 'loading') {
   initMenuToggle();
 }
 
+/* ---------- 8b. Application task-type showcase ---------- */
+(() => {
+  const root = document.getElementById('eaas');
+  if (!root) return;
+  const tabs = [...root.querySelectorAll('.eaas-tab')];
+  const vizs = [...root.querySelectorAll('.viz')];
+  const infos = [...root.querySelectorAll('.info')];
+
+  function show(index) {
+    tabs.forEach((tab, i) => {
+      const active = i === index;
+      tab.classList.toggle('active', active);
+      tab.setAttribute('aria-selected', String(active));
+    });
+    vizs.forEach((viz, i) => viz.classList.toggle('on', i === index));
+    infos.forEach((info, i) => info.classList.toggle('on', i === index));
+  }
+
+  tabs.forEach((tab, index) => tab.addEventListener('click', () => show(index)));
+})();
+
 /* ---------- 9. Interactive population globe (hero) ---------- */
 (() => {
   const canvas = document.getElementById('heroGlobe');

@@ -4,72 +4,62 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>(function(){try{var t=localStorage.getItem('matraix-theme')||'dark';document.documentElement.setAttribute('data-theme',t);document.documentElement.style.colorScheme=t;}catch(e){document.documentElement.setAttribute('data-theme','dark');document.documentElement.style.colorScheme='dark';}})();</script>
-  <title>matrAIx — Agent Simulation for Evaluation</title>
+  <title>MatrAIx — Simulate Before Reality</title>
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-  <meta name="description" content="matrAIx runs Agent Simulation for Evaluation: 8.3 Billion behaviors across 1,000 persona dimensions — generating segmented A/B reports and high-quality SFT and RL training data." />
+  <meta name="description" content="MatrAIx is an open-source research community building persona-conditioned agents, environments, and evaluation tools to simulate users before real-world deployment." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&family=Sora:wght@600;700;800&family=Chakra+Petch:wght@600;700&family=Michroma&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="home.css?v=37" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="home.css?v=50" />
   <link rel="stylesheet" href="light-theme.css?v=3" />
   <link rel="stylesheet" href="dark-theme.css?v=3" />
 </head>
 <body>
-  <!-- Background simulation layers -->
   <canvas id="sim" aria-hidden="true"></canvas>
   <div class="grain" aria-hidden="true"></div>
   <div class="scanlines" aria-hidden="true"></div>
   <div class="vignette" aria-hidden="true"></div>
 
   <header class="nav">
-    <a class="brand" href="/">
+    <a class="brand" href="/" aria-label="MatrAIx home">
       <span class="brand-name">Matr<em>AI</em>x</span>
     </a>
     <nav class="nav-links" aria-label="Primary">
       <a href="/">Home</a>
-      <a href="blog/">Blog</a>
-      <a href="persona.html">Persona</a>
-      <a href="demo.html">Demo</a>
+      <a href="blog/">Research</a>
+      <a href="persona.html">Personas</a>
+      <a href="#applications">Applications</a>
+      <a href="demo.html">Playground</a>
+      <a href="access.html">Community</a>
     </nav>
-    <button class="nav-toggle" aria-label="Toggle navigation menu">
-      Menu
-    </button>
-    <button id="theme-toggle" class="btn btn-ghost nav-cta" style="padding: 8px 14px; border: 1px solid var(--line); background: transparent; min-width: auto;">
-      🌙
-    </button>
-    <a href="access.html" class="btn btn-solid nav-cta">
-      <span class="dot live"></span> Join community
-    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu">Menu</button>
+    <button id="theme-toggle" class="btn btn-ghost nav-cta theme-nav" aria-label="Toggle color theme">🌙</button>
+    <a href="https://github.com/MatrAIx-ai/MatrAIx" class="nav-github" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="access.html" class="btn btn-solid nav-cta"><span class="dot live"></span> Join us</a>
   </header>
 
   <main>
-    <!-- Hero -->
-    <section class="hero hero--split">
+    <section class="hero hero--split" id="home">
       <div class="hero-copy">
         <div class="community-badge">
           <span class="badge-dot"></span>
-          <span class="badge-text">Open-Source Community</span>
+          <span class="badge-text">Open-source research community</span>
         </div>
-
-        <h1 class="headline">
-          <span class="line">8.3 Billion Personas</span>
-          <span class="line dim">Simulation for Evaluation</span>
+        <h1 class="headline headline--vision">
+          <span class="line">Before you release to the world,</span>
+          <span class="line dim">simulate the world.</span>
         </h1>
-
         <p class="hero-subheading">
-          matrAIx is an open-access community for evaluating interactive applications using AI agents that behave like real users. No more waiting weeks for user testing — get results in hours.
+          MatrAIx builds persona populations, agent environments, and evaluation scenarios to study how diverse simulated users behave before systems meet the real world.
         </p>
-
         <div class="cta-row">
-          <a href="access.html" class="btn btn-solid btn-lg">Join community <span class="arr">→</span></a>
-          <a href="demo.html" class="btn btn-ghost btn-lg">▶ Try the demo</a>
+          <a href="#applications" class="btn btn-solid btn-lg">Explore MatrAIx <span class="arr">→</span></a>
         </div>
       </div>
 
-      <!-- Interactive population globe: each point ≈ one person -->
       <div class="hero-globe-wrap" aria-hidden="true">
         <canvas id="heroGlobe"></canvas>
         <div class="hero-globe-glow"></div>
@@ -80,440 +70,156 @@
       </div>
     </section>
 
-    <!-- Twin globes: real people ≈ matrAIx agents (MOVED: now inline in interactive globe section) -->
-    <!-- EMPTY: This section is now part of the interactive globe below -->
-    <section class="panel" style="padding: 60px clamp(20px,5vw,40px); text-align: center; display: none;">
-      <div class="sec-head">
-        <span class="idx">00 — POPULATION PARITY</span>
-        <h2 class="sec-title">8.3 billion real people. 8.3 billion synthetic agents.</h2>
-      </div>
-      <div class="globes">
-        <div class="globe-wrap human">
-          <canvas class="globe" data-kind="human"></canvas>
-          <div class="globe-cap"><b>Real People</b><span>8.3B global population</span></div>
+    <section class="research-stack-strip" aria-labelledby="stack-title">
+      <div class="stack-strip-inner">
+        <div class="stack-strip-intro">
+          <span class="idx">THE MATRAIX THESIS</span>
+          <h2 id="stack-title">The next frontier for agents is understanding humanity—and learning to behave like us.</h2>
         </div>
-        <div class="globe-link"><span class="sym">⇄</span></div>
-        <div class="globe-wrap agent">
-          <canvas class="globe" data-kind="agent"></canvas>
-          <div class="globe-cap"><b>MatrAIx Agents</b><span>8.3B synthetic personas</span></div>
+        <div class="stack-strip-flow">
+          <a href="persona.html"><span>01 · WHO</span><b>Persona</b></a>
+          <i aria-hidden="true">→</i>
+          <div><span>02 · WHERE / HOW</span><b>Environment</b></div>
+          <i aria-hidden="true">→</i>
+          <a href="#applications"><span>03 · WHAT / WHY</span><b>Application</b></a>
+          <i aria-hidden="true">→</i>
+          <div class="stack-output"><span>OUTPUT</span><b>Evaluation Results</b></div>
         </div>
       </div>
     </section>
 
-    <!-- A/B report viewer -->
-    <section class="panel reports" id="reports">
+    <section class="panel application-types" id="applications">
       <div class="sec-head">
-        <span class="idx">01 — EVALUATION REPORTS</span>
-        <h2 class="sec-title">See actionable insights in hours, not weeks.</h2>
+        <span class="idx">01 — APPLICATION TASKS</span>
+        <h2 class="sec-title">Four types of user simulation tasks.</h2>
       </div>
-
-      <!-- ORIGINAL CONTENT COMMENTED OUT:
-      <div class="reports-compare">
-        <div class="rc-lead">Synthetic evaluation vs. 50,000-person human study:</div>
-        <div class="rc-strip">
-          <div class="rc-cell"><span class="rc-num">~<span class="cu" data-to="6">6</span> hrs</span><span class="rc-lab">run time · vs ~50,000</span></div>
-          <div class="rc-cell"><span class="rc-num">~$<span class="cu" data-to="2">2</span>K</span><span class="rc-lab">cost · vs ~$2M+</span></div>
-          <div class="rc-cell"><span class="rc-num"><span class="cu" data-to="95">95</span>%+</span><span class="rc-lab">match to humans</span></div>
-        </div>
-      </div>
-      <div class="report-snaps">
-        <article class="rsnap">
-          <div class="rsnap-top"><span class="rsnap-name">Checkout flow</span><span class="rsnap-win">B wins</span></div>
-          <div class="rsnap-lift">+14.2%</div>
-          <div class="rsnap-metric">task completion</div>
-          <p class="rsnap-find">Coupon field traps 23% of mobile users.</p>
-          <div class="rsnap-acc">✓ <span class="cu" data-to="96">96</span>% match to human trajectories</div>
-        </article>
-        <article class="rsnap">
-          <div class="rsnap-top"><span class="rsnap-name">SaaS onboarding</span><span class="rsnap-win">B wins</span></div>
-          <div class="rsnap-lift">+9.6%</div>
-          <div class="rsnap-metric">day-1 activation</div>
-          <p class="rsnap-find">41% of power users skip the tour.</p>
-          <div class="rsnap-acc">✓ <span class="cu" data-to="95">95</span>% match to human trajectories</div>
-        </article>
-        <article class="rsnap">
-          <div class="rsnap-top"><span class="rsnap-name">Fintech signup</span><span class="rsnap-win">B wins</span></div>
-          <div class="rsnap-lift">+11.0%</div>
-          <div class="rsnap-metric">signup completion</div>
-          <p class="rsnap-find">Passkey confuses 39% of users 55+.</p>
-          <div class="rsnap-acc">✓ <span class="cu" data-to="97">97</span>% match to human trajectories</div>
-        </article>
-      </div>
-      <div class="reports-foot"><a class="reports-btn" href="demo.html#reports"><span class="rb-ico">▣</span> See the full interactive reports in the demo <span class="arr">→</span></a></div>
-      -->
-
-      <!-- NEW CONTENT FROM ENTERPRISE.HTML: SERVICES GRID -->
-      <div class="svc">
-        <div class="card"><div class="svc-anim"><div class="a-run"><i></i><i></i><i></i></div></div><h3>pl<span style="color:var(--phos)">AI</span>ground access</h3></div>
-        <div class="card"><div class="svc-anim"><div class="a-bars"><i></i><i></i><i></i><i></i></div></div><h3>Evaluation reports</h3></div>
-        <div class="card"><div class="svc-anim"><div class="a-loop"></div></div><h3>Training data</h3></div>
-        <div class="card"><div class="svc-anim"><div class="a-grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><h3>Custom personas</h3></div>
-      </div>
-    </section>
-
-    <!-- EAAS Levels -->
-    <section class="panel data" id="data">
-      <div class="sec-head">
-        <span class="idx">02 — SELF-IMPROVING SYSTEM</span>
-        <h2 class="sec-title">The more you simulate, the better the system gets.</h2>
-      </div>
-
-      <!-- ORIGINAL CONTENT COMMENTED OUT:
-      <div class="data-grid">
-        <div class="evolve">
-          <div class="flywheel">
-            <div class="fw-ring"></div>
-            <div class="fw-center">
-              <div class="fw-ver">MODEL <b id="fwVer">v1</b></div>
-              <div class="fw-q" id="fwQ">71%</div>
-              <div class="fw-lab">eval pass rate</div>
-            </div>
-            <span class="fw-node nT">① Simulate</span>
-            <span class="fw-node nR">② Score</span>
-            <span class="fw-node nB">③ Train</span>
-            <span class="fw-node nL">④ Improve</span>
-          </div>
-          <div class="qchart"><div class="qbars" id="qbars"></div><div class="qcap">pass rate climbs each generation · <b id="fwEx">0</b> examples</div></div>
-        </div>
-        <ul class="data-points">
-          <li><strong>Every run is captured &amp; scored</strong> — millions of labeled behaviors, no labeling team.</li>
-          <li><strong>The best examples become training data</strong> — auto-curated for SFT &amp; preference pairs.</li>
-          <li><strong>The model trains and improves</strong> — measurably, every generation.</li>
-          <li><strong>A smarter model runs better simulations</strong> — which produce better data.</li>
-          <li><strong>The flywheel compounds</strong> — data and model improve together.</li>
-        </ul>
-      </div>
-      -->
-
-      <!-- NEW CONTENT FROM ENTERPRISE.HTML: EVALUATION-AS-A-SERVICE LEVELS -->
       <div class="eaas" id="eaas">
-        <div class="eaas-rail" role="tablist">
-          <button class="eaas-tab active" data-i="0" role="tab"><span class="lv">L1</span><span class="tx"><span class="nm">Survey</span><span class="meter"><i class="on"></i><i></i><i></i><i></i></span></span></button>
-          <button class="eaas-tab" data-i="1" role="tab"><span class="lv">L2</span><span class="tx"><span class="nm">Chatbot</span><span class="meter"><i class="on"></i><i class="on"></i><i></i><i></i></span></span></button>
-          <button class="eaas-tab" data-i="2" role="tab"><span class="lv">L3</span><span class="tx"><span class="nm">Web</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></span></button>
-          <button class="eaas-tab" data-i="3" role="tab"><span class="lv">L4</span><span class="tx"><span class="nm">App</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span></button>
+        <div class="eaas-rail" role="tablist" aria-label="Application task types">
+          <button class="eaas-tab active" data-i="0" role="tab" aria-selected="true"><span class="lv">L1</span><span class="tx"><span class="nm">Survey</span><span class="meter"><i class="on"></i><i></i><i></i><i></i></span></span></button>
+          <button class="eaas-tab" data-i="1" role="tab" aria-selected="false"><span class="lv">L2</span><span class="tx"><span class="nm">Chatbot</span><span class="meter"><i class="on"></i><i class="on"></i><i></i><i></i></span></span></button>
+          <button class="eaas-tab" data-i="2" role="tab" aria-selected="false"><span class="lv">L3</span><span class="tx"><span class="nm">Web</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></span></button>
+          <button class="eaas-tab" data-i="3" role="tab" aria-selected="false"><span class="lv">L4</span><span class="tx"><span class="nm">App</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span></button>
         </div>
-
         <div class="eaas-stage">
           <div class="stage-viz">
-            <!-- L1 viz: survey bars -->
             <div class="viz on" data-i="0">
               <div class="svy">
-                <span class="cap">// segmented responses<b></b></span>
-                <div class="row"><span class="lab2">18–24</span><div class="track"><span class="fill" style="--w:74%"></span></div><span class="pct">74%</span></div>
-                <div class="row"><span class="lab2">25–44</span><div class="track"><span class="fill" style="--w:91%;animation-delay:.25s"></span></div><span class="pct" style="animation-delay:.25s">91%</span></div>
-                <div class="row"><span class="lab2">45–64</span><div class="track"><span class="fill" style="--w:58%;animation-delay:.5s"></span></div><span class="pct" style="animation-delay:.5s">58%</span></div>
-                <div class="row"><span class="lab2">65+</span><div class="track"><span class="fill" style="--w:39%;animation-delay:.75s"></span></div><span class="pct" style="animation-delay:.75s">39%</span></div>
+                <span class="example-context">MARKET RESEARCH · PROMOTION TEST</span>
+                <span class="cap">“Which offer would make you buy today?”<b></b></span>
+                <div class="row"><span class="lab2">Free ship</span><div class="track"><span class="fill" style="--w:82%"></span></div><span class="pct">82%</span></div>
+                <div class="row"><span class="lab2">10% off</span><div class="track"><span class="fill" style="--w:74%;animation-delay:.25s"></span></div><span class="pct" style="animation-delay:.25s">74%</span></div>
+                <div class="row"><span class="lab2">Returns</span><div class="track"><span class="fill" style="--w:61%;animation-delay:.5s"></span></div><span class="pct" style="animation-delay:.5s">61%</span></div>
+                <div class="row"><span class="lab2">2× points</span><div class="track"><span class="fill" style="--w:45%;animation-delay:.75s"></span></div><span class="pct" style="animation-delay:.75s">45%</span></div>
               </div>
             </div>
-            <!-- L2 viz: conversation -->
             <div class="viz" data-i="1">
-              <div class="cv">
-                <div class="b me">How do I dispute this charge?</div>
-                <div class="b ai">I can help with that — was the charge unauthorized or incorrect?</div>
-                <div class="b me">Incorrect amount.</div>
-                <div class="b ai">Got it. I've opened a dispute and emailed you a confirmation. ✓</div>
-              </div>
+              <div class="cv"><span class="example-context">CUSTOMER SERVICE · PRODUCT RETURN</span><div class="b me">These shoes don't fit. Can I return them?</div><div class="b ai">Yes. Were they worn outside?</div><div class="b me">No, only tried on.</div><div class="b ai">Your return is approved. Here's the label. ✓</div></div>
             </div>
-            <!-- L3 viz: web form -->
             <div class="viz" data-i="2">
-              <div class="scr web">
-                <div class="scr-chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url"></span></div>
-                <div class="scr-body">
-                  <div class="field"></div>
-                  <div class="field"></div>
-                  <div class="field"></div>
-                  <div class="btn3"></div>
-                  <span class="ring"></span>
-                  <span class="cursor">▲</span>
-                  <span class="prog"></span>
-                </div>
-              </div>
+              <div class="scr web"><div class="scr-chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">shop.test/checkout</span></div><div class="scr-body"><span class="example-context mock-context">SHOPPING WEBSITE · CHECKOUT</span><div class="field"></div><div class="field"></div><div class="field"></div><div class="btn3"></div><span class="ring"></span><span class="cursor">▲</span><span class="prog"></span></div></div>
             </div>
-            <!-- L4 viz: app phone -->
             <div class="viz app" data-i="3">
-              <div class="phone">
-                <span class="notch"></span>
-                <div class="screens">
-                  <div class="s"><span class="ln hl"></span><span class="ln"></span><span class="blk"></span><span class="ln"></span></div>
-                  <div class="s"><span class="ln"></span><span class="blk"></span><span class="ln hl"></span><span class="ln"></span></div>
-                  <div class="s"><span class="ln hl"></span><span class="ln"></span><span class="ln"></span><span class="blk"></span></div>
-                </div>
-                <span class="tap"></span>
-                <div class="dots"><i></i><i></i><i></i></div>
-              </div>
+              <div class="app-example"><span class="example-context">SOCIAL APP · CREATE A GROUP</span><div class="phone"><span class="notch"></span><div class="screens"><div class="s"><span class="ln hl"></span><span class="ln"></span><span class="blk"></span><span class="ln"></span></div><div class="s"><span class="ln"></span><span class="blk"></span><span class="ln hl"></span><span class="ln"></span></div><div class="s"><span class="ln hl"></span><span class="ln"></span><span class="ln"></span><span class="blk"></span></div></div><span class="tap"></span><div class="dots"><i></i><i></i><i></i></div></div></div>
             </div>
           </div>
-
           <div class="stage-info">
-            <div class="info on" data-i="0">
-              <div class="top"><h3>Survey</h3><span class="tag">// synthetic panels, instant</span></div>
-              <p class="desc">A questionnaire in front of millions of persona-weighted agents — <b>segmented responses</b> in hours, no recruiting or panel fees.</p>
-              <div class="meta">
-                <div><span class="lab">You get</span><ul><li>Segmented distributions</li><li>Cross-tabs by 1,162 dims</li><li>Open-ended verbatims</li></ul></div>
-                <div><span class="lab">Best for</span><p class="best">Concept testing, <b>pricing</b>, positioning.</p></div>
-              </div>
-            </div>
-            <div class="info" data-i="1">
-              <div class="top"><h3>Chatbot</h3><span class="tag">// multi-turn stress tests</span></div>
-              <p class="desc">Personas hold real <b>multi-turn conversations</b> with your chatbot or assistant — probing helpfulness, safety, tone, and task completion.</p>
-              <div class="meta">
-                <div><span class="lab">You get</span><ul><li>Transcripts &amp; scores</li><li>Safety / refusal analysis</li><li>Task-completion rates</li></ul></div>
-                <div><span class="lab">Best for</span><p class="best">Support bots, <b>copilots</b>, voice IVR.</p></div>
-              </div>
-            </div>
-            <div class="info" data-i="2">
-              <div class="top"><h3>Web</h3><span class="tag">// agents drive your site</span></div>
-              <p class="desc">Agents navigate your site end-to-end — <b>checkout, onboarding, signup</b> — surfacing friction and how much each fix is worth.</p>
-              <div class="meta">
-                <div><span class="lab">You get</span><ul><li>Segmented A/B reports</li><li>Funnel friction map</li><li>Conversion-lift estimates</li></ul></div>
-                <div><span class="lab">Best for</span><p class="best">Checkout, <b>conversion</b> flows, onboarding.</p></div>
-              </div>
-            </div>
-            <div class="info" data-i="3">
-              <div class="top"><h3>App</h3><span class="tag">// full computer-use, end-to-end</span></div>
-              <p class="desc">Agents operate your <b>native mobile or desktop app</b> the way people do — real taps and screens — the highest-fidelity evaluation.</p>
-              <div class="meta">
-                <div><span class="lab">You get</span><ul><li>End-to-end task sims</li><li>Cross-device coverage</li><li>Full session replays</li></ul></div>
-                <div><span class="lab">Best for</span><p class="best">Mobile apps, desktop software, <b>complex products</b>.</p></div>
-              </div>
-            </div>
+            <div class="info on" data-i="0"><div class="top"><h3>Survey</h3><span class="tag">// questionnaires &amp; feedback</span></div><p class="desc">Collect structured and open-ended user feedback for market research, concept testing, and preference analysis.</p></div>
+            <div class="info" data-i="1"><div class="top"><h3>Chatbot</h3><span class="tag">// conversational AI evaluation</span></div><p class="desc">Evaluate AI chatbots across task completion, customer satisfaction, helpfulness, safety, and multi-turn reliability.</p></div>
+            <div class="info" data-i="2"><div class="top"><h3>Web</h3><span class="tag">// web product evaluation</span></div><p class="desc">Evaluate web products and features across usability, presentation, navigation, latency sensitivity, and task completion.</p></div>
+            <div class="info" data-i="3"><div class="top"><h3>App</h3><span class="tag">// app product evaluation</span></div><p class="desc">Evaluate app features and workflows across functionality, responsiveness, task success, and user preference.</p></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Simulation Playground -->
-    <section class="panel playground" id="playground">
+    <section class="panel capability-panel" id="capabilities">
       <div class="sec-head">
-        <span class="idx">03 — TRY IT NOW</span>
-        <h2 class="sec-title">Start a simulation in seconds.</h2>
+        <span class="idx">02 — WHAT MATRAIX PROVIDES</span>
+        <h2 class="sec-title">From simulated users to actionable evaluation results.</h2>
       </div>
-      <div class="os-card">
-        <div class="os-card-bar">
-          <span class="os-card-id">◉ matr<em>AI</em>x OS <span class="v">v4.8</span> <span class="node">NODE-07</span></span>
-          <span class="os-card-status">
-            <span class="led">CORE</span><span class="led">EVAL</span><span class="led">NET</span>
-            <span class="os-card-clock" id="pgClock">--:--:--</span>
-          </span>
-        </div>
+      <div class="svc capability-grid">
+        <a class="card" href="demo.html">
+          <div class="svc-anim"><div class="a-run"><i></i><i></i><i></i></div></div>
+          <h3>Playground</h3>
+        </a>
+        <a class="card" href="demo.html#reports">
+          <div class="svc-anim"><div class="a-bars"><i></i><i></i><i></i><i></i></div></div>
+          <h3>Evaluation reports</h3>
+        </a>
+        <article class="card">
+          <div class="svc-anim"><div class="a-loop"></div></div>
+          <h3>Telemetry data</h3>
+        </article>
+        <a class="card" href="persona.html">
+          <div class="svc-anim"><div class="a-grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+          <h3>Custom personas</h3>
+        </a>
+      </div>
+    </section>
+
+    <section class="panel playground-panel" id="playground">
+      <div class="sec-head">
+        <span class="idx">03 — PLAYGROUND</span>
+        <h2 class="sec-title">Start exploring the simulation stack.</h2>
+      </div>
+      <div class="os-card compact-os-card">
+        <div class="os-card-bar"><span class="os-card-id">◉ Matr<em>AI</em>x Playground</span><span class="os-card-status"><span class="led">PERSONA</span><span class="led">ENV</span><span class="led">EVAL</span></span></div>
         <div class="os-card-body">
           <div class="os-card-vitals">
-            <div><b>8.3B</b><span>synthetic personas</span></div>
-            <div><b>1,000</b><span>behavior dimensions</span></div>
-            <div><b data-stream="rate">412,880</b><span>evaluations / sec</span></div>
+            <div><b>8.3B</b><span>persona vision</span></div>
+            <div><b>1,290</b><span>persona attributes</span></div>
+            <div><b>1,000+</b><span>applications</span></div>
           </div>
-          <div class="pg-actions">
-            <a href="demo.html" class="btn btn-solid btn-lg">Launch playground <span class="arr">→</span></a>
-            <a href="case_study.html" class="btn btn-ghost btn-lg">▶ See examples</a>
-          </div>
+          <div class="pg-actions"><a href="demo.html" class="btn btn-solid btn-lg">Launch playground <span class="arr">→</span></a><a href="case_study.html" class="btn btn-ghost btn-lg">See example</a></div>
         </div>
       </div>
     </section>
 
-    <!-- Research — temporarily hidden
-    <section class="panel research" id="research">
-      <div class="sec-head">
-        <span class="idx">04 — RESEARCH</span>
-        <h2 class="sec-title">Built on peer-reviewed research.</h2>
-      </div>
-      <div class="papers">
-        <article class="paper">
-          <span class="paper-venue">ICML 2026 · FAGEN</span>
-          <h3 class="paper-title">Automating SKILL.md Generation for Computer-Using Agents via Interaction Trajectory Mining</h3>
-          <p class="paper-authors"><b>Yuexing Hao</b>, <b>Xiaomin Li</b></p>
-        </article>
-        <article class="paper">
-          <span class="paper-venue">ICML 2026</span>
-          <h3 class="paper-title">NARRA-Gym for Evaluating Interactive Narrative Agents</h3>
-          <p class="paper-authors">Yue Huang, Yuchen Ma, Jiayi Ye, Wenjie Wang, Zipeng Ling, Xingjian Hu, <b>Yuexing Hao</b>, Zichen Chen, Zhangchen Xu, Yunhong He, Zhengqing Yuan, Yujun Zhou, Kehan Guo, Chaoran Chen, Toby Jia-Jun Li, Stefan Feuerriegel, Xiangliang Zhang</p>
-        </article>
-        <article class="paper">
-          <span class="paper-venue">AAAI 2026</span>
-          <h3 class="paper-title">Rule-based Rating and Selection of LLM Data</h3>
-          <p class="paper-authors"><b>Xiaomin Li</b>, Mingye Gao, Zhiwei Zhang, Chang Yue, Hong Hu</p>
-        </article>
-        <article class="paper">
-          <span class="paper-venue">NeurIPS 2025 · GenAI4Health</span>
-          <h3 class="paper-title">MedGUIDE: Benchmarking Clinical Decision-Making in Large Language Models</h3>
-          <p class="paper-authors"><b>Xiaomin Li</b>, Mingye Gao, <b>Yuexing Hao</b>, Taoran Li, Guangya Wan, Zihan Wang, Yijun Wang</p>
-        </article>
-      </div>
+    <section class="panel video-panel" id="demo-video">
+      <div class="sec-head"><span class="idx">04 — DEMO</span><h2 class="sec-title">See MatrAIx in action.</h2></div>
+      <div class="video-frame"><iframe src="https://www.youtube.com/embed/puKQNjasK40" title="MatrAIx Environment Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
     </section>
-    -->
 
-    <!-- Demo video -->
-    <section style="max-width: 1080px; margin: 80px auto 0; padding: 0 clamp(20px, 5vw, 40px); text-align: center;">
-      <h2 style="font-family: var(--disp); font-weight: 800; font-size: clamp(2rem, 4vw, 2.8rem); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 28px; color: var(--ink);">See MatrAIx in Action</h2>
-      <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 1px solid var(--line); background: #000;">
-        <iframe
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-          src="https://www.youtube.com/embed/puKQNjasK40"
-          title="matrAIx Demo"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen>
-        </iframe>
+    <section class="panel discovery-panel" aria-label="Explore MatrAIx research and applications">
+      <div class="discovery-grid">
+        <a class="discovery-card research-discovery" href="blog/">
+          <div class="discovery-top"><span class="idx">GO DEEPER · RESEARCH</span><span aria-hidden="true">↗</span></div>
+          <h2>Research questions, methods, and findings.</h2>
+          <span class="discovery-link">Explore research →</span>
+        </a>
+        <a class="discovery-card application-discovery" href="blog/application-colm.html">
+          <div class="discovery-top"><span class="idx">GO DEEPER · APPLICATIONS</span><span aria-hidden="true">↗</span></div>
+          <h2>Tasks, scenarios, and product evaluation.</h2>
+          <div class="discovery-domains"><span>Commerce &amp; Retail</span><span>Software &amp; Developer Tools</span><span>Financial Services</span><span>Healthcare &amp; Digital Health</span></div>
+          <span class="discovery-link">Explore applications →</span>
+        </a>
       </div>
     </section>
 
-    <!-- Community CTA Section -->
-    <section class="panel" style="padding: 100px clamp(20px,5vw,40px); text-align: center;">
-      <div style="max-width: 700px; margin: 0 auto;">
-        <h2 style="font-family: var(--disp); font-weight: 700; font-size: 2.8rem; color: var(--ink); margin-bottom: 24px; line-height: 1.2;">Join Our Community</h2>
-        <p style="font-size: 1.05rem; line-height: 1.7; color: var(--ink-dim); margin-bottom: 40px;">
-          160+ contributors from Harvard, MIT, xAI, Cornell, Stanford, Anthropic, Microsoft, Google DeepMind, Google Research, CMU, Meta, and more.
-        </p>
-        <a href="access.html" class="btn btn-solid btn-lg">Join community <span class="arr">→</span></a>
-      </div>
+    <section class="closing community-closing" id="community">
+      <span class="idx">05 — OPEN RESEARCH COMMUNITY</span>
+      <h2>Build the human layer of intelligence with us.</h2>
+      <p class="closing-sub">Join the Persona, Environment, or Application team and contribute through research, engineering, data, evaluation, or product scenarios.</p>
+      <div class="closing-actions"><a href="access.html" class="btn btn-solid btn-lg">Join the community <span class="arr">→</span></a><a href="https://github.com/MatrAIx-ai/MatrAIx" class="btn btn-ghost btn-lg" target="_blank" rel="noopener">Contribute on GitHub ↗</a></div>
     </section>
-
   </main>
 
   <footer class="foot">
     <span class="brand-name small">Matr<em>AI</em>x</span>
     <span class="foot-links">
-      <a href="#reports">Reports</a>
-      <a href="#data">Training data</a>
-      <a href="#playground">Playground</a>
-      <a href="persona.html">Persona</a>
-      <a href="demo.html">Demo</a>
+      <a href="blog/">Research</a>
+      <a href="persona.html">Personas</a>
+      <a href="#applications">Applications</a>
+      <a href="demo.html">Playground</a>
+      <a href="access.html">Community</a>
+      <a href="https://github.com/MatrAIx-ai/MatrAIx" target="_blank" rel="noopener">GitHub ↗</a>
     </span>
-    <span class="foot-meta">SIM-NODE 07 · © 2026 MatrAIx.ai</span>
+    <span class="foot-meta">SIMULATE BEFORE REALITY · © 2026</span>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
-  <script src="home.js?v=44"></script>
-  <script>
-  /* Mobile nav toggle */
-  (function(){
-    const toggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    if (!toggle || !navLinks) return;
-    toggle.addEventListener('click', function(){
-      toggle.classList.toggle('active');
-      navLinks.classList.toggle('active');
-    });
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', function(){
-        toggle.classList.remove('active');
-        navLinks.classList.remove('active');
-      });
-    });
-    window.addEventListener('resize', function(){
-      if (window.innerWidth > 760) {
-        toggle.classList.remove('active');
-        navLinks.classList.remove('active');
-      }
-    });
-  })();
-  </script>
-  <script>
-  (function(){var el=document.getElementById('pgClock');if(!el)return;var p=function(x){return(x<10?'0':'')+x;};function t(){var d=new Date();el.textContent=p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());}t();setInterval(t,1000);})();
-  </script>
-  <script>
-  /* ---------- Runway band: agents race the flow as data points and steer clear of the cursor ---------- */
-  (function(){
-    var canvas=document.getElementById('runway'); if(!canvas) return;
-    var ctx=canvas.getContext('2d');
-    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var w=0,h=0,PADX=64,PADT=150,PADB=88,agents=[],N=1000,SPEED=0.003;
-    var mouse={x:0,y:0,active:false},RAD=95;
-    var STAGES=[{x:0.14,name:'LAND'},{x:0.32,name:'EVIDENCE',fric:0.9},{x:0.50,name:'ESTIMATE'},{x:0.68,name:'VERIFY',fric:0.96},{x:0.86,name:'SUBMIT'}];
-    var rnd=function(a,b){return a+Math.random()*(b-a);};
-    function spawn(fromStart){ return {x: fromStart? rnd(-0.05,0): Math.random(), y: Math.random(), base: rnd(0.06,0.20), skill: Math.random(), jit: rnd(0.8,1.2), oy:0, voy:0}; }
-    function resize(){ var r=canvas.getBoundingClientRect(); w=canvas.width=r.width; h=canvas.height=r.height; if(!agents.length) agents=Array.from({length:N},function(){return spawn(false);}); }
-    function TX(x){ return PADX + x*(w-2*PADX); }
-    function TY(y){ return PADT + y*(h-PADT-PADB); }
-    function mult(a){ var m=1; for(var i=0;i<STAGES.length;i++){ var s=STAGES[i]; if(!s.fric) continue; var d=Math.abs(a.x-s.x); if(d<0.055){ var hard=s.fric*(1-a.skill); m=Math.min(m, 1-hard*(1-d/0.055)); } } return m; }
-    function repel(px,py){ if(!mouse.active) return null; var ddx=px-mouse.x, ddy=py-mouse.y, d2=ddx*ddx+ddy*ddy; if(d2>=RAD*RAD) return null; var d=Math.sqrt(d2)||1, f=1-d/RAD; return {fx:ddx/d*f, fy:ddy/d*f}; }
-    var rate=0,lastSec=0,finN=0,running=false,onScreen=false;
-    var gx=[],gy=[],amx=[],amy=[],rdx=[],rdy=[];   // per-colour position buckets (batched draw)
-    function set(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; }
-    // one path + one fill for a whole colour bucket — no per-dot state changes, no shadowBlur
-    function blob(xs,ys,color){ if(!xs.length) return; ctx.fillStyle=color; ctx.beginPath();
-      for(var i=0;i<xs.length;i++){ ctx.moveTo(xs[i]+2.1,ys[i]); ctx.arc(xs[i],ys[i],2.1,0,6.283); } ctx.fill(); }
-    function frame(ts){
-      ctx.clearRect(0,0,w,h);
-      ctx.textAlign='center'; ctx.font='10px "JetBrains Mono",monospace'; ctx.lineWidth=1;
-      for(var i=0;i<STAGES.length;i++){ var sx=TX(STAGES[i].x);
-        ctx.strokeStyle=STAGES[i].fric?'rgba(255,181,71,0.16)':'rgba(74,143,194,0.08)';
-        ctx.beginPath(); ctx.moveTo(sx,TY(0)-8); ctx.lineTo(sx,TY(1)+8); ctx.stroke();
-        ctx.fillStyle=STAGES[i].fric?'rgba(255,181,71,0.55)':'rgba(111,130,115,0.7)';
-        ctx.fillText(STAGES[i].name+(STAGES[i].fric?' ⚠':''), sx, TY(1)+22); }
-      var fx=TX(1)+4; ctx.setLineDash([5,5]); ctx.strokeStyle='rgba(74,143,194,0.5)';
-      ctx.beginPath(); ctx.moveTo(fx,TY(0)-8); ctx.lineTo(fx,TY(1)+8); ctx.stroke(); ctx.setLineDash([]);
-      ctx.fillStyle='rgba(74,143,194,0.6)'; ctx.fillText('FINISH', fx, TY(0)-16);
-
-      // ---- physics pass: update + bucket by colour ----
-      var smooth=0,stall=0,lim=(h-PADT-PADB)*0.5;
-      gx.length=0; gy.length=0; amx.length=0; amy.length=0; rdx.length=0; rdy.length=0;
-      for(var k=0;k<agents.length;k++){ var a=agents[k]; var m=mult(a)*a.jit;
-        var dx=a.base*Math.max(m,0.32)*SPEED;                       // floored forward so they eventually escape
-        if(m<0.55 && a.x>0.04 && Math.random()<0.012){ dx-=a.base*SPEED*rnd(12,24); }  // error loop: step back & retry
-        a.x += dx; if(a.x<0) a.x=0;
-        if(a.x>=1.02){ finN++; var s=spawn(true); a.x=s.x;a.y=s.y;a.base=s.base;a.skill=s.skill;a.jit=s.jit;a.oy=0;a.voy=0; continue; }
-        var px=TX(a.x>1?1:a.x), baseY=TY(a.y);
-        var rp=repel(px, baseY+a.oy); if(rp) a.voy += rp.fy*1.9;     // flee the cursor (vertical parting)
-        a.voy += -a.oy*0.02; a.voy *= 0.85; a.oy += a.voy;           // spring back to lane + damping
-        if(a.oy>lim)a.oy=lim; else if(a.oy<-lim)a.oy=-lim;
-        var py=baseY+a.oy;
-        if(m>0.78){ gx.push(px); gy.push(py); smooth++; }
-        else if(m>0.4){ amx.push(px); amy.push(py); }
-        else { rdx.push(px); rdy.push(py); stall++; }
-      }
-      // green motion tails: one path, one stroke
-      ctx.strokeStyle='rgba(74,143,194,0.22)'; ctx.beginPath();
-      for(var t=0;t<gx.length;t++){ ctx.moveTo(gx[t]-13,gy[t]); ctx.lineTo(gx[t],gy[t]); } ctx.stroke();
-      // dots: one fill per colour, no per-dot shadow
-      blob(gx,gy,'#4A8FC2'); blob(amx,amy,'#ffb547'); blob(rdx,rdy,'#ff5c6c');
-
-      if(!lastSec) lastSec=ts;
-      if(ts-lastSec>=1000){ rate=finN/((ts-lastSec)/1000); finN=0; lastSec=ts;
-        set('rRate',Math.round(rate)); set('rSmooth',Math.round(smooth/N*100)+'%'); set('rStall',Math.round(stall/N*100)+'%'); }
-    }
-    function loop(ts){ if(!running) return; frame(ts); requestAnimationFrame(loop); }
-    function startLoop(){ if(running||reduce) return; running=true; lastSec=0; requestAnimationFrame(loop); }
-    function stopLoop(){ running=false; }
-
-    canvas.addEventListener('mousemove',function(e){ var r=canvas.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top; mouse.active=true; });
-    canvas.addEventListener('mouseleave',function(){ mouse.active=false; });
-    resize(); window.addEventListener('resize',resize); set('rAgents', N+'+');
-    if(reduce){
-      for(var k=0;k<agents.length;k++){var a=agents[k];ctx.fillStyle='#4A8FC2';ctx.globalAlpha=0.6;ctx.beginPath();ctx.arc(TX(a.x),TY(a.y),2,0,6.283);ctx.fill();}
-      ctx.globalAlpha=1;
-    } else if('IntersectionObserver' in window){
-      // only animate while the band is on-screen and the tab is visible — keeps initial load + the rest of the page smooth
-      var io=new IntersectionObserver(function(es){ onScreen=es[0].isIntersecting; if(onScreen && !document.hidden) startLoop(); else stopLoop(); }, {threshold:0.01});
-      io.observe(canvas);
-      document.addEventListener('visibilitychange',function(){ if(document.hidden) stopLoop(); else if(onScreen) startLoop(); });
-    } else { startLoop(); }
-  })();
-  </script>
-
-  <!-- EAAS interactive tabs -->
-  <script>
-  (function(){
-    var root = document.getElementById('eaas');
-    if (!root) return;
-    var tabs = [].slice.call(root.querySelectorAll('.eaas-tab'));
-    var vizs = [].slice.call(root.querySelectorAll('.viz'));
-    var infos = [].slice.call(root.querySelectorAll('.info'));
-
-    function show(i){
-      tabs.forEach(function(t, k){ t.classList.toggle('active', k === i); });
-      vizs.forEach(function(v, k){ v.classList.toggle('on', k === i); });
-      infos.forEach(function(f, k){ f.classList.toggle('on', k === i); });
-    }
-
-    tabs.forEach(function(t, i){
-      t.addEventListener('click', function(){
-        show(i);
-      });
-    });
-  })();
-  </script>
+  <script src="home.js?v=46"></script>
   <script src="theme-toggle.js?v=3"></script>
 </body>
 </html>
