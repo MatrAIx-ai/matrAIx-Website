@@ -35,8 +35,7 @@
   }
 
   const setStat = (k, v) => {
-    const el = document.querySelector(`[data-stat="${k}"]`);
-    if (el) el.textContent = v;
+    document.querySelectorAll(`[data-stat="${k}"]`).forEach(el => { el.textContent = v; });
   };
 
   // Count unique datasets from dimensions
@@ -66,6 +65,7 @@
 
   /* ---------- Categories / chips ---------- */
   const cats = [...new Set(dims.map(d => d.category))];
+  setStat('cats', fmtInt.format(cats.length));
   const counts = cats.reduce((m, c) => (m[c] = dims.filter(d => d.category === c).length, m), {});
   const chipBox = document.getElementById('chips');
   let activeCat = 'All';
@@ -84,6 +84,7 @@
     const btn = e.target.closest('.chip');
     if (!btn) return;
     activeCat = btn.dataset.cat;
+    visibleLimit = PAGE_SIZE;
     buildChips();
     render();
   });
@@ -91,9 +92,17 @@
   /* ---------- Dimension cards ---------- */
   const grid = document.getElementById('grid');
   const emptyMsg = document.getElementById('emptyMsg');
+  const resultCount = document.getElementById('resultCount');
+  const loadMore = document.getElementById('loadMore');
+  const PAGE_SIZE = window.innerWidth <= 600 ? 24 : 60;
+  let visibleLimit = PAGE_SIZE;
 
   // Extract dataset name from dimension ID
-  function getSourceName(dimId) {
+  function getSourceName(dim) {
+    if (dim.source_origin) {
+      return dim.source_origin.source_name || dim.source_origin.dataset_name || dim.source_origin.source_id || null;
+    }
+    const dimId = dim.id;
     const sources = {
       'nemotron_': 'Nemotron',
       'personahub_': 'PersonaHub',
@@ -103,7 +112,11 @@
       'synthetic_': 'Synthetic Chat',
       'personachat_': 'PersonaChat',
       'wildchat_': 'WildChat',
-      'horizonbench_': 'HorizonBench'
+      'horizonbench_': 'HorizonBench',
+      'wiki_': 'Wikipedia',
+      'amazon_': 'Amazon Reviews',
+      'stackoverflow_': 'Stack Overflow',
+      'stack_': 'Stack Overflow'
     };
     for (const [prefix, name] of Object.entries(sources)) {
       if (dimId.toLowerCase().startsWith(prefix)) return name;
@@ -134,9 +147,14 @@
       return catOk && qOk;
     });
 
+    const visible = list.slice(0, visibleLimit);
     emptyMsg.hidden = list.length > 0;
-    grid.innerHTML = list.map((d, i) => {
-      const source = getSourceName(d.id);
+    resultCount.textContent = list.length
+      ? `Showing ${fmtInt.format(visible.length)} of ${fmtInt.format(list.length)} dimensions`
+      : 'No matching dimensions';
+    loadMore.hidden = visible.length >= list.length;
+    grid.innerHTML = visible.map((d, i) => {
+      const source = getSourceName(d);
       const cleanLabel = getCleanLabel(d.label, d.id);
       const sourceClass = source ? 'has-source' : '';
       return `
@@ -167,8 +185,14 @@
   let searchTimer;
   document.getElementById('search').addEventListener('input', e => {
     query = e.target.value;
+    visibleLimit = PAGE_SIZE;
     clearTimeout(searchTimer);
     searchTimer = setTimeout(render, 120);   // debounce: 1000+ cards re-render
+  });
+
+  loadMore.addEventListener('click', () => {
+    visibleLimit += PAGE_SIZE;
+    render();
   });
 
   render();

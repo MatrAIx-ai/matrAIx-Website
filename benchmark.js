@@ -383,7 +383,7 @@
   const runBtn = $('#run');
   runBtn.addEventListener('click', () => {
     running = !running;
-    runBtn.textContent = running ? '■ HALT' : '▶ RUN';
+    runBtn.textContent = running ? '■ Pause run' : '▶ Resume run';
     runBtn.classList.toggle('run', running);
     $('#scanTag').textContent = running ? '● LIVE' : '⏸ HALTED';
     $('#scanTag').style.color = running ? '' : 'var(--ink-dim)';

@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>matrAIx — Persona</title>
+  <title>MatrAIx Personas — Data, Schema & Explorer</title>
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-  <meta name="description" content="Explore the flat persona dimension space that powers matrAIx agent simulations." />
+  <meta name="description" content="Explore the MatrAIx persona schema, synthetic and human-evidence data pipelines, and the planned 1M-persona public release." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="explorer.css?v=7" />
   <link rel="stylesheet" href="dark-theme.css?v=4" />
   <link rel="stylesheet" href="subpages.css?v=3" />
-  <link rel="stylesheet" href="persona-refresh.css?v=3" />
+  <link rel="stylesheet" href="persona-refresh.css?v=5" />
 </head>
 <body class="explorer-body">
   <div class="grain" aria-hidden="true"></div>
@@ -26,34 +26,96 @@
   <header class="mx-nav"><a class="mx-brand" href="/">Matr<em>AI</em>x</a><nav class="mx-links"><a href="/">Home</a><a href="blog/">Research</a><a class="active" href="persona.html">Personas</a><a href="applications.html">Applications</a><a href="demo.html">Playground</a><a href="access.html">Community</a></nav><a class="mx-github" href="https://github.com/MatrAIx-ai/MatrAIx" target="_blank" rel="noopener">GitHub ↗</a><a class="mx-join" href="access.html">Join us</a><button class="mx-menu">Menu</button></header>
 
   <main class="ex-main">
-    <!-- Title -->
+    <!-- Persona program overview -->
     <section class="ex-head">
       <div class="ex-head-copy">
       <div class="hero-eyebrow">
-        <span class="tick">//</span> PERSONA DIMENSION SPACE
-        <span class="ver" id="verTag">v1.0</span>
+        <span class="tick">//</span> PERSONA DATA &amp; SCHEMA
+        <span class="ver" id="verTag">loading</span>
         <span class="sep">—</span>
-        <span class="status"><span class="dot live"></span> FLAT / UNIFIED</span>
+        <span class="status"><span class="dot live"></span> ACTIVE RESEARCH</span>
       </div>
-      <h1 class="ex-title">Explore the <span>Persona Space.</span></h1>
+      <h1 class="ex-title">Personas at <span>planetary scale.</span></h1>
       <p class="ex-sub">
-        Every simulated agent is drawn by assigning <em>one value per dimension</em>.
-        Language, age, domain, academic background, professional history (LinkedIn-style)
-        and behavioral state are all flat siblings — multiplied together they define the
-        space MatrAIx uses to condition diverse simulated users.
+        MatrAIx builds structured user representations for simulation and evaluation.
+        Our internal corpus combines synthetic generation with evidence-aware extraction
+        from human-authored public data, all mapped into one inspectable schema.
       </p>
       </div>
-      <button class="persona-sample-cta" id="sampleTop">Sample a persona →</button>
+      <div class="persona-hero-actions">
+        <button class="persona-sample-cta" id="sampleTop">Sample a persona →</button>
+        <a class="persona-secondary-cta" href="#schema-explorer">Explore schema ↓</a>
+      </div>
 
       <!-- Stat bar -->
       <div class="ex-stats" id="statBar">
-        <div class="stat"><span class="stat-val" data-stat="dims">—</span><span class="stat-label">dimensions live</span></div>
-        <div class="stat"><span class="stat-val" data-stat="vals">—</span><span class="stat-label">total values</span></div>
-        <div class="stat"><span class="stat-val" data-stat="space">—</span><span class="stat-label">reachable personas</span></div>
-        <div class="stat"><span class="stat-val">8.3B</span><span class="stat-label">behaviors simulated</span></div>
-        <div class="stat"><span class="stat-val" data-stat="datasets">33</span><span class="stat-label">existing datasets</span></div>
+        <div class="stat"><span class="stat-val">8.3B</span><span class="stat-label">internal persona corpus</span></div>
+        <div class="stat"><span class="stat-val">1M</span><span class="stat-label">planned public release</span></div>
+        <div class="stat"><span class="stat-val" data-stat="dims">—</span><span class="stat-label">schema dimensions</span></div>
+        <div class="stat"><span class="stat-val" data-stat="cats">—</span><span class="stat-label">schema categories</span></div>
       </div>
-      <div class="persona-principles"><div><b>Structured</b><span>Every attribute is explicit, searchable, and machine-readable.</span></div><div><b>Grounded</b><span>Dimensions can retain source and provenance information.</span></div><div><b>Testable</b><span>Persona attributes become hypotheses for behavior evaluation.</span></div></div>
+    </section>
+
+    <section class="persona-build" aria-labelledby="build-title">
+      <div class="persona-section-head">
+        <span>How we build</span>
+        <h2 id="build-title">Two pipelines. One evidence-aware schema.</h2>
+        <p>The corpus is not a single undifferentiated dataset. Generation method, source context, confidence, and evidence boundaries matter.</p>
+      </div>
+      <div class="persona-pipeline-grid">
+        <article class="pipeline-card synthetic-card">
+          <span class="pipeline-index">01 · SYNTHETIC</span>
+          <h3>Structured generation</h3>
+          <p>Personas are sampled from a typed attribute graph, with compatibility rules designed to reduce contradictory combinations and preserve diversity.</p>
+          <ul><li>Schema-constrained attributes</li><li>Conditional consistency rules</li><li>Reproducible sampling and rendering</li></ul>
+        </article>
+        <article class="pipeline-card human-card">
+          <span class="pipeline-index">02 · HUMAN-EVIDENCE</span>
+          <h3>Grounded extraction</h3>
+          <p>Human-authored public traces are mapped to supported schema attributes. Unobserved fields should remain unknown rather than being invented.</p>
+          <ul><li>Evidence attached to assignments</li><li>Confidence and provenance tracking</li><li>Source-specific extraction policies</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="persona-sources" aria-labelledby="sources-title">
+      <div class="persona-section-head compact">
+        <span>Human-evidence sources</span>
+        <h2 id="sources-title">Public traces, different signals.</h2>
+      </div>
+      <div class="source-grid">
+        <article><span>01</span><h3>Wikipedia</h3><p>Public biographical and professional context, mapped only where the source provides support.</p><small>BIOGRAPHICAL</small></article>
+        <article><span>02</span><h3>Amazon Reviews</h3><p>Preference, product-use, and decision signals inferred from review histories with explicit evidence boundaries.</p><small>BEHAVIORAL</small></article>
+        <article><span>03</span><h3>Stack Overflow</h3><p>Technical interests, tools, expertise, and developer-workflow signals derived from public contributions.</p><small>TECHNICAL</small></article>
+      </div>
+      <p class="source-note">Source availability does not make every attribute observable. Sensitive or unsupported claims are excluded, and release eligibility depends on source terms, privacy review, and documentation.</p>
+    </section>
+
+    <section class="persona-release" aria-labelledby="release-title">
+      <div class="release-scale" aria-hidden="true">8.3B</div>
+      <div class="release-copy">
+        <span>Release policy</span>
+        <h2 id="release-title">Research at scale. Release with restraint.</h2>
+        <p>We will not directly distribute the full 8.3B internal corpus. It includes large-scale synthetic outputs and human-evidence extraction artifacts that require source-aware governance, storage, and quality controls.</p>
+      </div>
+      <div class="release-card">
+        <div><span>PLANNED PUBLIC DATASET</span><strong>1,000,000 personas</strong></div>
+        <p>A curated subset is planned for Hugging Face with a dataset card, schema documentation, provenance summaries, validation notes, and stated limitations.</p>
+        <div class="release-actions">
+          <span class="coming-soon">Hugging Face · coming soon</span>
+          <a href="https://github.com/MatrAIx-ai/MatrAIx" target="_blank" rel="noopener">Follow development ↗</a>
+        </div>
+        <small>Release timing, license, composition, and final counts are placeholders pending review.</small>
+      </div>
+    </section>
+
+    <section class="schema-intro" id="schema-explorer" aria-labelledby="schema-title">
+      <div>
+        <span>Live schema explorer</span>
+        <h2 id="schema-title">Inspect every dimension.</h2>
+      </div>
+      <p><b data-stat="dims">—</b> dimensions across <b data-stat="cats">—</b> categories, with <b data-stat="vals">—</b> allowed values. Search, filter, expand, or sample a structured persona below.</p>
+      <a href="https://github.com/MatrAIx-ai/MatrAIx/blob/main/persona/schema/dimensions.json" target="_blank" rel="noopener">Canonical schema ↗</a>
     </section>
 
     <!-- Controls -->
@@ -65,6 +127,10 @@
     <!-- Dimension grid -->
     <section class="ex-grid" id="grid" aria-live="polite"></section>
     <p class="ex-empty" id="emptyMsg" hidden>No dimensions match that filter.</p>
+    <div class="explorer-progress" id="explorerProgress">
+      <span id="resultCount">—</span>
+      <button type="button" id="loadMore">Load more dimensions</button>
+    </div>
   </main>
 
   <!-- Persona drawer -->
@@ -117,7 +183,7 @@
   })();
   </script>
 
-  <script src="dimensions.js?v=5"></script>
-  <script src="explorer.js?v=5"></script>
+  <script src="dimensions.js?v=6"></script>
+  <script src="explorer.js?v=7"></script>
 </body>
 </html>

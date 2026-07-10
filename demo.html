@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>matrAIx — Demo</title>
+  <title>MatrAIx Playground — Simulation Preview</title>
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="benchmark.css?v=16" />
+  <link rel="stylesheet" href="benchmark.css?v=17" />
   <link rel="stylesheet" href="dark-theme.css?v=4" />
   <style>
   .os-explain .ex-url{color:var(--ink)}
@@ -102,20 +102,20 @@
 
   <!-- System bar -->
   <div class="os-bar">
-    <a class="os-id" href="index.html">matr<span class="ai">AI</span>x OS<span class="v">v4.8</span><span class="node">NODE-07</span></a>
+    <a class="os-id" href="index.html">Matr<span class="ai">AI</span>x <span class="os-name">Playground</span><span class="v">Preview</span></a>
     <div class="os-target">
-      <span class="lbl">TARGET</span>
+      <span class="lbl">Evaluation target</span>
       <select id="target" class="os-select" aria-label="Evaluation target"></select>
-      <button id="run" class="os-btn run">■ HALT</button>
+      <button id="run" class="os-btn run">■ Pause run</button>
     </div>
     <div class="os-status">
-      <nav class="os-nav"><a href="index.html">Home</a><a href="blog/">Research</a><a href="persona.html">Personas</a><a href="applications.html">Applications</a><a href="access.html">Community</a><a href="demo_harbor.html">Harbor</a></nav>
+      <nav class="os-nav"><a href="index.html">Home</a><a href="blog/">Research</a><a href="persona.html">Personas</a><a href="applications.html">Applications</a><a href="access.html">Community</a></nav>
       <button class="os-btn api" id="apiBtn" title="Run matrAIx in your own environment">&#123; &#125; API</button>
-      <span class="led on" data-led="core">CORE</span>
-      <span class="led on" data-led="eval">EVAL</span>
-      <span class="led on" data-led="net">NET</span>
+      <span class="led on" data-led="core">Simulation live</span>
+      <span class="led on playground-aux" data-led="eval">Eval</span>
+      <span class="led on playground-aux" data-led="net">Net</span>
       <span class="led" id="backendLed" data-led="api">API</span>
-      <span class="os-clock" id="clock">--:--:--</span>
+      <span class="os-clock playground-aux" id="clock">--:--:--</span>
     </div>
   </div>
 
@@ -135,7 +135,7 @@
 
     <!-- Neural eval core -->
     <section class="win stage">
-      <div class="win-bar"><span>Neural Eval Core · metric flow</span><span class="scan-tag" id="scanTag">● LIVE</span></div>
+      <div class="win-bar"><span>Evaluation metrics</span><span class="scan-tag" id="scanTag">● LIVE</span></div>
       <div class="stage-legend"><b class="cp">● pass</b> <b class="ca">● flag</b> <b class="cr">● fail</b></div>
       <div class="metric-bar">
         <span class="mb-lab">Metrics</span><span class="mb-hint">— <a href="metrics.html" style="color:var(--phos)"><b id="metricCount">900+</b></a> or your own</span>
@@ -147,9 +147,9 @@
         <button id="metricAdd" class="os-btn" type="button">＋ Add</button>
       </div>
       <div class="flow">
-        <div class="fcap fin">INPUT · agent runs your flow</div>
+        <div class="fcap fin">Each agent run is scored against selected metrics</div>
         <div class="fnodes" id="flowNodes"></div>
-        <div class="fcap fout">VERDICT · pass / flag / fail</div>
+        <div class="fcap fout">Aggregated result · pass / flag / fail</div>
       </div>
       <div class="vitals" id="vitals">
         <div class="vital"><div class="vl">active agents</div><div class="vv" data-v="ag">—</div><div class="spark" data-s="ag"></div></div>
@@ -190,8 +190,8 @@
     </div>
     <div class="gr-head">
       <span class="gr-idx">— GENERATED REPORTS</span>
-      <h2 class="gr-title">See the report before you ship.</h2>
-      <p class="gr-sub">A/B verdict by persona segment — and the friction each one hits.</p>
+      <h2 class="gr-title">Example evaluation report.</h2>
+      <p class="gr-sub">A clearer view of the output generated from the simulation above.</p>
       <div class="gr-chips">
         <span class="gr-chip">Web apps</span><span class="gr-chip">Checkout</span><span class="gr-chip">Onboarding</span>
         <span class="gr-chip">AI assistants</span><span class="gr-chip">Search</span><span class="gr-chip">Accessibility</span>
@@ -228,7 +228,7 @@
         </div>
         <div class="apim-feats" aria-hidden="true">
           <span class="apim-feat"><b>8.3B</b> agents</span>
-          <span class="apim-feat">1,162-dim <b>personas</b></span>
+          <span class="apim-feat">1,290-dim <b>personas</b></span>
           <span class="apim-feat"><b>Simulation</b> engine</span>
           <span class="apim-feat">Segmented <b>reports</b></span>
           <span class="apim-feat"><b>SFT / RL</b> data</span>
@@ -278,9 +278,9 @@
   })();
   </script>
 
-  <script src="dimensions.js?v=3"></script>
+  <script src="dimensions.js?v=6"></script>
   <script src="metrics.js?v=2"></script>
-  <script src="benchmark.js?v=13"></script>
+  <script src="benchmark.js?v=14"></script>
   <script>
   /* ---------- Live agent runs from the CUA pipeline ---------- */
   (function(){
@@ -318,7 +318,7 @@
         encodeURIComponent(t.model_provider)+'/'+encodeURIComponent(t.model_name)+'/'+
         encodeURIComponent(t.task_name)+'/trials/'+encodeURIComponent(t.name);
     }
-    function loadHarbor(){
+    function loadBackendRuns(){
       return q(apiBase+'/api/health')
         .then(function(){ return q(apiBase+'/api/jobs?page=1&page_size=1'); })
         .then(function(jobs){
@@ -362,7 +362,7 @@
           box.hidden=false;
         });
     }
-    loadHarbor().catch(function(){
+    loadBackendRuns().catch(function(){
       onApi(false, 'Backend unavailable: '+apiBase+' (fallback to static runs)');
       return loadStatic();
     }).catch(function(){});

@@ -1,8 +1,8 @@
 window.MATRAIX_DIMENSIONS = {
-  "schemaVersion": "2.0",
+  "schemaVersion": "1.0",
   "name": "matrAIx Persona Dimension Space",
   "headlineBehaviors": 8300000000,
-  "targetDimensions": 1339,
+  "targetDimensions": 1290,
   "note": "Flat unified dimension set. Every sampled persona is assigned exactly one value per dimension. The 'category' tag is for UI grouping/filtering only \u2014 it does not nest the schema. The full reachable persona space is the product of all value counts; the 8.3B headline is the corpus of behaviors already simulated within it.",
   "dimensions": [
     {
@@ -11,14 +11,17 @@ window.MATRAIX_DIMENSIONS = {
       "category": "Demographic: Core",
       "description": "Life-age band of the persona.",
       "values": [
-        "13\u201317",
-        "18\u201324",
-        "25\u201334",
-        "35\u201344",
-        "45\u201354",
-        "55\u201364",
+        "13-17",
+        "18-24",
+        "25-34",
+        "35-44",
+        "45-54",
+        "55-64",
         "65+"
-      ]
+      ],
+      "index": 1,
+      "phrase": "aged {value}",
+      "defaultValue": null
     },
     {
       "id": "region",
@@ -36,7 +39,10 @@ window.MATRAIX_DIMENSIONS = {
         "East Asia",
         "Southeast Asia",
         "Oceania"
-      ]
+      ],
+      "index": 2,
+      "phrase": "based in {value}",
+      "defaultValue": null
     },
     {
       "id": "gender_identity",
@@ -49,7 +55,10 @@ window.MATRAIX_DIMENSIONS = {
         "Non-binary",
         "Self-described",
         "Prefer not to say"
-      ]
+      ],
+      "index": 3,
+      "phrase": "{value}",
+      "defaultValue": "Prefer not to say"
     },
     {
       "id": "urbanicity",
@@ -62,7 +71,10 @@ window.MATRAIX_DIMENSIONS = {
         "Small town",
         "Rural",
         "Nomadic / remote"
-      ]
+      ],
+      "index": 4,
+      "phrase": "living in a {value} setting",
+      "defaultValue": null
     },
     {
       "id": "socioeconomic_band",
@@ -75,7 +87,10 @@ window.MATRAIX_DIMENSIONS = {
         "Middle",
         "Upper-middle",
         "High income"
-      ]
+      ],
+      "index": 5,
+      "phrase": "from a {value} background",
+      "defaultValue": null
     },
     {
       "id": "primary_language",
@@ -95,7 +110,10 @@ window.MATRAIX_DIMENSIONS = {
         "Japanese",
         "German",
         "Swahili"
-      ]
+      ],
+      "index": 6,
+      "phrase": "a native {value} speaker",
+      "defaultValue": null
     },
     {
       "id": "english_proficiency",
@@ -104,11 +122,14 @@ window.MATRAIX_DIMENSIONS = {
       "description": "Command of English (the eval lingua franca).",
       "values": [
         "Native",
-        "Fluent (C1\u2013C2)",
-        "Intermediate (B1\u2013B2)",
-        "Basic (A1\u2013A2)",
+        "Fluent (C1-C2)",
+        "Intermediate (B1-B2)",
+        "Basic (A1-A2)",
         "None"
-      ]
+      ],
+      "index": 7,
+      "phrase": "{value} English",
+      "defaultValue": null
     },
     {
       "id": "multilingualism",
@@ -119,7 +140,10 @@ window.MATRAIX_DIMENSIONS = {
         "Monolingual",
         "Bilingual",
         "Trilingual+"
-      ]
+      ],
+      "index": 8,
+      "phrase": "{value}",
+      "defaultValue": null
     },
     {
       "id": "register",
@@ -132,7 +156,10 @@ window.MATRAIX_DIMENSIONS = {
         "Regional dialect",
         "Code-switching",
         "Technical jargon"
-      ]
+      ],
+      "index": 9,
+      "phrase": "speaks in a {value} register",
+      "defaultValue": null
     },
     {
       "id": "domain",
@@ -156,7 +183,10 @@ window.MATRAIX_DIMENSIONS = {
         "Public Sector",
         "Hospitality",
         "Skilled Trades"
-      ]
+      ],
+      "index": 10,
+      "phrase": "works in {value}",
+      "defaultValue": null
     },
     {
       "id": "subject_specialty",
@@ -180,7 +210,10 @@ window.MATRAIX_DIMENSIONS = {
         "Urban planning",
         "Culinary arts",
         "Electrical work"
-      ]
+      ],
+      "index": 11,
+      "phrase": "focused on {value}",
+      "defaultValue": null
     },
     {
       "id": "domain_characteristics",
@@ -195,7 +228,10 @@ window.MATRAIX_DIMENSIONS = {
         "Hobbyist",
         "Skeptic / critic",
         "Cross-disciplinary"
-      ]
+      ],
+      "index": 12,
+      "phrase": "with a {value} relationship to their field",
+      "defaultValue": null
     },
     {
       "id": "highest_education",
@@ -211,7 +247,10 @@ window.MATRAIX_DIMENSIONS = {
         "Master's",
         "Doctorate",
         "Postdoc"
-      ]
+      ],
+      "index": 13,
+      "phrase": "with a {value} education",
+      "defaultValue": null
     },
     {
       "id": "academic_field",
@@ -227,7 +266,10 @@ window.MATRAIX_DIMENSIONS = {
         "Social science",
         "Arts",
         "Interdisciplinary"
-      ]
+      ],
+      "index": 14,
+      "phrase": "academically trained in {value}",
+      "defaultValue": null
     },
     {
       "id": "institution_tier",
@@ -241,7 +283,10 @@ window.MATRAIX_DIMENSIONS = {
         "Online / bootcamp",
         "Self-taught",
         "Not applicable"
-      ]
+      ],
+      "index": 15,
+      "phrase": "educated at a {value} institution",
+      "defaultValue": "Not applicable"
     },
     {
       "id": "research_output",
@@ -254,7 +299,10 @@ window.MATRAIX_DIMENSIONS = {
         "Industry whitepapers",
         "Thesis only",
         "None"
-      ]
+      ],
+      "index": 16,
+      "phrase": "with a research footprint described as '{value}'",
+      "defaultValue": "None"
     },
     {
       "id": "seniority",
@@ -273,7 +321,10 @@ window.MATRAIX_DIMENSIONS = {
         "C-suite",
         "Founder",
         "Retired"
-      ]
+      ],
+      "index": 17,
+      "phrase": "at a {value} career level",
+      "defaultValue": null
     },
     {
       "id": "company_size",
@@ -283,13 +334,16 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Solo / freelance",
         "Startup (<50)",
-        "SMB (50\u2013500)",
-        "Mid (500\u20135k)",
+        "SMB (50-500)",
+        "Mid (500-5k)",
         "Enterprise (5k+)",
         "Public sector",
         "Academia",
         "NGO"
-      ]
+      ],
+      "index": 18,
+      "phrase": "working at a {value} organization",
+      "defaultValue": null
     },
     {
       "id": "role_function",
@@ -310,7 +364,10 @@ window.MATRAIX_DIMENSIONS = {
         "Clinical",
         "Teaching",
         "Executive"
-      ]
+      ],
+      "index": 19,
+      "phrase": "in a {value} role",
+      "defaultValue": null
     },
     {
       "id": "years_experience",
@@ -318,12 +375,15 @@ window.MATRAIX_DIMENSIONS = {
       "category": "Professional: Career",
       "description": "Tenure in their field.",
       "values": [
-        "0\u20132",
-        "3\u20135",
-        "6\u201310",
-        "11\u201320",
+        "0-2",
+        "3-5",
+        "6-10",
+        "11-20",
         "20+"
-      ]
+      ],
+      "index": 20,
+      "phrase": "with {value} years of experience",
+      "defaultValue": null
     },
     {
       "id": "linkedin_activity",
@@ -337,7 +397,10 @@ window.MATRAIX_DIMENSIONS = {
         "Job seeker",
         "Recruiter",
         "Inactive"
-      ]
+      ],
+      "index": 21,
+      "phrase": "a {value} on LinkedIn",
+      "defaultValue": "Inactive"
     },
     {
       "id": "life_stage",
@@ -352,7 +415,10 @@ window.MATRAIX_DIMENSIONS = {
         "Career change",
         "Empty nester",
         "Retirement"
-      ]
+      ],
+      "index": 22,
+      "phrase": "in the {value} life stage",
+      "defaultValue": null
     },
     {
       "id": "major_life_events",
@@ -368,7 +434,10 @@ window.MATRAIX_DIMENSIONS = {
         "Bereavement",
         "Major relocation",
         "None notable"
-      ]
+      ],
+      "index": 23,
+      "phrase": "shaped by {value}",
+      "defaultValue": "None notable"
     },
     {
       "id": "cultural_background",
@@ -384,7 +453,10 @@ window.MATRAIX_DIMENSIONS = {
         "Middle Eastern",
         "Indigenous",
         "Mixed / diaspora"
-      ]
+      ],
+      "index": 24,
+      "phrase": "with a {value} cultural frame",
+      "defaultValue": null
     },
     {
       "id": "tech_savviness",
@@ -397,7 +469,10 @@ window.MATRAIX_DIMENSIONS = {
         "Cautious adopter",
         "Reluctant",
         "Avoidant"
-      ]
+      ],
+      "index": 25,
+      "phrase": "{value} with technology",
+      "defaultValue": null
     },
     {
       "id": "dominant_trait",
@@ -411,7 +486,10 @@ window.MATRAIX_DIMENSIONS = {
         "High agreeableness",
         "High neuroticism",
         "Balanced"
-      ]
+      ],
+      "index": 26,
+      "phrase": "with a dominant trait of being {value}",
+      "defaultValue": "Balanced"
     },
     {
       "id": "risk_tolerance",
@@ -424,7 +502,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Risk-tolerant",
         "Risk-seeking"
-      ]
+      ],
+      "index": 27,
+      "phrase": "{value} toward risk",
+      "defaultValue": null
     },
     {
       "id": "decision_style",
@@ -437,7 +518,10 @@ window.MATRAIX_DIMENSIONS = {
         "Consensus-driven",
         "Directive",
         "Deliberative"
-      ]
+      ],
+      "index": 28,
+      "phrase": "a {value} decision-maker",
+      "defaultValue": null
     },
     {
       "id": "values_priority",
@@ -451,7 +535,10 @@ window.MATRAIX_DIMENSIONS = {
         "Community",
         "Novelty",
         "Tradition"
-      ]
+      ],
+      "index": 29,
+      "phrase": "values {value} above all",
+      "defaultValue": null
     },
     {
       "id": "political_lean",
@@ -465,7 +552,10 @@ window.MATRAIX_DIMENSIONS = {
         "Center-right",
         "Right",
         "Apolitical"
-      ]
+      ],
+      "index": 30,
+      "phrase": "politically {value}",
+      "defaultValue": null
     },
     {
       "id": "religiosity",
@@ -478,7 +568,10 @@ window.MATRAIX_DIMENSIONS = {
         "Observant",
         "Devout",
         "Prefer not to say"
-      ]
+      ],
+      "index": 31,
+      "phrase": "{value} in matters of religion",
+      "defaultValue": "Prefer not to say"
     },
     {
       "id": "neurotype",
@@ -492,7 +585,10 @@ window.MATRAIX_DIMENSIONS = {
         "Dyslexic",
         "Anxiety-prone",
         "Other"
-      ]
+      ],
+      "index": 32,
+      "phrase": "{value}",
+      "defaultValue": null
     },
     {
       "id": "emotional_state",
@@ -507,7 +603,10 @@ window.MATRAIX_DIMENSIONS = {
         "Excited",
         "Skeptical",
         "Urgent"
-      ]
+      ],
+      "index": 33,
+      "phrase": "their emotional state is {value}",
+      "defaultValue": null
     },
     {
       "id": "intent",
@@ -523,7 +622,10 @@ window.MATRAIX_DIMENSIONS = {
         "Vent / support",
         "Probe / red-team",
         "Verify a claim"
-      ]
+      ],
+      "index": 34,
+      "phrase": "their intent is {value}",
+      "defaultValue": null
     },
     {
       "id": "query_complexity",
@@ -536,7 +638,10 @@ window.MATRAIX_DIMENSIONS = {
         "Ambiguous / underspecified",
         "Adversarial",
         "Open-ended creative"
-      ]
+      ],
+      "index": 35,
+      "phrase": "their query complexity is {value}",
+      "defaultValue": null
     },
     {
       "id": "expertise_gap",
@@ -548,7 +653,10 @@ window.MATRAIX_DIMENSIONS = {
         "Peer-level",
         "Expert testing the system",
         "Teaching the model"
-      ]
+      ],
+      "index": 36,
+      "phrase": "their expertise gap is {value}",
+      "defaultValue": null
     },
     {
       "id": "tone_expected",
@@ -562,7 +670,10 @@ window.MATRAIX_DIMENSIONS = {
         "Formal",
         "Playful",
         "Blunt"
-      ]
+      ],
+      "index": 37,
+      "phrase": "their expected tone is {value}",
+      "defaultValue": null
     },
     {
       "id": "trust_level",
@@ -574,7 +685,10 @@ window.MATRAIX_DIMENSIONS = {
         "Verifying",
         "Skeptical",
         "Hostile"
-      ]
+      ],
+      "index": 38,
+      "phrase": "their trust level is {value}",
+      "defaultValue": null
     },
     {
       "id": "safety_sensitivity",
@@ -587,7 +701,10 @@ window.MATRAIX_DIMENSIONS = {
         "High-stakes (medical/legal/financial)",
         "Potentially harmful",
         "Dual-use"
-      ]
+      ],
+      "index": 39,
+      "phrase": "their safety sensitivity is {value}",
+      "defaultValue": null
     },
     {
       "id": "time_pressure",
@@ -599,7 +716,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Deadline",
         "Emergency"
-      ]
+      ],
+      "index": 40,
+      "phrase": "their time pressure is {value}",
+      "defaultValue": null
     },
     {
       "id": "prior_context",
@@ -611,7 +731,10 @@ window.MATRAIX_DIMENSIONS = {
         "Returning user",
         "Long ongoing project",
         "Frustrated re-ask"
-      ]
+      ],
+      "index": 41,
+      "phrase": "their prior context is {value}",
+      "defaultValue": null
     },
     {
       "id": "device_context",
@@ -624,7 +747,10 @@ window.MATRAIX_DIMENSIONS = {
         "Voice assistant",
         "Accessibility tool",
         "Low-bandwidth"
-      ]
+      ],
+      "index": 42,
+      "phrase": "their device context is {value}",
+      "defaultValue": null
     },
     {
       "id": "modality_pref",
@@ -638,7 +764,10 @@ window.MATRAIX_DIMENSIONS = {
         "Tabular",
         "Step-by-step",
         "Examples-first"
-      ]
+      ],
+      "index": 43,
+      "phrase": "their modality preference is {value}",
+      "defaultValue": null
     },
     {
       "id": "accessibility_needs",
@@ -652,7 +781,10 @@ window.MATRAIX_DIMENSIONS = {
         "Motor",
         "Cognitive / neurodivergent",
         "Language barrier"
-      ]
+      ],
+      "index": 44,
+      "phrase": "their accessibility needs is {value}",
+      "defaultValue": null
     },
     {
       "id": "learning_style",
@@ -665,7 +797,10 @@ window.MATRAIX_DIMENSIONS = {
         "Reading / writing",
         "Kinesthetic",
         "Mixed"
-      ]
+      ],
+      "index": 45,
+      "phrase": "learns best through {value}",
+      "defaultValue": null
     },
     {
       "id": "media_diet",
@@ -679,7 +814,10 @@ window.MATRAIX_DIMENSIONS = {
         "Long-form",
         "Video-first",
         "Minimal"
-      ]
+      ],
+      "index": 46,
+      "phrase": "gets information mainly from {value}",
+      "defaultValue": null
     },
     {
       "id": "economic_motivation",
@@ -691,7 +829,10 @@ window.MATRAIX_DIMENSIONS = {
         "Value-driven",
         "Premium-seeking",
         "Indifferent"
-      ]
+      ],
+      "index": 47,
+      "phrase": "a {value} spender",
+      "defaultValue": null
     },
     {
       "id": "fam_machine_learning",
@@ -704,7 +845,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 48,
+      "phrase": "{value} knowledge of Machine learning",
+      "defaultValue": "None"
     },
     {
       "id": "fam_deep_learning",
@@ -717,7 +861,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 49,
+      "phrase": "{value} knowledge of Deep learning",
+      "defaultValue": "None"
     },
     {
       "id": "fam_statistics",
@@ -730,7 +877,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 50,
+      "phrase": "{value} knowledge of Statistics",
+      "defaultValue": "None"
     },
     {
       "id": "fam_data_science",
@@ -743,7 +893,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 51,
+      "phrase": "{value} knowledge of Data science",
+      "defaultValue": "None"
     },
     {
       "id": "fam_cardiology",
@@ -756,7 +909,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 52,
+      "phrase": "{value} knowledge of Cardiology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_neurology",
@@ -769,7 +925,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 53,
+      "phrase": "{value} knowledge of Neurology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_oncology",
@@ -782,7 +941,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 54,
+      "phrase": "{value} knowledge of Oncology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_pediatrics",
@@ -795,7 +957,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 55,
+      "phrase": "{value} knowledge of Pediatrics",
+      "defaultValue": "None"
     },
     {
       "id": "fam_psychiatry",
@@ -808,7 +973,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 56,
+      "phrase": "{value} knowledge of Psychiatry",
+      "defaultValue": "None"
     },
     {
       "id": "fam_radiology",
@@ -821,7 +989,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 57,
+      "phrase": "{value} knowledge of Radiology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_surgery",
@@ -834,7 +1005,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 58,
+      "phrase": "{value} knowledge of Surgery",
+      "defaultValue": "None"
     },
     {
       "id": "fam_immunology",
@@ -847,7 +1021,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 59,
+      "phrase": "{value} knowledge of Immunology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_constitutional_law",
@@ -860,7 +1037,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 60,
+      "phrase": "{value} knowledge of Constitutional law",
+      "defaultValue": "None"
     },
     {
       "id": "fam_contract_law",
@@ -873,7 +1053,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 61,
+      "phrase": "{value} knowledge of Contract law",
+      "defaultValue": "None"
     },
     {
       "id": "fam_criminal_law",
@@ -886,7 +1069,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 62,
+      "phrase": "{value} knowledge of Criminal law",
+      "defaultValue": "None"
     },
     {
       "id": "fam_tax_law",
@@ -899,7 +1085,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 63,
+      "phrase": "{value} knowledge of Tax law",
+      "defaultValue": "None"
     },
     {
       "id": "fam_intellectual_property",
@@ -912,7 +1101,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 64,
+      "phrase": "{value} knowledge of Intellectual property",
+      "defaultValue": "None"
     },
     {
       "id": "fam_corporate_finance",
@@ -925,7 +1117,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 65,
+      "phrase": "{value} knowledge of Corporate finance",
+      "defaultValue": "None"
     },
     {
       "id": "fam_quantitative_trading",
@@ -938,7 +1133,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 66,
+      "phrase": "{value} knowledge of Quantitative trading",
+      "defaultValue": "None"
     },
     {
       "id": "fam_accounting",
@@ -951,7 +1149,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 67,
+      "phrase": "{value} knowledge of Accounting",
+      "defaultValue": "None"
     },
     {
       "id": "fam_auditing",
@@ -964,7 +1165,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 68,
+      "phrase": "{value} knowledge of Auditing",
+      "defaultValue": "None"
     },
     {
       "id": "fam_macroeconomics",
@@ -977,7 +1181,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 69,
+      "phrase": "{value} knowledge of Macroeconomics",
+      "defaultValue": "None"
     },
     {
       "id": "fam_microeconomics",
@@ -990,7 +1197,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 70,
+      "phrase": "{value} knowledge of Microeconomics",
+      "defaultValue": "None"
     },
     {
       "id": "fam_behavioral_economics",
@@ -1003,7 +1213,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 71,
+      "phrase": "{value} knowledge of Behavioral economics",
+      "defaultValue": "None"
     },
     {
       "id": "fam_curriculum_design",
@@ -1016,7 +1229,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 72,
+      "phrase": "{value} knowledge of Curriculum design",
+      "defaultValue": "None"
     },
     {
       "id": "fam_pedagogy",
@@ -1029,7 +1245,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 73,
+      "phrase": "{value} knowledge of Pedagogy",
+      "defaultValue": "None"
     },
     {
       "id": "fam_special_education",
@@ -1042,7 +1261,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 74,
+      "phrase": "{value} knowledge of Special education",
+      "defaultValue": "None"
     },
     {
       "id": "fam_structural_engineering",
@@ -1055,7 +1277,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 75,
+      "phrase": "{value} knowledge of Structural engineering",
+      "defaultValue": "None"
     },
     {
       "id": "fam_mechanical_engineering",
@@ -1068,7 +1293,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 76,
+      "phrase": "{value} knowledge of Mechanical engineering",
+      "defaultValue": "None"
     },
     {
       "id": "fam_electrical_engineering",
@@ -1081,7 +1309,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 77,
+      "phrase": "{value} knowledge of Electrical engineering",
+      "defaultValue": "None"
     },
     {
       "id": "fam_civil_engineering",
@@ -1094,7 +1325,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 78,
+      "phrase": "{value} knowledge of Civil engineering",
+      "defaultValue": "None"
     },
     {
       "id": "fam_chemical_engineering",
@@ -1107,7 +1341,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 79,
+      "phrase": "{value} knowledge of Chemical engineering",
+      "defaultValue": "None"
     },
     {
       "id": "fam_aerospace_engineering",
@@ -1120,7 +1357,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 80,
+      "phrase": "{value} knowledge of Aerospace engineering",
+      "defaultValue": "None"
     },
     {
       "id": "fam_robotics",
@@ -1133,7 +1373,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 81,
+      "phrase": "{value} knowledge of Robotics",
+      "defaultValue": "None"
     },
     {
       "id": "fam_control_systems",
@@ -1146,7 +1389,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 82,
+      "phrase": "{value} knowledge of Control systems",
+      "defaultValue": "None"
     },
     {
       "id": "fam_molecular_biology",
@@ -1159,7 +1405,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 83,
+      "phrase": "{value} knowledge of Molecular biology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_genetics",
@@ -1172,7 +1421,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 84,
+      "phrase": "{value} knowledge of Genetics",
+      "defaultValue": "None"
     },
     {
       "id": "fam_biochemistry",
@@ -1185,7 +1437,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 85,
+      "phrase": "{value} knowledge of Biochemistry",
+      "defaultValue": "None"
     },
     {
       "id": "fam_organic_chemistry",
@@ -1198,7 +1453,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 86,
+      "phrase": "{value} knowledge of Organic chemistry",
+      "defaultValue": "None"
     },
     {
       "id": "fam_physical_chemistry",
@@ -1211,7 +1469,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 87,
+      "phrase": "{value} knowledge of Physical chemistry",
+      "defaultValue": "None"
     },
     {
       "id": "fam_particle_physics",
@@ -1224,7 +1485,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 88,
+      "phrase": "{value} knowledge of Particle physics",
+      "defaultValue": "None"
     },
     {
       "id": "fam_astrophysics",
@@ -1237,7 +1501,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 89,
+      "phrase": "{value} knowledge of Astrophysics",
+      "defaultValue": "None"
     },
     {
       "id": "fam_astronomy",
@@ -1250,7 +1517,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 90,
+      "phrase": "{value} knowledge of Astronomy",
+      "defaultValue": "None"
     },
     {
       "id": "fam_geology",
@@ -1263,7 +1533,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 91,
+      "phrase": "{value} knowledge of Geology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_oceanography",
@@ -1276,7 +1549,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 92,
+      "phrase": "{value} knowledge of Oceanography",
+      "defaultValue": "None"
     },
     {
       "id": "fam_climate_science",
@@ -1289,7 +1565,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 93,
+      "phrase": "{value} knowledge of Climate science",
+      "defaultValue": "None"
     },
     {
       "id": "fam_ecology",
@@ -1302,7 +1581,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 94,
+      "phrase": "{value} knowledge of Ecology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_sociology",
@@ -1315,7 +1597,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 95,
+      "phrase": "{value} knowledge of Sociology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_psychology",
@@ -1328,7 +1613,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 96,
+      "phrase": "{value} knowledge of Psychology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_cognitive_science",
@@ -1341,7 +1629,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 97,
+      "phrase": "{value} knowledge of Cognitive science",
+      "defaultValue": "None"
     },
     {
       "id": "fam_anthropology",
@@ -1354,7 +1645,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 98,
+      "phrase": "{value} knowledge of Anthropology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_political_science",
@@ -1367,7 +1661,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 99,
+      "phrase": "{value} knowledge of Political science",
+      "defaultValue": "None"
     },
     {
       "id": "fam_international_relations",
@@ -1380,7 +1677,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 100,
+      "phrase": "{value} knowledge of International relations",
+      "defaultValue": "None"
     },
     {
       "id": "fam_comparative_literature",
@@ -1393,7 +1693,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 101,
+      "phrase": "{value} knowledge of Comparative literature",
+      "defaultValue": "None"
     },
     {
       "id": "fam_philosophy",
@@ -1406,7 +1709,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 102,
+      "phrase": "{value} knowledge of Philosophy",
+      "defaultValue": "None"
     },
     {
       "id": "fam_ethics",
@@ -1419,7 +1725,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 103,
+      "phrase": "{value} knowledge of Ethics",
+      "defaultValue": "None"
     },
     {
       "id": "fam_history",
@@ -1432,7 +1741,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 104,
+      "phrase": "{value} knowledge of History",
+      "defaultValue": "None"
     },
     {
       "id": "fam_archaeology",
@@ -1445,7 +1757,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 105,
+      "phrase": "{value} knowledge of Archaeology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_linguistics",
@@ -1458,7 +1773,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 106,
+      "phrase": "{value} knowledge of Linguistics",
+      "defaultValue": "None"
     },
     {
       "id": "fam_art_history",
@@ -1471,7 +1789,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 107,
+      "phrase": "{value} knowledge of Art history",
+      "defaultValue": "None"
     },
     {
       "id": "fam_music_theory",
@@ -1484,7 +1805,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 108,
+      "phrase": "{value} knowledge of Music theory",
+      "defaultValue": "None"
     },
     {
       "id": "fam_film_studies",
@@ -1497,7 +1821,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 109,
+      "phrase": "{value} knowledge of Film studies",
+      "defaultValue": "None"
     },
     {
       "id": "fam_architecture",
@@ -1510,7 +1837,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 110,
+      "phrase": "{value} knowledge of Architecture",
+      "defaultValue": "None"
     },
     {
       "id": "fam_urban_planning",
@@ -1523,7 +1853,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 111,
+      "phrase": "{value} knowledge of Urban planning",
+      "defaultValue": "None"
     },
     {
       "id": "fam_landscape_design",
@@ -1536,7 +1869,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 112,
+      "phrase": "{value} knowledge of Landscape design",
+      "defaultValue": "None"
     },
     {
       "id": "fam_agronomy",
@@ -1549,7 +1885,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 113,
+      "phrase": "{value} knowledge of Agronomy",
+      "defaultValue": "None"
     },
     {
       "id": "fam_horticulture",
@@ -1562,7 +1901,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 114,
+      "phrase": "{value} knowledge of Horticulture",
+      "defaultValue": "None"
     },
     {
       "id": "fam_veterinary_medicine",
@@ -1575,7 +1917,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 115,
+      "phrase": "{value} knowledge of Veterinary medicine",
+      "defaultValue": "None"
     },
     {
       "id": "fam_nursing",
@@ -1588,7 +1933,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 116,
+      "phrase": "{value} knowledge of Nursing",
+      "defaultValue": "None"
     },
     {
       "id": "fam_pharmacology",
@@ -1601,7 +1949,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 117,
+      "phrase": "{value} knowledge of Pharmacology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_public_health",
@@ -1614,7 +1965,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 118,
+      "phrase": "{value} knowledge of Public health",
+      "defaultValue": "None"
     },
     {
       "id": "fam_epidemiology",
@@ -1627,7 +1981,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 119,
+      "phrase": "{value} knowledge of Epidemiology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_nutrition",
@@ -1640,7 +1997,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 120,
+      "phrase": "{value} knowledge of Nutrition",
+      "defaultValue": "None"
     },
     {
       "id": "fam_sports_science",
@@ -1653,7 +2013,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 121,
+      "phrase": "{value} knowledge of Sports science",
+      "defaultValue": "None"
     },
     {
       "id": "fam_cybersecurity",
@@ -1666,7 +2029,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 122,
+      "phrase": "{value} knowledge of Cybersecurity",
+      "defaultValue": "None"
     },
     {
       "id": "fam_cryptography",
@@ -1679,7 +2045,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 123,
+      "phrase": "{value} knowledge of Cryptography",
+      "defaultValue": "None"
     },
     {
       "id": "fam_computer_networking",
@@ -1692,7 +2061,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 124,
+      "phrase": "{value} knowledge of Computer networking",
+      "defaultValue": "None"
     },
     {
       "id": "fam_databases",
@@ -1705,7 +2077,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 125,
+      "phrase": "{value} knowledge of Databases",
+      "defaultValue": "None"
     },
     {
       "id": "fam_distributed_systems",
@@ -1718,7 +2093,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 126,
+      "phrase": "{value} knowledge of Distributed systems",
+      "defaultValue": "None"
     },
     {
       "id": "fam_operating_systems",
@@ -1731,7 +2109,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 127,
+      "phrase": "{value} knowledge of Operating systems",
+      "defaultValue": "None"
     },
     {
       "id": "fam_compilers",
@@ -1744,7 +2125,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 128,
+      "phrase": "{value} knowledge of Compilers",
+      "defaultValue": "None"
     },
     {
       "id": "fam_cloud_infrastructure",
@@ -1757,7 +2141,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 129,
+      "phrase": "{value} knowledge of Cloud infrastructure",
+      "defaultValue": "None"
     },
     {
       "id": "fam_devops",
@@ -1770,7 +2157,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 130,
+      "phrase": "{value} knowledge of DevOps",
+      "defaultValue": "None"
     },
     {
       "id": "fam_game_development",
@@ -1783,7 +2173,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 131,
+      "phrase": "{value} knowledge of Game development",
+      "defaultValue": "None"
     },
     {
       "id": "fam_computer_graphics",
@@ -1796,7 +2189,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 132,
+      "phrase": "{value} knowledge of Computer graphics",
+      "defaultValue": "None"
     },
     {
       "id": "fam_computer_vision",
@@ -1809,7 +2205,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 133,
+      "phrase": "{value} knowledge of Computer vision",
+      "defaultValue": "None"
     },
     {
       "id": "fam_natural_language_processing",
@@ -1822,7 +2221,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 134,
+      "phrase": "{value} knowledge of Natural language processing",
+      "defaultValue": "None"
     },
     {
       "id": "fam_human_computer_interaction",
@@ -1835,7 +2237,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 135,
+      "phrase": "{value} knowledge of Human-computer interaction",
+      "defaultValue": "None"
     },
     {
       "id": "fam_ux_research",
@@ -1848,7 +2253,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 136,
+      "phrase": "{value} knowledge of UX research",
+      "defaultValue": "None"
     },
     {
       "id": "fam_graphic_design",
@@ -1861,7 +2269,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 137,
+      "phrase": "{value} knowledge of Graphic design",
+      "defaultValue": "None"
     },
     {
       "id": "fam_industrial_design",
@@ -1874,7 +2285,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 138,
+      "phrase": "{value} knowledge of Industrial design",
+      "defaultValue": "None"
     },
     {
       "id": "fam_typography",
@@ -1887,7 +2301,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 139,
+      "phrase": "{value} knowledge of Typography",
+      "defaultValue": "None"
     },
     {
       "id": "fam_journalism",
@@ -1900,7 +2317,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 140,
+      "phrase": "{value} knowledge of Journalism",
+      "defaultValue": "None"
     },
     {
       "id": "fam_public_relations",
@@ -1913,7 +2333,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 141,
+      "phrase": "{value} knowledge of Public relations",
+      "defaultValue": "None"
     },
     {
       "id": "fam_brand_marketing",
@@ -1926,7 +2349,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 142,
+      "phrase": "{value} knowledge of Brand marketing",
+      "defaultValue": "None"
     },
     {
       "id": "fam_performance_marketing",
@@ -1939,7 +2365,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 143,
+      "phrase": "{value} knowledge of Performance marketing",
+      "defaultValue": "None"
     },
     {
       "id": "fam_seo",
@@ -1952,7 +2381,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 144,
+      "phrase": "{value} knowledge of SEO",
+      "defaultValue": "None"
     },
     {
       "id": "fam_sales_engineering",
@@ -1965,7 +2397,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 145,
+      "phrase": "{value} knowledge of Sales engineering",
+      "defaultValue": "None"
     },
     {
       "id": "fam_supply_chain",
@@ -1978,7 +2413,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 146,
+      "phrase": "{value} knowledge of Supply chain",
+      "defaultValue": "None"
     },
     {
       "id": "fam_logistics",
@@ -1991,7 +2429,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 147,
+      "phrase": "{value} knowledge of Logistics",
+      "defaultValue": "None"
     },
     {
       "id": "fam_operations_management",
@@ -2004,7 +2445,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 148,
+      "phrase": "{value} knowledge of Operations management",
+      "defaultValue": "None"
     },
     {
       "id": "fam_lean_manufacturing",
@@ -2017,7 +2461,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 149,
+      "phrase": "{value} knowledge of Lean manufacturing",
+      "defaultValue": "None"
     },
     {
       "id": "fam_quality_assurance",
@@ -2030,7 +2477,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 150,
+      "phrase": "{value} knowledge of Quality assurance",
+      "defaultValue": "None"
     },
     {
       "id": "fam_human_resources",
@@ -2043,7 +2493,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 151,
+      "phrase": "{value} knowledge of Human resources",
+      "defaultValue": "None"
     },
     {
       "id": "fam_organizational_psychology",
@@ -2056,7 +2509,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 152,
+      "phrase": "{value} knowledge of Organizational psychology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_project_management",
@@ -2069,7 +2525,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 153,
+      "phrase": "{value} knowledge of Project management",
+      "defaultValue": "None"
     },
     {
       "id": "fam_product_management",
@@ -2082,7 +2541,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 154,
+      "phrase": "{value} knowledge of Product management",
+      "defaultValue": "None"
     },
     {
       "id": "fam_venture_capital",
@@ -2095,7 +2557,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 155,
+      "phrase": "{value} knowledge of Venture capital",
+      "defaultValue": "None"
     },
     {
       "id": "fam_private_equity",
@@ -2108,7 +2573,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 156,
+      "phrase": "{value} knowledge of Private equity",
+      "defaultValue": "None"
     },
     {
       "id": "fam_real_estate",
@@ -2121,7 +2589,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 157,
+      "phrase": "{value} knowledge of Real estate",
+      "defaultValue": "None"
     },
     {
       "id": "fam_insurance",
@@ -2134,7 +2605,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 158,
+      "phrase": "{value} knowledge of Insurance",
+      "defaultValue": "None"
     },
     {
       "id": "fam_actuarial_science",
@@ -2147,7 +2621,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 159,
+      "phrase": "{value} knowledge of Actuarial science",
+      "defaultValue": "None"
     },
     {
       "id": "fam_hospitality_management",
@@ -2160,7 +2637,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 160,
+      "phrase": "{value} knowledge of Hospitality management",
+      "defaultValue": "None"
     },
     {
       "id": "fam_culinary_arts",
@@ -2173,7 +2653,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 161,
+      "phrase": "{value} knowledge of Culinary arts",
+      "defaultValue": "None"
     },
     {
       "id": "fam_sommelier_knowledge",
@@ -2186,7 +2669,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 162,
+      "phrase": "{value} knowledge of Sommelier knowledge",
+      "defaultValue": "None"
     },
     {
       "id": "fam_fashion_design",
@@ -2199,7 +2685,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 163,
+      "phrase": "{value} knowledge of Fashion design",
+      "defaultValue": "None"
     },
     {
       "id": "fam_textiles",
@@ -2212,7 +2701,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 164,
+      "phrase": "{value} knowledge of Textiles",
+      "defaultValue": "None"
     },
     {
       "id": "fam_photography",
@@ -2225,7 +2717,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 165,
+      "phrase": "{value} knowledge of Photography",
+      "defaultValue": "None"
     },
     {
       "id": "fam_cinematography",
@@ -2238,7 +2733,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 166,
+      "phrase": "{value} knowledge of Cinematography",
+      "defaultValue": "None"
     },
     {
       "id": "fam_music_production",
@@ -2251,7 +2749,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 167,
+      "phrase": "{value} knowledge of Music production",
+      "defaultValue": "None"
     },
     {
       "id": "fam_sound_engineering",
@@ -2264,7 +2765,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 168,
+      "phrase": "{value} knowledge of Sound engineering",
+      "defaultValue": "None"
     },
     {
       "id": "fam_animation",
@@ -2277,7 +2781,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 169,
+      "phrase": "{value} knowledge of Animation",
+      "defaultValue": "None"
     },
     {
       "id": "fam_3d_modeling",
@@ -2290,7 +2797,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 170,
+      "phrase": "{value} knowledge of 3D modeling",
+      "defaultValue": "None"
     },
     {
       "id": "fam_geographic_information_systems",
@@ -2303,7 +2813,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 171,
+      "phrase": "{value} knowledge of Geographic information systems",
+      "defaultValue": "None"
     },
     {
       "id": "fam_meteorology",
@@ -2316,7 +2829,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 172,
+      "phrase": "{value} knowledge of Meteorology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_forestry",
@@ -2329,7 +2845,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 173,
+      "phrase": "{value} knowledge of Forestry",
+      "defaultValue": "None"
     },
     {
       "id": "fam_marine_biology",
@@ -2342,7 +2861,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 174,
+      "phrase": "{value} knowledge of Marine biology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_paleontology",
@@ -2355,7 +2877,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 175,
+      "phrase": "{value} knowledge of Paleontology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_materials_science",
@@ -2368,7 +2893,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 176,
+      "phrase": "{value} knowledge of Materials science",
+      "defaultValue": "None"
     },
     {
       "id": "fam_nanotechnology",
@@ -2381,7 +2909,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 177,
+      "phrase": "{value} knowledge of Nanotechnology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_renewable_energy",
@@ -2394,7 +2925,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 178,
+      "phrase": "{value} knowledge of Renewable energy",
+      "defaultValue": "None"
     },
     {
       "id": "fam_nuclear_engineering",
@@ -2407,7 +2941,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 179,
+      "phrase": "{value} knowledge of Nuclear engineering",
+      "defaultValue": "None"
     },
     {
       "id": "fam_petroleum_engineering",
@@ -2420,7 +2957,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 180,
+      "phrase": "{value} knowledge of Petroleum engineering",
+      "defaultValue": "None"
     },
     {
       "id": "fam_mining",
@@ -2433,7 +2973,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 181,
+      "phrase": "{value} knowledge of Mining",
+      "defaultValue": "None"
     },
     {
       "id": "fam_aviation",
@@ -2446,7 +2989,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 182,
+      "phrase": "{value} knowledge of Aviation",
+      "defaultValue": "None"
     },
     {
       "id": "fam_maritime_navigation",
@@ -2459,7 +3005,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 183,
+      "phrase": "{value} knowledge of Maritime navigation",
+      "defaultValue": "None"
     },
     {
       "id": "fam_military_strategy",
@@ -2472,7 +3021,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 184,
+      "phrase": "{value} knowledge of Military strategy",
+      "defaultValue": "None"
     },
     {
       "id": "fam_diplomacy",
@@ -2485,7 +3037,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 185,
+      "phrase": "{value} knowledge of Diplomacy",
+      "defaultValue": "None"
     },
     {
       "id": "fam_social_work",
@@ -2498,7 +3053,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 186,
+      "phrase": "{value} knowledge of Social work",
+      "defaultValue": "None"
     },
     {
       "id": "fam_counseling",
@@ -2511,7 +3069,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 187,
+      "phrase": "{value} knowledge of Counseling",
+      "defaultValue": "None"
     },
     {
       "id": "fam_theology",
@@ -2524,7 +3085,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 188,
+      "phrase": "{value} knowledge of Theology",
+      "defaultValue": "None"
     },
     {
       "id": "fam_religious_studies",
@@ -2537,7 +3101,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 189,
+      "phrase": "{value} knowledge of Religious studies",
+      "defaultValue": "None"
     },
     {
       "id": "fam_library_science",
@@ -2550,7 +3117,10 @@ window.MATRAIX_DIMENSIONS = {
         "Familiar",
         "Aware",
         "None"
-      ]
+      ],
+      "index": 190,
+      "phrase": "{value} knowledge of Library science",
+      "defaultValue": "None"
     },
     {
       "id": "skill_writing",
@@ -2563,7 +3133,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 191,
+      "phrase": "{value}-level skill in Writing",
+      "defaultValue": "None"
     },
     {
       "id": "skill_copywriting",
@@ -2576,7 +3149,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 192,
+      "phrase": "{value}-level skill in Copywriting",
+      "defaultValue": "None"
     },
     {
       "id": "skill_editing",
@@ -2589,7 +3165,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 193,
+      "phrase": "{value}-level skill in Editing",
+      "defaultValue": "None"
     },
     {
       "id": "skill_storytelling",
@@ -2602,7 +3181,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 194,
+      "phrase": "{value}-level skill in Storytelling",
+      "defaultValue": "None"
     },
     {
       "id": "skill_public_speaking",
@@ -2615,7 +3197,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 195,
+      "phrase": "{value}-level skill in Public speaking",
+      "defaultValue": "None"
     },
     {
       "id": "skill_negotiation",
@@ -2628,7 +3213,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 196,
+      "phrase": "{value}-level skill in Negotiation",
+      "defaultValue": "None"
     },
     {
       "id": "skill_coding",
@@ -2641,7 +3229,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 197,
+      "phrase": "{value}-level skill in Coding",
+      "defaultValue": "None"
     },
     {
       "id": "skill_debugging",
@@ -2654,7 +3245,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 198,
+      "phrase": "{value}-level skill in Debugging",
+      "defaultValue": "None"
     },
     {
       "id": "skill_code_review",
@@ -2667,7 +3261,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 199,
+      "phrase": "{value}-level skill in Code review",
+      "defaultValue": "None"
     },
     {
       "id": "skill_system_design",
@@ -2680,7 +3277,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 200,
+      "phrase": "{value}-level skill in System design",
+      "defaultValue": "None"
     },
     {
       "id": "skill_data_analysis",
@@ -2693,7 +3293,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 201,
+      "phrase": "{value}-level skill in Data analysis",
+      "defaultValue": "None"
     },
     {
       "id": "skill_data_visualization",
@@ -2706,7 +3309,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 202,
+      "phrase": "{value}-level skill in Data visualization",
+      "defaultValue": "None"
     },
     {
       "id": "skill_statistical_modeling",
@@ -2719,7 +3325,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 203,
+      "phrase": "{value}-level skill in Statistical modeling",
+      "defaultValue": "None"
     },
     {
       "id": "skill_spreadsheet_modeling",
@@ -2732,7 +3341,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 204,
+      "phrase": "{value}-level skill in Spreadsheet modeling",
+      "defaultValue": "None"
     },
     {
       "id": "skill_financial_modeling",
@@ -2745,7 +3357,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 205,
+      "phrase": "{value}-level skill in Financial modeling",
+      "defaultValue": "None"
     },
     {
       "id": "skill_project_management",
@@ -2758,7 +3373,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 206,
+      "phrase": "{value}-level skill in Project management",
+      "defaultValue": "None"
     },
     {
       "id": "skill_product_strategy",
@@ -2771,7 +3389,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 207,
+      "phrase": "{value}-level skill in Product strategy",
+      "defaultValue": "None"
     },
     {
       "id": "skill_leadership",
@@ -2784,7 +3405,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 208,
+      "phrase": "{value}-level skill in Leadership",
+      "defaultValue": "None"
     },
     {
       "id": "skill_people_management",
@@ -2797,7 +3421,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 209,
+      "phrase": "{value}-level skill in People management",
+      "defaultValue": "None"
     },
     {
       "id": "skill_mentoring",
@@ -2810,7 +3437,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 210,
+      "phrase": "{value}-level skill in Mentoring",
+      "defaultValue": "None"
     },
     {
       "id": "skill_coaching",
@@ -2823,7 +3453,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 211,
+      "phrase": "{value}-level skill in Coaching",
+      "defaultValue": "None"
     },
     {
       "id": "skill_conflict_resolution",
@@ -2836,7 +3469,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 212,
+      "phrase": "{value}-level skill in Conflict resolution",
+      "defaultValue": "None"
     },
     {
       "id": "skill_time_management",
@@ -2849,7 +3485,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 213,
+      "phrase": "{value}-level skill in Time management",
+      "defaultValue": "None"
     },
     {
       "id": "skill_prioritization",
@@ -2862,7 +3501,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 214,
+      "phrase": "{value}-level skill in Prioritization",
+      "defaultValue": "None"
     },
     {
       "id": "skill_research",
@@ -2875,7 +3517,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 215,
+      "phrase": "{value}-level skill in Research",
+      "defaultValue": "None"
     },
     {
       "id": "skill_critical_thinking",
@@ -2888,7 +3533,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 216,
+      "phrase": "{value}-level skill in Critical thinking",
+      "defaultValue": "None"
     },
     {
       "id": "skill_problem_solving",
@@ -2901,7 +3549,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 217,
+      "phrase": "{value}-level skill in Problem solving",
+      "defaultValue": "None"
     },
     {
       "id": "skill_mathematics",
@@ -2914,7 +3565,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 218,
+      "phrase": "{value}-level skill in Mathematics",
+      "defaultValue": "None"
     },
     {
       "id": "skill_mental_arithmetic",
@@ -2927,7 +3581,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 219,
+      "phrase": "{value}-level skill in Mental arithmetic",
+      "defaultValue": "None"
     },
     {
       "id": "skill_logical_reasoning",
@@ -2940,7 +3597,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 220,
+      "phrase": "{value}-level skill in Logical reasoning",
+      "defaultValue": "None"
     },
     {
       "id": "skill_language_learning",
@@ -2953,7 +3613,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 221,
+      "phrase": "{value}-level skill in Language learning",
+      "defaultValue": "None"
     },
     {
       "id": "skill_translation",
@@ -2966,7 +3629,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 222,
+      "phrase": "{value}-level skill in Translation",
+      "defaultValue": "None"
     },
     {
       "id": "skill_interpretation",
@@ -2979,7 +3645,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 223,
+      "phrase": "{value}-level skill in Interpretation",
+      "defaultValue": "None"
     },
     {
       "id": "skill_design_thinking",
@@ -2992,7 +3661,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 224,
+      "phrase": "{value}-level skill in Design thinking",
+      "defaultValue": "None"
     },
     {
       "id": "skill_prototyping",
@@ -3005,7 +3677,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 225,
+      "phrase": "{value}-level skill in Prototyping",
+      "defaultValue": "None"
     },
     {
       "id": "skill_sketching",
@@ -3018,7 +3693,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 226,
+      "phrase": "{value}-level skill in Sketching",
+      "defaultValue": "None"
     },
     {
       "id": "skill_drawing",
@@ -3031,7 +3709,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 227,
+      "phrase": "{value}-level skill in Drawing",
+      "defaultValue": "None"
     },
     {
       "id": "skill_painting",
@@ -3044,7 +3725,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 228,
+      "phrase": "{value}-level skill in Painting",
+      "defaultValue": "None"
     },
     {
       "id": "skill_photography",
@@ -3057,7 +3741,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 229,
+      "phrase": "{value}-level skill in Photography",
+      "defaultValue": "None"
     },
     {
       "id": "skill_videography",
@@ -3070,7 +3757,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 230,
+      "phrase": "{value}-level skill in Videography",
+      "defaultValue": "None"
     },
     {
       "id": "skill_video_editing",
@@ -3083,7 +3773,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 231,
+      "phrase": "{value}-level skill in Video editing",
+      "defaultValue": "None"
     },
     {
       "id": "skill_audio_production",
@@ -3096,7 +3789,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 232,
+      "phrase": "{value}-level skill in Audio production",
+      "defaultValue": "None"
     },
     {
       "id": "skill_cooking",
@@ -3109,7 +3805,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 233,
+      "phrase": "{value}-level skill in Cooking",
+      "defaultValue": "None"
     },
     {
       "id": "skill_baking",
@@ -3122,7 +3821,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 234,
+      "phrase": "{value}-level skill in Baking",
+      "defaultValue": "None"
     },
     {
       "id": "skill_budgeting",
@@ -3135,7 +3837,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 235,
+      "phrase": "{value}-level skill in Budgeting",
+      "defaultValue": "None"
     },
     {
       "id": "skill_investing",
@@ -3148,7 +3853,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 236,
+      "phrase": "{value}-level skill in Investing",
+      "defaultValue": "None"
     },
     {
       "id": "skill_diy_repair",
@@ -3161,7 +3869,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 237,
+      "phrase": "{value}-level skill in DIY repair",
+      "defaultValue": "None"
     },
     {
       "id": "skill_gardening",
@@ -3174,7 +3885,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 238,
+      "phrase": "{value}-level skill in Gardening",
+      "defaultValue": "None"
     },
     {
       "id": "skill_driving",
@@ -3187,7 +3901,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 239,
+      "phrase": "{value}-level skill in Driving",
+      "defaultValue": "None"
     },
     {
       "id": "skill_technical_writing",
@@ -3200,7 +3917,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 240,
+      "phrase": "{value}-level skill in Technical writing",
+      "defaultValue": "None"
     },
     {
       "id": "skill_note_taking",
@@ -3213,7 +3933,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 241,
+      "phrase": "{value}-level skill in Note-taking",
+      "defaultValue": "None"
     },
     {
       "id": "skill_speed_reading",
@@ -3226,7 +3949,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 242,
+      "phrase": "{value}-level skill in Speed reading",
+      "defaultValue": "None"
     },
     {
       "id": "skill_memorization",
@@ -3239,7 +3965,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 243,
+      "phrase": "{value}-level skill in Memorization",
+      "defaultValue": "None"
     },
     {
       "id": "skill_active_listening",
@@ -3252,7 +3981,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 244,
+      "phrase": "{value}-level skill in Active listening",
+      "defaultValue": "None"
     },
     {
       "id": "skill_empathy",
@@ -3265,7 +3997,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 245,
+      "phrase": "{value}-level skill in Empathy",
+      "defaultValue": "None"
     },
     {
       "id": "skill_persuasion",
@@ -3278,7 +4013,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 246,
+      "phrase": "{value}-level skill in Persuasion",
+      "defaultValue": "None"
     },
     {
       "id": "skill_facilitation",
@@ -3291,7 +4029,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 247,
+      "phrase": "{value}-level skill in Facilitation",
+      "defaultValue": "None"
     },
     {
       "id": "skill_forecasting",
@@ -3304,7 +4045,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 248,
+      "phrase": "{value}-level skill in Forecasting",
+      "defaultValue": "None"
     },
     {
       "id": "skill_estimation",
@@ -3317,7 +4061,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 249,
+      "phrase": "{value}-level skill in Estimation",
+      "defaultValue": "None"
     },
     {
       "id": "skill_fact_checking",
@@ -3330,7 +4077,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 250,
+      "phrase": "{value}-level skill in Fact-checking",
+      "defaultValue": "None"
     },
     {
       "id": "skill_proofreading",
@@ -3343,7 +4093,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 251,
+      "phrase": "{value}-level skill in Proofreading",
+      "defaultValue": "None"
     },
     {
       "id": "skill_presenting",
@@ -3356,7 +4109,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 252,
+      "phrase": "{value}-level skill in Presenting",
+      "defaultValue": "None"
     },
     {
       "id": "skill_networking",
@@ -3369,7 +4125,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 253,
+      "phrase": "{value}-level skill in Networking",
+      "defaultValue": "None"
     },
     {
       "id": "skill_selling",
@@ -3382,7 +4141,10 @@ window.MATRAIX_DIMENSIONS = {
         "Intermediate",
         "Beginner",
         "None"
-      ]
+      ],
+      "index": 254,
+      "phrase": "{value}-level skill in Selling",
+      "defaultValue": "None"
     },
     {
       "id": "tool_excel",
@@ -3395,7 +4157,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 255,
+      "phrase": "uses Excel ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_google_sheets",
@@ -3408,7 +4173,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 256,
+      "phrase": "uses Google Sheets ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_python",
@@ -3421,7 +4189,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 257,
+      "phrase": "uses Python ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_r",
@@ -3434,7 +4205,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 258,
+      "phrase": "uses R ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_sql",
@@ -3447,7 +4221,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 259,
+      "phrase": "uses SQL ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_tableau",
@@ -3460,7 +4237,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 260,
+      "phrase": "uses Tableau ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_power_bi",
@@ -3473,7 +4253,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 261,
+      "phrase": "uses Power BI ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_looker",
@@ -3486,7 +4269,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 262,
+      "phrase": "uses Looker ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_figma",
@@ -3499,7 +4285,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 263,
+      "phrase": "uses Figma ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_sketch",
@@ -3512,7 +4301,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 264,
+      "phrase": "uses Sketch ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_photoshop",
@@ -3525,7 +4317,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 265,
+      "phrase": "uses Photoshop ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_illustrator",
@@ -3538,7 +4333,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 266,
+      "phrase": "uses Illustrator ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_indesign",
@@ -3551,7 +4349,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 267,
+      "phrase": "uses InDesign ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_after_effects",
@@ -3564,7 +4365,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 268,
+      "phrase": "uses After Effects ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_premiere_pro",
@@ -3577,7 +4381,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 269,
+      "phrase": "uses Premiere Pro ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_notion",
@@ -3590,7 +4397,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 270,
+      "phrase": "uses Notion ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_obsidian",
@@ -3603,7 +4413,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 271,
+      "phrase": "uses Obsidian ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_jira",
@@ -3616,7 +4429,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 272,
+      "phrase": "uses Jira ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_linear",
@@ -3629,7 +4445,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 273,
+      "phrase": "uses Linear ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_slack",
@@ -3642,7 +4461,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 274,
+      "phrase": "uses Slack ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_microsoft_teams",
@@ -3655,7 +4477,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 275,
+      "phrase": "uses Microsoft Teams ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_salesforce",
@@ -3668,7 +4493,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 276,
+      "phrase": "uses Salesforce ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_hubspot",
@@ -3681,7 +4509,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 277,
+      "phrase": "uses HubSpot ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_sap",
@@ -3694,7 +4525,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 278,
+      "phrase": "uses SAP ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_oracle_erp",
@@ -3707,7 +4541,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 279,
+      "phrase": "uses Oracle ERP ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_git",
@@ -3720,7 +4557,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 280,
+      "phrase": "uses Git ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_github",
@@ -3733,7 +4573,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 281,
+      "phrase": "uses GitHub ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_gitlab",
@@ -3746,7 +4589,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 282,
+      "phrase": "uses GitLab ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_docker",
@@ -3759,7 +4605,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 283,
+      "phrase": "uses Docker ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_kubernetes",
@@ -3772,7 +4621,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 284,
+      "phrase": "uses Kubernetes ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_terraform",
@@ -3785,7 +4637,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 285,
+      "phrase": "uses Terraform ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_aws",
@@ -3798,7 +4653,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 286,
+      "phrase": "uses AWS ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_azure",
@@ -3811,7 +4669,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 287,
+      "phrase": "uses Azure ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_google_cloud",
@@ -3824,7 +4685,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 288,
+      "phrase": "uses Google Cloud ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_vs_code",
@@ -3837,7 +4701,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 289,
+      "phrase": "uses VS Code ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_jetbrains_ides",
@@ -3850,7 +4717,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 290,
+      "phrase": "uses JetBrains IDEs ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_vim",
@@ -3863,7 +4733,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 291,
+      "phrase": "uses Vim ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_jupyter",
@@ -3876,7 +4749,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 292,
+      "phrase": "uses Jupyter ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_matlab",
@@ -3889,7 +4765,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 293,
+      "phrase": "uses MATLAB ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_stata",
@@ -3902,7 +4781,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 294,
+      "phrase": "uses Stata ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_spss",
@@ -3915,7 +4797,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 295,
+      "phrase": "uses SPSS ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_sas",
@@ -3928,7 +4813,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 296,
+      "phrase": "uses SAS ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_word",
@@ -3941,7 +4829,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 297,
+      "phrase": "uses Word ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_powerpoint",
@@ -3954,7 +4845,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 298,
+      "phrase": "uses PowerPoint ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_keynote",
@@ -3967,7 +4861,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 299,
+      "phrase": "uses Keynote ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_canva",
@@ -3980,7 +4877,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 300,
+      "phrase": "uses Canva ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_blender",
@@ -3993,7 +4893,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 301,
+      "phrase": "uses Blender ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_autocad",
@@ -4006,7 +4909,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 302,
+      "phrase": "uses AutoCAD ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_solidworks",
@@ -4019,7 +4925,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 303,
+      "phrase": "uses SolidWorks ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_revit",
@@ -4032,7 +4941,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 304,
+      "phrase": "uses Revit ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_unity",
@@ -4045,7 +4957,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 305,
+      "phrase": "uses Unity ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_unreal_engine",
@@ -4058,7 +4973,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 306,
+      "phrase": "uses Unreal Engine ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_linux_cli",
@@ -4071,7 +4989,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 307,
+      "phrase": "uses Linux CLI ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_wordpress",
@@ -4084,7 +5005,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 308,
+      "phrase": "uses WordPress ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_webflow",
@@ -4097,7 +5021,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 309,
+      "phrase": "uses Webflow ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_shopify",
@@ -4110,7 +5037,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 310,
+      "phrase": "uses Shopify ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_stripe",
@@ -4123,7 +5053,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 311,
+      "phrase": "uses Stripe ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_quickbooks",
@@ -4136,7 +5069,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 312,
+      "phrase": "uses QuickBooks ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_xero",
@@ -4149,7 +5085,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 313,
+      "phrase": "uses Xero ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_zoom",
@@ -4162,7 +5101,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 314,
+      "phrase": "uses Zoom ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_trello",
@@ -4175,7 +5117,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 315,
+      "phrase": "uses Trello ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_asana",
@@ -4188,7 +5133,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 316,
+      "phrase": "uses Asana ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_airtable",
@@ -4201,7 +5149,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 317,
+      "phrase": "uses Airtable ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_chatgpt",
@@ -4214,7 +5165,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 318,
+      "phrase": "uses ChatGPT ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_claude",
@@ -4227,7 +5181,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 319,
+      "phrase": "uses Claude ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_github_copilot",
@@ -4240,7 +5197,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 320,
+      "phrase": "uses GitHub Copilot ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_midjourney",
@@ -4253,7 +5213,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 321,
+      "phrase": "uses Midjourney ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_zapier",
@@ -4266,7 +5229,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 322,
+      "phrase": "uses Zapier ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "tool_postman",
@@ -4279,7 +5245,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Tried it",
         "Never used"
-      ]
+      ],
+      "index": 323,
+      "phrase": "uses Postman ({value})",
+      "defaultValue": "Never used"
     },
     {
       "id": "topic_politics",
@@ -4292,6 +5261,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 324,
+      "phrase": "{value} about Politics",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4305,6 +5280,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 325,
+      "phrase": "{value} about Sports",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4318,6 +5299,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 326,
+      "phrase": "{value} about Fitness",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4331,6 +5318,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 327,
+      "phrase": "{value} about Travel",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4344,6 +5337,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 328,
+      "phrase": "{value} about Cooking",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4357,6 +5356,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 329,
+      "phrase": "{value} about Gaming",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4370,6 +5375,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 330,
+      "phrase": "{value} about Fashion",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4383,6 +5394,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 331,
+      "phrase": "{value} about Technology",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4396,6 +5413,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 332,
+      "phrase": "{value} about Science",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4409,6 +5432,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 333,
+      "phrase": "{value} about Space",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4422,6 +5451,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 334,
+      "phrase": "{value} about Personal finance",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4435,6 +5470,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 335,
+      "phrase": "{value} about Investing",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4448,6 +5489,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 336,
+      "phrase": "{value} about Cryptocurrency",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4461,6 +5508,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 337,
+      "phrase": "{value} about Real estate",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4474,6 +5527,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 338,
+      "phrase": "{value} about Parenting",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4487,6 +5546,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 339,
+      "phrase": "{value} about Pets",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4500,6 +5565,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 340,
+      "phrase": "{value} about Gardening",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4513,6 +5584,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 341,
+      "phrase": "{value} about Home improvement",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4526,6 +5603,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 342,
+      "phrase": "{value} about Cars",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4539,6 +5622,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 343,
+      "phrase": "{value} about Motorcycles",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4552,6 +5641,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 344,
+      "phrase": "{value} about Cycling",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4565,6 +5660,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 345,
+      "phrase": "{value} about Running",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4578,6 +5679,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 346,
+      "phrase": "{value} about Photography",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4591,6 +5698,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 347,
+      "phrase": "{value} about Film",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4604,6 +5717,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 348,
+      "phrase": "{value} about TV series",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4617,6 +5736,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 349,
+      "phrase": "{value} about Anime",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4630,6 +5755,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 350,
+      "phrase": "{value} about Comics",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4643,6 +5774,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 351,
+      "phrase": "{value} about Music",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4656,6 +5793,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 352,
+      "phrase": "{value} about Live concerts",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4669,6 +5812,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 353,
+      "phrase": "{value} about Theater",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4682,6 +5831,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 354,
+      "phrase": "{value} about Visual art",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4695,6 +5850,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 355,
+      "phrase": "{value} about Literature",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4708,6 +5869,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 356,
+      "phrase": "{value} about Poetry",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4721,6 +5888,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 357,
+      "phrase": "{value} about History",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4734,6 +5907,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 358,
+      "phrase": "{value} about Philosophy",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4747,6 +5926,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 359,
+      "phrase": "{value} about Religion",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4760,6 +5945,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 360,
+      "phrase": "{value} about Spirituality",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4773,6 +5964,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 361,
+      "phrase": "{value} about Meditation",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4786,6 +5983,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 362,
+      "phrase": "{value} about Yoga",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4799,6 +6002,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 363,
+      "phrase": "{value} about Hiking",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4812,6 +6021,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 364,
+      "phrase": "{value} about Camping",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4825,6 +6040,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 365,
+      "phrase": "{value} about Fishing",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4838,6 +6059,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 366,
+      "phrase": "{value} about Birdwatching",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4851,6 +6078,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 367,
+      "phrase": "{value} about Board games",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4864,6 +6097,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 368,
+      "phrase": "{value} about Tabletop RPGs",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4877,6 +6116,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 369,
+      "phrase": "{value} about Puzzles",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4890,6 +6135,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 370,
+      "phrase": "{value} about Chess",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4903,6 +6154,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 371,
+      "phrase": "{value} about Astrology",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4916,6 +6173,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 372,
+      "phrase": "{value} about True crime",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4929,6 +6192,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 373,
+      "phrase": "{value} about Podcasts",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4942,6 +6211,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 374,
+      "phrase": "{value} about Social media",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4955,6 +6230,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 375,
+      "phrase": "{value} about Volunteering",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4968,6 +6249,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 376,
+      "phrase": "{value} about Activism",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4981,6 +6268,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 377,
+      "phrase": "{value} about Environment",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -4994,6 +6287,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 378,
+      "phrase": "{value} about Sustainability",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5007,6 +6306,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 379,
+      "phrase": "{value} about Wine",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5020,6 +6325,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 380,
+      "phrase": "{value} about Coffee",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5033,6 +6344,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 381,
+      "phrase": "{value} about Craft beer",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5046,6 +6363,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 382,
+      "phrase": "{value} about Tea",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5059,6 +6382,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 383,
+      "phrase": "{value} about Baking",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5072,6 +6401,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 384,
+      "phrase": "{value} about Interior design",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5085,6 +6420,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 385,
+      "phrase": "{value} about Architecture",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5098,6 +6439,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 386,
+      "phrase": "{value} about Languages",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5111,6 +6458,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 387,
+      "phrase": "{value} about Genealogy",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5124,6 +6477,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 388,
+      "phrase": "{value} about Collecting",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5137,6 +6496,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 389,
+      "phrase": "{value} about Knitting",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5150,6 +6515,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 390,
+      "phrase": "{value} about Woodworking",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5163,6 +6534,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 391,
+      "phrase": "{value} about Calligraphy",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5176,6 +6553,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 392,
+      "phrase": "{value} about Dance",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5189,6 +6572,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 393,
+      "phrase": "{value} about Stand-up comedy",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5202,6 +6591,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 394,
+      "phrase": "{value} about Magic tricks",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5215,6 +6610,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 395,
+      "phrase": "{value} about Astronomy",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5228,6 +6629,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 396,
+      "phrase": "{value} about Robotics",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5241,6 +6648,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 397,
+      "phrase": "{value} about Drones",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5254,6 +6667,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 398,
+      "phrase": "{value} about 3D printing",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5267,6 +6686,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 399,
+      "phrase": "{value} about Investmentoring",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5280,6 +6705,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 400,
+      "phrase": "{value} about Entrepreneurship",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5293,6 +6724,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 401,
+      "phrase": "{value} about Productivity",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5306,6 +6743,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 402,
+      "phrase": "{value} about Self-improvement",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5319,6 +6762,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 403,
+      "phrase": "{value} about Mindfulness",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -5332,7 +6781,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 404,
+      "phrase": "{value} English",
+      "defaultValue": "None"
     },
     {
       "id": "lang_mandarin",
@@ -5345,7 +6797,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 405,
+      "phrase": "{value} Mandarin",
+      "defaultValue": "None"
     },
     {
       "id": "lang_cantonese",
@@ -5358,7 +6813,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 406,
+      "phrase": "{value} Cantonese",
+      "defaultValue": "None"
     },
     {
       "id": "lang_spanish",
@@ -5371,7 +6829,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 407,
+      "phrase": "{value} Spanish",
+      "defaultValue": "None"
     },
     {
       "id": "lang_hindi",
@@ -5384,7 +6845,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 408,
+      "phrase": "{value} Hindi",
+      "defaultValue": "None"
     },
     {
       "id": "lang_arabic",
@@ -5397,7 +6861,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 409,
+      "phrase": "{value} Arabic",
+      "defaultValue": "None"
     },
     {
       "id": "lang_french",
@@ -5410,7 +6877,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 410,
+      "phrase": "{value} French",
+      "defaultValue": "None"
     },
     {
       "id": "lang_portuguese",
@@ -5423,7 +6893,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 411,
+      "phrase": "{value} Portuguese",
+      "defaultValue": "None"
     },
     {
       "id": "lang_bengali",
@@ -5436,7 +6909,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 412,
+      "phrase": "{value} Bengali",
+      "defaultValue": "None"
     },
     {
       "id": "lang_russian",
@@ -5449,7 +6925,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 413,
+      "phrase": "{value} Russian",
+      "defaultValue": "None"
     },
     {
       "id": "lang_japanese",
@@ -5462,7 +6941,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 414,
+      "phrase": "{value} Japanese",
+      "defaultValue": "None"
     },
     {
       "id": "lang_german",
@@ -5475,7 +6957,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 415,
+      "phrase": "{value} German",
+      "defaultValue": "None"
     },
     {
       "id": "lang_korean",
@@ -5488,7 +6973,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 416,
+      "phrase": "{value} Korean",
+      "defaultValue": "None"
     },
     {
       "id": "lang_italian",
@@ -5501,7 +6989,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 417,
+      "phrase": "{value} Italian",
+      "defaultValue": "None"
     },
     {
       "id": "lang_turkish",
@@ -5514,7 +7005,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 418,
+      "phrase": "{value} Turkish",
+      "defaultValue": "None"
     },
     {
       "id": "lang_vietnamese",
@@ -5527,7 +7021,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 419,
+      "phrase": "{value} Vietnamese",
+      "defaultValue": "None"
     },
     {
       "id": "lang_thai",
@@ -5540,7 +7037,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 420,
+      "phrase": "{value} Thai",
+      "defaultValue": "None"
     },
     {
       "id": "lang_indonesian",
@@ -5553,7 +7053,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 421,
+      "phrase": "{value} Indonesian",
+      "defaultValue": "None"
     },
     {
       "id": "lang_malay",
@@ -5566,7 +7069,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 422,
+      "phrase": "{value} Malay",
+      "defaultValue": "None"
     },
     {
       "id": "lang_swahili",
@@ -5579,7 +7085,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 423,
+      "phrase": "{value} Swahili",
+      "defaultValue": "None"
     },
     {
       "id": "lang_dutch",
@@ -5592,7 +7101,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 424,
+      "phrase": "{value} Dutch",
+      "defaultValue": "None"
     },
     {
       "id": "lang_polish",
@@ -5605,7 +7117,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 425,
+      "phrase": "{value} Polish",
+      "defaultValue": "None"
     },
     {
       "id": "lang_ukrainian",
@@ -5618,7 +7133,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 426,
+      "phrase": "{value} Ukrainian",
+      "defaultValue": "None"
     },
     {
       "id": "lang_persian",
@@ -5631,7 +7149,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 427,
+      "phrase": "{value} Persian",
+      "defaultValue": "None"
     },
     {
       "id": "lang_hebrew",
@@ -5644,7 +7165,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 428,
+      "phrase": "{value} Hebrew",
+      "defaultValue": "None"
     },
     {
       "id": "lang_greek",
@@ -5657,7 +7181,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 429,
+      "phrase": "{value} Greek",
+      "defaultValue": "None"
     },
     {
       "id": "lang_czech",
@@ -5670,7 +7197,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 430,
+      "phrase": "{value} Czech",
+      "defaultValue": "None"
     },
     {
       "id": "lang_hungarian",
@@ -5683,7 +7213,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 431,
+      "phrase": "{value} Hungarian",
+      "defaultValue": "None"
     },
     {
       "id": "lang_romanian",
@@ -5696,7 +7229,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 432,
+      "phrase": "{value} Romanian",
+      "defaultValue": "None"
     },
     {
       "id": "lang_swedish",
@@ -5709,7 +7245,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 433,
+      "phrase": "{value} Swedish",
+      "defaultValue": "None"
     },
     {
       "id": "lang_norwegian",
@@ -5722,7 +7261,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 434,
+      "phrase": "{value} Norwegian",
+      "defaultValue": "None"
     },
     {
       "id": "lang_danish",
@@ -5735,7 +7277,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 435,
+      "phrase": "{value} Danish",
+      "defaultValue": "None"
     },
     {
       "id": "lang_finnish",
@@ -5748,7 +7293,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 436,
+      "phrase": "{value} Finnish",
+      "defaultValue": "None"
     },
     {
       "id": "lang_tagalog",
@@ -5761,7 +7309,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 437,
+      "phrase": "{value} Tagalog",
+      "defaultValue": "None"
     },
     {
       "id": "lang_urdu",
@@ -5774,7 +7325,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 438,
+      "phrase": "{value} Urdu",
+      "defaultValue": "None"
     },
     {
       "id": "lang_tamil",
@@ -5787,7 +7341,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 439,
+      "phrase": "{value} Tamil",
+      "defaultValue": "None"
     },
     {
       "id": "lang_telugu",
@@ -5800,7 +7357,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 440,
+      "phrase": "{value} Telugu",
+      "defaultValue": "None"
     },
     {
       "id": "lang_marathi",
@@ -5813,7 +7373,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 441,
+      "phrase": "{value} Marathi",
+      "defaultValue": "None"
     },
     {
       "id": "lang_punjabi",
@@ -5826,7 +7389,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 442,
+      "phrase": "{value} Punjabi",
+      "defaultValue": "None"
     },
     {
       "id": "lang_gujarati",
@@ -5839,7 +7405,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 443,
+      "phrase": "{value} Gujarati",
+      "defaultValue": "None"
     },
     {
       "id": "lang_hausa",
@@ -5852,7 +7421,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 444,
+      "phrase": "{value} Hausa",
+      "defaultValue": "None"
     },
     {
       "id": "lang_yoruba",
@@ -5865,7 +7437,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 445,
+      "phrase": "{value} Yoruba",
+      "defaultValue": "None"
     },
     {
       "id": "lang_igbo",
@@ -5878,7 +7453,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 446,
+      "phrase": "{value} Igbo",
+      "defaultValue": "None"
     },
     {
       "id": "lang_amharic",
@@ -5891,7 +7469,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 447,
+      "phrase": "{value} Amharic",
+      "defaultValue": "None"
     },
     {
       "id": "lang_zulu",
@@ -5904,7 +7485,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 448,
+      "phrase": "{value} Zulu",
+      "defaultValue": "None"
     },
     {
       "id": "lang_afrikaans",
@@ -5917,7 +7501,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 449,
+      "phrase": "{value} Afrikaans",
+      "defaultValue": "None"
     },
     {
       "id": "lang_serbian",
@@ -5930,7 +7517,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 450,
+      "phrase": "{value} Serbian",
+      "defaultValue": "None"
     },
     {
       "id": "lang_croatian",
@@ -5943,7 +7533,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 451,
+      "phrase": "{value} Croatian",
+      "defaultValue": "None"
     },
     {
       "id": "lang_bulgarian",
@@ -5956,7 +7549,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 452,
+      "phrase": "{value} Bulgarian",
+      "defaultValue": "None"
     },
     {
       "id": "lang_slovak",
@@ -5969,7 +7565,10 @@ window.MATRAIX_DIMENSIONS = {
         "Conversational",
         "Basic",
         "None"
-      ]
+      ],
+      "index": 453,
+      "phrase": "{value} Slovak",
+      "defaultValue": "None"
     },
     {
       "id": "att_ai",
@@ -5982,7 +7581,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 454,
+      "phrase": "a {value} stance on AI",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_automation",
@@ -5995,7 +7597,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 455,
+      "phrase": "a {value} stance on Automation",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_data_privacy",
@@ -6008,7 +7613,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 456,
+      "phrase": "a {value} stance on Data privacy",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_social_media",
@@ -6021,7 +7629,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 457,
+      "phrase": "a {value} stance on Social media",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_remote_work",
@@ -6034,7 +7645,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 458,
+      "phrase": "a {value} stance on Remote work",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_globalization",
@@ -6047,7 +7661,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 459,
+      "phrase": "a {value} stance on Globalization",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_immigration",
@@ -6060,7 +7677,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 460,
+      "phrase": "a {value} stance on Immigration",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_free_markets",
@@ -6073,7 +7693,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 461,
+      "phrase": "a {value} stance on Free markets",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_government_regulation",
@@ -6086,7 +7709,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 462,
+      "phrase": "a {value} stance on Government regulation",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_climate_action",
@@ -6099,7 +7725,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 463,
+      "phrase": "a {value} stance on Climate action",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_nuclear_energy",
@@ -6112,7 +7741,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 464,
+      "phrase": "a {value} stance on Nuclear energy",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_renewable_energy",
@@ -6125,7 +7757,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 465,
+      "phrase": "a {value} stance on Renewable energy",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_genetic_engineering",
@@ -6138,7 +7773,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 466,
+      "phrase": "a {value} stance on Genetic engineering",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_vaccines",
@@ -6151,7 +7789,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 467,
+      "phrase": "a {value} stance on Vaccines",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_alternative_medicine",
@@ -6164,7 +7805,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 468,
+      "phrase": "a {value} stance on Alternative medicine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_organized_religion",
@@ -6177,7 +7821,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 469,
+      "phrase": "a {value} stance on Organized religion",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_traditional_gender_roles",
@@ -6190,7 +7837,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 470,
+      "phrase": "a {value} stance on Traditional gender roles",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_cryptocurrency",
@@ -6203,7 +7853,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 471,
+      "phrase": "a {value} stance on Cryptocurrency",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_the_gig_economy",
@@ -6216,7 +7869,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 472,
+      "phrase": "a {value} stance on The gig economy",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_labor_unions",
@@ -6229,7 +7885,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 473,
+      "phrase": "a {value} stance on Labor unions",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_higher_education",
@@ -6242,7 +7901,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 474,
+      "phrase": "a {value} stance on Higher education",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_homeownership",
@@ -6255,7 +7917,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 475,
+      "phrase": "a {value} stance on Homeownership",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_taking_on_debt",
@@ -6268,7 +7933,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 476,
+      "phrase": "a {value} stance on Taking on debt",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_risk_taking",
@@ -6281,7 +7949,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 477,
+      "phrase": "a {value} stance on Risk-taking",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_authority",
@@ -6294,7 +7965,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 478,
+      "phrase": "a {value} stance on Authority",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_rapid_change",
@@ -6307,7 +7981,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 479,
+      "phrase": "a {value} stance on Rapid change",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_new_technology",
@@ -6320,7 +7997,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 480,
+      "phrase": "a {value} stance on New technology",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_brand_loyalty",
@@ -6333,7 +8013,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 481,
+      "phrase": "a {value} stance on Brand loyalty",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_advertising",
@@ -6346,7 +8029,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 482,
+      "phrase": "a {value} stance on Advertising",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_influencers",
@@ -6359,7 +8045,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 483,
+      "phrase": "a {value} stance on Influencers",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_online_reviews",
@@ -6372,7 +8061,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 484,
+      "phrase": "a {value} stance on Online reviews",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_subscription_services",
@@ -6385,7 +8077,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 485,
+      "phrase": "a {value} stance on Subscription services",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_open_source",
@@ -6398,7 +8093,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 486,
+      "phrase": "a {value} stance on Open source",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_surveillance",
@@ -6411,7 +8109,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 487,
+      "phrase": "a {value} stance on Surveillance",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_self_driving_cars",
@@ -6424,7 +8125,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 488,
+      "phrase": "a {value} stance on Self-driving cars",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_space_exploration",
@@ -6437,7 +8141,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 489,
+      "phrase": "a {value} stance on Space exploration",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_universal_basic_income",
@@ -6450,7 +8157,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 490,
+      "phrase": "a {value} stance on Universal basic income",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_minimalism",
@@ -6463,7 +8173,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 491,
+      "phrase": "a {value} stance on Minimalism",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_consumerism",
@@ -6476,7 +8189,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 492,
+      "phrase": "a {value} stance on Consumerism",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_veganism",
@@ -6489,7 +8205,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 493,
+      "phrase": "a {value} stance on Veganism",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_fast_fashion",
@@ -6502,7 +8221,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 494,
+      "phrase": "a {value} stance on Fast fashion",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_gun_ownership",
@@ -6515,7 +8237,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 495,
+      "phrase": "a {value} stance on Gun ownership",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_capital_punishment",
@@ -6528,7 +8253,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 496,
+      "phrase": "a {value} stance on Capital punishment",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_free_speech",
@@ -6541,7 +8269,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 497,
+      "phrase": "a {value} stance on Free speech",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_privacy_vs_security",
@@ -6554,7 +8285,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 498,
+      "phrase": "a {value} stance on Privacy vs security",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_globalized_supply_chains",
@@ -6567,7 +8301,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 499,
+      "phrase": "a {value} stance on Globalized supply chains",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_working_from_office",
@@ -6580,7 +8317,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 500,
+      "phrase": "a {value} stance on Working from office",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_four_day_work_week",
@@ -6593,7 +8333,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 501,
+      "phrase": "a {value} stance on Four-day work week",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_performance_reviews",
@@ -6606,7 +8349,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 502,
+      "phrase": "a {value} stance on Performance reviews",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_standardized_testing",
@@ -6619,7 +8365,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 503,
+      "phrase": "a {value} stance on Standardized testing",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_tipping_culture",
@@ -6632,7 +8381,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 504,
+      "phrase": "a {value} stance on Tipping culture",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_electric_vehicles",
@@ -6645,7 +8397,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 505,
+      "phrase": "a {value} stance on Electric vehicles",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_public_transit",
@@ -6658,7 +8413,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 506,
+      "phrase": "a {value} stance on Public transit",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_urban_density",
@@ -6671,7 +8429,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 507,
+      "phrase": "a {value} stance on Urban density",
+      "defaultValue": "Neutral"
     },
     {
       "id": "att_gentrification",
@@ -6684,7 +8445,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Skeptical",
         "Opposed"
-      ]
+      ],
+      "index": 508,
+      "phrase": "a {value} stance on Gentrification",
+      "defaultValue": "Neutral"
     },
     {
       "id": "ind_technology",
@@ -6696,7 +8460,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 509,
+      "phrase": "{value} experience in Technology",
+      "defaultValue": "None"
     },
     {
       "id": "ind_healthcare",
@@ -6708,7 +8475,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 510,
+      "phrase": "{value} experience in Healthcare",
+      "defaultValue": "None"
     },
     {
       "id": "ind_finance",
@@ -6720,7 +8490,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 511,
+      "phrase": "{value} experience in Finance",
+      "defaultValue": "None"
     },
     {
       "id": "ind_banking",
@@ -6732,7 +8505,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 512,
+      "phrase": "{value} experience in Banking",
+      "defaultValue": "None"
     },
     {
       "id": "ind_insurance",
@@ -6744,7 +8520,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 513,
+      "phrase": "{value} experience in Insurance",
+      "defaultValue": "None"
     },
     {
       "id": "ind_retail",
@@ -6756,7 +8535,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 514,
+      "phrase": "{value} experience in Retail",
+      "defaultValue": "None"
     },
     {
       "id": "ind_e_commerce",
@@ -6768,7 +8550,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 515,
+      "phrase": "{value} experience in E-commerce",
+      "defaultValue": "None"
     },
     {
       "id": "ind_manufacturing",
@@ -6780,7 +8565,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 516,
+      "phrase": "{value} experience in Manufacturing",
+      "defaultValue": "None"
     },
     {
       "id": "ind_automotive",
@@ -6792,7 +8580,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 517,
+      "phrase": "{value} experience in Automotive",
+      "defaultValue": "None"
     },
     {
       "id": "ind_aerospace",
@@ -6804,7 +8595,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 518,
+      "phrase": "{value} experience in Aerospace",
+      "defaultValue": "None"
     },
     {
       "id": "ind_energy",
@@ -6816,7 +8610,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 519,
+      "phrase": "{value} experience in Energy",
+      "defaultValue": "None"
     },
     {
       "id": "ind_oil_gas",
@@ -6828,7 +8625,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 520,
+      "phrase": "{value} experience in Oil & gas",
+      "defaultValue": "None"
     },
     {
       "id": "ind_utilities",
@@ -6840,7 +8640,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 521,
+      "phrase": "{value} experience in Utilities",
+      "defaultValue": "None"
     },
     {
       "id": "ind_construction",
@@ -6852,7 +8655,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 522,
+      "phrase": "{value} experience in Construction",
+      "defaultValue": "None"
     },
     {
       "id": "ind_real_estate",
@@ -6864,7 +8670,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 523,
+      "phrase": "{value} experience in Real estate",
+      "defaultValue": "None"
     },
     {
       "id": "ind_hospitality",
@@ -6876,7 +8685,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 524,
+      "phrase": "{value} experience in Hospitality",
+      "defaultValue": "None"
     },
     {
       "id": "ind_travel_tourism",
@@ -6888,7 +8700,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 525,
+      "phrase": "{value} experience in Travel & tourism",
+      "defaultValue": "None"
     },
     {
       "id": "ind_restaurants",
@@ -6900,7 +8715,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 526,
+      "phrase": "{value} experience in Restaurants",
+      "defaultValue": "None"
     },
     {
       "id": "ind_agriculture",
@@ -6912,7 +8730,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 527,
+      "phrase": "{value} experience in Agriculture",
+      "defaultValue": "None"
     },
     {
       "id": "ind_food_beverage",
@@ -6924,7 +8745,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 528,
+      "phrase": "{value} experience in Food & beverage",
+      "defaultValue": "None"
     },
     {
       "id": "ind_pharmaceuticals",
@@ -6936,7 +8760,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 529,
+      "phrase": "{value} experience in Pharmaceuticals",
+      "defaultValue": "None"
     },
     {
       "id": "ind_biotech",
@@ -6948,7 +8775,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 530,
+      "phrase": "{value} experience in Biotech",
+      "defaultValue": "None"
     },
     {
       "id": "ind_telecommunications",
@@ -6960,7 +8790,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 531,
+      "phrase": "{value} experience in Telecommunications",
+      "defaultValue": "None"
     },
     {
       "id": "ind_media",
@@ -6972,7 +8805,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 532,
+      "phrase": "{value} experience in Media",
+      "defaultValue": "None"
     },
     {
       "id": "ind_entertainment",
@@ -6984,7 +8820,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 533,
+      "phrase": "{value} experience in Entertainment",
+      "defaultValue": "None"
     },
     {
       "id": "ind_gaming",
@@ -6996,7 +8835,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 534,
+      "phrase": "{value} experience in Gaming",
+      "defaultValue": "None"
     },
     {
       "id": "ind_publishing",
@@ -7008,7 +8850,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 535,
+      "phrase": "{value} experience in Publishing",
+      "defaultValue": "None"
     },
     {
       "id": "ind_advertising",
@@ -7020,7 +8865,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 536,
+      "phrase": "{value} experience in Advertising",
+      "defaultValue": "None"
     },
     {
       "id": "ind_education",
@@ -7032,7 +8880,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 537,
+      "phrase": "{value} experience in Education",
+      "defaultValue": "None"
     },
     {
       "id": "ind_government",
@@ -7044,7 +8895,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 538,
+      "phrase": "{value} experience in Government",
+      "defaultValue": "None"
     },
     {
       "id": "ind_defense",
@@ -7056,7 +8910,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 539,
+      "phrase": "{value} experience in Defense",
+      "defaultValue": "None"
     },
     {
       "id": "ind_nonprofit",
@@ -7068,7 +8925,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 540,
+      "phrase": "{value} experience in Nonprofit",
+      "defaultValue": "None"
     },
     {
       "id": "ind_logistics",
@@ -7080,7 +8940,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 541,
+      "phrase": "{value} experience in Logistics",
+      "defaultValue": "None"
     },
     {
       "id": "ind_transportation",
@@ -7092,7 +8955,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 542,
+      "phrase": "{value} experience in Transportation",
+      "defaultValue": "None"
     },
     {
       "id": "ind_shipping",
@@ -7104,7 +8970,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 543,
+      "phrase": "{value} experience in Shipping",
+      "defaultValue": "None"
     },
     {
       "id": "ind_mining",
@@ -7116,7 +8985,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 544,
+      "phrase": "{value} experience in Mining",
+      "defaultValue": "None"
     },
     {
       "id": "ind_chemicals",
@@ -7128,7 +9000,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 545,
+      "phrase": "{value} experience in Chemicals",
+      "defaultValue": "None"
     },
     {
       "id": "ind_textiles",
@@ -7140,7 +9015,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 546,
+      "phrase": "{value} experience in Textiles",
+      "defaultValue": "None"
     },
     {
       "id": "ind_apparel",
@@ -7152,7 +9030,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 547,
+      "phrase": "{value} experience in Apparel",
+      "defaultValue": "None"
     },
     {
       "id": "ind_consumer_electronics",
@@ -7164,7 +9045,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 548,
+      "phrase": "{value} experience in Consumer electronics",
+      "defaultValue": "None"
     },
     {
       "id": "ind_semiconductors",
@@ -7176,7 +9060,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 549,
+      "phrase": "{value} experience in Semiconductors",
+      "defaultValue": "None"
     },
     {
       "id": "ind_legal_services",
@@ -7188,7 +9075,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 550,
+      "phrase": "{value} experience in Legal services",
+      "defaultValue": "None"
     },
     {
       "id": "ind_consulting",
@@ -7200,7 +9090,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 551,
+      "phrase": "{value} experience in Consulting",
+      "defaultValue": "None"
     },
     {
       "id": "ind_accounting",
@@ -7212,7 +9105,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 552,
+      "phrase": "{value} experience in Accounting",
+      "defaultValue": "None"
     },
     {
       "id": "ind_marketing_agencies",
@@ -7224,7 +9120,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 553,
+      "phrase": "{value} experience in Marketing agencies",
+      "defaultValue": "None"
     },
     {
       "id": "ind_fitness_wellness",
@@ -7236,7 +9135,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 554,
+      "phrase": "{value} experience in Fitness & wellness",
+      "defaultValue": "None"
     },
     {
       "id": "ind_beauty_cosmetics",
@@ -7248,7 +9150,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 555,
+      "phrase": "{value} experience in Beauty & cosmetics",
+      "defaultValue": "None"
     },
     {
       "id": "ind_sports",
@@ -7260,7 +9165,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 556,
+      "phrase": "{value} experience in Sports",
+      "defaultValue": "None"
     },
     {
       "id": "ind_music",
@@ -7272,7 +9180,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 557,
+      "phrase": "{value} experience in Music",
+      "defaultValue": "None"
     },
     {
       "id": "ind_fine_art",
@@ -7284,7 +9195,10 @@ window.MATRAIX_DIMENSIONS = {
         "Experienced",
         "Some exposure",
         "None"
-      ]
+      ],
+      "index": 558,
+      "phrase": "{value} experience in Fine art",
+      "defaultValue": "None"
     },
     {
       "id": "cult_united_states",
@@ -7297,7 +9211,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 559,
+      "phrase": "familiar with United States culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_canada",
@@ -7310,7 +9227,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 560,
+      "phrase": "familiar with Canada culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_mexico",
@@ -7323,7 +9243,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 561,
+      "phrase": "familiar with Mexico culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_brazil",
@@ -7336,7 +9259,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 562,
+      "phrase": "familiar with Brazil culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_argentina",
@@ -7349,7 +9275,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 563,
+      "phrase": "familiar with Argentina culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_united_kingdom",
@@ -7362,7 +9291,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 564,
+      "phrase": "familiar with United Kingdom culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_france",
@@ -7375,7 +9307,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 565,
+      "phrase": "familiar with France culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_germany",
@@ -7388,7 +9323,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 566,
+      "phrase": "familiar with Germany culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_italy",
@@ -7401,7 +9339,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 567,
+      "phrase": "familiar with Italy culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_spain",
@@ -7414,7 +9355,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 568,
+      "phrase": "familiar with Spain culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_netherlands",
@@ -7427,7 +9371,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 569,
+      "phrase": "familiar with Netherlands culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_sweden",
@@ -7440,7 +9387,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 570,
+      "phrase": "familiar with Sweden culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_poland",
@@ -7453,7 +9403,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 571,
+      "phrase": "familiar with Poland culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_russia",
@@ -7466,7 +9419,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 572,
+      "phrase": "familiar with Russia culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_turkey",
@@ -7479,7 +9435,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 573,
+      "phrase": "familiar with Turkey culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_egypt",
@@ -7492,7 +9451,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 574,
+      "phrase": "familiar with Egypt culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_saudi_arabia",
@@ -7505,7 +9467,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 575,
+      "phrase": "familiar with Saudi Arabia culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_uae",
@@ -7518,7 +9483,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 576,
+      "phrase": "familiar with UAE culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_israel",
@@ -7531,7 +9499,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 577,
+      "phrase": "familiar with Israel culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_iran",
@@ -7544,7 +9515,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 578,
+      "phrase": "familiar with Iran culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_nigeria",
@@ -7557,7 +9531,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 579,
+      "phrase": "familiar with Nigeria culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_kenya",
@@ -7570,7 +9547,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 580,
+      "phrase": "familiar with Kenya culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_south_africa",
@@ -7583,7 +9563,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 581,
+      "phrase": "familiar with South Africa culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_ethiopia",
@@ -7596,7 +9579,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 582,
+      "phrase": "familiar with Ethiopia culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_india",
@@ -7609,7 +9595,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 583,
+      "phrase": "familiar with India culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_pakistan",
@@ -7622,7 +9611,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 584,
+      "phrase": "familiar with Pakistan culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_bangladesh",
@@ -7635,7 +9627,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 585,
+      "phrase": "familiar with Bangladesh culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_china",
@@ -7648,7 +9643,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 586,
+      "phrase": "familiar with China culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_japan",
@@ -7661,7 +9659,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 587,
+      "phrase": "familiar with Japan culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_south_korea",
@@ -7674,7 +9675,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 588,
+      "phrase": "familiar with South Korea culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_vietnam",
@@ -7687,7 +9691,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 589,
+      "phrase": "familiar with Vietnam culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_thailand",
@@ -7700,7 +9707,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 590,
+      "phrase": "familiar with Thailand culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_indonesia",
@@ -7713,7 +9723,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 591,
+      "phrase": "familiar with Indonesia culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_philippines",
@@ -7726,7 +9739,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 592,
+      "phrase": "familiar with Philippines culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_australia",
@@ -7739,7 +9755,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 593,
+      "phrase": "familiar with Australia culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_new_zealand",
@@ -7752,7 +9771,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 594,
+      "phrase": "familiar with New Zealand culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_singapore",
@@ -7765,7 +9787,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 595,
+      "phrase": "familiar with Singapore culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_malaysia",
@@ -7778,7 +9803,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 596,
+      "phrase": "familiar with Malaysia culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_greece",
@@ -7791,7 +9819,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 597,
+      "phrase": "familiar with Greece culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "cult_portugal",
@@ -7804,7 +9835,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visited",
         "Studied",
         "Unfamiliar"
-      ]
+      ],
+      "index": 598,
+      "phrase": "familiar with Portugal culture ({value})",
+      "defaultValue": "Unfamiliar"
     },
     {
       "id": "musg_pop",
@@ -7816,7 +9850,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 599,
+      "phrase": "{value} for Pop music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_rock",
@@ -7828,7 +9865,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 600,
+      "phrase": "{value} for Rock music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_hip_hop",
@@ -7840,7 +9880,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 601,
+      "phrase": "{value} for Hip-hop music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_r_b",
@@ -7852,7 +9895,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 602,
+      "phrase": "{value} for R&B music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_jazz",
@@ -7864,7 +9910,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 603,
+      "phrase": "{value} for Jazz music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_blues",
@@ -7876,7 +9925,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 604,
+      "phrase": "{value} for Blues music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_classical",
@@ -7888,7 +9940,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 605,
+      "phrase": "{value} for Classical music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_opera",
@@ -7900,7 +9955,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 606,
+      "phrase": "{value} for Opera music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_country",
@@ -7912,7 +9970,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 607,
+      "phrase": "{value} for Country music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_folk",
@@ -7924,7 +9985,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 608,
+      "phrase": "{value} for Folk music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_reggae",
@@ -7936,7 +10000,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 609,
+      "phrase": "{value} for Reggae music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_reggaeton",
@@ -7948,7 +10015,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 610,
+      "phrase": "{value} for Reggaeton music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_electronic",
@@ -7960,7 +10030,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 611,
+      "phrase": "{value} for Electronic music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_house",
@@ -7972,7 +10045,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 612,
+      "phrase": "{value} for House music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_techno",
@@ -7984,7 +10060,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 613,
+      "phrase": "{value} for Techno music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_trance",
@@ -7996,7 +10075,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 614,
+      "phrase": "{value} for Trance music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_drum_bass",
@@ -8008,7 +10090,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 615,
+      "phrase": "{value} for Drum & bass music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_metal",
@@ -8020,7 +10105,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 616,
+      "phrase": "{value} for Metal music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_punk",
@@ -8032,7 +10120,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 617,
+      "phrase": "{value} for Punk music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_indie",
@@ -8044,7 +10135,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 618,
+      "phrase": "{value} for Indie music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_k_pop",
@@ -8056,7 +10150,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 619,
+      "phrase": "{value} for K-pop music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_j_pop",
@@ -8068,7 +10165,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 620,
+      "phrase": "{value} for J-pop music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_latin",
@@ -8080,7 +10180,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 621,
+      "phrase": "{value} for Latin music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_afrobeats",
@@ -8092,7 +10195,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 622,
+      "phrase": "{value} for Afrobeats music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_gospel",
@@ -8104,7 +10210,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 623,
+      "phrase": "{value} for Gospel music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_soul",
@@ -8116,7 +10225,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 624,
+      "phrase": "{value} for Soul music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_funk",
@@ -8128,7 +10240,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 625,
+      "phrase": "{value} for Funk music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_disco",
@@ -8140,7 +10255,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 626,
+      "phrase": "{value} for Disco music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_ambient",
@@ -8152,7 +10270,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 627,
+      "phrase": "{value} for Ambient music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_lo_fi",
@@ -8164,7 +10285,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 628,
+      "phrase": "{value} for Lo-fi music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_bluegrass",
@@ -8176,7 +10300,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 629,
+      "phrase": "{value} for Bluegrass music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_ska",
@@ -8188,7 +10315,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 630,
+      "phrase": "{value} for Ska music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_synthwave",
@@ -8200,7 +10330,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 631,
+      "phrase": "{value} for Synthwave music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_trap",
@@ -8212,7 +10345,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 632,
+      "phrase": "{value} for Trap music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "musg_bollywood",
@@ -8224,7 +10360,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 633,
+      "phrase": "{value} for Bollywood music",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_action",
@@ -8236,7 +10375,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 634,
+      "phrase": "{value} for Action films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_adventure",
@@ -8248,7 +10390,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 635,
+      "phrase": "{value} for Adventure films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_comedy",
@@ -8260,7 +10405,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 636,
+      "phrase": "{value} for Comedy films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_drama",
@@ -8272,7 +10420,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 637,
+      "phrase": "{value} for Drama films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_horror",
@@ -8284,7 +10435,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 638,
+      "phrase": "{value} for Horror films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_thriller",
@@ -8296,7 +10450,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 639,
+      "phrase": "{value} for Thriller films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_sci_fi",
@@ -8308,7 +10465,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 640,
+      "phrase": "{value} for Sci-fi films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_fantasy",
@@ -8320,7 +10480,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 641,
+      "phrase": "{value} for Fantasy films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_romance",
@@ -8332,7 +10495,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 642,
+      "phrase": "{value} for Romance films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_documentary",
@@ -8344,7 +10510,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 643,
+      "phrase": "{value} for Documentary films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_animation",
@@ -8356,7 +10525,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 644,
+      "phrase": "{value} for Animation films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_crime",
@@ -8368,7 +10540,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 645,
+      "phrase": "{value} for Crime films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_mystery",
@@ -8380,7 +10555,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 646,
+      "phrase": "{value} for Mystery films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_historical",
@@ -8392,7 +10570,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 647,
+      "phrase": "{value} for Historical films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_war",
@@ -8404,7 +10585,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 648,
+      "phrase": "{value} for War films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_western",
@@ -8416,7 +10600,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 649,
+      "phrase": "{value} for Western films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_musical",
@@ -8428,7 +10615,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 650,
+      "phrase": "{value} for Musical films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_noir",
@@ -8440,7 +10630,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 651,
+      "phrase": "{value} for Noir films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_superhero",
@@ -8452,7 +10645,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 652,
+      "phrase": "{value} for Superhero films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_indie_film",
@@ -8464,7 +10660,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 653,
+      "phrase": "{value} for Indie film films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_art_house",
@@ -8476,7 +10675,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 654,
+      "phrase": "{value} for Art house films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_biopic",
@@ -8488,7 +10690,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 655,
+      "phrase": "{value} for Biopic films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_comedy_drama",
@@ -8500,7 +10705,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 656,
+      "phrase": "{value} for Comedy-drama films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "filmg_disaster",
@@ -8512,7 +10720,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 657,
+      "phrase": "{value} for Disaster films",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_literary_fiction",
@@ -8524,7 +10735,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 658,
+      "phrase": "{value} for Literary fiction books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_science_fiction",
@@ -8536,7 +10750,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 659,
+      "phrase": "{value} for Science fiction books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_fantasy",
@@ -8548,7 +10765,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 660,
+      "phrase": "{value} for Fantasy books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_mystery",
@@ -8560,7 +10780,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 661,
+      "phrase": "{value} for Mystery books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_thriller",
@@ -8572,7 +10795,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 662,
+      "phrase": "{value} for Thriller books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_romance",
@@ -8584,7 +10810,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 663,
+      "phrase": "{value} for Romance books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_historical_fiction",
@@ -8596,7 +10825,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 664,
+      "phrase": "{value} for Historical fiction books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_horror",
@@ -8608,7 +10840,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 665,
+      "phrase": "{value} for Horror books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_biography",
@@ -8620,7 +10855,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 666,
+      "phrase": "{value} for Biography books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_memoir",
@@ -8632,7 +10870,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 667,
+      "phrase": "{value} for Memoir books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_self_help",
@@ -8644,7 +10885,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 668,
+      "phrase": "{value} for Self-help books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_business",
@@ -8656,7 +10900,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 669,
+      "phrase": "{value} for Business books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_popular_science",
@@ -8668,7 +10915,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 670,
+      "phrase": "{value} for Popular science books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_history",
@@ -8680,7 +10930,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 671,
+      "phrase": "{value} for History books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_philosophy",
@@ -8692,7 +10945,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 672,
+      "phrase": "{value} for Philosophy books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_poetry",
@@ -8704,7 +10960,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 673,
+      "phrase": "{value} for Poetry books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_young_adult",
@@ -8716,7 +10975,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 674,
+      "phrase": "{value} for Young adult books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_graphic_novels",
@@ -8728,7 +10990,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 675,
+      "phrase": "{value} for Graphic novels books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_true_crime",
@@ -8740,7 +11005,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 676,
+      "phrase": "{value} for True crime books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_travel_writing",
@@ -8752,7 +11020,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 677,
+      "phrase": "{value} for Travel writing books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_cookbooks",
@@ -8764,7 +11035,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 678,
+      "phrase": "{value} for Cookbooks books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "bookg_essays",
@@ -8776,7 +11050,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Dislike"
-      ]
+      ],
+      "index": 679,
+      "phrase": "{value} for Essays books",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_italian",
@@ -8788,7 +11065,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 680,
+      "phrase": "{value} for Italian cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_french",
@@ -8800,7 +11080,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 681,
+      "phrase": "{value} for French cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_spanish",
@@ -8812,7 +11095,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 682,
+      "phrase": "{value} for Spanish cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_greek",
@@ -8824,7 +11110,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 683,
+      "phrase": "{value} for Greek cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_mexican",
@@ -8836,7 +11125,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 684,
+      "phrase": "{value} for Mexican cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_peruvian",
@@ -8848,7 +11140,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 685,
+      "phrase": "{value} for Peruvian cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_brazilian",
@@ -8860,7 +11155,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 686,
+      "phrase": "{value} for Brazilian cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_american_bbq",
@@ -8872,7 +11170,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 687,
+      "phrase": "{value} for American BBQ cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_southern_soul_food",
@@ -8884,7 +11185,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 688,
+      "phrase": "{value} for Southern soul food cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_cajun",
@@ -8896,7 +11200,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 689,
+      "phrase": "{value} for Cajun cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_chinese",
@@ -8908,7 +11215,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 690,
+      "phrase": "{value} for Chinese cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_sichuan",
@@ -8920,7 +11230,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 691,
+      "phrase": "{value} for Sichuan cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_cantonese",
@@ -8932,7 +11245,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 692,
+      "phrase": "{value} for Cantonese cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_japanese",
@@ -8944,7 +11260,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 693,
+      "phrase": "{value} for Japanese cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_korean",
@@ -8956,7 +11275,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 694,
+      "phrase": "{value} for Korean cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_thai",
@@ -8968,7 +11290,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 695,
+      "phrase": "{value} for Thai cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_vietnamese",
@@ -8980,7 +11305,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 696,
+      "phrase": "{value} for Vietnamese cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_indian",
@@ -8992,7 +11320,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 697,
+      "phrase": "{value} for Indian cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_pakistani",
@@ -9004,7 +11335,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 698,
+      "phrase": "{value} for Pakistani cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_middle_eastern",
@@ -9016,7 +11350,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 699,
+      "phrase": "{value} for Middle Eastern cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_lebanese",
@@ -9028,7 +11365,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 700,
+      "phrase": "{value} for Lebanese cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_turkish",
@@ -9040,7 +11380,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 701,
+      "phrase": "{value} for Turkish cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_moroccan",
@@ -9052,7 +11395,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 702,
+      "phrase": "{value} for Moroccan cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_ethiopian",
@@ -9064,7 +11410,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 703,
+      "phrase": "{value} for Ethiopian cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_nigerian",
@@ -9076,7 +11425,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 704,
+      "phrase": "{value} for Nigerian cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_caribbean",
@@ -9088,7 +11440,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 705,
+      "phrase": "{value} for Caribbean cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_german",
@@ -9100,7 +11455,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 706,
+      "phrase": "{value} for German cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_scandinavian",
@@ -9112,7 +11470,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 707,
+      "phrase": "{value} for Scandinavian cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_russian",
@@ -9124,7 +11485,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 708,
+      "phrase": "{value} for Russian cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_spanish_tapas",
@@ -9136,7 +11500,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 709,
+      "phrase": "{value} for Spanish tapas cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_sushi",
@@ -9148,7 +11515,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 710,
+      "phrase": "{value} for Sushi cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_ramen",
@@ -9160,7 +11530,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 711,
+      "phrase": "{value} for Ramen cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_vegan",
@@ -9172,7 +11545,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 712,
+      "phrase": "{value} for Vegan cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_vegetarian",
@@ -9184,7 +11560,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 713,
+      "phrase": "{value} for Vegetarian cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "cuis_seafood",
@@ -9196,7 +11575,10 @@ window.MATRAIX_DIMENSIONS = {
         "Like",
         "Neutral",
         "Avoid"
-      ]
+      ],
+      "index": 714,
+      "phrase": "{value} for Seafood cuisine",
+      "defaultValue": "Neutral"
     },
     {
       "id": "sport_soccer",
@@ -9208,7 +11590,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 715,
+      "phrase": "{value} Soccer",
+      "defaultValue": "None"
     },
     {
       "id": "sport_basketball",
@@ -9220,7 +11605,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 716,
+      "phrase": "{value} Basketball",
+      "defaultValue": "None"
     },
     {
       "id": "sport_american_football",
@@ -9232,7 +11620,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 717,
+      "phrase": "{value} American football",
+      "defaultValue": "None"
     },
     {
       "id": "sport_baseball",
@@ -9244,7 +11635,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 718,
+      "phrase": "{value} Baseball",
+      "defaultValue": "None"
     },
     {
       "id": "sport_tennis",
@@ -9256,7 +11650,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 719,
+      "phrase": "{value} Tennis",
+      "defaultValue": "None"
     },
     {
       "id": "sport_golf",
@@ -9268,7 +11665,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 720,
+      "phrase": "{value} Golf",
+      "defaultValue": "None"
     },
     {
       "id": "sport_cricket",
@@ -9280,7 +11680,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 721,
+      "phrase": "{value} Cricket",
+      "defaultValue": "None"
     },
     {
       "id": "sport_rugby",
@@ -9292,7 +11695,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 722,
+      "phrase": "{value} Rugby",
+      "defaultValue": "None"
     },
     {
       "id": "sport_hockey",
@@ -9304,7 +11710,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 723,
+      "phrase": "{value} Hockey",
+      "defaultValue": "None"
     },
     {
       "id": "sport_volleyball",
@@ -9316,7 +11725,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 724,
+      "phrase": "{value} Volleyball",
+      "defaultValue": "None"
     },
     {
       "id": "sport_swimming",
@@ -9328,7 +11740,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 725,
+      "phrase": "{value} Swimming",
+      "defaultValue": "None"
     },
     {
       "id": "sport_running",
@@ -9340,7 +11755,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 726,
+      "phrase": "{value} Running",
+      "defaultValue": "None"
     },
     {
       "id": "sport_cycling",
@@ -9352,7 +11770,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 727,
+      "phrase": "{value} Cycling",
+      "defaultValue": "None"
     },
     {
       "id": "sport_boxing",
@@ -9364,7 +11785,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 728,
+      "phrase": "{value} Boxing",
+      "defaultValue": "None"
     },
     {
       "id": "sport_mma",
@@ -9376,7 +11800,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 729,
+      "phrase": "{value} MMA",
+      "defaultValue": "None"
     },
     {
       "id": "sport_wrestling",
@@ -9388,7 +11815,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 730,
+      "phrase": "{value} Wrestling",
+      "defaultValue": "None"
     },
     {
       "id": "sport_skiing",
@@ -9400,7 +11830,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 731,
+      "phrase": "{value} Skiing",
+      "defaultValue": "None"
     },
     {
       "id": "sport_snowboarding",
@@ -9412,7 +11845,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 732,
+      "phrase": "{value} Snowboarding",
+      "defaultValue": "None"
     },
     {
       "id": "sport_surfing",
@@ -9424,7 +11860,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 733,
+      "phrase": "{value} Surfing",
+      "defaultValue": "None"
     },
     {
       "id": "sport_skateboarding",
@@ -9436,7 +11875,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 734,
+      "phrase": "{value} Skateboarding",
+      "defaultValue": "None"
     },
     {
       "id": "sport_climbing",
@@ -9448,7 +11890,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 735,
+      "phrase": "{value} Climbing",
+      "defaultValue": "None"
     },
     {
       "id": "sport_gymnastics",
@@ -9460,7 +11905,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 736,
+      "phrase": "{value} Gymnastics",
+      "defaultValue": "None"
     },
     {
       "id": "sport_track_field",
@@ -9472,7 +11920,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 737,
+      "phrase": "{value} Track & field",
+      "defaultValue": "None"
     },
     {
       "id": "sport_badminton",
@@ -9484,7 +11935,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 738,
+      "phrase": "{value} Badminton",
+      "defaultValue": "None"
     },
     {
       "id": "sport_table_tennis",
@@ -9496,7 +11950,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 739,
+      "phrase": "{value} Table tennis",
+      "defaultValue": "None"
     },
     {
       "id": "sport_squash",
@@ -9508,7 +11965,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 740,
+      "phrase": "{value} Squash",
+      "defaultValue": "None"
     },
     {
       "id": "sport_sailing",
@@ -9520,7 +11980,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 741,
+      "phrase": "{value} Sailing",
+      "defaultValue": "None"
     },
     {
       "id": "sport_rowing",
@@ -9532,7 +11995,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 742,
+      "phrase": "{value} Rowing",
+      "defaultValue": "None"
     },
     {
       "id": "sport_martial_arts",
@@ -9544,7 +12010,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 743,
+      "phrase": "{value} Martial arts",
+      "defaultValue": "None"
     },
     {
       "id": "sport_yoga",
@@ -9556,7 +12025,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 744,
+      "phrase": "{value} Yoga",
+      "defaultValue": "None"
     },
     {
       "id": "sport_pilates",
@@ -9568,7 +12040,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 745,
+      "phrase": "{value} Pilates",
+      "defaultValue": "None"
     },
     {
       "id": "sport_crossfit",
@@ -9580,7 +12055,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 746,
+      "phrase": "{value} CrossFit",
+      "defaultValue": "None"
     },
     {
       "id": "sport_weightlifting",
@@ -9592,7 +12070,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 747,
+      "phrase": "{value} Weightlifting",
+      "defaultValue": "None"
     },
     {
       "id": "sport_esports",
@@ -9604,7 +12085,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 748,
+      "phrase": "{value} Esports",
+      "defaultValue": "None"
     },
     {
       "id": "sport_darts",
@@ -9616,7 +12100,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 749,
+      "phrase": "{value} Darts",
+      "defaultValue": "None"
     },
     {
       "id": "sport_bowling",
@@ -9628,7 +12115,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 750,
+      "phrase": "{value} Bowling",
+      "defaultValue": "None"
     },
     {
       "id": "sport_archery",
@@ -9640,7 +12130,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 751,
+      "phrase": "{value} Archery",
+      "defaultValue": "None"
     },
     {
       "id": "sport_equestrian",
@@ -9652,7 +12145,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 752,
+      "phrase": "{value} Equestrian",
+      "defaultValue": "None"
     },
     {
       "id": "sport_fencing",
@@ -9664,7 +12160,10 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 753,
+      "phrase": "{value} Fencing",
+      "defaultValue": "None"
     },
     {
       "id": "sport_triathlon",
@@ -9676,11 +12175,14 @@ window.MATRAIX_DIMENSIONS = {
         "Follow",
         "Casual",
         "None"
-      ]
+      ],
+      "index": 754,
+      "phrase": "{value} Triathlon",
+      "defaultValue": "None"
     },
     {
       "id": "mbti_type",
-      "label": "Myers\u2013Briggs type",
+      "label": "Myers-Briggs type",
       "category": "Personality: MBTI",
       "description": "The persona's 16-type MBTI profile.",
       "values": [
@@ -9700,7 +12202,10 @@ window.MATRAIX_DIMENSIONS = {
         "ISFP \u2014 Adventurer",
         "ESTP \u2014 Entrepreneur",
         "ESFP \u2014 Entertainer"
-      ]
+      ],
+      "index": 755,
+      "phrase": "an {value} personality type",
+      "defaultValue": null
     },
     {
       "id": "big5_imagination",
@@ -9713,7 +12218,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 756,
+      "phrase": "scores {value} on Imagination",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_artistic_interest",
@@ -9726,7 +12234,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 757,
+      "phrase": "scores {value} on Artistic interest",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_emotionality",
@@ -9739,7 +12250,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 758,
+      "phrase": "scores {value} on Emotionality",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_adventurousness",
@@ -9752,7 +12266,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 759,
+      "phrase": "scores {value} on Adventurousness",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_intellect",
@@ -9765,7 +12282,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 760,
+      "phrase": "scores {value} on Intellect",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_liberalism",
@@ -9778,7 +12298,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 761,
+      "phrase": "scores {value} on Liberalism",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_self_efficacy",
@@ -9791,7 +12314,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 762,
+      "phrase": "scores {value} on Self-efficacy",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_orderliness",
@@ -9804,7 +12330,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 763,
+      "phrase": "scores {value} on Orderliness",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_dutifulness",
@@ -9817,7 +12346,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 764,
+      "phrase": "scores {value} on Dutifulness",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_achievement_striving",
@@ -9830,7 +12362,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 765,
+      "phrase": "scores {value} on Achievement-striving",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_self_discipline",
@@ -9843,7 +12378,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 766,
+      "phrase": "scores {value} on Self-discipline",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_cautiousness",
@@ -9856,7 +12394,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 767,
+      "phrase": "scores {value} on Cautiousness",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_friendliness",
@@ -9869,7 +12410,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 768,
+      "phrase": "scores {value} on Friendliness",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_gregariousness",
@@ -9882,7 +12426,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 769,
+      "phrase": "scores {value} on Gregariousness",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_assertiveness",
@@ -9895,7 +12442,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 770,
+      "phrase": "scores {value} on Assertiveness",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_activity_level",
@@ -9908,7 +12458,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 771,
+      "phrase": "scores {value} on Activity level",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_excitement_seeking",
@@ -9921,7 +12474,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 772,
+      "phrase": "scores {value} on Excitement-seeking",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_cheerfulness",
@@ -9934,7 +12490,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 773,
+      "phrase": "scores {value} on Cheerfulness",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_trust",
@@ -9947,7 +12506,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 774,
+      "phrase": "scores {value} on Trust",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_morality",
@@ -9960,7 +12522,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 775,
+      "phrase": "scores {value} on Morality",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_altruism",
@@ -9973,7 +12538,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 776,
+      "phrase": "scores {value} on Altruism",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_cooperation",
@@ -9986,7 +12554,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 777,
+      "phrase": "scores {value} on Cooperation",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_modesty",
@@ -9999,7 +12570,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 778,
+      "phrase": "scores {value} on Modesty",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_sympathy",
@@ -10012,7 +12586,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 779,
+      "phrase": "scores {value} on Sympathy",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_anxiety",
@@ -10025,7 +12602,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 780,
+      "phrase": "scores {value} on Anxiety",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_anger",
@@ -10038,7 +12618,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 781,
+      "phrase": "scores {value} on Anger",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_depression",
@@ -10051,7 +12634,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 782,
+      "phrase": "scores {value} on Depression",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_self_consciousness",
@@ -10064,7 +12650,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 783,
+      "phrase": "scores {value} on Self-consciousness",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_immoderation",
@@ -10077,7 +12666,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 784,
+      "phrase": "scores {value} on Immoderation",
+      "defaultValue": "Average"
     },
     {
       "id": "big5_vulnerability",
@@ -10090,7 +12682,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Low",
         "Very low"
-      ]
+      ],
+      "index": 785,
+      "phrase": "scores {value} on Vulnerability",
+      "defaultValue": "Average"
     },
     {
       "id": "lstyle_sleep_schedule",
@@ -10103,7 +12698,10 @@ window.MATRAIX_DIMENSIONS = {
         "Irregular",
         "Flexible",
         "Shift-based"
-      ]
+      ],
+      "index": 786,
+      "phrase": "their sleep schedule is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_exercise_freq",
@@ -10116,7 +12714,10 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
-      ]
+      ],
+      "index": 787,
+      "phrase": "their exercise frequency is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_diet_type",
@@ -10130,7 +12731,10 @@ window.MATRAIX_DIMENSIONS = {
         "Vegan",
         "Pescatarian",
         "Keto/low-carb"
-      ]
+      ],
+      "index": 788,
+      "phrase": "their diet type is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_alcohol_use",
@@ -10143,7 +12747,10 @@ window.MATRAIX_DIMENSIONS = {
         "Socially",
         "Regularly",
         "Heavily"
-      ]
+      ],
+      "index": 789,
+      "phrase": "their alcohol use is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_smoking",
@@ -10155,7 +12762,10 @@ window.MATRAIX_DIMENSIONS = {
         "Former",
         "Occasional",
         "Regular"
-      ]
+      ],
+      "index": 790,
+      "phrase": "their smoking / vaping is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_caffeine",
@@ -10167,7 +12777,10 @@ window.MATRAIX_DIMENSIONS = {
         "Low",
         "Moderate",
         "High"
-      ]
+      ],
+      "index": 791,
+      "phrase": "their caffeine intake is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_cooking_freq",
@@ -10180,7 +12793,10 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
-      ]
+      ],
+      "index": 792,
+      "phrase": "their cooking frequency is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_shopping_style",
@@ -10193,7 +12809,10 @@ window.MATRAIX_DIMENSIONS = {
         "Bargain hunter",
         "Brand loyal",
         "Minimalist"
-      ]
+      ],
+      "index": 793,
+      "phrase": "their shopping style is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_travel_freq",
@@ -10206,7 +12825,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Rare",
         "Homebody"
-      ]
+      ],
+      "index": 794,
+      "phrase": "their travel frequency is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_commute_mode",
@@ -10220,7 +12842,10 @@ window.MATRAIX_DIMENSIONS = {
         "Walk",
         "Remote",
         "Rideshare"
-      ]
+      ],
+      "index": 795,
+      "phrase": "their commute mode is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_pet_ownership",
@@ -10233,7 +12858,10 @@ window.MATRAIX_DIMENSIONS = {
         "Multiple pets",
         "Other",
         "None"
-      ]
+      ],
+      "index": 796,
+      "phrase": "their pet ownership is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_household_size",
@@ -10243,10 +12871,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Lives alone",
         "2 people",
-        "3\u20134 people",
+        "3-4 people",
         "5+ people",
         "Communal"
-      ]
+      ],
+      "index": 797,
+      "phrase": "their household size is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_work_schedule",
@@ -10260,7 +12891,10 @@ window.MATRAIX_DIMENSIONS = {
         "On-call",
         "Freelance",
         "Unemployed"
-      ]
+      ],
+      "index": 798,
+      "phrase": "their work schedule is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_screen_time",
@@ -10269,10 +12903,13 @@ window.MATRAIX_DIMENSIONS = {
       "description": "Daily screen time.",
       "values": [
         "<2 hrs",
-        "2\u20134 hrs",
-        "4\u20138 hrs",
+        "2-4 hrs",
+        "4-8 hrs",
         "8+ hrs"
-      ]
+      ],
+      "index": 799,
+      "phrase": "their daily screen time is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_social_battery",
@@ -10285,7 +12922,10 @@ window.MATRAIX_DIMENSIONS = {
         "Ambivert",
         "Extrovert",
         "Strong extrovert"
-      ]
+      ],
+      "index": 800,
+      "phrase": "their social battery is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_planning_horizon",
@@ -10298,7 +12938,10 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Yearly",
         "Multi-year"
-      ]
+      ],
+      "index": 801,
+      "phrase": "their planning horizon is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_punctuality",
@@ -10310,7 +12953,10 @@ window.MATRAIX_DIMENSIONS = {
         "On time",
         "Usually late",
         "Unpredictable"
-      ]
+      ],
+      "index": 802,
+      "phrase": "their punctuality is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_tidiness",
@@ -10323,7 +12969,10 @@ window.MATRAIX_DIMENSIONS = {
         "Lived-in",
         "Cluttered",
         "Chaotic"
-      ]
+      ],
+      "index": 803,
+      "phrase": "their tidiness is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_frugality",
@@ -10335,7 +12984,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Spender",
         "Splurger"
-      ]
+      ],
+      "index": 804,
+      "phrase": "their spending vs saving is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_giving",
@@ -10347,7 +12999,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Rare",
         "Never"
-      ]
+      ],
+      "index": 805,
+      "phrase": "their charitable giving is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_news_freq",
@@ -10360,7 +13015,10 @@ window.MATRAIX_DIMENSIONS = {
         "Weekly",
         "Rarely",
         "Avoids news"
-      ]
+      ],
+      "index": 806,
+      "phrase": "their news consumption is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_reading_freq",
@@ -10373,7 +13031,10 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
-      ]
+      ],
+      "index": 807,
+      "phrase": "their reading frequency is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_gaming_freq",
@@ -10386,7 +13047,10 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
-      ]
+      ],
+      "index": 808,
+      "phrase": "their gaming frequency is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_streaming_hours",
@@ -10394,11 +13058,14 @@ window.MATRAIX_DIMENSIONS = {
       "category": "Interests: Culture",
       "description": "Streaming hours/week.",
       "values": [
-        "0\u20132",
-        "3\u20137",
-        "8\u201315",
+        "0-2",
+        "3-7",
+        "8-15",
         "16+"
-      ]
+      ],
+      "index": 809,
+      "phrase": "their streaming hours/week is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_music_listening",
@@ -10410,7 +13077,10 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Sometimes",
         "Rarely"
-      ]
+      ],
+      "index": 810,
+      "phrase": "their music listening is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_podcast_listening",
@@ -10423,7 +13093,10 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
-      ]
+      ],
+      "index": 811,
+      "phrase": "their podcast listening is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_primary_social",
@@ -10439,7 +13112,10 @@ window.MATRAIX_DIMENSIONS = {
         "YouTube",
         "Reddit",
         "None"
-      ]
+      ],
+      "index": 812,
+      "phrase": "their primary social platform is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_primary_messenger",
@@ -10454,7 +13130,10 @@ window.MATRAIX_DIMENSIONS = {
         "Signal",
         "Messenger",
         "SMS"
-      ]
+      ],
+      "index": 813,
+      "phrase": "their primary messenger is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_device_ecosystem",
@@ -10467,7 +13146,10 @@ window.MATRAIX_DIMENSIONS = {
         "Windows",
         "Mixed",
         "Linux"
-      ]
+      ],
+      "index": 814,
+      "phrase": "their device ecosystem is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_browser",
@@ -10481,7 +13163,10 @@ window.MATRAIX_DIMENSIONS = {
         "Edge",
         "Brave",
         "Other"
-      ]
+      ],
+      "index": 815,
+      "phrase": "their primary browser is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_payment_pref",
@@ -10495,7 +13180,10 @@ window.MATRAIX_DIMENSIONS = {
         "Cash",
         "BNPL",
         "Crypto"
-      ]
+      ],
+      "index": 816,
+      "phrase": "their payment preference is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_banking_style",
@@ -10508,7 +13196,10 @@ window.MATRAIX_DIMENSIONS = {
         "Credit union",
         "Mostly cash",
         "Unbanked"
-      ]
+      ],
+      "index": 817,
+      "phrase": "their banking style is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_investment_style",
@@ -10522,7 +13213,10 @@ window.MATRAIX_DIMENSIONS = {
         "Real estate",
         "Cash saver",
         "None"
-      ]
+      ],
+      "index": 818,
+      "phrase": "their investment style is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_subscription_count",
@@ -10530,11 +13224,14 @@ window.MATRAIX_DIMENSIONS = {
       "category": "Interests: Culture",
       "description": "Active subscriptions.",
       "values": [
-        "0\u20132",
-        "3\u20135",
-        "6\u201310",
+        "0-2",
+        "3-5",
+        "6-10",
         "10+"
-      ]
+      ],
+      "index": 819,
+      "phrase": "their active subscriptions is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_coffee_ritual",
@@ -10547,7 +13244,10 @@ window.MATRAIX_DIMENSIONS = {
         "Office coffee",
         "Tea instead",
         "None"
-      ]
+      ],
+      "index": 820,
+      "phrase": "their coffee ritual is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_fashion_sense",
@@ -10560,7 +13260,10 @@ window.MATRAIX_DIMENSIONS = {
         "Classic",
         "Practical",
         "Indifferent"
-      ]
+      ],
+      "index": 821,
+      "phrase": "their fashion sense is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_hobby_intensity",
@@ -10573,7 +13276,10 @@ window.MATRAIX_DIMENSIONS = {
         "Casual",
         "Dabbler",
         "None"
-      ]
+      ],
+      "index": 822,
+      "phrase": "their hobby intensity is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_vacation_style",
@@ -10587,7 +13293,10 @@ window.MATRAIX_DIMENSIONS = {
         "Luxury",
         "Budget backpacking",
         "Staycation"
-      ]
+      ],
+      "index": 823,
+      "phrase": "their vacation style is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_morning_routine",
@@ -10600,7 +13309,10 @@ window.MATRAIX_DIMENSIONS = {
         "Rushed",
         "Slow",
         "None"
-      ]
+      ],
+      "index": 824,
+      "phrase": "their morning routine is {value}",
+      "defaultValue": null
     },
     {
       "id": "lstyle_volunteering",
@@ -10613,7 +13325,10 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
-      ]
+      ],
+      "index": 825,
+      "phrase": "their volunteering is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_verbosity",
@@ -10626,7 +13341,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Wordy",
         "Rambling"
-      ]
+      ],
+      "index": 826,
+      "phrase": "their verbosity is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_formality",
@@ -10639,7 +13357,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Casual",
         "Slangy"
-      ]
+      ],
+      "index": 827,
+      "phrase": "their formality is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_directness",
@@ -10652,7 +13373,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Indirect",
         "Evasive"
-      ]
+      ],
+      "index": 828,
+      "phrase": "their directness is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_humor",
@@ -10665,7 +13389,10 @@ window.MATRAIX_DIMENSIONS = {
         "Playful",
         "Wholesome",
         "Serious"
-      ]
+      ],
+      "index": 829,
+      "phrase": "their humor style is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_detail_orientation",
@@ -10678,7 +13405,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 830,
+      "phrase": "their detail orientation is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_abstraction",
@@ -10691,7 +13421,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Concrete",
         "Very concrete"
-      ]
+      ],
+      "index": 831,
+      "phrase": "their abstract vs concrete is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_optimism",
@@ -10704,7 +13437,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 832,
+      "phrase": "their optimism is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_patience",
@@ -10717,7 +13453,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 833,
+      "phrase": "their patience is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_curiosity",
@@ -10730,7 +13469,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 834,
+      "phrase": "their curiosity is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_skepticism",
@@ -10743,7 +13485,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 835,
+      "phrase": "their skepticism is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_open_mindedness",
@@ -10756,7 +13501,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 836,
+      "phrase": "their open-mindedness is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_assertiveness",
@@ -10769,7 +13517,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 837,
+      "phrase": "their assertiveness is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_emotional_expressiveness",
@@ -10782,7 +13533,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 838,
+      "phrase": "their emotional expressiveness is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_conflict_approach",
@@ -10795,7 +13549,10 @@ window.MATRAIX_DIMENSIONS = {
         "Compromising",
         "Avoidant",
         "Accommodating"
-      ]
+      ],
+      "index": 839,
+      "phrase": "their conflict approach is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_feedback_receptiveness",
@@ -10808,7 +13565,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 840,
+      "phrase": "their feedback receptiveness is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_ambiguity_tolerance",
@@ -10821,7 +13581,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 841,
+      "phrase": "their ambiguity tolerance is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_perfectionism",
@@ -10834,7 +13597,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 842,
+      "phrase": "their perfectionism is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_procrastination",
@@ -10847,7 +13613,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 843,
+      "phrase": "their procrastination tendency is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_multitasking",
@@ -10859,7 +13628,10 @@ window.MATRAIX_DIMENSIONS = {
         "Some",
         "Prefers single-task",
         "Strict monotasker"
-      ]
+      ],
+      "index": 844,
+      "phrase": "their multitasking is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_attention_span",
@@ -10872,7 +13644,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Short",
         "Very short"
-      ]
+      ],
+      "index": 845,
+      "phrase": "their attention span is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_learning_pace",
@@ -10885,7 +13660,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Deliberate",
         "Slow"
-      ]
+      ],
+      "index": 846,
+      "phrase": "their learning pace is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_question_asking",
@@ -10897,7 +13675,10 @@ window.MATRAIX_DIMENSIONS = {
         "Asks often",
         "Sometimes",
         "Rarely asks"
-      ]
+      ],
+      "index": 847,
+      "phrase": "their question-asking is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_decision_speed",
@@ -10910,7 +13691,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Deliberate",
         "Agonizes"
-      ]
+      ],
+      "index": 848,
+      "phrase": "their decision speed is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_confidence_calibration",
@@ -10923,7 +13707,10 @@ window.MATRAIX_DIMENSIONS = {
         "Well-calibrated",
         "Cautious",
         "Underconfident"
-      ]
+      ],
+      "index": 849,
+      "phrase": "their confidence calibration is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_numeracy_comfort",
@@ -10936,7 +13723,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 850,
+      "phrase": "their numeracy comfort is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_reading_vs_watching",
@@ -10949,7 +13739,10 @@ window.MATRAIX_DIMENSIONS = {
         "No preference",
         "Prefers video",
         "Strongly prefers video"
-      ]
+      ],
+      "index": 851,
+      "phrase": "their reading vs watching is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_visual_vs_verbal",
@@ -10962,7 +13755,10 @@ window.MATRAIX_DIMENSIONS = {
         "Mixed",
         "Verbal",
         "Strongly verbal"
-      ]
+      ],
+      "index": 852,
+      "phrase": "their visual vs verbal thinking is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_big_picture_vs_detail",
@@ -10975,7 +13771,10 @@ window.MATRAIX_DIMENSIONS = {
         "Both",
         "Detail",
         "Detail-obsessed"
-      ]
+      ],
+      "index": 853,
+      "phrase": "their big-picture vs detail is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_risk_framing",
@@ -10986,7 +13785,10 @@ window.MATRAIX_DIMENSIONS = {
         "Opportunity-focused",
         "Balanced",
         "Threat-focused"
-      ]
+      ],
+      "index": 854,
+      "phrase": "their risk framing is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_empathy_expression",
@@ -10999,7 +13801,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 855,
+      "phrase": "their empathy expression is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_storytelling",
@@ -11012,7 +13817,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 856,
+      "phrase": "their storytelling tendency is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_precision_of_language",
@@ -11025,7 +13833,10 @@ window.MATRAIX_DIMENSIONS = {
         "Average",
         "Loose",
         "Vague"
-      ]
+      ],
+      "index": 857,
+      "phrase": "their precision of language is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_use_of_jargon",
@@ -11037,7 +13848,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Light",
         "Avoids jargon"
-      ]
+      ],
+      "index": 858,
+      "phrase": "their use of jargon is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_emoji_use",
@@ -11049,7 +13863,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Rare",
         "Never"
-      ]
+      ],
+      "index": 859,
+      "phrase": "their emoji / emoticon use is {value}",
+      "defaultValue": null
     },
     {
       "id": "cog_politeness",
@@ -11062,7 +13879,10 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Brusque",
         "Rude"
-      ]
+      ],
+      "index": 860,
+      "phrase": "their politeness is {value}",
+      "defaultValue": null
     },
     {
       "id": "health_general_health",
@@ -11074,7 +13894,10 @@ window.MATRAIX_DIMENSIONS = {
         "Good",
         "Fair",
         "Poor"
-      ]
+      ],
+      "index": 861,
+      "phrase": "their general health is {value}",
+      "defaultValue": "Excellent"
     },
     {
       "id": "health_chronic_condition",
@@ -11086,7 +13909,10 @@ window.MATRAIX_DIMENSIONS = {
         "Managed",
         "Multiple",
         "Undiagnosed concerns"
-      ]
+      ],
+      "index": 862,
+      "phrase": "their chronic condition is {value}",
+      "defaultValue": "None"
     },
     {
       "id": "health_mobility",
@@ -11098,7 +13924,10 @@ window.MATRAIX_DIMENSIONS = {
         "Mild limitation",
         "Moderate limitation",
         "Uses mobility aid"
-      ]
+      ],
+      "index": 863,
+      "phrase": "their mobility is {value}",
+      "defaultValue": "Full"
     },
     {
       "id": "health_vision",
@@ -11110,7 +13939,10 @@ window.MATRAIX_DIMENSIONS = {
         "Corrected",
         "Low vision",
         "Blind"
-      ]
+      ],
+      "index": 864,
+      "phrase": "their vision is {value}",
+      "defaultValue": "Normal"
     },
     {
       "id": "health_hearing",
@@ -11122,7 +13954,10 @@ window.MATRAIX_DIMENSIONS = {
         "Mild loss",
         "Moderate loss",
         "Deaf / hard of hearing"
-      ]
+      ],
+      "index": 865,
+      "phrase": "their hearing is {value}",
+      "defaultValue": "Normal"
     },
     {
       "id": "health_color_vision",
@@ -11132,7 +13967,10 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Typical",
         "Color-blind"
-      ]
+      ],
+      "index": 866,
+      "phrase": "their color vision is {value}",
+      "defaultValue": "Typical"
     },
     {
       "id": "health_dexterity",
@@ -11144,7 +13982,10 @@ window.MATRAIX_DIMENSIONS = {
         "Reduced",
         "Limited",
         "Assistive needed"
-      ]
+      ],
+      "index": 867,
+      "phrase": "their manual dexterity is {value}",
+      "defaultValue": "Full"
     },
     {
       "id": "health_mental_health",
@@ -11156,7 +13997,10 @@ window.MATRAIX_DIMENSIONS = {
         "Stable",
         "Struggling",
         "In crisis"
-      ]
+      ],
+      "index": 868,
+      "phrase": "their mental health is {value}",
+      "defaultValue": "Thriving"
     },
     {
       "id": "health_stress_level",
@@ -11169,7 +14013,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 869,
+      "phrase": "their stress level is {value}",
+      "defaultValue": "Very high"
     },
     {
       "id": "health_energy_level",
@@ -11182,7 +14029,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 870,
+      "phrase": "their energy level is {value}",
+      "defaultValue": "Very high"
     },
     {
       "id": "health_sleep_quality",
@@ -11194,7 +14044,10 @@ window.MATRAIX_DIMENSIONS = {
         "Good",
         "Fair",
         "Poor"
-      ]
+      ],
+      "index": 871,
+      "phrase": "their sleep quality is {value}",
+      "defaultValue": "Excellent"
     },
     {
       "id": "health_pain_level",
@@ -11206,7 +14059,10 @@ window.MATRAIX_DIMENSIONS = {
         "Mild",
         "Moderate",
         "Severe"
-      ]
+      ],
+      "index": 872,
+      "phrase": "their chronic pain is {value}",
+      "defaultValue": "None"
     },
     {
       "id": "health_medication_use",
@@ -11218,7 +14074,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Daily",
         "Multiple daily"
-      ]
+      ],
+      "index": 873,
+      "phrase": "their medication use is {value}",
+      "defaultValue": "None"
     },
     {
       "id": "health_dietary_restriction",
@@ -11231,7 +14090,10 @@ window.MATRAIX_DIMENSIONS = {
         "Religious",
         "Medical",
         "Ethical"
-      ]
+      ],
+      "index": 874,
+      "phrase": "their dietary restriction is {value}",
+      "defaultValue": "None"
     },
     {
       "id": "health_neurodivergence",
@@ -11244,7 +14106,10 @@ window.MATRAIX_DIMENSIONS = {
         "Autistic",
         "Dyslexic",
         "Other"
-      ]
+      ],
+      "index": 875,
+      "phrase": "their neurodivergence is {value}",
+      "defaultValue": "Neurotypical"
     },
     {
       "id": "health_caregiver_status",
@@ -11256,7 +14121,10 @@ window.MATRAIX_DIMENSIONS = {
         "Child caregiver",
         "Elder caregiver",
         "Both"
-      ]
+      ],
+      "index": 876,
+      "phrase": "their caregiver status is {value}",
+      "defaultValue": "Not a caregiver"
     },
     {
       "id": "health_health_literacy",
@@ -11269,7 +14137,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 877,
+      "phrase": "their health literacy is {value}",
+      "defaultValue": "Very high"
     },
     {
       "id": "health_insurance_status",
@@ -11281,7 +14152,10 @@ window.MATRAIX_DIMENSIONS = {
         "Basic",
         "Minimal",
         "Uninsured"
-      ]
+      ],
+      "index": 878,
+      "phrase": "their insurance status is {value}",
+      "defaultValue": "Comprehensive"
     },
     {
       "id": "health_fitness_level",
@@ -11293,7 +14167,10 @@ window.MATRAIX_DIMENSIONS = {
         "Fit",
         "Average",
         "Sedentary"
-      ]
+      ],
+      "index": 879,
+      "phrase": "their fitness level is {value}",
+      "defaultValue": "Athlete"
     },
     {
       "id": "health_cognitive_load_capacity",
@@ -11306,7 +14183,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Low",
         "None"
-      ]
+      ],
+      "index": 880,
+      "phrase": "their cognitive load capacity is {value}",
+      "defaultValue": "Very high"
     },
     {
       "id": "health_contrast_need",
@@ -11317,7 +14197,10 @@ window.MATRAIX_DIMENSIONS = {
         "No",
         "Prefers",
         "Requires"
-      ]
+      ],
+      "index": 881,
+      "phrase": "their high-contrast need is {value}",
+      "defaultValue": "No"
     },
     {
       "id": "health_text_size_need",
@@ -11328,7 +14211,10 @@ window.MATRAIX_DIMENSIONS = {
         "No",
         "Prefers",
         "Requires"
-      ]
+      ],
+      "index": 882,
+      "phrase": "their large-text need is {value}",
+      "defaultValue": "No"
     },
     {
       "id": "health_assistive_tech",
@@ -11341,7 +14227,10 @@ window.MATRAIX_DIMENSIONS = {
         "Switch control",
         "Voice control",
         "Magnifier"
-      ]
+      ],
+      "index": 883,
+      "phrase": "their assistive technology is {value}",
+      "defaultValue": "None"
     },
     {
       "id": "health_motion_sensitivity",
@@ -11352,7 +14241,10 @@ window.MATRAIX_DIMENSIONS = {
         "None",
         "Mild",
         "Strong (reduced motion)"
-      ]
+      ],
+      "index": 884,
+      "phrase": "their motion sensitivity is {value}",
+      "defaultValue": "None"
     },
     {
       "id": "health_attention_condition",
@@ -11363,7 +14255,10 @@ window.MATRAIX_DIMENSIONS = {
         "None",
         "Mild",
         "Diagnosed"
-      ]
+      ],
+      "index": 885,
+      "phrase": "their attention condition is {value}",
+      "defaultValue": "None"
     },
     {
       "id": "hob_knitting",
@@ -11376,7 +14271,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 886,
+      "phrase": "{value} Knitting",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_crocheting",
@@ -11389,7 +14287,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 887,
+      "phrase": "{value} Crocheting",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_pottery",
@@ -11402,7 +14303,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 888,
+      "phrase": "{value} Pottery",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_woodworking",
@@ -11415,7 +14319,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 889,
+      "phrase": "{value} Woodworking",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_metalworking",
@@ -11428,7 +14335,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 890,
+      "phrase": "{value} Metalworking",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_leatherworking",
@@ -11441,7 +14351,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 891,
+      "phrase": "{value} Leatherworking",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_candle_making",
@@ -11454,7 +14367,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 892,
+      "phrase": "{value} Candle making",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_origami",
@@ -11467,7 +14383,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 893,
+      "phrase": "{value} Origami",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_calligraphy",
@@ -11480,7 +14399,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 894,
+      "phrase": "{value} Calligraphy",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_scrapbooking",
@@ -11493,7 +14415,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 895,
+      "phrase": "{value} Scrapbooking",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_quilting",
@@ -11506,7 +14431,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 896,
+      "phrase": "{value} Quilting",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_embroidery",
@@ -11519,7 +14447,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 897,
+      "phrase": "{value} Embroidery",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_jewelry_making",
@@ -11532,7 +14463,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 898,
+      "phrase": "{value} Jewelry making",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_model_building",
@@ -11545,7 +14479,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 899,
+      "phrase": "{value} Model building",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_coin_collecting",
@@ -11558,7 +14495,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 900,
+      "phrase": "{value} Coin collecting",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_stamp_collecting",
@@ -11571,7 +14511,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 901,
+      "phrase": "{value} Stamp collecting",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_antiquing",
@@ -11584,7 +14527,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 902,
+      "phrase": "{value} Antiquing",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_vegetable_gardening",
@@ -11597,7 +14543,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 903,
+      "phrase": "{value} Vegetable gardening",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_bonsai",
@@ -11610,7 +14559,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 904,
+      "phrase": "{value} Bonsai",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_aquariums",
@@ -11623,7 +14575,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 905,
+      "phrase": "{value} Aquariums",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_beekeeping",
@@ -11636,7 +14591,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 906,
+      "phrase": "{value} Beekeeping",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_birdwatching",
@@ -11649,7 +14607,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 907,
+      "phrase": "{value} Birdwatching",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_stargazing",
@@ -11662,7 +14623,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 908,
+      "phrase": "{value} Stargazing",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_geocaching",
@@ -11675,7 +14639,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 909,
+      "phrase": "{value} Geocaching",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_rock_climbing",
@@ -11688,7 +14655,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 910,
+      "phrase": "{value} Rock climbing",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_bouldering",
@@ -11701,7 +14671,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 911,
+      "phrase": "{value} Bouldering",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_kayaking",
@@ -11714,7 +14687,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 912,
+      "phrase": "{value} Kayaking",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_paddleboarding",
@@ -11727,7 +14703,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 913,
+      "phrase": "{value} Paddleboarding",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_scuba_diving",
@@ -11740,7 +14719,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 914,
+      "phrase": "{value} Scuba diving",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_snorkeling",
@@ -11753,7 +14735,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 915,
+      "phrase": "{value} Snorkeling",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_skydiving",
@@ -11766,7 +14751,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 916,
+      "phrase": "{value} Skydiving",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_paragliding",
@@ -11779,7 +14767,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 917,
+      "phrase": "{value} Paragliding",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_horseback_riding",
@@ -11792,7 +14783,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 918,
+      "phrase": "{value} Horseback riding",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_foraging",
@@ -11805,7 +14799,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 919,
+      "phrase": "{value} Foraging",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_bread_baking",
@@ -11818,7 +14815,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 920,
+      "phrase": "{value} Bread baking",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_home_brewing",
@@ -11831,7 +14831,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 921,
+      "phrase": "{value} Home brewing",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_winemaking",
@@ -11844,7 +14847,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 922,
+      "phrase": "{value} Winemaking",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_cheesemaking",
@@ -11857,7 +14863,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 923,
+      "phrase": "{value} Cheesemaking",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_karaoke",
@@ -11870,7 +14879,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 924,
+      "phrase": "{value} Karaoke",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_ballroom_dance",
@@ -11883,7 +14895,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 925,
+      "phrase": "{value} Ballroom dance",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_salsa_dancing",
@@ -11896,7 +14911,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 926,
+      "phrase": "{value} Salsa dancing",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_improv",
@@ -11909,7 +14927,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 927,
+      "phrase": "{value} Improv",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_stand_up_comedy",
@@ -11922,7 +14943,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 928,
+      "phrase": "{value} Stand-up comedy",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_juggling",
@@ -11935,7 +14959,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 929,
+      "phrase": "{value} Juggling",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_whittling",
@@ -11948,7 +14975,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 930,
+      "phrase": "{value} Whittling",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_letterpress",
@@ -11961,7 +14991,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 931,
+      "phrase": "{value} Letterpress",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_urban_sketching",
@@ -11974,7 +15007,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 932,
+      "phrase": "{value} Urban sketching",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_genealogy",
@@ -11987,7 +15023,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 933,
+      "phrase": "{value} Genealogy",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_metal_detecting",
@@ -12000,7 +15039,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 934,
+      "phrase": "{value} Metal detecting",
+      "defaultValue": "Never"
     },
     {
       "id": "hob_cosplay",
@@ -12013,7 +15055,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional",
         "Curious",
         "Never"
-      ]
+      ],
+      "index": 935,
+      "phrase": "{value} Cosplay",
+      "defaultValue": "Never"
     },
     {
       "id": "acad_algebra",
@@ -12026,6 +15071,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 936,
+      "phrase": "{value} about Algebra",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12039,6 +15090,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 937,
+      "phrase": "{value} about Geometry",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12052,6 +15109,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 938,
+      "phrase": "{value} about Calculus",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12065,6 +15128,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 939,
+      "phrase": "{value} about Statistics",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12078,6 +15147,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 940,
+      "phrase": "{value} about Physics",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12091,6 +15166,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 941,
+      "phrase": "{value} about Chemistry",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12104,6 +15185,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 942,
+      "phrase": "{value} about Biology",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12117,6 +15204,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 943,
+      "phrase": "{value} about Earth science",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12130,6 +15223,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 944,
+      "phrase": "{value} about Computer science",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12143,6 +15242,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 945,
+      "phrase": "{value} about Economics",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12156,6 +15261,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 946,
+      "phrase": "{value} about Psychology",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12169,6 +15280,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 947,
+      "phrase": "{value} about Sociology",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12182,6 +15299,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 948,
+      "phrase": "{value} about World history",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12195,6 +15318,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 949,
+      "phrase": "{value} about Geography",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12208,6 +15337,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 950,
+      "phrase": "{value} about Civics",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12221,6 +15356,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 951,
+      "phrase": "{value} about Literature",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12234,6 +15375,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 952,
+      "phrase": "{value} about Creative writing",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12247,6 +15394,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 953,
+      "phrase": "{value} about Foreign languages",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12260,6 +15413,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 954,
+      "phrase": "{value} about Philosophy",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12273,6 +15432,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 955,
+      "phrase": "{value} about Visual art",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12286,6 +15451,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 956,
+      "phrase": "{value} about Music",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12299,6 +15470,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 957,
+      "phrase": "{value} about Drama",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12312,6 +15489,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 958,
+      "phrase": "{value} about Physical education",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12325,6 +15508,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 959,
+      "phrase": "{value} about Health science",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12338,6 +15527,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 960,
+      "phrase": "{value} about Business studies",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12351,6 +15546,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 961,
+      "phrase": "{value} about Environmental science",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12364,6 +15565,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 962,
+      "phrase": "{value} about Logic",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12377,6 +15584,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 963,
+      "phrase": "{value} about Astronomy",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12390,6 +15603,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 964,
+      "phrase": "{value} about Anthropology",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12403,6 +15622,12 @@ window.MATRAIX_DIMENSIONS = {
         "Neutral",
         "Indifferent",
         "Averse"
+      ],
+      "index": 965,
+      "phrase": "{value} about Political theory",
+      "defaultValue": [
+        "Neutral",
+        "Indifferent"
       ]
     },
     {
@@ -12413,6 +15638,12 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Major peeve",
         "Annoys",
+        "Neutral",
+        "Fine"
+      ],
+      "index": 966,
+      "phrase": "bothered by Typos ({value})",
+      "defaultValue": [
         "Neutral",
         "Fine"
       ]
@@ -12427,6 +15658,12 @@ window.MATRAIX_DIMENSIONS = {
         "Annoys",
         "Neutral",
         "Fine"
+      ],
+      "index": 967,
+      "phrase": "bothered by Being interrupted ({value})",
+      "defaultValue": [
+        "Neutral",
+        "Fine"
       ]
     },
     {
@@ -12437,6 +15674,12 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Major peeve",
         "Annoys",
+        "Neutral",
+        "Fine"
+      ],
+      "index": 968,
+      "phrase": "bothered by Lateness ({value})",
+      "defaultValue": [
         "Neutral",
         "Fine"
       ]
@@ -12451,6 +15694,12 @@ window.MATRAIX_DIMENSIONS = {
         "Annoys",
         "Neutral",
         "Fine"
+      ],
+      "index": 969,
+      "phrase": "bothered by Loud chewing ({value})",
+      "defaultValue": [
+        "Neutral",
+        "Fine"
       ]
     },
     {
@@ -12461,6 +15710,12 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Major peeve",
         "Annoys",
+        "Neutral",
+        "Fine"
+      ],
+      "index": 970,
+      "phrase": "bothered by Slow walkers ({value})",
+      "defaultValue": [
         "Neutral",
         "Fine"
       ]
@@ -12475,6 +15730,12 @@ window.MATRAIX_DIMENSIONS = {
         "Annoys",
         "Neutral",
         "Fine"
+      ],
+      "index": 971,
+      "phrase": "bothered by Spam ({value})",
+      "defaultValue": [
+        "Neutral",
+        "Fine"
       ]
     },
     {
@@ -12485,6 +15746,12 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Major peeve",
         "Annoys",
+        "Neutral",
+        "Fine"
+      ],
+      "index": 972,
+      "phrase": "bothered by Clickbait ({value})",
+      "defaultValue": [
         "Neutral",
         "Fine"
       ]
@@ -12499,6 +15766,12 @@ window.MATRAIX_DIMENSIONS = {
         "Annoys",
         "Neutral",
         "Fine"
+      ],
+      "index": 973,
+      "phrase": "bothered by Unexplained jargon ({value})",
+      "defaultValue": [
+        "Neutral",
+        "Fine"
       ]
     },
     {
@@ -12509,6 +15782,12 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Major peeve",
         "Annoys",
+        "Neutral",
+        "Fine"
+      ],
+      "index": 974,
+      "phrase": "bothered by Condescension ({value})",
+      "defaultValue": [
         "Neutral",
         "Fine"
       ]
@@ -12523,6 +15802,12 @@ window.MATRAIX_DIMENSIONS = {
         "Annoys",
         "Neutral",
         "Fine"
+      ],
+      "index": 975,
+      "phrase": "bothered by Micromanagement ({value})",
+      "defaultValue": [
+        "Neutral",
+        "Fine"
       ]
     },
     {
@@ -12533,6 +15818,12 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Major peeve",
         "Annoys",
+        "Neutral",
+        "Fine"
+      ],
+      "index": 976,
+      "phrase": "bothered by Forced small talk ({value})",
+      "defaultValue": [
         "Neutral",
         "Fine"
       ]
@@ -12547,6 +15838,12 @@ window.MATRAIX_DIMENSIONS = {
         "Annoys",
         "Neutral",
         "Fine"
+      ],
+      "index": 977,
+      "phrase": "bothered by Cold calls ({value})",
+      "defaultValue": [
+        "Neutral",
+        "Fine"
       ]
     },
     {
@@ -12557,6 +15854,12 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Major peeve",
         "Annoys",
+        "Neutral",
+        "Fine"
+      ],
+      "index": 978,
+      "phrase": "bothered by Pop-up ads ({value})",
+      "defaultValue": [
         "Neutral",
         "Fine"
       ]
@@ -12571,6 +15874,12 @@ window.MATRAIX_DIMENSIONS = {
         "Annoys",
         "Neutral",
         "Fine"
+      ],
+      "index": 979,
+      "phrase": "bothered by Auto-play video ({value})",
+      "defaultValue": [
+        "Neutral",
+        "Fine"
       ]
     },
     {
@@ -12583,6 +15892,12 @@ window.MATRAIX_DIMENSIONS = {
         "Annoys",
         "Neutral",
         "Fine"
+      ],
+      "index": 980,
+      "phrase": "bothered by Paywalls ({value})",
+      "defaultValue": [
+        "Neutral",
+        "Fine"
       ]
     },
     {
@@ -12593,6 +15908,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 981,
+      "phrase": "Curiosity is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12609,6 +15931,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 982,
+      "phrase": "Creativity is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -12619,6 +15948,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 983,
+      "phrase": "Love of learning is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12635,6 +15971,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 984,
+      "phrase": "Open-mindedness is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -12645,6 +15988,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 985,
+      "phrase": "Perspective is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12661,6 +16011,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 986,
+      "phrase": "Bravery is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -12671,6 +16028,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 987,
+      "phrase": "Perseverance is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12687,6 +16051,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 988,
+      "phrase": "Honesty is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -12697,6 +16068,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 989,
+      "phrase": "Zest is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12713,6 +16091,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 990,
+      "phrase": "Capacity for love is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -12723,6 +16108,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 991,
+      "phrase": "Kindness is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12739,6 +16131,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 992,
+      "phrase": "Social intelligence is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -12749,6 +16148,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 993,
+      "phrase": "Teamwork is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12765,6 +16171,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 994,
+      "phrase": "Fairness is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -12775,6 +16188,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 995,
+      "phrase": "Leadership is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12791,6 +16211,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 996,
+      "phrase": "Forgiveness is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -12801,6 +16228,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 997,
+      "phrase": "Humility is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12817,6 +16251,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 998,
+      "phrase": "Prudence is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -12827,6 +16268,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 999,
+      "phrase": "Self-regulation is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12843,6 +16291,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 1000,
+      "phrase": "Appreciation of beauty is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -12853,6 +16308,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 1001,
+      "phrase": "Gratitude is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12869,6 +16331,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 1002,
+      "phrase": "Hope / optimism is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -12879,6 +16348,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 1003,
+      "phrase": "Playfulness is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12895,6 +16371,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 1004,
+      "phrase": "Spirituality is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -12905,6 +16388,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 1005,
+      "phrase": "Ambition is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12921,6 +16411,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 1006,
+      "phrase": "Empathy is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -12931,6 +16428,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 1007,
+      "phrase": "Resilience is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12947,6 +16451,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 1008,
+      "phrase": "Discipline is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -12957,6 +16468,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 1009,
+      "phrase": "Generosity is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12973,6 +16491,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 1010,
+      "phrase": "Loyalty is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -12983,6 +16508,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Signature",
         "Strong",
+        "Moderate",
+        "Slight",
+        "Absent"
+      ],
+      "index": 1011,
+      "phrase": "Competitiveness is a {value} character strength",
+      "defaultValue": [
         "Moderate",
         "Slight",
         "Absent"
@@ -12999,6 +16531,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Slight",
         "Absent"
+      ],
+      "index": 1012,
+      "phrase": "Adaptability is a {value} character strength",
+      "defaultValue": [
+        "Moderate",
+        "Slight",
+        "Absent"
       ]
     },
     {
@@ -13009,6 +16548,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Core value",
         "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ],
+      "index": 1013,
+      "phrase": "holds Family as a {value}",
+      "defaultValue": [
         "Moderate",
         "Minor",
         "Irrelevant"
@@ -13025,6 +16571,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Minor",
         "Irrelevant"
+      ],
+      "index": 1014,
+      "phrase": "holds Career success as a {value}",
+      "defaultValue": [
+        "Moderate",
+        "Minor",
+        "Irrelevant"
       ]
     },
     {
@@ -13035,6 +16588,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Core value",
         "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ],
+      "index": 1015,
+      "phrase": "holds Wealth as a {value}",
+      "defaultValue": [
         "Moderate",
         "Minor",
         "Irrelevant"
@@ -13051,6 +16611,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Minor",
         "Irrelevant"
+      ],
+      "index": 1016,
+      "phrase": "holds Health as a {value}",
+      "defaultValue": [
+        "Moderate",
+        "Minor",
+        "Irrelevant"
       ]
     },
     {
@@ -13061,6 +16628,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Core value",
         "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ],
+      "index": 1017,
+      "phrase": "holds Personal freedom as a {value}",
+      "defaultValue": [
         "Moderate",
         "Minor",
         "Irrelevant"
@@ -13077,6 +16651,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Minor",
         "Irrelevant"
+      ],
+      "index": 1018,
+      "phrase": "holds Security & stability as a {value}",
+      "defaultValue": [
+        "Moderate",
+        "Minor",
+        "Irrelevant"
       ]
     },
     {
@@ -13087,6 +16668,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Core value",
         "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ],
+      "index": 1019,
+      "phrase": "holds Adventure as a {value}",
+      "defaultValue": [
         "Moderate",
         "Minor",
         "Irrelevant"
@@ -13103,6 +16691,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Minor",
         "Irrelevant"
+      ],
+      "index": 1020,
+      "phrase": "holds Tradition as a {value}",
+      "defaultValue": [
+        "Moderate",
+        "Minor",
+        "Irrelevant"
       ]
     },
     {
@@ -13113,6 +16708,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Core value",
         "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ],
+      "index": 1021,
+      "phrase": "holds Power & influence as a {value}",
+      "defaultValue": [
         "Moderate",
         "Minor",
         "Irrelevant"
@@ -13129,6 +16731,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Minor",
         "Irrelevant"
+      ],
+      "index": 1022,
+      "phrase": "holds Achievement as a {value}",
+      "defaultValue": [
+        "Moderate",
+        "Minor",
+        "Irrelevant"
       ]
     },
     {
@@ -13139,6 +16748,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Core value",
         "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ],
+      "index": 1023,
+      "phrase": "holds Creativity & self-expression as a {value}",
+      "defaultValue": [
         "Moderate",
         "Minor",
         "Irrelevant"
@@ -13155,6 +16771,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Minor",
         "Irrelevant"
+      ],
+      "index": 1024,
+      "phrase": "holds Community as a {value}",
+      "defaultValue": [
+        "Moderate",
+        "Minor",
+        "Irrelevant"
       ]
     },
     {
@@ -13165,6 +16788,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Core value",
         "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ],
+      "index": 1025,
+      "phrase": "holds Spirituality / faith as a {value}",
+      "defaultValue": [
         "Moderate",
         "Minor",
         "Irrelevant"
@@ -13181,6 +16811,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Minor",
         "Irrelevant"
+      ],
+      "index": 1026,
+      "phrase": "holds Knowledge & truth as a {value}",
+      "defaultValue": [
+        "Moderate",
+        "Minor",
+        "Irrelevant"
       ]
     },
     {
@@ -13191,6 +16828,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Core value",
         "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ],
+      "index": 1027,
+      "phrase": "holds Social status as a {value}",
+      "defaultValue": [
         "Moderate",
         "Minor",
         "Irrelevant"
@@ -13207,6 +16851,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Minor",
         "Irrelevant"
+      ],
+      "index": 1028,
+      "phrase": "holds Independence as a {value}",
+      "defaultValue": [
+        "Moderate",
+        "Minor",
+        "Irrelevant"
       ]
     },
     {
@@ -13217,6 +16868,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Core value",
         "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ],
+      "index": 1029,
+      "phrase": "holds Justice & fairness as a {value}",
+      "defaultValue": [
         "Moderate",
         "Minor",
         "Irrelevant"
@@ -13233,6 +16891,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Minor",
         "Irrelevant"
+      ],
+      "index": 1030,
+      "phrase": "holds Loyalty as a {value}",
+      "defaultValue": [
+        "Moderate",
+        "Minor",
+        "Irrelevant"
       ]
     },
     {
@@ -13243,6 +16908,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Core value",
         "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ],
+      "index": 1031,
+      "phrase": "holds Sustainability as a {value}",
+      "defaultValue": [
         "Moderate",
         "Minor",
         "Irrelevant"
@@ -13259,6 +16931,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Minor",
         "Irrelevant"
+      ],
+      "index": 1032,
+      "phrase": "holds Recognition as a {value}",
+      "defaultValue": [
+        "Moderate",
+        "Minor",
+        "Irrelevant"
       ]
     },
     {
@@ -13269,6 +16948,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Core value",
         "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ],
+      "index": 1033,
+      "phrase": "holds Helping others as a {value}",
+      "defaultValue": [
         "Moderate",
         "Minor",
         "Irrelevant"
@@ -13285,6 +16971,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Minor",
         "Irrelevant"
+      ],
+      "index": 1034,
+      "phrase": "holds Personal growth as a {value}",
+      "defaultValue": [
+        "Moderate",
+        "Minor",
+        "Irrelevant"
       ]
     },
     {
@@ -13295,6 +16988,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Core value",
         "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ],
+      "index": 1035,
+      "phrase": "holds Fun & enjoyment as a {value}",
+      "defaultValue": [
         "Moderate",
         "Minor",
         "Irrelevant"
@@ -13311,6 +17011,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Minor",
         "Irrelevant"
+      ],
+      "index": 1036,
+      "phrase": "holds Integrity & honesty as a {value}",
+      "defaultValue": [
+        "Moderate",
+        "Minor",
+        "Irrelevant"
       ]
     },
     {
@@ -13321,6 +17028,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Core value",
         "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ],
+      "index": 1037,
+      "phrase": "holds Beauty & aesthetics as a {value}",
+      "defaultValue": [
         "Moderate",
         "Minor",
         "Irrelevant"
@@ -13337,6 +17051,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Minor",
         "Irrelevant"
+      ],
+      "index": 1038,
+      "phrase": "holds Order & structure as a {value}",
+      "defaultValue": [
+        "Moderate",
+        "Minor",
+        "Irrelevant"
       ]
     },
     {
@@ -13347,6 +17068,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Core value",
         "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ],
+      "index": 1039,
+      "phrase": "holds Patriotism as a {value}",
+      "defaultValue": [
         "Moderate",
         "Minor",
         "Irrelevant"
@@ -13363,6 +17091,13 @@ window.MATRAIX_DIMENSIONS = {
         "Moderate",
         "Minor",
         "Irrelevant"
+      ],
+      "index": 1040,
+      "phrase": "holds Equality as a {value}",
+      "defaultValue": [
+        "Moderate",
+        "Minor",
+        "Irrelevant"
       ]
     },
     {
@@ -13373,6 +17108,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Core value",
         "Important",
+        "Moderate",
+        "Minor",
+        "Irrelevant"
+      ],
+      "index": 1041,
+      "phrase": "holds Privacy as a {value}",
+      "defaultValue": [
         "Moderate",
         "Minor",
         "Irrelevant"
@@ -13389,6 +17131,12 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
+      ],
+      "index": 1042,
+      "phrase": "Journaling ({value})",
+      "defaultValue": [
+        "Rarely",
+        "Never"
       ]
     },
     {
@@ -13400,6 +17148,12 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Weekly",
         "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "index": 1043,
+      "phrase": "Meditation ({value})",
+      "defaultValue": [
         "Rarely",
         "Never"
       ]
@@ -13415,6 +17169,12 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
+      ],
+      "index": 1044,
+      "phrase": "To-do lists ({value})",
+      "defaultValue": [
+        "Rarely",
+        "Never"
       ]
     },
     {
@@ -13426,6 +17186,12 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Weekly",
         "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "index": 1045,
+      "phrase": "Goal setting ({value})",
+      "defaultValue": [
         "Rarely",
         "Never"
       ]
@@ -13441,6 +17207,12 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
+      ],
+      "index": 1046,
+      "phrase": "Daily reflection ({value})",
+      "defaultValue": [
+        "Rarely",
+        "Never"
       ]
     },
     {
@@ -13452,6 +17224,12 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Weekly",
         "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "index": 1047,
+      "phrase": "Budget tracking ({value})",
+      "defaultValue": [
         "Rarely",
         "Never"
       ]
@@ -13467,6 +17245,12 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
+      ],
+      "index": 1048,
+      "phrase": "Meal prepping ({value})",
+      "defaultValue": [
+        "Rarely",
+        "Never"
       ]
     },
     {
@@ -13478,6 +17262,12 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Weekly",
         "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "index": 1049,
+      "phrase": "Stretching / mobility ({value})",
+      "defaultValue": [
         "Rarely",
         "Never"
       ]
@@ -13493,6 +17283,12 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
+      ],
+      "index": 1050,
+      "phrase": "Morning walk ({value})",
+      "defaultValue": [
+        "Rarely",
+        "Never"
       ]
     },
     {
@@ -13504,6 +17300,12 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Weekly",
         "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "index": 1051,
+      "phrase": "Phone-free downtime ({value})",
+      "defaultValue": [
         "Rarely",
         "Never"
       ]
@@ -13519,6 +17321,12 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
+      ],
+      "index": 1052,
+      "phrase": "Gratitude practice ({value})",
+      "defaultValue": [
+        "Rarely",
+        "Never"
       ]
     },
     {
@@ -13530,6 +17338,12 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Weekly",
         "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "index": 1053,
+      "phrase": "Reading before bed ({value})",
+      "defaultValue": [
         "Rarely",
         "Never"
       ]
@@ -13545,6 +17359,12 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
+      ],
+      "index": 1054,
+      "phrase": "Naps ({value})",
+      "defaultValue": [
+        "Rarely",
+        "Never"
       ]
     },
     {
@@ -13556,6 +17376,12 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Weekly",
         "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "index": 1055,
+      "phrase": "Power-snoozing alarm ({value})",
+      "defaultValue": [
         "Rarely",
         "Never"
       ]
@@ -13571,6 +17397,12 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
+      ],
+      "index": 1056,
+      "phrase": "Skipping breakfast ({value})",
+      "defaultValue": [
+        "Rarely",
+        "Never"
       ]
     },
     {
@@ -13582,6 +17414,12 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Weekly",
         "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "index": 1057,
+      "phrase": "Late-night snacking ({value})",
+      "defaultValue": [
         "Rarely",
         "Never"
       ]
@@ -13597,6 +17435,12 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
+      ],
+      "index": 1058,
+      "phrase": "Nail-biting / fidgeting ({value})",
+      "defaultValue": [
+        "Rarely",
+        "Never"
       ]
     },
     {
@@ -13608,6 +17452,12 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Weekly",
         "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "index": 1059,
+      "phrase": "Doomscrolling ({value})",
+      "defaultValue": [
         "Rarely",
         "Never"
       ]
@@ -13623,6 +17473,12 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
+      ],
+      "index": 1060,
+      "phrase": "Multitab browsing ({value})",
+      "defaultValue": [
+        "Rarely",
+        "Never"
       ]
     },
     {
@@ -13634,6 +17490,12 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Weekly",
         "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "index": 1061,
+      "phrase": "Inbox-zero discipline ({value})",
+      "defaultValue": [
         "Rarely",
         "Never"
       ]
@@ -13649,6 +17511,12 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
+      ],
+      "index": 1062,
+      "phrase": "Saving receipts ({value})",
+      "defaultValue": [
+        "Rarely",
+        "Never"
       ]
     },
     {
@@ -13660,6 +17528,12 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Weekly",
         "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "index": 1063,
+      "phrase": "Pre-trip overpacking ({value})",
+      "defaultValue": [
         "Rarely",
         "Never"
       ]
@@ -13675,6 +17549,12 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
+      ],
+      "index": 1064,
+      "phrase": "Talking to oneself ({value})",
+      "defaultValue": [
+        "Rarely",
+        "Never"
       ]
     },
     {
@@ -13686,6 +17566,12 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Weekly",
         "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "index": 1065,
+      "phrase": "Humming / whistling ({value})",
+      "defaultValue": [
         "Rarely",
         "Never"
       ]
@@ -13701,6 +17587,12 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
+      ],
+      "index": 1066,
+      "phrase": "Cold showers ({value})",
+      "defaultValue": [
+        "Rarely",
+        "Never"
       ]
     },
     {
@@ -13712,6 +17604,12 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Weekly",
         "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "index": 1067,
+      "phrase": "Step counting ({value})",
+      "defaultValue": [
         "Rarely",
         "Never"
       ]
@@ -13727,6 +17625,12 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
+      ],
+      "index": 1068,
+      "phrase": "Hydration tracking ({value})",
+      "defaultValue": [
+        "Rarely",
+        "Never"
       ]
     },
     {
@@ -13738,6 +17642,12 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Weekly",
         "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "index": 1069,
+      "phrase": "Backing up files ({value})",
+      "defaultValue": [
         "Rarely",
         "Never"
       ]
@@ -13753,6 +17663,12 @@ window.MATRAIX_DIMENSIONS = {
         "Monthly",
         "Rarely",
         "Never"
+      ],
+      "index": 1070,
+      "phrase": "Re-reading texts before sending ({value})",
+      "defaultValue": [
+        "Rarely",
+        "Never"
       ]
     },
     {
@@ -13764,6 +17680,12 @@ window.MATRAIX_DIMENSIONS = {
         "Daily",
         "Weekly",
         "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "index": 1071,
+      "phrase": "Procrasti-cleaning ({value})",
+      "defaultValue": [
         "Rarely",
         "Never"
       ]
@@ -13779,7 +17701,10 @@ window.MATRAIX_DIMENSIONS = {
         "Hybrid",
         "Remote-leaning",
         "Strongly remote"
-      ]
+      ],
+      "index": 1072,
+      "phrase": "their office vs remote is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_team_vs_solo",
@@ -13792,7 +17717,10 @@ window.MATRAIX_DIMENSIONS = {
         "Mixed",
         "Solo-leaning",
         "Strongly solo"
-      ]
+      ],
+      "index": 1073,
+      "phrase": "their team vs solo work is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_plan_vs_spontaneous",
@@ -13805,7 +17733,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Spontaneous",
         "Highly spontaneous"
-      ]
+      ],
+      "index": 1074,
+      "phrase": "their planned vs spontaneous is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_city_vs_nature",
@@ -13818,7 +17749,10 @@ window.MATRAIX_DIMENSIONS = {
         "Either",
         "Prefers nature",
         "Nature lover"
-      ]
+      ],
+      "index": 1075,
+      "phrase": "their city vs nature is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_routine_vs_variety",
@@ -13831,7 +17765,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Variety-leaning",
         "Craves variety"
-      ]
+      ],
+      "index": 1076,
+      "phrase": "their routine vs variety is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_speed_vs_accuracy",
@@ -13844,7 +17781,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Accuracy-leaning",
         "Accuracy first"
-      ]
+      ],
+      "index": 1077,
+      "phrase": "their speed vs accuracy is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_quality_vs_quantity",
@@ -13857,7 +17797,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Quantity-leaning",
         "Quantity first"
-      ]
+      ],
+      "index": 1078,
+      "phrase": "their quality vs quantity is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_logic_vs_intuition",
@@ -13870,7 +17813,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Intuition-leaning",
         "Pure intuition"
-      ]
+      ],
+      "index": 1079,
+      "phrase": "their logic vs intuition is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_save_vs_spend",
@@ -13883,7 +17829,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Spender-leaning",
         "Free spender"
-      ]
+      ],
+      "index": 1080,
+      "phrase": "their save vs spend is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_lead_vs_follow",
@@ -13896,7 +17845,10 @@ window.MATRAIX_DIMENSIONS = {
         "Situational",
         "Leans support",
         "Prefers to follow"
-      ]
+      ],
+      "index": 1081,
+      "phrase": "their lead vs follow is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_indoor_vs_outdoor",
@@ -13909,7 +17861,10 @@ window.MATRAIX_DIMENSIONS = {
         "Either",
         "Outdoor-leaning",
         "Strongly outdoor"
-      ]
+      ],
+      "index": 1082,
+      "phrase": "their indoor vs outdoor is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_early_vs_late",
@@ -13922,7 +17877,10 @@ window.MATRAIX_DIMENSIONS = {
         "Mainstream",
         "Late adopter",
         "Laggard"
-      ]
+      ],
+      "index": 1083,
+      "phrase": "their early vs late adopter is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_text_vs_call",
@@ -13935,7 +17893,10 @@ window.MATRAIX_DIMENSIONS = {
         "Either",
         "Prefers calls",
         "Calls only"
-      ]
+      ],
+      "index": 1084,
+      "phrase": "their texting vs calling is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_big_group_vs_one_on_one",
@@ -13948,7 +17909,10 @@ window.MATRAIX_DIMENSIONS = {
         "Either",
         "1-on-1 leaning",
         "One-on-one only"
-      ]
+      ],
+      "index": 1085,
+      "phrase": "their big group vs one-on-one is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_novelty_vs_familiarity",
@@ -13961,7 +17925,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Comfort-leaning",
         "Always familiar"
-      ]
+      ],
+      "index": 1086,
+      "phrase": "their novelty vs familiarity is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_detail_brief_vs_full",
@@ -13974,7 +17941,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Detail-leaning",
         "Every detail"
-      ]
+      ],
+      "index": 1087,
+      "phrase": "their brief vs full detail is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_competition_vs_collab",
@@ -13987,7 +17957,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Collaborative",
         "Highly collaborative"
-      ]
+      ],
+      "index": 1088,
+      "phrase": "their competition vs collaboration is {value}",
+      "defaultValue": null
     },
     {
       "id": "pref_stability_vs_change",
@@ -14000,7 +17973,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced",
         "Change-leaning",
         "Craves change"
-      ]
+      ],
+      "index": 1089,
+      "phrase": "their stability vs change is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_marital_status",
@@ -14015,7 +17991,10 @@ window.MATRAIX_DIMENSIONS = {
         "Separated",
         "Divorced",
         "Widowed"
-      ]
+      ],
+      "index": 1090,
+      "phrase": "their marital status is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_children_count",
@@ -14029,7 +18008,10 @@ window.MATRAIX_DIMENSIONS = {
         "2 children",
         "3+ children",
         "Adult children"
-      ]
+      ],
+      "index": 1091,
+      "phrase": "their children is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_household_income",
@@ -14038,11 +18020,14 @@ window.MATRAIX_DIMENSIONS = {
       "description": "Household income band.",
       "values": [
         "<$25k",
-        "$25k\u201350k",
-        "$50k\u2013100k",
-        "$100k\u2013200k",
+        "$25k-50k",
+        "$50k-100k",
+        "$100k-200k",
         "$200k+"
-      ]
+      ],
+      "index": 1092,
+      "phrase": "their household income band is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_employment_status",
@@ -14058,7 +18043,10 @@ window.MATRAIX_DIMENSIONS = {
         "Unemployed",
         "Retired",
         "Homemaker"
-      ]
+      ],
+      "index": 1093,
+      "phrase": "their employment status is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_housing_status",
@@ -14072,7 +18060,10 @@ window.MATRAIX_DIMENSIONS = {
         "Living with family",
         "Shared housing",
         "Temporary / transitional"
-      ]
+      ],
+      "index": 1094,
+      "phrase": "their housing status is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_generation",
@@ -14086,7 +18077,10 @@ window.MATRAIX_DIMENSIONS = {
         "Gen X",
         "Boomer",
         "Silent"
-      ]
+      ],
+      "index": 1095,
+      "phrase": "their generational cohort is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_religion_affiliation",
@@ -14104,7 +18098,10 @@ window.MATRAIX_DIMENSIONS = {
         "Spiritual but unaffiliated",
         "Atheist / agnostic",
         "None"
-      ]
+      ],
+      "index": 1096,
+      "phrase": "their religious affiliation is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_sexual_orientation",
@@ -14119,7 +18116,10 @@ window.MATRAIX_DIMENSIONS = {
         "Asexual",
         "Queer",
         "Prefer not to say"
-      ]
+      ],
+      "index": 1097,
+      "phrase": "their sexual orientation is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_citizenship_status",
@@ -14133,7 +18133,10 @@ window.MATRAIX_DIMENSIONS = {
         "Visa holder",
         "Dual national",
         "Undocumented"
-      ]
+      ],
+      "index": 1098,
+      "phrase": "their citizenship status is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_ethnicity_broad",
@@ -14151,7 +18154,10 @@ window.MATRAIX_DIMENSIONS = {
         "Indigenous",
         "Pacific Islander",
         "Multiracial"
-      ]
+      ],
+      "index": 1099,
+      "phrase": "their ethnic background is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_disability_status",
@@ -14166,7 +18172,10 @@ window.MATRAIX_DIMENSIONS = {
         "Chronic illness",
         "Multiple",
         "Prefers not to say"
-      ]
+      ],
+      "index": 1100,
+      "phrase": "their disability status is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_veteran_status",
@@ -14179,7 +18188,10 @@ window.MATRAIX_DIMENSIONS = {
         "Reserve / guard",
         "Veteran",
         "Military family"
-      ]
+      ],
+      "index": 1101,
+      "phrase": "their veteran status is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_birth_order",
@@ -14192,7 +18204,10 @@ window.MATRAIX_DIMENSIONS = {
         "Middle",
         "Youngest",
         "Twin / multiple"
-      ]
+      ],
+      "index": 1102,
+      "phrase": "their birth order is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_home_language",
@@ -14204,7 +18219,10 @@ window.MATRAIX_DIMENSIONS = {
         "Bilingual home",
         "Heritage language",
         "Mixed languages"
-      ]
+      ],
+      "index": 1103,
+      "phrase": "their language at home is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_political_engagement",
@@ -14217,7 +18235,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional voter",
         "Disengaged",
         "Non-voter"
-      ]
+      ],
+      "index": 1104,
+      "phrase": "their political engagement is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_parental_status",
@@ -14231,7 +18252,10 @@ window.MATRAIX_DIMENSIONS = {
         "Parent of adults",
         "Grandparent",
         "Step / foster parent"
-      ]
+      ],
+      "index": 1105,
+      "phrase": "their parenthood is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_relationship_length",
@@ -14241,10 +18265,13 @@ window.MATRAIX_DIMENSIONS = {
       "values": [
         "Not in one",
         "Under 1 year",
-        "1\u20135 years",
-        "5\u201315 years",
+        "1-5 years",
+        "5-15 years",
         "15+ years"
-      ]
+      ],
+      "index": 1106,
+      "phrase": "their relationship length is {value}",
+      "defaultValue": null
     },
     {
       "id": "demo_driver_status",
@@ -14257,7 +18284,10 @@ window.MATRAIX_DIMENSIONS = {
         "Licensed, rarely drives",
         "Non-driver",
         "Cannot drive"
-      ]
+      ],
+      "index": 1107,
+      "phrase": "their driving status is {value}",
+      "defaultValue": null
     },
     {
       "id": "lifex_childhood_environment",
@@ -14271,7 +18301,10 @@ window.MATRAIX_DIMENSIONS = {
         "Privileged",
         "Hardship",
         "Frequently uprooted"
-      ]
+      ],
+      "index": 1108,
+      "phrase": "their childhood environment is {value}",
+      "defaultValue": "Stable & secure"
     },
     {
       "id": "lifex_geographic_mobility",
@@ -14284,7 +18317,10 @@ window.MATRAIX_DIMENSIONS = {
         "Moved nationally",
         "Moved internationally",
         "Serial relocator"
-      ]
+      ],
+      "index": 1109,
+      "phrase": "their geographic mobility is {value}",
+      "defaultValue": "Never left hometown"
     },
     {
       "id": "lifex_travel_breadth",
@@ -14297,7 +18333,10 @@ window.MATRAIX_DIMENSIONS = {
         "Well-traveled",
         "Lived abroad",
         "Global nomad"
-      ]
+      ],
+      "index": 1110,
+      "phrase": "their travel breadth is {value}",
+      "defaultValue": "Never left country"
     },
     {
       "id": "lifex_career_path_shape",
@@ -14311,7 +18350,10 @@ window.MATRAIX_DIMENSIONS = {
         "Entrepreneurial",
         "Portfolio / patchwork",
         "Just starting"
-      ]
+      ],
+      "index": 1111,
+      "phrase": "their career path shape is {value}",
+      "defaultValue": "Linear climb"
     },
     {
       "id": "lifex_education_journey",
@@ -14325,7 +18367,10 @@ window.MATRAIX_DIMENSIONS = {
         "Dropped out",
         "Advanced degrees",
         "Vocational / trade"
-      ]
+      ],
+      "index": 1112,
+      "phrase": "their education journey is {value}",
+      "defaultValue": "Traditional track"
     },
     {
       "id": "lifex_financial_trajectory",
@@ -14339,7 +18384,10 @@ window.MATRAIX_DIMENSIONS = {
         "Downward",
         "Rebuilt after setback",
         "Inherited wealth"
-      ]
+      ],
+      "index": 1113,
+      "phrase": "their financial trajectory is {value}",
+      "defaultValue": "Steady upward"
     },
     {
       "id": "lifex_adversity_level",
@@ -14352,7 +18400,10 @@ window.MATRAIX_DIMENSIONS = {
         "Significant struggles",
         "Overcame major hardship",
         "Ongoing hardship"
-      ]
+      ],
+      "index": 1114,
+      "phrase": "their adversity faced is {value}",
+      "defaultValue": "Sheltered"
     },
     {
       "id": "lifex_immigration_generation",
@@ -14365,7 +18416,10 @@ window.MATRAIX_DIMENSIONS = {
         "Third+ generation",
         "Native multi-generational",
         "Returnee / repatriate"
-      ]
+      ],
+      "index": 1115,
+      "phrase": "their immigration generation is {value}",
+      "defaultValue": "First-generation immigrant"
     },
     {
       "id": "lifex_military_history",
@@ -14378,7 +18432,10 @@ window.MATRAIX_DIMENSIONS = {
         "Career veteran",
         "Combat veteran",
         "Military family"
-      ]
+      ],
+      "index": 1116,
+      "phrase": "their military history is {value}",
+      "defaultValue": "Never served"
     },
     {
       "id": "lifex_entrepreneurship_history",
@@ -14392,7 +18449,10 @@ window.MATRAIX_DIMENSIONS = {
         "Founded once",
         "Serial founder",
         "Exited a company"
-      ]
+      ],
+      "index": 1117,
+      "phrase": "their entrepreneurship history is {value}",
+      "defaultValue": "Never considered"
     },
     {
       "id": "lifex_relationship_history",
@@ -14406,7 +18466,10 @@ window.MATRAIX_DIMENSIONS = {
         "Married once",
         "Remarried",
         "Widowed"
-      ]
+      ],
+      "index": 1118,
+      "phrase": "their relationship history is {value}",
+      "defaultValue": "Limited"
     },
     {
       "id": "lifex_parenting_journey",
@@ -14420,7 +18483,10 @@ window.MATRAIX_DIMENSIONS = {
         "Grown children",
         "Empty nester",
         "Raising grandchildren"
-      ]
+      ],
+      "index": 1119,
+      "phrase": "their parenting journey is {value}",
+      "defaultValue": "No children"
     },
     {
       "id": "lifex_health_journey",
@@ -14434,7 +18500,10 @@ window.MATRAIX_DIMENSIONS = {
         "Major surgery / injury",
         "Mental health journey",
         "Caregiving for others"
-      ]
+      ],
+      "index": 1120,
+      "phrase": "their health journey is {value}",
+      "defaultValue": "No major events"
     },
     {
       "id": "lifex_loss_experience",
@@ -14447,7 +18516,10 @@ window.MATRAIX_DIMENSIONS = {
         "Lost a parent",
         "Lost a partner / child",
         "Multiple bereavements"
-      ]
+      ],
+      "index": 1121,
+      "phrase": "their experience of loss is {value}",
+      "defaultValue": "No major loss"
     },
     {
       "id": "lifex_faith_journey",
@@ -14461,7 +18533,10 @@ window.MATRAIX_DIMENSIONS = {
         "Always secular",
         "Still searching",
         "Returned to faith"
-      ]
+      ],
+      "index": 1122,
+      "phrase": "their faith journey is {value}",
+      "defaultValue": "Lifelong faith"
     },
     {
       "id": "lifex_cultural_exposure",
@@ -14474,7 +18549,10 @@ window.MATRAIX_DIMENSIONS = {
         "Multicultural upbringing",
         "Lived across cultures",
         "Third-culture kid"
-      ]
+      ],
+      "index": 1123,
+      "phrase": "their cross-cultural exposure is {value}",
+      "defaultValue": "Monocultural"
     },
     {
       "id": "lifex_formative_decade",
@@ -14482,13 +18560,16 @@ window.MATRAIX_DIMENSIONS = {
       "category": "Demographic: Life Events",
       "description": "Formative decade.",
       "values": [
-        "1960s\u201370s",
+        "1960s-70s",
         "1980s",
         "1990s",
         "2000s",
         "2010s",
         "2020s"
-      ]
+      ],
+      "index": 1124,
+      "phrase": "their formative decade is {value}",
+      "defaultValue": "1960s-70s"
     },
     {
       "id": "lifex_public_recognition",
@@ -14501,7 +18582,10 @@ window.MATRAIX_DIMENSIONS = {
         "Industry-recognized",
         "Publicly notable",
         "Famous"
-      ]
+      ],
+      "index": 1125,
+      "phrase": "their public recognition is {value}",
+      "defaultValue": "Private life"
     },
     {
       "id": "lifex_service_history",
@@ -14514,7 +18598,10 @@ window.MATRAIX_DIMENSIONS = {
         "Long-term volunteer",
         "Activist / organizer",
         "Public office"
-      ]
+      ],
+      "index": 1126,
+      "phrase": "their community / service history is {value}",
+      "defaultValue": "None"
     },
     {
       "id": "lifex_turning_point",
@@ -14528,7 +18615,10 @@ window.MATRAIX_DIMENSIONS = {
         "Reinvention",
         "Mentor encounter",
         "No single one"
-      ]
+      ],
+      "index": 1127,
+      "phrase": "their defining turning point is {value}",
+      "defaultValue": "Career break"
     },
     {
       "id": "lifex_languages_lifetime",
@@ -14541,7 +18631,10 @@ window.MATRAIX_DIMENSIONS = {
         "Three",
         "Four+",
         "Polyglot"
-      ]
+      ],
+      "index": 1128,
+      "phrase": "their languages learned over life is {value}",
+      "defaultValue": "One"
     },
     {
       "id": "lifex_hometown_tie",
@@ -14554,1900 +18647,10 @@ window.MATRAIX_DIMENSIONS = {
         "Occasional return",
         "Rarely returns",
         "No connection"
-      ]
-    },
-    {
-      "id": "personahub_dimension_1",
-      "label": "PersonaHub_Dimension1",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 1 from PersonaHub.",
-      "values": [
-        "Absent",
-        "Minimal",
-        "Moderate",
-        "Significant",
-        "Dominant"
-      ]
-    },
-    {
-      "id": "personahub_dimension_2",
-      "label": "PersonaHub_Dimension2",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 2 from PersonaHub.",
-      "values": [
-        "Absent",
-        "Minimal",
-        "Moderate",
-        "Significant",
-        "Dominant"
-      ]
-    },
-    {
-      "id": "oasis_dimension_1",
-      "label": "OASIS_Dimension1",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 1 from OASIS.",
-      "values": [
-        "Never",
-        "Rarely",
-        "Sometimes",
-        "Often",
-        "Always"
-      ]
-    },
-    {
-      "id": "oasis_dimension_2",
-      "label": "OASIS_Dimension2",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 2 from OASIS.",
-      "values": [
-        "Never",
-        "Rarely",
-        "Sometimes",
-        "Often",
-        "Always"
-      ]
-    },
-    {
-      "id": "oasis_dimension_3",
-      "label": "OASIS_Dimension3",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 3 from OASIS.",
-      "values": [
-        "Never",
-        "Rarely",
-        "Sometimes",
-        "Often",
-        "Always"
-      ]
-    },
-    {
-      "id": "oasis_dimension_4",
-      "label": "OASIS_Dimension4",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 4 from OASIS.",
-      "values": [
-        "Never",
-        "Rarely",
-        "Sometimes",
-        "Often",
-        "Always"
-      ]
-    },
-    {
-      "id": "oasis_dimension_5",
-      "label": "OASIS_Dimension5",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 5 from OASIS.",
-      "values": [
-        "Never",
-        "Rarely",
-        "Sometimes",
-        "Often",
-        "Always"
-      ]
-    },
-    {
-      "id": "oasis_dimension_6",
-      "label": "OASIS_Dimension6",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 6 from OASIS.",
-      "values": [
-        "Never",
-        "Rarely",
-        "Sometimes",
-        "Often",
-        "Always"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_1",
-      "label": "ApplePRIMEX_Dimension1",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 1 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_2",
-      "label": "ApplePRIMEX_Dimension2",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 2 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_3",
-      "label": "ApplePRIMEX_Dimension3",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 3 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_4",
-      "label": "ApplePRIMEX_Dimension4",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 4 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_5",
-      "label": "ApplePRIMEX_Dimension5",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 5 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_6",
-      "label": "ApplePRIMEX_Dimension6",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 6 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_7",
-      "label": "ApplePRIMEX_Dimension7",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 7 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_8",
-      "label": "ApplePRIMEX_Dimension8",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 8 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_9",
-      "label": "ApplePRIMEX_Dimension9",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 9 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_10",
-      "label": "ApplePRIMEX_Dimension10",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 10 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_11",
-      "label": "ApplePRIMEX_Dimension11",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 11 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_12",
-      "label": "ApplePRIMEX_Dimension12",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 12 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_13",
-      "label": "ApplePRIMEX_Dimension13",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 13 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_14",
-      "label": "ApplePRIMEX_Dimension14",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 14 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_15",
-      "label": "ApplePRIMEX_Dimension15",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 15 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_16",
-      "label": "ApplePRIMEX_Dimension16",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 16 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_17",
-      "label": "ApplePRIMEX_Dimension17",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 17 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_18",
-      "label": "ApplePRIMEX_Dimension18",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 18 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_19",
-      "label": "ApplePRIMEX_Dimension19",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 19 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_20",
-      "label": "ApplePRIMEX_Dimension20",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 20 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_21",
-      "label": "ApplePRIMEX_Dimension21",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 21 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_22",
-      "label": "ApplePRIMEX_Dimension22",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 22 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_23",
-      "label": "ApplePRIMEX_Dimension23",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 23 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_24",
-      "label": "ApplePRIMEX_Dimension24",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 24 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_25",
-      "label": "ApplePRIMEX_Dimension25",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 25 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_26",
-      "label": "ApplePRIMEX_Dimension26",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 26 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_27",
-      "label": "ApplePRIMEX_Dimension27",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 27 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_28",
-      "label": "ApplePRIMEX_Dimension28",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 28 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_29",
-      "label": "ApplePRIMEX_Dimension29",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 29 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_30",
-      "label": "ApplePRIMEX_Dimension30",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 30 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_31",
-      "label": "ApplePRIMEX_Dimension31",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 31 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_32",
-      "label": "ApplePRIMEX_Dimension32",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 32 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_33",
-      "label": "ApplePRIMEX_Dimension33",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 33 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_34",
-      "label": "ApplePRIMEX_Dimension34",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 34 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_35",
-      "label": "ApplePRIMEX_Dimension35",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 35 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_36",
-      "label": "ApplePRIMEX_Dimension36",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 36 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_37",
-      "label": "ApplePRIMEX_Dimension37",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 37 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_38",
-      "label": "ApplePRIMEX_Dimension38",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 38 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_39",
-      "label": "ApplePRIMEX_Dimension39",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 39 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_40",
-      "label": "ApplePRIMEX_Dimension40",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 40 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_41",
-      "label": "ApplePRIMEX_Dimension41",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 41 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_42",
-      "label": "ApplePRIMEX_Dimension42",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 42 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "apple_primex_dimension_43",
-      "label": "ApplePRIMEX_Dimension43",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 43 from ApplePRIMEX.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Medium",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "pandora_dimension_1",
-      "label": "PANDORA_Dimension1",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 1 from PANDORA.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Average",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "pandora_dimension_2",
-      "label": "PANDORA_Dimension2",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 2 from PANDORA.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Average",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "pandora_dimension_3",
-      "label": "PANDORA_Dimension3",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 3 from PANDORA.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Average",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "pandora_dimension_4",
-      "label": "PANDORA_Dimension4",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 4 from PANDORA.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Average",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "pandora_dimension_5",
-      "label": "PANDORA_Dimension5",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 5 from PANDORA.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Average",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "pandora_dimension_6",
-      "label": "PANDORA_Dimension6",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 6 from PANDORA.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Average",
-        "High",
-        "Very High"
-      ]
-    },
-    {
-      "id": "synthetic_persona_chat_dimension_1",
-      "label": "SyntheticPersonaChat_Dimension1",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 1 from SyntheticPersonaChat.",
-      "values": [
-        "Not Applicable",
-        "Minor",
-        "Moderate",
-        "Notable",
-        "Central"
-      ]
-    },
-    {
-      "id": "synthetic_persona_chat_dimension_2",
-      "label": "SyntheticPersonaChat_Dimension2",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 2 from SyntheticPersonaChat.",
-      "values": [
-        "Not Applicable",
-        "Minor",
-        "Moderate",
-        "Notable",
-        "Central"
-      ]
-    },
-    {
-      "id": "synthetic_persona_chat_dimension_3",
-      "label": "SyntheticPersonaChat_Dimension3",
-      "category": "External: Datasets",
-      "description": "Placeholder imported dimension 3 from SyntheticPersonaChat.",
-      "values": [
-        "Not Applicable",
-        "Minor",
-        "Moderate",
-        "Notable",
-        "Central"
-      ]
-    },
-    {
-      "id": "pandora_big5_dimension_1",
-      "label": "PANDORA_Openness",
-      "category": "Personality: Big Five",
-      "description": "Big Five personality trait: Openness from PANDORA Big5 subset.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Average",
-        "High",
-        "Very High"
       ],
-      "source_origin": {
-        "source_id": "pandora_big5",
-        "source_name": "TakeLab PANDORA (Big5 subset)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "jingjietan/pandora-big5",
-        "huggingface_url": "https://huggingface.co/datasets/jingjietan/pandora-big5",
-        "original_pandora_url": "https://psy.takelab.fer.hr/datasets/all/pandora/",
-        "manifest_file": "personas/existing_data_curation/manifests/pandora_big5.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "column_name": "O",
-        "license": "apache-2.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "pandora_big5_dimension_2",
-      "label": "PANDORA_Conscientiousness",
-      "category": "Personality: Big Five",
-      "description": "Big Five personality trait: Conscientiousness from PANDORA Big5 subset.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Average",
-        "High",
-        "Very High"
-      ],
-      "source_origin": {
-        "source_id": "pandora_big5",
-        "source_name": "TakeLab PANDORA (Big5 subset)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "jingjietan/pandora-big5",
-        "huggingface_url": "https://huggingface.co/datasets/jingjietan/pandora-big5",
-        "original_pandora_url": "https://psy.takelab.fer.hr/datasets/all/pandora/",
-        "manifest_file": "personas/existing_data_curation/manifests/pandora_big5.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "column_name": "C",
-        "license": "apache-2.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "pandora_big5_dimension_3",
-      "label": "PANDORA_Extraversion",
-      "category": "Personality: Big Five",
-      "description": "Big Five personality trait: Extraversion from PANDORA Big5 subset.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Average",
-        "High",
-        "Very High"
-      ],
-      "source_origin": {
-        "source_id": "pandora_big5",
-        "source_name": "TakeLab PANDORA (Big5 subset)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "jingjietan/pandora-big5",
-        "huggingface_url": "https://huggingface.co/datasets/jingjietan/pandora-big5",
-        "original_pandora_url": "https://psy.takelab.fer.hr/datasets/all/pandora/",
-        "manifest_file": "personas/existing_data_curation/manifests/pandora_big5.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "column_name": "E",
-        "license": "apache-2.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "pandora_big5_dimension_4",
-      "label": "PANDORA_Agreeableness",
-      "category": "Personality: Big Five",
-      "description": "Big Five personality trait: Agreeableness from PANDORA Big5 subset.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Average",
-        "High",
-        "Very High"
-      ],
-      "source_origin": {
-        "source_id": "pandora_big5",
-        "source_name": "TakeLab PANDORA (Big5 subset)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "jingjietan/pandora-big5",
-        "huggingface_url": "https://huggingface.co/datasets/jingjietan/pandora-big5",
-        "original_pandora_url": "https://psy.takelab.fer.hr/datasets/all/pandora/",
-        "manifest_file": "personas/existing_data_curation/manifests/pandora_big5.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "column_name": "A",
-        "license": "apache-2.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "pandora_big5_dimension_5",
-      "label": "PANDORA_Neuroticism",
-      "category": "Personality: Big Five",
-      "description": "Big Five personality trait: Neuroticism from PANDORA Big5 subset.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Average",
-        "High",
-        "Very High"
-      ],
-      "source_origin": {
-        "source_id": "pandora_big5",
-        "source_name": "TakeLab PANDORA (Big5 subset)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "jingjietan/pandora-big5",
-        "huggingface_url": "https://huggingface.co/datasets/jingjietan/pandora-big5",
-        "original_pandora_url": "https://psy.takelab.fer.hr/datasets/all/pandora/",
-        "manifest_file": "personas/existing_data_curation/manifests/pandora_big5.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "column_name": "N",
-        "license": "apache-2.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "pandora_big5_dimension_6",
-      "label": "PANDORA_PersonalityType",
-      "category": "Personality: Big Five",
-      "description": "Personality type classification (0-31) from PANDORA Big5 subset.",
-      "values": [
-        "Very Low",
-        "Low",
-        "Average",
-        "High",
-        "Very High"
-      ],
-      "source_origin": {
-        "source_id": "pandora_big5",
-        "source_name": "TakeLab PANDORA (Big5 subset)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "jingjietan/pandora-big5",
-        "huggingface_url": "https://huggingface.co/datasets/jingjietan/pandora-big5",
-        "original_pandora_url": "https://psy.takelab.fer.hr/datasets/all/pandora/",
-        "manifest_file": "personas/existing_data_curation/manifests/pandora_big5.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "column_name": "ptype",
-        "license": "apache-2.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "personachat_persona",
-      "label": "PersonaChat_PersonaDescription",
-      "category": "External: Datasets",
-      "description": "Free-text persona profile sentences describing interests, habits, and traits from PersonaChat dataset.",
-      "values": [
-        "Not Described",
-        "Mentioned Once",
-        "Occasionally Mentioned",
-        "Frequently Mentioned",
-        "Central to Profile"
-      ],
-      "source_origin": {
-        "source_id": "personachat_facebook",
-        "source_name": "Facebook PersonaChat",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "facebook/persona-chat",
-        "huggingface_url": "https://huggingface.co/datasets/facebook/persona-chat",
-        "paper_url": "https://arxiv.org/abs/1801.07243",
-        "manifest_file": "personas/existing_data_curation/manifests/personachat_facebook.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "column_name": "persona",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_1",
-      "label": "HorizonBench_Advice_Delivery_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'advice_delivery_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "advice_delivery_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_2",
-      "label": "HorizonBench_Analytical_Approach",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'analytical_approach' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "analytical_approach",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_3",
-      "label": "HorizonBench_Apology_Style_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'apology_style_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "apology_style_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_4",
-      "label": "HorizonBench_Communication_Intimacy",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'communication_intimacy' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "communication_intimacy",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_5",
-      "label": "HorizonBench_Communication_Medium_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'communication_medium_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "communication_medium_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_6",
-      "label": "HorizonBench_Conflict_Resolution_Style_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'conflict_resolution_style_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "conflict_resolution_style_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_7",
-      "label": "HorizonBench_Content_Length_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'content_length_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "content_length_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_8",
-      "label": "HorizonBench_Creative_Collaboration",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'creative_collaboration' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "creative_collaboration",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_9",
-      "label": "HorizonBench_Emotional_Support_Style",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'emotional_support_style' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "emotional_support_style",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_10",
-      "label": "HorizonBench_Empirical_Evidence_Integration_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'empirical_evidence_integration_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "empirical_evidence_integration_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_11",
-      "label": "HorizonBench_Entertainment_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'entertainment_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "entertainment_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_12",
-      "label": "HorizonBench_Ethical_Review_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'ethical_review_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "ethical_review_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_13",
-      "label": "HorizonBench_Event_Planning_Detail_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'event_planning_detail_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "event_planning_detail_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_14",
-      "label": "HorizonBench_Facilitation_Style_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'facilitation_style_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "facilitation_style_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_15",
-      "label": "HorizonBench_Follow_Up_Strategy_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'follow_up_strategy_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "follow_up_strategy_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_16",
-      "label": "HorizonBench_Interfaith_Engagement_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'interfaith_engagement_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "interfaith_engagement_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_17",
-      "label": "HorizonBench_Intergenerational_Engagement_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'intergenerational_engagement_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "intergenerational_engagement_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_18",
-      "label": "HorizonBench_Language_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'language_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "language_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_19",
-      "label": "HorizonBench_Motivation_Strategy_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'motivation_strategy_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "motivation_strategy_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_20",
-      "label": "HorizonBench_Philosophical_Engagement",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'philosophical_engagement' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "philosophical_engagement",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_21",
-      "label": "HorizonBench_Productivity_Style",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'productivity_style' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "productivity_style",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_22",
-      "label": "HorizonBench_Public_Speaking_Coaching_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'public_speaking_coaching_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "public_speaking_coaching_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_23",
-      "label": "HorizonBench_Self_Esteem_Rebuilding_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'self_esteem_rebuilding_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "self_esteem_rebuilding_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_24",
-      "label": "HorizonBench_Social_Engagement_Style_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'social_engagement_style_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "social_engagement_style_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_25",
-      "label": "HorizonBench_Stakeholder_Consultation_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'stakeholder_consultation_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "stakeholder_consultation_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_26",
-      "label": "HorizonBench_Support_Technique_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'support_technique_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "support_technique_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_27",
-      "label": "HorizonBench_Technology_Assistance_Style_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'technology_assistance_style_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "technology_assistance_style_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_28",
-      "label": "HorizonBench_Therapy_Discussion_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'therapy_discussion_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "therapy_discussion_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_29",
-      "label": "HorizonBench_Tone_Guideline_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'tone_guideline_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "tone_guideline_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "horizonbench_dimension_30",
-      "label": "HorizonBench_Writing_Style_Preferences",
-      "category": "External: Datasets",
-      "description": "Preference evolution domain 'writing_style_preferences' from HorizonBench long-horizon personalization dataset.",
-      "values": [
-        "Not Active",
-        "Minimally Active",
-        "Moderately Active",
-        "Highly Active",
-        "Dominant"
-      ],
-      "source_origin": {
-        "source_id": "horizonbench_mental_state_graphs",
-        "source_name": "HorizonBench (mental_state_graphs)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "stellalisy/HorizonBench",
-        "huggingface_url": "https://huggingface.co/datasets/stellalisy/HorizonBench",
-        "paper_url": "https://arxiv.org/abs/2604.17283",
-        "manifest_file": "personas/existing_data_curation/manifests/horizonbench_mental_state_graphs.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "config": "mental_state_graphs",
-        "column_name": "writing_style_preferences",
-        "license": "cc-by-4.0",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "wildchat_state",
-      "label": "WildChat_State",
-      "category": "External: Datasets",
-      "description": "U.S. state where user accessed WildChat (geographic dimension from IP geolocation).",
-      "values": [
-        "Unknown",
-        "Unlikely",
-        "Possible",
-        "Likely",
-        "Confirmed"
-      ],
-      "source_origin": {
-        "source_id": "wildchat_allenai",
-        "source_name": "AllenAI WildChat (1M)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "allenai/WildChat-1M",
-        "huggingface_url": "https://huggingface.co/datasets/allenai/WildChat-1M",
-        "paper_url": "https://arxiv.org/abs/2405.01470",
-        "manifest_file": "personas/existing_data_curation/manifests/wildchat_allenai.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "column_name": "state",
-        "license": "odc-by",
-        "note": "Privacy-first design: WildChat intentionally excludes traditional demographics (age, gender, education, occupation). Only geographic dimensions available.",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "wildchat_country",
-      "label": "WildChat_Country",
-      "category": "External: Datasets",
-      "description": "Country where user accessed WildChat (geographic dimension from IP geolocation).",
-      "values": [
-        "Unknown",
-        "Unlikely",
-        "Possible",
-        "Likely",
-        "Confirmed"
-      ],
-      "source_origin": {
-        "source_id": "wildchat_allenai",
-        "source_name": "AllenAI WildChat (1M)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "allenai/WildChat-1M",
-        "huggingface_url": "https://huggingface.co/datasets/allenai/WildChat-1M",
-        "paper_url": "https://arxiv.org/abs/2405.01470",
-        "manifest_file": "personas/existing_data_curation/manifests/wildchat_allenai.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "column_name": "country",
-        "license": "odc-by",
-        "note": "Privacy-first design: WildChat intentionally excludes traditional demographics (age, gender, education, occupation). Only geographic dimensions available.",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
-    },
-    {
-      "id": "wildchat_hashed_ip",
-      "label": "WildChat_HashedIP",
-      "category": "External: Datasets",
-      "description": "Privacy-preserving hashed IP address from WildChat (technical/geographic dimension).",
-      "values": [
-        "Unknown",
-        "Unlikely",
-        "Possible",
-        "Likely",
-        "Confirmed"
-      ],
-      "source_origin": {
-        "source_id": "wildchat_allenai",
-        "source_name": "AllenAI WildChat (1M)",
-        "source_type": "huggingface_dataset",
-        "huggingface_repo": "allenai/WildChat-1M",
-        "huggingface_url": "https://huggingface.co/datasets/allenai/WildChat-1M",
-        "paper_url": "https://arxiv.org/abs/2405.01470",
-        "manifest_file": "personas/existing_data_curation/manifests/wildchat_allenai.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "column_name": "hashed_ip",
-        "license": "odc-by",
-        "note": "Privacy-first design: WildChat intentionally excludes traditional demographics (age, gender, education, occupation). Only geographic dimensions available.",
-        "added_date": "2026-06-20",
-        "contributor_github": "yuexing"
-      }
+      "index": 1129,
+      "phrase": "their tie to hometown is {value}",
+      "defaultValue": "Still there"
     },
     {
       "id": "code_comment_style",
@@ -16461,7 +18664,10 @@ window.MATRAIX_DIMENSIONS = {
         "Mixed approach",
         "Docstring/documentation blocks only",
         "No comments"
-      ]
+      ],
+      "index": 1130,
+      "phrase": "their code Comment Style is {value}",
+      "defaultValue": null
     },
     {
       "id": "code_summary_documentation",
@@ -16474,7 +18680,10 @@ window.MATRAIX_DIMENSIONS = {
         "Includes TLDR for complex functions only",
         "Rarely includes TLDR",
         "Never includes TLDR"
-      ]
+      ],
+      "index": 1131,
+      "phrase": "their code Summary/TLDR Documentation is {value}",
+      "defaultValue": null
     },
     {
       "id": "code_naming_verbosity",
@@ -16487,7 +18696,10 @@ window.MATRAIX_DIMENSIONS = {
         "Mixed (context-dependent)",
         "Terse abbreviated names",
         "Single-letter names"
-      ]
+      ],
+      "index": 1132,
+      "phrase": "their code Naming Verbosity is {value}",
+      "defaultValue": null
     },
     {
       "id": "code_indentation_style",
@@ -16500,7 +18712,10 @@ window.MATRAIX_DIMENSIONS = {
         "4 spaces",
         "8 spaces",
         "Inconsistent/mixed"
-      ]
+      ],
+      "index": 1133,
+      "phrase": "their indentation and Whitespace Style is {value}",
+      "defaultValue": null
     },
     {
       "id": "code_structure_preference",
@@ -16513,7 +18728,10 @@ window.MATRAIX_DIMENSIONS = {
         "Procedural imperative",
         "Mixed paradigm",
         "Data-driven"
-      ]
+      ],
+      "index": 1134,
+      "phrase": "their code Structure Preference is {value}",
+      "defaultValue": null
     },
     {
       "id": "code_function_length",
@@ -16526,7 +18744,10 @@ window.MATRAIX_DIMENSIONS = {
         "Medium functions (30-100 lines)",
         "Large functions (100+ lines)",
         "Varies by context"
-      ]
+      ],
+      "index": 1135,
+      "phrase": "their function/Method Length Preference is {value}",
+      "defaultValue": null
     },
     {
       "id": "code_error_handling",
@@ -16539,7 +18760,10 @@ window.MATRAIX_DIMENSIONS = {
         "Graceful degradation and recovery",
         "Minimal error handling",
         "Silent failure tolerance"
-      ]
+      ],
+      "index": 1136,
+      "phrase": "their error Handling Style is {value}",
+      "defaultValue": null
     },
     {
       "id": "code_abstraction_level",
@@ -16552,7 +18776,10 @@ window.MATRAIX_DIMENSIONS = {
         "Concrete problem-specific solutions",
         "Mixed approach",
         "No premature abstraction"
-      ]
+      ],
+      "index": 1137,
+      "phrase": "their abstraction and Generalization is {value}",
+      "defaultValue": null
     },
     {
       "id": "code_dependencies_approach",
@@ -16565,7 +18792,10 @@ window.MATRAIX_DIMENSIONS = {
         "Prefer custom implementations",
         "Use framework defaults",
         "Dependency minimalist"
-      ]
+      ],
+      "index": 1138,
+      "phrase": "their dependencies and Library Usage is {value}",
+      "defaultValue": null
     },
     {
       "id": "code_performance_priority",
@@ -16578,7 +18808,10 @@ window.MATRAIX_DIMENSIONS = {
         "Balanced consideration",
         "Maintainability-first",
         "Premature optimization tendency"
-      ]
+      ],
+      "index": 1139,
+      "phrase": "their performance vs Readability Priority is {value}",
+      "defaultValue": null
     },
     {
       "id": "code_testing_approach",
@@ -16591,7 +18824,10 @@ window.MATRAIX_DIMENSIONS = {
         "Mix of unit and integration tests",
         "Minimal testing",
         "No tests"
-      ]
+      ],
+      "index": 1140,
+      "phrase": "their testing and Code Coverage Approach is {value}",
+      "defaultValue": null
     },
     {
       "id": "code_refactoring_frequency",
@@ -16604,7 +18840,10 @@ window.MATRAIX_DIMENSIONS = {
         "Refactor when necessary",
         "Rarely refactors",
         "Never refactors"
-      ]
+      ],
+      "index": 1141,
+      "phrase": "their refactoring Frequency and Cleanliness is {value}",
+      "defaultValue": null
     },
     {
       "id": "prog_python",
@@ -16616,7 +18855,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1142,
+      "phrase": "{value} in Python",
+      "defaultValue": "None"
     },
     {
       "id": "prog_javascript",
@@ -16628,7 +18870,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1143,
+      "phrase": "{value} in JavaScript",
+      "defaultValue": "None"
     },
     {
       "id": "prog_typescript",
@@ -16640,7 +18885,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1144,
+      "phrase": "{value} in TypeScript",
+      "defaultValue": "None"
     },
     {
       "id": "prog_java",
@@ -16652,7 +18900,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1145,
+      "phrase": "{value} in Java",
+      "defaultValue": "None"
     },
     {
       "id": "prog_c",
@@ -16664,7 +18915,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1146,
+      "phrase": "{value} in C",
+      "defaultValue": "None"
     },
     {
       "id": "prog_go",
@@ -16676,7 +18930,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1147,
+      "phrase": "{value} in Go",
+      "defaultValue": "None"
     },
     {
       "id": "prog_rust",
@@ -16688,7 +18945,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1148,
+      "phrase": "{value} in Rust",
+      "defaultValue": "None"
     },
     {
       "id": "prog_ruby",
@@ -16700,7 +18960,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1149,
+      "phrase": "{value} in Ruby",
+      "defaultValue": "None"
     },
     {
       "id": "prog_php",
@@ -16712,7 +18975,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1150,
+      "phrase": "{value} in PHP",
+      "defaultValue": "None"
     },
     {
       "id": "prog_swift",
@@ -16724,7 +18990,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1151,
+      "phrase": "{value} in Swift",
+      "defaultValue": "None"
     },
     {
       "id": "prog_kotlin",
@@ -16736,7 +19005,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1152,
+      "phrase": "{value} in Kotlin",
+      "defaultValue": "None"
     },
     {
       "id": "prog_objective_c",
@@ -16748,7 +19020,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1153,
+      "phrase": "{value} in Objective-C",
+      "defaultValue": "None"
     },
     {
       "id": "prog_scala",
@@ -16760,7 +19035,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1154,
+      "phrase": "{value} in Scala",
+      "defaultValue": "None"
     },
     {
       "id": "prog_haskell",
@@ -16772,7 +19050,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1155,
+      "phrase": "{value} in Haskell",
+      "defaultValue": "None"
     },
     {
       "id": "prog_elixir",
@@ -16784,7 +19065,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1156,
+      "phrase": "{value} in Elixir",
+      "defaultValue": "None"
     },
     {
       "id": "prog_erlang",
@@ -16796,7 +19080,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1157,
+      "phrase": "{value} in Erlang",
+      "defaultValue": "None"
     },
     {
       "id": "prog_clojure",
@@ -16808,7 +19095,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1158,
+      "phrase": "{value} in Clojure",
+      "defaultValue": "None"
     },
     {
       "id": "prog_lua",
@@ -16820,7 +19110,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1159,
+      "phrase": "{value} in Lua",
+      "defaultValue": "None"
     },
     {
       "id": "prog_perl",
@@ -16832,7 +19125,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1160,
+      "phrase": "{value} in Perl",
+      "defaultValue": "None"
     },
     {
       "id": "prog_r",
@@ -16844,7 +19140,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1161,
+      "phrase": "{value} in R",
+      "defaultValue": "None"
     },
     {
       "id": "prog_julia",
@@ -16856,7 +19155,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1162,
+      "phrase": "{value} in Julia",
+      "defaultValue": "None"
     },
     {
       "id": "prog_matlab",
@@ -16868,7 +19170,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1163,
+      "phrase": "{value} in MATLAB",
+      "defaultValue": "None"
     },
     {
       "id": "prog_sql",
@@ -16880,7 +19185,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1164,
+      "phrase": "{value} in SQL",
+      "defaultValue": "None"
     },
     {
       "id": "prog_bash",
@@ -16892,7 +19200,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1165,
+      "phrase": "{value} in Bash",
+      "defaultValue": "None"
     },
     {
       "id": "prog_powershell",
@@ -16904,7 +19215,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1166,
+      "phrase": "{value} in PowerShell",
+      "defaultValue": "None"
     },
     {
       "id": "prog_dart",
@@ -16916,7 +19230,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1167,
+      "phrase": "{value} in Dart",
+      "defaultValue": "None"
     },
     {
       "id": "prog_f",
@@ -16928,7 +19245,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1168,
+      "phrase": "{value} in F#",
+      "defaultValue": "None"
     },
     {
       "id": "prog_ocaml",
@@ -16940,7 +19260,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1169,
+      "phrase": "{value} in OCaml",
+      "defaultValue": "None"
     },
     {
       "id": "prog_assembly",
@@ -16952,7 +19275,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1170,
+      "phrase": "{value} in Assembly",
+      "defaultValue": "None"
     },
     {
       "id": "prog_cobol",
@@ -16964,7 +19290,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1171,
+      "phrase": "{value} in COBOL",
+      "defaultValue": "None"
     },
     {
       "id": "prog_fortran",
@@ -16976,7 +19305,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1172,
+      "phrase": "{value} in Fortran",
+      "defaultValue": "None"
     },
     {
       "id": "prog_solidity",
@@ -16988,7 +19320,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1173,
+      "phrase": "{value} in Solidity",
+      "defaultValue": "None"
     },
     {
       "id": "prog_graphql",
@@ -17000,7 +19335,10 @@ window.MATRAIX_DIMENSIONS = {
         "Proficient",
         "Familiar",
         "None"
-      ]
+      ],
+      "index": 1174,
+      "phrase": "{value} in GraphQL",
+      "defaultValue": "None"
     },
     {
       "id": "bfi2_domain_extraversion",
@@ -17023,14 +19361,17 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "domain",
         "dimensions_claimed": 20,
         "license": "research-use-reference",
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1175,
+      "phrase": "scores {value} on Extraversion",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_domain_agreeableness",
@@ -17053,14 +19394,17 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "domain",
         "dimensions_claimed": 20,
         "license": "research-use-reference",
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1176,
+      "phrase": "scores {value} on Agreeableness",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_domain_conscientiousness",
@@ -17083,14 +19427,17 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "domain",
         "dimensions_claimed": 20,
         "license": "research-use-reference",
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1177,
+      "phrase": "scores {value} on Conscientiousness",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_domain_negative_emotionality",
@@ -17113,14 +19460,17 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "domain",
         "dimensions_claimed": 20,
         "license": "research-use-reference",
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1178,
+      "phrase": "scores {value} on Negative Emotionality",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_domain_open_mindedness",
@@ -17143,14 +19493,17 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "domain",
         "dimensions_claimed": 20,
         "license": "research-use-reference",
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1179,
+      "phrase": "scores {value} on Open-Mindedness",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_facet_sociability",
@@ -17173,7 +19526,7 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "facet",
         "parent_domain": "Extraversion",
         "dimensions_claimed": 20,
@@ -17181,7 +19534,10 @@ window.MATRAIX_DIMENSIONS = {
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1180,
+      "phrase": "scores {value} on Sociability",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_facet_assertiveness",
@@ -17204,7 +19560,7 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "facet",
         "parent_domain": "Extraversion",
         "dimensions_claimed": 20,
@@ -17212,7 +19568,10 @@ window.MATRAIX_DIMENSIONS = {
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1181,
+      "phrase": "scores {value} on Assertiveness",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_facet_energy_level",
@@ -17235,7 +19594,7 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "facet",
         "parent_domain": "Extraversion",
         "dimensions_claimed": 20,
@@ -17243,7 +19602,10 @@ window.MATRAIX_DIMENSIONS = {
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1182,
+      "phrase": "scores {value} on Energy Level",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_facet_compassion",
@@ -17266,7 +19628,7 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "facet",
         "parent_domain": "Agreeableness",
         "dimensions_claimed": 20,
@@ -17274,7 +19636,10 @@ window.MATRAIX_DIMENSIONS = {
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1183,
+      "phrase": "scores {value} on Compassion",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_facet_respectfulness",
@@ -17297,7 +19662,7 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "facet",
         "parent_domain": "Agreeableness",
         "dimensions_claimed": 20,
@@ -17305,7 +19670,10 @@ window.MATRAIX_DIMENSIONS = {
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1184,
+      "phrase": "scores {value} on Respectfulness",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_facet_trust",
@@ -17328,7 +19696,7 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "facet",
         "parent_domain": "Agreeableness",
         "dimensions_claimed": 20,
@@ -17336,7 +19704,10 @@ window.MATRAIX_DIMENSIONS = {
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1185,
+      "phrase": "scores {value} on Trust",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_facet_organization",
@@ -17359,7 +19730,7 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "facet",
         "parent_domain": "Conscientiousness",
         "dimensions_claimed": 20,
@@ -17367,7 +19738,10 @@ window.MATRAIX_DIMENSIONS = {
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1186,
+      "phrase": "scores {value} on Organization",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_facet_productiveness",
@@ -17390,7 +19764,7 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "facet",
         "parent_domain": "Conscientiousness",
         "dimensions_claimed": 20,
@@ -17398,7 +19772,10 @@ window.MATRAIX_DIMENSIONS = {
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1187,
+      "phrase": "scores {value} on Productiveness",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_facet_responsibility",
@@ -17421,7 +19798,7 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "facet",
         "parent_domain": "Conscientiousness",
         "dimensions_claimed": 20,
@@ -17429,7 +19806,10 @@ window.MATRAIX_DIMENSIONS = {
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1188,
+      "phrase": "scores {value} on Responsibility",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_facet_anxiety",
@@ -17452,7 +19832,7 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "facet",
         "parent_domain": "Negative Emotionality",
         "dimensions_claimed": 20,
@@ -17460,7 +19840,10 @@ window.MATRAIX_DIMENSIONS = {
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1189,
+      "phrase": "scores {value} on Anxiety",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_facet_depression",
@@ -17483,7 +19866,7 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "facet",
         "parent_domain": "Negative Emotionality",
         "dimensions_claimed": 20,
@@ -17491,7 +19874,10 @@ window.MATRAIX_DIMENSIONS = {
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1190,
+      "phrase": "scores {value} on Depression",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_facet_emotional_volatility",
@@ -17514,7 +19900,7 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "facet",
         "parent_domain": "Negative Emotionality",
         "dimensions_claimed": 20,
@@ -17522,7 +19908,10 @@ window.MATRAIX_DIMENSIONS = {
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1191,
+      "phrase": "scores {value} on Emotional Volatility",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_facet_intellectual_curiosity",
@@ -17545,7 +19934,7 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "facet",
         "parent_domain": "Open-Mindedness",
         "dimensions_claimed": 20,
@@ -17553,7 +19942,10 @@ window.MATRAIX_DIMENSIONS = {
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1192,
+      "phrase": "scores {value} on Intellectual Curiosity",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_facet_aesthetic_sensitivity",
@@ -17576,7 +19968,7 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "facet",
         "parent_domain": "Open-Mindedness",
         "dimensions_claimed": 20,
@@ -17584,7 +19976,10 @@ window.MATRAIX_DIMENSIONS = {
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1193,
+      "phrase": "scores {value} on Aesthetic Sensitivity",
+      "defaultValue": "Average"
     },
     {
       "id": "bfi2_facet_creative_imagination",
@@ -17607,7 +20002,7 @@ window.MATRAIX_DIMENSIONS = {
         "doi": "10.1037/pspp0000096",
         "source_url": "https://www.colby.edu/academics/departments-and-programs/psychology/research-opportunities/personality-lab/the-bfi-2/",
         "manifest_file": "personas/existing_data_curation/manifests/bfi2_big_five_inventory_2.json",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "construct_level": "facet",
         "parent_domain": "Open-Mindedness",
         "dimensions_claimed": 20,
@@ -17615,7 +20010,10 @@ window.MATRAIX_DIMENSIONS = {
         "note": "Construct label only; questionnaire items are not copied.",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1194,
+      "phrase": "scores {value} on Creative Imagination",
+      "defaultValue": "Average"
     },
     {
       "id": "schwartz_value_self_direction",
@@ -17640,12 +20038,15 @@ window.MATRAIX_DIMENSIONS = {
         "paper_title": "An Overview of the Schwartz Theory of Basic Values",
         "construct_level": "basic_value",
         "note": "Theory construct label only; survey/questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "value_name": "Self-direction",
         "persona_category": "Values, Goals & Motivations",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1195,
+      "phrase": "scores {value} on the value of Self-Direction",
+      "defaultValue": "Average"
     },
     {
       "id": "schwartz_value_stimulation",
@@ -17670,12 +20071,15 @@ window.MATRAIX_DIMENSIONS = {
         "paper_title": "An Overview of the Schwartz Theory of Basic Values",
         "construct_level": "basic_value",
         "note": "Theory construct label only; survey/questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "value_name": "Stimulation",
         "persona_category": "Values, Goals & Motivations",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1196,
+      "phrase": "scores {value} on the value of Stimulation",
+      "defaultValue": "Average"
     },
     {
       "id": "schwartz_value_hedonism",
@@ -17700,12 +20104,15 @@ window.MATRAIX_DIMENSIONS = {
         "paper_title": "An Overview of the Schwartz Theory of Basic Values",
         "construct_level": "basic_value",
         "note": "Theory construct label only; survey/questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "value_name": "Hedonism",
         "persona_category": "Values, Goals & Motivations",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1197,
+      "phrase": "scores {value} on the value of Hedonism",
+      "defaultValue": "Average"
     },
     {
       "id": "schwartz_value_achievement",
@@ -17730,12 +20137,15 @@ window.MATRAIX_DIMENSIONS = {
         "paper_title": "An Overview of the Schwartz Theory of Basic Values",
         "construct_level": "basic_value",
         "note": "Theory construct label only; survey/questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "value_name": "Achievement",
         "persona_category": "Values, Goals & Motivations",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1198,
+      "phrase": "scores {value} on the value of Achievement",
+      "defaultValue": "Average"
     },
     {
       "id": "schwartz_value_power",
@@ -17760,12 +20170,15 @@ window.MATRAIX_DIMENSIONS = {
         "paper_title": "An Overview of the Schwartz Theory of Basic Values",
         "construct_level": "basic_value",
         "note": "Theory construct label only; survey/questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "value_name": "Power",
         "persona_category": "Values, Goals & Motivations",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1199,
+      "phrase": "scores {value} on the value of Power",
+      "defaultValue": "Average"
     },
     {
       "id": "schwartz_value_security",
@@ -17790,12 +20203,15 @@ window.MATRAIX_DIMENSIONS = {
         "paper_title": "An Overview of the Schwartz Theory of Basic Values",
         "construct_level": "basic_value",
         "note": "Theory construct label only; survey/questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "value_name": "Security",
         "persona_category": "Values, Goals & Motivations",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1200,
+      "phrase": "scores {value} on the value of Security",
+      "defaultValue": "Average"
     },
     {
       "id": "schwartz_value_conformity",
@@ -17820,12 +20236,15 @@ window.MATRAIX_DIMENSIONS = {
         "paper_title": "An Overview of the Schwartz Theory of Basic Values",
         "construct_level": "basic_value",
         "note": "Theory construct label only; survey/questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "value_name": "Conformity",
         "persona_category": "Values, Goals & Motivations",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1201,
+      "phrase": "scores {value} on the value of Conformity",
+      "defaultValue": "Average"
     },
     {
       "id": "schwartz_value_tradition",
@@ -17850,12 +20269,15 @@ window.MATRAIX_DIMENSIONS = {
         "paper_title": "An Overview of the Schwartz Theory of Basic Values",
         "construct_level": "basic_value",
         "note": "Theory construct label only; survey/questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "value_name": "Tradition",
         "persona_category": "Values, Goals & Motivations",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1202,
+      "phrase": "scores {value} on the value of Tradition",
+      "defaultValue": "Average"
     },
     {
       "id": "schwartz_value_benevolence",
@@ -17880,12 +20302,15 @@ window.MATRAIX_DIMENSIONS = {
         "paper_title": "An Overview of the Schwartz Theory of Basic Values",
         "construct_level": "basic_value",
         "note": "Theory construct label only; survey/questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "value_name": "Benevolence",
         "persona_category": "Values, Goals & Motivations",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1203,
+      "phrase": "scores {value} on the value of Benevolence",
+      "defaultValue": "Average"
     },
     {
       "id": "schwartz_value_universalism",
@@ -17910,12 +20335,15 @@ window.MATRAIX_DIMENSIONS = {
         "paper_title": "An Overview of the Schwartz Theory of Basic Values",
         "construct_level": "basic_value",
         "note": "Theory construct label only; survey/questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "value_name": "Universalism",
         "persona_category": "Values, Goals & Motivations",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1204,
+      "phrase": "scores {value} on the value of Universalism",
+      "defaultValue": "Average"
     },
     {
       "id": "sdt_need_autonomy",
@@ -17939,12 +20367,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "basic_psychological_need",
         "note": "Theory construct label only; questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "need_name": "Autonomy",
         "persona_category": "Values, Goals & Motivations",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1205,
+      "phrase": "scores {value} on the need for Autonomy Need",
+      "defaultValue": "Average"
     },
     {
       "id": "sdt_need_competence",
@@ -17968,12 +20399,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "basic_psychological_need",
         "note": "Theory construct label only; questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "need_name": "Competence",
         "persona_category": "Values, Goals & Motivations",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1206,
+      "phrase": "scores {value} on the need for Competence Need",
+      "defaultValue": "Average"
     },
     {
       "id": "sdt_need_relatedness",
@@ -17997,12 +20431,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "basic_psychological_need",
         "note": "Theory construct label only; questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "need_name": "Relatedness",
         "persona_category": "Values, Goals & Motivations",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1207,
+      "phrase": "scores {value} on the need for Relatedness Need",
+      "defaultValue": "Average"
     },
     {
       "id": "mft_care_harm",
@@ -18026,12 +20463,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "moral_foundation",
         "note": "Theory construct label only; questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "foundation_name": "Care/Harm",
         "persona_category": "Worldview, Beliefs & Attitudes",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1208,
+      "phrase": "scores {value} on Care/Harm",
+      "defaultValue": "Average"
     },
     {
       "id": "mft_fairness_cheating",
@@ -18055,12 +20495,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "moral_foundation",
         "note": "Theory construct label only; questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "foundation_name": "Fairness/Cheating",
         "persona_category": "Worldview, Beliefs & Attitudes",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1209,
+      "phrase": "scores {value} on Fairness/Cheating",
+      "defaultValue": "Average"
     },
     {
       "id": "mft_loyalty_betrayal",
@@ -18084,12 +20527,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "moral_foundation",
         "note": "Theory construct label only; questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "foundation_name": "Loyalty/Betrayal",
         "persona_category": "Worldview, Beliefs & Attitudes",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1210,
+      "phrase": "scores {value} on Loyalty/Betrayal",
+      "defaultValue": "Average"
     },
     {
       "id": "mft_authority_subversion",
@@ -18113,12 +20559,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "moral_foundation",
         "note": "Theory construct label only; questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "foundation_name": "Authority/Subversion",
         "persona_category": "Worldview, Beliefs & Attitudes",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1211,
+      "phrase": "scores {value} on Authority/Subversion",
+      "defaultValue": "Average"
     },
     {
       "id": "mft_sanctity_degradation",
@@ -18142,12 +20591,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "moral_foundation",
         "note": "Theory construct label only; questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "foundation_name": "Sanctity/Degradation",
         "persona_category": "Worldview, Beliefs & Attitudes",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1212,
+      "phrase": "scores {value} on Sanctity/Degradation",
+      "defaultValue": "Average"
     },
     {
       "id": "mft_liberty_oppression",
@@ -18171,12 +20623,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "moral_foundation",
         "note": "Theory construct label only; questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "foundation_name": "Liberty/Oppression",
         "persona_category": "Worldview, Beliefs & Attitudes",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1213,
+      "phrase": "scores {value} on Liberty/Oppression",
+      "defaultValue": "Average"
     },
     {
       "id": "need_for_cognition",
@@ -18201,11 +20656,14 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "cognitive_motivation_construct",
         "note": "Psychometric construct label only; questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "persona_category": "Cognitive & Capability Profile",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1214,
+      "phrase": "scores {value} on Need for Cognition",
+      "defaultValue": "Average"
     },
     {
       "id": "need_for_closure",
@@ -18230,11 +20688,14 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "cognitive_style_construct",
         "note": "Collapsed construct-level dimension for certainty/closure preference; questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "persona_category": "Cognitive & Capability Profile",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1215,
+      "phrase": "scores {value} on Need for Closure",
+      "defaultValue": "Average"
     },
     {
       "id": "dospert_ethical_risk_tolerance",
@@ -18259,12 +20720,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "risk_domain",
         "note": "Domain-level risk orientation labels only; DOSPERT item text is not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "risk_domain": "Ethical",
         "persona_category": "Behavioral Patterns",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1216,
+      "phrase": "scores {value} on Ethical Risk Tolerance",
+      "defaultValue": "Average"
     },
     {
       "id": "dospert_financial_risk_tolerance",
@@ -18289,12 +20753,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "risk_domain",
         "note": "Domain-level risk orientation labels only; DOSPERT item text is not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "risk_domain": "Financial",
         "persona_category": "Behavioral Patterns",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1217,
+      "phrase": "scores {value} on Financial Risk Tolerance",
+      "defaultValue": "Average"
     },
     {
       "id": "dospert_health_safety_risk_tolerance",
@@ -18319,12 +20786,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "risk_domain",
         "note": "Domain-level risk orientation labels only; DOSPERT item text is not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "risk_domain": "Health/Safety",
         "persona_category": "Behavioral Patterns",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1218,
+      "phrase": "scores {value} on Health/Safety Risk Tolerance",
+      "defaultValue": "Average"
     },
     {
       "id": "dospert_recreational_risk_tolerance",
@@ -18349,12 +20819,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "risk_domain",
         "note": "Domain-level risk orientation labels only; DOSPERT item text is not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "risk_domain": "Recreational",
         "persona_category": "Behavioral Patterns",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1219,
+      "phrase": "scores {value} on Recreational Risk Tolerance",
+      "defaultValue": "Average"
     },
     {
       "id": "dospert_social_risk_tolerance",
@@ -18379,12 +20852,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "risk_domain",
         "note": "Domain-level risk orientation labels only; DOSPERT item text is not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "risk_domain": "Social",
         "persona_category": "Behavioral Patterns",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1220,
+      "phrase": "scores {value} on Social Risk Tolerance",
+      "defaultValue": "Average"
     },
     {
       "id": "attachment_anxiety",
@@ -18408,12 +20884,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "research-use-reference",
         "construct_level": "adult_attachment_dimension",
         "note": "Uses the common adult attachment dimensions of anxiety and avoidance; questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "attachment_dimension": "Anxiety",
         "persona_category": "Social Identity & Relationships",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1221,
+      "phrase": "their attachment Anxiety is {value}",
+      "defaultValue": "Average"
     },
     {
       "id": "attachment_avoidance",
@@ -18437,12 +20916,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "research-use-reference",
         "construct_level": "adult_attachment_dimension",
         "note": "Uses the common adult attachment dimensions of anxiety and avoidance; questionnaire items are not copied.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "attachment_dimension": "Avoidance",
         "persona_category": "Social Identity & Relationships",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1222,
+      "phrase": "their attachment Avoidance is {value}",
+      "defaultValue": "Average"
     },
     {
       "id": "interpersonal_agency_dominance",
@@ -18467,12 +20949,15 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "interpersonal_axis",
         "note": "Adds the two broad interpersonal circumplex axes rather than octant-level scales.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "axis_name": "Agency/Dominance",
         "persona_category": "Social Identity & Relationships",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1223,
+      "phrase": "their interpersonal Agency/Dominance is {value}",
+      "defaultValue": "Average"
     },
     {
       "id": "interpersonal_communion_warmth",
@@ -18497,430 +20982,1119 @@ window.MATRAIX_DIMENSIONS = {
         "license": "citation-only",
         "construct_level": "interpersonal_axis",
         "note": "Adds the two broad interpersonal circumplex axes rather than octant-level scales.",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
         "axis_name": "Communion/Warmth",
         "persona_category": "Social Identity & Relationships",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
-      }
+      },
+      "index": 1224,
+      "phrase": "their interpersonal Communion/Warmth is {value}",
+      "defaultValue": "Average"
     },
     {
-      "id": "wiki_birth_date",
-      "label": "Birth Date",
-      "category": "Demographic: Life Events",
-      "description": "Specific date a person was born; enables age calculation and historical context.",
+      "id": "dev_professional_status",
+      "label": "Developer professional status",
+      "category": "Developer: Professional Context",
+      "description": "Whether coding is the persona's profession, learning path, hobby, or adjacent technical activity.",
       "values": [
-        "1800s",
-        "1900-1920",
-        "1920-1940",
-        "1940-1960",
-        "1960-1980",
-        "1980-2000",
-        "2000+"
+        "Professional developer",
+        "Learning to code",
+        "Hobbyist / side-project coder",
+        "Student developer",
+        "Non-developer technologist",
+        "Former / inactive developer"
       ],
-      "source_origin": {
-        "source_id": "wiki_bio_dataset",
-        "source_name": "Wikipedia Biographical Data",
-        "source_type": "wikipedia_wikidata_reference",
-        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
-        "manifest_file": "personas/existing_data_curation/manifests/wikipedia_biographical_data.json",
-        "dimensions_claimed": 18,
-        "license": "CC-BY-SA-3.0 (Wikipedia)",
-        "note": "Extracted from Wikipedia infoboxes and Wikidata P569",
-        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
-        "intended_use": "Grounding personas in real biographical data",
-        "added_date": "2026-06-20",
-        "contributor_github": "claude-assistant"
-      }
+      "index": 1225,
+      "phrase": "their developer professional status is {value}",
+      "defaultValue": "Former / inactive developer"
     },
     {
-      "id": "wiki_birth_place",
-      "label": "Birth Place",
-      "category": "Demographic: Geographic",
-      "description": "Geographic location where the person was born.",
+      "id": "dev_role_archetype",
+      "label": "Developer role archetype",
+      "category": "Developer: Professional Context",
+      "description": "Primary software role or developer identity, inspired by developer survey role categories.",
       "values": [
-        "North America",
-        "Latin America",
-        "Western Europe",
-        "Eastern Europe",
-        "Sub-Saharan Africa",
-        "MENA",
-        "South Asia",
-        "East Asia",
-        "Southeast Asia",
-        "Oceania"
+        "Front-end developer",
+        "Back-end developer",
+        "Full-stack developer",
+        "Mobile developer",
+        "Data / ML developer",
+        "DevOps / SRE / infrastructure",
+        "Security engineer",
+        "Game developer",
+        "Embedded / systems developer",
+        "Engineering manager / lead",
+        "Product / UX technical role",
+        "Student / learner",
+        "Other developer"
       ],
-      "source_origin": {
-        "source_id": "wiki_bio_dataset",
-        "source_name": "Wikipedia Biographical Data",
-        "source_type": "wikipedia_wikidata_reference",
-        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
-        "note": "Extracted from Wikipedia infoboxes and Wikidata P19",
-        "added_date": "2026-06-20",
-        "contributor_github": "claude-assistant"
-      }
+      "index": 1226,
+      "phrase": "their developer role archetype is {value}",
+      "defaultValue": "Other developer"
     },
     {
-      "id": "wiki_nationality",
-      "label": "Nationality",
-      "category": "Demographic: Core",
-      "description": "Primary country or countries of citizenship.",
+      "id": "dev_contribution_context",
+      "label": "Developer contribution context",
+      "category": "Developer: Professional Context",
+      "description": "The context in which the persona most often writes or influences code.",
       "values": [
-        "American",
-        "British",
-        "French",
-        "German",
-        "Japanese",
-        "Chinese",
-        "Indian",
-        "Canadian",
-        "Australian",
-        "Other"
+        "Employee work",
+        "Independent / freelance work",
+        "Open-source / community work",
+        "Academic / student work",
+        "Personal projects",
+        "Mixed contexts"
       ],
-      "source_origin": {
-        "source_id": "wiki_bio_dataset",
-        "source_name": "Wikipedia Biographical Data",
-        "source_type": "wikipedia_wikidata_reference",
-        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
-        "note": "Extracted from Wikipedia infoboxes and Wikidata P27",
-        "added_date": "2026-06-20",
-        "contributor_github": "claude-assistant"
-      }
+      "index": 1227,
+      "phrase": "their developer contribution context is {value}",
+      "defaultValue": "Mixed contexts"
     },
     {
-      "id": "wiki_occupation",
-      "label": "Occupation",
-      "category": "Professional: Industry",
-      "description": "Primary profession or occupational field from real biographical data.",
+      "id": "dev_ic_manager_orientation",
+      "label": "Individual contributor vs manager",
+      "category": "Developer: Professional Context",
+      "description": "Whether the persona primarily contributes directly, leads technically, or manages people.",
       "values": [
-        "Scientist",
-        "Politician",
-        "Artist",
-        "Athlete",
-        "Entrepreneur",
-        "Entertainer",
-        "Academic",
-        "Military",
-        "Religious",
-        "Other"
+        "Individual contributor",
+        "Tech lead without people management",
+        "People manager",
+        "Founder / owner",
+        "Student / learner",
+        "Not applicable"
       ],
-      "source_origin": {
-        "source_id": "wiki_bio_dataset",
-        "source_name": "Wikipedia Biographical Data",
-        "source_type": "wikipedia_wikidata_reference",
-        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
-        "note": "Extracted from Wikipedia infoboxes and Wikidata P106",
-        "added_date": "2026-06-20",
-        "contributor_github": "claude-assistant"
-      }
+      "index": 1228,
+      "phrase": "their individual contributor vs manager is {value}",
+      "defaultValue": "Not applicable"
     },
     {
-      "id": "wiki_field_of_work",
-      "label": "Field of Work",
-      "category": "Learning: Academic",
-      "description": "Academic or professional discipline.",
+      "id": "dev_toolchain_complexity",
+      "label": "Developer toolchain complexity",
+      "category": "Developer: Professional Context",
+      "description": "How many distinct software tools and platforms the persona regularly uses in development work.",
       "values": [
-        "Physics",
-        "Medicine",
-        "Literature",
-        "Politics",
-        "Law",
-        "Engineering",
-        "Business",
-        "Arts",
-        "Sports",
-        "Religion"
+        "Minimal toolchain",
+        "Focused small stack",
+        "Moderate multi-tool workflow",
+        "Large integrated toolchain",
+        "Highly fragmented toolchain"
       ],
-      "source_origin": {
-        "source_id": "wiki_bio_dataset",
-        "source_name": "Wikipedia Biographical Data",
-        "source_type": "wikipedia_wikidata_reference",
-        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
-        "note": "Extracted from Wikipedia infoboxes and Wikidata P101",
-        "added_date": "2026-06-20",
-        "contributor_github": "claude-assistant"
-      }
+      "index": 1229,
+      "phrase": "their developer toolchain complexity is {value}",
+      "defaultValue": "Highly fragmented toolchain"
     },
     {
-      "id": "wiki_position_held",
-      "label": "Notable Positions/Titles",
-      "category": "Professional: Career",
-      "description": "Official roles and positions occupied by the person.",
+      "id": "dev_primary_work_surface",
+      "label": "Primary developer work surface",
+      "category": "Developer: Professional Context",
+      "description": "Where the persona primarily performs coding work and interacts with coding tools.",
       "values": [
-        "CEO",
-        "President",
-        "Minister",
-        "Governor",
-        "Mayor",
-        "Archbishop",
-        "Chancellor",
-        "General",
-        "Ambassador",
-        "None"
+        "IDE / editor",
+        "Terminal / CLI",
+        "Browser / cloud workspace",
+        "Notebook environment",
+        "Mobile / embedded hardware workflow",
+        "Mixed surfaces"
       ],
-      "source_origin": {
-        "source_id": "wiki_bio_dataset",
-        "source_name": "Wikipedia Biographical Data",
-        "source_type": "wikipedia_wikidata_reference",
-        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
-        "note": "Extracted from Wikipedia infoboxes and Wikidata P39",
-        "added_date": "2026-06-20",
-        "contributor_github": "claude-assistant"
-      }
+      "index": 1230,
+      "phrase": "their primary developer work surface is {value}",
+      "defaultValue": "Mixed surfaces"
     },
     {
-      "id": "wiki_education_level",
-      "label": "Educational Attainment",
-      "category": "Learning: Academic",
-      "description": "Highest level of formal education achieved.",
+      "id": "coding_ai_usage_frequency",
+      "label": "Coding AI usage frequency",
+      "category": "Developer: AI Adoption",
+      "description": "How often the persona uses AI tools in the software development process.",
       "values": [
-        "No formal education",
-        "Primary",
-        "Secondary",
-        "Bachelor's degree",
-        "Master's degree",
-        "Doctorate",
-        "Postdoctoral"
+        "Daily",
+        "Weekly",
+        "Monthly or infrequent",
+        "Tried but not active",
+        "Never used",
+        "Actively avoids"
       ],
-      "source_origin": {
-        "source_id": "wiki_bio_dataset",
-        "source_name": "Wikipedia Biographical Data",
-        "source_type": "wikipedia_wikidata_reference",
-        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
-        "note": "Extracted from Wikipedia infoboxes and Wikidata P69",
-        "added_date": "2026-06-20",
-        "contributor_github": "claude-assistant"
-      }
+      "index": 1231,
+      "phrase": "their coding AI usage frequency is {value}",
+      "defaultValue": "Never used"
     },
     {
-      "id": "wiki_awards_recognition",
-      "label": "Awards and Honors",
-      "category": "Professional: Career",
-      "description": "Major prizes and distinctions received.",
+      "id": "coding_ai_sentiment",
+      "label": "Coding AI sentiment",
+      "category": "Developer: AI Adoption",
+      "description": "Overall stance toward using AI tools as part of a development workflow.",
       "values": [
-        "Nobel Prize",
-        "Academy Award",
-        "Pulitzer Prize",
-        "Emmy Award",
-        "Olympic Medal",
-        "Grammy Award",
-        "Other major award",
-        "None"
+        "Very favorable",
+        "Somewhat favorable",
+        "Neutral / indifferent",
+        "Somewhat unfavorable",
+        "Very unfavorable"
       ],
-      "source_origin": {
-        "source_id": "wiki_bio_dataset",
-        "source_name": "Wikipedia Biographical Data",
-        "source_type": "wikipedia_wikidata_reference",
-        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
-        "note": "Extracted from Wikipedia infoboxes and Wikidata P166",
-        "added_date": "2026-06-20",
-        "contributor_github": "claude-assistant"
-      }
+      "index": 1232,
+      "phrase": "their coding AI sentiment is {value}",
+      "defaultValue": "Neutral / indifferent"
     },
     {
-      "id": "wiki_political_affiliation",
-      "label": "Political Affiliation",
-      "category": "Worldview: Beliefs",
-      "description": "Political party or political ideology association.",
+      "id": "coding_ai_output_trust",
+      "label": "Coding AI output trust",
+      "category": "Developer: AI Adoption",
+      "description": "How much the persona trusts AI-generated development output before relying on it.",
       "values": [
-        "Democratic",
-        "Republican",
-        "Conservative",
-        "Labour",
-        "Green",
-        "Independent",
-        "Progressive",
-        "Socialist",
-        "Liberal",
-        "Other"
+        "Strongly trusts with light review",
+        "Trusts after verification",
+        "Neutral / depends on task",
+        "Distrusts until proven",
+        "Does not trust"
       ],
-      "source_origin": {
-        "source_id": "wiki_bio_dataset",
-        "source_name": "Wikipedia Biographical Data",
-        "source_type": "wikipedia_wikidata_reference",
-        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
-        "note": "Extracted from Wikipedia infoboxes and Wikidata P102",
-        "added_date": "2026-06-20",
-        "contributor_github": "claude-assistant"
-      }
+      "index": 1233,
+      "phrase": "their coding AI output trust is {value}",
+      "defaultValue": "Does not trust"
     },
     {
-      "id": "nemotron_sex",
-      "label": "Sex",
-      "category": "Demographic: Core",
-      "description": "Biological sex.",
+      "id": "coding_ai_complexity_comfort",
+      "label": "Coding AI complexity comfort",
+      "category": "Developer: AI Adoption",
+      "description": "How comfortable the persona is delegating complex development tasks to AI tools.",
       "values": [
-        "Female",
-        "Male"
+        "Comfortable delegating complex tasks",
+        "Comfortable with bounded complex tasks",
+        "Only simple / boilerplate tasks",
+        "Uses AI for explanation only",
+        "Avoids AI for complexity"
       ],
-      "source_origin": {
-        "source_id": "Nemotron",
-        "dataset_name": "Nemotron Personas USA",
-        "url": "https://huggingface.co/datasets/nvidia/Nemotron-4-340B-Instruct"
-      }
+      "index": 1234,
+      "phrase": "their coding AI complexity comfort is {value}",
+      "defaultValue": "Avoids AI for complexity"
     },
     {
-      "id": "nemotron_marital_status",
-      "label": "Marital Status",
-      "category": "Demographic: Family",
-      "description": "Current marital status.",
+      "id": "coding_ai_job_threat_perception",
+      "label": "Coding AI job threat perception",
+      "category": "Developer: AI Adoption",
+      "description": "Whether the persona perceives AI as a threat to their current or future developer role.",
       "values": [
-        "divorced",
-        "married_present",
-        "never_married",
-        "widowed"
+        "No perceived threat",
+        "Minor long-term concern",
+        "Unsure / mixed",
+        "Moderate threat concern",
+        "Serious threat concern"
       ],
-      "source_origin": {
-        "source_id": "Nemotron",
-        "dataset_name": "Nemotron Personas USA",
-        "url": "https://huggingface.co/datasets/nvidia/Nemotron-4-340B-Instruct"
-      }
+      "index": 1235,
+      "phrase": "their coding AI job threat perception is {value}",
+      "defaultValue": "Serious threat concern"
     },
     {
-      "id": "nemotron_education_level",
-      "label": "Education Level",
-      "category": "Learning: Academic",
-      "description": "Highest level of formal education completed.",
+      "id": "coding_ai_learning_source",
+      "label": "Coding AI learning source",
+      "category": "Developer: AI Adoption",
+      "description": "Primary route through which the persona learned AI-enabled coding tools or AI programming practices.",
       "values": [
-        "9th_12th_no_diploma",
-        "associates",
-        "bachelors",
-        "graduate",
-        "high_school",
-        "less_than_9th",
-        "some_college"
+        "AI-enabled coding tools",
+        "Documentation / tutorials",
+        "Online courses / videos",
+        "Stack Overflow / community Q&A",
+        "Peers / mentors",
+        "Self-experimentation",
+        "Not learning AI tooling"
       ],
-      "source_origin": {
-        "source_id": "Nemotron",
-        "dataset_name": "Nemotron Personas USA",
-        "url": "https://huggingface.co/datasets/nvidia/Nemotron-4-340B-Instruct"
-      }
+      "index": 1236,
+      "phrase": "their coding AI learning source is {value}",
+      "defaultValue": "Not learning AI tooling"
     },
     {
-      "id": "nemotron_bachelors_field",
-      "label": "Bachelor's Degree Field",
-      "category": "Learning: Academic",
-      "description": "Field of study for bachelor's degree (if applicable).",
+      "id": "coding_agent_usage_frequency",
+      "label": "Coding agent usage frequency",
+      "category": "Developer: Agent Adoption",
+      "description": "How often the persona uses AI agents for development or adjacent technical work.",
       "values": [
-        "arts_humanities",
-        "business",
-        "education",
-        "stem",
-        "stem_related"
+        "Daily",
+        "Weekly",
+        "Monthly or infrequent",
+        "Experimental only",
+        "Not yet but interested",
+        "No plans"
       ],
-      "source_origin": {
-        "source_id": "Nemotron",
-        "dataset_name": "Nemotron Personas USA",
-        "url": "https://huggingface.co/datasets/nvidia/Nemotron-4-340B-Instruct"
-      }
+      "index": 1237,
+      "phrase": "their coding agent usage frequency is {value}",
+      "defaultValue": "No plans"
     },
     {
-      "id": "nemotron_occupation",
-      "label": "Occupation",
-      "category": "Professional: Role",
-      "description": "Primary occupation or job role.",
+      "id": "coding_agent_autonomy_preference",
+      "label": "Coding agent autonomy preference",
+      "category": "Developer: Agent Adoption",
+      "description": "Preferred level of autonomy for a coding agent when planning, editing, testing, or executing tasks.",
       "values": [
-        "accountant_or_auditor",
-        "architect",
-        "assembler_or_fabricator",
-        "cashier",
-        "civil_engineer",
-        "computer_or_information_research_scientist",
-        "computer_systems_analyst",
-        "construction_laborer",
-        "correctional_officer_or_jailer",
-        "database_administrator_or_architect",
-        "dental_assistant",
-        "dining_room_or_cafeteria_attendant_or_bartender_helper",
-        "driver_sales_worker_or_truck_driver",
-        "electrical_power_line_installer_or_repairer",
-        "electrician",
-        "elementary_or_middle_school_teacher",
-        "emergency_medical_technician",
-        "engineer",
-        "fast_food_or_counter_worker",
-        "financial_manager",
-        "first_line_supervisor_of_food_preparation_or_serving_worker",
-        "food_service_manager",
-        "home_appliance_repairer",
-        "host_or_hostess_restaurant_lounge_or_coffee_shop",
-        "industrial_truck_or_tractor_operator",
-        "insurance_sales_agent",
-        "marketing_manager",
-        "massage_therapist",
-        "mathematical_science_occupation",
-        "network_or_computer_systems_administrator",
-        "no_occupation",
-        "not_in_workforce",
-        "nursing_assistant",
-        "office_clerk_general",
-        "painting_worker",
-        "personal_care_aide",
-        "physical_scientist",
-        "postsecondary_teacher",
-        "preschool_or_kindergarten_teacher",
-        "public_safety_telecommunicator",
-        "retail_salesperson",
-        "sales_manager",
-        "sales_representative_of_services",
-        "secretary_or_administrative_assistant",
-        "security_guard_or_gambling_surveillance_officer",
-        "software_developer",
-        "telephone_operator",
-        "waiter_or_waitress"
+        "Autonomous execution",
+        "Plan-then-act with checkpoints",
+        "Step-by-step pair programming",
+        "Suggest-only assistant",
+        "No agent autonomy"
       ],
-      "source_origin": {
-        "source_id": "Nemotron",
-        "dataset_name": "Nemotron Personas USA",
-        "url": "https://huggingface.co/datasets/nvidia/Nemotron-4-340B-Instruct"
-      }
+      "index": 1238,
+      "phrase": "their coding agent autonomy preference is {value}",
+      "defaultValue": "No agent autonomy"
     },
     {
-      "id": "nemotron_state",
-      "label": "State of Residence",
-      "category": "Demographic: Geography",
-      "description": "US state where the persona resides.",
+      "id": "coding_agent_workflow_impact",
+      "label": "Coding agent workflow impact",
+      "category": "Developer: Agent Adoption",
+      "description": "How much AI agents have changed the persona's development workflow.",
       "values": [
-        "AL",
-        "AZ",
-        "CA",
-        "CO",
-        "DC",
-        "DE",
-        "FL",
-        "GA",
-        "ID",
-        "IL",
-        "IN",
-        "KS",
-        "KY",
-        "LA",
-        "MA",
-        "MD",
-        "MI",
-        "MN",
-        "MO",
-        "MS",
-        "MT",
-        "NC",
-        "NJ",
-        "NY",
-        "OH",
-        "OK",
-        "OR",
-        "PA",
-        "PR",
-        "SC",
-        "TX",
-        "VA",
-        "WA",
-        "WI"
+        "Major productivity increase",
+        "Moderate productivity increase",
+        "Small targeted improvement",
+        "No clear change",
+        "Negative / slowdown"
       ],
-      "source_origin": {
-        "source_id": "Nemotron",
-        "dataset_name": "Nemotron Personas USA",
-        "url": "https://huggingface.co/datasets/nvidia/Nemotron-4-340B-Instruct"
-      }
+      "index": 1239,
+      "phrase": "their coding agent workflow impact is {value}",
+      "defaultValue": "No clear change"
+    },
+    {
+      "id": "coding_agent_adoption_barrier",
+      "label": "Coding agent adoption barrier",
+      "category": "Developer: Agent Adoption",
+      "description": "The main blocker that would prevent the persona from adopting a coding agent.",
+      "values": [
+        "Accuracy / reliability concerns",
+        "Security / privacy / compliance",
+        "Integration with existing tools",
+        "Learning / setup effort",
+        "Cost",
+        "Lack of clear use case",
+        "Company policy",
+        "No barrier"
+      ],
+      "index": 1240,
+      "phrase": "their coding agent adoption barrier is {value}",
+      "defaultValue": "No barrier"
+    },
+    {
+      "id": "coding_agent_control_expectation",
+      "label": "Coding agent control expectation",
+      "category": "Developer: Agent Adoption",
+      "description": "How much explicit control the persona expects before a coding agent changes files or runs commands.",
+      "values": [
+        "Requires explicit approval before edits",
+        "Approval before risky edits only",
+        "Agent may edit within scoped files",
+        "Agent may run broad tasks autonomously",
+        "Read-only assistance preferred"
+      ],
+      "index": 1241,
+      "phrase": "their coding agent control expectation is {value}",
+      "defaultValue": "Read-only assistance preferred"
+    },
+    {
+      "id": "coding_agent_explanation_preference",
+      "label": "Coding agent explanation preference",
+      "category": "Developer: Agent Adoption",
+      "description": "How much explanation the persona wants from a coding agent while it works.",
+      "values": [
+        "Concise summary only",
+        "Explain decisions and tradeoffs",
+        "Detailed step-by-step reasoning",
+        "Show diffs / tests first",
+        "Minimal explanation unless asked"
+      ],
+      "index": 1242,
+      "phrase": "their coding agent explanation preference is {value}",
+      "defaultValue": "Minimal explanation unless asked"
+    },
+    {
+      "id": "coding_agent_context_sharing_comfort",
+      "label": "Coding agent context sharing comfort",
+      "category": "Developer: Agent Adoption",
+      "description": "How much project or repository context the persona is comfortable sharing with a coding agent.",
+      "values": [
+        "Comfortable sharing full repo",
+        "Shares selected files only",
+        "Shares sanitized snippets",
+        "Shares natural-language descriptions only",
+        "Avoids sharing proprietary code"
+      ],
+      "index": 1243,
+      "phrase": "their coding agent context sharing comfort is {value}",
+      "defaultValue": "Avoids sharing proprietary code"
+    },
+    {
+      "id": "coding_agent_security_expectation",
+      "label": "Coding agent security expectation",
+      "category": "Developer: Agent Adoption",
+      "description": "Expected level of security, privacy, and secret-handling awareness from a coding agent.",
+      "values": [
+        "Requires strict security review",
+        "Expects basic secret / privacy checks",
+        "Security review only for sensitive areas",
+        "Relies on human review",
+        "Not a priority"
+      ],
+      "index": 1244,
+      "phrase": "their coding agent security expectation is {value}",
+      "defaultValue": "Not a priority"
+    },
+    {
+      "id": "coding_agent_memory_preference",
+      "label": "Coding agent memory preference",
+      "category": "Developer: Agent Adoption",
+      "description": "Preference for whether a coding agent should remember projects, decisions, or working style across sessions.",
+      "values": [
+        "Wants persistent project memory",
+        "Wants task-scoped memory",
+        "Wants explicit opt-in memory",
+        "Prefers stateless interactions",
+        "Unsure"
+      ],
+      "index": 1245,
+      "phrase": "their coding agent memory preference is {value}",
+      "defaultValue": "Unsure"
+    },
+    {
+      "id": "coding_agent_tool_integration_preference",
+      "label": "Coding agent tool integration preference",
+      "category": "Developer: Agent Adoption",
+      "description": "Preferred product surface or integration point for a coding agent.",
+      "values": [
+        "IDE-integrated",
+        "GitHub / PR integrated",
+        "CLI / terminal integrated",
+        "Chat / browser integrated",
+        "CI/CD integrated",
+        "No strong preference"
+      ],
+      "index": 1246,
+      "phrase": "their coding agent tool integration preference is {value}",
+      "defaultValue": "No strong preference"
+    },
+    {
+      "id": "coding_agent_failure_tolerance",
+      "label": "Coding agent failure tolerance",
+      "category": "Developer: Agent Adoption",
+      "description": "How much imperfect output, rework, or rollback the persona tolerates from an agent.",
+      "values": [
+        "Very low tolerance",
+        "Low tolerance with easy rollback",
+        "Moderate tolerance for prototypes",
+        "High tolerance for experimental work",
+        "Does not use agents"
+      ],
+      "index": 1247,
+      "phrase": "their coding agent failure tolerance is {value}",
+      "defaultValue": "Does not use agents"
+    },
+    {
+      "id": "ai_task_code_generation",
+      "label": "AI task fit: code generation",
+      "category": "Developer: AI Workflow Tasks",
+      "description": "Readiness to use AI or agents for writing new code.",
+      "values": [
+        "Currently mostly AI-assisted",
+        "Currently partially AI-assisted",
+        "Plans mostly AI use",
+        "Plans partial AI use",
+        "Does not plan AI use",
+        "Not applicable"
+      ],
+      "index": 1248,
+      "phrase": "their aI task fit: code generation is {value}",
+      "defaultValue": "Not applicable"
+    },
+    {
+      "id": "ai_task_debugging_fixing",
+      "label": "AI task fit: debugging and fixing",
+      "category": "Developer: AI Workflow Tasks",
+      "description": "Readiness to use AI or agents for debugging, diagnosis, and bug fixing.",
+      "values": [
+        "Currently mostly AI-assisted",
+        "Currently partially AI-assisted",
+        "Plans mostly AI use",
+        "Plans partial AI use",
+        "Does not plan AI use",
+        "Not applicable"
+      ],
+      "index": 1249,
+      "phrase": "their aI task fit: debugging and fixing is {value}",
+      "defaultValue": "Not applicable"
+    },
+    {
+      "id": "ai_task_testing",
+      "label": "AI task fit: testing",
+      "category": "Developer: AI Workflow Tasks",
+      "description": "Readiness to use AI or agents for writing, updating, or reasoning about tests.",
+      "values": [
+        "Currently mostly AI-assisted",
+        "Currently partially AI-assisted",
+        "Plans mostly AI use",
+        "Plans partial AI use",
+        "Does not plan AI use",
+        "Not applicable"
+      ],
+      "index": 1250,
+      "phrase": "their aI task fit: testing is {value}",
+      "defaultValue": "Not applicable"
+    },
+    {
+      "id": "ai_task_code_review",
+      "label": "AI task fit: code review",
+      "category": "Developer: AI Workflow Tasks",
+      "description": "Readiness to use AI or agents for commit review, PR review, and change critique.",
+      "values": [
+        "Currently mostly AI-assisted",
+        "Currently partially AI-assisted",
+        "Plans mostly AI use",
+        "Plans partial AI use",
+        "Does not plan AI use",
+        "Not applicable"
+      ],
+      "index": 1251,
+      "phrase": "their aI task fit: code review is {value}",
+      "defaultValue": "Not applicable"
+    },
+    {
+      "id": "ai_task_documentation",
+      "label": "AI task fit: documentation",
+      "category": "Developer: AI Workflow Tasks",
+      "description": "Readiness to use AI or agents for documenting code or maintaining project documentation.",
+      "values": [
+        "Currently mostly AI-assisted",
+        "Currently partially AI-assisted",
+        "Plans mostly AI use",
+        "Plans partial AI use",
+        "Does not plan AI use",
+        "Not applicable"
+      ],
+      "index": 1252,
+      "phrase": "their aI task fit: documentation is {value}",
+      "defaultValue": "Not applicable"
+    },
+    {
+      "id": "ai_task_codebase_learning",
+      "label": "AI task fit: codebase learning",
+      "category": "Developer: AI Workflow Tasks",
+      "description": "Readiness to use AI or agents to understand unfamiliar repositories or existing systems.",
+      "values": [
+        "Currently mostly AI-assisted",
+        "Currently partially AI-assisted",
+        "Plans mostly AI use",
+        "Plans partial AI use",
+        "Does not plan AI use",
+        "Not applicable"
+      ],
+      "index": 1253,
+      "phrase": "their aI task fit: codebase learning is {value}",
+      "defaultValue": "Not applicable"
+    },
+    {
+      "id": "ai_task_project_planning",
+      "label": "AI task fit: project planning",
+      "category": "Developer: AI Workflow Tasks",
+      "description": "Readiness to use AI or agents for task breakdown, planning, and implementation strategy.",
+      "values": [
+        "Currently mostly AI-assisted",
+        "Currently partially AI-assisted",
+        "Plans mostly AI use",
+        "Plans partial AI use",
+        "Does not plan AI use",
+        "Not applicable"
+      ],
+      "index": 1254,
+      "phrase": "their aI task fit: project planning is {value}",
+      "defaultValue": "Not applicable"
+    },
+    {
+      "id": "ai_task_deployment_monitoring",
+      "label": "AI task fit: deployment and monitoring",
+      "category": "Developer: AI Workflow Tasks",
+      "description": "Readiness to use AI or agents for deployment, operations, monitoring, and incident follow-up.",
+      "values": [
+        "Currently mostly AI-assisted",
+        "Currently partially AI-assisted",
+        "Plans mostly AI use",
+        "Plans partial AI use",
+        "Does not plan AI use",
+        "Not applicable"
+      ],
+      "index": 1255,
+      "phrase": "their aI task fit: deployment and monitoring is {value}",
+      "defaultValue": "Not applicable"
+    },
+    {
+      "id": "ai_task_search_answers",
+      "label": "AI task fit: search for answers",
+      "category": "Developer: AI Workflow Tasks",
+      "description": "Readiness to use AI or agents instead of or alongside search, documentation, and Q&A sites.",
+      "values": [
+        "Currently mostly AI-assisted",
+        "Currently partially AI-assisted",
+        "Plans mostly AI use",
+        "Plans partial AI use",
+        "Does not plan AI use",
+        "Not applicable"
+      ],
+      "index": 1256,
+      "phrase": "their aI task fit: search for answers is {value}",
+      "defaultValue": "Not applicable"
+    },
+    {
+      "id": "ai_task_learning_concepts",
+      "label": "AI task fit: learning concepts",
+      "category": "Developer: AI Workflow Tasks",
+      "description": "Readiness to use AI or agents to learn technologies, concepts, or codebase behavior.",
+      "values": [
+        "Currently mostly AI-assisted",
+        "Currently partially AI-assisted",
+        "Plans mostly AI use",
+        "Plans partial AI use",
+        "Does not plan AI use",
+        "Not applicable"
+      ],
+      "index": 1257,
+      "phrase": "their aI task fit: learning concepts is {value}",
+      "defaultValue": "Not applicable"
+    },
+    {
+      "id": "ai_task_refactoring",
+      "label": "AI task fit: refactoring",
+      "category": "Developer: AI Workflow Tasks",
+      "description": "Readiness to use AI or agents for cleanup, restructuring, and behavior-preserving code changes.",
+      "values": [
+        "Currently mostly AI-assisted",
+        "Currently partially AI-assisted",
+        "Plans mostly AI use",
+        "Plans partial AI use",
+        "Does not plan AI use",
+        "Not applicable"
+      ],
+      "index": 1258,
+      "phrase": "their aI task fit: refactoring is {value}",
+      "defaultValue": "Not applicable"
+    },
+    {
+      "id": "ai_task_data_generation_analytics",
+      "label": "AI task fit: data generation and analytics",
+      "category": "Developer: AI Workflow Tasks",
+      "description": "Readiness to use AI or agents for predictive analytics, generated content, or synthetic data tasks.",
+      "values": [
+        "Currently mostly AI-assisted",
+        "Currently partially AI-assisted",
+        "Plans mostly AI use",
+        "Plans partial AI use",
+        "Does not plan AI use",
+        "Not applicable"
+      ],
+      "index": 1259,
+      "phrase": "their aI task fit: data generation and analytics is {value}",
+      "defaultValue": "Not applicable"
+    },
+    {
+      "id": "coding_tool_ai_capability_importance",
+      "label": "Coding tool AI capability importance",
+      "category": "Developer: Technology Evaluation",
+      "description": "How strongly AI integration or agent capability attracts the persona to a development tool.",
+      "values": [
+        "Critical",
+        "High",
+        "Moderate",
+        "Low",
+        "Not a factor"
+      ],
+      "index": 1260,
+      "phrase": "their coding tool AI capability importance is {value}",
+      "defaultValue": "Not a factor"
+    },
+    {
+      "id": "coding_tool_api_completeness_importance",
+      "label": "Coding tool API completeness importance",
+      "category": "Developer: Technology Evaluation",
+      "description": "How much robust and complete APIs influence the persona to endorse a technology.",
+      "values": [
+        "Critical",
+        "High",
+        "Moderate",
+        "Low",
+        "Not a factor"
+      ],
+      "index": 1261,
+      "phrase": "their coding tool API completeness importance is {value}",
+      "defaultValue": "Not a factor"
+    },
+    {
+      "id": "coding_tool_reliability_latency_importance",
+      "label": "Coding tool reliability and latency importance",
+      "category": "Developer: Technology Evaluation",
+      "description": "How much reliability, availability, and low latency matter when the persona evaluates a tool.",
+      "values": [
+        "Critical",
+        "High",
+        "Moderate",
+        "Low",
+        "Not a factor"
+      ],
+      "index": 1262,
+      "phrase": "their coding tool reliability and latency importance is {value}",
+      "defaultValue": "Not a factor"
+    },
+    {
+      "id": "coding_tool_open_source_importance",
+      "label": "Coding tool open-source importance",
+      "category": "Developer: Technology Evaluation",
+      "description": "How much open-source status or open-source ecosystem connection attracts the persona to a tool.",
+      "values": [
+        "Critical",
+        "High",
+        "Moderate",
+        "Low",
+        "Not a factor"
+      ],
+      "index": 1263,
+      "phrase": "their coding tool open-source importance is {value}",
+      "defaultValue": "Not a factor"
+    },
+    {
+      "id": "coding_tool_security_privacy_blocker",
+      "label": "Coding tool security and privacy blocker",
+      "category": "Developer: Technology Evaluation",
+      "description": "How strongly security, privacy, or compliance concerns cause the persona to reject a tool.",
+      "values": [
+        "Hard blocker",
+        "Major concern",
+        "Moderate concern",
+        "Minor concern",
+        "Not a concern"
+      ],
+      "index": 1264,
+      "phrase": "their coding tool security and privacy blocker is {value}",
+      "defaultValue": "Not a concern"
+    },
+    {
+      "id": "coding_tool_ethics_blocker",
+      "label": "Coding tool ethics blocker",
+      "category": "Developer: Technology Evaluation",
+      "description": "How strongly ethical concerns cause the persona to reject a technology or AI coding product.",
+      "values": [
+        "Hard blocker",
+        "Major concern",
+        "Moderate concern",
+        "Minor concern",
+        "Not a concern"
+      ],
+      "index": 1265,
+      "phrase": "their coding tool ethics blocker is {value}",
+      "defaultValue": "Not a concern"
+    },
+    {
+      "id": "coding_tool_alternative_sensitivity",
+      "label": "Coding tool alternative sensitivity",
+      "category": "Developer: Technology Evaluation",
+      "description": "How strongly the availability of better alternatives affects the persona's willingness to adopt a tool.",
+      "values": [
+        "Hard blocker",
+        "Major concern",
+        "Moderate concern",
+        "Minor concern",
+        "Not a concern"
+      ],
+      "index": 1266,
+      "phrase": "their coding tool alternative sensitivity is {value}",
+      "defaultValue": "Not a concern"
+    },
+    {
+      "id": "coding_tool_obsolescence_blocker",
+      "label": "Coding tool obsolescence blocker",
+      "category": "Developer: Technology Evaluation",
+      "description": "How strongly outdated or obsolete technology causes the persona to reject a tool.",
+      "values": [
+        "Hard blocker",
+        "Major concern",
+        "Moderate concern",
+        "Minor concern",
+        "Not a concern"
+      ],
+      "index": 1267,
+      "phrase": "their coding tool obsolescence blocker is {value}",
+      "defaultValue": "Not a concern"
+    },
+    {
+      "id": "stackoverflow_usage_pattern",
+      "label": "Stack Overflow usage pattern",
+      "category": "Developer: Community Behavior",
+      "description": "How often the persona uses Stack Overflow or similar Q&A sites in developer work.",
+      "values": [
+        "Multiple times daily",
+        "Weekly reference",
+        "Occasional troubleshooting",
+        "Rare use",
+        "Never used"
+      ],
+      "index": 1268,
+      "phrase": "their stack Overflow usage pattern is {value}",
+      "defaultValue": "Never used"
+    },
+    {
+      "id": "stackoverflow_participation_style",
+      "label": "Stack Overflow participation style",
+      "category": "Developer: Community Behavior",
+      "description": "How the persona participates in Q&A communities beyond reading search results.",
+      "values": [
+        "Reads / searches only",
+        "Votes / bookmarks",
+        "Comments / discusses",
+        "Asks questions",
+        "Answers questions",
+        "Moderates / curates",
+        "Does not participate"
+      ],
+      "index": 1269,
+      "phrase": "their stack Overflow participation style is {value}",
+      "defaultValue": "Does not participate"
+    },
+    {
+      "id": "developer_help_seeking_preference",
+      "label": "Developer help-seeking preference",
+      "category": "Developer: Community Behavior",
+      "description": "The persona's first instinct when stuck on a coding problem.",
+      "values": [
+        "Ask AI first",
+        "Search docs first",
+        "Search Stack Overflow / Q&A first",
+        "Ask teammates first",
+        "Experiment / debug first",
+        "Mixed strategy"
+      ],
+      "index": 1270,
+      "phrase": "their developer help-seeking preference is {value}",
+      "defaultValue": "Mixed strategy"
+    },
+    {
+      "id": "developer_problem_profile",
+      "label": "Developer problem profile",
+      "category": "Developer: Community Behavior",
+      "description": "The kind of coding problems the persona most often seeks help with.",
+      "values": [
+        "Syntax / API usage",
+        "Debugging runtime errors",
+        "Architecture / design decisions",
+        "Performance optimization",
+        "Deployment / infrastructure",
+        "Security / compliance",
+        "Learning concepts"
+      ],
+      "index": 1271,
+      "phrase": "their developer problem profile is {value}",
+      "defaultValue": "Learning concepts"
+    },
+    {
+      "id": "open_source_activity_level",
+      "label": "Open-source activity level",
+      "category": "Developer: Open Source Behavior",
+      "description": "Overall level of observable open-source participation, inspired by GitHub public event data.",
+      "values": [
+        "Maintainer / core contributor",
+        "Regular contributor",
+        "Occasional contributor",
+        "Watcher / fork-only user",
+        "Private-only developer",
+        "No coding activity"
+      ],
+      "index": 1272,
+      "phrase": "their open-source activity level is {value}",
+      "defaultValue": "No coding activity"
+    },
+    {
+      "id": "github_contribution_mode",
+      "label": "GitHub contribution mode",
+      "category": "Developer: Open Source Behavior",
+      "description": "Dominant type of GitHub-style development behavior.",
+      "values": [
+        "Code pusher",
+        "Pull request contributor",
+        "Issue reporter",
+        "Reviewer / commenter",
+        "Repository maintainer",
+        "Star / fork explorer",
+        "Rare GitHub user"
+      ],
+      "index": 1273,
+      "phrase": "their gitHub contribution mode is {value}",
+      "defaultValue": "Rare GitHub user"
+    },
+    {
+      "id": "pr_collaboration_style",
+      "label": "Pull request collaboration style",
+      "category": "Developer: Open Source Behavior",
+      "description": "Typical pull request size, cadence, and collaboration style.",
+      "values": [
+        "Small focused PRs",
+        "Moderate scoped PRs",
+        "Large feature PRs",
+        "Draft / iterative PRs",
+        "Review-only participant",
+        "Rare PR usage"
+      ],
+      "index": 1274,
+      "phrase": "their pull request collaboration style is {value}",
+      "defaultValue": "Rare PR usage"
+    },
+    {
+      "id": "issue_engagement_style",
+      "label": "Issue engagement style",
+      "category": "Developer: Open Source Behavior",
+      "description": "How the persona tends to engage with issues, bug reports, and feature discussions.",
+      "values": [
+        "Detailed bug reports",
+        "Reproduction-focused",
+        "Feature-request oriented",
+        "Triage / labeling",
+        "Comment-only discussion",
+        "Rare issue usage"
+      ],
+      "index": 1275,
+      "phrase": "their issue engagement style is {value}",
+      "defaultValue": "Rare issue usage"
+    },
+    {
+      "id": "code_review_participation_level",
+      "label": "Code review participation level",
+      "category": "Developer: Open Source Behavior",
+      "description": "How actively the persona participates in code review workflows.",
+      "values": [
+        "Frequent reviewer",
+        "Occasional reviewer",
+        "Review requester mainly",
+        "Self-review only",
+        "Rare / no review"
+      ],
+      "index": 1276,
+      "phrase": "their code review participation level is {value}",
+      "defaultValue": "Rare / no review"
+    },
+    {
+      "id": "commit_cadence_style",
+      "label": "Commit cadence style",
+      "category": "Developer: Open Source Behavior",
+      "description": "Typical commit size and rhythm inferred from development history style.",
+      "values": [
+        "Many small commits",
+        "Task-sized commits",
+        "Squashed milestone commits",
+        "Large infrequent commits",
+        "Irregular / experimental commits"
+      ],
+      "index": 1277,
+      "phrase": "their commit cadence style is {value}",
+      "defaultValue": "Irregular / experimental commits"
+    },
+    {
+      "id": "release_maintenance_orientation",
+      "label": "Release maintenance orientation",
+      "category": "Developer: Open Source Behavior",
+      "description": "How involved the persona is in releases, maintenance, dependency updates, or operational ownership.",
+      "values": [
+        "Active release maintainer",
+        "Occasional release contributor",
+        "Dependency / update maintainer",
+        "Internal-only maintainer",
+        "Not involved in releases"
+      ],
+      "index": 1278,
+      "phrase": "their release maintenance orientation is {value}",
+      "defaultValue": "Not involved in releases"
+    },
+    {
+      "id": "code_complexity_tolerance",
+      "label": "Code complexity tolerance",
+      "category": "Developer: Code Maintenance",
+      "description": "How much structural, branching, or conceptual complexity the persona tolerates in code before preferring simplification.",
+      "values": [
+        "Very low",
+        "Low",
+        "Moderate",
+        "High",
+        "Very high"
+      ],
+      "index": 1279,
+      "phrase": "their code complexity tolerance is {value}",
+      "defaultValue": "Very high"
+    },
+    {
+      "id": "code_modularity_preference",
+      "label": "Code modularity preference",
+      "category": "Developer: Code Maintenance",
+      "description": "Preference for decomposing code into modules, components, packages, and smaller units.",
+      "values": [
+        "Highly modular small components",
+        "Moderately modular",
+        "Feature-file oriented",
+        "Monolithic / simple structure",
+        "Context-dependent"
+      ],
+      "index": 1280,
+      "phrase": "their code modularity preference is {value}",
+      "defaultValue": "Context-dependent"
+    },
+    {
+      "id": "code_type_system_orientation",
+      "label": "Code type system orientation",
+      "category": "Developer: Code Maintenance",
+      "description": "Preference for static types, gradual typing, dynamic typing, or boundary-only type discipline.",
+      "values": [
+        "Strong static typing preference",
+        "Gradual typing preference",
+        "Dynamic typing preference",
+        "Type annotations only for boundaries",
+        "No strong preference"
+      ],
+      "index": 1281,
+      "phrase": "their code type system orientation is {value}",
+      "defaultValue": "No strong preference"
+    },
+    {
+      "id": "code_api_design_orientation",
+      "label": "Code API design orientation",
+      "category": "Developer: Code Maintenance",
+      "description": "How the persona tends to design internal or public APIs when building software.",
+      "values": [
+        "Stable public API first",
+        "Internal ergonomics first",
+        "Minimal API surface",
+        "Rapid iteration over stability",
+        "Framework-convention driven"
+      ],
+      "index": 1282,
+      "phrase": "their code API design orientation is {value}",
+      "defaultValue": "Framework-convention driven"
+    },
+    {
+      "id": "code_security_review_habit",
+      "label": "Code security review habit",
+      "category": "Developer: Code Maintenance",
+      "description": "How consistently the persona reviews code for security, privacy, secrets, and abuse cases.",
+      "values": [
+        "Always reviews threat model",
+        "Checks common vulnerabilities",
+        "Relies on automated scanners",
+        "Reviews only sensitive changes",
+        "Rarely reviews security"
+      ],
+      "index": 1283,
+      "phrase": "their code security review habit is {value}",
+      "defaultValue": "Rarely reviews security"
+    },
+    {
+      "id": "code_observability_habit",
+      "label": "Code observability habit",
+      "category": "Developer: Code Maintenance",
+      "description": "How often the persona adds logging, metrics, traces, or diagnostics while building software.",
+      "values": [
+        "Structured logging / metrics by default",
+        "Logs important flows / errors",
+        "Adds observability when debugging",
+        "Minimal observability",
+        "Not applicable"
+      ],
+      "index": 1284,
+      "phrase": "their code observability habit is {value}",
+      "defaultValue": "Not applicable"
+    },
+    {
+      "id": "bug_fix_scope_preference",
+      "label": "Bug fix scope preference",
+      "category": "Developer: Code Maintenance",
+      "description": "Preferred scope of changes when fixing bugs or defects.",
+      "values": [
+        "Minimal targeted patch",
+        "Patch plus adjacent cleanup",
+        "Root-cause / systemic fix",
+        "Broad refactor while fixing",
+        "Temporary workaround"
+      ],
+      "index": 1285,
+      "phrase": "their bug fix scope preference is {value}",
+      "defaultValue": "Temporary workaround"
+    },
+    {
+      "id": "bug_fix_test_behavior",
+      "label": "Bug fix test behavior",
+      "category": "Developer: Code Maintenance",
+      "description": "How often the persona adds or updates tests when fixing a bug.",
+      "values": [
+        "Always adds regression tests",
+        "Usually adds tests",
+        "Adds tests for critical bugs",
+        "Rarely adds tests",
+        "No tests"
+      ],
+      "index": 1286,
+      "phrase": "their bug fix test behavior is {value}",
+      "defaultValue": "No tests"
+    },
+    {
+      "id": "debugging_strategy",
+      "label": "Debugging strategy",
+      "category": "Developer: Code Maintenance",
+      "description": "The persona's dominant approach when diagnosing broken code or unclear behavior.",
+      "values": [
+        "Reproduce first",
+        "Read code / traces first",
+        "Add logging / instrumentation",
+        "Interactive debugger",
+        "Search / ask externally",
+        "Trial-and-error"
+      ],
+      "index": 1287,
+      "phrase": "their debugging strategy is {value}",
+      "defaultValue": "Trial-and-error"
+    },
+    {
+      "id": "codebase_onboarding_style",
+      "label": "Codebase onboarding style",
+      "category": "Developer: Code Maintenance",
+      "description": "How the persona usually learns an unfamiliar repository or inherited codebase.",
+      "values": [
+        "Reads architecture / docs first",
+        "Starts from tests",
+        "Traces execution paths",
+        "Uses search / grep heavily",
+        "Asks teammates / AI for map",
+        "Experiments by changing code"
+      ],
+      "index": 1288,
+      "phrase": "their codebase onboarding style is {value}",
+      "defaultValue": "Experiments by changing code"
+    },
+    {
+      "id": "human_help_boundary_for_ai_coding",
+      "label": "Human help boundary for AI coding",
+      "category": "Developer: AI Adoption",
+      "description": "When the persona still prefers human help even if AI tools can perform many coding tasks.",
+      "values": [
+        "When trust is low",
+        "When learning deeply",
+        "When comparing approaches",
+        "When security / ethics matter",
+        "When context is hard to explain",
+        "Rarely needs human help"
+      ],
+      "index": 1289,
+      "phrase": "their human help boundary for AI coding is {value}",
+      "defaultValue": "Rarely needs human help"
+    },
+    {
+      "id": "future_developer_skill_belief",
+      "label": "Future developer skill belief",
+      "category": "Developer: AI Adoption",
+      "description": "Skill the persona believes will remain valuable as AI coding tools become more capable.",
+      "values": [
+        "Systems understanding",
+        "Problem decomposition",
+        "Debugging and diagnosis",
+        "Security and privacy judgment",
+        "Product and user judgment",
+        "Communication and collaboration",
+        "Domain expertise",
+        "Ethical judgment"
+      ],
+      "index": 1290,
+      "phrase": "their future developer skill belief is {value}",
+      "defaultValue": "Ethical judgment"
     }
   ],
   "reference_sources": [
@@ -18933,7 +22107,7 @@ window.MATRAIX_DIMENSIONS = {
       "dimensions_claimed": 31,
       "license": "research-use-reference",
       "note": "6 domains + 25 facets. HEXACO personality trait grounding. Register domains/facets as constructs; do not copy full scale items without checking official terms.",
-      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
       "intended_use": "Personality trait grounding",
       "reason_added": "Adds 6 major personality domains (Honesty-Humility, Emotionality, Extraversion, Agreeableness, Conscientiousness, Openness) plus 25 facet-level constructs for fine-grained personality grounding beyond Big Five."
     },
@@ -18946,7 +22120,7 @@ window.MATRAIX_DIMENSIONS = {
       "dimensions_claimed": 70,
       "license": "open-web-reference",
       "note": "70 Big Five facet labels. Fine-grained personality trait grounding.",
-      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
       "intended_use": "Fine-grained personality traits",
       "reason_added": "Provides 70 validated Big Five facet labels for detailed personality trait coverage and assessment of specific behavioral tendencies within each domain."
     },
@@ -18959,7 +22133,7 @@ window.MATRAIX_DIMENSIONS = {
       "dimensions_claimed": 276,
       "license": "public-domain-reference",
       "note": "276 scale labels; 3319 item pool entries. Public-domain trait construct and item reference.",
-      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
       "intended_use": "Trait construct and item reference",
       "reason_added": "Offers 276 public-domain trait construct labels and 3319 item pool entries for construct-level grounding and measurement validation of personality dimensions."
     },
@@ -18973,7 +22147,7 @@ window.MATRAIX_DIMENSIONS = {
       "dimensions_claimed": 12,
       "license": "arxiv paper/reference; verify project, code, dataset, and generated taxonomy license before reuse",
       "note": "12 top-level categories; long-tail persona attribute taxonomy. Candidate attribute coverage and subcategory grounding; requires review before becoming dimensions.",
-      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
       "intended_use": "Candidate attribute coverage and subcategory grounding",
       "reason_added": "Contributes 12 top-level persona categories and long-tail attribute taxonomy for comprehensive candidate attribute coverage and subcategory organization."
     },
@@ -18986,7 +22160,7 @@ window.MATRAIX_DIMENSIONS = {
       "dimensions_claimed": 135,
       "license": "dataset-terms-unknown",
       "note": "135 protocol fields. Sociopsychological persona protocol reference.",
-      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
       "intended_use": "Sociopsychological persona protocol reference",
       "reason_added": "Adds 135 sociopsychological protocol fields grounding persona schema in tested simulation logic and identity/values/beliefs frameworks."
     },
@@ -18999,7 +22173,7 @@ window.MATRAIX_DIMENSIONS = {
       "dimensions_claimed": 6518,
       "license": "official-survey-terms",
       "note": "6518 variables. Official social survey grounding for attitudes, trust, religion, politics, work, family, behavior, and life context.",
-      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
       "intended_use": "Official social survey grounding",
       "reason_added": "Provides 6518 official social survey variables for grounding in population-level attitudes, trust, religion, politics, work, family, and behavioral data."
     },
@@ -19012,7 +22186,7 @@ window.MATRAIX_DIMENSIONS = {
       "dimensions_claimed": 153,
       "license": "official-survey-terms",
       "note": "153 questionnaire items. Values, beliefs, trust, politics, religion, and social attitudes grounding.",
-      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
       "intended_use": "Values, beliefs, trust, politics, religion, and social attitudes",
       "reason_added": "Adds 153 cross-national survey items for values, political beliefs, religious attitudes, trust, and social worldview dimensions across diverse populations."
     },
@@ -19025,7 +22199,7 @@ window.MATRAIX_DIMENSIONS = {
       "dimensions_claimed": 135,
       "license": "us-government-public-data",
       "note": "Curated demographic and population variables. Official demographic grounding layer.",
-      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
       "intended_use": "Official demographic grounding",
       "reason_added": "Grounds 135 curated demographic and population variables in official U.S. Census data for validated demographic, education, employment, household, and language dimensions."
     },
@@ -19038,7 +22212,7 @@ window.MATRAIX_DIMENSIONS = {
       "dimensions_claimed": 3,
       "license": "citation-only",
       "note": "3 theoretical levels: dispositional traits, characteristic adaptations, narrative identity. Schema theory and narrative identity grounding.",
-      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
       "intended_use": "Schema theory and narrative identity grounding",
       "reason_added": "Provides theoretical foundation (dispositional traits, characteristic adaptations, narrative identity) for schema architecture and multi-level persona construction."
     },
@@ -19051,7 +22225,7 @@ window.MATRAIX_DIMENSIONS = {
       "dimensions_claimed": 26,
       "license": "research-use-reference",
       "note": "World-belief constructs including safe, enticing, alive and associated facets. Worldview grounding.",
-      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
       "intended_use": "Worldview grounding",
       "reason_added": "Adds 26 worldview constructs (safe, enticing, alive and associated facets) for belief-based persona differentiation beyond traditional political/religious dimensions."
     },
@@ -19064,7 +22238,7 @@ window.MATRAIX_DIMENSIONS = {
       "dimensions_claimed": 4,
       "license": "citation-only",
       "note": "Behavioral inhibition and activation constructs. Motivation and affective disposition grounding.",
-      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
       "intended_use": "Motivation and affective disposition grounding",
       "reason_added": "Contributes 4 behavioral inhibition/activation constructs for motivation and affective disposition grounding in neurobehavioral approach systems."
     },
@@ -19077,7 +22251,7 @@ window.MATRAIX_DIMENSIONS = {
       "dimensions_claimed": 2,
       "license": "citation-only",
       "note": "Perseverance and long-term effort constructs. Motivation and persistence grounding.",
-      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
       "intended_use": "Motivation and persistence grounding",
       "reason_added": "Adds 2 perseverance-of-effort and consistency-of-interests constructs for long-term motivation and persistence behavior grounding."
     },
@@ -19090,9 +22264,53 @@ window.MATRAIX_DIMENSIONS = {
       "dimensions_claimed": 1,
       "license": "citation-only",
       "note": "Malleability-of-ability belief construct. Cognitive and motivation grounding.",
-      "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+      "fetch_script": "persona/curation/existing_data/scripts/fetch_sources.py",
       "intended_use": "Cognitive and motivation grounding",
       "reason_added": "Adds 1 malleability-of-ability belief dimension for cognitive motivation and learning orientation differences across personas."
     }
-  ]
-};
+  ],
+  "indexConvention": "1-based index on each dimension object matches array order and persona bench task bench_dim_index / Harbor name persona-bench-dim-{NNN}.",
+  "personaYamlProbeFields": {
+    "dimensions.age_bracket": {
+      "dimensionId": "age_bracket",
+      "index": 1
+    },
+    "dimensions.socioeconomic_band": {
+      "dimensionId": "socioeconomic_band",
+      "index": 5
+    },
+    "dimensions.life_stage": {
+      "dimensionId": "life_stage",
+      "index": 22
+    },
+    "dimensions.economic_motivation": {
+      "dimensionId": "economic_motivation",
+      "index": 47
+    },
+    "dimensions.risk_tolerance": {
+      "dimensionId": "risk_tolerance",
+      "index": 27
+    },
+    "dimensions.tech_savviness": {
+      "dimensionId": "tech_savviness",
+      "index": 25
+    },
+    "dimensions.cog_verbosity": {
+      "dimensionId": "cog_verbosity",
+      "index": 826
+    },
+    "dimensions.cog_formality": {
+      "dimensionId": "cog_formality",
+      "index": 827
+    },
+    "dimensions.cog_patience": {
+      "dimensionId": "cog_patience",
+      "index": 833
+    },
+    "dimensions.cog_skepticism": {
+      "dimensionId": "cog_skepticism",
+      "index": 835
+    }
+  }
+}
+;
