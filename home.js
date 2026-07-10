@@ -502,9 +502,12 @@ if (document.readyState === 'loading') {
           if (!isLandPoint && noise(i + 24000) > 0.24) continue;
           const p = ll3(lon, lat);
           const strength = noise(i + 8000);
+          // Bias strongly toward tiny lights, with fewer medium/large points.
+          // This breaks up the uniform dotted texture without changing density.
+          const variedPower = Math.pow(strength, 2.35);
           PTS.push({
             x: p[0], y: p[1], z: p[2], land: isLandPoint,
-            power: isLandPoint ? 0.62 + strength * 0.24 : 0.40 + strength * 0.18,
+            power: isLandPoint ? 0.30 + variedPower * 0.70 : 0.22 + variedPower * 0.30,
             warm: isLandPoint && noise(i + 12000) > 0.972,
             tw: noise(i + 16000) * Math.PI * 2,
             tws: 0.32 + noise(i + 20000) * 0.78,
@@ -690,6 +693,7 @@ if (document.readyState === 'loading') {
       const col = p.warm ? PAL.warm : PAL.base;
       let size = (0.7 + f * 1.25) * tw * PAL.dotSize * p.power + boost * 2.4;
       let alpha = Math.min(1, (PAL.dotMin + f * PAL.dotRange) * tw * 0.8 + boost * 0.6);
+      alpha *= Math.min(1, 0.48 + p.power * 0.62);
       if (!p.land) { alpha *= 0.52; size *= 0.88; }
 
       if (boost > 0.15) {
