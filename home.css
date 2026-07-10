@@ -63,15 +63,19 @@ body {
    letter-spacing (e.g. 0.01em); Space Grotesk / Sora with -0.02em.
    --------------------------------------------------------------- */
 .brand-name {
-  /* To try another wordmark font, replace "Space Grotesk" below with one of:
-     "Sora", "Chakra Petch", "Michroma", "JetBrains Mono", or use var(--disp) for Inter.
-     (All are preloaded in index.html.) */
-  font-family: "Space Grotesk", var(--disp);
-  font-weight: 700; font-size: 2.15rem;
-  letter-spacing: -0.02em;
+  display: inline-block;
+  font-family: "Orbitron", "Space Grotesk", var(--disp) !important;
+  font-weight: 700; font-size: 1.92rem;
+  letter-spacing: .025em;
+  line-height: 1;
+  transform: scaleX(1.05) scaleY(.88);
+  transform-origin: left center;
 }
 .brand-name .tld { color: var(--ink); font-weight: 500; }
-.brand-name.small { font-size: var(--text-base); }
+.brand-name.small {
+  font-size: 1.02rem; letter-spacing: .02em;
+  transform: scaleX(1.05) scaleY(.9);
+}
 @keyframes flick { 0%, 10%, 90%, 100% { opacity: 1; } 45%, 55% { opacity: 0.5; } }
 
 /* ---------- Nav ---------- */
@@ -86,6 +90,8 @@ body {
 .brand { flex-shrink: 0; display: flex; align-items: center; gap: 6px; }
 .brand-mark { display: none; }
 .brand-name em {
+  display: inline-block;
+  margin-right: .09em;
   font-style: normal;
   background: linear-gradient(90deg, #a855f7, #4A8FC2);
   background-size: 200% auto;
