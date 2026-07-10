@@ -395,32 +395,158 @@ if (document.readyState === 'loading') {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  // Accent color (phosphor blue) + warm highlight
-  const BLUE = [74, 143, 194];
-  const WARM = [217, 119, 6];
-
-  // Build a fibonacci-sphere point cloud: each point ≈ a person/agent.
-  const N = 560;
-  const PTS = new Array(N);
-  const ga = Math.PI * (3 - Math.sqrt(5));
-  for (let i = 0; i < N; i++) {
-    const y = 1 - (i / (N - 1)) * 2;
-    const r = Math.sqrt(1 - y * y);
-    const t = ga * i;
-    PTS[i] = {
-      x: Math.cos(t) * r, y: y, z: Math.sin(t) * r,
-      warm: Math.random() < 0.06,           // a few "highlighted" agents
-      tw: Math.random() * Math.PI * 2,        // twinkle phase
-      tws: 0.6 + Math.random() * 1.6,         // twinkle speed
-    };
+  // Theme-aware palettes so the globe reads well on both dark and light
+  // backgrounds. Light mode uses deeper, more saturated colors with higher
+  // opacity (crisp on white); dark mode uses a brighter glowing blue.
+  const THEMES = {
+    dark: {
+      base: [96, 178, 255], warm: [255, 176, 80], line: [110, 185, 255],
+      haloAlpha: 0.20, dotMin: 0.24, dotRange: 0.76, dotSize: 1.22,
+      lineAlpha: 0.18, particleAlpha: 0.55, ringAlpha: 0.30, haloBoost: 0.18,
+      oceanAlpha: 0.16, outlineAlpha: 0.85, coastGlow: 0.18,
+      rim: [155, 210, 255], atmo: [80, 140, 225],
+      clGlowA: 0.10, clCore: 'rgba(175,216,248,0.58)',
+      oceanInner: 'rgba(12,28,43,0.94)', oceanOuter: 'rgba(5,12,21,0.98)',
+    },
+    light: {
+      base: [30, 92, 158], warm: [198, 96, 8], line: [50, 114, 176],
+      haloAlpha: 0.22, dotMin: 0.34, dotRange: 0.58, dotSize: 1.14,
+      lineAlpha: 0.30, particleAlpha: 0.70, ringAlpha: 0.42, haloBoost: 0.22,
+      oceanAlpha: 0.12, outlineAlpha: 1.0, coastGlow: 0.10,
+      rim: null, atmo: null,
+      clGlowA: 0.05, clCore: 'rgba(32,91,145,0.62)',
+      oceanInner: 'rgba(225,237,247,0.72)', oceanOuter: 'rgba(202,220,235,0.42)',
+    },
+  };
+  let PAL = THEMES.dark;
+  function applyPalette() {
+    PAL = document.documentElement.getAttribute('data-theme') === 'light'
+      ? THEMES.light : THEMES.dark;
   }
+  applyPalette();
+  document.addEventListener('themechange', applyPalette);
 
+  const D2R = Math.PI / 180;
+  const ll3 = (lon, lat) => {
+    const la = lat * D2R, lo = lon * D2R, cl = Math.cos(la);
+    // Conventional Earth coordinates: east is screen-right and longitude
+    // increases eastward. The previous axes mirrored every continent.
+    return [cl * Math.sin(lo), Math.sin(la), cl * Math.cos(lo)];
+  };
+
+  // Natural Earth 110m keeps the corrected real-world positions while loading
+  // and projecting far fewer coastline vertices than the much heavier 50m map.
+  // If the CDN is unavailable the globe still renders gracefully with city
+  // lights and atmosphere rather than falling back to an inaccurate outline.
+  const COAST_SEGS = [];
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/land-110m.json')
+    .then(response => {
+      if (!response.ok) throw new Error(`World map request failed: ${response.status}`);
+      return response.json();
+    })
+    .then(world => {
+      if (!window.topojson) return;
+      const land = window.topojson.feature(world, world.objects.land);
+      const features = land.type === 'FeatureCollection' ? land.features : [land];
+      for (const feature of features) {
+        const geometry = feature.geometry || feature;
+        const polygons = geometry.type === 'MultiPolygon' ? geometry.coordinates : [geometry.coordinates];
+        for (const polygon of polygons) {
+          for (const ring of polygon) {
+            for (let i = 1; i < ring.length; i++) {
+              const a = ring[i - 1], b = ring[i];
+              if (Math.abs(a[0] - b[0]) > 180) continue;
+              COAST_SEGS.push([ll3(a[0], a[1]), ll3(b[0], b[1])]);
+            }
+          }
+        }
+      }
+
+      // Evenly sample the full sphere. Land receives brighter, denser lights;
+      // a small deterministic subset of ocean samples remains as dim activity.
+      if (window.d3 && typeof window.d3.geoContains === 'function') {
+        const samples = 3000;
+        const goldenAngle = 137.507764;
+        const noise = (n) => {
+          const value = Math.sin(n * 12.9898 + 78.233) * 43758.5453;
+          return value - Math.floor(value);
+        };
+        for (let i = 0; i < samples; i++) {
+          const y = 1 - 2 * ((i + 0.5) / samples);
+          const baseLat = Math.asin(y) / D2R;
+          const lat = Math.max(-88.5, Math.min(88.5, baseLat + (noise(i) - 0.5) * 2.6));
+          const lonJitter = (noise(i + 4000) - 0.5) * 3.2 / Math.max(0.35, Math.cos(lat * D2R));
+          const lon = (((i * goldenAngle + lonJitter + 180) % 360) + 360) % 360 - 180;
+          const isLandPoint = window.d3.geoContains(land, [lon, lat]);
+          if (!isLandPoint && noise(i + 24000) > 0.24) continue;
+          const p = ll3(lon, lat);
+          const strength = noise(i + 8000);
+          PTS.push({
+            x: p[0], y: p[1], z: p[2], land: isLandPoint,
+            power: isLandPoint ? 0.62 + strength * 0.24 : 0.40 + strength * 0.18,
+            warm: isLandPoint && noise(i + 12000) > 0.972,
+            tw: noise(i + 16000) * Math.PI * 2,
+            tws: 0.32 + noise(i + 20000) * 0.78,
+          });
+        }
+      }
+    })
+    .catch(() => {});
+
+  // Deliberate city lights replace the previous uniform land grid. The small,
+  // geographically accurate set reads as population without making the globe
+  // look like a dotted map.
+  const PTS = [];
+  const CITIES = [
+    [51.5,-0.1,1.0],[48.9,2.4,.9],[52.5,13.4,.8],[40.4,-3.7,.8],[41.9,12.5,.7],
+    [45.5,9.2,.6],[50.1,14.4,.6],[52.2,21.0,.6],[59.3,18.1,.6],[55.8,37.6,.8],
+    [53.3,-6.3,.5],[50.9,4.4,.6],[52.4,4.9,.6],[48.2,16.4,.5],[47.5,19.0,.5],
+    [44.4,26.1,.5],[37.9,23.7,.5],[38.7,-9.1,.5],[45.1,7.7,.45],[43.3,5.4,.45],
+    [41.0,29.0,.8],[30.0,31.2,.9],[31.2,29.9,.55],[33.6,-7.6,.6],[34.0,-6.8,.45],
+    [36.8,10.2,.5],[36.7,3.1,.55],[14.7,-17.5,.65],[12.6,-8.0,.45],[9.6,-13.6,.4],
+    [6.5,3.4,1.0],[7.4,3.9,.5],[5.6,-0.2,.6],[6.7,-1.6,.45],[5.3,-4.0,.55],
+    [4.1,9.7,.45],[3.9,11.5,.5],[-4.3,15.3,.65],[-8.8,13.2,.5],[-1.3,36.8,.7],
+    [0.3,32.6,.55],[-3.4,29.4,.4],[-6.8,39.3,.6],[-4.0,39.7,.4],[-15.4,28.3,.5],
+    [-17.8,31.1,.5],[-25.7,32.6,.45],[-26.2,28.0,.8],[-29.9,31.0,.55],[-33.9,18.4,.6],
+    [-22.6,17.1,.4],[-24.7,25.9,.4],[9.0,38.8,.65],[15.5,32.6,.5],[11.6,43.1,.4],
+    [24.7,46.7,.7],[25.2,55.3,.9],[35.7,51.4,.6],[33.3,44.4,.6],[19.1,72.9,1.0],
+    [28.6,77.2,1.0],[22.6,88.4,.8],[13.1,80.3,.7],[12.9,77.6,.8],[17.4,78.5,.7],
+    [23.0,72.6,.8],[23.8,90.4,1.0],[24.9,67.0,.8],[31.5,74.4,.7],[27.7,85.3,.5],
+    [16.8,96.2,.6],[21.0,105.8,.7],[10.8,106.6,.8],[13.8,100.5,.9],[1.3,103.8,.9],
+    [3.1,101.7,.7],[-6.2,106.8,1.0],[-7.3,112.7,.7],[14.6,121.0,1.0],[22.3,114.2,1.0],
+    [25.0,121.6,.8],[31.2,121.5,1.0],[39.9,116.4,1.0],[23.1,113.3,.9],[30.6,104.1,.8],
+    [34.3,108.9,.7],[37.6,127.0,.9],[35.7,139.7,1.0],[34.7,135.5,.8],[-33.9,151.2,.8],
+    [-37.8,145.0,.6],[-27.5,153.0,.5],[-36.9,174.8,.5],[40.7,-74.0,1.0],[34.1,-118.2,1.0],
+    [37.8,-122.4,.8],[47.6,-122.3,.6],[41.9,-87.6,.8],[42.3,-83.0,.5],[33.8,-84.4,.6],
+    [25.8,-80.2,.6],[29.8,-95.4,.8],[32.8,-96.8,.7],[19.4,-99.1,1.0],[20.7,-103.3,.6],
+    [4.7,-74.1,.7],[10.5,-66.9,.6],[-12.0,-77.0,.7],[-23.6,-46.6,1.0],[-22.9,-43.2,.8],
+    [-34.6,-58.4,.7],[-33.4,-70.7,.6],[43.7,-79.4,.7],[45.5,-73.6,.6],[49.3,-123.1,.6],
+  ];
+  for (let i = 0; i < CITIES.length; i++) {
+    const city = CITIES[i];
+    const copies = 1;
+    for (let j = 0; j < copies; j++) {
+      // Keep one brighter anchor for each major population hub.
+      const spread = j === 0 ? 0 : 0.55 + ((i * 17 + j * 11) % 12) * 0.12;
+      const angle = (i * 2.399 + j * 2.1) % (Math.PI * 2);
+      const lat = (city[0] + Math.sin(angle) * spread) * D2R;
+      const lon = (city[1] + Math.cos(angle) * spread / Math.max(0.35, Math.cos(city[0] * D2R))) * D2R;
+      const cl = Math.cos(lat);
+      PTS.push({
+        x: cl * Math.sin(lon), y: Math.sin(lat), z: cl * Math.cos(lon),
+        land: true, power: j === 0 ? city[2] : Math.max(0.38, city[2] * (0.66 - j * 0.035)),
+        warm: j === 0 && i % 9 === 4,
+        tw: (i * 3 + j) * 1.73, tws: 0.45 + ((i + j) % 5) * 0.16,
+      });
+    }
+  }
   // Free-floating particles drifting around the globe (cursor-reactive).
   const PARTICLES = [];
-  const PN = 30;
+  const PN = 16;
 
   let w, h, cx, cy, R, dpr;
-  let rot = Math.random() * 6;          // auto Y-rotation
+  // Open on Europe/Africa/Asia rather than a random, often ocean-heavy view.
+  let rot = 0.45;
   let tilt = 0;                          // current X-tilt
   let tiltTarget = 0;
   let spinTarget = 0;                    // extra spin from mouse X
@@ -485,19 +611,38 @@ if (document.readyState === 'loading') {
     // Ease camera toward targets.
     tilt += (tiltTarget - tilt) * 0.06;
     spinVel += (spinTarget * 0.02 - spinVel) * 0.05;
-    rot += 0.0016 + spinVel;
+    rot += 0.00038 + spinVel;
 
     const ca = Math.cos(rot), sa = Math.sin(rot);
     const ct = Math.cos(tilt), st = Math.sin(tilt);
 
+    // Atmospheric outer glow ring around the globe.
+    if (PAL.atmo) {
+      const ga = ctx.createRadialGradient(cx, cy, R * 0.90, cx, cy, R * 1.16);
+      ga.addColorStop(0, `rgba(${PAL.atmo.join(',')},0)`);
+      ga.addColorStop(0.5, `rgba(${PAL.atmo.join(',')},0.13)`);
+      ga.addColorStop(1, `rgba(${PAL.atmo.join(',')},0)`);
+      ctx.fillStyle = ga;
+      ctx.beginPath(); ctx.arc(cx, cy, R * 1.16, 0, 6.283); ctx.fill();
+    }
+
+    // A quiet ocean body anchors the geography and removes the hollow wireframe
+    // feeling of the previous version.
+    const ocean = ctx.createRadialGradient(cx - R * 0.25, cy - R * 0.28, R * 0.05, cx, cy, R);
+    ocean.addColorStop(0, PAL.oceanInner);
+    ocean.addColorStop(0.72, PAL.oceanOuter);
+    ocean.addColorStop(1, PAL.oceanOuter);
+    ctx.fillStyle = ocean;
+    ctx.beginPath(); ctx.arc(cx, cy, R * 0.992, 0, 6.283); ctx.fill();
+
     // Faint wire halo.
-    ctx.strokeStyle = `rgba(${BLUE.join(',')},0.10)`;
+    ctx.strokeStyle = `rgba(${PAL.line.join(',')},${PAL.haloAlpha})`;
     ctx.lineWidth = 1;
     ctx.beginPath(); ctx.arc(cx, cy, R, 0, 6.283); ctx.stroke();
 
-    // Project points.
-    const proj = new Array(N);
-    for (let i = 0; i < N; i++) {
+    // Project and draw in one pass. Depth sorting was visually unnecessary for
+    // tiny lights and previously allocated thousands of objects every frame.
+    for (let i = 0; i < PTS.length; i++) {
       const p = PTS[i];
       // rotate around Y
       let x = p.x * ca - p.z * sa;
@@ -506,68 +651,69 @@ if (document.readyState === 'loading') {
       // tilt around X
       const y2 = y * ct - z * st;
       const z2 = y * st + z * ct;
-      proj[i] = {
-        sx: cx + x * R,
-        sy: cy + y2 * R,
-        z: z2,
-        p,
-      };
-    }
-    proj.sort((a, b) => a.z - b.z);
-
-    // Constellation lines: connect near, front-facing points close on screen.
-    ctx.lineWidth = 1;
-    for (let i = 0; i < proj.length; i++) {
-      const a = proj[i];
-      if (a.z < 0.15) continue;
-      for (let j = i + 1; j < Math.min(i + 7, proj.length); j++) {
-        const b = proj[j];
-        if (b.z < 0.15) continue;
-        const dx = a.sx - b.sx, dy = a.sy - b.sy;
-        const d2 = dx * dx + dy * dy;
-        if (d2 < (R * 0.16) * (R * 0.16)) {
-          const alpha = (1 - Math.sqrt(d2) / (R * 0.16)) * 0.16 * ((a.z + b.z) / 2);
-          ctx.strokeStyle = `rgba(${BLUE.join(',')},${alpha.toFixed(3)})`;
-          ctx.beginPath();
-          ctx.moveTo(a.sx, a.sy);
-          ctx.lineTo(b.sx, b.sy);
-          ctx.stroke();
-        }
-      }
-    }
-
-    // Draw people points (back-to-front).
-    for (let i = 0; i < proj.length; i++) {
-      const q = proj[i];
-      const p = q.p;
-      const f = (q.z + 1) / 2;                 // depth 0..1
+      if (z2 < 0.025) continue;
+      const sx = cx + x * R;
+      const sy = cy - y2 * R;
+      const f = (z2 + 1) / 2;                 // depth 0..1
       const tw = 0.75 + 0.25 * Math.sin(time * p.tws + p.tw); // twinkle
 
       // Cursor proximity glow.
       let boost = 0;
       if (hasMouse) {
-        const dx = q.sx - mx, dy = q.sy - my;
+        const dx = sx - mx, dy = sy - my;
         const dd = Math.sqrt(dx * dx + dy * dy);
         const rad = R * 0.34;
         if (dd < rad) boost = (1 - dd / rad);
       }
 
-      const col = p.warm ? WARM : BLUE;
-      const size = (0.6 + f * 1.7) * tw + boost * 2.4;
-      const alpha = Math.min(1, (0.10 + f * 0.8) * tw + boost * 0.6);
+      const col = p.warm ? PAL.warm : PAL.base;
+      let size = (0.7 + f * 1.25) * tw * PAL.dotSize * p.power + boost * 2.4;
+      let alpha = Math.min(1, (PAL.dotMin + f * PAL.dotRange) * tw * 0.8 + boost * 0.6);
+      if (!p.land) { alpha *= 0.52; size *= 0.88; }
 
-      // Cheap glow for cursor-highlighted points (a soft translucent halo
-      // instead of the costly canvas shadowBlur).
       if (boost > 0.15) {
-        ctx.fillStyle = `rgba(${col.join(',')},${(0.18 * boost).toFixed(3)})`;
+        ctx.fillStyle = `rgba(${col.join(',')},${(PAL.haloBoost * boost).toFixed(3)})`;
         ctx.beginPath();
-        ctx.arc(q.sx, q.sy, size + 3.5 * boost, 0, 6.283);
+        ctx.arc(sx, sy, size + 3.5 * boost, 0, 6.283);
         ctx.fill();
       }
       ctx.fillStyle = `rgba(${col.join(',')},${alpha.toFixed(3)})`;
       ctx.beginPath();
-      ctx.arc(q.sx, q.sy, size, 0, 6.283);
+      ctx.arc(sx, sy, size, 0, 6.283);
       ctx.fill();
+    }
+
+    // Glowing coastline outlines (batched: a wide soft glow + a thin bright core).
+    ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+    ctx.beginPath();
+    for (let s = 0; s < COAST_SEGS.length; s++) {
+      const A = COAST_SEGS[s][0], Bp = COAST_SEGS[s][1];
+      const rax = A[0] * ca - A[2] * sa, raz = A[0] * sa + A[2] * ca, ray = A[1];
+      const az2 = ray * st + raz * ct; if (az2 < 0.06) continue;
+      const rbx = Bp[0] * ca - Bp[2] * sa, rbz = Bp[0] * sa + Bp[2] * ca, rby = Bp[1];
+      const bz2 = rby * st + rbz * ct; if (bz2 < 0.06) continue;
+      const ay2 = ray * ct - raz * st, by2 = rby * ct - rbz * st;
+      ctx.moveTo(cx + rax * R, cy - ay2 * R);
+      ctx.lineTo(cx + rbx * R, cy - by2 * R);
+    }
+    ctx.strokeStyle = `rgba(${PAL.line.join(',')},${PAL.clGlowA})`;
+    ctx.lineWidth = 2.0; ctx.stroke();
+    ctx.strokeStyle = PAL.clCore;
+    ctx.lineWidth = 0.72; ctx.stroke();
+
+    // Bright atmospheric crescent on the lit limb (screen-fixed light source).
+    if (PAL.rim) {
+      ctx.save();
+      ctx.shadowColor = `rgba(${PAL.rim.join(',')},0.9)`;
+      ctx.shadowBlur = R * 0.10;
+      ctx.strokeStyle = `rgba(${PAL.rim.join(',')},0.32)`;
+      ctx.lineWidth = 1.7;
+      ctx.beginPath(); ctx.arc(cx, cy, R * 0.992, -2.55, 0.55); ctx.stroke();
+      ctx.shadowBlur = R * 0.05;
+      ctx.strokeStyle = 'rgba(228,242,255,0.58)';
+      ctx.lineWidth = 0.9;
+      ctx.beginPath(); ctx.arc(cx, cy, R * 0.992, -2.4, 0.32); ctx.stroke();
+      ctx.restore();
     }
 
     // Free-floating particles with cursor attraction/repulsion.
@@ -594,8 +740,8 @@ if (document.readyState === 'loading') {
       pt.vx += (ox / orad) * k;
       pt.vy += (oy / orad) * k;
 
-      const col = pt.warm ? WARM : BLUE;
-      ctx.fillStyle = `rgba(${col.join(',')},0.55)`;
+      const col = pt.warm ? PAL.warm : PAL.base;
+      ctx.fillStyle = `rgba(${col.join(',')},${PAL.particleAlpha})`;
       ctx.beginPath();
       ctx.arc(pt.x, pt.y, pt.s, 0, 6.283);
       ctx.fill();
@@ -603,15 +749,20 @@ if (document.readyState === 'loading') {
 
     // Cursor focus ring.
     if (hasMouse) {
-      ctx.strokeStyle = `rgba(${BLUE.join(',')},0.28)`;
+      ctx.strokeStyle = `rgba(${PAL.line.join(',')},${PAL.ringAlpha})`;
       ctx.lineWidth = 1;
       ctx.beginPath(); ctx.arc(mx, my, R * 0.18, 0, 6.283); ctx.stroke();
     }
   }
 
-  function loop() {
+  let lastFrame = 0;
+  function loop(timestamp) {
     if (!running) return;
-    draw();
+    // 30 FPS remains fluid for the slow rotation and halves canvas work.
+    if (!lastFrame || timestamp - lastFrame >= 33) {
+      draw();
+      lastFrame = timestamp;
+    }
     raf = requestAnimationFrame(loop);
   }
 
@@ -619,6 +770,7 @@ if (document.readyState === 'loading') {
     const shouldRun = inView && tabVisible && !reduceMotion;
     if (shouldRun && !running) {
       running = true;
+      lastFrame = 0;
       raf = requestAnimationFrame(loop);
     } else if (!shouldRun && running) {
       running = false;
