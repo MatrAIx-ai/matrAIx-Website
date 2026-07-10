@@ -137,6 +137,7 @@
     }
   </style>
   <link rel="stylesheet" href="../dark-theme.css?v=4" />
+  <link rel="stylesheet" href="../blog-post.css?v=2" />
 </head>
 <body>
   <header>
@@ -146,24 +147,25 @@
     </a>
     <nav>
       <a href="/">Home</a>
-      <a href="/blog/">Blog</a>
+      <a href="/blog/" aria-current="page">Research</a>
       <a href="/persona.html">Persona</a>
       <a href="/applications.html">Applications</a>
       <a href="/demo.html">Playground</a>
       <a href="/access.html">Community</a>
     </nav>
-    <a href="access.html" class="btn-nav">
+    <a href="/access.html" class="btn-nav">
       <span class="dot live"></span> Join community
     </a>
     <button class="nav-toggle" aria-label="Toggle navigation menu">Menu</button>
   </header>
 
   <main>
+    <aside class="article-toc" aria-label="On this page"><span>On this page</span><ol></ol></aside>
     <div class="blog-header">
       <div class="blog-breadcrumb">
         <a href="/">Home</a> <span>/</span>
-        <a href="/blog/">Blog</a> <span>/</span>
-        <span>Research</span>
+        <a href="/blog/">Research</a> <span>/</span>
+        <span>Application</span>
       </div>
       <h1 class="blog-title">A Dress Rehearsal for App Testing</h1>
       <div class="blog-meta">
@@ -292,7 +294,7 @@
     </p>
     <p>
       <a href="/">Home</a> ·
-      <a href="/blog.html">Blog</a> ·
+      <a href="/blog/">Research</a> ·
       <a href="/persona.html">Persona</a> ·
       <a href="/demo.html">Demo</a> ·
       <a href="mailto:info@matraix.ai">Contact</a>
@@ -302,6 +304,7 @@
     </p>
   </footer>
 
+  <script src="../blog-post.js?v=2"></script>
   <script>
   /* Mobile nav toggle */
   (function(){

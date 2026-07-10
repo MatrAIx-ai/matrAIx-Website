@@ -346,6 +346,7 @@
     }
   </style>
   <link rel="stylesheet" href="../dark-theme.css?v=4" />
+  <link rel="stylesheet" href="../blog-post.css?v=2" />
 </head>
 <body>
   <header>
@@ -355,24 +356,25 @@
     </a>
     <nav>
       <a href="/">Home</a>
-      <a href="/blog/">Blog</a>
+      <a href="/blog/" aria-current="page">Research</a>
       <a href="/persona.html">Persona</a>
       <a href="/applications.html">Applications</a>
       <a href="/demo.html">Playground</a>
       <a href="/access.html">Community</a>
     </nav>
-    <a href="access.html" class="btn-nav">
+    <a href="/access.html" class="btn-nav">
       <span class="dot live"></span> Join community
     </a>
     <button class="nav-toggle" aria-label="Toggle navigation menu">Menu</button>
   </header>
 
   <main>
+    <aside class="article-toc" aria-label="On this page"><span>On this page</span><ol></ol></aside>
     <div class="blog-header">
       <div class="blog-breadcrumb">
         <a href="/">Home</a> <span>/</span>
-        <a href="/blog/">Blog</a> <span>/</span>
-        <span>Research</span>
+        <a href="/blog/">Research</a> <span>/</span>
+        <span>Publication</span>
       </div>
       <h1 class="blog-title">Synthetic Personas Need Explicit Grounding</h1>
       <div class="blog-meta">
@@ -390,6 +392,8 @@
         Suppose a city wants to know how residents might react to a new housing rule. Instead of waiting months for surveys and town halls, it asks a thousand AI-generated "people." They answer in ordinary language. Some worry about rent. Some defend landlords. Some sound exactly like voters.
       </p>
 
+      <h2>Believable is not the same as real</h2>
+
       <p>
         This is no longer a strange idea. Large language models can now play roles with startling fluency. Give one a name, age, job, income, political leaning, and a few personal worries, and it can produce a believable response. Researchers call these profiles <strong>synthetic personas</strong>: artificial descriptions of people used to make AI agents behave differently. The trouble is that believable is not the same as real.
       </p>
@@ -398,6 +402,8 @@
         Our recent position paper asks a practical question: <em>when an AI persona speaks, what gives that voice authority?</em> The researchers argue that every persona should come with <strong>grounding</strong>, meaning a clear account of where its details came from and what kind of claim they can support.
       </p>
 
+      <h2>A persona needs a receipt</h2>
+
       <p>
         Their central idea is simple: <strong>a persona needs a receipt</strong>. If a profile was written by a designer, it may be useful for imagining a user in a product meeting. If it was invented by a model, it may help generate varied examples, but its hidden assumptions matter. If it was sampled from survey or census data, it may support claims about a population, but only if the sampling preserves important combinations such as age, education, income, location, and technology access. If it was built from traces of a real person, it raises another set of questions about privacy, consent, and whether one person can stand for anyone else.
       </p>
@@ -405,6 +411,8 @@
       <p>
         The authors also point out a second weakness. Even a carefully built persona does not guarantee that the AI will actually act according to it. The model may ignore details, contradict itself, or drift toward a generic answer after a few turns. So persona-based simulations still need checks for some extras. Does the model remember the assigned traits, use them when relevant, and change its answers when the persona changes? These are all critical questions.
       </p>
+
+      <h2>From plausibility to evidence</h2>
 
       <p>
         This matters because synthetic personas are moving into places where decisions get made, including market research, policy analysis, social simulation, and AI evaluation. A vivid artificial person can be useful. It can also smuggle in stereotypes and call them evidence.
@@ -429,7 +437,7 @@
     </p>
     <p>
       <a href="/">Home</a> ·
-      <a href="/blog.html">Blog</a> ·
+      <a href="/blog/">Research</a> ·
       <a href="/persona.html">Persona</a> ·
       <a href="/demo.html">Demo</a> ·
       <a href="mailto:info@matraix.ai">Contact</a>
@@ -439,6 +447,7 @@
     </p>
   </footer>
 
+  <script src="../blog-post.js?v=2"></script>
   <script>
   /* Mobile nav toggle */
   (function(){

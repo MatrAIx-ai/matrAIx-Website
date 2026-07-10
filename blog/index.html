@@ -638,8 +638,8 @@
     }
   </style>
   <link rel="stylesheet" href="../dark-theme.css?v=4" />
-  <link rel="stylesheet" href="../subpages.css?v=1" />
-  <link rel="stylesheet" href="../research.css?v=1" />
+  <link rel="stylesheet" href="../subpages.css?v=3" />
+  <link rel="stylesheet" href="../research.css?v=6" />
 </head>
 <body>
   <!-- Navigation -->
@@ -654,19 +654,21 @@
         <span>Research</span>
       </div>
 
-      <h1 class="blog-title">Research</h1>
+      <h1 class="blog-title">The science of simulated users.</h1>
       <p class="research-intro">
         Questions, methods, and findings from the MatrAIx community—covering persona grounding, simulated users, interactive environments, evaluation, and identity drift.
       </p>
+      <div class="research-orbit" aria-hidden="true"><span></span><i></i><b>HUMAN<br>BEHAVIOR</b></div>
     </div>
 
+    <div class="research-list-head"><span>Featured research</span><a href="#research-index">Browse all research ↓</a></div>
     <!-- Blog posts grid -->
     <div class="blog-grid">
       <!-- Post 1: Position Paper -->
       <a href="position-colm.html" class="blog-card">
-        <span class="blog-card-tag">Research</span>
-        <h3 class="blog-card-title">Synthetic Persona Grounding & Standardized Reporting</h3>
-        <p class="blog-card-desc">Why explicit grounding and standardized persona report cards are critical for trustworthy agent simulation.</p>
+        <span class="blog-card-tag">Blog post</span>
+        <h3 class="blog-card-title">Synthetic Personas Need Explicit Grounding</h3>
+        <p class="blog-card-desc">A practical introduction to why believable synthetic personas still need provenance, reporting, and behavioral validation.</p>
         <div class="blog-card-meta">
           <div class="blog-card-author">
             <img src="/../Assets/logos/Matrix_Logo.jpg" alt="MatrAIx" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;" />
@@ -712,12 +714,30 @@
       </a>
     </div>
 
-    <section class="research-principle">
-      <div>
-        <span style="font-family: var(--mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--phos);">Research principle</span>
-        <h2 style="font-family: var(--disp); font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1.1; letter-spacing: -.03em; margin-top: 12px;">Simulation is a hypothesis, not a human subject.</h2>
+    <section class="research-index" id="research-index">
+      <div class="research-index-heading">
+        <h2>Research</h2>
+        <div class="research-filters" role="group" aria-label="Filter research by type">
+          <button class="active" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-filter="publication" aria-pressed="false">Publication</button>
+          <button type="button" data-filter="dataset" aria-pressed="false">Dataset</button>
+          <button type="button" data-filter="benchmark" aria-pressed="false">Benchmark</button>
+          <button type="button" data-filter="system" aria-pressed="false">System</button>
+          <button type="button" data-filter="application" aria-pressed="false">Application</button>
+          <button type="button" data-filter="validation" aria-pressed="false">Validation</button>
+        </div>
       </div>
-      <p style="color: var(--ink-dim); font-family: var(--disp); font-size: 1rem; line-height: 1.7;">Synthetic users can surface hypotheses, blind spots, and potential failures—but they are not ground truth. Important findings still require explicit grounding, uncertainty reporting, and validation with human evidence. <a href="position-colm.html" style="color: var(--phos); text-decoration: none; white-space: nowrap;">Read our grounding principles →</a></p>
+      <div class="index-list">
+        <a href="position-colm.html" data-category="publication"><span><strong>Publication</strong><small>Jun 24, 2026</small></span><div><b>Synthetic Personas Need Explicit Grounding</b><small>Why believable synthetic personas still need provenance, reporting, and behavioral validation.</small></div><i>↗</i></a>
+        <a href="application-colm.html" data-category="application"><span><strong>Application</strong><small>Jun 22, 2026</small></span><div><b>PersonaEval: Persona-Based User Simulation</b><small>Evaluate interactive applications using population-scale synthetic personas.</small></div><i>↗</i></a>
+        <a href="env-colm.html" data-category="publication"><span><strong>Publication</strong><small>Jun 20, 2026</small></span><div><b>MicroVerse: Identity Drift in Multi-Agent Simulations</b><small>Measuring and correcting persona drift in long-horizon agent interactions.</small></div><i>↗</i></a>
+        <div data-category="dataset"><span><strong>Dataset</strong><small>In development</small></span><div><b>MatrAIxPersona: Population-Scale Persona Infrastructure</b><small>Grounded population construction, provenance, filtering, and diversity measurement.</small></div><i>—</i></div>
+        <div data-category="benchmark"><span><strong>Benchmark</strong><small>In development</small></span><div><b>PersonaBench: Do Agents Actually Follow Their Personas?</b><small>Tasks for adherence, self-consistency, behavioral sensitivity, and identity drift.</small></div><i>—</i></div>
+        <div data-category="system"><span><strong>System</strong><small>In development</small></span><div><b>A Shared Environment and Telemetry Interface</b><small>A reproducible contract for survey, chatbot, web, app, and multi-agent episodes.</small></div><i>—</i></div>
+        <div data-category="validation"><span><strong>Validation</strong><small>In development</small></span><div><b>When Do Simulated Users Match Human Behavior?</b><small>Human calibration for realism, subgroup fidelity, uncertainty, and failure modes.</small></div><i>—</i></div>
+        <div data-category="application"><span><strong>Application</strong><small>In development</small></span><div><b>Simulated Users for Conversational AI Evaluation</b><small>Task completion, helpfulness, safety, and multi-turn reliability at scale.</small></div><i>—</i></div>
+        <div data-category="publication"><span><strong>Publication</strong><small>In development</small></span><div><b>From Personas to User Simulation</b><small>A structured review of methods, benchmarks, applications, risks, and open questions.</small></div><i>—</i></div>
+      </div>
     </section>
 
     <div class="research-submit">
@@ -752,6 +772,24 @@
         nav.classList.remove('open');
       }
     });
+  })();
+
+  /* Research type filters */
+  (function(){
+    const buttons = document.querySelectorAll('.research-filters button');
+    const entries = document.querySelectorAll('.index-list > [data-category]');
+    if (!buttons.length || !entries.length) return;
+    buttons.forEach(button => button.addEventListener('click', function(){
+      const filter = button.dataset.filter;
+      buttons.forEach(item => {
+        const selected = item === button;
+        item.classList.toggle('active', selected);
+        item.setAttribute('aria-pressed', String(selected));
+      });
+      entries.forEach(entry => {
+        entry.hidden = filter !== 'all' && entry.dataset.category !== filter;
+      });
+    }));
   })();
   </script>
 </body>
