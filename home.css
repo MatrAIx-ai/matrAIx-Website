@@ -221,6 +221,17 @@ body {
 /* ---------- Hero ---------- */
 main { position: relative; z-index: 10; }
 
+/* Skip layout/paint work for below-the-fold sections until they approach the
+   viewport. Intrinsic sizes keep scrolling stable before content is rendered. */
+main > section:not(.hero),
+main > aside {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 620px;
+}
+.perf-paused *,
+.perf-paused *::before,
+.perf-paused *::after { animation-play-state: paused !important; }
+
 .hero {
   max-width: 1100px; margin: 0 auto;
   padding: clamp(140px, 18vw, 180px) clamp(20px, 5vw, 40px) 70px;
@@ -245,11 +256,12 @@ main { position: relative; z-index: 10; }
 @media (min-width: 900px) {
   .hero--split {
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    gap: clamp(52px, 7vw, 96px);
+    gap: clamp(30px, 4vw, 56px);
     text-align: left;
     padding-top: clamp(150px, 16vw, 190px);
   }
   .hero--split .community-badge { animation-delay: 0.05s; }
+  .hero--split .hero-copy { left: clamp(8px, 1vw, 16px); }
   .hero--split .megacount { justify-content: flex-start; }
   .hero--split .hero-subheading { margin-left: 0; margin-right: 0; }
   .hero--split .cta-row { justify-content: flex-start; }
@@ -340,7 +352,7 @@ main { position: relative; z-index: 10; }
     max-width: 560px;
     margin: 0;
     margin-left: auto;
-    left: clamp(32px, 4vw, 56px);
+    left: clamp(6px, 1.2vw, 18px);
     animation-delay: 0.4s;
   }
 }
@@ -794,12 +806,25 @@ main { position: relative; z-index: 10; }
 .web .btn3 { height: 24px; width: 96px; background: var(--phos); box-shadow: var(--glow); opacity: 0.35; }
 .viz.on .web .btn3 { animation: webbtn 4.2s ease infinite; }
 @keyframes webbtn { 0%, 66% { opacity: 0.35; transform: scale(1); } 74% { opacity: 1; transform: scale(1.08); } 82% { opacity: 1; transform: scale(1); } 92%, 100% { opacity: 0.35; } }
-.web .cursor { position: absolute; left: 40px; top: 22px; font-size: 17px; color: var(--phos); filter: drop-shadow(0 0 5px rgba(80, 137, 184, 0.8)); pointer-events: none; }
+.web .cursor { position: absolute; left: 40px; top: 48px; font-size: 17px; color: var(--phos); filter: drop-shadow(0 0 5px rgba(80, 137, 184, 0.8)); pointer-events: none; }
 .viz.on .web .cursor { animation: webcur 4.2s cubic-bezier(0.5, 0, 0.5, 1) infinite; }
-@keyframes webcur { 0%, 12% { left: 40px; top: 22px; } 28% { left: 40px; top: 22px; } 36%, 46% { left: 60px; top: 53px; } 54%, 64% { left: 84px; top: 84px; } 72% { left: 70px; top: 120px; } 80% { left: 70px; top: 118px; } 88%, 100% { left: 70px; top: 120px; } }
-.web .ring { position: absolute; width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--phos); opacity: 0; left: 36px; top: 18px; pointer-events: none; }
+@keyframes webcur { 0%, 28% { left: 40px; top: 48px; } 36%, 46% { left: 60px; top: 79px; } 54%, 64% { left: 84px; top: 110px; } 72%, 100% { left: 60px; top: 144px; } }
+.web .ring { position: absolute; width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--phos); opacity: 0; left: 36px; top: 48px; pointer-events: none; }
 .viz.on .web .ring { animation: webring 4.2s ease infinite; }
-@keyframes webring { 0%, 30% { opacity: 0; transform: scale(0.5); left: 36px; top: 18px; } 33% { opacity: 0.9; transform: scale(0.6); } 42% { opacity: 0; transform: scale(1.6); } 48% { left: 56px; top: 49px; } 51% { opacity: 0.9; transform: scale(0.6); } 60% { opacity: 0; transform: scale(1.6); } 66% { left: 80px; top: 80px; } 69% { opacity: 0.9; transform: scale(0.6); } 78% { opacity: 0; transform: scale(1.6); } 100% { opacity: 0; left: 80px; top: 80px; } }
+@keyframes webring {
+  0%, 30% { opacity: 0; transform: scale(0.5); left: 36px; top: 48px; }
+  33% { opacity: 0.9; transform: scale(0.6); }
+  41% { opacity: 0; transform: scale(1.6); }
+  47% { left: 56px; top: 79px; transform: scale(0.5); }
+  50% { opacity: 0.9; transform: scale(0.6); }
+  58% { opacity: 0; transform: scale(1.6); }
+  64% { left: 80px; top: 110px; transform: scale(0.5); }
+  67% { opacity: 0.9; transform: scale(0.6); }
+  75% { opacity: 0; transform: scale(1.6); }
+  80% { left: 56px; top: 144px; transform: scale(0.5); }
+  83% { opacity: 0.9; transform: scale(0.6); }
+  91%, 100% { opacity: 0; transform: scale(1.6); left: 56px; top: 144px; }
+}
 .web .prog { position: absolute; left: 0; bottom: 0; height: 3px; background: var(--phos); box-shadow: var(--glow); width: 0; }
 .viz.on .web .prog { animation: webprog 4.2s ease infinite; }
 @keyframes webprog { 0%, 6% { width: 0; } 20% { width: 33%; } 46% { width: 66%; } 74% { width: 100%; } 92% { width: 100%; } 100% { width: 0; } }

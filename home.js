@@ -44,11 +44,19 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
       ctx.fillRect(a.x, a.y, a.s, a.s);
     }
     ctx.globalAlpha = 1;
-    raf = requestAnimationFrame(frame);
   }
-  let raf = 0, animating = false;
-  function start() { if (!animating && !reduceMotion) { animating = true; raf = requestAnimationFrame(frame); } }
-  function stop() { animating = false; cancelAnimationFrame(raf); }
+  let raf = 0, animating = false, lastFrame = 0;
+  const FRAME_MS = 1000 / 24;
+  const renderFrame = (ts) => {
+    if (!animating) return;
+    if (!lastFrame || ts - lastFrame >= FRAME_MS) {
+      frame();
+      lastFrame = ts;
+    }
+    raf = requestAnimationFrame(renderFrame);
+  };
+  function start() { if (!animating && !reduceMotion) { animating = true; lastFrame = 0; raf = requestAnimationFrame(renderFrame); } }
+  function stop() { animating = false; lastFrame = 0; cancelAnimationFrame(raf); }
   resize();
   window.addEventListener('resize', resize);
   document.addEventListener('visibilitychange', () => {
@@ -389,6 +397,16 @@ if (document.readyState === 'loading') {
   initMenuToggle();
 }
 
+/* ---------- 8a. Pause decorative animation outside the viewport ---------- */
+(() => {
+  if (reduceMotion || !('IntersectionObserver' in window)) return;
+  const sections = document.querySelectorAll('main > section:not(.hero), main > aside');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => entry.target.classList.toggle('perf-paused', !entry.isIntersecting));
+  }, { rootMargin: '180px 0px', threshold: 0 });
+  sections.forEach(section => observer.observe(section));
+})();
+
 /* ---------- 8b. Application task-type showcase ---------- */
 (() => {
   const root = document.getElementById('eaas');
@@ -486,33 +504,35 @@ if (document.readyState === 'loading') {
       // Evenly sample the full sphere. Land receives brighter, denser lights;
       // a small deterministic subset of ocean samples remains as dim activity.
       if (window.d3 && typeof window.d3.geoContains === 'function') {
-        const samples = 3000;
-        const goldenAngle = 137.507764;
-        const noise = (n) => {
-          const value = Math.sin(n * 12.9898 + 78.233) * 43758.5453;
-          return value - Math.floor(value);
+        const buildPopulation = () => {
+          const samples = 3000;
+          const goldenAngle = 137.507764;
+          const noise = (n) => {
+            const value = Math.sin(n * 12.9898 + 78.233) * 43758.5453;
+            return value - Math.floor(value);
+          };
+          for (let i = 0; i < samples; i++) {
+            const y = 1 - 2 * ((i + 0.5) / samples);
+            const baseLat = Math.asin(y) / D2R;
+            const lat = Math.max(-88.5, Math.min(88.5, baseLat + (noise(i) - 0.5) * 2.6));
+            const lonJitter = (noise(i + 4000) - 0.5) * 3.2 / Math.max(0.35, Math.cos(lat * D2R));
+            const lon = (((i * goldenAngle + lonJitter + 180) % 360) + 360) % 360 - 180;
+            const isLandPoint = window.d3.geoContains(land, [lon, lat]);
+            if (!isLandPoint && noise(i + 24000) > 0.24) continue;
+            const p = ll3(lon, lat);
+            const strength = noise(i + 8000);
+            const variedPower = Math.pow(strength, 2.35);
+            PTS.push({
+              x: p[0], y: p[1], z: p[2], land: isLandPoint,
+              power: isLandPoint ? 0.30 + variedPower * 0.70 : 0.22 + variedPower * 0.30,
+              warm: isLandPoint && noise(i + 12000) > 0.935,
+              tw: noise(i + 16000) * Math.PI * 2,
+              tws: 0.32 + noise(i + 20000) * 0.78,
+            });
+          }
         };
-        for (let i = 0; i < samples; i++) {
-          const y = 1 - 2 * ((i + 0.5) / samples);
-          const baseLat = Math.asin(y) / D2R;
-          const lat = Math.max(-88.5, Math.min(88.5, baseLat + (noise(i) - 0.5) * 2.6));
-          const lonJitter = (noise(i + 4000) - 0.5) * 3.2 / Math.max(0.35, Math.cos(lat * D2R));
-          const lon = (((i * goldenAngle + lonJitter + 180) % 360) + 360) % 360 - 180;
-          const isLandPoint = window.d3.geoContains(land, [lon, lat]);
-          if (!isLandPoint && noise(i + 24000) > 0.24) continue;
-          const p = ll3(lon, lat);
-          const strength = noise(i + 8000);
-          // Bias strongly toward tiny lights, with fewer medium/large points.
-          // This breaks up the uniform dotted texture without changing density.
-          const variedPower = Math.pow(strength, 2.35);
-          PTS.push({
-            x: p[0], y: p[1], z: p[2], land: isLandPoint,
-            power: isLandPoint ? 0.30 + variedPower * 0.70 : 0.22 + variedPower * 0.30,
-            warm: isLandPoint && noise(i + 12000) > 0.972,
-            tw: noise(i + 16000) * Math.PI * 2,
-            tws: 0.32 + noise(i + 20000) * 0.78,
-          });
-        }
+        if ('requestIdleCallback' in window) requestIdleCallback(buildPopulation, { timeout: 700 });
+        else setTimeout(buildPopulation, 80);
       }
     })
     .catch(() => {});
