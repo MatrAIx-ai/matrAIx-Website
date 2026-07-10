@@ -11,50 +11,39 @@
   <meta name="description" content="Explore the flat persona dimension space that powers matrAIx agent simulations." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=8" />
   <link rel="stylesheet" href="explorer.css?v=7" />
   <link rel="stylesheet" href="dark-theme.css?v=4" />
+  <link rel="stylesheet" href="subpages.css?v=1" />
+  <link rel="stylesheet" href="persona-refresh.css?v=1" />
 </head>
 <body class="explorer-body">
   <div class="grain" aria-hidden="true"></div>
   <div class="scanlines" aria-hidden="true"></div>
 
   <!-- Header -->
-  <header class="nav">
-    <a class="brand" href="/">
-      <span class="brand-name">Matr<em>AI</em>x</span>
-    </a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="/">Home</a>
-      <a href="blog/">Blog</a>
-      <a href="persona.html">Persona</a>
-      <a href="demo.html">Demo</a>
-    </nav>
-    <button class="nav-toggle" aria-label="Toggle navigation menu">
-      Menu
-    </button>
-    <a href="access.html" class="btn btn-solid nav-cta">
-      <span class="dot live"></span> Join community
-    </a>
-  </header>
+  <header class="mx-nav"><a class="mx-brand" href="/">Matr<em>AI</em>x</a><nav class="mx-links"><a href="/">Home</a><a href="blog/">Research</a><a class="active" href="persona.html">Personas</a><a href="applications.html">Applications</a><a href="demo.html">Playground</a><a href="access.html">Community</a></nav><a class="mx-github" href="https://github.com/MatrAIx-ai/MatrAIx" target="_blank" rel="noopener">GitHub ↗</a><a class="mx-join" href="access.html">Join us</a><button class="mx-menu">Menu</button></header>
 
   <main class="ex-main">
     <!-- Title -->
     <section class="ex-head">
+      <div class="ex-head-copy">
       <div class="hero-eyebrow">
         <span class="tick">//</span> PERSONA DIMENSION SPACE
         <span class="ver" id="verTag">v1.0</span>
         <span class="sep">—</span>
         <span class="status"><span class="dot live"></span> FLAT / UNIFIED</span>
       </div>
-      <h1 class="ex-title">1000-Dimension <span>Persona Schema</span></h1>
+      <h1 class="ex-title">Explore the <span>Persona Space.</span></h1>
       <p class="ex-sub">
         Every simulated agent is drawn by assigning <em>one value per dimension</em>.
         Language, age, domain, academic background, professional history (LinkedIn-style)
         and behavioral state are all flat siblings — multiplied together they define the
-        space matrAIx samples 8.3 billion behaviors from.
+        space MatrAIx uses to condition diverse simulated users.
       </p>
+      </div>
+      <button class="persona-sample-cta" id="sampleTop">Sample a persona →</button>
 
       <!-- Stat bar -->
       <div class="ex-stats" id="statBar">
@@ -64,6 +53,7 @@
         <div class="stat"><span class="stat-val">8.3B</span><span class="stat-label">behaviors simulated</span></div>
         <div class="stat"><span class="stat-val" data-stat="datasets">33</span><span class="stat-label">existing datasets</span></div>
       </div>
+      <div class="persona-principles"><div><b>Structured</b><span>Every attribute is explicit, searchable, and machine-readable.</span></div><div><b>Grounded</b><span>Dimensions can retain source and provenance information.</span></div><div><b>Testable</b><span>Persona attributes become hypotheses for behavior evaluation.</span></div></div>
     </section>
 
     <!-- Controls -->
@@ -105,23 +95,23 @@
   <script>
   /* Mobile nav toggle */
   (function(){
-    const toggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
+    const toggle = document.querySelector('.mx-menu');
+    const navLinks = document.querySelector('.mx-links');
     if (!toggle || !navLinks) return;
     toggle.addEventListener('click', function(){
       toggle.classList.toggle('active');
-      navLinks.classList.toggle('active');
+      document.querySelector('.mx-nav').classList.toggle('open');
     });
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', function(){
         toggle.classList.remove('active');
-        navLinks.classList.remove('active');
+        document.querySelector('.mx-nav').classList.remove('open');
       });
     });
     window.addEventListener('resize', function(){
       if (window.innerWidth > 760) {
         toggle.classList.remove('active');
-        navLinks.classList.remove('active');
+        document.querySelector('.mx-nav').classList.remove('open');
       }
     });
   })();

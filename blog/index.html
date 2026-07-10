@@ -11,7 +11,7 @@
   <meta name="description" content="Insights from the matrAIx community: building agent simulations, evaluation frameworks, and synthetic personas at scale." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     /* ============================================================
        matrAIx Blog — light theme with Inter sans-serif
@@ -638,37 +638,25 @@
     }
   </style>
   <link rel="stylesheet" href="../dark-theme.css?v=4" />
+  <link rel="stylesheet" href="../subpages.css?v=1" />
+  <link rel="stylesheet" href="../research.css?v=1" />
 </head>
 <body>
   <!-- Navigation -->
-  <header>
-    <a class="brand" href="/">
-      <span class="brand-name">Matr<em>AI</em>x</span>
-    </a>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/blog/">Blog</a>
-      <a href="/persona.html">Persona</a>
-      <a href="/demo.html">Demo</a>
-    </nav>
-    <a href="access.html" class="btn-nav">
-      <span class="dot live"></span> Join community
-    </a>
-    <button class="nav-toggle" aria-label="Toggle navigation menu">Menu</button>
-  </header>
+  <header class="mx-nav"><a class="mx-brand" href="/">Matr<em>AI</em>x</a><nav class="mx-links"><a href="/">Home</a><a class="active" href="/blog/">Research</a><a href="/persona.html">Personas</a><a href="/applications.html">Applications</a><a href="/demo.html">Playground</a><a href="/access.html">Community</a></nav><a class="mx-github" href="https://github.com/MatrAIx-ai/MatrAIx" target="_blank" rel="noopener">GitHub ↗</a><a class="mx-join" href="/access.html">Join us</a><button class="mx-menu">Menu</button></header>
 
-  <main>
+  <main class="research-page">
     <!-- Blog index header -->
     <div class="blog-header">
       <div class="blog-breadcrumb">
         <a href="/">Home</a>
         <span>/</span>
-        <span>Blog</span>
+        <span>Research</span>
       </div>
 
-      <h1 class="blog-title">Blog</h1>
-      <p style="color: var(--ink); font-family: var(--disp); font-size: 1.05rem; margin-top: 20px; max-width: 600px; line-height: 1.8;">
-        Research, insights, and community updates from the matrAIx team. Explore our latest work on persona grounding, agent simulation, and evaluation frameworks.
+      <h1 class="blog-title">Research</h1>
+      <p class="research-intro">
+        Questions, methods, and findings from the MatrAIx community—covering persona grounding, simulated users, interactive environments, evaluation, and identity drift.
       </p>
     </div>
 
@@ -724,7 +712,7 @@
       </a>
     </div>
 
-    <section style="margin-top: 60px; padding: clamp(24px, 4vw, 36px); border: 1px solid var(--line); border-radius: 12px; background: var(--bg-2); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 30px; align-items: center;">
+    <section class="research-principle">
       <div>
         <span style="font-family: var(--mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--phos);">Research principle</span>
         <h2 style="font-family: var(--disp); font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1.1; letter-spacing: -.03em; margin-top: 12px;">Simulation is a hypothesis, not a human subject.</h2>
@@ -732,7 +720,7 @@
       <p style="color: var(--ink-dim); font-family: var(--disp); font-size: 1rem; line-height: 1.7;">Synthetic users can surface hypotheses, blind spots, and potential failures—but they are not ground truth. Important findings still require explicit grounding, uncertainty reporting, and validation with human evidence. <a href="position-colm.html" style="color: var(--phos); text-decoration: none; white-space: nowrap;">Read our grounding principles →</a></p>
     </section>
 
-    <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--line); text-align: center;">
+    <div class="research-submit">
       <p style="color: var(--ink); font-family: var(--disp); margin-bottom: 16px; font-size: 1.05rem;">
         Have research or insights to share? We welcome community contributions.
       </p>
@@ -740,45 +728,28 @@
     </div>
   </main>
 
-  <footer>
-    <p style="margin-bottom: 16px;">
-      <span class="brand" style="font-size: 1rem;">
-        
-        <span class="brand-name">Matr<em>AI</em>x</span>
-      </span> — Agent Simulation for Evaluation
-    </p>
-    <p>
-      <a href="/">Home</a> ·
-      <a href="/blog.html">Blog</a> ·
-      <a href="/persona.html">Persona</a> ·
-      <a href="/demo.html">Demo</a> ·
-      <a href="mailto:info@matraix.ai">Contact</a>
-    </p>
-    <p style="margin-top: 20px; font-size: 0.85rem;">
-      © 2026 matrAIx — Open-source community · SIM-NODE 07
-    </p>
-  </footer>
+  <footer class="mx-footer"><span>MatrAIx · Research</span><span><a href="/">Home</a> · <a href="/persona.html">Personas</a> · <a href="/applications.html">Applications</a> · <a href="/demo.html">Playground</a></span><span>© 2026</span></footer>
 
   <script>
   /* Mobile nav toggle */
   (function(){
-    const toggle = document.querySelector('.nav-toggle');
-    const nav = document.querySelector('nav');
+    const toggle = document.querySelector('.mx-menu');
+    const nav = document.querySelector('.mx-nav');
     if (!toggle || !nav) return;
     toggle.addEventListener('click', function(){
       toggle.classList.toggle('active');
-      nav.classList.toggle('active');
+      nav.classList.toggle('open');
     });
-    nav.querySelectorAll('a').forEach(link => {
+    document.querySelectorAll('.mx-links a').forEach(link => {
       link.addEventListener('click', function(){
         toggle.classList.remove('active');
-        nav.classList.remove('active');
+        nav.classList.remove('open');
       });
     });
     window.addEventListener('resize', function(){
       if (window.innerWidth > 768) {
         toggle.classList.remove('active');
-        nav.classList.remove('active');
+        nav.classList.remove('open');
       }
     });
   })();

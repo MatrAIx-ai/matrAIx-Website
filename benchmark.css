@@ -306,9 +306,15 @@ a { color: inherit; text-decoration: none; }
   .console { height: 200px; }
 }
 @media (max-width: 620px) {
+  html, body.os { overflow-x: hidden; }
   .os-bar { flex-wrap: wrap; height: auto; padding: 8px; gap: 8px; }
   .os-target { order: 3; flex-basis: 100%; }
+  .os-target .lbl { display: none; }
+  .os-select { width: min(100%, 230px); min-width: 0; }
+  .os-status { max-width: 100%; overflow: hidden; }
   .os-nav { display: none; }
+  .gr-tabs { overflow-x: auto; justify-content: flex-start; }
+  .gr-tab { flex: 0 0 auto; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
 
