@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark" style="color-scheme: dark;">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){try{var t=localStorage.getItem('matraix-theme')||'dark';document.documentElement.setAttribute('data-theme',t);document.documentElement.style.colorScheme=t;}catch(e){document.documentElement.setAttribute('data-theme','dark');document.documentElement.style.colorScheme='dark';}})();</script>
   <title>MatrAIx — Simulate Before Reality</title>
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
@@ -14,7 +13,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="home.css?v=57" />
-  <link rel="stylesheet" href="light-theme.css?v=3" />
   <link rel="stylesheet" href="dark-theme.css?v=3" />
 </head>
 <body>
@@ -36,7 +34,6 @@
       <a href="access.html">Community</a>
     </nav>
     <button class="nav-toggle" aria-label="Toggle navigation menu">Menu</button>
-    <button id="theme-toggle" class="btn btn-ghost nav-cta theme-nav" aria-label="Toggle color theme">🌙</button>
     <a href="https://github.com/MatrAIx-ai/MatrAIx" class="nav-github" target="_blank" rel="noopener">GitHub ↗</a>
     <a href="access.html" class="btn btn-solid nav-cta"><span class="dot live"></span> Join us</a>
   </header>
@@ -220,6 +217,5 @@
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
   <script src="home.js?v=46"></script>
-  <script src="theme-toggle.js?v=3"></script>
 </body>
 </html>

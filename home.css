@@ -4,7 +4,7 @@
    Inter (sans-serif) + JetBrains Mono (monospace).
    ============================================================ */
 
-/* Color and font variables are defined in light-theme.css. */
+/* Color and font variables are defined in dark-theme.css. */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -820,8 +820,6 @@ main { position: relative; z-index: 10; }
   .brand { flex: 0; }
   .nav-toggle { display: flex !important; order: 2; position: relative; z-index: 21; pointer-events: auto; }
   .nav-cta { display: none; }
-  /* Keep the dark/light theme toggle visible on mobile, left of the menu button */
-  #theme-toggle.nav-cta { display: inline-flex !important; order: 1; margin-left: auto; margin-right: 10px; }
   .nav-links {
     position: absolute; top: 100%; left: 0; right: 0; z-index: 20;
     display: flex !important; flex-direction: column;
