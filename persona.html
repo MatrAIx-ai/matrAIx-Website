@@ -109,36 +109,6 @@
       </div>
     </section>
 
-    <section class="persona-dag" aria-labelledby="dag-title">
-      <div class="persona-section-head dag-heading">
-        <span>Attribute dependency graph</span>
-        <h2 id="dag-title">Attributes are connected, not sampled in isolation.</h2>
-        <p>The Full DAG encodes directed proposal dependencies across the persona schema. This website view aggregates the canonical graph by category so its structure remains readable.</p>
-      </div>
-      <div class="dag-metrics" aria-label="Full DAG summary">
-        <div><b>1,308</b><span>graph nodes</span></div>
-        <div><b>1,290</b><span>emitted attributes</span></div>
-        <div><b>6,999</b><span>directed edges</span></div>
-        <div><b>54</b><span>full CPT overlays</span></div>
-        <div><b>524</b><span>conditional masks</span></div>
-      </div>
-      <div class="dag-shell">
-        <div class="dag-toolbar">
-          <label for="dagSearch">Find a category</label>
-          <input id="dagSearch" type="search" placeholder="e.g. personality, skills, interests…" autocomplete="off" />
-          <label class="dag-density" for="dagDensity">Connections <input id="dagDensity" type="range" min="12" max="51" value="36" /></label>
-          <button id="dagMotion" type="button" aria-pressed="true">Flow on</button>
-          <button id="dagReset" type="button">Reset layout</button>
-        </div>
-        <div class="dag-canvas-wrap"><canvas id="personaDag" aria-label="Interactive category overview of the MatrAIx persona Full DAG"></canvas></div>
-        <div class="dag-footer">
-          <div id="dagStatus" class="dag-status" aria-live="polite"></div>
-          <div class="dag-legend"><span><i></i>Node size = attributes</span><span><i></i>Line weight = dependencies</span><span>Drag · select · search</span></div>
-        </div>
-      </div>
-      <p class="dag-note">Edges represent sampling dependencies and structural priors; they should not automatically be interpreted as identified causal effects.</p>
-    </section>
-
     <section class="schema-intro" id="schema-explorer" aria-labelledby="schema-title">
       <div>
         <span>Live schema explorer</span>
@@ -214,7 +184,6 @@
   </script>
 
   <script src="dimensions.js?v=6"></script>
-  <script src="persona-dag.js?v=5"></script>
   <script src="explorer.js?v=7"></script>
 </body>
 </html>

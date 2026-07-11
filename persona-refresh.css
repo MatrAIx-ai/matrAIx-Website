@@ -14,7 +14,6 @@
 .dim-card{content-visibility:auto;contain-intrinsic-size:180px}.trait-row{content-visibility:auto;contain-intrinsic-size:38px}
 .ex-main{max-width:1280px!important;padding-bottom:110px!important}
 .ex-head{min-height:630px;align-content:center;margin-bottom:0!important;padding-top:105px!important;padding-bottom:75px!important;border-bottom:1px solid var(--line-soft)}
-.dag-canvas-wrap{min-height:520px}@media(max-width:600px){.dag-canvas-wrap{min-height:400px}}
 .ex-head-copy{max-width:790px!important}
 .ex-title{max-width:850px;font-size:clamp(3.3rem,7vw,6.9rem)!important;line-height:.96!important}
 .ex-title span{color:#a9d5f2!important;text-shadow:none!important}
