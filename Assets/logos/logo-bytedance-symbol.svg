@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" role="img" aria-labelledby="title">
+  <title id="title">ByteDance</title>
+  <path fill="#365DB7" d="M8 20 28 25v61L8 91z"/>
+  <path fill="#428AF1" d="M39 48 59 53v35l-20 5z"/>
+  <path fill="#09BBC7" d="m70 40 20-6v49l-20-6z"/>
+  <path fill="#6BD7D2" d="m101 15 19 5v71l-19-5z"/>
+</svg>
