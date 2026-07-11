@@ -128,3 +128,4 @@
 
 @media(max-width:900px){.ex-head{grid-template-columns:1fr!important}.persona-hero-actions{align-items:flex-start!important}.persona-pipeline-grid{grid-template-columns:1fr!important}.persona-release{grid-template-columns:1fr!important}.schema-intro{grid-template-columns:1fr!important}.schema-intro>a{grid-column:auto!important}.ex-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:600px){.ex-main{padding-top:64px!important}.ex-head{padding:82px 0 42px!important}.ex-title{font-size:clamp(2.55rem,12vw,3.45rem)!important}.ex-stats{grid-template-columns:1fr 1fr!important}.persona-build,.persona-sources,.persona-release,.schema-intro{margin-top:62px!important}.persona-release{padding:24px!important}.ex-grid{grid-template-columns:1fr!important}.explorer-progress{align-items:flex-start;flex-direction:column}}
+@media(min-width:1200px){.ex-main{max-width:1560px!important}}

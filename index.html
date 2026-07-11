@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="home.css?v=62" />
+  <link rel="stylesheet" href="home.css?v=64" />
   <link rel="stylesheet" href="dark-theme.css?v=4" />
 </head>
 <body>
@@ -25,7 +25,7 @@
     <a class="brand" href="/" aria-label="MatrAIx home">
       <span class="brand-name">Matr<em>AI</em>x</span>
     </a>
-    <nav class="nav-links" aria-label="Primary">
+    <nav class="nav-links" id="primary-navigation" aria-label="Primary">
       <a href="/">Home</a>
       <a href="blog/">Research</a>
       <a href="persona.html">Personas</a>
@@ -33,7 +33,7 @@
       <a href="demo.html">Playground</a>
       <a href="access.html">Community</a>
     </nav>
-    <button class="nav-toggle" aria-label="Toggle navigation menu">Menu</button>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-navigation">Menu</button>
     <a href="https://github.com/MatrAIx-ai/MatrAIx" class="nav-github" target="_blank" rel="noopener">GitHub ↗</a>
     <a href="access.html" class="btn btn-solid nav-cta"><span class="dot live"></span> Join us</a>
   </header>
@@ -218,6 +218,6 @@
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-array@3/dist/d3-array.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-geo@3/dist/d3-geo.min.js"></script>
-  <script src="home.js?v=51"></script>
+  <script src="home.js?v=52"></script>
 </body>
 </html>

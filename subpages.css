@@ -11,3 +11,4 @@
 .mx-footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:26px clamp(20px,5vw,48px);border-top:1px solid var(--mx-soft);color:var(--mx-dim);font-size:.78rem}.mx-footer a{color:var(--mx-dim);text-decoration:none}.mx-footer a:hover{color:var(--mx-blue)}
 .mx-status{display:inline-flex;padding:4px 8px;border:1px solid var(--mx-line);border-radius:999px;color:var(--mx-blue);font:500 .58rem var(--mx-mono);letter-spacing:.08em;text-transform:uppercase}
 @media(max-width:850px){.mx-links,.mx-github,.mx-join{display:none}.mx-menu{display:block}.mx-nav.open .mx-links{position:absolute;display:flex;flex-direction:column;top:100%;left:0;right:0;padding:10px 24px;background:#0d0f10;border-bottom:1px solid var(--mx-line)}.mx-section-head{align-items:start;flex-direction:column}}
+@media(min-width:1200px){.mx-shell{max-width:1600px;padding-right:clamp(32px,3vw,48px);padding-left:clamp(32px,3vw,48px)}}
