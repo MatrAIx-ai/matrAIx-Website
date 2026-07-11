@@ -28,7 +28,8 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
   function resize() {
     w = canvas.width = window.innerWidth;
     h = canvas.height = window.innerHeight;
-    const density = Math.min(200, Math.floor((w * h) / 9000));
+    const maxAgents = w <= 760 ? 48 : 110;
+    const density = Math.min(maxAgents, Math.floor((w * h) / 14000));
     agents = Array.from({ length: density }, spawn);
   }
   function frame() {
@@ -46,7 +47,7 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
     ctx.globalAlpha = 1;
   }
   let raf = 0, animating = false, lastFrame = 0;
-  const FRAME_MS = 1000 / 24;
+  const FRAME_MS = 1000 / (window.innerWidth <= 760 ? 12 : 18);
   const renderFrame = (ts) => {
     if (!animating) return;
     if (!lastFrame || ts - lastFrame >= FRAME_MS) {
@@ -610,7 +611,7 @@ if (document.readyState === 'loading') {
   }
   // Free-floating particles drifting around the globe (cursor-reactive).
   const PARTICLES = [];
-  const PN = 16;
+  const PN = 22;
 
   let w, h, cx, cy, R, dpr;
   // Open on Europe/Africa/Asia rather than a random, often ocean-heavy view.
