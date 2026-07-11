@@ -12,8 +12,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="benchmark.css?v=16" />
-  <link rel="stylesheet" href="dark-theme.css?v=4" />
+  <link rel="stylesheet" href="benchmark.css?v=19" />
+  <link rel="stylesheet" href="dark-theme.css?v=5" />
   <style>
     .harbor-grid {
       min-height: calc(100vh - 96px);
@@ -767,6 +767,7 @@
         polling: true,
         playbackTimer: null,
         pollTimer: null,
+        clockTimer: null,
         trialDetail: null,
         expandedSections: {},
         rightTab: localStorage.getItem("harbor_live_right_tab") || "controls",
@@ -789,8 +790,16 @@
         const d = new Date();
         els.clock.textContent = d.toLocaleTimeString();
       }
-      tickClock();
-      setInterval(tickClock, 1000);
+      function startClock(){
+        if(state.clockTimer || document.hidden) return;
+        tickClock();
+        state.clockTimer = setInterval(tickClock, 1000);
+      }
+      function stopClock(){
+        if(state.clockTimer) clearInterval(state.clockTimer);
+        state.clockTimer = null;
+      }
+      startClock();
 
       function escapeHtml(v){
         return String(v == null ? "" : v).replace(/[&<>\"]/g, (c) => ({
@@ -1389,7 +1398,7 @@
           state.pollTimer = null;
         }
 
-        if(!state.polling) return;
+        if(!state.polling || document.hidden) return;
 
         const interval = Math.max(500, Number(els.pollMs.value || 2000));
         state.pollTimer = setInterval(async () => {
@@ -1400,6 +1409,17 @@
           }
         }, interval);
       }
+
+      document.addEventListener('visibilitychange', () => {
+        if(document.hidden){
+          stopClock();
+          if(state.pollTimer) clearInterval(state.pollTimer);
+          state.pollTimer = null;
+        } else {
+          startClock();
+          startPolling();
+        }
+      });
 
       async function connectAndLoad(){
         try {
@@ -1577,5 +1597,6 @@
       connectAndLoad();
     })();
   </script>
+<script src="site-performance.js?v=1"></script>
 </body>
 </html>

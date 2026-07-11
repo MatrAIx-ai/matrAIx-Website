@@ -234,6 +234,15 @@
   const store = [];
   const agg = { n: 0, pass: 0, rewardSum: 0, hist: new Array(10).fill(0), finishes: [] };
   const sparks = { ag: [], tp: [], rw: [], ps: [] };
+  let reportTimer = 0;
+
+  function scheduleReport() {
+    if (reportTimer) return;
+    reportTimer = window.setTimeout(() => {
+      reportTimer = 0;
+      renderReport();
+    }, 180);
+  }
 
   const popEl = $('#pop'), focusListEl = $('#focusList'), conFeed = $('#conFeed'), intelBody = $('#intelBody'), explainEl = $('#explain');
 
@@ -277,7 +286,7 @@
     Brain.pulse(b.verdict);
     store.push({ id: `mx-${pad(id, 6)}`, target: target.id, persona: b.persona, trajectory: b.traj, score: +b.score.toFixed(4), verdict: b.verdict });
     if (store.length > 5000) store.shift();
-    if (currentReport === 'score' || currentReport === 'heat') renderReport();
+    if (currentReport === 'score' || currentReport === 'heat') scheduleReport();
   }
 
   /* ---- console ---- */
@@ -496,9 +505,26 @@
   focus = Array.from({ length: FOCUS_N }, spawnFocus);
   renderFocusCards();
   vitals(); setExplain(); renderReport(); clock();
-  setInterval(popTick, 460);
-  setInterval(bgTick, 620);
-  setInterval(focusTick, 1800);   // slow & readable
-  setInterval(vitals, 1150);
-  setInterval(clock, 1000);
+  let timerIds = [];
+  function startTimers() {
+    if (timerIds.length || document.hidden) return;
+    timerIds = [
+      setInterval(popTick, 460),
+      setInterval(bgTick, 620),
+      setInterval(focusTick, 1800),
+      setInterval(vitals, 1150),
+      setInterval(clock, 1000),
+    ];
+  }
+  function stopTimers() {
+    timerIds.forEach(clearInterval);
+    timerIds = [];
+    if (reportTimer) { clearTimeout(reportTimer); reportTimer = 0; }
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopTimers();
+    else { clock(); vitals(); scheduleReport(); startTimers(); }
+  });
+  window.addEventListener('pagehide', stopTimers);
+  startTimers();
 })();

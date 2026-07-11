@@ -747,6 +747,7 @@ a { color: inherit; text-decoration: none; }
   .vital:nth-child(-n+2) { border-bottom: 1px solid var(--line-soft); }
   .gr-table { display: block; overflow-x: auto; }
 }
+.genreports{content-visibility:auto;contain-intrinsic-size:auto 900px}html.document-hidden *,html.document-hidden *::before,html.document-hidden *::after{animation-play-state:paused!important}
 
 /* Shared-site alignment for the Playground header */
 @media screen {

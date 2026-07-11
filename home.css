@@ -883,7 +883,11 @@ main > aside {
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .eyebrow, .headline .line, .hero-stat, .subhead, .cta-row, .telemetry { opacity: 1; }
+  .eyebrow, .community-badge, .headline .line, .hero-stat, .hero-subheading,
+  .subhead, .cta-row, .hero-globe-wrap, .telemetry {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* ---------- Agent runway (moved from the demo portal) ---------- */

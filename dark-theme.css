@@ -1,3 +1,4 @@
+html.document-hidden *,html.document-hidden *::before,html.document-hidden *::after{animation-play-state:paused!important}
 /* ============================================================
    matrAIx.ai — Dark Theme (Auto-detected or explicit)
    Dark background with white text

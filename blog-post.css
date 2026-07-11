@@ -2,6 +2,7 @@
 html {
   background: #0a0b0d;
 }
+html.document-hidden *,html.document-hidden *::before,html.document-hidden *::after{animation-play-state:paused!important}
 
 body {
   background:

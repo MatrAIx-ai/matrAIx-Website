@@ -136,8 +136,8 @@
       .blog-meta { flex-direction: column; gap: 12px; }
     }
   </style>
-  <link rel="stylesheet" href="../dark-theme.css?v=4" />
-  <link rel="stylesheet" href="../blog-post.css?v=2" />
+  <link rel="stylesheet" href="../dark-theme.css?v=5" />
+  <link rel="stylesheet" href="../blog-post.css?v=3" />
 </head>
 <body>
   <header>
@@ -248,7 +248,7 @@
 
       <div class="demo-section">
         <div class="demo-video">
-          <video autoplay muted loop playsinline style="width: 100%; border: 1px solid var(--line); border-radius: 6px; display: block; background: #000;">
+          <video muted loop playsinline preload="metadata" data-autoplay="true" style="width: 100%; border: 1px solid var(--line); border-radius: 6px; display: block; background: #000;">
             <source src="../Assets/media/demo.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -304,6 +304,7 @@
     </p>
   </footer>
 
+  <script src="../site-performance.js?v=1"></script>
   <script src="../blog-post.js?v=2"></script>
   <script>
   /* Mobile nav toggle */

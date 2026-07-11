@@ -120,15 +120,21 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
   };
   const nodes = document.querySelectorAll('[data-stream]');
   if (!nodes.length || reduceMotion) return;
+  let timer = 0;
   function update() {
+    if (document.hidden) return;
     nodes.forEach(n => {
       const c = cfg[n.dataset.stream];
       const v = c.base + Math.round((Math.random() - 0.5) * c.jitter);
       n.textContent = c.fmt(v);
     });
-    setTimeout(update, 1400);
+    timer = setTimeout(update, 1400);
   }
-  setTimeout(update, 1600);
+  timer = setTimeout(update, 1600);
+  document.addEventListener('visibilitychange', () => {
+    clearTimeout(timer);
+    if (!document.hidden) timer = setTimeout(update, 250);
+  });
 })();
 
 /* ---------- 4. A/B report viewer ---------- */

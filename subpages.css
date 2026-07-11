@@ -12,3 +12,4 @@
 .mx-status{display:inline-flex;padding:4px 8px;border:1px solid var(--mx-line);border-radius:999px;color:var(--mx-blue);font:500 .58rem var(--mx-mono);letter-spacing:.08em;text-transform:uppercase}
 @media(max-width:850px){.mx-links,.mx-github,.mx-join{display:none}.mx-menu{display:block}.mx-nav.open .mx-links{position:absolute;display:flex;flex-direction:column;top:100%;left:0;right:0;padding:10px 24px;background:#0d0f10;border-bottom:1px solid var(--mx-line)}.mx-section-head{align-items:start;flex-direction:column}}
 @media(min-width:1200px){.mx-shell{max-width:1600px;padding-right:clamp(32px,3vw,48px);padding-left:clamp(32px,3vw,48px)}}
+.mx-shell>.mx-section{content-visibility:auto;contain-intrinsic-size:auto 620px}html.document-hidden *,html.document-hidden *::before,html.document-hidden *::after{animation-play-state:paused!important}

@@ -12,8 +12,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="benchmark.css?v=18" />
-  <link rel="stylesheet" href="dark-theme.css?v=4" />
+  <link rel="stylesheet" href="benchmark.css?v=19" />
+  <link rel="stylesheet" href="dark-theme.css?v=5" />
   <style>
   .os-explain .ex-url{color:var(--ink)}
   /* --- self-defined evaluation metrics --- */
@@ -278,9 +278,10 @@
   })();
   </script>
 
+  <script src="site-performance.js?v=1"></script>
   <script src="dimensions.js?v=6"></script>
   <script src="metrics.js?v=2"></script>
-  <script src="benchmark.js?v=14"></script>
+  <script src="benchmark.js?v=15"></script>
   <script>
   /* ---------- Live agent runs from the CUA pipeline ---------- */
   (function(){
@@ -413,6 +414,7 @@
     <h2 style="font-family: var(--disp); font-weight: 800; font-size: clamp(2rem, 4vw, 2.8rem); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 28px; color: var(--ink);">See MatrAIx in Action</h2>
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 1px solid var(--line); background: #000;">
       <iframe
+        loading="lazy"
         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
         src="https://www.youtube.com/embed/puKQNjasK40"
         title="matrAIx Demo"
