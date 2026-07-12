@@ -58,6 +58,28 @@ document.addEventListener('DOMContentLoaded', () => {
   addAffiliation(academicCloud, 'JHU', 'jhu.edu');
   addAffiliation(academicCloud, 'Caltech', 'caltech.edu');
 
+  const cambridge = [...academicCloud.querySelectorAll('.affiliation-chip')]
+    .find(chip => chip.textContent.trim() === 'Cambridge');
+  if (cambridge) {
+    const logo = cambridge.querySelector('img');
+    if (logo) logo.src = 'https://www.cam.ac.uk/themes/custom/fresh/images/interface/university_logo_white-01.svg';
+    cambridge.classList.add('cambridge-affiliation');
+
+    if (![...academicCloud.querySelectorAll('.affiliation-chip')].some(chip => chip.textContent.trim() === 'USC')) {
+      const usc = document.createElement('span');
+      usc.className = 'affiliation-chip';
+      usc.textContent = 'USC';
+      const uscLogo = document.createElement('img');
+      uscLogo.src = 'https://www.usc.edu/favicon.ico';
+      uscLogo.alt = '';
+      uscLogo.loading = 'lazy';
+      uscLogo.decoding = 'async';
+      uscLogo.addEventListener('error', () => uscLogo.remove());
+      usc.prepend(uscLogo);
+      cambridge.insertAdjacentElement('afterend', usc);
+    }
+  }
+
   const academicChips = Object.fromEntries(
     [...academicCloud.querySelectorAll('.affiliation-chip')].map(chip => [chip.textContent.trim(), chip])
   );
