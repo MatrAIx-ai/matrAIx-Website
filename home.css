@@ -1273,8 +1273,9 @@ main > aside {
 }
 
 .compact-os-card { max-width: 1080px; }
-.compact-os-card .os-card-body { padding: 26px 20px; }
-.compact-os-card .os-card-vitals > div { min-width: 170px; }
+.compact-os-card .os-card-body { display:grid;grid-template-columns:minmax(0,1fr) auto;padding:26px 20px;gap:32px; }
+.compact-os-card .os-card-vitals { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%; }
+.compact-os-card .os-card-vitals > div { min-width:0; }
 .video-panel { max-width: 960px; }
 .video-frame {
   position: relative; height: 0; padding-bottom: 56.25%; overflow: hidden;
@@ -1336,6 +1337,7 @@ main > aside {
 
 @media (max-width: 760px) {
   .compact-os-card .os-card-vitals span { font-size: .66rem; }
+  .compact-os-card .os-card-body { grid-template-columns:1fr; }
 }
 
 @media (max-width: 520px) {
