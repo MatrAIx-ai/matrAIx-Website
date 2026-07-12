@@ -62,7 +62,10 @@ document.addEventListener('DOMContentLoaded', () => {
     .find(chip => chip.textContent.trim() === 'Cambridge');
   if (cambridge) {
     const logo = cambridge.querySelector('img');
-    if (logo) logo.src = 'https://www.cam.ac.uk/themes/custom/fresh/images/interface/university_logo_white-01.svg';
+    if (logo) {
+      logo.loading = 'eager';
+      logo.src = 'https://upload.wikimedia.org/wikipedia/commons/c/c3/Coat_of_Arms_of_the_University_of_Cambridge.svg';
+    }
     cambridge.classList.add('cambridge-affiliation');
 
     if (![...academicCloud.querySelectorAll('.affiliation-chip')].some(chip => chip.textContent.trim() === 'USC')) {
