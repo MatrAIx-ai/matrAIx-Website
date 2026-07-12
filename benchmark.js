@@ -17,7 +17,7 @@
   const pick = a => a[(Math.random() * a.length) | 0];
   const pad = (n, w) => String(n).padStart(w, '0');
 
-  /* ---------- persona sampling (subset of the 1000-dim space) ---------- */
+  /* ---------- persona sampling (subset of the canonical dimension space) ---------- */
   const KEY = ['age_bracket', 'region', 'primary_language', 'english_proficiency', 'intent',
     'device_context', 'expertise_gap', 'safety_sensitivity', 'trust_level', 'query_complexity',
     'emotional_state', 'prior_context'];

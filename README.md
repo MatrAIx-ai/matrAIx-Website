@@ -36,7 +36,7 @@ The schema is a **flat, unified set**: every sampled persona is assigned exactly
 **one value per dimension**. The `category` field is for UI grouping/filtering
 only — it does not nest the schema.
 
-Current synchronized shape: **1,290 dimensions · 6,340 values · ~5.5 × 10⁸⁸⁴
+Current synchronized shape: **1,290 dimensions · 6,347 values · ~1.24 × 10⁸⁸⁵
 reachable combinations**, spanning 43 categories. The 8.3B headline refers to the
 internal persona corpus produced across synthetic generation and human-evidence
 extraction pipelines; it is not a direct public download. A curated 1M-persona
@@ -132,8 +132,8 @@ benchmark.js                    Sampling, structured scoring, live stream, heatm
 
 deck.html                       (Local only — not tracked in git) Self-contained investor pitch deck (15 slides)
 
-generate-dimensions.js          Builds the 1,000-dimension schema (curated core + families)
-dimensions.json                 Canonical flat dimension schema (source of truth)
+generate-dimensions.js          Legacy local schema-generation utility
+dimensions.json                 Synchronized copy of the canonical research schema
 dimensions.js                   Browser-loadable mirror of dimensions.json
 CNAME                           Custom domain for GitHub Pages (matraix.ai)
 ```
