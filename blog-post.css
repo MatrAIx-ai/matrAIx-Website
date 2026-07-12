@@ -157,6 +157,18 @@ main {
   margin: 0 auto;
 }
 
+main.article-layout--no-toc {
+  display: block;
+  max-width: 840px !important;
+}
+
+main.article-layout--no-toc .blog-header,
+main.article-layout--no-toc .article {
+  max-width: 780px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .article-toc {
   grid-column: 1;
   grid-row: 1 / span 2;
@@ -281,6 +293,26 @@ main {
 
 .article li::marker {
   color: #649fc9 !important;
+}
+
+.article .receipt-list {
+  margin: 24px 0 32px !important;
+  padding: 0;
+  list-style: none;
+}
+
+.article .receipt-list li {
+  position: relative;
+  padding-left: 32px;
+}
+
+.article .receipt-list li::before {
+  content: "-";
+  position: absolute;
+  top: 0;
+  left: 8px;
+  color: #649fc9;
+  font-family: var(--mono);
 }
 
 .article > p[style] {

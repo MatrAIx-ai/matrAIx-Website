@@ -116,9 +116,9 @@ styles.css                      Shared console styling for the tool pages (CSS v
 
 blog/
 ├── index.html                  Blog index page (links to research papers)
-├── position-colm.html          Research: Synthetic Persona Grounding & Standardized Reporting
-├── application-colm.html       Research: PersonaEval Framework for Interactive App Evaluation
-└── env-colm.html               Research: MicroVerse — Measuring Identity Drift in Simulations
+├── position-colm.html          Research: AI Personas Need Receipts
+├── application-colm.html       Research: A Dress Rehearsal for App Testing
+└── env-colm.html               Research: What Happens When an AI Watches Itself Act?
 
 person.html                     Persona explorer markup
 explorer.html                   Redirect stub -> person.html
