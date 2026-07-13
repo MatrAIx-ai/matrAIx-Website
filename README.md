@@ -1,8 +1,8 @@
-# matrAIx
+# MatrAIx
 
 **Agent Simulation for Eval — 8.3-Billion-Behavior.**
 
-matrAIx spins up populations of autonomous agents, runs them across adversarial
+MatrAIx spins up populations of autonomous agents, runs them across adversarial
 worlds, and scores every decision — so capability, alignment, and failure modes
 can be evaluated *before* they ship. This repository holds the marketing site and
 the persona **dimension schema** that defines the space those agents are sampled from.
