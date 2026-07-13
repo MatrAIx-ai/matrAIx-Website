@@ -25,6 +25,7 @@ const OUT_PATH = path.join(ROOT, "i18n", "zh.json");
 const { dimensions } = JSON.parse(fs.readFileSync(DIMENSIONS_PATH, "utf8"));
 const I18N = require("./i18n-words");
 const { VALUE_EXT, ENTITY_EXT, WORD_EXT } = require("./i18n-extra");
+const BATCH = require("./i18n-data/batch-fixes");
 
 const CATEGORIES = {
   "Demographic: Core": "人口统计：核心",
@@ -157,6 +158,7 @@ const ENTITY = {
   Classical: "古典",
   Gentrification: "中产阶层化",
 };
+Object.assign(ENTITY, BATCH.ENTITIES);
 
 /** Brand / product names — keep Latin letters in zh display */
 const BRAND_NAMES = new Set([
@@ -170,6 +172,7 @@ const BRAND_NAMES = new Set([
   "ENFJ", "ENFP", "ISTJ", "ISFJ", "ESTJ", "ESFJ", "ISTP", "ISFP", "ESTP", "ESFP",
   "MBTI", "TIPI", "AI", "API", "CLI", "CI/CD", "GitHub", "SMS",
 ]);
+for (const brand of BATCH.BRAND_NAMES) BRAND_NAMES.add(brand);
 
 const LABEL_BY_ID = {
   age_bracket: "年龄区间",
@@ -400,6 +403,7 @@ const LABEL_BY_ID = {
   lifex_languages_lifetime: "一生掌握的语言数",
   lifex_hometown_tie: "与故乡的联系",
 };
+Object.assign(LABEL_BY_ID, BATCH.LABEL_BY_ID);
 
 /** Explicit Chinese descriptions by dimension id (overrides pattern rules). */
 const DESC_BY_ID = {
@@ -598,9 +602,85 @@ const VALUES = {
   Annually: "每年",
   Single: "单身",
   "In a relationship": "恋爱中",
+  Engaged: "积极参与",
   Married: "已婚",
   Divorced: "离异",
   Widowed: "丧偶",
+  "Only child": "独生子女",
+  "Folk / traditional": "民间/传统宗教",
+  "Citizen by birth": "出生公民",
+  "No disability": "无残疾",
+  "Prefers not to say": "不愿透露",
+  "Parent of minors": "有未成年子女",
+  // Demographic: Core — extended (fix Chinglish)
+  "Domestic partnership": "同居伴侣",
+  Separated: "分居",
+  Expecting: "怀孕中",
+  "1 child": "1 个孩子",
+  "2 children": "2 个孩子",
+  "3+ children": "3 个及以上",
+  "Adult children": "成年子女",
+  "Gig / freelance": "零工/自由职业",
+  "Own outright": "完全自有",
+  Renting: "租房",
+  "Living with family": "与家人同住",
+  "Shared housing": "合租",
+  "Temporary / transitional": "临时/过渡性住房",
+  "Gen Alpha": "Alpha 世代",
+  "Gen Z": "Z 世代",
+  Millennial: "千禧一代",
+  "Gen X": "X 世代",
+  Boomer: "婴儿潮一代",
+  Silent: "静默世代",
+  "Spiritual but unaffiliated": "有精神信仰但未入教",
+  Heterosexual: "异性恋",
+  "Gay / lesbian": "同性恋",
+  Bisexual: "双性恋",
+  Pansexual: "泛性恋",
+  Asexual: "无性恋",
+  Queer: "酷儿",
+  "Naturalized citizen": "归化公民",
+  "Permanent resident": "永久居民",
+  "Visa holder": "签证持有者",
+  "Dual national": "双重国籍",
+  Undocumented: "无证身份",
+  "White / European": "白人/欧洲裔",
+  "Black / African": "黑人/非洲裔",
+  "Hispanic / Latino": "西班牙裔/拉丁裔",
+  "East Asian": "东亚裔",
+  "Southeast Asian": "东南亚裔",
+  "Pacific Islander": "太平洋岛民裔",
+  Multiracial: "多种族混血",
+  Physical: "身体残疾",
+  Sensory: "感官残疾",
+  "Chronic illness": "慢性疾病",
+  Civilian: "非军人/平民",
+  "Active duty": "现役",
+  "Reserve / guard": "预备役/国民警卫队",
+  "Military family": "军人家庭",
+  Eldest: "排行最大",
+  Youngest: "排行最小",
+  "Twin / multiple": "双胞胎/多胞胎",
+  "Same as primary": "与主要语言相同",
+  "Bilingual home": "双语家庭",
+  "Heritage language": "传承语言",
+  "Mixed languages": "混合语言",
+  Disengaged: "政治冷感",
+  "Non-voter": "不投票",
+  "Not a parent": "非父母",
+  "New parent": "新手父母",
+  "Parent of adults": "子女已成年",
+  "Step / foster parent": "继父母/养父母",
+  "Not in one": "无固定伴侣关系",
+  "Under 1 year": "不满 1 年",
+  "1-5 years": "1–5 年",
+  "5-15 years": "5–15 年",
+  "15+ years": "15 年以上",
+  "Daily driver": "每日开车",
+  "Occasional driver": "偶尔开车",
+  "Licensed, rarely drives": "有驾照但很少开",
+  "Non-driver": "不开车",
+  "Cannot drive": "无法开车",
   "Full-time": "全职",
   "Part-time": "兼职",
   "Self-employed": "自雇/个体经营",
@@ -1054,6 +1134,20 @@ const VALUES = {
   "Rarely returns": "很少回去",
   "No connection": "与故乡无联系",
 };
+Object.assign(VALUES, BATCH.VALUES);
+
+/** Same English value, different Chinese by dimension id */
+const VALUE_OVERRIDES = {
+  demo_birth_order: {
+    Middle: "排行中间",
+  },
+  socioeconomic_band: {
+    Middle: "中等",
+  },
+  demo_marital_status: {
+    Engaged: "已订婚",
+  },
+};
 
 /** Full-string value patterns — capture groups produce complete Chinese output */
 const VALUE_PATTERNS = [
@@ -1372,6 +1466,7 @@ const out = {
   categories: CATEGORIES,
   dimensions: {},
   values: { ...VALUES },
+  valueOverrides: VALUE_OVERRIDES,
   meta: {
     generatedAt: new Date().toISOString(),
     dimensionCount: dimensions.length,

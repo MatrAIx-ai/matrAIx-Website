@@ -245,8 +245,8 @@
       "description": "对「深度学习」的熟悉程度。"
     },
     "fam_statistics": {
-      "label": "熟悉度：统计学",
-      "description": "对「统计学」的熟悉程度。"
+      "label": "熟悉度：统计",
+      "description": "对「统计」的熟悉程度。"
     },
     "fam_data_science": {
       "label": "熟悉度：数据科学",
@@ -321,12 +321,12 @@
       "description": "对「审计」的熟悉程度。"
     },
     "fam_macroeconomics": {
-      "label": "熟悉度：Macroeconomics",
-      "description": "对「Macroeconomics」的熟悉程度。"
+      "label": "熟悉度：宏观经济学",
+      "description": "对「宏观经济学」的熟悉程度。"
     },
     "fam_microeconomics": {
-      "label": "熟悉度：Microeconomics",
-      "description": "对「Microeconomics」的熟悉程度。"
+      "label": "熟悉度：微观经济学",
+      "description": "对「微观经济学」的熟悉程度。"
     },
     "fam_behavioral_economics": {
       "label": "熟悉度：行为经济学",
@@ -337,8 +337,8 @@
       "description": "对「课程设计」的熟悉程度。"
     },
     "fam_pedagogy": {
-      "label": "熟悉度：Pedagogy",
-      "description": "对「Pedagogy」的熟悉程度。"
+      "label": "熟悉度：教育学",
+      "description": "对「教育学」的熟悉程度。"
     },
     "fam_special_education": {
       "label": "熟悉度：特殊教育",
@@ -413,16 +413,16 @@
       "description": "对「地质」的熟悉程度。"
     },
     "fam_oceanography": {
-      "label": "熟悉度：Oceanography",
-      "description": "对「Oceanography」的熟悉程度。"
+      "label": "熟悉度：海洋学",
+      "description": "对「海洋学」的熟悉程度。"
     },
     "fam_climate_science": {
       "label": "熟悉度：气候科学",
       "description": "对「气候科学」的熟悉程度。"
     },
     "fam_ecology": {
-      "label": "熟悉度：生态",
-      "description": "对「生态」的熟悉程度。"
+      "label": "熟悉度：生态学",
+      "description": "对「生态学」的熟悉程度。"
     },
     "fam_sociology": {
       "label": "熟悉度：社会学",
@@ -457,8 +457,8 @@
       "description": "对「哲学」的熟悉程度。"
     },
     "fam_ethics": {
-      "label": "熟悉度：Ethics",
-      "description": "对「Ethics」的熟悉程度。"
+      "label": "熟悉度：伦理学",
+      "description": "对「伦理学」的熟悉程度。"
     },
     "fam_history": {
       "label": "熟悉度：历史",
@@ -485,8 +485,8 @@
       "description": "对「电影研究」的熟悉程度。"
     },
     "fam_architecture": {
-      "label": "熟悉度：建筑学",
-      "description": "对「建筑学」的熟悉程度。"
+      "label": "熟悉度：建筑",
+      "description": "对「建筑」的熟悉程度。"
     },
     "fam_urban_planning": {
       "label": "熟悉度：城市规划",
@@ -497,12 +497,12 @@
       "description": "对「景观设计」的熟悉程度。"
     },
     "fam_agronomy": {
-      "label": "熟悉度：Agronomy",
-      "description": "对「Agronomy」的熟悉程度。"
+      "label": "熟悉度：农学",
+      "description": "对「农学」的熟悉程度。"
     },
     "fam_horticulture": {
-      "label": "熟悉度：Horticulture",
-      "description": "对「Horticulture」的熟悉程度。"
+      "label": "熟悉度：园艺学",
+      "description": "对「园艺学」的熟悉程度。"
     },
     "fam_veterinary_medicine": {
       "label": "熟悉度：兽医学",
@@ -525,20 +525,20 @@
       "description": "对「流行病学」的熟悉程度。"
     },
     "fam_nutrition": {
-      "label": "熟悉度：Nutrition",
-      "description": "对「Nutrition」的熟悉程度。"
+      "label": "熟悉度：营养学",
+      "description": "对「营养学」的熟悉程度。"
     },
     "fam_sports_science": {
       "label": "熟悉度：运动科学",
       "description": "对「运动科学」的熟悉程度。"
     },
     "fam_cybersecurity": {
-      "label": "熟悉度：Cybersecurity",
-      "description": "对「Cybersecurity」的熟悉程度。"
+      "label": "熟悉度：网络安全",
+      "description": "对「网络安全」的熟悉程度。"
     },
     "fam_cryptography": {
-      "label": "熟悉度：Cryptography",
-      "description": "对「Cryptography」的熟悉程度。"
+      "label": "熟悉度：密码学",
+      "description": "对「密码学」的熟悉程度。"
     },
     "fam_computer_networking": {
       "label": "熟悉度：计算机网络",
@@ -557,8 +557,8 @@
       "description": "对「操作系统」的熟悉程度。"
     },
     "fam_compilers": {
-      "label": "熟悉度：Compilers",
-      "description": "对「Compilers」的熟悉程度。"
+      "label": "熟悉度：编译器",
+      "description": "对「编译器」的熟悉程度。"
     },
     "fam_cloud_infrastructure": {
       "label": "熟悉度：云基础设施",
@@ -633,7 +633,7 @@
       "description": "对「供应链」的熟悉程度。"
     },
     "fam_logistics": {
-      "label": "熟悉度：Logistics",
+      "label": "熟悉度：物流",
       "description": "对「Logistics」的熟悉程度。"
     },
     "fam_operations_management": {
@@ -685,7 +685,7 @@
       "description": "对「精算学」的熟悉程度。"
     },
     "fam_hospitality_management": {
-      "label": "熟悉度：酒店餐饮management",
+      "label": "熟悉度：酒店餐饮管理",
       "description": "对「酒店餐饮management」的熟悉程度。"
     },
     "fam_culinary_arts": {
@@ -733,8 +733,8 @@
       "description": "对「地理信息系统」的熟悉程度。"
     },
     "fam_meteorology": {
-      "label": "熟悉度：气象学",
-      "description": "对「气象学」的熟悉程度。"
+      "label": "熟悉度：气象",
+      "description": "对「气象」的熟悉程度。"
     },
     "fam_forestry": {
       "label": "熟悉度：林业",
@@ -745,8 +745,8 @@
       "description": "对「海洋生物学」的熟悉程度。"
     },
     "fam_paleontology": {
-      "label": "熟悉度：古生物学",
-      "description": "对「古生物学」的熟悉程度。"
+      "label": "熟悉度：古生物",
+      "description": "对「古生物」的熟悉程度。"
     },
     "fam_materials_science": {
       "label": "熟悉度：材料科学",
@@ -813,11 +813,11 @@
       "description": "在「写作」方面的相关情况。"
     },
     "skill_copywriting": {
-      "label": "技能：文案写作",
+      "label": "技能：文案",
       "description": "在「文案写作」方面的相关情况。"
     },
     "skill_editing": {
-      "label": "技能：编辑",
+      "label": "技能：剪辑",
       "description": "在「编辑」方面的相关情况。"
     },
     "skill_storytelling": {
@@ -845,7 +845,7 @@
       "description": "在「代码审查」方面的相关情况。"
     },
     "skill_system_design": {
-      "label": "技能：Systemdesign",
+      "label": "技能：系统设计",
       "description": "在「system design」方面的相关情况。"
     },
     "skill_data_analysis": {
@@ -861,7 +861,7 @@
       "description": "在「统计建模」方面的相关情况。"
     },
     "skill_spreadsheet_modeling": {
-      "label": "技能：Spreadsheet模型中",
+      "label": "技能：电子表格建模",
       "description": "在「spreadsheet modeling」方面的相关情况。"
     },
     "skill_financial_modeling": {
@@ -873,11 +873,11 @@
       "description": "在「项目管理」方面的相关情况。"
     },
     "skill_product_strategy": {
-      "label": "技能：Productstrategy",
+      "label": "技能：产品策略",
       "description": "在「product strategy」方面的相关情况。"
     },
     "skill_leadership": {
-      "label": "技能：领导力",
+      "label": "技能：领导",
       "description": "在「领导力」方面的相关情况。"
     },
     "skill_people_management": {
@@ -885,7 +885,7 @@
       "description": "在「人员管理」方面的相关情况。"
     },
     "skill_mentoring": {
-      "label": "技能：导师中",
+      "label": "技能：导师",
       "description": "在「导师中」方面的相关情况。"
     },
     "skill_coaching": {
@@ -901,7 +901,7 @@
       "description": "在「时间管理」方面的相关情况。"
     },
     "skill_prioritization": {
-      "label": "技能：Prioritization",
+      "label": "技能：优先级管理",
       "description": "在「prioritization」方面的相关情况。"
     },
     "skill_research": {
@@ -933,11 +933,11 @@
       "description": "在「语言学习」方面的相关情况。"
     },
     "skill_translation": {
-      "label": "技能：Translation",
+      "label": "技能：翻译",
       "description": "在「translation」方面的相关情况。"
     },
     "skill_interpretation": {
-      "label": "技能：Interpretation",
+      "label": "技能：解读分析",
       "description": "在「interpretation」方面的相关情况。"
     },
     "skill_design_thinking": {
@@ -945,7 +945,7 @@
       "description": "在「设计思维」方面的相关情况。"
     },
     "skill_prototyping": {
-      "label": "技能：Prototyping",
+      "label": "技能：原型",
       "description": "在「prototyping」方面的相关情况。"
     },
     "skill_sketching": {
@@ -965,7 +965,7 @@
       "description": "在「摄影」方面的相关情况。"
     },
     "skill_videography": {
-      "label": "技能：Videography",
+      "label": "技能：摄像",
       "description": "在「videography」方面的相关情况。"
     },
     "skill_video_editing": {
@@ -981,11 +981,11 @@
       "description": "在「烹饪」方面的相关情况。"
     },
     "skill_baking": {
-      "label": "技能：Baking",
+      "label": "技能：烘焙",
       "description": "在「baking」方面的相关情况。"
     },
     "skill_budgeting": {
-      "label": "技能：Budgeting",
+      "label": "技能：预算",
       "description": "在「budgeting」方面的相关情况。"
     },
     "skill_investing": {
@@ -993,7 +993,7 @@
       "description": "在「投资」方面的相关情况。"
     },
     "skill_diy_repair": {
-      "label": "技能：DIY维修",
+      "label": "技能：DIY 维修",
       "description": "在「diy repair」方面的相关情况。"
     },
     "skill_gardening": {
@@ -1001,7 +1001,7 @@
       "description": "在「园艺」方面的相关情况。"
     },
     "skill_driving": {
-      "label": "技能：Driving",
+      "label": "技能：驾驶",
       "description": "在「driving」方面的相关情况。"
     },
     "skill_technical_writing": {
@@ -1033,15 +1033,15 @@
       "description": "在「persuasion」方面的相关情况。"
     },
     "skill_facilitation": {
-      "label": "技能：Facilitation",
+      "label": "技能：引导",
       "description": "在「facilitation」方面的相关情况。"
     },
     "skill_forecasting": {
-      "label": "技能：Forecasting",
+      "label": "技能：预测",
       "description": "在「forecasting」方面的相关情况。"
     },
     "skill_estimation": {
-      "label": "技能：Estimation",
+      "label": "技能：估算",
       "description": "在「estimation」方面的相关情况。"
     },
     "skill_fact_checking": {
@@ -1057,7 +1057,7 @@
       "description": "在「presenting」方面的相关情况。"
     },
     "skill_networking": {
-      "label": "技能：网络",
+      "label": "技能：社交",
       "description": "在「网络」方面的相关情况。"
     },
     "skill_selling": {
@@ -1069,8 +1069,8 @@
       "description": "对「Excel」的相关程度。"
     },
     "tool_google_sheets": {
-      "label": "工具：GoogleSheets",
-      "description": "对「GoogleSheets」的相关程度。"
+      "label": "工具：Google Sheets",
+      "description": "对「Google Sheets」的相关程度。"
     },
     "tool_python": {
       "label": "工具：Python",
@@ -1089,8 +1089,8 @@
       "description": "对「Tableau」的相关程度。"
     },
     "tool_power_bi": {
-      "label": "工具：PowerBI",
-      "description": "对「PowerBI」的相关程度。"
+      "label": "工具：Power BI",
+      "description": "对「Power BI」的相关程度。"
     },
     "tool_looker": {
       "label": "工具：Looker",
@@ -1117,8 +1117,8 @@
       "description": "对「indesign」的相关程度。"
     },
     "tool_after_effects": {
-      "label": "工具：AfterEffects",
-      "description": "对「AfterEffects」的相关程度。"
+      "label": "工具：After Effects",
+      "description": "对「After Effects」的相关程度。"
     },
     "tool_premiere_pro": {
       "label": "工具：PremierePro",
@@ -1165,16 +1165,16 @@
       "description": "对「OracleERP」的相关程度。"
     },
     "tool_git": {
-      "label": "工具：git",
-      "description": "对「git」的相关程度。"
+      "label": "工具：Git",
+      "description": "对「Git」的相关程度。"
     },
     "tool_github": {
       "label": "工具：GitHub",
       "description": "对「GitHub」的相关程度。"
     },
     "tool_gitlab": {
-      "label": "工具：gitlab",
-      "description": "对「gitlab」的相关程度。"
+      "label": "工具：GitLab",
+      "description": "对「GitLab」的相关程度。"
     },
     "tool_docker": {
       "label": "工具：Docker",
@@ -1245,8 +1245,8 @@
       "description": "对「keynote」的相关程度。"
     },
     "tool_canva": {
-      "label": "工具：canva",
-      "description": "对「canva」的相关程度。"
+      "label": "工具：Canva",
+      "description": "对「Canva」的相关程度。"
     },
     "tool_blender": {
       "label": "工具：Blender",
@@ -1313,8 +1313,8 @@
       "description": "对「Asana」的相关程度。"
     },
     "tool_airtable": {
-      "label": "工具：airtable",
-      "description": "对「airtable」的相关程度。"
+      "label": "工具：Airtable",
+      "description": "对「Airtable」的相关程度。"
     },
     "tool_chatgpt": {
       "label": "工具：ChatGPT",
@@ -1325,8 +1325,8 @@
       "description": "对「Claude」的相关程度。"
     },
     "tool_github_copilot": {
-      "label": "工具：GitHubCopilot",
-      "description": "对「GitHubCopilot」的相关程度。"
+      "label": "工具：GitHub Copilot",
+      "description": "对「GitHub Copilot」的相关程度。"
     },
     "tool_midjourney": {
       "label": "工具：Midjourney",
@@ -1377,7 +1377,7 @@
       "description": "对「科学」的兴趣程度。"
     },
     "topic_space": {
-      "label": "兴趣：太空",
+      "label": "兴趣：航天",
       "description": "对「太空」的兴趣程度。"
     },
     "topic_personal_finance": {
@@ -1389,7 +1389,7 @@
       "description": "对「投资」的兴趣程度。"
     },
     "topic_cryptocurrency": {
-      "label": "兴趣：Cryptocurrency",
+      "label": "兴趣：加密货币",
       "description": "对「cryptocurrency」的兴趣程度。"
     },
     "topic_real_estate": {
@@ -1397,7 +1397,7 @@
       "description": "对「房地产地产」的兴趣程度。"
     },
     "topic_parenting": {
-      "label": "兴趣：父母中",
+      "label": "兴趣：育儿",
       "description": "对「父母中」的兴趣程度。"
     },
     "topic_pets": {
@@ -1413,11 +1413,11 @@
       "description": "对「家居改造」的兴趣程度。"
     },
     "topic_cars": {
-      "label": "兴趣：Cars",
+      "label": "兴趣：汽车",
       "description": "对「cars」的兴趣程度。"
     },
     "topic_motorcycles": {
-      "label": "兴趣：Motorcycles",
+      "label": "兴趣：摩托车",
       "description": "对「motorcycles」的兴趣程度。"
     },
     "topic_cycling": {
@@ -1437,7 +1437,7 @@
       "description": "对「电影」的兴趣程度。"
     },
     "topic_tv_series": {
-      "label": "兴趣：TVseries",
+      "label": "兴趣：剧集",
       "description": "对「tv series」的兴趣程度。"
     },
     "topic_anime": {
@@ -1445,7 +1445,7 @@
       "description": "对「动漫」的兴趣程度。"
     },
     "topic_comics": {
-      "label": "兴趣：Comics",
+      "label": "兴趣：漫画",
       "description": "对「comics」的兴趣程度。"
     },
     "topic_music": {
@@ -1453,23 +1453,23 @@
       "description": "对「音乐」的兴趣程度。"
     },
     "topic_live_concerts": {
-      "label": "兴趣：Liveconcerts",
+      "label": "兴趣：现场演唱会",
       "description": "对「live concerts」的兴趣程度。"
     },
     "topic_theater": {
-      "label": "兴趣：Theater",
+      "label": "兴趣：戏剧",
       "description": "对「theater」的兴趣程度。"
     },
     "topic_visual_art": {
-      "label": "兴趣：视觉art",
+      "label": "兴趣：视觉艺术",
       "description": "对「visual art」的兴趣程度。"
     },
     "topic_literature": {
-      "label": "兴趣：Literature",
+      "label": "兴趣：文学",
       "description": "对「literature」的兴趣程度。"
     },
     "topic_poetry": {
-      "label": "兴趣：Poetry",
+      "label": "兴趣：诗歌",
       "description": "对「poetry」的兴趣程度。"
     },
     "topic_history": {
@@ -1481,11 +1481,11 @@
       "description": "对「哲学」的兴趣程度。"
     },
     "topic_religion": {
-      "label": "兴趣：Religion",
+      "label": "兴趣：宗教",
       "description": "对「religion」的兴趣程度。"
     },
     "topic_spirituality": {
-      "label": "兴趣：Spirituality",
+      "label": "兴趣：灵性",
       "description": "对「spirituality」的兴趣程度。"
     },
     "topic_meditation": {
@@ -1505,11 +1505,11 @@
       "description": "对「露营」的兴趣程度。"
     },
     "topic_fishing": {
-      "label": "兴趣：Fishing",
+      "label": "兴趣：钓鱼",
       "description": "对「fishing」的兴趣程度。"
     },
     "topic_birdwatching": {
-      "label": "兴趣：Birdwatching",
+      "label": "兴趣：观鸟",
       "description": "对「birdwatching」的兴趣程度。"
     },
     "topic_board_games": {
@@ -1521,7 +1521,7 @@
       "description": "对「桌游角色扮演」的兴趣程度。"
     },
     "topic_puzzles": {
-      "label": "兴趣：谜题",
+      "label": "兴趣：拼图",
       "description": "对「谜题」的兴趣程度。"
     },
     "topic_chess": {
@@ -1529,7 +1529,7 @@
       "description": "对「国际象棋」的兴趣程度。"
     },
     "topic_astrology": {
-      "label": "兴趣：占星术",
+      "label": "兴趣：占星",
       "description": "对「占星术」的兴趣程度。"
     },
     "topic_true_crime": {
@@ -1537,7 +1537,7 @@
       "description": "对「真实犯罪」的兴趣程度。"
     },
     "topic_podcasts": {
-      "label": "兴趣：Podcasts",
+      "label": "兴趣：播客",
       "description": "对「podcasts」的兴趣程度。"
     },
     "topic_social_media": {
@@ -1545,15 +1545,15 @@
       "description": "对「社交媒体」的兴趣程度。"
     },
     "topic_volunteering": {
-      "label": "兴趣：志愿者中",
+      "label": "兴趣：志愿",
       "description": "对「志愿者中」的兴趣程度。"
     },
     "topic_activism": {
-      "label": "兴趣：Activism",
+      "label": "兴趣：行动主义",
       "description": "对「activism」的兴趣程度。"
     },
     "topic_environment": {
-      "label": "兴趣：Environment",
+      "label": "兴趣：环境",
       "description": "对「environment」的兴趣程度。"
     },
     "topic_sustainability": {
@@ -1565,7 +1565,7 @@
       "description": "对「wine」的兴趣程度。"
     },
     "topic_coffee": {
-      "label": "兴趣：Coffee",
+      "label": "兴趣：咖啡",
       "description": "对「coffee」的兴趣程度。"
     },
     "topic_craft_beer": {
@@ -1577,7 +1577,7 @@
       "description": "对「茶」的兴趣程度。"
     },
     "topic_baking": {
-      "label": "兴趣：Baking",
+      "label": "兴趣：烘焙",
       "description": "对「baking」的兴趣程度。"
     },
     "topic_interior_design": {
@@ -1585,7 +1585,7 @@
       "description": "对「室内设计」的兴趣程度。"
     },
     "topic_architecture": {
-      "label": "兴趣：建筑学",
+      "label": "兴趣：建筑",
       "description": "对「建筑学」的兴趣程度。"
     },
     "topic_languages": {
@@ -1593,7 +1593,7 @@
       "description": "对「语言」的兴趣程度。"
     },
     "topic_genealogy": {
-      "label": "兴趣：家谱学",
+      "label": "兴趣：家谱",
       "description": "对「家谱学」的兴趣程度。"
     },
     "topic_collecting": {
@@ -1601,7 +1601,7 @@
       "description": "对「收藏」的兴趣程度。"
     },
     "topic_knitting": {
-      "label": "兴趣：针织",
+      "label": "兴趣：编织",
       "description": "对「针织」的兴趣程度。"
     },
     "topic_woodworking": {
@@ -1609,7 +1609,7 @@
       "description": "对「木工」的兴趣程度。"
     },
     "topic_calligraphy": {
-      "label": "兴趣：Calligraphy",
+      "label": "兴趣：书法",
       "description": "对「calligraphy」的兴趣程度。"
     },
     "topic_dance": {
@@ -1633,11 +1633,11 @@
       "description": "对「机器人」的兴趣程度。"
     },
     "topic_drones": {
-      "label": "兴趣：Drones",
+      "label": "兴趣：无人机",
       "description": "对「drones」的兴趣程度。"
     },
     "topic_3d_printing": {
-      "label": "兴趣：3D打印",
+      "label": "兴趣：3D 打印",
       "description": "对「3d printing」的兴趣程度。"
     },
     "topic_investmentoring": {
@@ -1645,11 +1645,11 @@
       "description": "对「investmentoring」的兴趣程度。"
     },
     "topic_entrepreneurship": {
-      "label": "兴趣：Entrepreneurship",
+      "label": "兴趣：创业",
       "description": "对「entrepreneurship」的兴趣程度。"
     },
     "topic_productivity": {
-      "label": "兴趣：Productivity",
+      "label": "兴趣：效率",
       "description": "对「productivity」的兴趣程度。"
     },
     "topic_self_improvement": {
@@ -1657,7 +1657,7 @@
       "description": "对「self-improvement」的兴趣程度。"
     },
     "topic_mindfulness": {
-      "label": "兴趣：Mindfulness",
+      "label": "兴趣：正念",
       "description": "对「mindfulness」的兴趣程度。"
     },
     "lang_english": {
@@ -1785,7 +1785,7 @@
       "description": "「挪威语」口语熟练度。"
     },
     "lang_danish": {
-      "label": "语言：Danish",
+      "label": "语言：丹麦语",
       "description": "「Danish」口语熟练度。"
     },
     "lang_finnish": {
@@ -1929,8 +1929,8 @@
       "description": "对传统性别角色分工的态度。"
     },
     "att_cryptocurrency": {
-      "label": "态度：Cryptocurrency",
-      "description": "态度：Cryptocurrency的相关说明。"
+      "label": "态度：加密货币",
+      "description": "态度：加密货币的相关说明。"
     },
     "att_the_gig_economy": {
       "label": "态度：零工经济",
@@ -1945,28 +1945,28 @@
       "description": "态度：高等教育的相关说明。"
     },
     "att_homeownership": {
-      "label": "态度：Homeownership",
-      "description": "态度：Homeownership的相关说明。"
+      "label": "态度：自有住房",
+      "description": "态度：自有住房的相关说明。"
     },
     "att_taking_on_debt": {
-      "label": "态度：Taking在debt",
-      "description": "态度：Taking在debt的相关说明。"
+      "label": "态度：承担债务",
+      "description": "态度：承担债务的相关说明。"
     },
     "att_risk_taking": {
-      "label": "态度：Risk - taking",
-      "description": "态度：Risk - taking的相关说明。"
+      "label": "态度：冒险倾向",
+      "description": "态度：冒险倾向的相关说明。"
     },
     "att_authority": {
-      "label": "态度：Authority",
-      "description": "态度：Authority的相关说明。"
+      "label": "态度：权威",
+      "description": "态度：权威的相关说明。"
     },
     "att_rapid_change": {
-      "label": "态度：Rapid变化",
-      "description": "态度：Rapid变化的相关说明。"
+      "label": "态度：快速变化",
+      "description": "态度：快速变化的相关说明。"
     },
     "att_new_technology": {
-      "label": "态度：New科技",
-      "description": "态度：New科技的相关说明。"
+      "label": "态度：新技术",
+      "description": "态度：新技术的相关说明。"
     },
     "att_brand_loyalty": {
       "label": "态度：品牌忠诚",
@@ -2009,16 +2009,16 @@
       "description": "态度：全民基本收入的相关说明。"
     },
     "att_minimalism": {
-      "label": "态度：Minimalism",
-      "description": "态度：Minimalism的相关说明。"
+      "label": "态度：极简",
+      "description": "态度：极简的相关说明。"
     },
     "att_consumerism": {
       "label": "态度：消费主义",
       "description": "态度：消费主义的相关说明。"
     },
     "att_veganism": {
-      "label": "态度：Veganism",
-      "description": "态度：Veganism的相关说明。"
+      "label": "态度：纯素",
+      "description": "态度：纯素的相关说明。"
     },
     "att_fast_fashion": {
       "label": "态度：快时尚",
@@ -2085,7 +2085,7 @@
       "description": "在「科技」方面的相关情况。"
     },
     "ind_healthcare": {
-      "label": "行业：医疗健康",
+      "label": "行业：医疗",
       "description": "在「医疗健康」方面的相关情况。"
     },
     "ind_finance": {
@@ -2105,7 +2105,7 @@
       "description": "在「零售」方面的相关情况。"
     },
     "ind_e_commerce": {
-      "label": "行业：E - commerce",
+      "label": "行业：电商",
       "description": "在「e-commerce」方面的相关情况。"
     },
     "ind_manufacturing": {
@@ -2125,11 +2125,11 @@
       "description": "在「能源」方面的相关情况。"
     },
     "ind_oil_gas": {
-      "label": "行业：Oil 与 gas",
+      "label": "行业：石油与天然气",
       "description": "在「oil & gas」方面的相关情况。"
     },
     "ind_utilities": {
-      "label": "行业：Utilities",
+      "label": "行业：公用事业",
       "description": "在「utilities」方面的相关情况。"
     },
     "ind_construction": {
@@ -2149,7 +2149,7 @@
       "description": "在「旅游观光」方面的相关情况。"
     },
     "ind_restaurants": {
-      "label": "行业：Restaurants",
+      "label": "行业：餐饮",
       "description": "在「restaurants」方面的相关情况。"
     },
     "ind_agriculture": {
@@ -2185,7 +2185,7 @@
       "description": "在「游戏」方面的相关情况。"
     },
     "ind_publishing": {
-      "label": "行业：Publishing",
+      "label": "行业：出版",
       "description": "在「publishing」方面的相关情况。"
     },
     "ind_advertising": {
@@ -2201,7 +2201,7 @@
       "description": "在「政府」方面的相关情况。"
     },
     "ind_defense": {
-      "label": "行业：Defense",
+      "label": "行业：国防",
       "description": "在「defense」方面的相关情况。"
     },
     "ind_nonprofit": {
@@ -2233,7 +2233,7 @@
       "description": "在「textiles」方面的相关情况。"
     },
     "ind_apparel": {
-      "label": "行业：Apparel",
+      "label": "行业：服装",
       "description": "在「apparel」方面的相关情况。"
     },
     "ind_consumer_electronics": {
@@ -2257,7 +2257,7 @@
       "description": "在「会计」方面的相关情况。"
     },
     "ind_marketing_agencies": {
-      "label": "行业：营销agencies",
+      "label": "行业：营销机构",
       "description": "在「marketing agencies」方面的相关情况。"
     },
     "ind_fitness_wellness": {
@@ -2277,7 +2277,7 @@
       "description": "在「音乐」方面的相关情况。"
     },
     "ind_fine_art": {
-      "label": "行业：Fineart",
+      "label": "行业：纯艺术",
       "description": "在「fine art」方面的相关情况。"
     },
     "cult_united_states": {
@@ -2449,12 +2449,12 @@
       "description": "对摇滚音乐的偏好。"
     },
     "musg_hip_hop": {
-      "label": "音乐：嘻哈 - 跳",
-      "description": "对嘻哈 - 跳音乐的偏好。"
+      "label": "音乐：嘻哈",
+      "description": "对嘻哈音乐的偏好。"
     },
     "musg_r_b": {
-      "label": "音乐：r&b",
-      "description": "对r&b音乐的偏好。"
+      "label": "音乐：R&B",
+      "description": "对R&B音乐的偏好。"
     },
     "musg_jazz": {
       "label": "音乐：爵士",
@@ -2473,8 +2473,8 @@
       "description": "对歌剧音乐的偏好。"
     },
     "musg_country": {
-      "label": "音乐：国家",
-      "description": "对国家音乐的偏好。"
+      "label": "音乐：乡村",
+      "description": "对乡村音乐的偏好。"
     },
     "musg_folk": {
       "label": "音乐：民谣",
@@ -2493,20 +2493,20 @@
       "description": "对电子音乐的偏好。"
     },
     "musg_house": {
-      "label": "音乐：房屋",
-      "description": "对房屋音乐的偏好。"
+      "label": "音乐：浩室",
+      "description": "对浩室音乐的偏好。"
     },
     "musg_techno": {
-      "label": "音乐：科技舞曲",
-      "description": "对科技舞曲音乐的偏好。"
+      "label": "音乐： techno",
+      "description": "对 techno音乐的偏好。"
     },
     "musg_trance": {
-      "label": "音乐：迷幻",
-      "description": "对迷幻音乐的偏好。"
+      "label": "音乐： trance",
+      "description": "对 trance音乐的偏好。"
     },
     "musg_drum_bass": {
-      "label": "音乐：Drum 与 bass",
-      "description": "对Drum 与 bass音乐的偏好。"
+      "label": "音乐：Drum & bass",
+      "description": "对Drum & bass音乐的偏好。"
     },
     "musg_metal": {
       "label": "音乐：金属",
@@ -2521,12 +2521,12 @@
       "description": "对独立音乐的偏好。"
     },
     "musg_k_pop": {
-      "label": "音乐：k-pop",
-      "description": "对k-pop音乐的偏好。"
+      "label": "音乐：K-pop",
+      "description": "对K-pop音乐的偏好。"
     },
     "musg_j_pop": {
-      "label": "音乐：j-pop",
-      "description": "对j-pop音乐的偏好。"
+      "label": "音乐：J-pop",
+      "description": "对J-pop音乐的偏好。"
     },
     "musg_latin": {
       "label": "音乐：拉丁文化",
@@ -2557,8 +2557,8 @@
       "description": "对氛围音乐的偏好。"
     },
     "musg_lo_fi": {
-      "label": "音乐：lo-fi",
-      "description": "对lo-fi音乐的偏好。"
+      "label": "音乐：Lo-fi",
+      "description": "对Lo-fi音乐的偏好。"
     },
     "musg_bluegrass": {
       "label": "音乐：蓝草",
@@ -2585,8 +2585,8 @@
       "description": "电影类型：动作的相关说明。"
     },
     "filmg_adventure": {
-      "label": "电影类型：Adventure",
-      "description": "电影类型：Adventure的相关说明。"
+      "label": "电影类型：冒险",
+      "description": "电影类型：冒险的相关说明。"
     },
     "filmg_comedy": {
       "label": "电影类型：喜剧",
@@ -2633,8 +2633,8 @@
       "description": "电影类型：悬疑的相关说明。"
     },
     "filmg_historical": {
-      "label": "电影类型：Historical",
-      "description": "电影类型：Historical的相关说明。"
+      "label": "电影类型：历史",
+      "description": "电影类型：历史的相关说明。"
     },
     "filmg_war": {
       "label": "电影类型：战争",
@@ -2673,8 +2673,8 @@
       "description": "电影类型：喜剧 - 剧情的相关说明。"
     },
     "filmg_disaster": {
-      "label": "电影类型：Disaster",
-      "description": "电影类型：Disaster的相关说明。"
+      "label": "电影类型：灾害",
+      "description": "电影类型：灾害的相关说明。"
     },
     "bookg_literary_fiction": {
       "label": "阅读类型：文学小说",
@@ -2709,8 +2709,8 @@
       "description": "阅读类型：恐怖的相关说明。"
     },
     "bookg_biography": {
-      "label": "阅读类型：Biography",
-      "description": "阅读类型：Biography的相关说明。"
+      "label": "阅读类型：传记",
+      "description": "阅读类型：传记的相关说明。"
     },
     "bookg_memoir": {
       "label": "阅读类型：Memoir",
@@ -2737,8 +2737,8 @@
       "description": "阅读类型：哲学的相关说明。"
     },
     "bookg_poetry": {
-      "label": "阅读类型：Poetry",
-      "description": "阅读类型：Poetry的相关说明。"
+      "label": "阅读类型：诗歌",
+      "description": "阅读类型：诗歌的相关说明。"
     },
     "bookg_young_adult": {
       "label": "阅读类型：青少年文学",
@@ -2757,12 +2757,12 @@
       "description": "阅读类型：旅行写作的相关说明。"
     },
     "bookg_cookbooks": {
-      "label": "阅读类型：Cookbooks",
-      "description": "阅读类型：Cookbooks的相关说明。"
+      "label": "阅读类型：食谱",
+      "description": "阅读类型：食谱的相关说明。"
     },
     "bookg_essays": {
-      "label": "阅读类型：Essays",
-      "description": "阅读类型：Essays的相关说明。"
+      "label": "阅读类型：随笔",
+      "description": "阅读类型：随笔的相关说明。"
     },
     "cuis_italian": {
       "label": "菜系：意大利语",
@@ -2793,16 +2793,16 @@
       "description": "对巴西菜系的偏好。"
     },
     "cuis_american_bbq": {
-      "label": "菜系：AmericanBBQ",
-      "description": "对AmericanBBQ菜系的偏好。"
+      "label": "菜系：美式烧烤",
+      "description": "对美式烧烤菜系的偏好。"
     },
     "cuis_southern_soul_food": {
-      "label": "菜系：Southern灵魂food",
-      "description": "对Southern灵魂food菜系的偏好。"
+      "label": "菜系：美国南方灵魂菜",
+      "description": "对美国南方灵魂菜菜系的偏好。"
     },
     "cuis_cajun": {
-      "label": "菜系： Cajun",
-      "description": "对 Cajun菜系的偏好。"
+      "label": "菜系：卡真菜",
+      "description": "对卡真菜菜系的偏好。"
     },
     "cuis_chinese": {
       "label": "菜系：中餐",
@@ -2837,8 +2837,8 @@
       "description": "对印度菜系的偏好。"
     },
     "cuis_pakistani": {
-      "label": "菜系：Pakistani",
-      "description": "对Pakistani菜系的偏好。"
+      "label": "菜系：巴基斯坦菜",
+      "description": "对巴基斯坦菜菜系的偏好。"
     },
     "cuis_middle_eastern": {
       "label": "菜系：中东文化",
@@ -2857,12 +2857,12 @@
       "description": "对摩洛哥菜系的偏好。"
     },
     "cuis_ethiopian": {
-      "label": "菜系：Ethiopian",
-      "description": "对Ethiopian菜系的偏好。"
+      "label": "菜系：埃塞俄比亚菜",
+      "description": "对埃塞俄比亚菜菜系的偏好。"
     },
     "cuis_nigerian": {
-      "label": "菜系：Nigerian",
-      "description": "对Nigerian菜系的偏好。"
+      "label": "菜系：尼日利亚菜",
+      "description": "对尼日利亚菜菜系的偏好。"
     },
     "cuis_caribbean": {
       "label": "菜系：加勒比",
@@ -2873,8 +2873,8 @@
       "description": "对德语菜系的偏好。"
     },
     "cuis_scandinavian": {
-      "label": "菜系：Scandinavian",
-      "description": "对Scandinavian菜系的偏好。"
+      "label": "菜系：斯堪的纳维亚菜",
+      "description": "对斯堪的纳维亚菜菜系的偏好。"
     },
     "cuis_russian": {
       "label": "菜系：俄语",
@@ -2957,8 +2957,8 @@
       "description": "运动：骑行的相关说明。"
     },
     "sport_boxing": {
-      "label": "运动：Boxing",
-      "description": "运动：Boxing的相关说明。"
+      "label": "运动：拳击",
+      "description": "运动：拳击的相关说明。"
     },
     "sport_mma": {
       "label": "运动：MMA",
@@ -2969,36 +2969,36 @@
       "description": "运动：Wrestling的相关说明。"
     },
     "sport_skiing": {
-      "label": "运动：Skiing",
-      "description": "运动：Skiing的相关说明。"
+      "label": "运动：滑雪",
+      "description": "运动：滑雪的相关说明。"
     },
     "sport_snowboarding": {
-      "label": "运动：Snowboarding",
-      "description": "运动：Snowboarding的相关说明。"
+      "label": "运动：单板滑雪",
+      "description": "运动：单板滑雪的相关说明。"
     },
     "sport_surfing": {
-      "label": "运动：Surfing",
-      "description": "运动：Surfing的相关说明。"
+      "label": "运动：冲浪",
+      "description": "运动：冲浪的相关说明。"
     },
     "sport_skateboarding": {
-      "label": "运动：Skateboarding",
-      "description": "运动：Skateboarding的相关说明。"
+      "label": "运动：滑板",
+      "description": "运动：滑板的相关说明。"
     },
     "sport_climbing": {
-      "label": "运动：Climbing",
-      "description": "运动：Climbing的相关说明。"
+      "label": "运动：攀岩",
+      "description": "运动：攀岩的相关说明。"
     },
     "sport_gymnastics": {
-      "label": "运动：Gymnastics",
-      "description": "运动：Gymnastics的相关说明。"
+      "label": "运动：体操",
+      "description": "运动：体操的相关说明。"
     },
     "sport_track_field": {
       "label": "运动：田径",
       "description": "运动：田径的相关说明。"
     },
     "sport_badminton": {
-      "label": "运动：Badminton",
-      "description": "运动：Badminton的相关说明。"
+      "label": "运动：羽毛球",
+      "description": "运动：羽毛球的相关说明。"
     },
     "sport_table_tennis": {
       "label": "运动：乒乓球",
@@ -3009,12 +3009,12 @@
       "description": "运动：Squash的相关说明。"
     },
     "sport_sailing": {
-      "label": "运动：Sailing",
-      "description": "运动：Sailing的相关说明。"
+      "label": "运动：帆船",
+      "description": "运动：帆船的相关说明。"
     },
     "sport_rowing": {
-      "label": "运动：Rowing",
-      "description": "运动：Rowing的相关说明。"
+      "label": "运动：赛艇",
+      "description": "运动：赛艇的相关说明。"
     },
     "sport_martial_arts": {
       "label": "运动：武术",
@@ -3041,28 +3041,28 @@
       "description": "运动：Esports的相关说明。"
     },
     "sport_darts": {
-      "label": "运动：Darts",
-      "description": "运动：Darts的相关说明。"
+      "label": "运动：飞镖",
+      "description": "运动：飞镖的相关说明。"
     },
     "sport_bowling": {
-      "label": "运动：Bowling",
-      "description": "运动：Bowling的相关说明。"
+      "label": "运动：保龄球",
+      "description": "运动：保龄球的相关说明。"
     },
     "sport_archery": {
-      "label": "运动：Archery",
-      "description": "运动：Archery的相关说明。"
+      "label": "运动：射箭",
+      "description": "运动：射箭的相关说明。"
     },
     "sport_equestrian": {
-      "label": "运动：Equestrian",
-      "description": "运动：Equestrian的相关说明。"
+      "label": "运动：马术",
+      "description": "运动：马术的相关说明。"
     },
     "sport_fencing": {
-      "label": "运动：Fencing",
-      "description": "运动：Fencing的相关说明。"
+      "label": "运动：击剑",
+      "description": "运动：击剑的相关说明。"
     },
     "sport_triathlon": {
-      "label": "运动：Triathlon",
-      "description": "运动：Triathlon的相关说明。"
+      "label": "运动：铁人三项",
+      "description": "运动：铁人三项的相关说明。"
     },
     "mbti_type": {
       "label": "MBTI 类型",
@@ -3569,27 +3569,27 @@
       "description": "Cognitiveloadcapacity的相关说明。"
     },
     "health_contrast_need": {
-      "label": "高 - contrastneed",
-      "description": "高 - contrastneed的相关说明。"
+      "label": "高对比度需求",
+      "description": "高对比度需求的相关说明。"
     },
     "health_text_size_need": {
       "label": "Large - textneed",
       "description": "Large - textneed的相关说明。"
     },
     "health_assistive_tech": {
-      "label": "Assistive科技",
-      "description": "Assistive科技的相关说明。"
+      "label": "辅助科技",
+      "description": "辅助科技的相关说明。"
     },
     "health_motion_sensitivity": {
-      "label": "Motion敏感度",
-      "description": "Motion敏感度的相关说明。"
+      "label": "动态敏感度",
+      "description": "动态敏感度的相关说明。"
     },
     "health_attention_condition": {
-      "label": "Attention状况",
-      "description": "Attention状况的相关说明。"
+      "label": "注意力状况",
+      "description": "注意力状况的相关说明。"
     },
     "hob_knitting": {
-      "label": "爱好：针织",
+      "label": "爱好：编织",
       "description": "对「针织」的参与/投入程度。"
     },
     "hob_crocheting": {
@@ -3605,7 +3605,7 @@
       "description": "对「木工」的参与/投入程度。"
     },
     "hob_metalworking": {
-      "label": "爱好：Metalworking",
+      "label": "爱好：金属工艺",
       "description": "对「metalworking」的参与/投入程度。"
     },
     "hob_leatherworking": {
@@ -3617,23 +3617,23 @@
       "description": "对「蜡烛制作」的参与/投入程度。"
     },
     "hob_origami": {
-      "label": "爱好：Origami",
+      "label": "爱好：折纸",
       "description": "对「origami」的参与/投入程度。"
     },
     "hob_calligraphy": {
-      "label": "爱好：Calligraphy",
+      "label": "爱好：书法",
       "description": "对「calligraphy」的参与/投入程度。"
     },
     "hob_scrapbooking": {
-      "label": "爱好：Scrapbooking",
+      "label": "爱好：剪贴簿",
       "description": "对「scrapbooking」的参与/投入程度。"
     },
     "hob_quilting": {
-      "label": "爱好：Quilting",
+      "label": "爱好：拼布",
       "description": "对「quilting」的参与/投入程度。"
     },
     "hob_embroidery": {
-      "label": "爱好：Embroidery",
+      "label": "爱好：刺绣",
       "description": "对「embroidery」的参与/投入程度。"
     },
     "hob_jewelry_making": {
@@ -3653,7 +3653,7 @@
       "description": "对「集邮」的参与/投入程度。"
     },
     "hob_antiquing": {
-      "label": "爱好：Antiquing",
+      "label": "爱好：古董收藏",
       "description": "对「antiquing」的参与/投入程度。"
     },
     "hob_vegetable_gardening": {
@@ -3661,11 +3661,11 @@
       "description": "对「蔬菜园艺」的参与/投入程度。"
     },
     "hob_bonsai": {
-      "label": "爱好：Bonsai",
+      "label": "爱好：盆景",
       "description": "对「bonsai」的参与/投入程度。"
     },
     "hob_aquariums": {
-      "label": "爱好：Aquariums",
+      "label": "爱好：水族",
       "description": "对「aquariums」的参与/投入程度。"
     },
     "hob_beekeeping": {
@@ -3673,15 +3673,15 @@
       "description": "对「养蜂」的参与/投入程度。"
     },
     "hob_birdwatching": {
-      "label": "爱好：Birdwatching",
+      "label": "爱好：观鸟",
       "description": "对「birdwatching」的参与/投入程度。"
     },
     "hob_stargazing": {
-      "label": "爱好：Stargazing",
+      "label": "爱好：观星",
       "description": "对「stargazing」的参与/投入程度。"
     },
     "hob_geocaching": {
-      "label": "爱好：Geocaching",
+      "label": "爱好：地理藏宝",
       "description": "对「geocaching」的参与/投入程度。"
     },
     "hob_rock_climbing": {
@@ -3689,11 +3689,11 @@
       "description": "对「攀岩」的参与/投入程度。"
     },
     "hob_bouldering": {
-      "label": "爱好：Bouldering",
+      "label": "爱好：抱石",
       "description": "对「bouldering」的参与/投入程度。"
     },
     "hob_kayaking": {
-      "label": "爱好：Kayaking",
+      "label": "爱好：皮划艇",
       "description": "对「kayaking」的参与/投入程度。"
     },
     "hob_paddleboarding": {
@@ -3705,7 +3705,7 @@
       "description": "对「水肺潜水」的参与/投入程度。"
     },
     "hob_snorkeling": {
-      "label": "爱好：Snorkeling",
+      "label": "爱好：浮潜",
       "description": "对「snorkeling」的参与/投入程度。"
     },
     "hob_skydiving": {
@@ -3733,11 +3733,11 @@
       "description": "对「自酿啤酒」的参与/投入程度。"
     },
     "hob_winemaking": {
-      "label": "爱好：Winemaking",
+      "label": "爱好：酿酒",
       "description": "对「winemaking」的参与/投入程度。"
     },
     "hob_cheesemaking": {
-      "label": "爱好：Cheesemaking",
+      "label": "爱好：奶酪制作",
       "description": "对「cheesemaking」的参与/投入程度。"
     },
     "hob_karaoke": {
@@ -3753,7 +3753,7 @@
       "description": "对「萨尔萨舞」的参与/投入程度。"
     },
     "hob_improv": {
-      "label": "爱好：Improv",
+      "label": "爱好：即兴",
       "description": "对「improv」的参与/投入程度。"
     },
     "hob_stand_up_comedy": {
@@ -3761,7 +3761,7 @@
       "description": "对「单口喜剧」的参与/投入程度。"
     },
     "hob_juggling": {
-      "label": "爱好：Juggling",
+      "label": "爱好： juggling",
       "description": "对「juggling」的参与/投入程度。"
     },
     "hob_whittling": {
@@ -3773,11 +3773,11 @@
       "description": "对「letterpress」的参与/投入程度。"
     },
     "hob_urban_sketching": {
-      "label": "爱好：城市sketching",
+      "label": "爱好：城市速写",
       "description": "对「urban sketching」的参与/投入程度。"
     },
     "hob_genealogy": {
-      "label": "爱好：家谱学",
+      "label": "爱好：家谱",
       "description": "对「家谱学」的参与/投入程度。"
     },
     "hob_metal_detecting": {
@@ -3786,22 +3786,22 @@
     },
     "hob_cosplay": {
       "label": "爱好：Cosplay",
-      "description": "对「cosplay」的参与/投入程度。"
+      "description": "对「Cosplay」的参与/投入程度。"
     },
     "acad_algebra": {
-      "label": "学科：Algebra",
+      "label": "学科：代数",
       "description": "在「algebra」方面的相关情况。"
     },
     "acad_geometry": {
-      "label": "学科：Geometry",
+      "label": "学科：几何",
       "description": "在「geometry」方面的相关情况。"
     },
     "acad_calculus": {
-      "label": "学科：Calculus",
+      "label": "学科：微积分",
       "description": "在「calculus」方面的相关情况。"
     },
     "acad_statistics": {
-      "label": "学科：统计学",
+      "label": "学科：统计",
       "description": "在「统计学」方面的相关情况。"
     },
     "acad_physics": {
@@ -3813,7 +3813,7 @@
       "description": "在「化学」方面的相关情况。"
     },
     "acad_biology": {
-      "label": "学科：生物",
+      "label": "学科：生物学",
       "description": "在「生物」方面的相关情况。"
     },
     "acad_earth_science": {
@@ -3837,7 +3837,7 @@
       "description": "在「社会学」方面的相关情况。"
     },
     "acad_world_history": {
-      "label": "学科：World历史",
+      "label": "学科：世界历史",
       "description": "在「world history」方面的相关情况。"
     },
     "acad_geography": {
@@ -3845,11 +3845,11 @@
       "description": "在「地理」方面的相关情况。"
     },
     "acad_civics": {
-      "label": "学科：Civics",
+      "label": "学科：公民学",
       "description": "在「civics」方面的相关情况。"
     },
     "acad_literature": {
-      "label": "学科：Literature",
+      "label": "学科：文学",
       "description": "在「literature」方面的相关情况。"
     },
     "acad_creative_writing": {
@@ -3865,7 +3865,7 @@
       "description": "在「哲学」方面的相关情况。"
     },
     "acad_visual_art": {
-      "label": "学科：视觉art",
+      "label": "学科：视觉艺术",
       "description": "在「visual art」方面的相关情况。"
     },
     "acad_music": {
@@ -3877,7 +3877,7 @@
       "description": "在「剧情」方面的相关情况。"
     },
     "acad_physical_education": {
-      "label": "学科：Physical教育",
+      "label": "学科：体育",
       "description": "在「physical education」方面的相关情况。"
     },
     "acad_health_science": {
@@ -3885,7 +3885,7 @@
       "description": "在「健康科学」方面的相关情况。"
     },
     "acad_business_studies": {
-      "label": "学科：Businessstudies",
+      "label": "学科：商科",
       "description": "在「business studies」方面的相关情况。"
     },
     "acad_environmental_science": {
@@ -3973,7 +3973,7 @@
       "description": "在「好奇心」方面的相关情况。"
     },
     "trait_creativity": {
-      "label": "品格特质：创造力",
+      "label": "品格特质：创意",
       "description": "在「创造力」方面的相关情况。"
     },
     "trait_love_of_learning": {
@@ -3981,7 +3981,7 @@
       "description": "在「非常喜欢的学习」方面的相关情况。"
     },
     "trait_open_mindedness": {
-      "label": "品格特质：开放 - mindedness",
+      "label": "品格特质：开放性",
       "description": "在「the persona」方面的相关情况。"
     },
     "trait_perspective": {
@@ -3989,7 +3989,7 @@
       "description": "在「视角」方面的相关情况。"
     },
     "trait_bravery": {
-      "label": "品格特质：Bravery",
+      "label": "品格特质：勇敢",
       "description": "在「the persona」方面的相关情况。"
     },
     "trait_perseverance": {
@@ -4001,7 +4001,7 @@
       "description": "在「诚实」方面的相关情况。"
     },
     "trait_zest": {
-      "label": "品格特质：Zest",
+      "label": "品格特质：热忱",
       "description": "在「the persona」方面的相关情况。"
     },
     "trait_capacity_for_love": {
@@ -4021,11 +4021,11 @@
       "description": "在「团队合作」方面的相关情况。"
     },
     "trait_fairness": {
-      "label": "品格特质：Fairness",
+      "label": "品格特质：公平",
       "description": "在「the persona」方面的相关情况。"
     },
     "trait_leadership": {
-      "label": "品格特质：领导力",
+      "label": "品格特质：领导",
       "description": "在「领导力」方面的相关情况。"
     },
     "trait_forgiveness": {
@@ -4041,7 +4041,7 @@
       "description": "在「审慎」方面的相关情况。"
     },
     "trait_self_regulation": {
-      "label": "品格特质：自我 - regulation",
+      "label": "品格特质：自我调节",
       "description": "在「the persona」方面的相关情况。"
     },
     "trait_appreciation_of_beauty": {
@@ -4057,11 +4057,11 @@
       "description": "在「the persona」方面的相关情况。"
     },
     "trait_playfulness": {
-      "label": "品格特质：Playfulness",
+      "label": "品格特质：玩心",
       "description": "在「the persona」方面的相关情况。"
     },
     "trait_spirituality": {
-      "label": "品格特质：Spirituality",
+      "label": "品格特质：灵性",
       "description": "在「the persona」方面的相关情况。"
     },
     "trait_ambition": {
@@ -4089,7 +4089,7 @@
       "description": "在「忠诚」方面的相关情况。"
     },
     "trait_competitiveness": {
-      "label": "品格特质：Competitiveness",
+      "label": "品格特质：竞争力",
       "description": "在「the persona」方面的相关情况。"
     },
     "trait_adaptability": {
@@ -4121,8 +4121,8 @@
       "description": "价值观：安全与稳定的相关说明。"
     },
     "val_adventure": {
-      "label": "价值观：Adventure",
-      "description": "价值观：Adventure的相关说明。"
+      "label": "价值观：冒险",
+      "description": "价值观：冒险的相关说明。"
     },
     "val_tradition": {
       "label": "价值观：传统",
@@ -4153,8 +4153,8 @@
       "description": "价值观：知识与真理的相关说明。"
     },
     "val_social_status": {
-      "label": "价值观：Socialstatus",
-      "description": "价值观：Socialstatus的相关说明。"
+      "label": "价值观：社会地位",
+      "description": "价值观：社会地位的相关说明。"
     },
     "val_independence": {
       "label": "价值观：独立",
@@ -4173,8 +4173,8 @@
       "description": "价值观：可持续的相关说明。"
     },
     "val_recognition": {
-      "label": "价值观：Recognition",
-      "description": "价值观：Recognition的相关说明。"
+      "label": "价值观：认可",
+      "description": "价值观：认可的相关说明。"
     },
     "val_helping_others": {
       "label": "价值观：帮助他人",
@@ -4197,16 +4197,16 @@
       "description": "价值观：美容与美学的相关说明。"
     },
     "val_order_structure": {
-      "label": "价值观：Order 与 structure",
-      "description": "价值观：Order 与 structure的相关说明。"
+      "label": "价值观：秩序与结构",
+      "description": "价值观：秩序与结构的相关说明。"
     },
     "val_patriotism": {
-      "label": "价值观：Patriotism",
-      "description": "价值观：Patriotism的相关说明。"
+      "label": "价值观：爱国主义",
+      "description": "价值观：爱国主义的相关说明。"
     },
     "val_equality": {
-      "label": "价值观：Equality",
-      "description": "价值观：Equality的相关说明。"
+      "label": "价值观：平等",
+      "description": "价值观：平等的相关说明。"
     },
     "val_privacy": {
       "label": "价值观：隐私",
@@ -4241,7 +4241,7 @@
       "description": "参与「备餐」的频率。"
     },
     "habit_stretching_mobility": {
-      "label": "习惯：Stretching / 行动能力",
+      "label": "习惯：拉伸/行动能力",
       "description": "参与「stretching / mobility」的频率。"
     },
     "habit_morning_walk": {
@@ -4261,7 +4261,7 @@
       "description": "参与「睡前阅读」的频率。"
     },
     "habit_naps": {
-      "label": "习惯：Naps",
+      "label": "习惯：小睡",
       "description": "参与「naps」的频率。"
     },
     "habit_power_snoozing_alarm": {
@@ -4569,8 +4569,8 @@
       "description": "在「注释风格」方面的相关情况。"
     },
     "code_summary_documentation": {
-      "label": "代码Summary / 摘要文档",
-      "description": "代码Summary / 摘要文档的相关说明。"
+      "label": "代码Summary / TLDR文档",
+      "description": "代码Summary / TLDR文档的相关说明。"
     },
     "code_naming_verbosity": {
       "label": "代码NamingVerbosity",
@@ -4585,7 +4585,7 @@
       "description": "代码Structure偏好的相关说明。"
     },
     "code_function_length": {
-      "label": "职能 / MethodLength偏好",
+      "label": "函数长度偏好",
       "description": "偏好为小focusedfunctions vs largermulti - purposefunctions偏好。"
     },
     "code_error_handling": {
@@ -4633,8 +4633,8 @@
       "description": "在「C」方面的相关情况。"
     },
     "prog_go": {
-      "label": "编程语言：Go",
-      "description": "在「Go」方面的相关情况。"
+      "label": "编程语言：围棋",
+      "description": "在「围棋」方面的相关情况。"
     },
     "prog_rust": {
       "label": "编程语言：Rust",
@@ -4761,7 +4761,7 @@
       "description": "大五人格·Big五：领域消极情感丰富度。"
     },
     "bfi2_domain_open_mindedness": {
-      "label": "BFI - 2开放 - Mindedness",
+      "label": "BFI-2 开放性",
       "description": "大五人格·Big五：Open-Mindedness。"
     },
     "bfi2_facet_sociability": {
@@ -4790,7 +4790,7 @@
     },
     "bfi2_facet_organization": {
       "label": "BFI - 2Organization",
-      "description": "大五人格·Conscientiousness：Organization。"
+      "description": "大五人格·Conscientiousness：整理。"
     },
     "bfi2_facet_productiveness": {
       "label": "BFI - 2Productiveness",
@@ -4809,12 +4809,12 @@
       "description": "大五人格·消极情感丰富度：抑郁。"
     },
     "bfi2_facet_emotional_volatility": {
-      "label": "BFI - 2情绪Volatility",
-      "description": "大五人格·消极情感丰富度：Emotional Volatility。"
+      "label": "BFI-2 情绪起伏",
+      "description": "大五人格·消极情感丰富度：情绪起伏。"
     },
     "bfi2_facet_intellectual_curiosity": {
-      "label": "BFI - 2Intellectual好奇心",
-      "description": "大五人格·开放 - Mindedness：Intellectual Curiosity。"
+      "label": "BFI-2 求知欲",
+      "description": "大五人格·开放 - Mindedness：求知欲。"
     },
     "bfi2_facet_aesthetic_sensitivity": {
       "label": "BFI - 2Aesthetic敏感度",
@@ -4905,32 +4905,32 @@
       "description": "在「and enjoying effortful thinking」方面的相关情况。"
     },
     "need_for_closure": {
-      "label": "Need为Closure",
-      "description": "Need为Closure的相关说明。"
+      "label": "闭合需求",
+      "description": "闭合需求的相关说明。"
     },
     "dospert_ethical_risk_tolerance": {
-      "label": "DOSPERT伦理原因风险承受度",
-      "description": "DOSPERT伦理原因风险承受度的相关说明。"
+      "label": "DOSPERT 伦理风险承受度",
+      "description": "DOSPERT 伦理风险承受度的相关说明。"
     },
     "dospert_financial_risk_tolerance": {
-      "label": "DOSPERTFinancial风险承受度",
-      "description": "DOSPERTFinancial风险承受度的相关说明。"
+      "label": "DOSPERT 财务风险承受度",
+      "description": "DOSPERT 财务风险承受度的相关说明。"
     },
     "dospert_health_safety_risk_tolerance": {
-      "label": "DOSPERT健康 / 安全风险承受度",
-      "description": "DOSPERT健康 / 安全风险承受度的相关说明。"
+      "label": "DOSPERT 健康/安全风险承受度",
+      "description": "DOSPERT 健康/安全风险承受度的相关说明。"
     },
     "dospert_recreational_risk_tolerance": {
-      "label": "DOSPERTRecreational风险承受度",
-      "description": "DOSPERTRecreational风险承受度的相关说明。"
+      "label": "DOSPERT 娱乐风险承受度",
+      "description": "DOSPERT 娱乐风险承受度的相关说明。"
     },
     "dospert_social_risk_tolerance": {
-      "label": "DOSPERTSocial风险承受度",
-      "description": "DOSPERTSocial风险承受度的相关说明。"
+      "label": "DOSPERT 社交风险承受度",
+      "description": "DOSPERT 社交风险承受度的相关说明。"
     },
     "attachment_anxiety": {
-      "label": "Attachment焦虑",
-      "description": "Attachment焦虑的相关说明。"
+      "label": "依恋焦虑",
+      "description": "依恋焦虑的相关说明。"
     },
     "attachment_avoidance": {
       "label": "AttachmentAvoidance",
@@ -4945,15 +4945,15 @@
       "description": "InterpersonalCommunion / Warmth的相关说明。"
     },
     "dev_professional_status": {
-      "label": "开发者professionalstatus",
-      "description": "开发者professionalstatus的相关说明。"
+      "label": "开发者职业状态",
+      "description": "开发者职业状态的相关说明。"
     },
     "dev_role_archetype": {
-      "label": "开发者角色archetype",
-      "description": "开发者角色archetype的相关说明。"
+      "label": "开发者角色类型",
+      "description": "开发者角色类型的相关说明。"
     },
     "dev_contribution_context": {
-      "label": "开发者contribution背景",
+      "label": "开发者贡献场景",
       "description": "在「which the persona most often writes or influences code」方面的相关情况。"
     },
     "dev_ic_manager_orientation": {
@@ -4965,7 +4965,7 @@
       "description": "在「工具链复杂度」方面的相关情况。"
     },
     "dev_primary_work_surface": {
-      "label": "主要开发者工作surface",
+      "label": "主要开发工作界面",
       "description": "对「coding tools」的相关程度。"
     },
     "coding_ai_usage_frequency": {
@@ -5121,16 +5121,16 @@
       "description": "在「开发者工作」方面的相关情况。"
     },
     "stackoverflow_participation_style": {
-      "label": "StackOverflowparticipation风格",
+      "label": "Stack Overflow 参与风格",
       "description": "在「Q&A communities beyond reading search results」方面的相关情况。"
     },
     "developer_help_seeking_preference": {
-      "label": "开发者help - 寻求偏好",
-      "description": "开发者help - 寻求偏好的相关说明。"
+      "label": "开发者求助偏好",
+      "description": "开发者求助偏好的相关说明。"
     },
     "developer_problem_profile": {
-      "label": "开发者problemprofile",
-      "description": "开发者problemprofile的相关说明。"
+      "label": "开发者问题画像",
+      "description": "开发者问题画像的相关说明。"
     },
     "open_source_activity_level": {
       "label": "开源活跃度",
@@ -5299,9 +5299,84 @@
     "Annually": "每年",
     "Single": "单身",
     "In a relationship": "恋爱中",
+    "Engaged": "积极参与",
     "Married": "已婚",
     "Divorced": "离异",
     "Widowed": "丧偶",
+    "Only child": "独生子女",
+    "Folk / traditional": "民间/传统宗教",
+    "Citizen by birth": "出生公民",
+    "No disability": "无残疾",
+    "Prefers not to say": "不愿透露",
+    "Parent of minors": "有未成年子女",
+    "Domestic partnership": "同居伴侣",
+    "Separated": "分居",
+    "Expecting": "怀孕中",
+    "1 child": "1 个孩子",
+    "2 children": "2 个孩子",
+    "3+ children": "3 个及以上",
+    "Adult children": "成年子女",
+    "Gig / freelance": "零工/自由职业",
+    "Own outright": "完全自有",
+    "Renting": "租房",
+    "Living with family": "与家人同住",
+    "Shared housing": "合租",
+    "Temporary / transitional": "临时/过渡性住房",
+    "Gen Alpha": "Alpha 世代",
+    "Gen Z": "Z 世代",
+    "Millennial": "千禧一代",
+    "Gen X": "X 世代",
+    "Boomer": "婴儿潮一代",
+    "Silent": "静默世代",
+    "Spiritual but unaffiliated": "有精神信仰但未入教",
+    "Heterosexual": "异性恋",
+    "Gay / lesbian": "同性恋",
+    "Bisexual": "双性恋",
+    "Pansexual": "泛性恋",
+    "Asexual": "无性恋",
+    "Queer": "酷儿",
+    "Naturalized citizen": "归化公民",
+    "Permanent resident": "永久居民",
+    "Visa holder": "签证持有者",
+    "Dual national": "双重国籍",
+    "Undocumented": "无证身份",
+    "White / European": "白人/欧洲裔",
+    "Black / African": "黑人/非洲裔",
+    "Hispanic / Latino": "西班牙裔/拉丁裔",
+    "East Asian": "东亚裔",
+    "Southeast Asian": "东南亚裔",
+    "Pacific Islander": "太平洋岛民裔",
+    "Multiracial": "多种族混血",
+    "Physical": "身体残疾",
+    "Sensory": "感官残疾",
+    "Chronic illness": "慢性疾病",
+    "Civilian": "非军人/平民",
+    "Active duty": "现役",
+    "Reserve / guard": "预备役/国民警卫队",
+    "Military family": "军人家庭",
+    "Eldest": "排行最大",
+    "Youngest": "排行最小",
+    "Twin / multiple": "双胞胎/多胞胎",
+    "Same as primary": "与主要语言相同",
+    "Bilingual home": "双语家庭",
+    "Heritage language": "传承语言",
+    "Mixed languages": "混合语言",
+    "Disengaged": "政治冷感",
+    "Non-voter": "不投票",
+    "Not a parent": "非父母",
+    "New parent": "新手父母",
+    "Parent of adults": "子女已成年",
+    "Step / foster parent": "继父母/养父母",
+    "Not in one": "无固定伴侣关系",
+    "Under 1 year": "不满 1 年",
+    "1-5 years": "1–5 年",
+    "5-15 years": "5–15 年",
+    "15+ years": "15 年以上",
+    "Daily driver": "每日开车",
+    "Occasional driver": "偶尔开车",
+    "Licensed, rarely drives": "有驾照但很少开",
+    "Non-driver": "不开车",
+    "Cannot drive": "无法开车",
     "Full-time": "全职",
     "Part-time": "兼职",
     "Self-employed": "自雇/个体经营",
@@ -5497,7 +5572,7 @@
     "No barrier": "无障碍",
     "Requires explicit approval before edits": "修改前需明确批准",
     "Approval before risky edits only": "仅高风险修改需批准",
-    "Agent may edit within scoped files": "Agent 可在限定文件内修改",
+    "Agent may edit within scoped files": "Agent 可在限定文件内编辑",
     "Agent may run broad tasks autonomously": "Agent 可自主执行广泛任务",
     "Read-only assistance preferred": "偏好只读辅助",
     "Concise summary only": "仅简洁摘要",
@@ -5521,8 +5596,8 @@
     "Prefers stateless interactions": "偏好无状态交互",
     "Unsure": "不确定",
     "IDE-integrated": "IDE 集成",
-    "GitHub / PR integrated": "GitHub/PR 集成",
-    "CLI / terminal integrated": "CLI/终端集成",
+    "GitHub / PR integrated": "GitHub / PR 集成",
+    "CLI / terminal integrated": "CLI / 终端集成",
     "Chat / browser integrated": "聊天/浏览器集成",
     "CI/CD integrated": "CI/CD 集成",
     "No strong preference": "无强烈偏好",
@@ -5614,7 +5689,7 @@
     "Reads architecture / docs first": "先读架构/文档",
     "Starts from tests": "从测试入手",
     "Traces execution paths": "追踪执行路径",
-    "Uses search / grep heavily": "重度使用搜索/grep",
+    "Uses search / grep heavily": "重度使用 search/grep",
     "Asks teammates / AI for map": "向同事/AI 要概览",
     "Experiments by changing code": "通过改代码实验",
     "Does not plan AI use": "不计划使用 AI",
@@ -5678,7 +5753,6 @@
     "Served briefly": "短期服役",
     "Career veteran": "职业军人",
     "Combat veteran": "作战退伍军人",
-    "Military family": "军人家庭",
     "Never considered": "从未考虑",
     "Considered it": "曾考虑过",
     "Side hustle": "副业/兼职创业",
@@ -5747,6 +5821,89 @@
     "Occasional return": "偶尔回去",
     "Rarely returns": "很少回去",
     "No connection": "与故乡无联系",
+    "Thesis only": "仅论文",
+    "Consensus-driven": "共识驱动",
+    "Well-calibrated": "校准良好",
+    "Big-picture": "宏观视角",
+    "Night owl": "夜猫型",
+    "Long-form": "长文内容",
+    "Video-first": "视频优先",
+    "Impulse buyer": "冲动消费型",
+    "Bargain hunter": "划算猎手",
+    "A few trips/yr": "每年几次旅行",
+    "Flexible hours": "弹性工时",
+    "On-call": "On-call 待命",
+    "Day-to-day": "短期（按日）",
+    "Multi-year": "多年期",
+    "Avoids news": "不看新闻",
+    "Traditional bank": "传统银行",
+    "Active trader": "活跃交易者",
+    "Office coffee": "办公室咖啡",
+    "Budget backpacking": "预算背包旅行",
+    "Undiagnosed concerns": "未确诊顾虑",
+    "Uses mobility aid": "使用行动辅助设备",
+    "Mild loss": "轻度损失",
+    "Moderate loss": "中度损失",
+    "Deaf / hard of hearing": "聋/重听",
+    "Assistive needed": "需要辅助工具",
+    "Screen reader": "屏幕阅读器",
+    "Very small functions (5-10 lines)": "超小函数（5–10 行）",
+    "Small functions (10-30 lines)": "小函数（10–30 行）",
+    "Varies by context": "视情境而定",
+    "Professional developer": "专业开发者",
+    "Learning to code": "正在学编程",
+    "Hobbyist / side-project coder": "业余/副业开发者",
+    "Student developer": "学生开发者",
+    "Non-developer technologist": "非开发者技术人员",
+    "Former / inactive developer": "前开发者/暂不开发",
+    "Front-end developer": "Front-end developer",
+    "Back-end developer": "Back-end developer",
+    "Full-stack developer": "Full-stack developer",
+    "Mobile developer": "Mobile developer",
+    "Data / ML developer": "Data / ML developer",
+    "DevOps / SRE / infrastructure": "DevOps / SRE / infrastructure",
+    "Security engineer": "Security engineer",
+    "Game developer": "Game developer",
+    "Embedded / systems developer": "Embedded / systems developer",
+    "Engineering manager / lead": "Engineering manager / lead",
+    "Product / UX technical role": "Product / UX technical role",
+    "Student / learner": "Student / learner",
+    "Other developer": "Other developer",
+    "Employee work": "受雇工作",
+    "Independent / freelance work": "独立/自由职业",
+    "Open-source / community work": "开源/社区工作",
+    "Academic / student work": "学术/学生项目",
+    "Personal projects": "个人项目",
+    "Mixed contexts": "混合场景",
+    "Tech lead without people management": "Tech lead（不带人事管理）",
+    "Focused small stack": "专注小技术栈",
+    "Large integrated toolchain": "大型集成工具链",
+    "Highly fragmented toolchain": "高度分散工具链",
+    "Browser / cloud workspace": "Browser / cloud workspace",
+    "IDE / editor": "IDE / editor",
+    "Terminal / CLI": "Terminal / CLI",
+    "Notebook environment": "Notebook 环境",
+    "Mobile / embedded hardware workflow": "Mobile / embedded 硬件流程",
+    "Mixed surfaces": "混合界面",
+    "Currently mostly AI-assisted": "目前主要 AI 辅助",
+    "Currently partially AI-assisted": "目前部分 AI 辅助",
+    "Plans mostly AI use": "计划主要使用 AI",
+    "Plans partial AI use": "计划部分使用 AI",
+    "Multiple times daily": "每天多次",
+    "Weekly reference": "每周查阅",
+    "Occasional troubleshooting": "偶尔排查问题",
+    "Reads / searches only": "仅阅读/搜索",
+    "Comments / discusses": "评论/讨论",
+    "Asks questions": "提问",
+    "Answers questions": "回答问题",
+    "Moderates / curates": "审核 / 内容策展",
+    "Ask AI first": "先问 AI",
+    "Search docs first": "先查文档",
+    "Search Stack Overflow / Q&A first": "先搜 Stack Overflow / 问答",
+    "Ask teammates first": "先问同事",
+    "Experiment / debug first": "先实验/调试",
+    "Mixed strategy": "混合策略",
+    "Architecture / design decisions": "架构/设计决策",
     "Under 5": "以下5",
     "5-12": "5-12",
     "13-17": "13-17",
@@ -5852,7 +6009,6 @@
     "Prolific publisher": "高产发表者",
     "Occasional author": "偶尔写作",
     "Industry whitepapers": "行业白皮书",
-    "Thesis only": "仅Thesis",
     "Student / intern": "学生 / 实习生",
     "Entry": "入门",
     "Mid": "中级",
@@ -5910,7 +6066,6 @@
     "Risk-seeking": "追求风险",
     "Analytical": "分析型",
     "Intuitive": "Intuitive",
-    "Consensus-driven": "Consensus驱动",
     "Directive": "指令型",
     "Deliberative": "审慎",
     "Achievement": "成就",
@@ -5986,8 +6141,6 @@
     "Kinesthetic": "Kinesthetic",
     "Mixed": "混合",
     "Academic journals": "学术期刊",
-    "Long-form": "Long/形式",
-    "Video-first": "Video优先",
     "Cost-sensitive": "成本 - 敏感",
     "Value-driven": "价值观驱动",
     "Premium-seeking": "追求高端",
@@ -6010,7 +6163,6 @@
     "ESTP — Entrepreneur": "ESTP — Entrepreneur",
     "ESFP — Entertainer": "ESFP — Entertainer",
     "Early bird": "早期早起",
-    "Night owl": "Night夜猫",
     "Irregular": "Irregular",
     "Flexible": "灵活",
     "Shift-based": "基于轮班",
@@ -6025,12 +6177,9 @@
     "Heavily": "Heavily",
     "Former": "Former",
     "Researcher": "研究者",
-    "Impulse buyer": "冲动buyer",
-    "Bargain hunter": "划算hunter",
     "Brand loyal": "品牌忠诚",
     "Minimalist": "Minimalist",
     "Frequent flyer": "频繁飞行",
-    "A few trips/yr": "Afew旅行/yr",
     "Rare": "Rare",
     "Homebody": "Homebody",
     "Car": "Car",
@@ -6043,9 +6192,7 @@
     "Cat": "猫",
     "Multiple pets": "多项宠物",
     "9-to-5": "9/到/5",
-    "Flexible hours": "灵活hours",
     "Shift work": "轮班工作",
-    "On-call": "在/call",
     "Freelance": "Freelance",
     "<2 hrs": "<2小时",
     "2-4 hrs": "2/4小时",
@@ -6056,9 +6203,7 @@
     "Ambivert": "中间型",
     "Extrovert": "外向",
     "Strong extrovert": "强烈外向",
-    "Day-to-day": "Day/到/day",
     "Yearly": "每年",
-    "Multi-year": "多/year",
     "Always early": "总是早期",
     "On time": "在时间",
     "Usually late": "通常晚期",
@@ -6073,7 +6218,6 @@
     "Splurger": "Splurger",
     "Regular donor": "定期捐赠",
     "Constant": "持续",
-    "Avoids news": "避开news",
     "3-7": "3-7",
     "8-15": "8-15",
     "16+": "16+",
@@ -6107,20 +6251,17 @@
     "Cash": "现金",
     "BNPL": "BNPL",
     "Crypto": "加密货币",
-    "Traditional bank": "Traditional银行",
     "Neobank": "数字银行",
     "Credit union": "信用合作社",
     "Mostly cash": "大多现金",
     "Unbanked": "无银行账户",
     "Index investor": "指数投资者",
-    "Active trader": "Active交易者",
     "Crypto-heavy": "重度加密货币",
     "Real estate": "房地产地产",
     "Cash saver": "现金储蓄",
     "10+": "10+",
     "Home brew": "家冲泡",
     "Café regular": "咖啡定期",
-    "Office coffee": "办公室coffee",
     "Tea instead": "茶替代",
     "Trend-setter": "潮流 - 引领者",
     "Trend-follower": "潮流 - 追随者",
@@ -6133,36 +6274,26 @@
     "Relaxation": "Relaxation",
     "Culture": "文化",
     "Luxury": "奢侈",
-    "Budget backpacking": "Budget背包",
     "Staycation": "Staycation",
     "Highly structured": "高度结构化",
     "Loosely structured": "松散结构化",
     "Rushed": "Rushed",
     "Overconfident": "Overconfident",
     "Confident": "Confident",
-    "Well-calibrated": "Well/校准",
     "Underconfident": "Underconfident",
     "Big-picture only": "仅大局观",
-    "Big-picture": "Big/图景",
     "Detail": "细节",
     "Detail-obsessed": "极度细节",
     "Light": "Light",
-    "Undiagnosed concerns": "未诊断concerns",
     "Mild limitation": "轻度受限",
     "Moderate limitation": "中等受限",
-    "Uses mobility aid": "使用mobility aid",
     "Corrected": "Corrected",
     "Low vision": "低视力",
     "Blind": "盲",
-    "Mild loss": "轻度loss",
-    "Moderate loss": "中等loss",
-    "Deaf / hard of hearing": "聋/hard的听力",
     "Typical": "Typical",
     "Color-blind": "色觉 - 盲",
     "Reduced": "Reduced",
-    "Assistive needed": "辅助needed",
     "Multiple daily": "多项每天",
-    "Screen reader": "Screen阅读器",
     "Switch control": "Switch control",
     "Voice control": "Voice control",
     "Magnifier": "Magnifier",
@@ -6253,98 +6384,24 @@
     "Stability-leaning": "偏向稳定",
     "Change-leaning": "偏向变化",
     "Craves change": "强烈渴望变化",
-    "Engaged": "积极参与",
-    "Domestic partnership": "国内伴侣",
-    "Separated": "Separated",
-    "Expecting": "Expecting",
-    "1 child": "1孩子",
-    "2 children": "2子女",
-    "3+ children": "3+子女",
-    "Adult children": "成人子女",
     "<$25k": "<$25k",
     "$25k-50k": "$25k-50k",
     "$50k-100k": "$50k-100k",
     "$100k-200k": "$100k-200k",
     "$200k+": "$200k+",
-    "Gig / freelance": "Gig / freelance",
-    "Own outright": "自有outright",
     "Mortgage": "按揭",
-    "Renting": "租中",
-    "Living with family": "Living与家庭",
-    "Shared housing": "Shared housing",
-    "Temporary / transitional": "Temporary / transitional",
-    "Gen Alpha": "Gen Alpha",
-    "Gen Z": "Gen Z",
-    "Millennial": "Millennial",
-    "Gen X": "GenX",
-    "Boomer": "Boomer",
-    "Silent": "Silent",
     "Christian": "基督教",
     "Muslim": "穆斯林",
     "Hindu": "印度教",
     "Buddhist": "佛教",
     "Jewish": "犹太教",
     "Sikh": "锡克教",
-    "Folk / traditional": "民谣/traditional",
-    "Spiritual but unaffiliated": "灵性butunaffiliated",
     "Atheist / agnostic": "无神论 / 不可知论",
-    "Heterosexual": "Heterosexual",
-    "Gay / lesbian": "Gay / lesbian",
-    "Bisexual": "Bisexual",
-    "Pansexual": "Pansexual",
-    "Asexual": "Asexual",
-    "Queer": "Queer",
-    "Citizen by birth": "Citizen由birth",
-    "Naturalized citizen": "Naturalized citizen",
-    "Permanent resident": "Permanent resident",
-    "Visa holder": "Visa holder",
-    "Dual national": "Dual national",
-    "Undocumented": "Undocumented",
-    "White / European": "White / European",
-    "Black / African": "Black/African",
-    "Hispanic / Latino": "Hispanic / Latino",
-    "East Asian": "东Asian",
-    "Southeast Asian": "Southeast Asian",
-    "Pacific Islander": "Pacific Islander",
-    "Multiracial": "Multiracial",
-    "No disability": "否disability",
-    "Physical": "Physical",
-    "Sensory": "Sensory",
     "Cognitive": "认知",
-    "Chronic illness": "慢性illness",
-    "Prefers not to say": "偏向不到说",
-    "Civilian": "Civilian",
-    "Active duty": "Active duty",
-    "Reserve / guard": "Reserve / guard",
-    "Only child": "在地孩子",
-    "Eldest": "Eldest",
-    "Youngest": "Youngest",
-    "Twin / multiple": "Twin/多项",
-    "Same as primary": "Same作为主要",
-    "Bilingual home": "双语家",
-    "Heritage language": "Heritage语言",
-    "Mixed languages": "Mixed语言",
     "Activist": "活动家",
     "Engaged voter": "积极参与选民",
     "Occasional voter": "偶尔选民",
-    "Disengaged": "Disengaged",
-    "Non-voter": "Non/选民",
-    "Not a parent": "不a父母",
-    "New parent": "New父母",
-    "Parent of minors": "父母的minors",
-    "Parent of adults": "父母的成人",
     "Grandparent": "祖父母",
-    "Step / foster parent": "步骤/foster父母",
-    "Not in one": "不在一",
-    "Under 1 year": "以下1year",
-    "1-5 years": "1/5年",
-    "5-15 years": "5/15年",
-    "15+ years": "15+年",
-    "Daily driver": "每天driver",
-    "Occasional driver": "偶尔driver",
-    "Licensed, rarely drives": "Licensed很少drives",
-    "Non-driver": "Non/driver",
-    "Cannot drive": "Cannot drive",
     "Extensive inline comments": "Extensive行内注释",
     "Sparse inline comments": "Sparse行内注释",
     "Self-documenting code preference": "自我/documenting代码偏好",
@@ -6371,11 +6428,8 @@
     "Procedural imperative": "过程式命令式",
     "Mixed paradigm": "Mixed范式",
     "Data-driven": "数据驱动",
-    "Very small functions (5-10 lines)": "非常small functions (5-10 lines)",
-    "Small functions (10-30 lines)": "小functions10/30 lines)",
     "Medium functions (30-100 lines)": "Medium functions (30/100 lines)",
     "Large functions (100+ lines)": "Large functions (100+ lines)",
-    "Varies by context": "Varies由背景",
     "Defensive with try/catch everywhere": "Defensive与try/catch everywhere",
     "Explicit error returns/validation": "Explicit错误returns/validation",
     "Graceful degradation and recovery": "Gracefuldegradation和recovery",
@@ -6404,78 +6458,35 @@
     "Refactor when necessary": "Refactor when necessary",
     "Rarely refactors": "很少refactors",
     "Never refactors": "从不refactors",
-    "Professional developer": "Professional开发者",
-    "Learning to code": "学习到代码",
-    "Hobbyist / side-project coder": "爱好者/side/project coder",
-    "Student developer": "学生开发者",
-    "Non-developer technologist": "Non/开发者technologist",
-    "Former / inactive developer": "Former/不活跃开发者",
-    "Front-end developer": "Front/end开发者",
-    "Back-end developer": "Back/end开发者",
-    "Full-stack developer": "完整/stack开发者",
-    "Mobile developer": "移动开发者",
-    "Data / ML developer": "数据/ML开发者",
-    "DevOps / SRE / infrastructure": "DevOps / SRE / 基础设施",
-    "Security engineer": "安全工程师",
-    "Game developer": "Game开发者",
-    "Embedded / systems developer": "嵌入式/systems开发者",
-    "Engineering manager / lead": "工程师中管理者 / 领导",
-    "Product / UX technical role": "Product/UXtechnical角色",
-    "Student / learner": "学生/learner",
-    "Other developer": "其他开发者",
-    "Employee work": "Employee工作",
-    "Independent / freelance work": "Independent/freelance工作",
-    "Open-source / community work": "开放 - 源 / 社区工作",
-    "Academic / student work": "学术 / 学生工作",
-    "Personal projects": "Personal projects",
-    "Mixed contexts": "Mixed contexts",
     "Individual contributor": "个人贡献者",
-    "Tech lead without people management": "科技领导without人management",
     "People manager": "人管理者",
     "Founder / owner": "创始人 / 所有者",
     "Minimal toolchain": "最低工具链",
-    "Focused small stack": "Focused小stack",
     "Moderate multi-tool workflow": "中等多 - 工具工作流",
-    "Large integrated toolchain": "Large集成工具链",
-    "Highly fragmented toolchain": "高度fragmented toolchain",
-    "IDE / editor": "IDE / 编辑器",
-    "Terminal / CLI": "终端 / CLI",
-    "Browser / cloud workspace": "浏览器/云workspace",
-    "Notebook environment": "Notebook environment",
-    "Mobile / embedded hardware workflow": "移动 / 嵌入式硬件工作流",
-    "Mixed surfaces": "Mixed surfaces",
     "Security / privacy / compliance": "安全 / 隐私 / 合规",
     "Cost": "成本",
-    "Currently mostly AI-assisted": "目前大多AI/assisted",
-    "Currently partially AI-assisted": "目前部分AI/assisted",
-    "Plans mostly AI use": "规划大多AIuse",
-    "Plans partial AI use": "规划partialAIuse",
-    "Multiple times daily": "多项times每天",
-    "Weekly reference": "每周reference",
-    "Occasional troubleshooting": "偶尔troubleshooting",
     "Rare use": "Rare use",
-    "Reads / searches only": "仅Reads / searches",
     "Votes / bookmarks": "Votes / bookmarks",
-    "Comments / discusses": "注释/discusses",
-    "Asks questions": "questions提问",
-    "Answers questions": "答案questions",
-    "Moderates / curates": "中等/curates",
-    "Ask AI first": "Ask AI优先",
-    "Search docs first": "Search docs优先",
-    "Search Stack Overflow / Q&A first": "Search Stack Overflow / Q&A优先",
-    "Ask teammates first": "Ask teammates优先",
-    "Experiment / debug first": "Experiment / debug优先",
-    "Mixed strategy": "Mixed战略",
     "Syntax / API usage": "Syntax/APIusage",
     "Debugging runtime errors": "调试运行时错误",
-    "Architecture / design decisions": "建筑学/设计decisions",
     "Performance optimization": "性能优化",
     "Deployment / infrastructure": "部署 / 基础设施",
     "Security / compliance": "安全 / 合规",
     "Learning concepts": "学习概念"
   },
+  "valueOverrides": {
+    "demo_birth_order": {
+      "Middle": "排行中间"
+    },
+    "socioeconomic_band": {
+      "Middle": "中等"
+    },
+    "demo_marital_status": {
+      "Engaged": "已订婚"
+    }
+  },
   "meta": {
-    "generatedAt": "2026-07-13T02:35:43.013Z",
+    "generatedAt": "2026-07-13T05:59:44.898Z",
     "dimensionCount": 1290,
     "untranslatedValues": [],
     "untranslatedValueCount": 0,

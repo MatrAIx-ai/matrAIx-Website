@@ -15,9 +15,9 @@
       prev: "← Previous",
       next: "Next →",
       saveDraft: "Save draft",
-      fillDefaults: "Fill defaults",
+      fillDefaults: "Fill group defaults",
       download: "Download attributes.json",
-      reset: "Reset",
+      reset: "Reset group",
       progressLabel: "Progress",
       tabLabel: "Tab",
       of: "of",
@@ -48,9 +48,9 @@
       skipBanner: "This group was skipped. Defaults are filled. You can undo or expand cards to override.",
       draftSaved: "Draft saved locally.",
       restored: "Draft restored from local storage.",
-      fillDone: "Defaults filled for all dimensions.",
-      resetDone: "Survey reset.",
-      resetConfirm: "Reset all answers, smart answers, and local data?",
+      fillDone: "Defaults filled for this group.",
+      resetDone: "Current group reset.",
+      resetConfirm: "Reset answers, smart answers, and skip state for this group only?",
       exportMissing: "Cannot export yet. Missing values: ",
       exportReady: "attributes.json downloaded.",
       exportPartial: "attributes.json downloaded. Unfilled saved as null: ",
@@ -67,9 +67,9 @@
       prev: "← 上一组",
       next: "下一组 →",
       saveDraft: "保存草稿",
-      fillDefaults: "填充默认值",
+      fillDefaults: "填充本组默认值",
       download: "下载 attributes.json",
-      reset: "重置",
+      reset: "重置本组",
       progressLabel: "进度",
       tabLabel: "分组",
       of: "/",
@@ -100,9 +100,9 @@
       skipBanner: "本组已跳过，已填入默认值。可取消跳过，或展开卡片手动修改。",
       draftSaved: "草稿已保存到本地。",
       restored: "已从本地恢复草稿。",
-      fillDone: "已为全部维度填入默认值。",
-      resetDone: "问卷已重置。",
-      resetConfirm: "确定重置全部答案、智能答案和本地数据吗？",
+      fillDone: "已为本组填入默认值。",
+      resetDone: "已重置当前分组。",
+      resetConfirm: "确定仅重置当前分组的答案、智能答案和跳过状态吗？",
       exportMissing: "暂时无法导出，缺失维度数量：",
       exportReady: "attributes.json 已下载。",
       exportPartial: "attributes.json 已下载。未填写已存为 null，缺失数量：",
@@ -149,26 +149,7 @@
       }
     ],
     "Values & Motivation": [
-      {
-        id: "success_definition",
-        text: { en: "Success feels like...", zh: "在我看来，成功更像..." },
-        options: [
-          { value: "impact", label: { en: "Creating measurable impact", zh: "创造可衡量的影响" }, valueDelta: { achievement: 2, community: 1 }, traitDelta: { C: 1 } },
-          { value: "freedom", label: { en: "Freedom over my direction", zh: "拥有自主方向的自由" }, valueDelta: { autonomy: 2, novelty: 1 }, traitDelta: { O: 1 } },
-          { value: "stability", label: { en: "Stability for me and my family", zh: "自己和家人的稳定" }, valueDelta: { security: 2, tradition: 1 }, traitDelta: { C: 1 } },
-          { value: "joy", label: { en: "Daily joy and meaningful moments", zh: "日常快乐与意义感" }, valueDelta: { community: 1, novelty: 1 }, traitDelta: { A: 1 } }
-        ]
-      },
-      {
-        id: "money_tradeoff",
-        text: { en: "Given same effort, I prefer...", zh: "在付出相同努力时，我更倾向..." },
-        options: [
-          { value: "high_pay", label: { en: "Higher pay with pressure", zh: "更高收入但压力更大" }, valueDelta: { achievement: 2, wealth: 2 }, traitDelta: { C: 1 } },
-          { value: "balance", label: { en: "Balanced pay and flexibility", zh: "薪资与弹性兼顾" }, valueDelta: { autonomy: 1, security: 1 }, traitDelta: { C: 1 } },
-          { value: "mission", label: { en: "Mission fit over pay", zh: "使命契合优先于收入" }, valueDelta: { community: 2, integrity: 1 }, traitDelta: { A: 1 } },
-          { value: "safe", label: { en: "Lower variance, safer path", zh: "更低波动、更安全路径" }, valueDelta: { security: 2 }, traitDelta: { N: 1 } }
-        ]
-      }
+      /* superseded by values-motivation-smart-bank.js */
     ],
     "Risk & Decision": [
       {
@@ -305,7 +286,7 @@
   async function loadDimensions() {
     const [dimsResponse, zhResponse] = await Promise.all([
       fetch("./dimensions.json"),
-      fetch("./i18n/zh.json?v=17")
+      fetch("./i18n/zh.json?v=20")
     ]);
     if (!dimsResponse.ok || !zhResponse.ok) {
       throw new Error(t("loadError"));
@@ -337,9 +318,12 @@
     if (!pack) return dim.description || "";
     return pack.dimensions[dim.id]?.description ?? dim.description ?? "";
   }
-  function optionLabelForUi(_dim, value) {
+  function optionLabelForUi(dim, value) {
     const pack = zhPack();
     if (!pack) return value;
+    const dimId = typeof dim === "string" ? dim : dim?.id;
+    const override = dimId && pack.valueOverrides?.[dimId]?.[value];
+    if (override) return override;
     return pack.values[value] ?? value; // exact match only; untranslated stays English
   }
   function categoryLabel(category) {
@@ -688,6 +672,12 @@
     if (category === "Worldview: Beliefs" && window.WORLDVIEW_SMART?.questions) {
       return window.WORLDVIEW_SMART.questions;
     }
+    if (category === "Values & Motivation" && window.VALUES_MOTIVATION_SMART?.questions) {
+      return window.VALUES_MOTIVATION_SMART.questions;
+    }
+    if (category === "Personality: Character" && window.PERSONALITY_CHARACTER_SMART?.questions) {
+      return window.PERSONALITY_CHARACTER_SMART.questions;
+    }
     return SMART_QUESTION_BANK[category] || SMART_QUESTION_BANK._default || [];
   }
 
@@ -701,13 +691,21 @@
     if (category === "Worldview: Beliefs" && window.WORLDVIEW_SMART?.intro) {
       return window.WORLDVIEW_SMART.intro;
     }
+    if (category === "Values & Motivation" && window.VALUES_MOTIVATION_SMART?.intro) {
+      return window.VALUES_MOTIVATION_SMART.intro;
+    }
+    if (category === "Personality: Character" && window.PERSONALITY_CHARACTER_SMART?.intro) {
+      return window.PERSONALITY_CHARACTER_SMART.intro;
+    }
     return null;
   }
 
   function usesSmartMapInference(category) {
     return category === "Linguistic: Communication"
       || category === "Developer: Agent Adoption"
-      || category === "Worldview: Beliefs";
+      || category === "Worldview: Beliefs"
+      || category === "Values & Motivation"
+      || category === "Personality: Character";
   }
 
   function smartLabel(question, option) {
@@ -1074,7 +1072,9 @@
     return isInteractiveCategory(category)
       || (category === "Linguistic: Communication" && window.COMMUNICATION_SMART?.questions?.length)
       || (category === "Developer: Agent Adoption" && window.AGENT_ADOPTION_SMART?.questions?.length)
-      || (category === "Worldview: Beliefs" && window.WORLDVIEW_SMART?.questions?.length);
+      || (category === "Worldview: Beliefs" && window.WORLDVIEW_SMART?.questions?.length)
+      || (category === "Values & Motivation" && window.VALUES_MOTIVATION_SMART?.questions?.length)
+      || (category === "Personality: Character" && window.PERSONALITY_CHARACTER_SMART?.questions?.length);
   }
 
   function inferPersonalityDimensions(category, smartAnswers = null, personalityGauge = null) {
@@ -1154,7 +1154,9 @@
     const dims = state.grouped[category] || [];
     let inferred = {};
     if (category === "Values & Motivation") {
-      inferred = inferValueDimensions(category, state.smartAnswers[category] || {});
+      inferred = inferSmartMapDimensions(category);
+    } else if (category === "Personality: Character") {
+      inferred = inferSmartMapDimensions(category);
     } else if (category === "Linguistic: Communication") {
       inferred = inferCommunicationDimensions(category);
     } else if (category === "Developer: Agent Adoption") {
@@ -1202,37 +1204,36 @@
   }
 
   function fillDefaults() {
-    for (const dim of state.dimensions) {
-      const fallback = dim.defaultValue != null && (dim.values || []).includes(dim.defaultValue)
-        ? dim.defaultValue
-        : (dim.values || [])[0] ?? null;
+    const category = getCurrentCategory();
+    const dims = state.grouped[category] || [];
+    for (const dim of dims) {
+      const fallback = defaultForDimension(dim);
       if (fallback != null) {
         state.answers[dim.id] = fallback;
       }
     }
     queueSave();
-    setStatus(t("fillDone"), "ok");
+    setStatus(`${t("fillDone")} (${categoryLabel(category)})`, "ok");
     renderAll();
   }
 
   function resetSurvey() {
+    const category = getCurrentCategory();
     const accepted = window.confirm(t("resetConfirm"));
     if (!accepted) return;
-    state.answers = {};
-    state.smartAnswers = {};
-    state.personalityGauge = { O: 0, C: 0, E: 0, A: 0, N: 0 };
-    state.manualExpanded = {};
-    state.interactiveAnswers = {};
-    state.skippedCategories = {};
-    state.search = "";
-    state.activeIndex = 0;
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch (_err) {
-      // no-op
+    const dims = state.grouped[category] || [];
+    for (const dim of dims) {
+      delete state.answers[dim.id];
     }
-    dom.dimensionSearch.value = "";
-    setStatus(t("resetDone"), "ok");
+    delete state.smartAnswers[category];
+    delete state.interactiveAnswers[category];
+    delete state.skippedCategories[category];
+    delete state.manualExpanded[category];
+    if (category === "Personality: Big Five") {
+      state.personalityGauge = { O: 0, C: 0, E: 0, A: 0, N: 0 };
+    }
+    queueSave();
+    setStatus(`${t("resetDone")} (${categoryLabel(category)})`, "ok");
     renderAll();
   }
 
