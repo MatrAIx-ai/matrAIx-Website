@@ -23,4 +23,14 @@
 .funnel-list{margin-left:0!important;padding-left:0;counter-reset:funnel;list-style:none}.funnel-list li{position:relative;margin-bottom:12px;padding:17px 18px 17px 56px;border-left:2px solid rgba(74,143,194,.5);background:#111318}.funnel-list li::before{counter-increment:funnel;content:counter(funnel,decimal-leading-zero);position:absolute;left:16px;top:18px;color:#6daedb;font:600 .66rem var(--mono)}
 .references{font-size:.86rem;line-height:1.65}.references li{margin-bottom:14px}.references li:target{padding:8px;background:rgba(74,143,194,.12)}
 .method-note{margin-top:40px!important;padding:20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:#858d98!important;font-size:.82rem!important}
+.tldr-wrap{margin:34px 0 8px;overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.tldr-table{width:100%;min-width:640px;border-collapse:collapse;font-size:.83rem}
+.tldr-table thead th{padding:13px 14px;background:#12151a;color:#8fb9d8;font:600 .62rem var(--mono);letter-spacing:.07em;text-transform:uppercase;text-align:left;border-bottom:1px solid var(--line)}
+.tldr-table tbody th{padding:14px;color:#e6e9ed;font-weight:600;font-size:.82rem;text-align:left;border-bottom:1px solid var(--line-soft);border-right:1px solid var(--line-soft);white-space:nowrap}
+.tldr-table td{padding:14px;border-bottom:1px solid var(--line-soft);color:#c7cdd5;line-height:1.5;vertical-align:top}
+.tldr-table tbody tr:last-child th,.tldr-table tbody tr:last-child td{border-bottom:0}
+.tldr-table .human{color:#d7a865}.tldr-table .ai{color:#7db9e1}
+.tldr-table small{display:block;margin-top:3px;color:#858d98;font-size:.72rem}
+.tldr-table .ratio{font:600 .82rem var(--mono);color:#9fd0a0;white-space:nowrap}
+.tldr-cap{margin:0 2px 26px;color:#858d98;font-size:.78rem;line-height:1.6}
 @media(max-width:720px){.assumption-strip{grid-template-columns:repeat(2,1fr)}.assumption-strip div:nth-child(2){border-right:0}.assumption-strip div:nth-child(-n+2){border-bottom:1px solid var(--line)}.cost-stack,.allocation-grid,.comparison-bar,.time-comparison{grid-template-columns:1fr}.comparison-bar small{grid-column:1}.scenario{padding:23px 20px}.formula-card{padding:18px}}
