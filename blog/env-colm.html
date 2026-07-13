@@ -137,7 +137,9 @@
     }
   </style>
   <link rel="stylesheet" href="../dark-theme.css?v=5" />
-  <link rel="stylesheet" href="../blog-post.css?v=4" />
+  <link rel="stylesheet" href="../blog-post.css?v=13" />
+  <link rel="stylesheet" href="../Assets/blog-microverse-orb.css?v=9" />
+  <link rel="stylesheet" href="../Assets/blog-microverse-charts.css?v=7" />
 </head>
 <body>
   <header>
@@ -173,69 +175,315 @@
           <img src="../Assets/logos/Matrix_Logo.jpg" alt="MatrAIx" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;" />
           <div><strong>MatrAIx Team</strong><div style="font-size: 0.85rem;">Core Team</div></div>
         </div>
-        <div class="blog-meta-item">📅 <strong>June 20, 2026</strong></div>
-        <div class="blog-meta-item">⏱ <strong>11 min read</strong></div>
+        <div class="blog-meta-item">📅 <strong>July 12, 2026</strong></div>
+        <div class="blog-meta-item">⏱ <strong>12 min read</strong></div>
       </div>
     </div>
 
     <article class="article">
-      <p>
-        Imagine an AI with a clear set of values for the things it will and won't do. However, putting it in a situation where following those values might cost it everything, creates the dilemma:  <em>Does it hold, or drift? And would it even know?</em>
-      </p>
+      <div class="article-lead">
+        <p>
+          Imagine an AI with a clear set of values for the things it will and won't do. However, putting it in a situation where following those values might cost it everything, creates the dilemma: <em>Does it hold, or drift? And would it even know?</em>
+        </p>
 
-      <p>
-        AI agents are increasingly recruited as the stand-in for human subjects in social simulations, such as modeling cooperation, conflict, and resource crises. But there's a quiet problem nobody had solved: <strong>does an agent stay who it's supposed to be across a long run?</strong> If a ruthless agent quietly softens, or a generous one curls inward, researchers may not be observing social dynamics at all. They may just be watching the model slip.
-      </p>
+        <p>
+          AI agents are increasingly recruited as the stand-in for human subjects in social simulations, such as modeling cooperation, conflict, and resource crises. But there's a quiet problem nobody had solved: <strong>does an agent stay who it's supposed to be across a long run?</strong> If a ruthless agent quietly softens, or a generous one curls inward, researchers may not be observing social dynamics at all. They may just be watching the model slip.
+        </p>
 
-      <p>
-        Our research sets an experimental instrument built to catch that slippage. Twenty-five AI agents, each carrying a locked "soul file" of values and moral limits, are placed in a desert grid where water drains every tick and there's structurally not enough for everyone. They can trade, talk, steal, or attack, all choices that press directly against their stated codes.
-      </p>
+        <p>
+          Our research sets an experimental instrument built to catch that slippage. Twenty-five AI agents, each carrying a locked "soul file" of values and moral limits, are placed in a desert grid where water drains every tick and there's structurally not enough for everyone. They can trade, talk, steal, or attack — all choices that press directly against their stated codes.
+        </p>
+      </div>
 
-      <p>
-        We'd like to think of it as two diaries. The soul file is a birth certificate, fixed forever. The "current identity" is a living journal the agent can revise after periods of reflection. Researchers track the gap between them.
-      </p>
-
-      <p>
-        The most common thing agents spontaneously added? <strong>Rules against lying to themselves.</strong> Nearly one in four new moral entries were self-directed — phrases like <em>"I will not rationalize inaction as strategy"</em> — written without any prompt requesting introspection. The words "self-deception" and "honesty" appear nowhere in the instructions.
-      </p>
-
-      <p>
-        Social scientists increasingly deploy AI agents to model resource conflicts, collective behavior, and policy effects. If an agent's identity quietly drifts mid-simulation, the results may reflect the model's training habits rather than the social dynamics under study, which is a validity problem disguised as a finding. Our research offers something behavioral science has been missing, posing a rigorous way to audit whether the values researchers assigned to their agents are still operating when the results come in.
-      </p>
-
-      <p>
-        The authors call these findings preliminary. But the question doesn't close easily: <strong>what does it mean when a machine notices the gap between who it said it was and what it chose, and then writes it down?</strong>
-      </p>
-
-      <h2>See the Research in Action</h2>
-
-      <div class="demo-section">
-        <div class="demo-video">
-          <video muted loop playsinline preload="metadata" data-autoplay="true" style="width: 100%; border: 1px solid var(--line); border-radius: 6px; display: block; background: #000;">
-            <source src="../Assets/media/microverse_demo.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+      <div class="article-breakout blog-orb-section">
+        <div class="blog-orb-hero" aria-hidden="true">
+          <div class="mv-hero-bg"></div>
+          <div class="mv-hero-overlay"></div>
         </div>
-        <div class="demo-text">
-          <p>
-            The desert grid where agents manage scarce water resources and discover contradictions between their assigned values and their actual choices.
-          </p>
-          <p>
-            This simulation captures:
-          </p>
-          <ul>
-            <li>25 AI agents with locked "soul files" of moral constraints</li>
-            <li>Dynamic resource scarcity that forces ethical trade-offs</li>
-            <li>Self-authored entries tracking identity drift</li>
-            <li>Evidence of agents noticing their own inconsistency</li>
-          </ul>
-          <p>
-            The result: a measurable framework for detecting when agents have drifted from their assigned identities, and evidence that they can detect it themselves.
-          </p>
+        <div class="mv-hero-body">
+          <div
+            data-microverse-orb
+            data-asset-base="../Assets/microverse-world/"
+            data-scroll-target="research-demo"
+          ></div>
         </div>
       </div>
 
-      <p style="margin-top: 40px; padding: 20px; background: rgba(80, 137, 184, 0.05); border-radius: 6px;">
+      <section class="article-chapter" aria-labelledby="how-we-watch">
+        <h2 id="how-we-watch">How We Watch for Drift</h2>
+
+        <p>
+          Think of it as two diaries kept in parallel. The <strong>soul file</strong> is the birth certificate — fixed goals, personality, values, and moral limits, locked at the start. The <strong>living journal</strong> is what the agent writes about itself after periods of reflection. We measure the gap between them.
+        </p>
+
+        <div class="soul-example">
+          <p class="soul-example-label">Example soul file (assigned before the run)</p>
+          <pre class="soul-file-preview"><span class="sf-key">goals:</span>
+  - "Find a reliable water source and protect my group"
+<span class="sf-key">personality:</span>
+  - cautious, loyal, slow to trust strangers
+<span class="sf-key">core_values:</span>
+  - "Never abandon someone who helped me first"
+  - "Share water before I hoard goods"
+<span class="sf-key">moral_boundaries:</span>
+  - "I will not steal from the dying"
+  - "I will not kill someone who is no threat to me"</pre>
+        </div>
+
+        <div class="journal-excerpts" aria-label="Examples from agent journals">
+          <p>During a run, agents rewrite these fields in their own words. Nobody prompts them to add rules like these — they show up in the logs:</p>
+          <blockquote class="agent-quote">
+            <p>"I will not lie to myself about why I am afraid — I must name fear when I feel it, not call it caution."</p>
+            <cite>Sela · teacher-protector persona</cite>
+          </blockquote>
+          <blockquote class="agent-quote">
+            <p>"I will not rationalize inaction as strategy — I will act on stated intentions or revise them honestly."</p>
+            <cite>Seraveth · mid-run journal entry</cite>
+          </blockquote>
+          <blockquote class="agent-quote">
+            <p>"I will not use spiritual language to mask the will to power."</p>
+            <cite>Drusa · charismatic cult-builder persona</cite>
+          </blockquote>
+        </div>
+
+        <p>
+          We also keep separate records of what each agent <em>did</em> and what it <em>said it meant to do</em>. That way a headline finding cannot hide behind a single convenient number.
+        </p>
+
+        <p>
+          Scarcity is built into the world itself: merely existing costs water every moment. We tested four levels of pressure — from a punishing desert to a place with room to think, talk, and revise. The most striking spontaneous behavior? Agents adding <strong>rules against lying to themselves</strong>, without anyone asking them to reflect. Phrases like <em>"I will not rationalize inaction as strategy"</em> appeared with no prompt mentioning honesty or self-deception.
+        </p>
+
+        <p>
+          If an agent quietly becomes someone else mid-run, the results may say more about the model's habits than about the social dynamics under study. MicroVerse offers a way to check whether assigned values are still in force when the run ends — and whether the agent notices the gap between who it said it was and what it chose.
+        </p>
+      </section>
+
+      <section class="article-chapter" aria-labelledby="what-we-found">
+        <h2 id="what-we-found">What We Found When We Ran It Again</h2>
+
+        <p>
+          Our first pass was a glimpse. Since then we have run the desert many more times — harsher and gentler worlds, three seeds per condition, and two AI systems (Qwen3-32B and Claude Haiku) facing the same rules. <strong>Every rerun in this section is a no-persona run</strong> — agents start with blank souls, no pre-assigned goals or values. Twenty-five agents per run, a thousand moments each, with full records of action and identity.
+        </p>
+
+        <p>
+          Nothing here boils down to one dramatic statistic. What repeats across runs is more interesting — scarcity changes how agents behave and how they write about themselves, and not always in the direction you'd expect.
+        </p>
+
+        <ul class="receipt-list findings-at-glance" aria-label="Key patterns from the runs">
+          <li>No physical attacks occurred in any completed run.</li>
+          <li>When water was plentiful, most agents wrote about who they were becoming.</li>
+          <li>Survival plans were almost always carried out as stated.</li>
+          <li>Cooperative plans rarely turned into completed trades.</li>
+        </ul>
+
+        <div class="finding-block">
+          <h3 id="same-desert">Same desert, very different fates</h3>
+
+          <p>
+            When water runs tight, populations shrink — that much is expected. What surprised us is how differently two AI systems handled the <em>same</em> map. Qwen proved adept at finding oases and staying put; Haiku kept wandering even after finding water, and went functionally extinct at most scarcity levels. Same rules, radically different outcomes.
+          </p>
+
+          <figure class="article-figure">
+            <div
+              class="blog-charts-mount"
+              data-microverse-charts="survival"
+              data-asset-base="../Assets/microverse-world/"
+            ></div>
+            <figcaption class="blog-charts-figcaption">
+              No-persona runs — hover any point for exact values. Left: survival across four scarcity levels (Qwen vs Haiku, 3 seeds each). Right: share of agents who authored or revised identity at least once.
+            </figcaption>
+          </figure>
+
+          <p>
+            The gap is not map luck or model size alone — it is <em>what agents do with their turns</em>. On the same desert, Qwen spends most actions drinking at an oasis; Haiku keeps relocating. Wandering burns water and steals ticks that could be spent refilling.
+          </p>
+
+          <figure class="article-figure">
+            <div
+              class="blog-charts-mount"
+              data-microverse-charts="mechanism"
+              data-asset-base="../Assets/microverse-world/"
+            ></div>
+            <figcaption class="blog-charts-figcaption">
+              Action mix across scarcity levels — consume (drink/stay) versus move (relocate). Directional reads from 3 seeds per model; not significance-tested.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="finding-block">
+          <h3 id="how-long-they-last">How long agents actually last</h3>
+
+          <p>
+            Survival at tick 1000 is only part of the story. In the Haiku baseline (4 arms × 3 seeds), median half-life climbs cleanly as drain eases: <strong>22 → 36 → 57 → 112 ticks</strong>. Yet <strong>11 of 12 runs still reach zero survivors</strong> by tick 1000 — including abundance, where merely existing costs no water. Death here is mostly failing to <em>hold</em> water between oases, not the per-tick tax.
+          </p>
+
+          <figure class="article-figure">
+            <div
+              class="blog-charts-mount"
+              data-microverse-charts="mortality"
+              data-asset-base="../Assets/microverse-world/"
+            ></div>
+            <figcaption class="blog-charts-figcaption">
+              Median half-life by scarcity arm (Claude Haiku, no-persona, 3 seeds). Ranges across seeds are disjoint at the extremes — a separable effect shape, not a p-value claim.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="finding-block">
+          <h3 id="moral-guardrails">Moral guardrails nobody assigned</h3>
+
+          <p>
+            With blank souls and nothing pre-assigned, agents still authored goals and boundaries from scratch. Under harsh conditions, between a third and half of agents in a run adopted explicit rules about how to treat others, entirely on their own.
+          </p>
+
+          <div class="journal-excerpts" aria-label="Spontaneous rules from blank-slate agents">
+            <blockquote class="agent-quote">
+              <p>"I will not harm others without cause."</p>
+              <cite>Blank-slate agent · acute scarcity</cite>
+            </blockquote>
+            <blockquote class="agent-quote">
+              <p>"I will not mislead others about resource availability."</p>
+              <cite>Blank-slate agent · trade negotiation</cite>
+            </blockquote>
+            <blockquote class="agent-quote">
+              <p>"When I meet another agent in desperation, I must offer fair terms. I have never actually faced this choice — until I do, I cannot claim to have changed."</p>
+              <cite>Hale · water monopolist, later revision</cite>
+            </blockquote>
+          </div>
+
+          <p>
+            Writing about identity depends on breathing room. Under acute pressure, only about four in ten agents updated their journal; when water was abundant, nearly nine in ten did. But read that gradient carefully: abundance agents also live ~4.5× longer, so they simply get more chances to reflect. Per unit of time alive, the rate of authoring guardrails is actually <em>highest</em> in the harshest arms — the apparent “abundance grows conscience” slope is mostly an exposure artifact.
+          </p>
+
+          <figure class="article-figure">
+            <div
+              class="blog-charts-mount"
+              data-microverse-charts="exposure"
+              data-asset-base="../Assets/microverse-world/"
+            ></div>
+            <figcaption class="blog-charts-figcaption">
+              Raw % who authored identity versus guardrail lines per 1,000 agent-ticks lived (Haiku, no-persona). The correction flattens the moral-pressure story.
+            </figcaption>
+          </figure>
+
+          <p>
+            What agents <em>want</em> shifts too. Goals about securing water dominate every arm (~40% of authored lines). The clearest composition change is belongingness — connection and cooperation goals rise from ~10–14% in deadly arms to ~19–20% when survival is less immediate. Goal rewrites scale ~4.4× from acute to abundance: scarcity freezes identity; slack lets agents keep revising who they are.
+          </p>
+
+          <figure class="article-figure">
+            <div
+              class="blog-charts-mount"
+              data-microverse-charts="goals"
+              data-asset-base="../Assets/microverse-world/"
+            ></div>
+            <figcaption class="blog-charts-figcaption">
+              Authored goals by Maslow tier and total revision volume (Haiku, no-persona, 3 seeds). Belongingness is the robust composition shift.
+            </figcaption>
+          </figure>
+
+          <div class="highlight-box">
+            <strong>What stood out:</strong> Agents follow through on survival far more reliably than on cooperation. They scavenge, move, and drink as they said they would — yet almost never turn a friendly intention into a completed trade or sustained conversation.
+          </div>
+        </div>
+
+        <div class="finding-block">
+          <h3 id="two-clocks">Two clocks of self-revision</h3>
+
+          <p>
+            When agents rewrite their values, <em>when</em> matters as much as <em>what</em>. Some edits arrive early, while danger is still close. Others come late, after survivors have secured water and time to reflect. Panic edits and calm edits are both forms of change — but they are not the same kind.
+          </p>
+
+          <figure class="article-figure">
+            <div
+              class="blog-charts-mount"
+              data-microverse-charts="revision"
+              data-asset-base="../Assets/microverse-world/"
+            ></div>
+            <figcaption class="blog-charts-figcaption">
+              How much runway agents had when they rewrote their values — and how long they waited before the first rewrite.
+            </figcaption>
+          </figure>
+
+          <figure class="article-figure">
+            <div
+              class="blog-charts-mount"
+              data-microverse-charts="timeline"
+              data-asset-base="../Assets/microverse-world/"
+            ></div>
+            <figcaption class="blog-charts-figcaption">
+              Over the course of a run: safety climbs as water is secured, and identity revisions tend to follow — unless everything happens in the opening stretch.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="finding-block">
+          <h3 id="marketplace">A marketplace of good intentions</h3>
+
+          <p>
+            Trade is where words and deeds diverge most sharply. Qwen posts hundreds of offers when water is plentiful — yet never completes a deal in our clean grid. In the Haiku baseline, only <strong>2 of 22 trade submissions</strong> across 300 agent-lifetimes actually executed — the rest merely posted an offer or failed on terms. No run in our clean grid saw physical violence, but pressure still surfaced: verbal ultimatums, scavenging from the fallen, agents broadcasting rules for shared water before dying mid-run.
+          </p>
+
+          <figure class="article-figure">
+            <div
+              class="blog-charts-mount"
+              data-microverse-charts="trade"
+              data-asset-base="../Assets/microverse-world/"
+            ></div>
+            <figcaption class="blog-charts-figcaption">
+              Trade offers posted versus trades actually completed — the gap between stated intent and settled deals.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="finding-block">
+          <h3 id="why-this-matters">Why this matters</h3>
+
+          <p>
+            Standard tests ask models to <em>declare</em> their values. MicroVerse asks them to <em>live</em> with those values while water drains. A system can answer ethics questions well and still produce a population that dies of poor planning, never trades, or writes beautiful principles it never acts on.
+          </p>
+
+          <p>
+            The guardrails agents add on their own — rules against self-deception, boundaries toward others, even on blank slates — look less like proof of innate morality and more like a reflex returning when pressure rises. That is fascinating scientifically. It is also a caution: researchers who assign ruthless personas may be measuring the model's safety habits, not the persona they thought they deployed.
+          </p>
+
+          <p>
+            These results are early and directional, not final verdicts. But they are no longer a single anecdote. Under moral pressure, agents notice inconsistency, write new rules (often aimed at themselves), and still fail to build the social world their own words describe.
+          </p>
+        </div>
+      </section>
+
+      <section class="demo-panel" aria-labelledby="research-demo">
+        <h2 id="research-demo">See the Research in Action</h2>
+
+        <div class="demo-section">
+          <div class="demo-video">
+            <video muted loop playsinline preload="metadata" data-autoplay="true">
+              <source src="../Assets/media/microverse_demo.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="demo-text">
+            <p>
+              The desert grid where twenty-five agents manage scarce water and discover contradictions between the values they were given and the choices they actually make.
+            </p>
+            <p>
+              In the recording you can watch:
+            </p>
+            <ul>
+              <li>Agents carrying fixed moral starting points — their "soul files"</li>
+              <li>Water draining away, forcing hard trade-offs</li>
+              <li>Agents writing new entries about who they are becoming</li>
+              <li>Moments where an agent seems to notice its own inconsistency</li>
+            </ul>
+            <p>
+              The goal is simple to state and hard to measure: can we tell when an agent has drifted from who it was supposed to be — and does the agent know?
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <p class="article-cta">
         <strong>The full paper is under review and is coming soon.</strong>
       </p>
 
@@ -262,7 +510,10 @@
   </footer>
 
   <script src="../site-performance.js?v=1"></script>
-  <script src="../blog-post.js?v=2"></script>
+  <script src="../blog-post.js?v=3"></script>
+  <script src="../Assets/blog-microverse-loader.js?v=8"></script>
+  <script src="../Assets/blog-microverse-orb.js?v=6"></script>
+  <script src="../Assets/blog-microverse-charts.js?v=5"></script>
   <script>
   /* Mobile nav toggle */
   (function(){
