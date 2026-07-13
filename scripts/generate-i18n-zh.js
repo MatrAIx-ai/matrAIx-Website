@@ -155,6 +155,7 @@ const ENTITY = {
   Rock: "摇滚",
   Jazz: "爵士",
   Classical: "古典",
+  Gentrification: "中产阶层化",
 };
 
 /** Brand / product names — keep Latin letters in zh display */
@@ -180,6 +181,7 @@ const LABEL_BY_ID = {
   att_traditional_gender_roles: "对传统性别角色的态度",
   cultural_background: "文化背景",
   att_immigration: "对移民的态度",
+  att_gentrification: "态度：中产阶层化",
   primary_language: "主要语言",
   english_proficiency: "英语熟练度",
   multilingualism: "多语能力",
@@ -401,6 +403,7 @@ const LABEL_BY_ID = {
 
 /** Explicit Chinese descriptions by dimension id (overrides pattern rules). */
 const DESC_BY_ID = {
+  att_gentrification: "对城市旧区改造与阶层置换（gentrification）的态度。",
   coding_ai_usage_frequency: "在软件开发流程中使用 AI 工具的频率。",
   coding_ai_sentiment: "对将 AI 工具纳入开发工作流的总体态度。",
   coding_ai_output_trust: "在依赖 AI 生成内容之前，对产出的信任程度。",

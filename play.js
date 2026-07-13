@@ -191,26 +191,7 @@
       }
     ],
     "Worldview: Beliefs": [
-      {
-        id: "tech_change",
-        text: { en: "Rapid technological change is mostly...", zh: "快速技术变革总体上..." },
-        options: [
-          { value: "opportunity", label: { en: "A major opportunity", zh: "是重大机会" }, traitDelta: { O: 2 }, valueDelta: { novelty: 2 } },
-          { value: "balanced", label: { en: "Mixed: gains with trade-offs", zh: "利弊并存" }, traitDelta: { C: 1 }, valueDelta: { security: 1 } },
-          { value: "risky", label: { en: "Risky without safeguards", zh: "若无保障则风险偏高" }, traitDelta: { N: 1 }, valueDelta: { security: 2 } },
-          { value: "harmful", label: { en: "Mostly harmful", zh: "总体偏负面" }, traitDelta: { N: 2 }, valueDelta: { tradition: 1 } }
-        ]
-      },
-      {
-        id: "institution_trust",
-        text: { en: "When authority and peers disagree, I rely on...", zh: "当权威与同侪意见冲突时，我更依赖..." },
-        options: [
-          { value: "authority", label: { en: "Established authority", zh: "既有权威" }, traitDelta: { C: 1 }, valueDelta: { tradition: 2 } },
-          { value: "evidence", label: { en: "Primary evidence", zh: "一手证据" }, traitDelta: { O: 1, C: 1 }, valueDelta: { autonomy: 1, achievement: 1 } },
-          { value: "community", label: { en: "Trusted community", zh: "信任社群" }, traitDelta: { A: 2 }, valueDelta: { community: 2 } },
-          { value: "skeptic", label: { en: "Skepticism by default", zh: "默认保持怀疑" }, traitDelta: { N: 1 }, valueDelta: { security: 1 } }
-        ]
-      }
+      /* superseded by worldview-smart-bank.js — kept empty to avoid _default fallback */
     ],
     "State: Emotional": [
       {
@@ -322,7 +303,7 @@
   async function loadDimensions() {
     const [dimsResponse, zhResponse] = await Promise.all([
       fetch("./dimensions.json"),
-      fetch("./i18n/zh.json?v=16")
+      fetch("./i18n/zh.json?v=17")
     ]);
     if (!dimsResponse.ok || !zhResponse.ok) {
       throw new Error(t("loadError"));
@@ -697,6 +678,9 @@
     if (category === "Developer: Agent Adoption" && window.AGENT_ADOPTION_SMART?.questions) {
       return window.AGENT_ADOPTION_SMART.questions;
     }
+    if (category === "Worldview: Beliefs" && window.WORLDVIEW_SMART?.questions) {
+      return window.WORLDVIEW_SMART.questions;
+    }
     return SMART_QUESTION_BANK[category] || SMART_QUESTION_BANK._default || [];
   }
 
@@ -707,11 +691,16 @@
     if (category === "Developer: Agent Adoption" && window.AGENT_ADOPTION_SMART?.intro) {
       return window.AGENT_ADOPTION_SMART.intro;
     }
+    if (category === "Worldview: Beliefs" && window.WORLDVIEW_SMART?.intro) {
+      return window.WORLDVIEW_SMART.intro;
+    }
     return null;
   }
 
   function usesSmartMapInference(category) {
-    return category === "Linguistic: Communication" || category === "Developer: Agent Adoption";
+    return category === "Linguistic: Communication"
+      || category === "Developer: Agent Adoption"
+      || category === "Worldview: Beliefs";
   }
 
   function smartLabel(question, option) {
@@ -1078,7 +1067,8 @@
   function hasExampleInference(category) {
     return isInteractiveCategory(category)
       || (category === "Linguistic: Communication" && window.COMMUNICATION_SMART?.questions?.length)
-      || (category === "Developer: Agent Adoption" && window.AGENT_ADOPTION_SMART?.questions?.length);
+      || (category === "Developer: Agent Adoption" && window.AGENT_ADOPTION_SMART?.questions?.length)
+      || (category === "Worldview: Beliefs" && window.WORLDVIEW_SMART?.questions?.length);
   }
 
   function inferPersonalityDimensions(category, smartAnswers = null, personalityGauge = null) {
@@ -1163,6 +1153,8 @@
       inferred = inferCommunicationDimensions(category);
     } else if (category === "Developer: Agent Adoption") {
       inferred = inferAgentAdoptionDimensions(category);
+    } else if (category === "Worldview: Beliefs") {
+      inferred = inferSmartMapDimensions(category);
     } else if (isBigFiveCategory(category)) {
       inferred = applyPersonalityGauge(dims, state.personalityGauge, {});
     } else {

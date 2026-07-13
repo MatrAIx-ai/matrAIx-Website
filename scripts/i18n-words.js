@@ -1454,7 +1454,7 @@ module.exports = {
   "Generosity": "慷慨",
   "Genetic engineering": "基因工程",
   "Genetics": "遗传",
-  "Gentrification": "绅士化",
+  "Gentrification": "中产阶层化",
   "Geocaching": "Geocaching",
   "Geographic information systems": "地理信息系统",
   "Geography": "地理",

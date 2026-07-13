@@ -1077,7 +1077,7 @@ module.exports = {
   "Career success": "职业成功",
   "Brand loyalty": "品牌忠诚",
   "Consumerism": "消费主义",
-  "Gentrification": "绅士化",
+  "Gentrification": "中产阶层化",
   "Privacy vs security": "隐私与安全",
   "Being interrupted": "被打断",
   "Forced small talk": "被迫寒暄",
