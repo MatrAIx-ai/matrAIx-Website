@@ -575,50 +575,6 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      header {
-        gap: 0;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-      }
-
-      .brand { flex: 0; }
-      .nav-toggle { display: flex; position: relative; z-index: 21; }
-      .btn-nav { display: none; }
-
-      nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        z-index: 20;
-        flex-direction: column;
-        gap: 0;
-        padding: 0;
-        margin-top: 0;
-        max-height: 0;
-        opacity: 0;
-        visibility: hidden;
-        overflow: hidden;
-        transition: max-height 0.3s ease, opacity 0.3s ease, visibility 0.3s;
-        background: linear-gradient(to bottom, rgba(6,8,7,0.95), rgba(6,8,7,0.9));
-        border-bottom: 1px solid var(--line-soft);
-        backdrop-filter: blur(8px);
-        justify-content: flex-start;
-      }
-
-      nav.active {
-        max-height: 500px;
-        opacity: 1;
-        visibility: visible;
-      }
-
-      nav a {
-        padding: 12px 32px;
-        display: block;
-        border-bottom: 1px solid var(--line-soft);
-        text-align: center;
-      }
-
       .blog-title {
         font-size: 1.6rem;
       }
@@ -638,12 +594,12 @@
     }
   </style>
   <link rel="stylesheet" href="../dark-theme.css?v=5" />
-  <link rel="stylesheet" href="../subpages.css?v=6" />
+  <link rel="stylesheet" href="../subpages.css?v=7" />
   <link rel="stylesheet" href="../research.css?v=9" />
 </head>
 <body>
   <!-- Navigation -->
-  <header class="mx-nav"><a class="mx-brand" href="/">Matr<em>AI</em>x</a><nav class="mx-links"><a href="/">Home</a><a class="active" href="/blog/">Research</a><a href="/persona.html">Personas</a><a href="/applications.html">Applications</a><a href="/demo.html">Playground</a><a href="/access.html">Community</a></nav><a class="mx-github" href="https://github.com/MatrAIx-ai/MatrAIx" target="_blank" rel="noopener">GitHub ↗</a><a class="mx-join" href="/access.html">Join us</a><button class="mx-menu">Menu</button></header>
+  <header class="mx-nav"><a class="mx-brand" href="/">Matr<em>AI</em>x</a><nav class="mx-links" id="research-nav"><a href="/">Home</a><a class="active" href="/blog/">Research</a><a href="/persona.html">Personas</a><a href="/applications.html">Applications</a><a href="/demo.html">Playground</a><a href="/access.html">Community</a></nav><a class="mx-github" href="https://github.com/MatrAIx-ai/MatrAIx" target="_blank" rel="noopener">GitHub ↗</a><a class="mx-join" href="/access.html">Join us</a><button class="mx-menu" type="button" aria-controls="research-nav" aria-expanded="false">Menu</button></header>
 
   <main class="research-page">
     <!-- Blog index header -->
@@ -777,18 +733,28 @@
     toggle.addEventListener('click', function(){
       toggle.classList.toggle('active');
       nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', nav.classList.contains('open') ? 'true' : 'false');
     });
     document.querySelectorAll('.mx-links a').forEach(link => {
       link.addEventListener('click', function(){
         toggle.classList.remove('active');
         nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
       });
     });
     window.addEventListener('resize', function(){
-      if (window.innerWidth > 768) {
+      if (window.innerWidth > 850) {
         toggle.classList.remove('active');
         nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
       }
+    });
+    document.addEventListener('keydown', function(event){
+      if (event.key !== 'Escape' || !nav.classList.contains('open')) return;
+      toggle.classList.remove('active');
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus();
     });
   })();
 
