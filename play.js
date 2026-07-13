@@ -53,6 +53,7 @@
       resetConfirm: "Reset all answers, smart answers, and local data?",
       exportMissing: "Cannot export yet. Missing values: ",
       exportReady: "attributes.json downloaded.",
+      exportPartial: "attributes.json downloaded. Unfilled saved as null: ",
       loadError: "Failed to load dimensions or language pack.",
       toggleLang: "Switch language",
       missingIds: "Required survey DOM nodes are missing."
@@ -104,6 +105,7 @@
       resetConfirm: "确定重置全部答案、智能答案和本地数据吗？",
       exportMissing: "暂时无法导出，缺失维度数量：",
       exportReady: "attributes.json 已下载。",
+      exportPartial: "attributes.json 已下载。未填写已存为 null，缺失数量：",
       loadError: "加载 dimensions 或中文包失败。",
       toggleLang: "切换语言",
       missingIds: "缺少问卷所需的 DOM 节点。"
@@ -422,8 +424,13 @@
     }
     state.skippedCategories[category] = true;
     queueSave();
-    setStatus(t("skipDone"), "ok");
-    renderAll();
+    const lastIndex = state.categories.length - 1;
+    if (state.activeIndex < lastIndex) {
+      changeCategory(state.activeIndex + 1);
+    } else {
+      renderAll();
+    }
+    setStatus(`${t("skipDone")} (${category})`, "ok");
   }
 
   function unskipCurrentCategory() {
@@ -819,7 +826,6 @@
       return `<article class="dimension-card">
         <header class="dim-card-head">
           <h4 class="dim-card-title">${escapeHtml(dimensionLabelForUi(dim))}</h4>
-          ${state.lang === "en" ? `<code class="dim-card-id">${escapeHtml(dim.id)}</code>` : ""}
         </header>
         <p class="dim-card-desc">${escapeHtml(dimensionDescriptionForUi(dim))}</p>
         <div class="value-grid">${options}</div>
@@ -1240,13 +1246,9 @@
 
   function downloadAttributes() {
     const missing = state.dimensions.filter(dim => !state.answers[dim.id]).map(dim => dim.id);
-    if (missing.length) {
-      setStatus(`${t("exportMissing")}${missing.length}`, "warn");
-      return;
-    }
     const payload = {};
     for (const dim of state.dimensions) {
-      payload[dim.id] = state.answers[dim.id];
+      payload[dim.id] = state.answers[dim.id] || null;
     }
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -1257,7 +1259,11 @@
     anchor.click();
     anchor.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1200);
-    setStatus(t("exportReady"), "ok");
+    if (missing.length) {
+      setStatus(`${t("exportPartial")}${missing.length}`, "warn");
+    } else {
+      setStatus(t("exportReady"), "ok");
+    }
   }
 
   function handleGroupContentClick(event) {
