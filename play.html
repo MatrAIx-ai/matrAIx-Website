@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>matrAIx — Let's Play!</title>
+  <title>matrAIx — Persona Attribute Survey</title>
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-  <meta name="description" content="Answer 8 fun questions and matrAIx builds your persona — then predicts how you'd behave." />
+  <meta name="description" content="Fill all persona attributes across 43 groups and export attributes.json." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=6" />
-  <link rel="stylesheet" href="play.css?v=6" />
+  <link rel="stylesheet" href="play.css?v=9" />
   <link rel="stylesheet" href="dark-theme.css?v=5" />
 </head>
 <body class="play-body">
@@ -36,70 +36,48 @@
   </header>
 
   <main class="play-main">
-    <!-- Title -->
     <section class="play-head">
       <div class="hero-eyebrow">
-        <span class="tick">//</span> PERSONALITY · WHO ARE YOU
+        <span class="tick">//</span> PERSONA ATTRIBUTE COLLECTION
         <span class="sep">—</span>
-        <span class="status"><span class="dot live"></span> TRY ME!</span>
+        <span class="status"><span class="dot live"></span> V1 BUILDER</span>
       </div>
-      <h1 class="play-title">Let's play! <span class="hl">🎮</span></h1>
-      <p class="play-sub">
-        Eight quick, fun questions — no wrong answers. matrAIx reads your choices, builds your
-        <em>persona</em>, and predicts how you'd actually behave. <strong>Ready? 👇</strong>
+      <h1 class="play-title" id="titleText">Persona Attribute Survey</h1>
+      <p class="play-sub" id="subtitleText">
+        Complete all 1290 persona dimensions in 43 groups. Progress is auto-saved locally so you can continue after refresh.
       </p>
     </section>
 
-    <!-- Quiz: one question at a time, with a per-aspect progress bar -->
     <section class="play-quiz">
-      <div class="play-progress" id="progress"></div>
-      <div class="play-step" id="quiz"></div>
-
-      <div class="play-context" id="contextPanel" hidden>
-        <div class="pc-h">Last step — optional facts to fill in your profile card</div>
-        <div class="pc-grid">
-          <label class="pc-field"><span>Age</span>
-            <select id="cxAge">
-              <option value="">—</option>
-              <option>13–17</option><option>18–24</option><option>25–34</option><option>35–44</option>
-              <option>45–54</option><option>55–64</option><option>65+</option>
-            </select></label>
-          <label class="pc-field"><span>Region</span>
-            <select id="cxRegion">
-              <option value="">—</option>
-              <option>North America</option><option>Latin America</option><option>Western Europe</option>
-              <option>Eastern Europe</option><option>Sub-Saharan Africa</option><option>MENA</option>
-              <option>South Asia</option><option>East Asia</option><option>Southeast Asia</option><option>Oceania</option>
-            </select></label>
-          <label class="pc-field"><span>Primary language</span>
-            <select id="cxLang">
-              <option value="">—</option>
-              <option>English</option><option>Mandarin</option><option>Spanish</option><option>Hindi</option>
-              <option>Arabic</option><option>French</option><option>Portuguese</option><option>Bengali</option>
-              <option>Russian</option><option>Japanese</option><option>German</option><option>Swahili</option>
-            </select></label>
-          <label class="pc-field"><span>English level</span>
-            <select id="cxEng">
-              <option value="">—</option>
-              <option>Native</option><option>Fluent (C1–C2)</option><option>Intermediate (B1–B2)</option>
-              <option>Basic (A1–A2)</option><option>None</option>
-            </select></label>
-          <label class="pc-field"><span>Right now you're on</span>
-            <select id="cxDevice">
-              <option value="">—</option>
-              <option>Desktop, focused</option><option>Mobile, on-the-go</option><option>Voice assistant</option>
-              <option>Accessibility tool</option><option>Low-bandwidth</option>
-            </select></label>
-        </div>
+      <div class="toolbar">
+        <label class="tool-field grow">
+          <span id="searchLabel">Search dimensions</span>
+          <input id="dimensionSearch" type="text" placeholder="search dimensions..." />
+        </label>
+        <label class="tool-field">
+          <span id="languageLabel">Language</span>
+          <select id="langToggle">
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+          </select>
+        </label>
       </div>
+
+      <div class="play-progress" id="progressStats"></div>
+      <div class="tab-wrap" id="groupTabs"></div>
+      <div class="play-step" id="groupContent"></div>
 
       <div class="play-controls">
-        <button id="backBtn" type="button" class="btn btn-ghost" hidden>← Back</button>
-        <button id="submitBtn" type="button" class="btn btn-solid" hidden>Reveal my persona ✨</button>
-        <button id="resetBtn" type="button" class="btn btn-ghost">↻ Start over</button>
+        <button id="prevGroupBtn" type="button" class="btn btn-ghost">← Previous</button>
+        <button id="nextGroupBtn" type="button" class="btn btn-ghost">Next →</button>
+        <button id="saveDraftBtn" type="button" class="btn btn-ghost">Save draft</button>
+        <button id="fillDefaultsBtn" type="button" class="btn btn-ghost">Fill defaults</button>
+        <button id="downloadBtn" type="button" class="btn btn-solid">Download attributes.json</button>
+        <button id="resetBtn" type="button" class="btn btn-ghost">Reset</button>
+      </div>
+      <div class="play-controls secondary">
         <span id="status" class="play-status"></span>
       </div>
-      <div id="result" class="play-result" hidden></div>
     </section>
   </main>
 
@@ -108,7 +86,10 @@
     <span class="foot-meta">LET'S PLAY · PERSONA FROM PERSONALITY · © 2026</span>
   </footer>
 
-  <script src="play.js?v=5"></script>
-<script src="site-performance.js?v=1"></script>
+  <script src="interactive-decks.js?v=2"></script>
+  <script src="communication-smart-bank.js?v=1"></script>
+  <script src="agent-adoption-smart-bank.js?v=1"></script>
+  <script src="play.js?v=17"></script>
+  <script src="site-performance.js?v=1"></script>
 </body>
 </html>
