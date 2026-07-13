@@ -412,6 +412,11 @@ main.article-layout--no-toc .blog-header {
   text-wrap: balance;
 }
 
+.article h2[id],
+.article h3[id] {
+  scroll-margin-top: 96px;
+}
+
 .article h2 {
   margin: 64px 0 22px !important;
   font-size: clamp(1.7rem, 3.2vw, 2.35rem) !important;
@@ -506,6 +511,7 @@ main.article-layout--no-toc .blog-header {
   display: grid;
   position: relative;
   width: 100%;
+  grid-column: 2;
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto auto;
   align-items: center;
@@ -751,8 +757,10 @@ footer a {
 @media (max-width: 1200px) {
   .article-figure,
   .demo-section {
+    width: 100%;
     margin-right: 0 !important;
     margin-left: 0 !important;
+    transform: none;
   }
 }
 
@@ -1078,6 +1086,7 @@ footer a {
   .demo-section {
     max-width: 100% !important;
     margin: 8mm 0 !important;
+    transform: none !important;
     break-inside: avoid-page;
   }
 
