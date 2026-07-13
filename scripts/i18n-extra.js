@@ -1589,7 +1589,7 @@ module.exports = {
   "Electric vehicles": "电动汽车",
   "Public transit": "公共交通",
   "Urban density": "城市密度",
-  "Gentrification": "绅士化",
+  "Gentrification": "中产阶层化",
   "Healthcare": "医疗健康",
   "Finance": "金融",
   "Banking": "银行",

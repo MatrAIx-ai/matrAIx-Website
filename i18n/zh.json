@@ -2077,8 +2077,8 @@
       "description": "态度：城市密度的相关说明。"
     },
     "att_gentrification": {
-      "label": "态度：绅士化",
-      "description": "态度：绅士化的相关说明。"
+      "label": "态度：中产阶层化",
+      "description": "对城市旧区改造与阶层置换（gentrification）的态度。"
     },
     "ind_technology": {
       "label": "行业：科技",
@@ -6475,7 +6475,7 @@
     "Learning concepts": "学习概念"
   },
   "meta": {
-    "generatedAt": "2026-07-13T02:17:43.501Z",
+    "generatedAt": "2026-07-13T02:35:43.013Z",
     "dimensionCount": 1290,
     "untranslatedValues": [],
     "untranslatedValueCount": 0,
