@@ -44,3 +44,5 @@
 /* ---- 7. Center + enlarge capability card title ---- */
 .rf-icons .card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 30px 22px; }
 .rf-icons h3 { margin-top: 16px; font-size: 1.25rem; font-weight: 500; }
+/* ---- 8. "Go Deeper" discovery card headings ---- */
+.discovery-card h2 { font-weight: 400; }
