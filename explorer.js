@@ -241,7 +241,6 @@
     scrim.hidden = true;
   }
 
-  document.getElementById('sampleTop').addEventListener('click', e => { e.preventDefault(); openDrawer(); });
   document.getElementById('regen').addEventListener('click', sample);
   document.getElementById('drawerClose').addEventListener('click', closeDrawer);
   scrim.addEventListener('click', closeDrawer);

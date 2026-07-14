@@ -2,13 +2,15 @@
   "use strict";
 
   const STORAGE_KEY = "matraix_persona_survey_v2";
+  const NOT_APPLICABLE_VALUE = "N/A";
+  const AUTO_SAVE_INTERVAL_MS = 15000;
   const OCEAN_KEYS = ["O", "C", "E", "A", "N"];
   const EXPLORATORY_FAMILIES = ["Personality:", "Worldview:"];
 
   const UI = {
     en: {
       title: "Persona Attribute Survey",
-      subtitle: "Complete all 1290 persona dimensions in 43 groups. Progress is auto-saved locally so you can continue after refresh.",
+      subtitle: "Complete all 1290 persona dimensions in 43 groups. Progress is auto-saved locally every 15 seconds so you can continue after refresh.",
       searchLabel: "Search dimensions",
       searchPlaceholder: "search dimensions...",
       languageLabel: "Language",
@@ -16,7 +18,7 @@
       next: "Next →",
       saveDraft: "Save draft",
       fillDefaults: "Fill group defaults",
-      generateReport: "Reveal my MatrAIx",
+      generateReport: "Reveal My MatrAIx Persona",
       download: "Download attributes.json",
       reset: "Reset group",
       reportKicker: "MatrAIx 36 · Persona report",
@@ -43,6 +45,7 @@
       reportBack: "Back to survey",
       reportReady: "Your MatrAIx persona report is ready.",
       reportNeedAnswers: "Answer at least one core personality, values, decision, or cognitive-style question before revealing your MatrAIx.",
+      reportDownloadFirst: "Download the current attributes.json before revealing your MatrAIx Persona.",
       reportEngineMissing: "The MatrAIx report engine could not be loaded.",
       progressLabel: "Progress",
       tabLabel: "Tab",
@@ -86,7 +89,7 @@
     },
     zh: {
       title: "Persona 属性问卷",
-      subtitle: "完成全部 1290 个 persona 维度（43 个分组）。进度会自动保存在本地，刷新后可继续填写。",
+      subtitle: "完成全部 1290 个 persona 维度（43 个分组）。进度每 15 秒自动保存在本地，刷新后可继续填写。",
       searchLabel: "搜索维度",
       searchPlaceholder: "搜索维度...",
       languageLabel: "语言",
@@ -94,7 +97,7 @@
       next: "下一组 →",
       saveDraft: "保存草稿",
       fillDefaults: "填充本组默认值",
-      generateReport: "揭示我的 MatrAIx",
+      generateReport: "揭示我的 MatrAIx Persona",
       download: "下载 attributes.json",
       reset: "重置本组",
       reportKicker: "MatrAIx 36 · 人格报告",
@@ -121,6 +124,7 @@
       reportBack: "返回问卷",
       reportReady: "你的 MatrAIx 人格报告已生成。",
       reportNeedAnswers: "请至少回答一道核心人格、价值观、决策或认知风格问题，再揭示你的 MatrAIx。",
+      reportDownloadFirst: "请先下载当前版本的 attributes.json，再揭示你的 MatrAIx Persona。",
       reportEngineMissing: "无法加载 MatrAIx 人格报告引擎。",
       progressLabel: "进度",
       tabLabel: "分组",
@@ -278,6 +282,7 @@
     manualExpanded: {},
     interactiveAnswers: {},
     skippedCategories: {},
+    downloadedFingerprint: "",
     result: null,
     reportVisible: false,
     saveTimer: null
@@ -375,6 +380,9 @@
     return pack.dimensions[dim.id]?.description ?? dim.description ?? "";
   }
   function optionLabelForUi(dim, value) {
+    if (value === NOT_APPLICABLE_VALUE) {
+      return state.lang === "zh" ? "无" : "N/A";
+    }
     const pack = zhPack();
     if (!pack) return value;
     const dimId = typeof dim === "string" ? dim : dim?.id;
@@ -385,6 +393,10 @@
   function categoryLabel(category) {
     if (state.lang === "zh") return state.i18n?.categories?.[category] ?? category;
     return category;
+  }
+
+  function isAllowedDimensionValue(dim, value) {
+    return value === NOT_APPLICABLE_VALUE || (dim.values || []).includes(value);
   }
 
   function isExploratoryCategory(category) {
@@ -605,6 +617,18 @@
     return count;
   }
 
+  function answersFingerprint() {
+    let hash = 2166136261;
+    for (const dim of state.dimensions) {
+      const token = `${dim.id}:${state.answers[dim.id] ?? ""}|`;
+      for (let i = 0; i < token.length; i += 1) {
+        hash ^= token.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+      }
+    }
+    return (hash >>> 0).toString(16).padStart(8, "0");
+  }
+
   function persistState() {
     const payload = {
       version: 2,
@@ -617,6 +641,7 @@
       manualExpanded: state.manualExpanded,
       interactiveAnswers: state.interactiveAnswers,
       skippedCategories: state.skippedCategories,
+      downloadedFingerprint: state.downloadedFingerprint,
       updatedAt: Date.now()
     };
     try {
@@ -659,7 +684,7 @@
     for (const dim of state.dimensions) {
       const value = sourceAnswers[dim.id];
       if (value === undefined || value === null || value === "") continue;
-      if ((dim.values || []).includes(value)) {
+      if (isAllowedDimensionValue(dim, value)) {
         restoredAnswers[dim.id] = value;
       }
     }
@@ -670,6 +695,7 @@
     state.manualExpanded = raw.manualExpanded && typeof raw.manualExpanded === "object" ? raw.manualExpanded : {};
     state.interactiveAnswers = raw.interactiveAnswers && typeof raw.interactiveAnswers === "object" ? raw.interactiveAnswers : {};
     state.skippedCategories = raw.skippedCategories && typeof raw.skippedCategories === "object" ? raw.skippedCategories : {};
+    state.downloadedFingerprint = typeof raw.downloadedFingerprint === "string" ? raw.downloadedFingerprint : "";
     state.lang = raw.lang === "zh" ? "zh" : "en";
     state.search = typeof raw.search === "string" ? raw.search : "";
     const idx = Number(raw.activeIndex);
@@ -858,7 +884,7 @@
     }
     const cardHtml = dims.map(dim => {
       const current = state.answers[dim.id];
-      const options = (dim.values || []).map(value => {
+      const options = [...(dim.values || []), NOT_APPLICABLE_VALUE].map(value => {
         const checked = current === value ? " checked" : "";
         const id = `opt-${dim.id}-${String(value).replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_-]/g, "")}`;
         return `<label class="value-choice" for="${escapeHtml(id)}">
@@ -1256,7 +1282,7 @@
   function setDimensionValue(dimId, value) {
     const dim = state.dimById[dimId];
     if (!dim) return;
-    if (!(dim.values || []).includes(value)) return;
+    if (!isAllowedDimensionValue(dim, value)) return;
     state.answers[dimId] = value;
     queueSave();
     renderProgressStats();
@@ -1420,6 +1446,12 @@
       setStatus(t("reportNeedAnswers"), "warn");
       return;
     }
+    if (!state.downloadedFingerprint || state.downloadedFingerprint !== answersFingerprint()) {
+      state.reportVisible = false;
+      dom.reportPanel.hidden = true;
+      setStatus(t("reportDownloadFirst"), "warn");
+      return;
+    }
     const result = engine.match(state.answers, {
       skippedGroups: Object.keys(state.skippedCategories).length
     });
@@ -1520,6 +1552,8 @@
     anchor.click();
     anchor.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1200);
+    state.downloadedFingerprint = answersFingerprint();
+    persistState();
     if (missing.length) {
       setStatus(`${t("exportPartial")}${missing.length}`, "warn");
     } else {
@@ -1607,7 +1641,40 @@
     }
   }
 
+  function bindNavigationMenu() {
+    const toggle = document.querySelector(".nav-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    const nav = document.querySelector(".nav");
+    if (!toggle || !navLinks || !nav) return;
+
+    const closeMenu = () => {
+      navLinks.classList.remove("active");
+      toggle.classList.remove("active");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.textContent = "Menu";
+    };
+
+    toggle.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      const open = navLinks.classList.toggle("active");
+      toggle.classList.toggle("active", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.textContent = open ? "Close" : "Menu";
+    });
+    navLinks.addEventListener("click", event => {
+      if (event.target.closest("a")) closeMenu();
+    });
+    document.addEventListener("click", event => {
+      if (!event.target.closest(".nav")) closeMenu();
+    });
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 820) closeMenu();
+    });
+  }
+
   function bindEvents() {
+    bindNavigationMenu();
     dom.dimensionSearch.addEventListener("input", () => {
       state.search = dom.dimensionSearch.value || "";
       queueSave();
@@ -1653,6 +1720,7 @@
       dom.dimensionSearch.value = state.search;
       bindEvents();
       renderAll();
+      window.setInterval(persistState, AUTO_SAVE_INTERVAL_MS);
       if (restored) {
         setStatus(t("restored"), "ok");
       }

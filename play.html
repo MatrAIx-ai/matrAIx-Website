@@ -11,28 +11,30 @@
   <meta name="description" content="Fill all persona attributes across 43 groups and export attributes.json." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=6" />
-  <link rel="stylesheet" href="play.css?v=11" />
+  <link rel="stylesheet" href="play.css?v=15" />
   <link rel="stylesheet" href="dark-theme.css?v=5" />
 </head>
 <body class="play-body">
   <div class="grain" aria-hidden="true"></div>
   <div class="scanlines" aria-hidden="true"></div>
 
-  <!-- Header -->
   <header class="nav">
-    <a class="brand" href="/">
+    <a class="brand" href="/" aria-label="MatrAIx home">
       <span class="brand-name">Matr<em>AI</em>x</span>
     </a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <a href="persona.html">Persona</a>
-      <a href="demo.html">Demo</a>
+    <nav class="nav-links" id="primary-navigation" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="blog/">Research</a>
+      <a href="persona.html">Personas</a>
+      <a href="applications.html">Applications</a>
+      <a href="demo.html">Playground</a>
+      <a href="access.html">Community</a>
     </nav>
-    <a href="access.html" class="btn btn-ghost nav-cta">
-      <span class="dot live"></span> Request access
-    </a>
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-navigation">Menu</button>
+    <a href="https://github.com/MatrAIx-ai/MatrAIx" class="nav-github" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="access.html" class="btn btn-solid nav-cta"><span class="dot live"></span> Join us</a>
   </header>
 
   <main class="play-main">
@@ -44,7 +46,7 @@
       </div>
       <h1 class="play-title" id="titleText">Persona Attribute Survey</h1>
       <p class="play-sub" id="subtitleText">
-        Complete all 1290 persona dimensions in 43 groups. Progress is auto-saved locally so you can continue after refresh.
+        Complete all 1290 persona dimensions in 43 groups. Progress is auto-saved locally every 15 seconds so you can continue after refresh.
       </p>
     </section>
 
@@ -72,8 +74,8 @@
         <button id="nextGroupBtn" type="button" class="btn btn-ghost">Next →</button>
         <button id="saveDraftBtn" type="button" class="btn btn-ghost">Save draft</button>
         <button id="fillDefaultsBtn" type="button" class="btn btn-ghost">Fill group defaults</button>
-        <button id="generateReportBtn" type="button" class="btn btn-solid">Reveal my MatrAIx</button>
-        <button id="downloadBtn" type="button" class="btn btn-ghost">Download attributes.json</button>
+        <button id="downloadBtn" type="button" class="btn btn-solid">Download attributes.json</button>
+        <button id="generateReportBtn" type="button" class="btn btn-ghost">Reveal My MatrAIx Persona</button>
         <button id="resetBtn" type="button" class="btn btn-ghost">Reset group</button>
       </div>
       <div class="play-controls secondary">
@@ -98,7 +100,7 @@
   <script src="values-motivation-smart-bank.js?v=1"></script>
   <script src="personality-character-smart-bank.js?v=1"></script>
   <script src="matraix-archetypes.js?v=1"></script>
-  <script src="play.js?v=24"></script>
+  <script src="play.js?v=28"></script>
   <script src="site-performance.js?v=1"></script>
 </body>
 </html>
