@@ -740,7 +740,7 @@ main > aside {
 .eaas-tab { text-align: left; font-family: var(--mono); color: var(--ink-dim); background: var(--bg-2); border: 1px solid var(--line-soft); border-left: 3px solid transparent; padding: 14px 16px; cursor: pointer; display: flex; align-items: center; gap: 12px; transition: all 0.2s; }
 .eaas-tab:hover { border-color: var(--line); color: var(--ink); }
 .eaas-tab.active { border-color: var(--line); border-left-color: var(--phos); background: var(--bg-3); color: var(--ink); }
-.eaas-tab .lv { font-family: var(--disp); font-weight: 700; font-size: var(--text-lg); color: var(--ink); flex: none; width: 30px; }
+.eaas-tab .lv { font-family: var(--mono); font-weight: 600; font-size: .72rem; letter-spacing: .04em; color: var(--ink); flex: 0 0 56px; width: 56px; white-space: nowrap; }
 .eaas-tab.active .lv { color: var(--phos); text-shadow: var(--glow); }
 .eaas-tab .tx { display: flex; flex-direction: column; gap: 5px; flex: 1; }
 .eaas-tab .nm { font-family: var(--disp); font-weight: 700; font-size: 1.02rem; }

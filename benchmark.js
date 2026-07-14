@@ -17,6 +17,32 @@
   const pick = a => a[(Math.random() * a.length) | 0];
   const pad = (n, w) => String(n).padStart(w, '0');
 
+  /* ---------- shared-site mobile navigation ---------- */
+  const playgroundMenu = $('.os-menu');
+  const playgroundNav = $('.os-nav');
+  const closePlaygroundMenu = () => {
+    if (!playgroundMenu || !playgroundNav) return;
+    playgroundNav.classList.remove('open');
+    playgroundMenu.setAttribute('aria-expanded', 'false');
+  };
+  if (playgroundMenu && playgroundNav) {
+    playgroundMenu.addEventListener('click', () => {
+      const open = playgroundNav.classList.toggle('open');
+      playgroundMenu.setAttribute('aria-expanded', String(open));
+    });
+    playgroundNav.addEventListener('click', event => {
+      if (event.target.closest('a')) closePlaygroundMenu();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key !== 'Escape' || !playgroundNav.classList.contains('open')) return;
+      closePlaygroundMenu();
+      playgroundMenu.focus();
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 860) closePlaygroundMenu();
+    });
+  }
+
   /* ---------- persona sampling (subset of the canonical dimension space) ---------- */
   const KEY = ['age_bracket', 'region', 'primary_language', 'english_proficiency', 'intent',
     'device_context', 'expertise_gap', 'safety_sensitivity', 'trust_level', 'query_complexity',

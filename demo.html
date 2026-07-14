@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="benchmark.css?v=20" />
+  <link rel="stylesheet" href="benchmark.css?v=24" />
   <link rel="stylesheet" href="dark-theme.css?v=5" />
   <style>
   .os-explain .ex-url{color:var(--ink)}
@@ -108,7 +108,8 @@
       <select id="target" class="os-select" aria-label="Evaluation target"></select>
       <button id="run" class="os-btn run">■ Pause run</button>
     </div>
-    <nav class="os-nav"><a href="index.html">Home</a><a href="blog/">Research</a><a href="persona.html">Personas</a><a href="applications.html">Applications</a><a class="active" href="demo.html">Playground</a><a href="access.html">Community</a></nav>
+    <nav class="os-nav" id="playground-nav"><a href="index.html">Home</a><a href="blog/">Research</a><a href="persona.html">Personas</a><a href="applications.html">Applications</a><a class="active" href="demo.html">Playground</a><a href="access.html">Community</a></nav>
+    <button class="os-menu" type="button" aria-controls="playground-nav" aria-expanded="false">Menu</button>
     <div class="os-status">
       <button class="os-btn api" id="apiBtn" title="Run matrAIx in your own environment">&#123; &#125; API</button>
       <span class="led on" data-led="core">Simulation live</span>
@@ -281,7 +282,7 @@
   <script src="site-performance.js?v=1"></script>
   <script src="dimensions.js?v=7"></script>
   <script src="metrics.js?v=2"></script>
-  <script src="benchmark.js?v=15"></script>
+  <script src="benchmark.js?v=16"></script>
   <script>
   /* ---------- Live agent runs from the CUA pipeline ---------- */
   (function(){
