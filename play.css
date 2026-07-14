@@ -89,7 +89,7 @@
 .play-main {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 112px 20px 64px;
+  padding: 112px clamp(20px, 5vw, 64px) 64px;
 }
 
 .play-head {

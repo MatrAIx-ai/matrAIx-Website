@@ -83,7 +83,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px clamp(20px, 5vw, 40px);
+  padding: 18px clamp(20px, 5vw, 64px);
   background: var(--bg);
   border-bottom: 1px solid var(--line-soft);
   gap: 20px;
@@ -243,7 +243,7 @@ main { position: relative; z-index: 10; }
   min-height: 100vh;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 160px 32px 80px;
+  padding: 160px clamp(20px, 5vw, 64px) 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -400,7 +400,7 @@ main { position: relative; z-index: 10; }
   position: relative;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 90px 32px;
+  padding: 90px clamp(20px, 5vw, 64px);
   border-top: 1px solid var(--line-soft);
 }
 .panel-head { margin-bottom: 44px; max-width: 640px; }
