@@ -1160,6 +1160,20 @@
   vertical-align: middle;
 }
 
+.save-indicator[data-failed="true"] {
+  color: var(--rose);
+  opacity: 1;
+  font-weight: 600;
+}
+
+.save-indicator[data-failed="true"]::before {
+  content: "●";
+  margin-right: 5px;
+  color: var(--rose);
+  font-size: 8px;
+  vertical-align: middle;
+}
+
 .progress-track {
   height: 8px;
   border-radius: 999px;

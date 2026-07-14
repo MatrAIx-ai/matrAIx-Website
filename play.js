@@ -105,6 +105,8 @@
       skipDone: "Group skipped — neutral defaults applied.",
       skipBanner: "This group was skipped. Defaults are filled. You can undo or expand cards to override.",
       progressSaved: "Progress saved locally.",
+      saveFailed: "Could not save — this browser is blocking local storage. Download attributes.json before closing this tab, or your answers will be lost.",
+      saveBlocked: "Not saved — storage blocked",
       backToTop: "Top",
       backToTopAria: "Back to top of the survey",
       matrixDimension: "Dimension",
@@ -213,6 +215,8 @@
       skipDone: "已跳过本组并填入中性默认值。",
       skipBanner: "本组已跳过，已填入默认值。可取消跳过，或展开卡片手动修改。",
       progressSaved: "进度已保存到本地。",
+      saveFailed: "无法保存 — 此浏览器阻止了本地存储。请在关闭标签页前下载 attributes.json，否则作答将丢失。",
+      saveBlocked: "未保存 — 存储被阻止",
       backToTop: "顶部",
       backToTopAria: "回到问卷顶部",
       matrixDimension: "维度",
@@ -352,6 +356,7 @@
     reportVisible: false,
     saveTimer: null,
     lastSavedAt: 0,
+    saveFailed: false,
     tabsExpanded: false
   };
 
@@ -784,13 +789,19 @@
       tabsExpanded: state.tabsExpanded,
       updatedAt: Date.now()
     };
+    let saved = false;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
       state.lastSavedAt = payload.updatedAt;
+      saved = true;
     } catch (_err) {
-      // no-op: storage can fail in private mode
+      // Private mode and quota exhaustion both land here. Never report success:
+      // the survey has no server, so a failed write means the answers are gone.
+      saved = false;
     }
+    state.saveFailed = !saved;
     updateSaveIndicator();
+    return saved;
   }
 
   function queueSave() {
@@ -810,7 +821,7 @@
       clearTimeout(state.saveTimer);
       state.saveTimer = null;
     }
-    persistState();
+    return persistState();
   }
 
   function sanitizeGauge(input) {
@@ -879,6 +890,7 @@
   }
 
   function saveIndicatorText() {
+    if (state.saveFailed) return t("saveBlocked");
     if (!state.lastSavedAt) return t("saveNever");
     const seconds = Math.max(0, Math.round((Date.now() - state.lastSavedAt) / 1000));
     if (seconds < 10) return t("saveJustNow");
@@ -892,7 +904,8 @@
     const node = document.getElementById("saveIndicator");
     if (!node) return;
     node.textContent = saveIndicatorText();
-    node.dataset.saved = state.lastSavedAt ? "true" : "false";
+    node.dataset.saved = state.lastSavedAt && !state.saveFailed ? "true" : "false";
+    node.dataset.failed = state.saveFailed ? "true" : "false";
   }
 
   function completedGroupCount() {
@@ -916,7 +929,9 @@
     dom.progressStats.innerHTML = `
       <div class="progress-head">
         <span class="progress-group-count">${currentComplete}/${currentTotal} ${escapeHtml(t("complete"))} · ${groupPercent}%</span>
-        <span id="saveIndicator" class="save-indicator" data-saved="${state.lastSavedAt ? "true" : "false"}">${escapeHtml(saveIndicatorText())}</span>
+        <span id="saveIndicator" class="save-indicator"
+          data-saved="${state.lastSavedAt && !state.saveFailed ? "true" : "false"}"
+          data-failed="${state.saveFailed ? "true" : "false"}">${escapeHtml(saveIndicatorText())}</span>
       </div>
       <div class="progress-track" role="progressbar" aria-valuenow="${groupPercent}" aria-valuemin="0" aria-valuemax="100"
         aria-label="${escapeHtml(categoryLabel(category))}">
@@ -1299,8 +1314,8 @@
     const next = Math.max(0, Math.min(state.categories.length - 1, index));
     if (next === state.activeIndex) return;
     state.activeIndex = next;
-    flushSave();
-    setStatus(t("progressSaved"), "ok");
+    const saved = flushSave();
+    setStatus(saved ? t("progressSaved") : t("saveFailed"), saved ? "ok" : "error");
     renderAll();
   }
 
