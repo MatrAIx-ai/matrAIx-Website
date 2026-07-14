@@ -348,8 +348,8 @@ function ingestCsv(path) {
 /** Per-category skip hints — shown above the skip button in each group tab. */
 window.SKIP_GROUP_HINTS = {
   "Skills: Programming": {
-    en: "Don't write code? Skip this group — we'll use neutral defaults.",
-    zh: "不会编程？可跳过本组，我们会填入中性默认值。"
+    en: "Don't write code? Skip this category — we'll use neutral defaults.",
+    zh: "不会编程？可跳过本类别，我们会填入中性默认值。"
   },
   "Skills: Tools": {
     en: "Unfamiliar with these tools? Skip and use defaults.",
@@ -357,7 +357,7 @@ window.SKIP_GROUP_HINTS = {
   },
   "Developer: Professional Context": {
     en: "Not a developer? Skip this entire section.",
-    zh: "不是开发者？可跳过整个分组。"
+    zh: "不是开发者？可跳过整个类别。"
   },
   "Developer: AI Adoption": {
     en: "Skip if you don't use AI coding tools.",
@@ -388,7 +388,7 @@ window.SKIP_GROUP_HINTS = {
     zh: "不维护代码库？可跳过。"
   },
   _default: {
-    en: "Not familiar with this topic? Skip this group and use defaults.",
-    zh: "不熟悉这个主题？可跳过本组并使用默认值。"
+    en: "Not familiar with this topic? Skip this category and use defaults.",
+    zh: "不熟悉这个主题？可跳过本类别并使用默认值。"
   }
 };
