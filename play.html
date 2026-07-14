@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=6" />
-  <link rel="stylesheet" href="play.css?v=15" />
+  <link rel="stylesheet" href="play.css?v=26" />
   <link rel="stylesheet" href="dark-theme.css?v=5" />
 </head>
 <body class="play-body">
@@ -46,7 +46,7 @@
       </div>
       <h1 class="play-title" id="titleText">Persona Attribute Survey</h1>
       <p class="play-sub" id="subtitleText">
-        Complete all 1290 persona dimensions in 43 groups. Progress is auto-saved locally every 15 seconds so you can continue after refresh.
+        Work through 43 groups of persona dimensions, one group at a time. Every answer is saved locally the moment you make it, so you can stop and pick up where you left off.
       </p>
     </section>
 
@@ -65,21 +65,35 @@
         </label>
       </div>
 
-      <div class="play-progress" id="progressStats"></div>
+      <div class="search-summary" id="searchSummary" hidden></div>
       <div class="tab-wrap" id="groupTabs"></div>
+      <div class="play-progress" id="progressStats"></div>
       <div class="play-step" id="groupContent"></div>
 
-      <div class="play-controls">
+      <div class="control-zone control-flow">
         <button id="prevGroupBtn" type="button" class="btn btn-ghost">← Previous</button>
-        <button id="nextGroupBtn" type="button" class="btn btn-ghost">Next →</button>
-        <button id="saveDraftBtn" type="button" class="btn btn-ghost">Save draft</button>
-        <button id="fillDefaultsBtn" type="button" class="btn btn-ghost">Fill group defaults</button>
-        <button id="downloadBtn" type="button" class="btn btn-solid">Download attributes.json</button>
-        <button id="generateReportBtn" type="button" class="btn btn-ghost">Reveal My MatrAIx Persona</button>
-        <button id="resetBtn" type="button" class="btn btn-ghost">Reset group</button>
+        <button id="fillDefaultsBtn" type="button" class="btn btn-quiet">Fill group defaults</button>
+        <button id="nextGroupBtn" type="button" class="btn btn-solid control-next">Next →</button>
       </div>
+
+      <div class="control-zone control-finish">
+        <p class="control-zone-label" id="finishZoneLabel">Finish</p>
+        <div class="control-zone-actions">
+          <button id="generateReportBtn" type="button" class="btn btn-solid">Reveal My MatrAIx Persona</button>
+          <button id="downloadBtn" type="button" class="btn btn-ghost">Download attributes.json</button>
+        </div>
+      </div>
+
+      <div class="control-zone control-danger">
+        <p class="control-zone-label" id="dangerZoneLabel">Danger zone</p>
+        <div class="control-zone-actions">
+          <button id="resetBtn" type="button" class="btn btn-danger">Reset group</button>
+          <button id="resetAllBtn" type="button" class="btn btn-danger">Reset all</button>
+        </div>
+      </div>
+
       <div class="play-controls secondary">
-        <span id="status" class="play-status"></span>
+        <span id="status" class="play-status" role="status" aria-live="polite"></span>
       </div>
     </section>
 
@@ -87,6 +101,11 @@
       <div id="reportContent"></div>
     </section>
   </main>
+
+  <button id="backToTop" class="back-to-top" type="button">
+    <span class="back-to-top-arrow" aria-hidden="true">↑</span>
+    <span id="backToTopLabel">Top</span>
+  </button>
 
   <footer class="foot">
     <span class="brand-name small">Matr<em>AI</em>x<span class="tld">.ai</span></span>
@@ -100,7 +119,7 @@
   <script src="values-motivation-smart-bank.js?v=1"></script>
   <script src="personality-character-smart-bank.js?v=1"></script>
   <script src="matraix-archetypes.js?v=1"></script>
-  <script src="play.js?v=28"></script>
+  <script src="play.js?v=36"></script>
   <script src="site-performance.js?v=1"></script>
 </body>
 </html>

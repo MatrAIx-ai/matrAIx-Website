@@ -3,24 +3,33 @@
 
   const STORAGE_KEY = "matraix_persona_survey_v2";
   const NOT_APPLICABLE_VALUE = "N/A";
+  // Dimensions whose schema already offers an opt-out ("None"/"Not applicable") must not
+  // also get a synthetic "N/A" appended — one opt-out per dimension, never two.
+  const OPT_OUT_PATTERN = /^(none|not applicable|n\/a)$/i;
+  const MATRIX_MIN_ROWS = 3;
+  const MATRIX_MAX_COLUMNS = 7;
   const AUTO_SAVE_INTERVAL_MS = 15000;
+  const SAVE_INDICATOR_TICK_MS = 20000;
+  const BACK_TO_TOP_OFFSET_PX = 400;
   const OCEAN_KEYS = ["O", "C", "E", "A", "N"];
   const EXPLORATORY_FAMILIES = ["Personality:", "Worldview:"];
 
   const UI = {
     en: {
       title: "Persona Attribute Survey",
-      subtitle: "Complete all 1290 persona dimensions in 43 groups. Progress is auto-saved locally every 15 seconds so you can continue after refresh.",
-      searchLabel: "Search dimensions",
-      searchPlaceholder: "search dimensions...",
+      subtitle: "Work through 43 groups of persona dimensions, one group at a time. Every answer is saved locally the moment you make it, so you can stop and pick up where you left off.",
+      searchLabel: "Search all dimensions",
+      searchPlaceholder: "search all 43 groups...",
       languageLabel: "Language",
       prev: "← Previous",
       next: "Next →",
-      saveDraft: "Save draft",
       fillDefaults: "Fill group defaults",
       generateReport: "Reveal My MatrAIx Persona",
       download: "Download attributes.json",
       reset: "Reset group",
+      resetAll: "Reset all",
+      finishZone: "Finish",
+      dangerZone: "Danger zone",
       reportKicker: "MatrAIx 36 · Persona report",
       primaryArchetype: "Primary archetype",
       secondaryArchetype: "Secondary blend",
@@ -45,13 +54,33 @@
       reportBack: "Back to survey",
       reportReady: "Your MatrAIx persona report is ready.",
       reportNeedAnswers: "Answer at least one core personality, values, decision, or cognitive-style question before revealing your MatrAIx.",
-      reportDownloadFirst: "Download the current attributes.json before revealing your MatrAIx Persona.",
+      reportSubmitTitle: "One more step — submit your responses",
+      reportSubmitHint: "Your report is yours to keep. To take part in the study, download attributes.json and send it to whoever shared this survey with you.",
+      reportSubmitStale: "You've changed answers since your last download. Download attributes.json again so your submission matches this report.",
+      reportSubmitDone: "attributes.json matches this report. Send it to your survey distributor to submit.",
       reportEngineMissing: "The MatrAIx report engine could not be loaded.",
       progressLabel: "Progress",
       tabLabel: "Tab",
       of: "of",
       complete: "complete",
+      jumpToGroup: "Jump to group",
+      hideGroups: "Hide group list",
+      overallProgress: "Overall {done} of {total} · {percent}%",
+      groupsComplete: "{done} of {total} groups complete",
+      saveNever: "Not saved yet",
+      saveJustNow: "Saved · just now",
+      saveSeconds: "Saved · {n}s ago",
+      saveMinutes: "Saved · {n}m ago",
+      saveHours: "Saved · {n}h ago",
       searchEmpty: "No matching dimensions in this group.",
+      searchSummaryHere: "{n} in this group",
+      searchSummaryOther: "{n} in {groups} other groups",
+      searchSummaryOtherOne: "{n} in 1 other group",
+      searchNoMatches: "No dimensions match \u201c{q}\u201d anywhere in the survey.",
+      searchNoGroups: "No groups contain a match.",
+      searchShowGroups: "Show matching groups",
+      searchClear: "Clear search",
+      tabListFiltered: "Showing only groups with matches — clear the search to see all 43.",
       cardsHidden: "Dimension cards hidden by default for this exploratory group.",
       interactiveCardsHidden: "Examples above infer values below. Expand cards to fine-tune individual dimensions.",
       showCards: "Show dimension cards",
@@ -75,11 +104,18 @@
       skipHintDefault: "Not familiar with this topic? Skip this group and use defaults.",
       skipDone: "Group skipped — neutral defaults applied.",
       skipBanner: "This group was skipped. Defaults are filled. You can undo or expand cards to override.",
-      draftSaved: "Draft saved locally.",
+      progressSaved: "Progress saved locally.",
+      backToTop: "Top",
+      backToTopAria: "Back to top of the survey",
+      matrixDimension: "Dimension",
       restored: "Draft restored from local storage.",
       fillDone: "Defaults filled for this group.",
       resetDone: "Current group reset.",
       resetConfirm: "Reset answers, smart answers, and skip state for this group only?",
+      resetAllPrompt: "This permanently erases all {n} answers, every group, and your saved draft. This cannot be undone.\n\nType RESET to confirm:",
+      resetAllKeyword: "RESET",
+      resetAllDone: "Everything reset. Local draft cleared.",
+      resetAllAborted: "Reset all cancelled — nothing was changed.",
       exportMissing: "Cannot export yet. Missing values: ",
       exportReady: "attributes.json downloaded.",
       exportPartial: "attributes.json downloaded. Unfilled saved as null: ",
@@ -89,17 +125,19 @@
     },
     zh: {
       title: "Persona 属性问卷",
-      subtitle: "完成全部 1290 个 persona 维度（43 个分组）。进度每 15 秒自动保存在本地，刷新后可继续填写。",
-      searchLabel: "搜索维度",
-      searchPlaceholder: "搜索维度...",
+      subtitle: "逐组完成 43 个分组的 persona 维度。每次作答都会立即保存在本地，可随时中断并从上次的位置继续。",
+      searchLabel: "搜索全部维度",
+      searchPlaceholder: "搜索全部 43 个分组...",
       languageLabel: "语言",
       prev: "← 上一组",
       next: "下一组 →",
-      saveDraft: "保存草稿",
       fillDefaults: "填充本组默认值",
       generateReport: "揭示我的 MatrAIx Persona",
       download: "下载 attributes.json",
       reset: "重置本组",
+      resetAll: "重置全部",
+      finishZone: "完成",
+      dangerZone: "危险操作",
       reportKicker: "MatrAIx 36 · 人格报告",
       primaryArchetype: "核心人格",
       secondaryArchetype: "次级人格组合",
@@ -124,13 +162,33 @@
       reportBack: "返回问卷",
       reportReady: "你的 MatrAIx 人格报告已生成。",
       reportNeedAnswers: "请至少回答一道核心人格、价值观、决策或认知风格问题，再揭示你的 MatrAIx。",
-      reportDownloadFirst: "请先下载当前版本的 attributes.json，再揭示你的 MatrAIx Persona。",
+      reportSubmitTitle: "还差一步 — 提交你的作答",
+      reportSubmitHint: "报告归你所有。若要参与研究，请下载 attributes.json 并发送给向你分享本问卷的人。",
+      reportSubmitStale: "自上次下载后你修改过答案。请重新下载 attributes.json，使提交内容与本报告一致。",
+      reportSubmitDone: "attributes.json 与本报告一致。请发送给问卷分发者以完成提交。",
       reportEngineMissing: "无法加载 MatrAIx 人格报告引擎。",
       progressLabel: "进度",
       tabLabel: "分组",
       of: "/",
       complete: "已完成",
+      jumpToGroup: "跳转到分组",
+      hideGroups: "收起分组列表",
+      overallProgress: "总体 {done} / {total} · {percent}%",
+      groupsComplete: "已完成 {done} / {total} 个分组",
+      saveNever: "尚未保存",
+      saveJustNow: "已保存 · 刚刚",
+      saveSeconds: "已保存 · {n} 秒前",
+      saveMinutes: "已保存 · {n} 分钟前",
+      saveHours: "已保存 · {n} 小时前",
       searchEmpty: "当前分组没有匹配的维度。",
+      searchSummaryHere: "本组 {n} 个",
+      searchSummaryOther: "其他 {groups} 个分组中 {n} 个",
+      searchSummaryOtherOne: "另 1 个分组中 {n} 个",
+      searchNoMatches: "整份问卷中没有匹配\u201c{q}\u201d的维度。",
+      searchNoGroups: "没有包含匹配项的分组。",
+      searchShowGroups: "查看有匹配的分组",
+      searchClear: "清除搜索",
+      tabListFiltered: "仅显示有匹配的分组 — 清除搜索可查看全部 43 个分组。",
       cardsHidden: "该探索分组默认隐藏维度卡片。",
       interactiveCardsHidden: "上方示例会推断下方属性；展开卡片可逐条微调。",
       showCards: "展开维度卡片",
@@ -154,11 +212,18 @@
       skipHintDefault: "不熟悉这个主题？可跳过本组并使用默认值。",
       skipDone: "已跳过本组并填入中性默认值。",
       skipBanner: "本组已跳过，已填入默认值。可取消跳过，或展开卡片手动修改。",
-      draftSaved: "草稿已保存到本地。",
+      progressSaved: "进度已保存到本地。",
+      backToTop: "顶部",
+      backToTopAria: "回到问卷顶部",
+      matrixDimension: "维度",
       restored: "已从本地恢复草稿。",
       fillDone: "已为本组填入默认值。",
       resetDone: "已重置当前分组。",
       resetConfirm: "确定仅重置当前分组的答案、智能答案和跳过状态吗？",
+      resetAllPrompt: "此操作将永久清除全部 {n} 个答案、所有分组以及本地草稿，且无法撤销。\n\n请输入 RESET 以确认：",
+      resetAllKeyword: "RESET",
+      resetAllDone: "已重置全部内容，本地草稿已清除。",
+      resetAllAborted: "已取消重置，未做任何更改。",
       exportMissing: "暂时无法导出，缺失维度数量：",
       exportReady: "attributes.json 已下载。",
       exportPartial: "attributes.json 已下载。未填写已存为 null，缺失数量：",
@@ -285,19 +350,26 @@
     downloadedFingerprint: "",
     result: null,
     reportVisible: false,
-    saveTimer: null
+    saveTimer: null,
+    lastSavedAt: 0,
+    tabsExpanded: false
   };
 
   const dom = {};
   const REQUIRED_IDS = [
     "titleText", "subtitleText", "searchLabel", "dimensionSearch", "languageLabel", "langToggle",
-    "progressStats", "groupTabs", "groupContent", "prevGroupBtn", "nextGroupBtn",
-    "saveDraftBtn", "fillDefaultsBtn", "generateReportBtn", "downloadBtn", "resetBtn", "status",
-    "reportPanel", "reportContent"
+    "progressStats", "searchSummary", "groupTabs", "groupContent", "prevGroupBtn", "nextGroupBtn",
+    "fillDefaultsBtn", "generateReportBtn", "downloadBtn", "resetBtn", "resetAllBtn", "status",
+    "finishZoneLabel", "dangerZoneLabel", "backToTop", "backToTopLabel", "reportPanel", "reportContent"
   ];
 
-  function t(key) {
-    return UI[state.lang]?.[key] || UI.en[key] || key;
+  function t(key, replacements = null) {
+    const template = UI[state.lang]?.[key] || UI.en[key] || key;
+    if (!replacements) return template;
+    return Object.entries(replacements).reduce(
+      (text, [token, value]) => text.replaceAll(`{${token}}`, String(value)),
+      template
+    );
   }
 
   function escapeHtml(value) {
@@ -395,8 +467,37 @@
     return category;
   }
 
+  function nativeOptOutValue(dim) {
+    return (dim.values || []).find(value => OPT_OUT_PATTERN.test(String(value))) ?? null;
+  }
+
+  function optionsForDimension(dim) {
+    const values = dim.values || [];
+    return nativeOptOutValue(dim) ? values : [...values, NOT_APPLICABLE_VALUE];
+  }
+
+  function optOutValueForDimension(dim) {
+    return nativeOptOutValue(dim) ?? NOT_APPLICABLE_VALUE;
+  }
+
+  // Only the synthetic "N/A" means "no data"; a schema "None" is a real answer and exports as-is.
+  function exportValueForDimension(dim) {
+    const answer = state.answers[dim.id];
+    if (answer === undefined || answer === null || answer === "") return null;
+    return answer === NOT_APPLICABLE_VALUE ? null : answer;
+  }
+
+  function isDimensionUnanswered(dim) {
+    const answer = state.answers[dim.id];
+    return answer === undefined || answer === null || answer === "";
+  }
+
   function isAllowedDimensionValue(dim, value) {
-    return value === NOT_APPLICABLE_VALUE || (dim.values || []).includes(value);
+    return optionsForDimension(dim).includes(value);
+  }
+
+  function optionInputId(dim, value) {
+    return `opt-${dim.id}-${String(value).replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_-]/g, "")}`;
   }
 
   function isExploratoryCategory(category) {
@@ -427,19 +528,14 @@
     return hint[state.lang] || hint.en || t("skipHintDefault");
   }
 
+  // The schema states defaultValue as either a single value or a ranked list of acceptable
+  // fallbacks. Anything without a usable declared default falls back to the dimension's own
+  // opt-out rather than a guessed mid-scale value, so skipping never invents an answer.
   function defaultForDimension(dim) {
-    if (dim.defaultValue != null && (dim.values || []).includes(dim.defaultValue)) {
-      return dim.defaultValue;
-    }
-    const neutral = pickByKeywords(
-      dim.values || [],
-      ["mixed", "moderate", "neutral", "not applicable", "none", "average", "balanced", "indifferent", "aware"],
-      null
-    );
-    if (neutral) return neutral;
     const values = dim.values || [];
-    if (!values.length) return null;
-    return values[Math.floor((values.length - 1) / 2)] ?? values[0];
+    const declared = Array.isArray(dim.defaultValue) ? dim.defaultValue : [dim.defaultValue];
+    const usable = declared.find(value => typeof value === "string" && values.includes(value));
+    return usable ?? optOutValueForDimension(dim);
   }
 
   function isCategorySkipped(category) {
@@ -578,22 +674,65 @@
     return state.categories[state.activeIndex] || state.categories[0] || "";
   }
 
+  function searchQuery() {
+    return state.search.trim().toLowerCase();
+  }
+
+  function matchesSearch(dim, query) {
+    const strings = [
+      dim.id,
+      dim.label,
+      dim.description,
+      dimensionLabelForUi(dim),
+      dimensionDescriptionForUi(dim),
+      ...((dim.values || []).map(v => String(v))),
+      ...((dim.values || []).map(v => optionLabelForUi(dim, String(v))))
+    ].filter(Boolean);
+    return strings.some(s => String(s).toLowerCase().includes(query));
+  }
+
+  // Search covers every group, not just the open one. Counts are memoized per query+language
+  // because this scans all 1290 dimensions on each keystroke.
+  const searchCountCache = { key: null, counts: null };
+
+  function searchMatchesByCategory() {
+    const query = searchQuery();
+    const key = `${state.lang}::${query}`;
+    if (searchCountCache.key === key) return searchCountCache.counts;
+    const counts = {};
+    if (query) {
+      for (const category of state.categories) {
+        counts[category] = (state.grouped[category] || []).filter(dim => matchesSearch(dim, query)).length;
+      }
+    }
+    searchCountCache.key = key;
+    searchCountCache.counts = counts;
+    return counts;
+  }
+
+  function searchTotals() {
+    const counts = searchMatchesByCategory();
+    const current = getCurrentCategory();
+    let here = 0;
+    let other = 0;
+    let otherGroups = 0;
+    for (const [category, count] of Object.entries(counts)) {
+      if (!count) continue;
+      if (category === current) {
+        here = count;
+      } else {
+        other += count;
+        otherGroups += 1;
+      }
+    }
+    return { here, other, otherGroups, total: here + other };
+  }
+
   function filterDimensionsInCategory(category) {
     const source = state.grouped[category] || [];
-    const query = state.search.trim().toLowerCase();
+    const query = searchQuery();
     if (!query) return source;
-    return source.filter(dim => {
-      const strings = [
-        dim.id,
-        dim.label,
-        dim.description,
-        dimensionLabelForUi(dim),
-        dimensionDescriptionForUi(dim),
-        ...((dim.values || []).map(v => String(v))),
-        ...((dim.values || []).map(v => optionLabelForUi(dim, String(v))))
-      ].filter(Boolean);
-      return strings.some(s => String(s).toLowerCase().includes(query));
-    });
+    return source.filter(dim => matchesSearch(dim, query));
   }
 
   function answeredCountOverall() {
@@ -642,13 +781,16 @@
       interactiveAnswers: state.interactiveAnswers,
       skippedCategories: state.skippedCategories,
       downloadedFingerprint: state.downloadedFingerprint,
+      tabsExpanded: state.tabsExpanded,
       updatedAt: Date.now()
     };
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      state.lastSavedAt = payload.updatedAt;
     } catch (_err) {
       // no-op: storage can fail in private mode
     }
+    updateSaveIndicator();
   }
 
   function queueSave() {
@@ -659,6 +801,16 @@
       persistState();
       state.saveTimer = null;
     }, 120);
+  }
+
+  // Writes immediately instead of waiting out the debounce, for moments where the pending answer
+  // would otherwise be lost: leaving a group, leaving the page, or an explicit save.
+  function flushSave() {
+    if (state.saveTimer) {
+      clearTimeout(state.saveTimer);
+      state.saveTimer = null;
+    }
+    persistState();
   }
 
   function sanitizeGauge(input) {
@@ -696,6 +848,8 @@
     state.interactiveAnswers = raw.interactiveAnswers && typeof raw.interactiveAnswers === "object" ? raw.interactiveAnswers : {};
     state.skippedCategories = raw.skippedCategories && typeof raw.skippedCategories === "object" ? raw.skippedCategories : {};
     state.downloadedFingerprint = typeof raw.downloadedFingerprint === "string" ? raw.downloadedFingerprint : "";
+    state.lastSavedAt = Number.isFinite(raw.updatedAt) ? raw.updatedAt : 0;
+    state.tabsExpanded = raw.tabsExpanded === true;
     state.lang = raw.lang === "zh" ? "zh" : "en";
     state.search = typeof raw.search === "string" ? raw.search : "";
     const idx = Number(raw.activeIndex);
@@ -712,37 +866,145 @@
     dom.langToggle.value = state.lang;
     dom.prevGroupBtn.textContent = t("prev");
     dom.nextGroupBtn.textContent = t("next");
-    dom.saveDraftBtn.textContent = t("saveDraft");
     dom.fillDefaultsBtn.textContent = t("fillDefaults");
     dom.generateReportBtn.textContent = t("generateReport");
     dom.downloadBtn.textContent = t("download");
     dom.resetBtn.textContent = t("reset");
+    dom.resetAllBtn.textContent = t("resetAll");
+    dom.backToTopLabel.textContent = t("backToTop");
+    dom.backToTop.setAttribute("aria-label", t("backToTopAria"));
+    dom.finishZoneLabel.textContent = t("finishZone");
+    dom.dangerZoneLabel.textContent = t("dangerZone");
     dom.langToggle.setAttribute("aria-label", t("toggleLang"));
   }
 
+  function saveIndicatorText() {
+    if (!state.lastSavedAt) return t("saveNever");
+    const seconds = Math.max(0, Math.round((Date.now() - state.lastSavedAt) / 1000));
+    if (seconds < 10) return t("saveJustNow");
+    if (seconds < 60) return t("saveSeconds", { n: seconds });
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return t("saveMinutes", { n: minutes });
+    return t("saveHours", { n: Math.floor(minutes / 60) });
+  }
+
+  function updateSaveIndicator() {
+    const node = document.getElementById("saveIndicator");
+    if (!node) return;
+    node.textContent = saveIndicatorText();
+    node.dataset.saved = state.lastSavedAt ? "true" : "false";
+  }
+
+  function completedGroupCount() {
+    return state.categories.filter(category =>
+      answeredCountInCategory(category) === (state.grouped[category] || []).length).length;
+  }
+
+  // The group bar is the prominent one: a reachable finish line drives the goal-gradient effect,
+  // whereas a raw "12/1290" reads as hopeless on question one.
   function renderProgressStats() {
     const category = getCurrentCategory();
     const total = state.dimensions.length;
     const complete = answeredCountOverall();
     const currentTotal = (state.grouped[category] || []).length;
     const currentComplete = answeredCountInCategory(category);
-    dom.progressStats.innerHTML =
-      `<div><strong>${escapeHtml(t("progressLabel"))}:</strong> ${complete}/${total} ${escapeHtml(t("complete"))}</div>` +
-      `<div>${escapeHtml(t("tabLabel"))} ${state.activeIndex + 1} ${escapeHtml(t("of"))} ${state.categories.length} · ` +
-      `${escapeHtml(categoryLabel(category))}: ${currentComplete}/${currentTotal}</div>`;
+    const groupPercent = currentTotal ? Math.round((currentComplete / currentTotal) * 100) : 0;
+    const overallPercent = total ? Math.round((complete / total) * 100) : 0;
+
+    // The group nav directly above already names the current group; repeating it here read as
+    // three copies of the same title stacked down the page.
+    dom.progressStats.innerHTML = `
+      <div class="progress-head">
+        <span class="progress-group-count">${currentComplete}/${currentTotal} ${escapeHtml(t("complete"))} · ${groupPercent}%</span>
+        <span id="saveIndicator" class="save-indicator" data-saved="${state.lastSavedAt ? "true" : "false"}">${escapeHtml(saveIndicatorText())}</span>
+      </div>
+      <div class="progress-track" role="progressbar" aria-valuenow="${groupPercent}" aria-valuemin="0" aria-valuemax="100"
+        aria-label="${escapeHtml(categoryLabel(category))}">
+        <div class="progress-fill" style="width:${groupPercent}%"></div>
+      </div>
+      <div class="progress-foot">
+        <span class="progress-overall">
+          ${escapeHtml(t("groupsComplete", { done: completedGroupCount(), total: state.categories.length }))}
+          <span class="progress-overall-bar"><span style="width:${overallPercent}%"></span></span>
+          ${escapeHtml(t("overallProgress", { done: complete, total, percent: overallPercent }))}
+        </span>
+      </div>`;
   }
 
+  function renderSearchSummary() {
+    const query = searchQuery();
+    if (!query) {
+      dom.searchSummary.hidden = true;
+      dom.searchSummary.innerHTML = "";
+      return;
+    }
+    dom.searchSummary.hidden = false;
+    const { here, other, otherGroups, total } = searchTotals();
+    const clear = `<button type="button" class="link-btn" data-action="clear-search">${escapeHtml(t("searchClear"))}</button>`;
+
+    if (!total) {
+      dom.searchSummary.innerHTML = `<span class="search-summary-text">${escapeHtml(t("searchNoMatches", { q: state.search.trim() }))}</span>${clear}`;
+      return;
+    }
+    const parts = [t("searchSummaryHere", { n: here })];
+    if (other) {
+      parts.push(otherGroups === 1
+        ? t("searchSummaryOtherOne", { n: other })
+        : t("searchSummaryOther", { n: other, groups: otherGroups }));
+    }
+    const jump = other
+      ? `<button type="button" class="link-btn" data-action="show-matching-groups">${escapeHtml(t("searchShowGroups"))}</button>`
+      : "";
+    dom.searchSummary.innerHTML =
+      `<span class="search-summary-text">${escapeHtml(parts.join(" · "))}</span>${jump}${clear}`;
+  }
+
+  // 43 group pills is a wall of equal-weight choices, so the list is collapsed behind a toggle
+  // that names the current group; picking a group closes it again.
   function renderTabs() {
-    const html = state.categories.map((category, index) => {
-      const active = index === state.activeIndex ? " is-active" : "";
+    const current = getCurrentCategory();
+    const expanded = state.tabsExpanded;
+    const query = searchQuery();
+    const counts = searchMatchesByCategory();
+    // With a query active the list shows only groups that actually contain matches.
+    const entries = state.categories
+      .map((category, index) => ({ category, index }))
+      .filter(entry => !query || counts[entry.category] > 0);
+
+    const tabHtml = entries.map(({ category, index }) => {
       const count = answeredCountInCategory(category);
       const total = (state.grouped[category] || []).length;
-      return `<button type="button" class="group-tab${active}" data-action="tab" data-index="${index}">
-        ${escapeHtml(categoryLabel(category))}
-        <span class="tab-count">${count}/${total}</span>
+      const classes = ["group-tab"];
+      if (index === state.activeIndex) classes.push("is-active");
+      if (total && count === total) classes.push("is-done");
+      if (isCategorySkipped(category)) classes.push("is-skipped");
+      const badge = query
+        ? `<span class="tab-count is-match">${counts[category]}</span>`
+        : `<span class="tab-count">${count}/${total}</span>`;
+      return `<button type="button" class="${classes.join(" ")}" data-action="tab" data-index="${index}"
+        ${index === state.activeIndex ? 'aria-current="true"' : ""}>
+        <span class="tab-name">${escapeHtml(categoryLabel(category))}</span>
+        ${badge}
       </button>`;
-    }).join("");
-    dom.groupTabs.innerHTML = html;
+    }).join("") || `<p class="muted">${escapeHtml(t("searchNoGroups"))}</p>`;
+
+    const filterNote = query
+      ? `<p class="tab-list-note">${escapeHtml(t("tabListFiltered"))}</p>`
+      : "";
+
+    dom.groupTabs.innerHTML = `
+      <button type="button" class="group-nav-toggle" data-action="toggle-tabs"
+        aria-expanded="${expanded}" aria-controls="groupTabList">
+        <span class="group-nav-current">
+          <span class="group-nav-step">${escapeHtml(t("tabLabel"))} ${state.activeIndex + 1} ${escapeHtml(t("of"))} ${state.categories.length}</span>
+          <strong>${escapeHtml(categoryLabel(current))}</strong>
+        </span>
+        <span class="group-nav-hint">
+          ${escapeHtml(expanded ? t("hideGroups") : t("jumpToGroup"))}
+          <span class="group-nav-caret" aria-hidden="true">${expanded ? "▴" : "▾"}</span>
+        </span>
+      </button>
+      <div class="tab-list" id="groupTabList"${expanded ? "" : " hidden"}>${filterNote}${tabHtml}</div>`;
   }
 
   function getSmartQuestionsForCategory(category) {
@@ -878,39 +1140,111 @@
     </section>`;
   }
 
+  // Dimensions that share an option set read far faster as a matrix (questions down, options
+  // across) than as repeated cards. Signature covers raw values and their localized labels, so a
+  // per-dimension translation override drops that dimension back to a card automatically.
+  function optionSignature(dim) {
+    return JSON.stringify(optionsForDimension(dim).map(value => [value, optionLabelForUi(dim, value)]));
+  }
+
+  function partitionByOptionSet(dims) {
+    const buckets = new Map();
+    for (const dim of dims) {
+      const key = optionSignature(dim);
+      if (!buckets.has(key)) buckets.set(key, []);
+      buckets.get(key).push(dim);
+    }
+    const matrices = [...buckets.values()].filter(bucket =>
+      bucket.length >= MATRIX_MIN_ROWS && optionsForDimension(bucket[0]).length <= MATRIX_MAX_COLUMNS);
+    const gridded = new Set(matrices.flat().map(dim => dim.id));
+    return { matrices, cards: dims.filter(dim => !gridded.has(dim.id)) };
+  }
+
+  function renderOptionMatrix(dims) {
+    const options = optionsForDimension(dims[0]);
+    const headHtml = options
+      .map(value => `<th scope="col" class="matrix-option-head">${escapeHtml(optionLabelForUi(dims[0], value))}</th>`)
+      .join("");
+    const rowHtml = dims.map(dim => {
+      const current = state.answers[dim.id];
+      const description = dimensionDescriptionForUi(dim);
+      const cells = options.map(value => {
+        const id = optionInputId(dim, value);
+        const checked = current === value ? " checked" : "";
+        const ariaLabel = `${dimensionLabelForUi(dim)}: ${optionLabelForUi(dim, value)}`;
+        return `<td class="matrix-cell">
+          <label class="matrix-choice" for="${escapeHtml(id)}">
+            <input type="radio" id="${escapeHtml(id)}" name="dim-${escapeHtml(dim.id)}" value="${escapeHtml(value)}"
+              data-action="set-value" data-dim-id="${escapeHtml(dim.id)}" aria-label="${escapeHtml(ariaLabel)}"${checked}>
+          </label>
+        </td>`;
+      }).join("");
+      return `<tr class="matrix-row">
+        <th scope="row" class="matrix-row-head">
+          <span class="matrix-row-label">${escapeHtml(dimensionLabelForUi(dim))}</span>
+          ${description ? `<span class="matrix-row-desc">${escapeHtml(description)}</span>` : ""}
+        </th>
+        ${cells}
+      </tr>`;
+    }).join("");
+
+    return `<div class="matrix-wrap">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th scope="col" class="matrix-row-head matrix-corner">${escapeHtml(t("matrixDimension"))}</th>
+            ${headHtml}
+          </tr>
+        </thead>
+        <tbody>${rowHtml}</tbody>
+      </table>
+    </div>`;
+  }
+
+  function renderDimensionCard(dim) {
+    const current = state.answers[dim.id];
+    const options = optionsForDimension(dim).map(value => {
+      const checked = current === value ? " checked" : "";
+      const id = optionInputId(dim, value);
+      return `<label class="value-choice" for="${escapeHtml(id)}">
+        <input type="radio" id="${escapeHtml(id)}" name="dim-${escapeHtml(dim.id)}" value="${escapeHtml(value)}"
+          data-action="set-value" data-dim-id="${escapeHtml(dim.id)}"${checked}>
+        <span>${escapeHtml(optionLabelForUi(dim, value))}</span>
+      </label>`;
+    }).join("");
+    return `<article class="dimension-card">
+      <header class="dim-card-head">
+        <h4 class="dim-card-title">${escapeHtml(dimensionLabelForUi(dim))}</h4>
+      </header>
+      <p class="dim-card-desc">${escapeHtml(dimensionDescriptionForUi(dim))}</p>
+      <div class="value-grid">${options}</div>
+    </article>`;
+  }
+
+  function renderDimensionFields(dims) {
+    const { matrices, cards } = partitionByOptionSet(dims);
+    const matrixHtml = matrices.map(renderOptionMatrix).join("");
+    const cardHtml = cards.length
+      ? `<div class="dimension-grid">${cards.map(renderDimensionCard).join("")}</div>`
+      : "";
+    return `${matrixHtml}${cardHtml}`;
+  }
+
   function renderDimensionCards(category, dims, hiddenByDefault) {
     if (!dims.length) {
       return `<div class="empty-group">${escapeHtml(t("searchEmpty"))}</div>`;
     }
-    const cardHtml = dims.map(dim => {
-      const current = state.answers[dim.id];
-      const options = [...(dim.values || []), NOT_APPLICABLE_VALUE].map(value => {
-        const checked = current === value ? " checked" : "";
-        const id = `opt-${dim.id}-${String(value).replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_-]/g, "")}`;
-        return `<label class="value-choice" for="${escapeHtml(id)}">
-          <input type="radio" id="${escapeHtml(id)}" name="dim-${escapeHtml(dim.id)}" value="${escapeHtml(value)}"
-            data-action="set-value" data-dim-id="${escapeHtml(dim.id)}"${checked}>
-          <span>${escapeHtml(optionLabelForUi(dim, value))}</span>
-        </label>`;
-      }).join("");
-      return `<article class="dimension-card">
-        <header class="dim-card-head">
-          <h4 class="dim-card-title">${escapeHtml(dimensionLabelForUi(dim))}</h4>
-        </header>
-        <p class="dim-card-desc">${escapeHtml(dimensionDescriptionForUi(dim))}</p>
-        <div class="value-grid">${options}</div>
-      </article>`;
-    }).join("");
+    const cardHtml = renderDimensionFields(dims);
 
     if (!hiddenByDefault) {
-      return `<div class="dimension-grid">${cardHtml}</div>`;
+      return cardHtml;
     }
 
     const expanded = !!state.manualExpanded[category];
     const toggleText = expanded ? t("hideCards") : t("showCards");
     const collapsedHint = hasExampleInference(category) ? t("interactiveCardsHidden") : t("cardsHidden");
     const info = `<p class="muted">${escapeHtml(collapsedHint)}</p>`;
-    const body = expanded ? `<div class="dimension-grid">${cardHtml}</div>` : "";
+    const body = expanded ? cardHtml : "";
     return `${info}
       <button type="button" class="btn btn-ghost" data-action="toggle-expand">${escapeHtml(toggleText)}</button>
       ${body}`;
@@ -922,12 +1256,11 @@
     const exploratory = isExploratoryCategory(category);
     const interactive = isInteractiveCategory(category);
     const bigFive = isBigFiveCategory(category);
-    const showCardsCollapsed = exploratory || interactive;
-    let html = `<section class="group-panel">
-      <header class="group-head">
-        <h3>${escapeHtml(categoryLabel(category))}</h3>
-        <div>${answeredCountInCategory(category)}/${(state.grouped[category] || []).length}</div>
-      </header>`;
+    // Exploratory/interactive groups hide their cards by default, which would swallow search
+    // hits — a query has to reveal what it claims to have found.
+    const showCardsCollapsed = (exploratory || interactive) && !searchQuery();
+    // No title here: the group nav and progress bar above both already state the group and count.
+    let html = `<section class="group-panel">`;
 
     html += renderSkipGroupBar(category);
 
@@ -953,6 +1286,7 @@
 
   function renderAll() {
     updateStaticUiText();
+    renderSearchSummary();
     renderProgressStats();
     renderTabs();
     renderCurrentGroup();
@@ -965,7 +1299,8 @@
     const next = Math.max(0, Math.min(state.categories.length - 1, index));
     if (next === state.activeIndex) return;
     state.activeIndex = next;
-    queueSave();
+    flushSave();
+    setStatus(t("progressSaved"), "ok");
     renderAll();
   }
 
@@ -1323,6 +1658,39 @@
     renderAll();
   }
 
+  // Wiping every answer is unrecoverable, so this asks for a typed keyword rather than a
+  // confirm() dialog that muscle memory dismisses.
+  function resetAll() {
+    const typed = window.prompt(t("resetAllPrompt", { n: answeredCountOverall() }));
+    if (typed === null) return;
+    if (typed.trim().toUpperCase() !== t("resetAllKeyword")) {
+      setStatus(t("resetAllAborted"), "warn");
+      return;
+    }
+    state.answers = {};
+    state.smartAnswers = {};
+    state.interactiveAnswers = {};
+    state.skippedCategories = {};
+    state.manualExpanded = {};
+    state.personalityGauge = { O: 0, C: 0, E: 0, A: 0, N: 0 };
+    state.downloadedFingerprint = "";
+    state.result = null;
+    state.reportVisible = false;
+    state.activeIndex = 0;
+    state.search = "";
+    state.lastSavedAt = 0;
+    state.tabsExpanded = false;
+    dom.reportPanel.hidden = true;
+    dom.dimensionSearch.value = "";
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (_err) {
+      // no-op: storage can fail in private mode
+    }
+    setStatus(t("resetAllDone"), "ok");
+    renderAll();
+  }
+
   function resultLabel(localized) {
     return localized?.[state.lang] || localized?.en || "";
   }
@@ -1380,6 +1748,24 @@
     </article>`;
   }
 
+  // The report is no longer gated behind exporting attributes.json; instead it carries the
+  // submission reminder, and tracks whether the last export still matches the current answers.
+  function renderSubmitReminder() {
+    const downloaded = Boolean(state.downloadedFingerprint);
+    const current = state.downloadedFingerprint === answersFingerprint();
+    const done = downloaded && current;
+    const message = done ? t("reportSubmitDone") : (downloaded ? t("reportSubmitStale") : t("reportSubmitHint"));
+    return `<aside class="report-submit" data-state="${done ? "done" : "todo"}">
+      <div class="report-submit-copy">
+        <h3>${escapeHtml(done ? t("reportSubmitDone") : t("reportSubmitTitle"))}</h3>
+        ${done ? "" : `<p>${escapeHtml(message)}</p>`}
+      </div>
+      ${done ? "" : `<button type="button" class="btn btn-solid" data-report-action="download-attributes">
+        ${escapeHtml(t("download"))}
+      </button>`}
+    </aside>`;
+  }
+
   function renderReport() {
     const engine = window.MATRAIX_ARCHETYPES;
     if (!engine || !state.result) return;
@@ -1426,6 +1812,7 @@
           </div>`, "wide")}
         ${reportCard("11", t("reportEvidence"), `${evidence}<p class="report-disclaimer">${result.coverage}% ${escapeHtml(t("reportCoverage"))}</p>`, "wide")}
       </div>
+      ${renderSubmitReminder()}
       <div class="report-actions">
         <button type="button" class="btn btn-solid" data-report-action="download">${escapeHtml(t("reportDownload"))}</button>
         <button type="button" class="btn btn-ghost" data-report-action="print">${escapeHtml(t("reportPrint"))}</button>
@@ -1444,12 +1831,6 @@
       state.reportVisible = false;
       dom.reportPanel.hidden = true;
       setStatus(t("reportNeedAnswers"), "warn");
-      return;
-    }
-    if (!state.downloadedFingerprint || state.downloadedFingerprint !== answersFingerprint()) {
-      state.reportVisible = false;
-      dom.reportPanel.hidden = true;
-      setStatus(t("reportDownloadFirst"), "warn");
       return;
     }
     const result = engine.match(state.answers, {
@@ -1503,7 +1884,7 @@
         en: engine.reportFor(result, "en"),
         zh: engine.reportFor(result, "zh")
       },
-      attributes: Object.fromEntries(state.dimensions.map(dim => [dim.id, state.answers[dim.id] || null]))
+      attributes: Object.fromEntries(state.dimensions.map(dim => [dim.id, exportValueForDimension(dim)]))
     };
   }
 
@@ -1528,6 +1909,9 @@
     const action = target.dataset.reportAction;
     if (action === "download") {
       downloadPersonaReport();
+    } else if (action === "download-attributes") {
+      downloadAttributes();
+      renderReport();
     } else if (action === "print") {
       window.print();
     } else if (action === "close") {
@@ -1538,10 +1922,10 @@
   }
 
   function downloadAttributes() {
-    const missing = state.dimensions.filter(dim => !state.answers[dim.id]).map(dim => dim.id);
+    const missing = state.dimensions.filter(isDimensionUnanswered).map(dim => dim.id);
     const payload = {};
     for (const dim of state.dimensions) {
-      payload[dim.id] = state.answers[dim.id] || null;
+      payload[dim.id] = exportValueForDimension(dim);
     }
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -1673,12 +2057,53 @@
     });
   }
 
+  function prefersReducedMotion() {
+    return window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true;
+  }
+
+  // Toggled on a rAF so the scroll listener itself stays cheap on a 140-row matrix.
+  function bindBackToTop() {
+    let ticking = false;
+    const update = () => {
+      dom.backToTop.classList.toggle("is-visible", window.scrollY > BACK_TO_TOP_OFFSET_PX);
+      ticking = false;
+    };
+    window.addEventListener("scroll", () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }, { passive: true });
+    dom.backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? "auto" : "smooth" });
+      dom.dimensionSearch.focus({ preventScroll: true });
+    });
+    update();
+  }
+
   function bindEvents() {
     bindNavigationMenu();
+    bindBackToTop();
     dom.dimensionSearch.addEventListener("input", () => {
       state.search = dom.dimensionSearch.value || "";
       queueSave();
+      renderSearchSummary();
+      renderTabs();
       renderCurrentGroup();
+    });
+
+    dom.searchSummary.addEventListener("click", event => {
+      const action = event.target.closest("[data-action]")?.dataset.action;
+      if (action === "clear-search") {
+        state.search = "";
+        dom.dimensionSearch.value = "";
+        queueSave();
+        renderAll();
+      } else if (action === "show-matching-groups") {
+        state.tabsExpanded = true;
+        queueSave();
+        renderTabs();
+        dom.groupTabs.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
     });
 
     dom.langToggle.addEventListener("change", () => {
@@ -1688,24 +2113,29 @@
     });
 
     dom.groupTabs.addEventListener("click", event => {
+      if (event.target.closest("[data-action='toggle-tabs']")) {
+        state.tabsExpanded = !state.tabsExpanded;
+        queueSave();
+        renderTabs();
+        return;
+      }
       const button = event.target.closest("[data-action='tab']");
       if (!button) return;
       const index = Number(button.dataset.index);
-      if (Number.isFinite(index)) {
-        changeCategory(index);
-      }
+      if (!Number.isFinite(index)) return;
+      state.tabsExpanded = false;
+      // changeCategory no-ops when the group is already active, so close the list here.
+      if (index === state.activeIndex) renderTabs();
+      else changeCategory(index);
     });
 
     dom.prevGroupBtn.addEventListener("click", () => changeCategory(state.activeIndex - 1));
     dom.nextGroupBtn.addEventListener("click", () => changeCategory(state.activeIndex + 1));
-    dom.saveDraftBtn.addEventListener("click", () => {
-      persistState();
-      setStatus(t("draftSaved"), "ok");
-    });
     dom.fillDefaultsBtn.addEventListener("click", fillDefaults);
     dom.generateReportBtn.addEventListener("click", () => generateReport(true));
     dom.downloadBtn.addEventListener("click", downloadAttributes);
     dom.resetBtn.addEventListener("click", resetSurvey);
+    dom.resetAllBtn.addEventListener("click", resetAll);
 
     dom.groupContent.addEventListener("click", handleGroupContentClick);
     dom.groupContent.addEventListener("change", handleGroupContentChange);
@@ -1721,6 +2151,11 @@
       bindEvents();
       renderAll();
       window.setInterval(persistState, AUTO_SAVE_INTERVAL_MS);
+      window.setInterval(updateSaveIndicator, SAVE_INDICATOR_TICK_MS);
+      window.addEventListener("pagehide", flushSave);
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") flushSave();
+      });
       if (restored) {
         setStatus(t("restored"), "ok");
       }
