@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=6" />
-  <link rel="stylesheet" href="play.css?v=10" />
+  <link rel="stylesheet" href="play.css?v=11" />
   <link rel="stylesheet" href="dark-theme.css?v=5" />
 </head>
 <body class="play-body">
@@ -72,12 +72,17 @@
         <button id="nextGroupBtn" type="button" class="btn btn-ghost">Next →</button>
         <button id="saveDraftBtn" type="button" class="btn btn-ghost">Save draft</button>
         <button id="fillDefaultsBtn" type="button" class="btn btn-ghost">Fill group defaults</button>
-        <button id="downloadBtn" type="button" class="btn btn-solid">Download attributes.json</button>
+        <button id="generateReportBtn" type="button" class="btn btn-solid">Reveal my MatrAIx</button>
+        <button id="downloadBtn" type="button" class="btn btn-ghost">Download attributes.json</button>
         <button id="resetBtn" type="button" class="btn btn-ghost">Reset group</button>
       </div>
       <div class="play-controls secondary">
         <span id="status" class="play-status"></span>
       </div>
+    </section>
+
+    <section id="reportPanel" class="matraix-report" aria-live="polite" hidden>
+      <div id="reportContent"></div>
     </section>
   </main>
 
@@ -92,7 +97,8 @@
   <script src="worldview-smart-bank.js?v=1"></script>
   <script src="values-motivation-smart-bank.js?v=1"></script>
   <script src="personality-character-smart-bank.js?v=1"></script>
-  <script src="play.js?v=23"></script>
+  <script src="matraix-archetypes.js?v=1"></script>
+  <script src="play.js?v=24"></script>
   <script src="site-performance.js?v=1"></script>
 </body>
 </html>

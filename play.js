@@ -16,8 +16,34 @@
       next: "Next →",
       saveDraft: "Save draft",
       fillDefaults: "Fill group defaults",
+      generateReport: "Reveal my MatrAIx",
       download: "Download attributes.json",
       reset: "Reset group",
+      reportKicker: "MatrAIx 36 · Persona report",
+      primaryArchetype: "Primary archetype",
+      secondaryArchetype: "Secondary blend",
+      profileFidelity: "Profile fidelity",
+      reportOverview: "Core profile",
+      reportStrengths: "Natural strengths",
+      reportBlindSpots: "Watch-outs",
+      reportWork: "Work & creation",
+      reportRelationships: "Relationships",
+      reportPressure: "Under pressure",
+      reportGrowth: "Growth edge",
+      reportAi: "AI operating manual",
+      reportBlend: "Your blend",
+      reportMatrix: "Your matching matrix",
+      reportDrives: "Core drives · why you move",
+      reportModes: "Operating modes · how you move",
+      reportEvidence: "Strongest matching signals",
+      reportEvidenceEmpty: "Answer more core personality questions to reveal matching signals.",
+      reportCoverage: "core signal coverage",
+      reportDownload: "Download Persona Report",
+      reportPrint: "Print / Save PDF",
+      reportBack: "Back to survey",
+      reportReady: "Your MatrAIx persona report is ready.",
+      reportNeedAnswers: "Answer at least one core personality, values, decision, or cognitive-style question before revealing your MatrAIx.",
+      reportEngineMissing: "The MatrAIx report engine could not be loaded.",
       progressLabel: "Progress",
       tabLabel: "Tab",
       of: "of",
@@ -68,8 +94,34 @@
       next: "下一组 →",
       saveDraft: "保存草稿",
       fillDefaults: "填充本组默认值",
+      generateReport: "揭示我的 MatrAIx",
       download: "下载 attributes.json",
       reset: "重置本组",
+      reportKicker: "MatrAIx 36 · 人格报告",
+      primaryArchetype: "核心人格",
+      secondaryArchetype: "次级人格组合",
+      profileFidelity: "画像可信度",
+      reportOverview: "核心画像",
+      reportStrengths: "自然优势",
+      reportBlindSpots: "潜在盲点",
+      reportWork: "工作与创造",
+      reportRelationships: "人际关系",
+      reportPressure: "压力下的你",
+      reportGrowth: "成长方向",
+      reportAi: "AI 协作说明书",
+      reportBlend: "你的人格组合",
+      reportMatrix: "你的人格匹配矩阵",
+      reportDrives: "核心驱动力 · 你为何行动",
+      reportModes: "行动模式 · 你如何行动",
+      reportEvidence: "最强匹配信号",
+      reportEvidenceEmpty: "回答更多核心人格问题后，将显示匹配依据。",
+      reportCoverage: "核心信号覆盖率",
+      reportDownload: "下载人格报告",
+      reportPrint: "打印 / 保存 PDF",
+      reportBack: "返回问卷",
+      reportReady: "你的 MatrAIx 人格报告已生成。",
+      reportNeedAnswers: "请至少回答一道核心人格、价值观、决策或认知风格问题，再揭示你的 MatrAIx。",
+      reportEngineMissing: "无法加载 MatrAIx 人格报告引擎。",
       progressLabel: "进度",
       tabLabel: "分组",
       of: "/",
@@ -226,6 +278,8 @@
     manualExpanded: {},
     interactiveAnswers: {},
     skippedCategories: {},
+    result: null,
+    reportVisible: false,
     saveTimer: null
   };
 
@@ -233,7 +287,8 @@
   const REQUIRED_IDS = [
     "titleText", "subtitleText", "searchLabel", "dimensionSearch", "languageLabel", "langToggle",
     "progressStats", "groupTabs", "groupContent", "prevGroupBtn", "nextGroupBtn",
-    "saveDraftBtn", "fillDefaultsBtn", "downloadBtn", "resetBtn", "status"
+    "saveDraftBtn", "fillDefaultsBtn", "generateReportBtn", "downloadBtn", "resetBtn", "status",
+    "reportPanel", "reportContent"
   ];
 
   function t(key) {
@@ -254,6 +309,7 @@
     if (!dom.status) return;
     dom.status.textContent = message;
     dom.status.dataset.kind = kind;
+    dom.status.dataset.tone = kind;
   }
 
   function assertDomNodes() {
@@ -632,6 +688,7 @@
     dom.nextGroupBtn.textContent = t("next");
     dom.saveDraftBtn.textContent = t("saveDraft");
     dom.fillDefaultsBtn.textContent = t("fillDefaults");
+    dom.generateReportBtn.textContent = t("generateReport");
     dom.downloadBtn.textContent = t("download");
     dom.resetBtn.textContent = t("reset");
     dom.langToggle.setAttribute("aria-label", t("toggleLang"));
@@ -873,6 +930,9 @@
     renderProgressStats();
     renderTabs();
     renderCurrentGroup();
+    if (state.reportVisible) {
+      generateReport(false);
+    }
   }
 
   function changeCategory(index) {
@@ -1237,6 +1297,214 @@
     renderAll();
   }
 
+  function resultLabel(localized) {
+    return localized?.[state.lang] || localized?.en || "";
+  }
+
+  function renderScoreRows(items, definitions) {
+    const max = Math.max(0, ...items.map(item => Number(item.score) || 0));
+    return items.map(item => {
+      const label = resultLabel(definitions[item.id]?.name) || item.id;
+      const relative = max > 0 ? item.score / max : 0;
+      const width = Math.round(8 + relative * 92);
+      const displayScore = max > 0 ? Math.round(45 + relative * 50) : 45;
+      return `<div class="report-score-row">
+        <span class="report-match-label" title="${escapeHtml(label)}">${escapeHtml(label)}</span>
+        <span class="report-score-track"><span class="report-score-fill" style="width:${width}%"></span></span>
+        <span class="report-score-value">${displayScore}</span>
+      </div>`;
+    }).join("");
+  }
+
+  function evidenceLabel(item) {
+    if (item.dimension.startsWith("big5_")) {
+      const group = item.dimension.replace("big5_", "").replace(/_/g, " ");
+      const groupZh = {
+        openness: "开放性",
+        conscientiousness: "尽责性",
+        extraversion: "外向性",
+        agreeableness: "宜人性"
+      }[group] || group;
+      const names = {
+        en: `Big Five ${group}`,
+        zh: `大五人格 ${groupZh}`
+      };
+      return names[state.lang];
+    }
+    const dim = state.dimById[item.dimension];
+    if (!dim) return item.dimension.replace(/_/g, " ");
+    const label = dimensionLabelForUi(dim);
+    const valueZh = {
+      Achievement: "成就",
+      Security: "安全",
+      Autonomy: "自主",
+      Community: "社群",
+      Novelty: "新奇",
+      Tradition: "传统"
+    }[item.value];
+    const value = state.lang === "zh" && valueZh ? valueZh : optionLabelForUi(dim, item.value);
+    return `${label}: ${value}`;
+  }
+
+  function reportCard(label, title, content, classes = "") {
+    return `<article class="report-card ${classes}">
+      <div class="report-section-label">${escapeHtml(label)}</div>
+      <h3>${escapeHtml(title)}</h3>
+      ${content}
+    </article>`;
+  }
+
+  function renderReport() {
+    const engine = window.MATRAIX_ARCHETYPES;
+    if (!engine || !state.result) return;
+    const result = state.result;
+    const report = engine.reportFor(result, state.lang);
+    const list = items => `<ul class="report-list">${items.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+    const primaryName = resultLabel(result.primary.name);
+    const secondaryName = resultLabel(result.secondary.name);
+    const uniqueEvidence = result.evidence.filter((item, index, items) =>
+      items.findIndex(candidate => candidate.dimension === item.dimension && candidate.value === item.value) === index
+    );
+    const evidence = uniqueEvidence.length
+      ? `<div class="report-evidence">${uniqueEvidence.map(item => `<span class="report-evidence-chip">${escapeHtml(evidenceLabel(item))}</span>`).join("")}</div>`
+      : `<p>${escapeHtml(t("reportEvidenceEmpty"))}</p>`;
+
+    dom.reportContent.innerHTML = `
+      <div class="report-hero">
+        <div>
+          <p class="report-kicker">${escapeHtml(t("reportKicker"))}</p>
+          <h2 class="report-title">${escapeHtml(report.name)}</h2>
+          <p class="report-tagline">${escapeHtml(report.tagline)}</p>
+        </div>
+        <aside class="report-identity-card">
+          <div class="report-signature">${escapeHtml(result.signature)}</div>
+          <div class="report-meta-row"><span>${escapeHtml(t("primaryArchetype"))}</span><strong>${escapeHtml(primaryName)} · ${result.primary.match}</strong></div>
+          <div class="report-meta-row"><span>${escapeHtml(t("secondaryArchetype"))}</span><strong>${escapeHtml(secondaryName)} · ${result.secondary.match}</strong></div>
+          <div class="report-meta-row"><span>${escapeHtml(t("profileFidelity"))}</span><strong>${result.confidence}%</strong></div>
+        </aside>
+      </div>
+      <div class="report-body">
+        ${reportCard("01", t("reportOverview"), `<p>${escapeHtml(report.overview)}</p>`, "wide accent")}
+        ${reportCard("02", t("reportStrengths"), list(report.strengths))}
+        ${reportCard("03", t("reportBlindSpots"), list(report.blindSpots))}
+        ${reportCard("04", t("reportBlend"), `<p>${escapeHtml(report.blend)}</p>`, "wide")}
+        ${reportCard("05", t("reportWork"), `<p>${escapeHtml(report.work)}</p>`)}
+        ${reportCard("06", t("reportRelationships"), `<p>${escapeHtml(report.relationships)}</p>`)}
+        ${reportCard("07", t("reportPressure"), `<p>${escapeHtml(report.underPressure)}</p>`)}
+        ${reportCard("08", t("reportGrowth"), `<p>${escapeHtml(report.growth)}</p>`)}
+        ${reportCard("09", t("reportAi"), `<p>${escapeHtml(report.aiCollaboration)}</p>`, "wide accent")}
+        ${reportCard("10", t("reportMatrix"), `
+          <div class="report-score-grid">
+            <div class="report-score-group"><h4>${escapeHtml(t("reportDrives"))}</h4>${renderScoreRows(result.drives, engine.drives)}</div>
+            <div class="report-score-group"><h4>${escapeHtml(t("reportModes"))}</h4>${renderScoreRows(result.modes, engine.modes)}</div>
+          </div>`, "wide")}
+        ${reportCard("11", t("reportEvidence"), `${evidence}<p class="report-disclaimer">${result.coverage}% ${escapeHtml(t("reportCoverage"))}</p>`, "wide")}
+      </div>
+      <div class="report-actions">
+        <button type="button" class="btn btn-solid" data-report-action="download">${escapeHtml(t("reportDownload"))}</button>
+        <button type="button" class="btn btn-ghost" data-report-action="print">${escapeHtml(t("reportPrint"))}</button>
+        <button type="button" class="btn btn-ghost" data-report-action="close">${escapeHtml(t("reportBack"))}</button>
+      </div>
+      <p class="report-disclaimer">${escapeHtml(report.disclaimer)}</p>`;
+  }
+
+  function generateReport(shouldScroll = true) {
+    const engine = window.MATRAIX_ARCHETYPES;
+    if (!engine) {
+      setStatus(t("reportEngineMissing"), "error");
+      return;
+    }
+    if (!answeredCountOverall()) {
+      state.reportVisible = false;
+      dom.reportPanel.hidden = true;
+      setStatus(t("reportNeedAnswers"), "warn");
+      return;
+    }
+    const result = engine.match(state.answers, {
+      skippedGroups: Object.keys(state.skippedCategories).length
+    });
+    if (!result.relevantAnswered) {
+      state.reportVisible = false;
+      dom.reportPanel.hidden = true;
+      setStatus(t("reportNeedAnswers"), "warn");
+      return;
+    }
+    state.result = result;
+    state.reportVisible = true;
+    dom.reportPanel.hidden = false;
+    renderReport();
+    setStatus(t("reportReady"), "ok");
+    if (shouldScroll) {
+      dom.reportPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
+  function buildPersonaReportPayload() {
+    const engine = window.MATRAIX_ARCHETYPES;
+    const result = state.result;
+    if (!engine || !result) return null;
+    return {
+      schemaVersion: "1.0",
+      generatedAt: new Date().toISOString(),
+      signature: result.signature,
+      archetype: {
+        primary: {
+          id: result.primary.id,
+          code: result.primary.code,
+          name: result.primary.name,
+          match: result.primary.match
+        },
+        secondary: {
+          id: result.secondary.id,
+          code: result.secondary.code,
+          name: result.secondary.name,
+          match: result.secondary.match
+        }
+      },
+      fidelity: result.confidence,
+      scores: {
+        drives: Object.fromEntries(result.drives.map(item => [item.id, Number(item.score.toFixed(3))])),
+        operatingModes: Object.fromEntries(result.modes.map(item => [item.id, Number(item.score.toFixed(3))]))
+      },
+      matchingEvidence: result.evidence,
+      report: {
+        en: engine.reportFor(result, "en"),
+        zh: engine.reportFor(result, "zh")
+      },
+      attributes: Object.fromEntries(state.dimensions.map(dim => [dim.id, state.answers[dim.id] || null]))
+    };
+  }
+
+  function downloadPersonaReport() {
+    if (!state.result) generateReport(false);
+    const payload = buildPersonaReportPayload();
+    if (!payload) return;
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `matraix-persona-${state.result.signature}.json`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1200);
+  }
+
+  function handleReportClick(event) {
+    const target = event.target.closest("[data-report-action]");
+    if (!target) return;
+    const action = target.dataset.reportAction;
+    if (action === "download") {
+      downloadPersonaReport();
+    } else if (action === "print") {
+      window.print();
+    } else if (action === "close") {
+      state.reportVisible = false;
+      dom.reportPanel.hidden = true;
+      dom.generateReportBtn.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+
   function downloadAttributes() {
     const missing = state.dimensions.filter(dim => !state.answers[dim.id]).map(dim => dim.id);
     const payload = {};
@@ -1368,11 +1636,13 @@
       setStatus(t("draftSaved"), "ok");
     });
     dom.fillDefaultsBtn.addEventListener("click", fillDefaults);
+    dom.generateReportBtn.addEventListener("click", () => generateReport(true));
     dom.downloadBtn.addEventListener("click", downloadAttributes);
     dom.resetBtn.addEventListener("click", resetSurvey);
 
     dom.groupContent.addEventListener("click", handleGroupContentClick);
     dom.groupContent.addEventListener("change", handleGroupContentChange);
+    dom.reportPanel.addEventListener("click", handleReportClick);
   }
 
   async function init() {
