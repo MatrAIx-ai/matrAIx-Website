@@ -1181,12 +1181,22 @@
     return { matrices, cards: dims.filter(dim => !gridded.has(dim.id)) };
   }
 
+  function sortDimensionsForGrid(dims) {
+    const locale = state.lang === "zh" ? "zh-Hans" : "en";
+    const collator = new Intl.Collator(locale, { sensitivity: "base", numeric: true });
+    return [...dims].sort((left, right) =>
+      collator.compare(dimensionLabelForUi(left), dimensionLabelForUi(right))
+      || collator.compare(left.id, right.id)
+    );
+  }
+
   function renderOptionMatrix(dims) {
     const options = optionsForDimension(dims[0]);
+    const sortedDims = sortDimensionsForGrid(dims);
     const headHtml = options
       .map(value => `<th scope="col" class="matrix-option-head">${escapeHtml(optionLabelForUi(dims[0], value))}</th>`)
       .join("");
-    const rowHtml = dims.map(dim => {
+    const rowHtml = sortedDims.map(dim => {
       const current = state.answers[dim.id];
       const description = dimensionDescriptionForUi(dim);
       const cells = options.map(value => {
