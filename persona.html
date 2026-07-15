@@ -12,11 +12,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=8" />
+  <link rel="stylesheet" href="styles.css?v=9" />
   <link rel="stylesheet" href="explorer.css?v=7" />
   <link rel="stylesheet" href="dark-theme.css?v=5" />
-  <link rel="stylesheet" href="subpages.css?v=7" />
-  <link rel="stylesheet" href="persona-refresh.css?v=9" />
+  <link rel="stylesheet" href="subpages.css?v=8" />
+  <link rel="stylesheet" href="persona-refresh.css?v=13" />
 </head>
 <body class="explorer-body">
   <div class="grain" aria-hidden="true"></div>
@@ -38,8 +38,8 @@
       <h1 class="ex-title">Personas at <span>planetary scale.</span></h1>
       <p class="ex-sub">
         MatrAIx builds structured user representations for simulation and evaluation.
-        Our internal corpus combines synthetic generation with evidence-aware extraction
-        from human-authored public data, all mapped into one inspectable schema.
+        Our internal corpus combines synthetic generation, evidence-aware extraction
+        from human-authored public data, and consented self-reports, all mapped into one inspectable schema.
       </p>
       </div>
       <div class="persona-hero-actions">
@@ -71,24 +71,25 @@
         </article>
         <article class="pipeline-card human-card">
           <span class="pipeline-index">02 · HUMAN-EVIDENCE</span>
-          <h3>Grounded extraction</h3>
-          <p>Human-authored public traces are mapped to supported schema attributes. Unobserved fields should remain unknown rather than being invented.</p>
-          <ul><li>Evidence attached to assignments</li><li>Confidence and provenance tracking</li><li>Source-specific extraction policies</li></ul>
+          <h3>Grounded human data</h3>
+          <p>Public traces and consented survey responses are mapped to supported schema attributes. Unobserved fields should remain unknown rather than being invented.</p>
+          <ul><li>Evidence or self-report attached to assignments</li><li>Confidence, consent, and provenance tracking</li><li>Source-specific collection policies</li></ul>
         </article>
       </div>
     </section>
 
     <section class="persona-sources" aria-labelledby="sources-title">
       <div class="persona-section-head compact">
-        <span>Human-evidence sources</span>
-        <h2 id="sources-title">Public traces, different signals.</h2>
+        <span>Human persona sources</span>
+        <h2 id="sources-title">Different sources, different signals.</h2>
       </div>
       <div class="source-grid">
         <article><span>01</span><h3>Wikipedia</h3><p>Public biographical and professional context, mapped only where the source provides support.</p><small>BIOGRAPHICAL</small></article>
         <article><span>02</span><h3>Amazon Reviews</h3><p>Preference, product-use, and decision signals inferred from review histories with explicit evidence boundaries.</p><small>BEHAVIORAL</small></article>
         <article><span>03</span><h3>Stack Overflow</h3><p>Technical interests, tools, expertise, and developer-workflow signals derived from public contributions.</p><small>TECHNICAL</small></article>
+        <article><span>04</span><h3>Persona Survey</h3><p>Consented, first-person responses provided directly by participants and mapped to the shared persona schema.</p><small>SELF-REPORTED</small></article>
       </div>
-      <p class="source-note">Source availability does not make every attribute observable. Sensitive or unsupported claims are excluded, and release eligibility depends on source terms, privacy review, and documentation.</p>
+      <p class="source-note">No source makes every attribute observable. Sensitive or unsupported claims are excluded, and collection or release eligibility depends on consent, source terms, privacy review, and documentation.</p>
     </section>
 
     <section class="persona-release" aria-labelledby="release-title">
@@ -96,7 +97,7 @@
       <div class="release-copy">
         <span>Release policy</span>
         <h2 id="release-title">Research at scale. Release with restraint.</h2>
-        <p>We will not directly distribute the full 8.3B internal corpus. It includes large-scale synthetic outputs and human-evidence extraction artifacts that require source-aware governance, storage, and quality controls.</p>
+        <p>We will not directly distribute the full 8.3B internal corpus. It includes large-scale synthetic outputs, human-evidence extraction artifacts, and consented self-reports that require source-aware governance, storage, and quality controls.</p>
       </div>
       <div class="release-card">
         <div><span>PLANNED PUBLIC DATASET</span><strong>1,000,000 personas</strong></div>

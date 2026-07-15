@@ -492,6 +492,12 @@
     return answer === NOT_APPLICABLE_VALUE ? null : answer;
   }
 
+  function normalizedAnswers() {
+    return Object.fromEntries(
+      state.dimensions.map(dim => [dim.id, exportValueForDimension(dim)])
+    );
+  }
+
   function isDimensionUnanswered(dim) {
     const answer = state.answers[dim.id];
     return answer === undefined || answer === null || answer === "";
@@ -1306,7 +1312,7 @@
     renderTabs();
     renderCurrentGroup();
     if (state.reportVisible) {
-      generateReport(false);
+      generateReport(false, false);
     }
   }
 
@@ -1637,6 +1643,9 @@
     queueSave();
     renderProgressStats();
     renderTabs();
+    if (state.reportVisible) {
+      generateReport(false, false);
+    }
   }
 
   function fillDefaults() {
@@ -1836,7 +1845,7 @@
       <p class="report-disclaimer">${escapeHtml(report.disclaimer)}</p>`;
   }
 
-  function generateReport(shouldScroll = true) {
+  function generateReport(shouldScroll = true, shouldAnnounce = true) {
     const engine = window.MATRAIX_ARCHETYPES;
     if (!engine) {
       setStatus(t("reportEngineMissing"), "error");
@@ -1848,7 +1857,7 @@
       setStatus(t("reportNeedAnswers"), "warn");
       return;
     }
-    const result = engine.match(state.answers, {
+    const result = engine.match(normalizedAnswers(), {
       skippedGroups: Object.keys(state.skippedCategories).length
     });
     if (!result.relevantAnswered) {
@@ -1861,7 +1870,9 @@
     state.reportVisible = true;
     dom.reportPanel.hidden = false;
     renderReport();
-    setStatus(t("reportReady"), "ok");
+    if (shouldAnnounce) {
+      setStatus(t("reportReady"), "ok");
+    }
     if (shouldScroll) {
       dom.reportPanel.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -1899,7 +1910,7 @@
         en: engine.reportFor(result, "en"),
         zh: engine.reportFor(result, "zh")
       },
-      attributes: Object.fromEntries(state.dimensions.map(dim => [dim.id, exportValueForDimension(dim)]))
+      attributes: normalizedAnswers()
     };
   }
 
@@ -1938,10 +1949,7 @@
 
   function downloadAttributes() {
     const missing = state.dimensions.filter(isDimensionUnanswered).map(dim => dim.id);
-    const payload = {};
-    for (const dim of state.dimensions) {
-      payload[dim.id] = exportValueForDimension(dim);
-    }
+    const payload = normalizedAnswers();
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");

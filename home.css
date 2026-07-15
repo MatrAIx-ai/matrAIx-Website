@@ -88,7 +88,7 @@ body {
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 20;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 18px clamp(20px, 5vw, 40px);
+  padding: 18px clamp(20px, 5vw, 64px);
   background: var(--bg);
   border-bottom: 1px solid var(--line-soft);
   gap: 20px;
@@ -235,7 +235,7 @@ main > aside {
 
 .hero {
   max-width: 1100px; margin: 0 auto;
-  padding: clamp(140px, 18vw, 180px) clamp(20px, 5vw, 40px) 70px;
+  padding: clamp(140px, 18vw, 180px) clamp(20px, 5vw, 64px) 70px;
   text-align: center;
 }
 
@@ -431,7 +431,7 @@ main > aside {
 .panel {
   position: relative; z-index: 10;
   max-width: 1080px; margin: 0 auto;
-  padding: clamp(70px, 10vw, 110px) clamp(20px, 5vw, 40px) 0;
+  padding: clamp(70px, 10vw, 110px) clamp(20px, 5vw, 64px) 0;
 }
 .sec-head { max-width: 760px; margin: 0 auto 44px; text-align: center; }
 .sec-head .idx { font-family: var(--disp); font-size: var(--text-sm); letter-spacing: var(--tracking-widest); color: var(--phos); font-weight: 500; }
