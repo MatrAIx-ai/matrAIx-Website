@@ -1316,6 +1316,15 @@
     }
   }
 
+  function scrollToCategoryStart() {
+    const navBottom = document.querySelector(".nav")?.getBoundingClientRect().bottom ?? 0;
+    const groupTop = window.scrollY + dom.groupContent.getBoundingClientRect().top;
+    window.scrollTo({
+      top: Math.max(0, Math.round(groupTop - navBottom - 16)),
+      behavior: "auto"
+    });
+  }
+
   function changeCategory(index) {
     const next = Math.max(0, Math.min(state.categories.length - 1, index));
     if (next === state.activeIndex) return;
@@ -1323,6 +1332,7 @@
     const saved = flushSave();
     setStatus(saved ? t("progressSaved") : t("saveFailed"), saved ? "ok" : "error");
     renderAll();
+    scrollToCategoryStart();
   }
 
   function pickByKeywords(values, preferredKeywords = [], fallback = null) {
