@@ -423,7 +423,7 @@
 
   async function loadDimensions() {
     const [dimsResponse, zhResponse] = await Promise.all([
-      fetch("./dimensions.json"),
+      fetch("./dimensions.json?v=2"),
       fetch("./i18n/zh.json?v=20")
     ]);
     if (!dimsResponse.ok || !zhResponse.ok) {
@@ -458,7 +458,7 @@
   }
   function optionLabelForUi(dim, value) {
     if (value === NOT_APPLICABLE_VALUE) {
-      return state.lang === "zh" ? "无" : "N/A";
+      return state.lang === "zh" ? "跳过 / 不适用" : "Skip / not applicable";
     }
     const pack = zhPack();
     if (!pack) return value;
