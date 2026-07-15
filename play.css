@@ -868,55 +868,101 @@
     gap: 12px;
   }
 
-  .matrix-row {
+  .matrix-row,
+  .dimension-grid .dimension-card {
+    padding: 0;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     overflow: hidden;
+    border: 0;
     border-radius: 12px;
     background: var(--bg-2);
     box-shadow: 0 0 0 1px var(--line-soft);
   }
 
-  .matrix-row-head {
+  .matrix-table .matrix-row-head,
+  .dimension-card .dim-card-head {
     position: static;
     grid-column: 1 / -1;
     display: block;
     min-width: 0;
     max-width: none;
     padding: 12px;
+    margin: 0;
+    text-align: left;
     border-bottom: 1px solid var(--line-soft);
     background: var(--bg-3);
   }
 
-  .matrix-row-desc {
-    display: block;
-    margin-top: 4px;
+  .matrix-table .matrix-row-label,
+  .dimension-card .dim-card-title {
+    font-size: 13px;
+    line-height: 1.35;
+    font-weight: 600;
   }
 
-  .matrix-cell {
+  .matrix-table .matrix-row-desc,
+  .dimension-card .dim-card-desc {
+    display: block;
+    margin-top: 4px;
+    margin-bottom: 0;
+    font-size: 11px;
+    line-height: 1.4;
+    opacity: 0.75;
+  }
+
+  .dimension-card .value-grid {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .matrix-cell,
+  .value-choice {
     display: block;
     min-width: 0;
+    max-width: none;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
     border-bottom: 1px solid var(--line-soft);
   }
 
-  .matrix-cell:nth-of-type(odd) {
+  .matrix-cell:nth-of-type(odd),
+  .value-choice:nth-child(odd) {
     border-right: 1px solid var(--line-soft);
   }
 
-  .matrix-choice {
+  .matrix-choice,
+  .value-choice {
+    display: flex;
+    align-items: center;
     justify-content: flex-start;
     gap: 9px;
     min-height: 48px;
     padding: 8px 10px;
+    background: transparent;
   }
 
-  .matrix-choice-label {
+  .matrix-cell.is-synthetic-opt-out,
+  .value-choice.is-synthetic-opt-out {
+    grid-column: 1 / -1;
+    border-right: 0;
+  }
+
+  .matrix-choice-label,
+  .value-choice span {
     display: block;
     min-width: 0;
     color: var(--ink);
     font-size: 12px;
     line-height: 1.25;
     overflow-wrap: anywhere;
+  }
+
+  .value-choice:hover {
+    border-color: var(--line-soft);
   }
 
   .value-choice input[type="radio"],

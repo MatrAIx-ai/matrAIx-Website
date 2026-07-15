@@ -1202,8 +1202,9 @@
       const cells = options.map(value => {
         const id = optionInputId(dim, value);
         const checked = current === value ? " checked" : "";
+        const optOutClass = value === NOT_APPLICABLE_VALUE ? " is-synthetic-opt-out" : "";
         const ariaLabel = `${dimensionLabelForUi(dim)}: ${optionLabelForUi(dim, value)}`;
-        return `<td class="matrix-cell">
+        return `<td class="matrix-cell${optOutClass}">
           <label class="matrix-choice" for="${escapeHtml(id)}">
             <input type="radio" id="${escapeHtml(id)}" name="dim-${escapeHtml(dim.id)}" value="${escapeHtml(value)}"
               data-action="set-value" data-dim-id="${escapeHtml(dim.id)}" aria-label="${escapeHtml(ariaLabel)}"${checked}>
@@ -1238,7 +1239,8 @@
     const options = optionsForDimension(dim).map(value => {
       const checked = current === value ? " checked" : "";
       const id = optionInputId(dim, value);
-      return `<label class="value-choice" for="${escapeHtml(id)}">
+      const optOutClass = value === NOT_APPLICABLE_VALUE ? " is-synthetic-opt-out" : "";
+      return `<label class="value-choice${optOutClass}" for="${escapeHtml(id)}">
         <input type="radio" id="${escapeHtml(id)}" name="dim-${escapeHtml(dim.id)}" value="${escapeHtml(value)}"
           data-action="set-value" data-dim-id="${escapeHtml(dim.id)}"${checked}>
         <span>${escapeHtml(optionLabelForUi(dim, value))}</span>
@@ -1247,8 +1249,8 @@
     return `<article class="dimension-card">
       <header class="dim-card-head">
         <h4 class="dim-card-title">${escapeHtml(dimensionLabelForUi(dim))}</h4>
+        <p class="dim-card-desc">${escapeHtml(dimensionDescriptionForUi(dim))}</p>
       </header>
-      <p class="dim-card-desc">${escapeHtml(dimensionDescriptionForUi(dim))}</p>
       <div class="value-grid">${options}</div>
     </article>`;
   }
