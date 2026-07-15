@@ -1207,6 +1207,7 @@
           <label class="matrix-choice" for="${escapeHtml(id)}">
             <input type="radio" id="${escapeHtml(id)}" name="dim-${escapeHtml(dim.id)}" value="${escapeHtml(value)}"
               data-action="set-value" data-dim-id="${escapeHtml(dim.id)}" aria-label="${escapeHtml(ariaLabel)}"${checked}>
+            <span class="matrix-choice-label">${escapeHtml(optionLabelForUi(dim, value))}</span>
           </label>
         </td>`;
       }).join("");
