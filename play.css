@@ -825,7 +825,34 @@
   display: none;
 }
 
-@media (max-width: 900px) {
+/* Tailwind's `sm` boundary and above keep the matrix. Compress its columns between phone and
+   desktop widths so the table still fits without horizontal page overflow. */
+@media (min-width: 640px) and (max-width: 900px) {
+  .matrix-table {
+    table-layout: fixed;
+    font-size: 12px;
+  }
+
+  .matrix-row-head {
+    width: 28%;
+    min-width: 0;
+    max-width: none;
+    padding: 8px;
+  }
+
+  .matrix-option-head {
+    min-width: 0;
+    padding: 9px 3px !important;
+    font-size: 10px !important;
+    overflow-wrap: anywhere;
+  }
+
+  .matrix-row-desc {
+    display: none;
+  }
+}
+
+@media (max-width: 639px) {
   .matrix-table,
   .matrix-table tbody {
     display: block;
