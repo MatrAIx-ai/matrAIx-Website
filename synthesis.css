@@ -269,11 +269,12 @@
 /* Graph elements shared by the renderers added in Tasks 8 and 9. */
 .syn-cat-node { cursor: pointer; }
 .syn-cat-node:focus-visible circle,
-.syn-dd-node:focus-visible rect { stroke: #fff; stroke-width: 3; }
+.syn-dd-node:focus-visible rect { stroke: var(--syn-ink); stroke-width: 3; }
 .syn-cat-node circle { fill: rgba(74, 143, 194, 0.16); stroke: var(--syn-accent); stroke-width: 1.2; }
 .syn-cat-node.active circle { fill: rgba(74, 143, 194, 0.4); }
 .syn-cat-node text { fill: currentColor; font: 11px Inter, sans-serif; }
 .syn-edge { fill: none; stroke: var(--syn-accent); stroke-opacity: 0.25; }
+.syn-edge-arrow { fill: var(--syn-accent); fill-opacity: 0.55; }
 .syn-dd-node rect { fill: rgba(140, 160, 170, 0.08); stroke: rgba(140, 160, 170, 0.4); rx: 5; }
 .syn-dd-node.center rect { fill: rgba(74, 143, 194, 0.18); stroke: var(--syn-accent); stroke-width: 1.6; }
 .syn-dd-node.helper rect { stroke-dasharray: 3 3; }
@@ -302,7 +303,13 @@
   .syn-main { padding-top: 80px; }
   .syn-panel-head { flex-wrap: wrap; }
   .syn-panel-hint { flex: 1 1 320px; }
-  .syn-overview-layout { grid-template-columns: 1fr; grid-template-rows: minmax(220px, 1fr) minmax(120px, auto); }
+  .syn-overview-layout {
+    height: auto;
+    min-height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(620px, auto) minmax(120px, auto);
+  }
+  .syn-overview-layout > .syn-svg { min-height: 620px; }
   .syn-attr-list { border-top: 1px solid var(--syn-line); border-left: 0; }
 }
 

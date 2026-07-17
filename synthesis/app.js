@@ -2,6 +2,7 @@ import { loadManifest, loadArtifact } from "./data-loader.js";
 import { createGraphStore } from "./graph-store.js";
 import { buildOverview } from "./graph-views.js";
 import { decodeUrlState, encodeUrlState } from "./url-state.js";
+import { createOverviewRenderer } from "./overview-graph.js";
 
 const $ = (id) => document.getElementById(id);
 const rendererSlices = new WeakMap();
@@ -227,6 +228,20 @@ function restoreFromUrl() {
 
 async function boot() {
   const cleanups = [wireExpandButtons(), wireMobileNav(), wireHopControls()];
+  registerRenderer(createOverviewRenderer({
+    svg: $("overviewSvg"),
+    listEl: $("attrList"),
+    onSelectCategory: (name) =>
+      setState(
+        {
+          selectedCategory: state.selectedCategory === name ? null : name,
+          selectedNode: null,
+        },
+        { historyMode: "push" },
+      ),
+    onSelectNode: (id) =>
+      setState({ centerNode: id, selectedNode: id }, { historyMode: "push" }),
+  }), { slices: ["overview", "selectedCategory", "centerNode"] });
   let controller = null;
   let attemptId = 0;
   let pinnedManifest = null;
