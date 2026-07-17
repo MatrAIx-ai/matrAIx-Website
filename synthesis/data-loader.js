@@ -122,7 +122,8 @@ function validateDescriptor(value, key, siteUrl) {
 
   const rawPath = value.path;
   const lowerPath = rawPath.toLowerCase();
-  if (rawPath.includes("?")
+  if (rawPath !== rawPath.trim()
+      || rawPath.includes("?")
       || rawPath.includes("#")
       || rawPath.includes("\\")
       || rawPath.startsWith("//")
