@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Build data/i18n-zh.json — display-only Chinese for the persona survey.
+ * Build data/play_ch_version.json — display-only Chinese for the persona survey.
  * Exact-key lookups only. No runtime substring replacement.
  *
  * Policy:
@@ -20,7 +20,7 @@ execFileSync(process.execPath, [path.join(__dirname, "build-i18n-extra.js")], { 
 
 const ROOT = path.join(__dirname, "..");
 const DIMENSIONS_PATH = path.join(ROOT, "data", "dimensions.json");
-const OUT_PATH = path.join(ROOT, "data", "i18n-zh.json");
+const OUT_PATH = path.join(ROOT, "data", "play_ch_version.json");
 
 const { dimensions } = JSON.parse(fs.readFileSync(DIMENSIONS_PATH, "utf8"));
 const I18N = require("./i18n-words");
