@@ -1,0 +1,80 @@
+{
+  "formatVersion": 1,
+  "releaseId": "v1",
+  "allowlistSha256": "97da50f6a87f0b0bddea8a7d16f63568062f9e985359bdd1bf1559b06b155c17",
+  "runtime": [
+    {
+      "path": "app.js",
+      "bytes": 11353,
+      "sha256": "44d23f0f4b828658929eb15162cdd09ce15eabe0d8b1b4dea355393004db72a4"
+    },
+    {
+      "path": "data-loader.js",
+      "bytes": 18380,
+      "sha256": "c8068c0b3624903303f4b5a6d5480b31e06d33f3136498c5d210dadffc11eec7"
+    },
+    {
+      "path": "detail-rail.js",
+      "bytes": 4509,
+      "sha256": "3edd7707ee7ef1ccd0b91f2ca9fdfe5f5b659864f01a4d07e6be91ba918c8fd2"
+    },
+    {
+      "path": "dist-utils.js",
+      "bytes": 2917,
+      "sha256": "8925ae84c439e2c989efa290bb8d88b59ec89f542bcb48c6934ed125dff740be"
+    },
+    {
+      "path": "drilldown-graph.js",
+      "bytes": 10212,
+      "sha256": "3a0c02d1437e6981c60169a752099c005ca07b3a8d6581228ac8ffaa62c8c237"
+    },
+    {
+      "path": "graph-store.js",
+      "bytes": 812,
+      "sha256": "77298efd038fa8e64c72ff8aed371c4f4f5ab876f0eaadf122bfbf171f1d1d4a"
+    },
+    {
+      "path": "graph-views.js",
+      "bytes": 8394,
+      "sha256": "94fd6d87049944d0ed9620281a0871ec3bbbf1d60f97d04a883cad354aa886c4"
+    },
+    {
+      "path": "overview-graph.js",
+      "bytes": 10001,
+      "sha256": "bc0f1d36d437533c6407d2e0ee6e7b0b74e3c3d9d7c8e69547ab451c360b31c2"
+    },
+    {
+      "path": "synthesis.css",
+      "bytes": 10252,
+      "sha256": "e7650b4748374580a726755ee4f72186f1ee8ef56116dbb86f24b4252a784e33"
+    },
+    {
+      "path": "url-state.js",
+      "bytes": 2846,
+      "sha256": "8d823b19e3db9aa87730de620a2d5bb575d348ca8daf4e9fd3c8643e8743b04f"
+    }
+  ],
+  "data": {
+    "datasetId": "sha256:28822720c6f8beea8f9386ef918df329ff5607eacea9ad16f5b80edc6dc4e166",
+    "manifest": {
+      "path": "synthesis/data/manifest.v1.json",
+      "bytes": 668,
+      "sha256": "4e9d26e94c00d2a3e0c332ceb6f0725f55885b3d328e10b18aceab5331ebec8a"
+    },
+    "artifacts": [
+      {
+        "name": "core",
+        "path": "synthesis/data/graph-core.v1.json",
+        "bytes": 1315948,
+        "sha256": "801614ade9e81212044347402ea06a7eac2783d756fe097dca55ad933ea6e9c9"
+      }
+    ],
+    "generator": {
+      "path": "scripts/build-synthesis-data.5f11b43bdef57c0fc202d49d484889aae996cc46a4ad5923718feae2d0685083.mjs",
+      "bytes": 6522,
+      "sha256": "5f11b43bdef57c0fc202d49d484889aae996cc46a4ad5923718feae2d0685083",
+      "node": "18.19.1"
+    }
+  },
+  "predecessor": null
+}

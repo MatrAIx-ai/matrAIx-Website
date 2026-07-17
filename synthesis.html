@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="dark-theme.css?v=5" />
   <link rel="stylesheet" href="subpages.css?v=8" />
   <link rel="stylesheet" href="subpages-light.css?v=2" />
-  <link rel="stylesheet" href="synthesis.css" />
+  <link rel="stylesheet" href="synthesis/releases/v1/synthesis.css" />
 </head>
 <body class="syn-body">
   <div class="grain" aria-hidden="true"></div>
@@ -62,7 +62,7 @@
         <div class="syn-hops">
           <label>Up <select id="hopsUp" aria-label="Upstream hops"><option>0</option><option selected>1</option><option>2</option><option>3</option><option>4</option></select></label>
           <label>Down <select id="hopsDown" aria-label="Downstream hops"><option>0</option><option selected>1</option><option>2</option><option>3</option><option>4</option></select></label>
-          <span class="syn-truncated" id="truncatedFlag" hidden>truncated</span>
+          <span class="syn-truncated" id="truncatedFlag" role="status" aria-live="polite" hidden>truncated to 60/direction</span>
         </div>
         <button class="syn-expand" type="button" data-panel="panelDrilldown" aria-expanded="false" aria-controls="drilldownPanelBody" aria-label="Expand Drill-down subgraph">Expand</button>
       </header>
@@ -83,7 +83,7 @@
     </section>
   </main>
 
-  <script type="module" src="synthesis/app.js"></script>
+  <script type="module" src="synthesis/releases/v1/app.js"></script>
   <script src="theme-toggle.js?v=3"></script>
   <script src="site-performance.js?v=1"></script>
 </body>

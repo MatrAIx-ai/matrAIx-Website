@@ -1,0 +1,19 @@
+{
+  "formatVersion": 1,
+  "releases": {
+    "v1": {
+      "files": [
+        { "source": "synthesis/app.js", "target": "app.js" },
+        { "source": "synthesis/data-loader.js", "target": "data-loader.js" },
+        { "source": "synthesis/detail-rail.js", "target": "detail-rail.js" },
+        { "source": "synthesis/dist-utils.js", "target": "dist-utils.js" },
+        { "source": "synthesis/drilldown-graph.js", "target": "drilldown-graph.js" },
+        { "source": "synthesis/graph-store.js", "target": "graph-store.js" },
+        { "source": "synthesis/graph-views.js", "target": "graph-views.js" },
+        { "source": "synthesis/overview-graph.js", "target": "overview-graph.js" },
+        { "source": "synthesis.css", "target": "synthesis.css" },
+        { "source": "synthesis/url-state.js", "target": "url-state.js" }
+      ]
+    }
+  }
+}
