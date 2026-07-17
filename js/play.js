@@ -347,7 +347,7 @@
   async function loadDimensions() {
     const [dimsResponse, zhResponse] = await Promise.all([
       fetch("./data/dimensions.json"),
-      fetch("./i18n/zh.json?v=20")
+      fetch("./data/i18n-zh.json?v=20")
     ]);
     if (!dimsResponse.ok || !zhResponse.ok) {
       throw new Error(t("loadError"));
