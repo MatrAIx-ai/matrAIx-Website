@@ -366,10 +366,13 @@ test("loadManifest requires the exact expected releaseId", async () => {
   }), "release");
 });
 
-test("manifest descriptors reject query, fragment, cross-origin, off-tree, and mutable paths", async (t) => {
+test("manifest descriptors reject non-contract raw paths", async (t) => {
   const cases = [
     ["query", `${CORE_PATH}?v=123`],
     ["fragment", `${CORE_PATH}#sha`],
+    ["bare filename", "graph-core.v1.json"],
+    ["same-origin full URL", `https://example.test/${CORE_PATH}`],
+    ["same-origin network path", `//example.test/${CORE_PATH}`],
     ["cross-origin", `https://evil.test/${CORE_PATH}`],
     ["non-http scheme", `blob:https://example.test/${CORE_PATH}`],
     ["off-tree", "data/graph-core.v1.json"],
@@ -386,6 +389,33 @@ test("manifest descriptors reject query, fragment, cross-origin, off-tree, and m
       }), "descriptor");
     });
   }
+});
+
+test("descriptor loading is consistent under a subpath deployment", async () => {
+  const deploymentBase = "https://example.test/app/";
+  const manifestUrl = `${deploymentBase}synthesis/data/manifest.v2.json`;
+  const manifestValue = manifestWithBytes();
+
+  const manifest = await loadManifest(manifestUrl, {
+    expectedReleaseId: "v2",
+    fetchImpl: async (url, init) => {
+      assert.equal(String(url), manifestUrl);
+      assert.equal(init.cache, "no-store");
+      return new Response(JSON.stringify(manifestValue));
+    },
+  });
+  const core = await loadArtifact(manifest, "core", {
+    baseUrl: deploymentBase,
+    fetchImpl: async (url, init) => {
+      assert.equal(String(url), `${deploymentBase}${CORE_PATH}`);
+      assert.equal(init.cache, "no-store");
+      assert.equal(new URL(String(url)).search, "");
+      assert.equal(new URL(String(url)).hash, "");
+      return new Response(CORE_BYTES);
+    },
+  });
+
+  assert.deepEqual(core, coreFixture);
 });
 
 test("loadArtifact rechecks descriptor origin against the trusted base URL", async () => {

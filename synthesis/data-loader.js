@@ -125,11 +125,18 @@ function validateDescriptor(value, key, siteUrl) {
   if (rawPath.includes("?")
       || rawPath.includes("#")
       || rawPath.includes("\\")
+      || rawPath.startsWith("//")
+      || /^[a-z][a-z\d+.-]*:/i.test(rawPath)
       || lowerPath.includes("%2e")
       || lowerPath.includes("%2f")
       || lowerPath.includes("%5c")
       || rawPath.split("/").some((part) => part === "." || part === "..")) {
     throw new ArtifactLoadError("descriptor", "Snapshot descriptor path is invalid.");
+  }
+
+  const rawMatch = rawPath.match(/(?:^|\/)synthesis\/data\/([^/]+)$/);
+  if (!rawMatch || !immutableFilename(key, rawMatch[1])) {
+    throw new ArtifactLoadError("descriptor", "Snapshot descriptor path is not immutable.");
   }
 
   const base = resolveUrl(siteUrl, undefined, "descriptor");
@@ -149,10 +156,6 @@ function validateDescriptor(value, key, siteUrl) {
     throw new ArtifactLoadError("descriptor", "Snapshot descriptor path is invalid.");
   }
 
-  const match = resolved.pathname.match(/(?:^|\/)synthesis\/data\/([^/]+)$/);
-  if (!match || !immutableFilename(key, match[1])) {
-    throw new ArtifactLoadError("descriptor", "Snapshot descriptor path is not immutable.");
-  }
   return resolved;
 }
 
