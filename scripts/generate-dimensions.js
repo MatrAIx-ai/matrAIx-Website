@@ -3,13 +3,13 @@
    Keeps the curated core dimensions and expands the flat persona
    space toward 1,000 via families of genuinely meaningful axes
    (familiarity, proficiency, attitude, interest, ...).
-   Run:  node generate-dimensions.js
+   Run:  node scripts/generate-dimensions.js
    ============================================================ */
 
 const fs = require('fs');
 const path = require('path');
 
-const FILE = path.join(__dirname, 'dimensions.json');
+const FILE = path.join(__dirname, '..', 'data', 'dimensions.json');
 const existing = JSON.parse(fs.readFileSync(FILE, 'utf8'));
 
 // Family id prefixes — used to strip previously generated dims so re-running is idempotent.

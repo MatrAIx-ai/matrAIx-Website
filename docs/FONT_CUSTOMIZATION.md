@@ -9,7 +9,7 @@ This document explains how to easily customize fonts across the matrAIx.ai websi
 
 ## Font Variables
 
-All fonts are defined using CSS custom properties (variables) for easy customization. The main font variable file is `light-theme.css`:
+All fonts are defined using CSS custom properties (variables) for easy customization. The main font variable file is `css/light-theme.css`:
 
 ```css
 :root {
@@ -27,7 +27,7 @@ Fallback fonts are included for better browser compatibility:
 
 To change all fonts on the site, edit the following files:
 
-### 1. `light-theme.css` (Primary - applies to all pages)
+### 1. `css/light-theme.css` (Primary - applies to all pages)
 Update the `:root` variables at the top:
 
 ```css
@@ -39,11 +39,11 @@ Update the `:root` variables at the top:
 ```
 
 ### 2. Individual CSS files (for specific sections)
-- `home.css` - Landing page
-- `styles.css` - Main shared styles
-- `benchmark.css` - Demo portal
-- `explorer.css` - Persona explorer
-- `play.css` - Quiz page
+- `css/home.css` - Landing page
+- `css/styles.css` - Main shared styles
+- `css/benchmark.css` - Demo portal
+- `css/explorer.css` - Persona explorer
+- `css/play.css` - Quiz page
 
 Update the `--disp` variable in each file's `:root` block.
 
@@ -119,7 +119,7 @@ h1, h2, h3, h4, h5, h6 {
 
 ## Testing Font Changes
 
-1. Update the font variable in `light-theme.css`
+1. Update the font variable in `css/light-theme.css`
 2. Ensure the font is properly imported (via Google Fonts or other service)
 3. Test across all pages:
    - Home (`index.html`)

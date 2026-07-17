@@ -19,7 +19,7 @@ const { execFileSync } = require("child_process");
 execFileSync(process.execPath, [path.join(__dirname, "build-i18n-extra.js")], { stdio: "inherit" });
 
 const ROOT = path.join(__dirname, "..");
-const DIMENSIONS_PATH = path.join(ROOT, "dimensions.json");
+const DIMENSIONS_PATH = path.join(ROOT, "data", "dimensions.json");
 const OUT_PATH = path.join(ROOT, "i18n", "zh.json");
 
 const { dimensions } = JSON.parse(fs.readFileSync(DIMENSIONS_PATH, "utf8"));

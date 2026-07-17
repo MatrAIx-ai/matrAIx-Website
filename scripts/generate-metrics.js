@@ -3,8 +3,8 @@
    Builds a 900+ catalog of evaluation metrics (curated core +
    meaningful families) that the demo's metric picker offers for
    selection. Users can still type any custom metric.
-   Writes:  metrics.json  (categorized)  +  metrics.js  (names array)
-   Run:     node generate-metrics.js
+   Writes:  data/metrics.json (categorized) + js/metrics.js (names array)
+   Run:     node scripts/generate-metrics.js
    ============================================================ */
 
 const fs = require('fs');
@@ -160,12 +160,12 @@ FAIR.forEach(s => DEMO.forEach(d => add(`${s} by ${d}`, 'Fairness')));
 /* ---------- write ---------- */
 const cats = {};
 out.forEach(m => (cats[m.category] = (cats[m.category] || 0) + 1));
-fs.writeFileSync(path.join(__dirname, 'metrics.json'),
+fs.writeFileSync(path.join(__dirname, '..', 'data', 'metrics.json'),
   JSON.stringify({ name: 'matrAIx evaluation metrics', count: out.length, categories: cats, metrics: out }, null, 2) + '\n');
 const groups = {};
 out.forEach(m => { (groups[m.category] = groups[m.category] || []).push(m.name); });
 const groupsArr = Object.keys(groups).map(c => ({ category: c, metrics: groups[c] }));
-fs.writeFileSync(path.join(__dirname, 'metrics.js'),
+fs.writeFileSync(path.join(__dirname, '..', 'js', 'metrics.js'),
   'window.MATRAIX_METRICS = ' + JSON.stringify(out.map(m => m.name)) + ';\n' +
   'window.MATRAIX_METRIC_GROUPS = ' + JSON.stringify(groupsArr) + ';\n');
 

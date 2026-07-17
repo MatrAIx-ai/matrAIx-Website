@@ -3,7 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 const { dimensions } = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "..", "dimensions.json"), "utf8")
+  fs.readFileSync(path.join(__dirname, "..", "data", "dimensions.json"), "utf8")
 );
 
 const SKIP_CATS = new Set(["Skills: Programming"]);

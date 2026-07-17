@@ -1,6 +1,6 @@
 # matrAIx synthetic agents — cohort summary
 
-Diversity and statistics for the **830 generated agents** in this folder, each drawn from **1162 dimensions** in [`dimensions.json`](../../dimensions.json).
+Diversity and statistics for the **830 generated agents** in this folder, each drawn from **1162 dimensions** in [`dimensions.json`](../../data/dimensions.json).
 
 > Regenerate with `node agent/personas/summarize.js`. Machine-readable form: [`summary.json`](summary.json).
 
