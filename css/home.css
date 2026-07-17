@@ -981,7 +981,7 @@ main > aside {
 /* Shared research components */
 .section-kicker,
 .idx {
-  font-family: var(--mono); font-size: 0.72rem; font-weight: 500;
+  font-family: "Inter", var(--disp); font-size: 0.72rem; font-weight: 500;
   letter-spacing: .15em; text-transform: uppercase; color: var(--phos);
 }
 .maturity {
