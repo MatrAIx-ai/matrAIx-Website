@@ -14,7 +14,7 @@ the persona **dimension schema** that defines the space those agents are sampled
 | Landing | [`index.html`](index.html) | Hero with the 8.3-billion-behavior headline, "Open-Source Community" badge, and a live agent-field simulation (canvas), telemetry strip, and eval methodology. |
 | Blog | [`blog/`](blog/) | Blog index page with 3 research papers in a single-column layout. Gateway to research insights on persona grounding, evaluation frameworks, and agent simulation. |
 | Persona Explorer | [`person.html`](person.html) | Browse the flat persona schema: filter by category, search, expand value pools, and sample a full synthetic persona. |
-| DAG Studio | synthesis.html | Client-side browser for the Persona Full DAG: category overview, hop-bounded drill-down, per-node priors and strongest edges. |
+| DAG Studio | [`synthesis.html`](synthesis.html) | Verified client-side Persona Full DAG browser with hop-bounded inspection, reproducible pin/prior/edge/category recipes, Worker sampling, baseline comparisons, and selected-persona overlays. |
 | Demo Portal (matrAIx OS) | [`demo.html`](demo.html) | A mission-control interface: a live "Neural Eval Core" brain visualization, an agent swarm simulating the selected app/website, streaming trajectory telemetry, switchable reports (A/B, segments, score distribution, heatmap, findings), and JSONL trajectory export. |
 | Case Study | [`case_study.html`](case_study.html) | A recorded sample trajectory: a matrAIx computer-using agent (10-dimension persona) files an auto-insurance claim on hugclaim.com, with per-step screenshots, observations, actions, rewards, friction findings, and a JSONL export. |
 | Let's Play! | [`play.html`](play.html) | A fun 8-question personality quiz. Each answer maps to a real persona dimension value (`dominant_trait`, `risk_tolerance`, `decision_style`, `values_priority`, `tone_expected`, `learning_style`, `media_diet`, `economic_motivation`); after answering, matrAIx synthesizes the player's **persona**, names their archetype, and **predicts how they'd behave** inside a product flow — the simulation-fidelity thesis, made playable. Self-contained (no schema file needed). |
@@ -24,6 +24,28 @@ No build step — open `index.html` in a browser, or serve the folder:
 ```bash
 python3 -m http.server 8000   # then visit http://localhost:8000
 ```
+
+### Synthesis Studio data
+
+The Studio's source, data, generator, golden, and immutable runtime contracts are
+documented in [`synthesis/README.md`](synthesis/README.md). Its phase-2 data must
+be regenerated with the content-addressed generator named by
+`synthesis/data/manifest.v2.json`, never a mutable build entry point:
+
+```bash
+export NODE18=/absolute/path/to/node-v18.19.1
+test "$("$NODE18" --version)" = "v18.19.1"
+V2_GENERATOR=$("$NODE18" -e \
+  "const m=require('./synthesis/data/manifest.v2.json');process.stdout.write(m.generator.path)")
+"$NODE18" "$V2_GENERATOR" \
+  --graph /path/to/pinned-MatrAIx/persona/synthesis/graph/full_dag.json \
+  --source-commit 4dfa4e066b706c6a2d33a10fd41b976efd3f524e \
+  --dimensions dimensions.json --out-dir synthesis/data --phase 2
+```
+
+Baseline comparisons use the same seed and sample count with the default,
+unadjusted sampler. They do not reuse the adjusted gamma or recipe, and the site
+retains baseline marginals only—not a second set of persona objects.
 
 ## Persona dimension schema
 

@@ -1248,5 +1248,5 @@ test("repository releases and public entry points pin one query-free v2 runtime"
   assert.match(readme,
     /\| DAG Studio \| \[`synthesis\.html`\]\(synthesis\.html\) \| Verified client-side Persona Full DAG browser[\s\S]*?selected-persona overlays\. \|/);
   assert.match(readme,
-    /manifest\.v2\.json[\s\S]*?\$V2_GENERATOR[\s\S]*?--phase 2[\s\S]*?default,[\s\S]*?unadjusted sampler/);
+    /NODE18[\s\S]*?v18\.19\.1[\s\S]*?manifest\.v2\.json[\s\S]*?"\$NODE18" "\$V2_GENERATOR"[\s\S]*?--phase 2[\s\S]*?default,[\s\S]*?unadjusted sampler/);
 });
