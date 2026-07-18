@@ -66,6 +66,16 @@ The main thread verifies the manifest and core before enabling the studio. The
 Worker independently fetches and verifies core then pack. Persona text performs
 a separate lazy verification of dimensions.
 
+Manifest fetches use normal HTTP caching; Retry reloads the manifest only while
+no verified manifest is pinned. Artifact misses normally use `default`, while
+the next explicit page Retry after a current non-abort failure owns one
+`reload` core request. Only verified raw core, pack, and dimensions bytes enter
+`matraix-synthesis-verified-artifacts-v1`; manifests are not stored there. Cache
+hits repeat descriptor, digest, JSON, dataset, and artifact-specific semantic
+validation. Corrupt entries are best-effort deleted and bypassed once. Cache
+Storage failures degrade to verified network loading, and sequential
+Window/Worker reuse is promised only after an awaited successful put.
+
 Failures are safe and retryable:
 
 - manifest/core failure leaves the graph unavailable and exposes only the fixed
@@ -100,10 +110,12 @@ Worker may be reused. The result contains adjusted persona codes and requested
 marginals, optional baseline marginals, effective config, and helper-pin flags.
 It does not contain `baselinePersonas`.
 
-“Baseline” means the default, unadjusted sampler compiled from the same pinned
-core/pack and sampled with the same seed and `n`. It uses default gamma and no
-recipe overrides or pins; it is not “the adjusted sampler with only overrides
-removed.” Only baseline marginals requested by the UI are retained.
+Generate defaults to adjusted marginals only. Selecting **Compare with
+baseline** opts into a second sample from the default, unadjusted model compiled
+from the same pinned core/pack and sampled with the same seed and `n`. It uses
+default gamma and no recipe overrides or pins; it is not “the adjusted sampler
+with only overrides removed.” When enabled, baseline semantics and output are
+unchanged, and only baseline marginals requested by the UI are retained.
 
 The Results table decodes emitted attributes for its current ten visible rows.
 Selecting a row overlays that exact persona on the drill-down graph, including

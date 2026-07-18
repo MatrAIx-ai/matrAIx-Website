@@ -60,8 +60,8 @@
     },
     {
       "path": "request-schema.js",
-      "bytes": 12926,
-      "sha256": "ae7c3afaf66cbaee86328f7d9b12864123d812633d51b10aca8b2da75c3b23a5"
+      "bytes": 12955,
+      "sha256": "009f06b093cfe9873f1c08213c2fd1ecd09ec71c891e7a47df31bcfdf383d871"
     },
     {
       "path": "results-panel.js",

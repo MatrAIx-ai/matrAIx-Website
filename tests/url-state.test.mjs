@@ -35,7 +35,7 @@ const DEFAULT_CONTROLS = {
   n: 20,
   seed: 42,
   gammaScale: 1,
-  compareBaseline: true,
+  compareBaseline: false,
 };
 const defaults = {
   selectedCategory: null,
@@ -339,6 +339,30 @@ test("cfg decoder accepts arbitrary legal key order and returns normalized entri
     recipe: canonicalRecipe,
     controls: recipeControls,
   });
+});
+
+test("cfg defaults omitted baseline comparison to false and preserves explicit true", () => {
+  const omitted = {
+    datasetId: DATASET_ID,
+    recipe: [],
+    controls: { n: 20, seed: 42, gammaScale: 1 },
+  };
+  assert.equal(
+    browseWithCfg(base64Url(JSON.stringify(omitted))).controls.compareBaseline,
+    false,
+  );
+
+  const explicitTrue = { ...DEFAULT_CONTROLS, compareBaseline: true };
+  const encoded = encodeUrlState(page(), {
+    manifest,
+    recipe: [],
+    controls: explicitTrue,
+  });
+  assert.equal(
+    decodeUrlState(new URL(encoded, "https://matraix.ai"), context)
+      .controls.compareBaseline,
+    true,
+  );
 });
 
 test("padded, noncanonical, and invalid UTF-8 cfg encodings fail closed", () => {

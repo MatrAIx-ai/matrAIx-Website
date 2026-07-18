@@ -264,7 +264,7 @@ test("recipe helpers preserve the four upstream entry kinds and exact request sh
   } = await import("../synthesis/adjust-panel.js");
 
   assert.deepEqual(DEFAULT_CONTROLS,
-    { n: 20, seed: 42, gammaScale: 1, compareBaseline: true });
+    { n: 20, seed: 42, gammaScale: 1, compareBaseline: false });
   const pin = { kind: "pin", nodeId: "p", label: "Pin", value: "yes" };
   const prior = {
     kind: "prior", nodeId: "q", label: "Prior", values: ["x", "y"], weights: [1, 2],
@@ -294,7 +294,7 @@ test("recipe helpers preserve the four upstream entry kinds and exact request sh
     n: 20,
     seed: 42,
     gammaScale: 1,
-    compareBaseline: true,
+    compareBaseline: false,
     pins: { p: "no" },
     overrides: {
       edgeWeights: { "s->t": 0.7 },
@@ -341,7 +341,7 @@ test("Adjust is controlled, safe, highlights validation, and keeps restart actio
       kind: "prior", nodeId: "a", label: "Alpha", values: ["a0", "a1"], weights: [1, 3],
     },
   ];
-  const controls = { n: 20, seed: 42, gammaScale: 1, compareBaseline: true };
+  const controls = { n: 20, seed: 42, gammaScale: 1, compareBaseline: false };
   renderer.render({
     recipe,
     controls,
@@ -406,9 +406,9 @@ test("Adjust is controlled, safe, highlights validation, and keeps restart actio
   nInput.dispatch("change");
   assert.deepEqual(controlsChanges.pop(), { ...controls, n: 33 });
   const baseline = oneByAttribute(rootEl, "data-control", "compareBaseline");
-  baseline.checked = false;
+  baseline.checked = true;
   baseline.dispatch("change");
-  assert.deepEqual(controlsChanges.pop(), { ...controls, compareBaseline: false });
+  assert.deepEqual(controlsChanges.pop(), { ...controls, compareBaseline: true });
 
   const restart = buttonNamed(rootEl, "Restart with latest settings");
   assert.equal(restart.disabled, false);

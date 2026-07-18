@@ -111,7 +111,7 @@ const expectValidationKey = (fn, key) => {
 
 test("URL config validates all four canonical recipe shapes and returns a detached clone", () => {
   assert.deepEqual(DEFAULT_CONTROLS, {
-    n: 20, seed: 42, gammaScale: 1, compareBaseline: true,
+    n: 20, seed: 42, gammaScale: 1, compareBaseline: false,
   });
   assert.equal(Object.hasOwn(requestSchema, "recipeKey"), false);
   assert.equal(Object.hasOwn(requestSchema, "recipeToRequest"), false);
@@ -119,7 +119,7 @@ test("URL config validates all four canonical recipe shapes and returns a detach
   const normalized = validateUrlConfig(raw, { manifest, core });
   assert.deepEqual(normalized, {
     ...validUrlConfig(),
-    controls: { n: 20, seed: 42, gammaScale: 1, compareBaseline: true },
+    controls: { n: 20, seed: 42, gammaScale: 1, compareBaseline: false },
   });
   assert.equal(Object.getPrototypeOf(normalized), Object.prototype);
   assert.equal(Object.getPrototypeOf(normalized.controls), Object.prototype);
@@ -247,7 +247,7 @@ test("URL recipe enforces the cap, unique derived keys, canonical data, and fini
 test("sample request normalizes compareBaseline and returns detached canonical objects", () => {
   const raw = validSampleRequest();
   const normalized = validateSampleRequest(raw, core);
-  assert.deepEqual(normalized, { ...validSampleRequest(), compareBaseline: true });
+  assert.deepEqual(normalized, { ...validSampleRequest(), compareBaseline: false });
   assert.notEqual(normalized, raw);
   assert.notEqual(normalized.pins, raw.pins);
   assert.notEqual(normalized.overrides, raw.overrides);
@@ -374,7 +374,7 @@ test("validated URL recipe expands to the same normalized direct Generate reques
     n: 20,
     seed: 42,
     gammaScale: 1,
-    compareBaseline: true,
+    compareBaseline: false,
     pins: { a: "a1" },
     overrides: {
       edgeWeights: { "h->b": 2 },
@@ -420,6 +420,7 @@ test("runSamplerJob returns deterministic transferable row-major codes and selec
   assert.deepEqual(first.personaCodes, second.personaCodes);
   assert.deepEqual(first.marginals, second.marginals);
   assert.deepEqual(Object.keys(first.marginals), ["h", "d", "e"]);
+  assert.notEqual(first.baselineMarginals, null);
   assert.deepEqual(Object.keys(first.baselineMarginals), ["h", "d", "e"]);
   assert.equal(Object.hasOwn(first, "personas"), false);
   assert.equal(Object.hasOwn(first, "baselinePersonas"), false);

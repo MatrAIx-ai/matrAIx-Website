@@ -43,9 +43,11 @@ V2_GENERATOR=$("$NODE18" -e \
   --dimensions data/dimensions.json --out-dir synthesis/data --phase 2
 ```
 
-Baseline comparisons use the same seed and sample count with the default,
-unadjusted sampler. They do not reuse the adjusted gamma or recipe, and the site
-retains baseline marginals only—not a second set of persona objects.
+Generate defaults to adjusted marginals only. Selecting **Compare with baseline**
+opts into a second sample from the default, unadjusted sampler with the same seed
+and sample count. When enabled, baseline semantics and output are unchanged: the
+sample does not reuse adjusted gamma or recipe settings, and the site retains
+only requested baseline marginals, not a second set of persona objects.
 
 ## Persona dimension schema
 

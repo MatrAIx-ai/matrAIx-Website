@@ -983,6 +983,10 @@ test("a recipe-free batch paginates, renders text lazily, compares numeric distr
   expect(await page.evaluate(() => window.__synState.recipe)).toEqual([]);
   expect(dimensionsRequests).toBe(0);
 
+  const compareBaseline = page.locator('[data-control="compareBaseline"]');
+  await compareBaseline.check();
+  await expect.poll(() => page.evaluate(() => window.__synState.controls.compareBaseline))
+    .toBe(true);
   await page.getByRole("button", { name: "Generate personas" }).click();
   await waitForGeneratedSeed(page, 42, 20);
   await expect(page.locator("#resultsPanel .syn-persona-table tbody tr")).toHaveCount(10);
@@ -1110,6 +1114,10 @@ test("four recipe kinds reach the worker, invalid priors roll back, and compact 
 
   await changeNumberControl(page, "gammaScale", 0.5);
   await expect.poll(() => page.evaluate(() => window.__synState.controls.gammaScale)).toBe(0.5);
+  const compareBaseline = page.locator('[data-control="compareBaseline"]');
+  await compareBaseline.check();
+  await expect.poll(() => page.evaluate(() => window.__synState.controls.compareBaseline))
+    .toBe(true);
   await page.getByRole("button", { name: "Generate personas" }).click();
   await waitForGeneratedSeed(page, 42, 20);
 
@@ -1419,7 +1427,7 @@ test("the complete cfg survives reload and history while duplicate cfg falls bac
   }))).toEqual({
     centerNode: TOPIC_NODE_ID,
     selectedNode: TOPIC_NODE_ID,
-    controls: { n: 20, seed: 42, gammaScale: 1, compareBaseline: true },
+    controls: { n: 20, seed: 42, gammaScale: 1, compareBaseline: false },
     recipe: [],
   });
   const canonical = new URL(page.url());
@@ -1475,6 +1483,47 @@ test("core acquisition starts before the manifest response completes", async ({ 
     .toBeGreaterThan(0);
 });
 
+test("baseline comparison is opt-in and explicit true is preserved", async ({ page }) => {
+  await openStudio(page);
+  const compareBaseline = page.locator('[data-control="compareBaseline"]');
+  await expect(compareBaseline).not.toBeChecked();
+
+  await page.getByRole("button", { name: "Generate personas" }).click();
+  await expect.poll(() => page.evaluate(() => ({
+    generating: window.__synState.generating,
+    n: window.__synState.results?.n ?? null,
+    seed: window.__synState.results?.seed ?? null,
+    controls: window.__synState.controls.compareBaseline,
+    result: window.__synState.results?.compareBaseline ?? null,
+    hasBaseline: window.__synState.results?.hasBaseline ?? null,
+  })), { timeout: 30_000 }).toEqual({
+    generating: false,
+    n: 20,
+    seed: 42,
+    controls: false,
+    result: false,
+    hasBaseline: false,
+  });
+
+  await compareBaseline.check();
+  await expect.poll(() => page.evaluate(() => window.__synState.controls.compareBaseline))
+    .toBe(true);
+  await page.getByRole("button", { name: "Generate personas" }).click();
+  await expect.poll(() => page.evaluate(() => ({
+    generating: window.__synState.generating,
+    n: window.__synState.results?.n ?? null,
+    seed: window.__synState.results?.seed ?? null,
+    result: window.__synState.results?.compareBaseline ?? null,
+    hasBaseline: window.__synState.results?.hasBaseline ?? null,
+  })), { timeout: 30_000 }).toEqual({
+    generating: false,
+    n: 20,
+    seed: 42,
+    result: true,
+    hasBaseline: true,
+  });
+});
+
 test("n=200 stays off the main thread and crosses the worker boundary as a compact transferred buffer", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "chromium-desktop", "performance and transfer probe is Chromium-specific");
   await installNativeWorkerProbe(page);
@@ -1499,10 +1548,7 @@ self.postMessage = (message, transfer = []) => {
   await openStudio(page);
   await changeNumberControl(page, "n", 200);
   const compareBaseline = page.locator('[data-control="compareBaseline"]');
-  await expect(compareBaseline).toBeChecked();
-  await compareBaseline.uncheck();
-  await expect.poll(() => page.evaluate(() => window.__synState.controls.compareBaseline))
-    .toBe(false);
+  await expect(compareBaseline).not.toBeChecked();
   await page.evaluate(() => {
     const intervalMs = 25;
     let previous = performance.now();

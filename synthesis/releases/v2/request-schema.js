@@ -8,7 +8,7 @@ export const DEFAULT_CONTROLS = Object.freeze({
   n: 20,
   seed: 42,
   gammaScale: 1,
-  compareBaseline: true,
+  compareBaseline: false,
 });
 export const MAX_RECIPE_ENTRIES = 12;
 export const MAX_MARGINAL_NODE_IDS = 32;
@@ -98,7 +98,7 @@ const validateGamma = (value, key) => {
 };
 
 const validateCompareBaseline = (record, key) => {
-  if (!hasOwn(record, "compareBaseline")) return true;
+  if (!hasOwn(record, "compareBaseline")) return DEFAULT_CONTROLS.compareBaseline;
   if (typeof record.compareBaseline !== "boolean") {
     fail("compareBaseline must be a boolean", key);
   }
