@@ -18,6 +18,7 @@ const ARTIFACT_FILENAMES = {
   pack: /^sampler-pack\.v[1-9][0-9]*\.json$/,
   dimensions: /^dimensions\.[0-9a-f]{16,64}\.json$/,
 };
+const artifactRequestHandles = new WeakMap();
 const VERIFIED_ARTIFACT_CACHE = "matraix-synthesis-verified-artifacts-v1";
 const CONTENT_FAILURE_CODES = new Set([
   "size",
@@ -128,6 +129,44 @@ const immutableFilename = (key, filename) => {
   return pattern instanceof RegExp && pattern.test(filename);
 };
 
+function resolveArtifactUrl(rawPath, siteUrl, { code, key = null }) {
+  if (!isNonEmptyString(rawPath)) {
+    throw new ArtifactLoadError(code, "Snapshot artifact path is invalid.");
+  }
+  const lowerPath = rawPath.toLowerCase();
+  if (rawPath !== rawPath.trim()
+      || rawPath.includes("?")
+      || rawPath.includes("#")
+      || rawPath.includes("\\")
+      || rawPath.startsWith("/")
+      || /^[a-z][a-z\d+.-]*:/i.test(rawPath)
+      || lowerPath.includes("%2e")
+      || lowerPath.includes("%2f")
+      || lowerPath.includes("%5c")
+      || rawPath.split("/").some((part) => part === "." || part === "..")) {
+    throw new ArtifactLoadError(code, "Snapshot artifact path is invalid.");
+  }
+  const rawMatch = rawPath.match(/(?:^|\/)synthesis\/data\/([^/]+)$/);
+  const immutable = key === null
+    ? Object.keys(ARTIFACT_FILENAMES).some((name) => immutableFilename(name, rawMatch?.[1]))
+    : immutableFilename(key, rawMatch?.[1]);
+  if (!rawMatch || !immutable) {
+    throw new ArtifactLoadError(code, "Snapshot artifact path is not immutable.");
+  }
+  const base = resolveUrl(siteUrl, undefined, code);
+  const resolved = resolveUrl(rawPath, base, code);
+  if (resolved.origin !== base.origin
+      || !["http:", "https:"].includes(base.protocol)
+      || resolved.protocol !== base.protocol
+      || resolved.username !== ""
+      || resolved.password !== ""
+      || resolved.search !== ""
+      || resolved.hash !== "") {
+    throw new ArtifactLoadError(code, "Snapshot artifact path is invalid.");
+  }
+  return resolved;
+}
+
 function validateDescriptor(value, key, siteUrl) {
   if (!isRecord(value)
       || !isNonEmptyString(value.path)
@@ -137,44 +176,7 @@ function validateDescriptor(value, key, siteUrl) {
     throw new ArtifactLoadError("descriptor", "Snapshot descriptor is invalid.");
   }
 
-  const rawPath = value.path;
-  const lowerPath = rawPath.toLowerCase();
-  if (rawPath !== rawPath.trim()
-      || rawPath.includes("?")
-      || rawPath.includes("#")
-      || rawPath.includes("\\")
-      || rawPath.startsWith("//")
-      || /^[a-z][a-z\d+.-]*:/i.test(rawPath)
-      || lowerPath.includes("%2e")
-      || lowerPath.includes("%2f")
-      || lowerPath.includes("%5c")
-      || rawPath.split("/").some((part) => part === "." || part === "..")) {
-    throw new ArtifactLoadError("descriptor", "Snapshot descriptor path is invalid.");
-  }
-
-  const rawMatch = rawPath.match(/(?:^|\/)synthesis\/data\/([^/]+)$/);
-  if (!rawMatch || !immutableFilename(key, rawMatch[1])) {
-    throw new ArtifactLoadError("descriptor", "Snapshot descriptor path is not immutable.");
-  }
-
-  const base = resolveUrl(siteUrl, undefined, "descriptor");
-  let resolved;
-  try {
-    resolved = new URL(rawPath, base);
-  } catch (error) {
-    throw new ArtifactLoadError("descriptor", "Snapshot descriptor path is invalid.", error);
-  }
-  if (resolved.origin !== base.origin
-      || !["http:", "https:"].includes(base.protocol)
-      || resolved.protocol !== base.protocol
-      || resolved.username !== ""
-      || resolved.password !== ""
-      || resolved.search !== ""
-      || resolved.hash !== "") {
-    throw new ArtifactLoadError("descriptor", "Snapshot descriptor path is invalid.");
-  }
-
-  return resolved;
+  return resolveArtifactUrl(value.path, siteUrl, { code: "descriptor", key });
 }
 
 function validateGenerator(generator) {
@@ -542,6 +544,60 @@ async function initialCandidate({
   };
 }
 
+export function startArtifactRequest(url, options = {}) {
+  const base = options.baseUrl ?? runtimeBaseUrl();
+  if (base === undefined) {
+    throw new ArtifactLoadError("request-binding", "Snapshot base URL is unavailable.");
+  }
+  const requestUrl = resolveArtifactUrl(url, base, {
+    code: "request-binding",
+    key: null,
+  });
+  const cacheMode = cacheModeFrom(options);
+  const cacheStorage = hasOwn(options, "cacheStorage")
+    ? options.cacheStorage
+    : globalThis.caches;
+  const pending = initialCandidate({
+    requestUrl,
+    signal: options.signal,
+    fetchImpl: options.fetchImpl ?? globalThis.fetch,
+    cacheStorage,
+    cacheMode,
+  }).then(
+    (candidate) => ({ ok: true, candidate }),
+    (error) => ({ ok: false, error }),
+  );
+  const handle = Object.freeze({});
+  artifactRequestHandles.set(handle, {
+    requestUrl: requestUrl.href,
+    pending,
+    consumed: false,
+    signal: options.signal,
+  });
+  return handle;
+}
+
+async function consumeArtifactRequest(handle, requestUrl, signal) {
+  const state = artifactRequestHandles.get(handle);
+  if (!state || state.consumed) {
+    throw new ArtifactLoadError("request-handle", "Artifact request handle is invalid.");
+  }
+  state.consumed = true;
+  if (state.requestUrl !== requestUrl.href) {
+    throw new ArtifactLoadError(
+      "request-binding",
+      "Artifact request does not match its descriptor.",
+    );
+  }
+  if (signal !== undefined && signal !== state.signal) {
+    throw new ArtifactLoadError("request-binding", "Artifact request signal does not match.");
+  }
+  const result = await state.pending;
+  if (!result.ok) throw result.error;
+  throwIfAborted(result.candidate.signal);
+  return result.candidate;
+}
+
 async function loadVerifiedArtifact({
   descriptor,
   key,
@@ -550,15 +606,12 @@ async function loadVerifiedArtifact({
   fetchImpl,
   cacheStorage,
   cacheMode,
+  requestHandle,
   validate,
 }) {
-  let candidate = await initialCandidate({
-    requestUrl,
-    signal,
-    fetchImpl,
-    cacheStorage,
-    cacheMode,
-  });
+  let candidate = requestHandle === undefined
+    ? await initialCandidate({ requestUrl, signal, fetchImpl, cacheStorage, cacheMode })
+    : await consumeArtifactRequest(requestHandle, requestUrl, signal);
   throwIfAborted(candidate.signal);
 
   for (let attempt = 0; attempt < 2; attempt += 1) {
@@ -630,10 +683,18 @@ export async function loadArtifact(manifest, key, options = {}) {
       throw new ArtifactLoadError("missing-core", "Core is required to verify pack.");
     }
     const { descriptor, requestUrl } = artifactRequest(manifest, key, options.baseUrl);
-    const cacheMode = cacheModeFrom(options);
-    const cacheStorage = hasOwn(options, "cacheStorage")
-      ? options.cacheStorage
-      : globalThis.caches;
+    const hasRequestHandle = options.requestHandle !== undefined;
+    if (hasRequestHandle
+        && ["fetchImpl", "cacheStorage", "cacheMode"].some((name) => hasOwn(options, name))) {
+      throw new ArtifactLoadError(
+        "request-binding",
+        "Artifact request handle owns its request dependencies.",
+      );
+    }
+    const cacheMode = hasRequestHandle ? undefined : cacheModeFrom(options);
+    const cacheStorage = hasRequestHandle
+      ? undefined
+      : hasOwn(options, "cacheStorage") ? options.cacheStorage : globalThis.caches;
     const validate = async (value) => {
       if (!isRecord(value)) schemaError(key === "core" ? "Core" : "Pack");
       if (value.formatVersion !== 1) {
@@ -653,6 +714,7 @@ export async function loadArtifact(manifest, key, options = {}) {
       fetchImpl: options.fetchImpl ?? globalThis.fetch,
       cacheStorage,
       cacheMode,
+      requestHandle: options.requestHandle,
       validate,
     });
   } catch (error) {
@@ -669,10 +731,18 @@ export async function loadAuxJson(manifest, key, options = {}) {
       throw new ArtifactLoadError("missing-validator", "dimensions validator is required.");
     }
     const { descriptor, requestUrl } = artifactRequest(manifest, key, options.baseUrl);
-    const cacheMode = cacheModeFrom(options);
-    const cacheStorage = hasOwn(options, "cacheStorage")
-      ? options.cacheStorage
-      : globalThis.caches;
+    const hasRequestHandle = options.requestHandle !== undefined;
+    if (hasRequestHandle
+        && ["fetchImpl", "cacheStorage", "cacheMode"].some((name) => hasOwn(options, name))) {
+      throw new ArtifactLoadError(
+        "request-binding",
+        "Artifact request handle owns its request dependencies.",
+      );
+    }
+    const cacheMode = hasRequestHandle ? undefined : cacheModeFrom(options);
+    const cacheStorage = hasRequestHandle
+      ? undefined
+      : hasOwn(options, "cacheStorage") ? options.cacheStorage : globalThis.caches;
     const validate = async (value) => {
       try {
         const result = await options.validate(value);
@@ -694,6 +764,7 @@ export async function loadAuxJson(manifest, key, options = {}) {
       fetchImpl: options.fetchImpl ?? globalThis.fetch,
       cacheStorage,
       cacheMode,
+      requestHandle: options.requestHandle,
       validate,
     });
   } catch (error) {

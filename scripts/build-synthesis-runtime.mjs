@@ -992,7 +992,8 @@ function sameJson(actual, expected, message) {
   if (JSON.stringify(actual) !== JSON.stringify(expected)) fail(message);
 }
 
-function isStaticLoadManifestImport(tokens, index) {
+function isStaticNamedImport(tokens, index, name) {
+  if (tokens[index]?.type !== "identifier" || tokens[index].value !== name) return false;
   if (!["{", ","].includes(tokens[index - 1]?.value)
       || !["}", ","].includes(tokens[index + 1]?.value)) return false;
   let importIndex = index - 1;
@@ -1009,25 +1010,43 @@ function isStaticLoadManifestImport(tokens, index) {
   return false;
 }
 
-function assertAppBinding(runtimeBytes, releaseId) {
-  const tokens = tokenizeJavaScript(runtimeBytes.get("app.js") ?? Buffer.alloc(0), "app.js");
+function boundCall(tokens, name) {
   const calls = [];
+  let importCount = 0;
   for (let index = 0; index < tokens.length; index += 1) {
-    if (tokens[index].type !== "identifier" || tokens[index].value !== "loadManifest") continue;
-    if (tokens[index + 1]?.value === "(" && tokens[index - 1]?.value !== ".") {
+    if (tokens[index].type !== "identifier" || tokens[index].value !== name) continue;
+    if (tokens[index + 1]?.value === "("
+        && tokens[index - 1]?.value !== "."
+        && tokens[index - 1]?.value !== "new") {
       calls.push(index);
       continue;
     }
-    if (isStaticLoadManifestImport(tokens, index)) continue;
-    fail("app.js has unsupported loadManifest identifier reference");
+    if (isStaticNamedImport(tokens, index, name)) {
+      importCount += 1;
+      continue;
+    }
+    fail(`app.js has unsupported ${name} identifier reference`);
   }
-  if (calls.length !== 1) fail("released app must contain exactly one real loadManifest() call");
+  if (importCount !== 1) {
+    fail(`released app must contain exactly one named ${name} import from ./data-loader.js`);
+  }
+  if (calls.length !== 1) {
+    fail(`released app must contain exactly one real ${name}() call`);
+  }
+  return calls[0];
+}
 
-  const call = calls[0];
+function assertAppBinding(runtimeBytes, { releaseId, manifestPath, corePath }) {
+  const tokens = tokenizeJavaScript(runtimeBytes.get("app.js") ?? Buffer.alloc(0), "app.js");
+  const call = boundCall(tokens, "loadManifest");
+  const coreCall = boundCall(tokens, "startArtifactRequest");
+  if (coreCall >= call) {
+    fail("released app must start the core artifact request before loadManifest");
+  }
+
   const callClose = matchingTokenIndex(tokens, call + 1, "app.js loadManifest call");
-  const expectedManifest = `synthesis/data/manifest.${releaseId}.json`;
-  if (literalSpecifier(tokens[call + 2], "app.js", "loadManifest manifest") !== expectedManifest) {
-    fail(`released app manifest literal does not match ${releaseId}`);
+  if (literalSpecifier(tokens[call + 2], "app.js", "loadManifest manifest") !== manifestPath) {
+    fail(`released app manifest literal does not match validated ${releaseId} data`);
   }
   if (tokens[call + 3]?.value !== "," || tokens[call + 4]?.value !== "{") {
     fail("released app loadManifest options must be an object literal");
@@ -1070,6 +1089,31 @@ function assertAppBinding(runtimeBytes, releaseId) {
   if (bindingCount !== 1) {
     fail("released app loadManifest options must contain exactly one expectedReleaseId binding");
   }
+
+  const coreCallClose = matchingTokenIndex(
+    tokens,
+    coreCall + 1,
+    "app.js startArtifactRequest call",
+  );
+  if (literalSpecifier(
+    tokens[coreCall + 2],
+    "app.js",
+    "startArtifactRequest core artifact",
+  ) !== corePath) {
+    fail("released app core artifact literal does not match validated data");
+  }
+  if (tokens[coreCall + 3]?.value !== "," || coreCall + 4 >= coreCallClose) {
+    fail("released app startArtifactRequest call must have exactly two arguments");
+  }
+  for (let index = coreCall + 4; index < coreCallClose; index += 1) {
+    if (["(", "[", "{"].includes(tokens[index].value)) {
+      index = matchingTokenIndex(tokens, index, "app.js startArtifactRequest options");
+      continue;
+    }
+    if (tokens[index].value === ",") {
+      fail("released app startArtifactRequest call must have exactly two arguments");
+    }
+  }
 }
 
 export function previousReleaseId(releaseId) {
@@ -1104,8 +1148,14 @@ function checkRelease(repoRoot, config, releaseId, {
     runtimeBytes.set(file.target, readRegularFileNoFollow(path, `release runtime ${file.target}`));
   }
   analyzeRuntime(runtimeBytes);
-  assertAppBinding(runtimeBytes, releaseId);
   const data = validateData(repoRoot, releaseId);
+  const corePath = data.artifacts.find(({ name }) => name === "core")?.path;
+  if (!corePath) fail(`release ${releaseId} has no validated core artifact`);
+  assertAppBinding(runtimeBytes, {
+    releaseId,
+    manifestPath: data.manifest.path,
+    corePath,
+  });
 
   let predecessor = null;
   const previous = previousReleaseId(releaseId);
@@ -1183,8 +1233,14 @@ function writeRelease(repoRoot, config, releaseId) {
   const runtimeBytes = new Map();
   for (const file of release.files) runtimeBytes.set(file.target, readRepoFile(repoRoot, file.source));
   analyzeRuntime(runtimeBytes);
-  assertAppBinding(runtimeBytes, releaseId);
   const data = validateData(repoRoot, releaseId);
+  const corePath = data.artifacts.find(({ name }) => name === "core")?.path;
+  if (!corePath) fail(`release ${releaseId} has no validated core artifact`);
+  assertAppBinding(runtimeBytes, {
+    releaseId,
+    manifestPath: data.manifest.path,
+    corePath,
+  });
 
   let predecessor = null;
   const previous = previousReleaseId(releaseId);

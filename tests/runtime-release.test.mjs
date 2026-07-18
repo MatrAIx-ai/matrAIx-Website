@@ -30,9 +30,19 @@ after(() => {
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const jsonBytes = (value) => Buffer.from(`${JSON.stringify(value)}\n`);
+const loaderImport =
+  'import { loadManifest, startArtifactRequest } from "./data-loader.js";';
+const coreBinding = (corePath = "synthesis/data/graph-core.v1.json") =>
+  `const coreRequest = startArtifactRequest("${corePath}", { signal: undefined });`;
 const releaseBinding = (releaseId = "v1", extraOptions = "") =>
   `loadManifest("synthesis/data/manifest.${releaseId}.json", {${extraOptions} expectedReleaseId: "${releaseId}" });`;
-const validApp = (...lines) => [...lines, releaseBinding(), ""].join("\n");
+const validApp = (...lines) => [
+  loaderImport,
+  ...lines,
+  coreBinding(),
+  releaseBinding(),
+  "",
+].join("\n");
 
 function write(root, relative, bytes) {
   const path = join(root, ...relative.split("/"));
@@ -58,9 +68,9 @@ function replaceBytes(bytes, needle, replacement) {
   ]);
 }
 
-function assertNoReleaseWork(root) {
+function assertNoReleaseWork(root, expected = []) {
   const releases = join(root, "synthesis", "releases");
-  assert.deepEqual(existsSync(releases) ? readdirSync(releases).sort() : [], []);
+  assert.deepEqual(existsSync(releases) ? readdirSync(releases).sort() : [], expected);
 }
 
 function moveArtifact(root, name, path, bytes = null) {
@@ -230,13 +240,16 @@ function makeFixture({ app, css, generator, files, extraSources = {} } = {}) {
   write(root, generatorPath, generatorBytes);
   write(root, "synthesis/data/graph-core.v1.json", coreBytes);
   writeJson(root, "synthesis/data/manifest.v1.json", manifest);
-  write(root, "synthesis/app.js", Buffer.from(app ?? [
+  write(root, "synthesis/app.js", Buffer.from(app ?? validApp(
     'import "./dep.js";',
     '// import "./comment-only.js"',
     'const harmless = "import(\\"./string-only.js\\")";',
     'const template = `import("./template-only.js") ${1}`;',
-    releaseBinding(),
     'export { harmless, template };',
+  )));
+  write(root, "synthesis/data-loader.js", Buffer.from([
+    "export async function loadManifest() {}",
+    "export function startArtifactRequest() {}",
     "",
   ].join("\n")));
   write(root, "synthesis/dep.js", Buffer.from("export const dependency = true;\n"));
@@ -250,6 +263,7 @@ function makeFixture({ app, css, generator, files, extraSources = {} } = {}) {
       v1: {
         files: files ?? [
           { source: "synthesis/app.js", target: "app.js" },
+          { source: "synthesis/data-loader.js", target: "data-loader.js" },
           { source: "synthesis/dep.js", target: "dep.js" },
           { source: "synthesis.css", target: "synthesis.css" },
         ],
@@ -267,16 +281,20 @@ async function buildFixture(options) {
   return root;
 }
 
-function addV2(root) {
+function addV2(root, { corePath = "synthesis/data/graph-core.v2.json" } = {}) {
   const v1Manifest = readJson(root, "synthesis/data/manifest.v1.json");
   const coreBytes = readFileSync(join(root, "synthesis", "data", "graph-core.v1.json"));
-  write(root, "synthesis/data/graph-core.v2.json", coreBytes);
+  if (corePath === "synthesis/data/graph-core.v2.json") {
+    write(root, corePath, coreBytes);
+  }
   const v2Manifest = structuredClone(v1Manifest);
   v2Manifest.releaseId = "v2";
-  v2Manifest.artifacts.core.path = "synthesis/data/graph-core.v2.json";
+  v2Manifest.artifacts.core.path = corePath;
   writeJson(root, "synthesis/data/manifest.v2.json", v2Manifest);
   write(root, "synthesis/v2-app.js", Buffer.from([
+    loaderImport,
     'import "./dep.js";',
+    coreBinding(corePath),
     releaseBinding("v2"),
     "",
   ].join("\n")));
@@ -284,6 +302,7 @@ function addV2(root) {
   config.releases.v2 = {
     files: [
       { source: "synthesis/v2-app.js", target: "app.js" },
+      { source: "synthesis/data-loader.js", target: "data-loader.js" },
       { source: "synthesis/dep.js", target: "dep.js" },
       { source: "synthesis.css", target: "synthesis.css" },
     ],
@@ -328,7 +347,12 @@ test("write is immutable; check is source-independent; check-source detects drif
   assert.equal(lock.formatVersion, 1);
   assert.equal(lock.releaseId, "v1");
   assert.equal(lock.predecessor, null);
-  assert.deepEqual(lock.runtime.map((entry) => entry.path), ["app.js", "dep.js", "synthesis.css"]);
+  assert.deepEqual(lock.runtime.map((entry) => entry.path), [
+    "app.js",
+    "data-loader.js",
+    "dep.js",
+    "synthesis.css",
+  ]);
   assert.deepEqual(lock.data.artifacts.map((entry) => entry.name), ["core"]);
   assert.ok(/^[0-9a-f]{64}$/.test(lock.allowlistSha256));
 
@@ -373,6 +397,7 @@ test("tokenized closure accepts every supported literal JS/CSS dependency form d
   const files = [
     { source: "synthesis/app.js", target: "app.js" },
     { source: "synthesis/asset.txt", target: "asset.txt" },
+    { source: "synthesis/data-loader.js", target: "data-loader.js" },
     { source: "synthesis/dep.js", target: "dep.js" },
     { source: "synthesis/dynamic.js", target: "dynamic.js" },
     { source: "synthesis/reexport.js", target: "reexport.js" },
@@ -385,6 +410,7 @@ test("tokenized closure accepts every supported literal JS/CSS dependency form d
   const options = {
     files,
     app: [
+      loaderImport,
       'import "./dep.js";',
       'export { reexported } from "./reexport.js";',
       'const lazy = () => import("./dynamic.js");',
@@ -394,6 +420,7 @@ test("tokenized closure accepts every supported literal JS/CSS dependency form d
       '// import "./comment-only.js"',
       'const harmless = "new Worker(\\"./string-only.js\\")";',
       'const template = `import("./template-only.js") ${asset}`;',
+      coreBinding(),
       releaseBinding(),
       'export { lazy, asset, worker, shared, harmless, template };',
       "",
@@ -448,13 +475,17 @@ test("eager module closure excludes dynamic imports and Worker entries", () => {
 test("app/data binding requires exactly one structural loadManifest call", async (t) => {
   const cases = [
     ["complete call in a comment", [
+      loaderImport,
       'import "./dep.js";',
       '/* loadManifest( "synthesis/data/manifest.v1.json", { expectedReleaseId: "v1" }); */',
+      coreBinding(),
       "",
     ].join("\n")],
     ["complete call in a string", [
+      loaderImport,
       'import "./dep.js";',
       'const fake = \'loadManifest( "synthesis/data/manifest.v1.json", { expectedReleaseId: "v1" });\';',
+      coreBinding(),
       "",
     ].join("\n")],
     ["comments and unrelated strings", validApp(
@@ -557,6 +588,87 @@ test("app/data binding requires exactly one structural loadManifest call", async
       assertNoReleaseWork(root);
     });
   }
+});
+
+test("app binding requires one imported startArtifactRequest core path before loadManifest", async (t) => {
+  const valid = validApp('import "./dep.js";');
+  const cases = [
+    ["missing startArtifactRequest", valid.replace(coreBinding(), "")],
+    ["duplicate startArtifactRequest", validApp(
+      'import "./dep.js";',
+      coreBinding(),
+    )],
+    ["aliased startArtifactRequest", validApp(
+      'import "./dep.js";',
+      "const startCore = startArtifactRequest;",
+    )],
+    ["member startArtifactRequest", validApp(
+      'import "./dep.js";',
+      `startArtifactRequest.call(null, "synthesis/data/graph-core.v1.json", {});`,
+    )],
+    ["computed startArtifactRequest", validApp(
+      'import "./dep.js";',
+      `loader["startArtifactRequest"]("synthesis/data/graph-core.v1.json", {});`,
+    )],
+    ["dynamic core path", validApp(
+      'import "./dep.js";',
+      'const corePath = "synthesis/data/graph-core.v1.json";',
+      "const coreRequest = startArtifactRequest(corePath, { signal: undefined });",
+    ).replace(coreBinding(), "")],
+    ["wrong core path", valid.replace(
+      coreBinding(),
+      coreBinding("synthesis/data/graph-core.v2.json"),
+    )],
+    ["core request after loadManifest", [
+      loaderImport,
+      'import "./dep.js";',
+      releaseBinding(),
+      coreBinding(),
+      "",
+    ].join("\n")],
+    ["missing loadManifest named import", valid.replace(
+      loaderImport,
+      'import { startArtifactRequest } from "./data-loader.js";',
+    )],
+    ["missing startArtifactRequest named import", valid.replace(
+      loaderImport,
+      'import { loadManifest } from "./data-loader.js";',
+    )],
+  ];
+
+  for (const [label, app] of cases) {
+    await t.test(label, async () => {
+      const root = makeFixture({ app });
+      await rejects(root, ["--release", "v1", "--write"],
+        /startArtifactRequest|core|binding|path|import|reference|computed/i);
+      assertNoReleaseWork(root);
+    });
+  }
+
+  await t.test("v2 binding cannot invent a v2 core when validated data reuses v1", async () => {
+    const root = await buildFixture();
+    addV2(root, { corePath: "synthesis/data/graph-core.v1.json" });
+    write(root, "synthesis/v2-app.js", Buffer.from([
+      loaderImport,
+      'import "./dep.js";',
+      coreBinding("synthesis/data/graph-core.v2.json"),
+      releaseBinding("v2"),
+      "",
+    ].join("\n")));
+    await rejects(root, ["--release", "v2", "--write"],
+      /startArtifactRequest|core|binding|path/i);
+    assertNoReleaseWork(root, ["v1"]);
+  });
+});
+
+test("v2 app binding accepts the validated v1 core path", async () => {
+  const root = await buildFixture();
+  addV2(root, { corePath: "synthesis/data/graph-core.v1.json" });
+  await run(root, "--release", "v2", "--write");
+  await run(root, "--release", "v2", "--check");
+  assert.equal(readJson(root, "synthesis/releases/v2/release-lock.json")
+    .data.artifacts.find(({ name }) => name === "core")?.path,
+  "synthesis/data/graph-core.v1.json");
 });
 
 test("Worker and generic import-meta URL syntax fail closed outside the exact wrapper", async (t) => {
@@ -668,7 +780,9 @@ test("canonical config paths reject leading/trailing whitespace and non-NFC text
         write(root, source, readFileSync(join(root, "synthesis", "dep.js")));
       }
       const config = readJson(root, "scripts/synthesis-runtime-files.json");
-      config.releases.v1.files[1] = { source, target };
+      const depIndex = config.releases.v1.files.findIndex((file) => file.target === "dep.js");
+      assert.notEqual(depIndex, -1);
+      config.releases.v1.files[depIndex] = { source, target };
       config.releases.v1.files.sort((a, b) => a.target < b.target ? -1 : a.target > b.target ? 1 : 0);
       writeJson(root, "scripts/synthesis-runtime-files.json", config);
       await rejects(root, ["--release", "v1", "--write"], /canonical|whitespace|NFC|normal form/i);
@@ -766,10 +880,7 @@ test("artifact policy accepts immutable pack/dimensions and v2 reuse of a v1 cor
   await run(maxDimensions, "--release", "v1", "--check");
 
   const reusedCore = await buildFixture();
-  addV2(reusedCore);
-  const manifestV2 = readJson(reusedCore, "synthesis/data/manifest.v2.json");
-  manifestV2.artifacts.core.path = "synthesis/data/graph-core.v1.json";
-  writeJson(reusedCore, "synthesis/data/manifest.v2.json", manifestV2);
+  addV2(reusedCore, { corePath: "synthesis/data/graph-core.v1.json" });
   await run(reusedCore, "--release", "v2", "--write");
   await run(reusedCore, "--release", "v2", "--check");
   assert.equal(readJson(reusedCore, "synthesis/releases/v2/release-lock.json")
@@ -820,6 +931,7 @@ test("nested runtime trees are compared after global path sorting", async () => 
     { source: "synthesis/a-foo.js", target: "a-foo.js" },
     { source: "synthesis/a-b.js", target: "a/b.js" },
     { source: "synthesis/app.js", target: "app.js" },
+    { source: "synthesis/data-loader.js", target: "data-loader.js" },
     { source: "synthesis.css", target: "synthesis.css" },
   ];
   const root = await buildFixture({
@@ -832,7 +944,13 @@ test("nested runtime trees are compared after global path sorting", async () => 
   });
   await run(root, "--release", "v1", "--check");
   assert.deepEqual(readJson(root, "synthesis/releases/v1/release-lock.json")
-    .runtime.map((entry) => entry.path), ["a-foo.js", "a/b.js", "app.js", "synthesis.css"]);
+    .runtime.map((entry) => entry.path), [
+      "a-foo.js",
+      "a/b.js",
+      "app.js",
+      "data-loader.js",
+      "synthesis.css",
+    ]);
 });
 
 test("filesystem identity helper distinguishes a path replacement", () => {
@@ -856,6 +974,7 @@ test("JS and CSS dependency closure rejects missing, unreachable, and non-litera
     [{ app: validApp('import "./missing.js";') }, /missing|configured/i],
     [{ files: [
       { source: "synthesis/app.js", target: "app.js" },
+      { source: "synthesis/data-loader.js", target: "data-loader.js" },
       { source: "synthesis/dep.js", target: "dep.js" },
       { source: "synthesis/ghost.js", target: "ghost.js" },
       { source: "synthesis.css", target: "synthesis.css" },
@@ -970,8 +1089,20 @@ test("check rejects lock, runtime, manifest, artifact, inner dataset, and genera
 
 test("manifest/release literals and generator module graph are pinned before write", async () => {
   for (const app of [
-    'import "./dep.js"; loadManifest("synthesis/data/manifest.v2.json", { expectedReleaseId: "v1" });\n',
-    'import "./dep.js"; loadManifest("synthesis/data/manifest.v1.json", { expectedReleaseId: "v2" });\n',
+    [
+      loaderImport,
+      'import "./dep.js";',
+      coreBinding(),
+      'loadManifest("synthesis/data/manifest.v2.json", { expectedReleaseId: "v1" });',
+      "",
+    ].join("\n"),
+    [
+      loaderImport,
+      'import "./dep.js";',
+      coreBinding(),
+      'loadManifest("synthesis/data/manifest.v1.json", { expectedReleaseId: "v2" });',
+      "",
+    ].join("\n"),
   ]) {
     const root = makeFixture({ app });
     await rejects(root, ["--release", "v1", "--write"], /manifest|release binding|expectedReleaseId/i);

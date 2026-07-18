@@ -1,4 +1,4 @@
-import { loadManifest, loadArtifact } from "./data-loader.js";
+import { loadManifest, loadArtifact, startArtifactRequest } from "./data-loader.js";
 import { createGraphStore } from "./graph-store.js";
 import { buildOverview } from "./graph-views.js";
 import { decodeUrlState, encodeUrlState } from "./url-state.js";
@@ -261,31 +261,43 @@ async function boot() {
   let controller = null;
   let attemptId = 0;
   let pinnedManifest = null;
+  let reloadManifest = false;
+  let reloadCore = false;
 
   const attempt = async () => {
     const id = ++attemptId;
     controller?.abort();
-    controller = new AbortController();
-    const { signal } = controller;
+    const attemptController = new AbortController();
+    controller = attemptController;
+    const { signal } = attemptController;
     $("synLoadStatus").setAttribute("role", "status");
     $("synLoadMessage").textContent = "Loading verified graph snapshot…";
     $("synRetry").hidden = true;
 
     try {
+      const coreRequest = startArtifactRequest("synthesis/data/graph-core.v1.json", {
+        baseUrl: document.baseURI,
+        cacheMode: reloadCore ? "reload" : "default",
+        signal,
+      });
       let manifest = pinnedManifest;
       if (!manifest) {
         manifest = await loadManifest("synthesis/data/manifest.v1.json", {
+          cacheMode: reloadManifest ? "reload" : "default",
           signal,
           expectedReleaseId: "v1",
         });
         if (id !== attemptId) return;
         pinnedManifest = manifest;
+        reloadManifest = false;
       }
       const core = await loadArtifact(manifest, "core", {
         baseUrl: document.baseURI,
+        requestHandle: coreRequest,
         signal,
       });
       if (id !== attemptId) return;
+      reloadCore = false;
 
       const store = createGraphStore(core);
       const overview = buildOverview(store);
@@ -308,7 +320,10 @@ async function boot() {
         "down",
       ]);
     } catch (error) {
+      attemptController.abort();
       if (id !== attemptId || error?.name === "AbortError") return;
+      reloadCore = true;
+      if (pinnedManifest === null) reloadManifest = true;
       $("synLoadStatus").setAttribute("role", "alert");
       $("synLoadMessage").textContent = "The graph snapshot could not be verified.";
       $("synRetry").hidden = false;

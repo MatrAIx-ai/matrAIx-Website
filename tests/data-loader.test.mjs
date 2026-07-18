@@ -6,6 +6,7 @@ import {
   loadArtifact,
   loadAuxJson,
   loadManifest,
+  startArtifactRequest,
   validateCore,
   validatePack,
 } from "../synthesis/data-loader.js";
@@ -386,6 +387,355 @@ test("artifact cache mode fails before cache or fetch", async () => {
   let cacheCalls = 0;
   let fetches = 0;
   await rejectsWithCode(() => loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    cacheMode: "no-store",
+    cacheStorage: {
+      async open() {
+        cacheCalls += 1;
+      },
+    },
+    fetchImpl: async () => {
+      fetches += 1;
+      return new Response(CORE_BYTES);
+    },
+  }), "cache-mode");
+  assert.equal(cacheCalls, 0);
+  assert.equal(fetches, 0);
+});
+
+test("startArtifactRequest returns a frozen opaque handle and starts immediately", async () => {
+  const started = deferred();
+  const allowResponse = deferred();
+  const handle = startArtifactRequest(CORE_PATH, {
+    baseUrl: BASE_URL,
+    cacheStorage: null,
+    fetchImpl: async (_url, init) => {
+      assert.equal(init.cache, "default");
+      started.resolve();
+      await allowResponse.promise;
+      return new Response(CORE_BYTES);
+    },
+  });
+  assert.equal(Object.isFrozen(handle), true);
+  assert.deepEqual(Object.keys(handle), []);
+  await started.promise;
+  allowResponse.resolve();
+  assert.deepEqual(await loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    requestHandle: handle,
+  }), coreFixture);
+});
+
+test("loadArtifact rejects a non-handle", async () => {
+  await rejectsWithCode(() => loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    requestHandle: Object.freeze({}),
+  }), "request-handle");
+});
+
+test("loadArtifact rejects a consumed handle", async () => {
+  let fetches = 0;
+  const handle = startArtifactRequest(CORE_PATH, {
+    baseUrl: BASE_URL,
+    cacheStorage: null,
+    fetchImpl: async () => {
+      fetches += 1;
+      return new Response(CORE_BYTES);
+    },
+  });
+  assert.deepEqual(await loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    requestHandle: handle,
+  }), coreFixture);
+  await rejectsWithCode(() => loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    requestHandle: handle,
+  }), "request-handle");
+  assert.equal(fetches, 1);
+});
+
+test("a request handle rejects a different immutable artifact binding", async () => {
+  const handle = startArtifactRequest(PACK_PATH, {
+    baseUrl: BASE_URL,
+    cacheStorage: null,
+    fetchImpl: artifactFetch(PACK_PATH, PACK_BYTES),
+  });
+  await rejectsWithCode(() => loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    requestHandle: handle,
+  }), "request-binding");
+});
+
+test("request handles reject non-contract raw paths before fetch", async (t) => {
+  const cases = [
+    ["query", `${CORE_PATH}?v=1`],
+    ["fragment", `${CORE_PATH}#hash`],
+    ["credentials", `https://user:password@example.test/${CORE_PATH}`],
+    ["cross-origin", `https://evil.test/${CORE_PATH}`],
+    ["traversal", "synthesis/data/../data/graph-core.v1.json"],
+    ["escaped separator", "synthesis/data%2fgraph-core.v1.json"],
+    ["mutable filename", "synthesis/data/graph-core.json"],
+  ];
+  for (const [name, path] of cases) {
+    await t.test(name, () => {
+      let cacheCalls = 0;
+      let fetches = 0;
+      throwsWithCode(() => startArtifactRequest(path, {
+        baseUrl: BASE_URL,
+        cacheStorage: {
+          async open() {
+            cacheCalls += 1;
+          },
+        },
+        fetchImpl: async () => {
+          fetches += 1;
+          return new Response(CORE_BYTES);
+        },
+      }), "request-binding");
+      assert.equal(cacheCalls, 0);
+      assert.equal(fetches, 0);
+    });
+  }
+});
+
+test("an abandoned request handle rejection is handled", async () => {
+  let unhandled;
+  const onUnhandled = (reason) => { unhandled = reason; };
+  process.on("unhandledRejection", onUnhandled);
+  try {
+    startArtifactRequest(CORE_PATH, {
+      baseUrl: BASE_URL,
+      cacheStorage: null,
+      fetchImpl: async () => { throw new Error("abandoned request"); },
+    });
+    await new Promise((resolve) => setImmediate(resolve));
+    await new Promise((resolve) => setImmediate(resolve));
+    assert.equal(unhandled, undefined);
+  } finally {
+    process.removeListener("unhandledRejection", onUnhandled);
+  }
+});
+
+test("a rejected request handle is consumed once without restarting", async () => {
+  let fetches = 0;
+  const handle = startArtifactRequest(CORE_PATH, {
+    baseUrl: BASE_URL,
+    cacheStorage: null,
+    fetchImpl: async () => {
+      fetches += 1;
+      return new Response("temporary outage", { status: 503 });
+    },
+  });
+  await rejectsWithCode(() => loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    requestHandle: handle,
+  }), "http");
+  await rejectsWithCode(() => loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    requestHandle: handle,
+  }), "request-handle");
+  assert.equal(fetches, 1);
+});
+
+test("aborting a request handle signal stops an unconsumed request", async () => {
+  const controller = new AbortController();
+  const started = deferred();
+  const stopped = deferred();
+  startArtifactRequest(CORE_PATH, {
+    baseUrl: BASE_URL,
+    cacheStorage: null,
+    signal: controller.signal,
+    fetchImpl: async (_url, init) => {
+      assert.equal(init.signal, controller.signal);
+      started.resolve();
+      return new Promise((_resolve, reject) => {
+        init.signal.addEventListener("abort", () => {
+          stopped.resolve();
+          reject(init.signal.reason);
+        }, { once: true });
+      });
+    },
+  });
+  await started.promise;
+  controller.abort(new DOMException("cancelled", "AbortError"));
+  await stopped.promise;
+  await new Promise((resolve) => setImmediate(resolve));
+});
+
+test("aborting after a handle candidate settles exposes no value", async () => {
+  const controller = new AbortController();
+  const bodyRead = deferred();
+  const handle = startArtifactRequest(CORE_PATH, {
+    baseUrl: BASE_URL,
+    cacheStorage: null,
+    signal: controller.signal,
+    fetchImpl: async () => ({
+      ok: true,
+      status: 200,
+      async arrayBuffer() {
+        bodyRead.resolve();
+        return CORE_BYTES.buffer.slice(
+          CORE_BYTES.byteOffset,
+          CORE_BYTES.byteOffset + CORE_BYTES.byteLength,
+        );
+      },
+    }),
+  });
+  await bodyRead.promise;
+  await new Promise((resolve) => setImmediate(resolve));
+  const abort = new DOMException("cancelled", "AbortError");
+  controller.abort(abort);
+  await assert.rejects(
+    () => loadArtifact(manifestWithBytes(), "core", {
+      baseUrl: BASE_URL,
+      requestHandle: handle,
+      signal: controller.signal,
+    }),
+    (error) => error === abort,
+  );
+});
+
+test("content-invalid handle recovery keeps its original signal and fetch adapter", async () => {
+  const invalidBytes = CORE_BYTES.slice();
+  invalidBytes[0] ^= 1;
+  const controller = new AbortController();
+  const modes = [];
+  let fetches = 0;
+  const fetchImpl = async (_url, init) => {
+    assert.equal(init.signal, controller.signal);
+    modes.push(init.cache);
+    fetches += 1;
+    return new Response(fetches === 1 ? invalidBytes : CORE_BYTES);
+  };
+  const handle = startArtifactRequest(CORE_PATH, {
+    baseUrl: BASE_URL,
+    cacheStorage: null,
+    fetchImpl,
+    signal: controller.signal,
+  });
+  assert.deepEqual(await loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    requestHandle: handle,
+    signal: controller.signal,
+  }), coreFixture);
+  assert.deepEqual(modes, ["default", "reload"]);
+});
+
+test("request handles reject replacement signal, adapters, and cache mode", async (t) => {
+  const cases = [
+    ["signal", { signal: new AbortController().signal }],
+    ["fetch adapter", { fetchImpl: async () => new Response(CORE_BYTES) }],
+    ["cache adapter", { cacheStorage: createCacheStorage() }],
+    ["cache mode", { cacheMode: "default" }],
+  ];
+  for (const [name, replacement] of cases) {
+    await t.test(name, async () => {
+      const handle = startArtifactRequest(CORE_PATH, {
+        baseUrl: BASE_URL,
+        cacheStorage: null,
+        fetchImpl: async () => new Response(CORE_BYTES),
+      });
+      await rejectsWithCode(() => loadArtifact(manifestWithBytes(), "core", {
+        baseUrl: BASE_URL,
+        requestHandle: handle,
+        ...replacement,
+      }), "request-binding");
+    });
+  }
+});
+
+test("a cache-hit request handle performs no network request", async () => {
+  const url = new URL(CORE_PATH, BASE_URL).href;
+  const cacheStorage = createCacheStorage({
+    entries: new Map([[url, CORE_BYTES]]),
+  });
+  let fetches = 0;
+  const handle = startArtifactRequest(CORE_PATH, {
+    baseUrl: BASE_URL,
+    cacheStorage,
+    fetchImpl: async () => {
+      fetches += 1;
+      return new Response(CORE_BYTES);
+    },
+  });
+  assert.deepEqual(await loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    requestHandle: handle,
+  }), coreFixture);
+  assert.equal(fetches, 0);
+  assert.equal(cacheStorage.calls.filter(([kind]) => kind === "match").length, 1);
+});
+
+test("a network request handle waits for its verified cache put when consumed", async () => {
+  const putStarted = deferred();
+  const allowPut = deferred();
+  const cacheStorage = createCacheStorage({
+    hooks: {
+      async put() {
+        putStarted.resolve();
+        await allowPut.promise;
+      },
+    },
+  });
+  const handle = startArtifactRequest(CORE_PATH, {
+    baseUrl: BASE_URL,
+    cacheStorage,
+    fetchImpl: artifactFetch(CORE_PATH, CORE_BYTES),
+  });
+  let settled = false;
+  const load = loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    requestHandle: handle,
+  }).finally(() => { settled = true; });
+  const firstSettlement = await Promise.race([
+    putStarted.promise.then(() => "put-started"),
+    load.then(
+      () => "load-settled",
+      () => "load-settled",
+    ),
+  ]);
+  assert.equal(firstSettlement, "put-started");
+  assert.equal(settled, false);
+  allowPut.resolve();
+  assert.deepEqual(await load, coreFixture);
+  assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 1);
+});
+
+test("request handle explicit retry owns reload mode", async () => {
+  const modes = [];
+  let responses = 0;
+  const fetchImpl = async (_url, init) => {
+    modes.push(init.cache);
+    responses += 1;
+    if (responses === 1) return new Response("temporary outage", { status: 503 });
+    return new Response(CORE_BYTES);
+  };
+  const first = startArtifactRequest(CORE_PATH, {
+    baseUrl: BASE_URL,
+    cacheStorage: null,
+    fetchImpl,
+  });
+  await rejectsWithCode(() => loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    requestHandle: first,
+  }), "http");
+  assert.deepEqual(modes, ["default"]);
+
+  const retry = startArtifactRequest(CORE_PATH, {
+    baseUrl: BASE_URL,
+    cacheMode: "reload",
+    cacheStorage: null,
+    fetchImpl,
+  });
+  assert.deepEqual(await loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    requestHandle: retry,
+  }), coreFixture);
+  assert.deepEqual(modes, ["default", "reload"]);
+
+  let cacheCalls = 0;
+  let fetches = 0;
+  throwsWithCode(() => startArtifactRequest(CORE_PATH, {
     baseUrl: BASE_URL,
     cacheMode: "no-store",
     cacheStorage: {

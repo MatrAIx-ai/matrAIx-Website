@@ -5,13 +5,13 @@
   "runtime": [
     {
       "path": "app.js",
-      "bytes": 11353,
-      "sha256": "44d23f0f4b828658929eb15162cdd09ce15eabe0d8b1b4dea355393004db72a4"
+      "bytes": 11958,
+      "sha256": "203e85c101f17f3516043de1fbbccbdcda10361e17c7f662eddfae627d0995c1"
     },
     {
       "path": "data-loader.js",
-      "bytes": 23993,
-      "sha256": "c369ba73dc393302c71a2062c8d80eaee4fe05ce6e4283dc2b8399f7618a2ab1"
+      "bytes": 26920,
+      "sha256": "50125f0c39cfebba5aabce483645859d5aba5e703d831fb180832e5c360c954c"
     },
     {
       "path": "detail-rail.js",

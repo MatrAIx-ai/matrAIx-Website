@@ -44,8 +44,22 @@ const HOSTILE_SCRIPT = "<script>window.__synSentinel=2</script>";
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
+function deferredPromise() {
+  let resolve;
+  const promise = new Promise((done) => { resolve = done; });
+  return { promise, resolve };
+}
+
 function allowHttpFailure(page, pathname, status) {
-  pageGuards.get(page).expectedHttp.push({ pathname, status, expected: 1, remaining: 1 });
+  const expectation = {
+    pathname,
+    status,
+    expected: 1,
+    remaining: 1,
+    abortedAfterResponse: 0,
+  };
+  pageGuards.get(page).expectedHttp.push(expectation);
+  return expectation;
 }
 
 function hostileFixture() {
@@ -163,7 +177,12 @@ async function activeIdentity(page) {
 }
 
 test.beforeEach(async ({ page }) => {
-  const guard = { issues: [], resourceConsoleErrors: [], expectedHttp: [] };
+  const guard = {
+    issues: [],
+    resourceConsoleErrors: [],
+    expectedHttp: [],
+    expectedHttpRequests: new WeakMap(),
+  };
   pageGuards.set(page, guard);
 
   page.on("console", (message) => {
@@ -175,6 +194,12 @@ test.beforeEach(async ({ page }) => {
   });
   page.on("pageerror", (error) => guard.issues.push(`page error: ${error.message}`));
   page.on("requestfailed", (request) => {
+    const expected = guard.expectedHttpRequests.get(request);
+    if (expected && request.failure()?.errorText === "net::ERR_ABORTED") {
+      expected.abortedAfterResponse += 1;
+      guard.expectedHttpRequests.delete(request);
+      return;
+    }
     guard.issues.push(
       `request failed: ${request.method()} ${request.url()} (${request.failure()?.errorText})`,
     );
@@ -184,7 +209,10 @@ test.beforeEach(async ({ page }) => {
       const pathname = new URL(response.url()).pathname;
       const expected = guard.expectedHttp.find((item) =>
         item.remaining > 0 && item.status === response.status() && item.pathname === pathname);
-      if (expected) expected.remaining -= 1;
+      if (expected) {
+        expected.remaining -= 1;
+        guard.expectedHttpRequests.set(response.request(), expected);
+      }
       else {
         guard.issues.push(
           `HTTP ${response.status()}: ${response.request().method()} ${response.url()}`,
@@ -484,6 +512,18 @@ for (const scenario of [
 }
 
 test("Retry recovers an artifact failure without refetching the pinned manifest", async ({ page }) => {
+  await page.addInitScript(() => {
+    const nativeFetch = globalThis.fetch.bind(globalThis);
+    globalThis.__synCoreFetchModes = [];
+    globalThis.fetch = (input, init = {}) => {
+      const rawUrl = input instanceof Request ? input.url : String(input);
+      if (new URL(rawUrl, location.href).pathname
+          === "/synthesis/data/graph-core.v1.json") {
+        globalThis.__synCoreFetchModes.push(init.cache ?? null);
+      }
+      return nativeFetch(input, init);
+    };
+  });
   let manifestRequests = 0;
   let coreRequests = 0;
   page.on("request", (request) => {
@@ -491,7 +531,7 @@ test("Retry recovers an artifact failure without refetching the pinned manifest"
     if (pathname === MANIFEST_PATH) manifestRequests += 1;
     if (pathname === CORE_PATH) coreRequests += 1;
   });
-  allowHttpFailure(page, CORE_PATH, 503);
+  const expectedCoreFailure = allowHttpFailure(page, CORE_PATH, 503);
   await page.route(CORE_ROUTE, async (route) => {
     if (coreRequests === 1) {
       await route.fulfill({
@@ -513,6 +553,9 @@ test("Retry recovers an artifact failure without refetching the pinned manifest"
   await expect(page.locator("#synRetry")).toBeHidden();
   expect(manifestRequests).toBe(1);
   expect(coreRequests).toBe(2);
+  expect(await page.evaluate(() => globalThis.__synCoreFetchModes))
+    .toEqual(["default", "reload"]);
+  await expect.poll(() => expectedCoreFailure.abortedAfterResponse).toBe(1);
 });
 
 test("the 390px menu closes on Escape, link activation, and desktop resize", async ({ page }, testInfo) => {
@@ -630,6 +673,25 @@ test("illegal and duplicate URL parameters canonicalize to safe defaults", async
   }
   await expect(page.locator("#drilldownSvg")).toBeHidden();
   await expect(page.locator("#detailRail")).toContainText("Select a node to inspect");
+});
+
+test("core acquisition starts before the manifest response completes", async ({ page }) => {
+  const manifestSeen = deferredPromise();
+  const releaseManifest = deferredPromise();
+  await page.route(MANIFEST_ROUTE, async (route) => {
+    manifestSeen.resolve();
+    await releaseManifest.promise;
+    await route.continue();
+  });
+  const coreRequest = page.waitForRequest((request) =>
+    new URL(request.url()).pathname === CORE_PATH);
+  const navigation = page.goto(`${STUDIO_ORIGIN}/synthesis.html`);
+  await manifestSeen.promise;
+  await coreRequest;
+  releaseManifest.resolve();
+  await navigation;
+  await expect.poll(() => page.evaluate(() => window.__synState.store?.nodeCount ?? 0))
+    .toBeGreaterThan(0);
 });
 
 test("the browser fetch graph is exactly the query-free v1 release closure", async ({ page }) => {
