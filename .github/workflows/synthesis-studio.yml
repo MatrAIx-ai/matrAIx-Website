@@ -1,0 +1,132 @@
+name: Synthesis Studio
+
+"on":
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  reproducibility:
+    name: Reproducibility (Node 18.19.1)
+    runs-on: ubuntu-latest
+    env:
+      MATRAIX_SOURCE_COMMIT: 4dfa4e066b706c6a2d33a10fd41b976efd3f524e
+      MATRAIX_WORKTREE: ${{ github.workspace }}/.ci/matraix
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up artifact-generation Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 18.19.1
+          package-manager-cache: false
+
+      - name: Check out pinned MatrAIx source
+        uses: actions/checkout@v6
+        with:
+          repository: MatrAIx-ai/MatrAIx
+          ref: 4dfa4e066b706c6a2d33a10fd41b976efd3f524e
+          path: .ci/matraix
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Verify pinned source checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          actual_commit="$(git -C "$MATRAIX_WORKTREE" rev-parse HEAD)"
+          if [[ "$actual_commit" != "$MATRAIX_SOURCE_COMMIT" ]]; then
+            printf 'Expected MatrAIx commit %s, got %s\n' \
+              "$MATRAIX_SOURCE_COMMIT" "$actual_commit" >&2
+            exit 1
+          fi
+          if head_ref="$(git -C "$MATRAIX_WORKTREE" symbolic-ref --quiet HEAD)"; then
+            printf 'Expected detached MatrAIx checkout, got %s\n' "$head_ref" >&2
+            exit 1
+          fi
+          test -f "$MATRAIX_WORKTREE/persona/synthesis/graph/full_dag.json"
+
+      - name: Run Node tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test tests/
+
+      - name: Rebuild and verify phase 1 artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          V1_GENERATOR="$(node -e \
+            "const m=require('./synthesis/data/manifest.v1.json');process.stdout.write(m.generator.path)")"
+          V1_GENERATOR_SHA256="$(node -e \
+            "const m=require('./synthesis/data/manifest.v1.json');process.stdout.write(m.generator.sha256)")"
+
+          [[ "$V1_GENERATOR" =~ ^scripts/build-synthesis-data\.[0-9a-f]{64}\.mjs$ ]]
+          [[ "$V1_GENERATOR_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          printf '%s  %s\n' "$V1_GENERATOR_SHA256" "$V1_GENERATOR" | sha256sum -c -
+
+          node "$V1_GENERATOR" \
+            --graph "$MATRAIX_WORKTREE/persona/synthesis/graph/full_dag.json" \
+            --source-commit "$MATRAIX_SOURCE_COMMIT" \
+            --out-dir synthesis/data \
+            --phase 1
+          python3 scripts/generate-synthesis-goldens-p1.py \
+            --matraix-root "$MATRAIX_WORKTREE"
+          node scripts/build-synthesis-runtime.mjs --release v1 --check
+
+          git diff --exit-code -- synthesis/data tests/fixtures
+
+          core_path="synthesis/data/graph-core.v1.json"
+          core_bytes="$(wc -c < "$core_path")"
+          core_gzip_bytes="$(gzip -9 -c "$core_path" | wc -c)"
+          if (( core_bytes >= 1600000 )); then
+            printf 'graph-core raw size is %s bytes (limit: < 1600000)\n' \
+              "$core_bytes" >&2
+            exit 1
+          fi
+          if (( core_gzip_bytes >= 150000 )); then
+            printf 'graph-core gzip size is %s bytes (limit: < 150000)\n' \
+              "$core_gzip_bytes" >&2
+            exit 1
+          fi
+
+  browser:
+    name: Browser regression (Node 22)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up browser-test Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: tests/browser/package-lock.json
+
+      - name: Install browser test dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm --prefix tests/browser ci
+
+      - name: Install Playwright browsers
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx --prefix tests/browser playwright install --with-deps chromium webkit
+
+      - name: Run browser tests
+        working-directory: tests/browser
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
