@@ -6,6 +6,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  realpathSync,
   readdirSync,
   renameSync,
   rmSync,
@@ -14,7 +15,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import { createHash } from "node:crypto";
-import { join } from "node:path";
+import { join, relative, resolve, sep } from "node:path";
 import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import * as runtimeBuilder from "../scripts/build-synthesis-runtime.mjs";
@@ -129,6 +130,37 @@ function assertHtmlRuntimeEntries(html, releaseId) {
   assert.doesNotMatch(css, /[?#]/);
   assert.doesNotMatch(app, /[?#]/);
   return { css, app };
+}
+
+function assertLocalHtmlResources(root, html) {
+  const physicalRoot = realpathSync(root);
+  const values = [
+    ...startTags(html, "link").map((attrs) => attrs.get("href")),
+    ...startTags(html, "script").map((attrs) => attrs.get("src")),
+  ].filter(Boolean);
+  for (const value of values) {
+    if (/^https?:\/\//i.test(value)) continue;
+    const pathname = value.split(/[?#]/, 1)[0];
+    assert.ok(pathname && !pathname.startsWith("/"), `invalid local asset: ${value}`);
+    const absolute = resolve(root, pathname);
+    const lexicalRelative = relative(root, absolute);
+    assert.ok(
+      lexicalRelative !== ".."
+        && !lexicalRelative.startsWith(`..${sep}`)
+        && !lexicalRelative.startsWith(sep),
+      `escaping local asset: ${pathname}`,
+    );
+    assert.ok(existsSync(absolute), `missing local asset: ${pathname}`);
+    const physicalRelative = relative(physicalRoot, realpathSync(absolute));
+    assert.ok(
+      physicalRelative !== ".."
+        && !physicalRelative.startsWith(`..${sep}`)
+        && !physicalRelative.startsWith(sep),
+      `escaped local asset: ${pathname}`,
+    );
+    const stat = lstatSync(absolute);
+    assert.ok(stat.isFile() && !stat.isSymbolicLink(), `unsafe local asset: ${pathname}`);
+  }
 }
 
 function makeFixture({ app, css, generator, files, extraSources = {} } = {}) {
@@ -959,6 +991,7 @@ test("repository release and public entry points pin one query-free v1 runtime",
     css: "synthesis/releases/v1/synthesis.css",
     app: "synthesis/releases/v1/app.js",
   });
+  assertLocalHtmlResources(REPOSITORY_ROOT, html);
 
   const reordered = html
     .replace('<link rel="stylesheet" href="synthesis/releases/v1/synthesis.css" />',
@@ -974,8 +1007,10 @@ test("repository release and public entry points pin one query-free v1 runtime",
     html.replace("synthesis/releases/v1/app.js", "synthesis/releases/v2/app.js"),
   ]) assert.throws(() => assertHtmlRuntimeEntries(bypass, "v1"));
 
-  assert.match(html, /href="styles\.css\?v=9"/);
-  assert.match(html, /src="theme-toggle\.js\?v=3"/);
+  assert.match(html, /href="css\/styles\.css\?v=9"/);
+  assert.match(html, /href="css\/navigation\.css\?v=1"/);
+  assert.match(html, /src="js\/theme-toggle\.js\?v=3"/);
+  assert.match(html, /src="js\/site-performance\.js\?v=1"/);
 
   const persona = readFileSync(join(REPOSITORY_ROOT, "persona.html"), "utf8");
   assert.match(persona,

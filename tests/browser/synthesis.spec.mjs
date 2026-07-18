@@ -26,12 +26,13 @@ const GOOGLE_FONT_STYLESHEET = "https://fonts.googleapis.com/css2"
   + "&family=JetBrains+Mono:wght@400;500;700"
   + "&family=Orbitron:wght@600;700&display=swap";
 const SITE_CODE_URLS = [
-  `${STUDIO_ORIGIN}/styles.css?v=9`,
-  `${STUDIO_ORIGIN}/dark-theme.css?v=5`,
-  `${STUDIO_ORIGIN}/subpages.css?v=8`,
-  `${STUDIO_ORIGIN}/subpages-light.css?v=2`,
-  `${STUDIO_ORIGIN}/theme-toggle.js?v=3`,
-  `${STUDIO_ORIGIN}/site-performance.js?v=1`,
+  `${STUDIO_ORIGIN}/css/styles.css?v=9`,
+  `${STUDIO_ORIGIN}/css/dark-theme.css?v=5`,
+  `${STUDIO_ORIGIN}/css/subpages.css?v=8`,
+  `${STUDIO_ORIGIN}/css/subpages-light.css?v=2`,
+  `${STUDIO_ORIGIN}/css/navigation.css?v=1`,
+  `${STUDIO_ORIGIN}/js/theme-toggle.js?v=3`,
+  `${STUDIO_ORIGIN}/js/site-performance.js?v=1`,
   GOOGLE_FONT_STYLESHEET,
   ...RELEASE_RUNTIME_PATHS.map((pathname) => `${STUDIO_ORIGIN}${pathname}`),
 ];
