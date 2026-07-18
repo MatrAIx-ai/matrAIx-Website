@@ -8,7 +8,7 @@ const MANIFEST_PATH = "/synthesis/data/manifest.v1.json";
 const CORE_PATH = "/synthesis/data/graph-core.v1.json";
 const MANIFEST_ROUTE = /\/synthesis\/data\/manifest\.v1\.json$/;
 const CORE_ROUTE = /\/synthesis\/data\/graph-core\.v1\.json$/;
-const RELEASE_RUNTIME_PATHS = [
+const RELEASE_MODULE_PATHS = [
   "app.js",
   "data-loader.js",
   "detail-rail.js",
@@ -17,9 +17,12 @@ const RELEASE_RUNTIME_PATHS = [
   "graph-store.js",
   "graph-views.js",
   "overview-graph.js",
-  "synthesis.css",
   "url-state.js",
 ].map((name) => `/synthesis/releases/v1/${name}`);
+const RELEASE_RUNTIME_PATHS = [
+  ...RELEASE_MODULE_PATHS,
+  "/synthesis/releases/v1/synthesis.css",
+];
 const STUDIO_ORIGIN = "http://127.0.0.1:4173";
 const GOOGLE_FONT_STYLESHEET = "https://fonts.googleapis.com/css2"
   + "?family=Inter:wght@200;300;400;500;600;700"
@@ -636,6 +639,12 @@ test("the browser fetch graph is exactly the query-free v1 release closure", asy
     url: request.url(),
   }));
   await openStudio(page);
+
+  const preloadHrefs = await page.locator('link[rel~="modulepreload"]').evaluateAll((links) =>
+    links.map((link) => link.getAttribute("href")));
+  expect(preloadHrefs.sort()).toEqual(
+    RELEASE_MODULE_PATHS.map((pathname) => pathname.slice(1)).sort(),
+  );
 
   const codeRequests = requests.filter(({ resourceType }) =>
     resourceType === "script" || resourceType === "stylesheet");

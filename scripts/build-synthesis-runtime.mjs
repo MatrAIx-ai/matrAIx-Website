@@ -753,6 +753,34 @@ function analyzeRuntime(runtimeBytes) {
   if (ghosts.length) fail(`runtime release has unreachable target: ${ghosts.join(", ")}`);
 }
 
+export function eagerModuleClosure(runtimeBytes, entry = "app.js") {
+  if (!(runtimeBytes instanceof Map) || typeof entry !== "string" || !entry.endsWith(".js")) {
+    fail("eager module closure inputs are invalid");
+  }
+  const targetSet = new Set(runtimeBytes.keys());
+  const graph = new Map();
+  for (const [target, bytes] of runtimeBytes) {
+    if (!target.endsWith(".js")) continue;
+    const dependencies = new Set();
+    for (const resource of scanJavaScript(bytes, target, { enforceRuntimeClosure: true })) {
+      if (resource.kind !== "import" && resource.kind !== "re-export") continue;
+      const resolved = resolveRuntimeSpecifier(target, resource, targetSet);
+      if (!resolved?.endsWith(".js")) fail(`${target} eagerly imports a non-JavaScript target`);
+      dependencies.add(resolved);
+    }
+    graph.set(target, dependencies);
+  }
+  if (!graph.has(entry)) fail(`eager module entry is missing: ${entry}`);
+  const reachable = new Set();
+  const visit = (target) => {
+    if (reachable.has(target)) return;
+    reachable.add(target);
+    for (const dependency of graph.get(target) ?? []) visit(dependency);
+  };
+  visit(entry);
+  return [...reachable].sort();
+}
+
 function validateGenerator(bytes, label) {
   const tokens = tokenizeJavaScript(bytes, label);
   if (tokens.some((token) => token.type === "identifier"

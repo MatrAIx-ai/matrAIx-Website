@@ -20,7 +20,7 @@ import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import * as runtimeBuilder from "../scripts/build-synthesis-runtime.mjs";
 
-const { previousReleaseId, runCli } = runtimeBuilder;
+const { eagerModuleClosure, previousReleaseId, runCli } = runtimeBuilder;
 
 const temporaryRoots = [];
 const REPOSITORY_ROOT = fileURLToPath(new URL("..", import.meta.url));
@@ -130,6 +130,32 @@ function assertHtmlRuntimeEntries(html, releaseId) {
   assert.doesNotMatch(css, /[?#]/);
   assert.doesNotMatch(app, /[?#]/);
   return { css, app };
+}
+
+function runtimeBytesFor(root, releaseId) {
+  const lock = readJson(root, `synthesis/releases/${releaseId}/release-lock.json`);
+  return new Map(lock.runtime
+    .filter(({ path }) => path.endsWith(".js"))
+    .map(({ path }) => [path, readFileSync(join(
+      root, "synthesis", "releases", releaseId, ...path.split("/"),
+    ))]));
+}
+
+function assertHtmlModulePreloads(root, html, releaseId) {
+  const prefix = `synthesis/releases/${releaseId}/`;
+  const actual = startTags(html, "link")
+    .filter((attrs) => (attrs.get("rel") ?? "").toLowerCase().split(/\s+/)
+      .includes("modulepreload"))
+    .map((attrs) => attrs.get("href"));
+  for (const href of actual) {
+    assert.equal(href?.startsWith(prefix), true);
+    assert.doesNotMatch(href, /[?#]/);
+  }
+  const expected = eagerModuleClosure(runtimeBytesFor(root, releaseId))
+    .map((target) => `${prefix}${target}`)
+    .sort();
+  assert.deepEqual([...actual].sort(), expected);
+  return expected;
 }
 
 function assertLocalHtmlResources(root, html) {
@@ -399,6 +425,24 @@ test("tokenized closure accepts every supported literal JS/CSS dependency form d
   const lockText = firstLock.toString("utf8");
   assert.doesNotMatch(lockText, /synthesis-runtime-|\.tmp-|timestamp|createdAt|updatedAt/i);
   assert.doesNotMatch(lockText, /(?:^|\")\/(?:tmp|data2|home)\//);
+});
+
+test("eager module closure excludes dynamic imports and Worker entries", () => {
+  const eagerFixture = new Map([
+    ["app.js", Buffer.from(
+      'import "./dep.js"; export { reexported } from "./reexport.js"; ' +
+      'import("./dynamic.js"); new Worker(new URL("./worker.js", import.meta.url), { type: "module" });',
+    )],
+    ["dep.js", Buffer.from("export const dep = true;\n")],
+    ["reexport.js", Buffer.from("export const reexported = true;\n")],
+    ["dynamic.js", Buffer.from("export const dynamic = true;\n")],
+    ["worker.js", Buffer.from("self.onmessage = () => {};\n")],
+  ]);
+  assert.deepEqual(eagerModuleClosure(eagerFixture), [
+    "app.js",
+    "dep.js",
+    "reexport.js",
+  ]);
 });
 
 test("app/data binding requires exactly one structural loadManifest call", async (t) => {
@@ -991,6 +1035,17 @@ test("repository release and public entry points pin one query-free v1 runtime",
     css: "synthesis/releases/v1/synthesis.css",
     app: "synthesis/releases/v1/app.js",
   });
+  assert.deepEqual(assertHtmlModulePreloads(REPOSITORY_ROOT, html, "v1"), [
+    "synthesis/releases/v1/app.js",
+    "synthesis/releases/v1/data-loader.js",
+    "synthesis/releases/v1/detail-rail.js",
+    "synthesis/releases/v1/dist-utils.js",
+    "synthesis/releases/v1/drilldown-graph.js",
+    "synthesis/releases/v1/graph-store.js",
+    "synthesis/releases/v1/graph-views.js",
+    "synthesis/releases/v1/overview-graph.js",
+    "synthesis/releases/v1/url-state.js",
+  ]);
   assertLocalHtmlResources(REPOSITORY_ROOT, html);
 
   const reordered = html
@@ -1004,7 +1059,8 @@ test("repository release and public entry points pin one query-free v1 runtime",
     html.replace("</head>", '<link rel="stylesheet" href="synthesis.css" /></head>'),
     html.replace("</body>", '<script type="module" src="synthesis/app.js"></script></body>'),
     html.replace("synthesis/releases/v1/synthesis.css", "synthesis/releases/v1/synthesis.css?v=mutable"),
-    html.replace("synthesis/releases/v1/app.js", "synthesis/releases/v2/app.js"),
+    html.replace('<script type="module" src="synthesis/releases/v1/app.js"></script>',
+      '<script type="module" src="synthesis/releases/v2/app.js"></script>'),
   ]) assert.throws(() => assertHtmlRuntimeEntries(bypass, "v1"));
 
   assert.match(html, /href="css\/styles\.css\?v=9"/);
