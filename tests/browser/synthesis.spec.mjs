@@ -359,6 +359,9 @@ test("keyboard, pointer, focus restoration, and detail semantics stay coherent",
 
   const viewport = page.viewportSize();
   await page.setViewportSize({ width: viewport.width - 40, height: viewport.height - 20 });
+  await page.evaluate(() => new Promise((resolve) => {
+    requestAnimationFrame(() => requestAnimationFrame(resolve));
+  }));
   await expect.poll(() => activeIdentity(page)).toEqual({ id: "", key: DOMAIN_CATEGORY_KEY });
 
   const attribute = page.locator(`[data-focus-key="${DOMAIN_ATTRIBUTE_KEY}"]`);
