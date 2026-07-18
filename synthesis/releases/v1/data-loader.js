@@ -18,6 +18,21 @@ const ARTIFACT_FILENAMES = {
   pack: /^sampler-pack\.v[1-9][0-9]*\.json$/,
   dimensions: /^dimensions\.[0-9a-f]{16,64}\.json$/,
 };
+const VERIFIED_ARTIFACT_CACHE = "matraix-synthesis-verified-artifacts-v1";
+const CONTENT_FAILURE_CODES = new Set([
+  "size",
+  "hash",
+  "json",
+  "version",
+  "dataset",
+  "schema",
+]);
+
+const throwIfAborted = (signal) => {
+  if (!signal?.aborted) return;
+  if (typeof signal.throwIfAborted === "function") signal.throwIfAborted();
+  throw signal.reason ?? new DOMException("The operation was aborted.", "AbortError");
+};
 
 const isAbortError = (error) => error?.name === "AbortError";
 const isFiniteNumber = (value) => typeof value === "number" && Number.isFinite(value);
@@ -417,6 +432,178 @@ function cacheModeFrom(options) {
   return cacheMode;
 }
 
+async function openArtifactCache(cacheStorage, signal) {
+  throwIfAborted(signal);
+  if (!cacheStorage || typeof cacheStorage.open !== "function") return null;
+  try {
+    const cache = await cacheStorage.open(VERIFIED_ARTIFACT_CACHE);
+    throwIfAborted(signal);
+    return cache;
+  } catch (error) {
+    throwIfAborted(signal);
+    return null;
+  }
+}
+
+async function cachedCandidate(cache, requestUrl, signal) {
+  throwIfAborted(signal);
+  if (!cache || typeof cache.match !== "function") return null;
+  try {
+    const response = await cache.match(requestUrl.href);
+    throwIfAborted(signal);
+    return response ?? null;
+  } catch (error) {
+    throwIfAborted(signal);
+    return null;
+  }
+}
+
+async function bestEffortDelete(cache, requestUrl, signal) {
+  throwIfAborted(signal);
+  if (!cache || typeof cache.delete !== "function") return;
+  try {
+    await cache.delete(requestUrl.href);
+  } catch (error) {
+    // Cache deletion is an optimization; validation remains authoritative.
+  }
+  throwIfAborted(signal);
+}
+
+async function bestEffortCommit(cache, requestUrl, bytes, signal) {
+  throwIfAborted(signal);
+  if (!cache || typeof cache.put !== "function") return;
+  try {
+    await cache.put(requestUrl.href, new Response(bytes));
+  } catch (error) {
+    // Cache writes may fail under quota or privacy restrictions.
+  }
+  throwIfAborted(signal);
+}
+
+async function initialCandidate({
+  requestUrl,
+  signal,
+  fetchImpl,
+  cacheStorage,
+  cacheMode,
+}) {
+  const cache = await openArtifactCache(cacheStorage, signal);
+  throwIfAborted(signal);
+  const response = await cachedCandidate(cache, requestUrl, signal);
+  throwIfAborted(signal);
+  if (response !== null) {
+    try {
+      const bytes = await readResponseBytes(response);
+      throwIfAborted(signal);
+      return {
+        cache,
+        bytes,
+        source: "cache",
+        signal,
+        fetchImpl,
+        recoveryUsed: false,
+      };
+    } catch (error) {
+      if (error instanceof ArtifactLoadError
+          && (error.code === "http" || error.code === "body")) {
+        await bestEffortDelete(cache, requestUrl, signal);
+        throwIfAborted(signal);
+        const bytes = await fetchBytes(
+          requestUrl,
+          { cache: "reload", signal },
+          fetchImpl,
+        );
+        throwIfAborted(signal);
+        return {
+          cache,
+          bytes,
+          source: "network",
+          signal,
+          fetchImpl,
+          recoveryUsed: true,
+        };
+      }
+      throw error;
+    }
+  }
+  const bytes = await fetchBytes(
+    requestUrl,
+    { cache: cacheMode, signal },
+    fetchImpl,
+  );
+  throwIfAborted(signal);
+  return {
+    cache,
+    bytes,
+    source: "network",
+    signal,
+    fetchImpl,
+    recoveryUsed: cacheMode === "reload",
+  };
+}
+
+async function loadVerifiedArtifact({
+  descriptor,
+  key,
+  requestUrl,
+  signal,
+  fetchImpl,
+  cacheStorage,
+  cacheMode,
+  validate,
+}) {
+  let candidate = await initialCandidate({
+    requestUrl,
+    signal,
+    fetchImpl,
+    cacheStorage,
+    cacheMode,
+  });
+  throwIfAborted(candidate.signal);
+
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      await verifyDescriptorBytes(descriptor, key, candidate.bytes);
+      throwIfAborted(candidate.signal);
+      const value = parseJson(candidate.bytes, key);
+      await validate(value);
+      throwIfAborted(candidate.signal);
+      if (candidate.source !== "cache") {
+        await bestEffortCommit(
+          candidate.cache,
+          requestUrl,
+          candidate.bytes,
+          candidate.signal,
+        );
+      }
+      throwIfAborted(candidate.signal);
+      return value;
+    } catch (error) {
+      if (attempt !== 0
+          || candidate.recoveryUsed
+          || !(error instanceof ArtifactLoadError)
+          || !CONTENT_FAILURE_CODES.has(error.code)) {
+        throw error;
+      }
+      await bestEffortDelete(candidate.cache, requestUrl, candidate.signal);
+      throwIfAborted(candidate.signal);
+      const bytes = await fetchBytes(
+        requestUrl,
+        { cache: "reload", signal: candidate.signal },
+        candidate.fetchImpl,
+      );
+      throwIfAborted(candidate.signal);
+      candidate = {
+        ...candidate,
+        bytes,
+        source: "network",
+        recoveryUsed: true,
+      };
+    }
+  }
+  throw new ArtifactLoadError("artifact", "Snapshot artifact could not be loaded.");
+}
+
 export async function loadManifest(url, options = {}) {
   try {
     const cacheMode = cacheModeFrom(options);
@@ -443,23 +630,31 @@ export async function loadArtifact(manifest, key, options = {}) {
       throw new ArtifactLoadError("missing-core", "Core is required to verify pack.");
     }
     const { descriptor, requestUrl } = artifactRequest(manifest, key, options.baseUrl);
-    const fetchedBytes = await fetchBytes(
+    const cacheMode = cacheModeFrom(options);
+    const cacheStorage = hasOwn(options, "cacheStorage")
+      ? options.cacheStorage
+      : globalThis.caches;
+    const validate = async (value) => {
+      if (!isRecord(value)) schemaError(key === "core" ? "Core" : "Pack");
+      if (value.formatVersion !== 1) {
+        throw new ArtifactLoadError("version", `${key} schema version is unsupported.`);
+      }
+      if (value.datasetId !== manifest.datasetId) {
+        throw new ArtifactLoadError("dataset", `${key} belongs to another snapshot.`);
+      }
+      if (key === "core") validateCore(value);
+      else validatePack(value, options.core);
+    };
+    return loadVerifiedArtifact({
+      descriptor,
+      key,
       requestUrl,
-      { cache: "default", signal: options.signal },
-      options.fetchImpl ?? globalThis.fetch,
-    );
-    const bytes = await verifyDescriptorBytes(descriptor, key, fetchedBytes);
-    const value = parseJson(bytes, key);
-    if (!isRecord(value)) schemaError(key === "core" ? "Core" : "Pack");
-    if (value.formatVersion !== 1) {
-      throw new ArtifactLoadError("version", `${key} schema version is unsupported.`);
-    }
-    if (value.datasetId !== manifest.datasetId) {
-      throw new ArtifactLoadError("dataset", `${key} belongs to another snapshot.`);
-    }
-    if (key === "core") validateCore(value);
-    else validatePack(value, options.core);
-    return value;
+      signal: options.signal,
+      fetchImpl: options.fetchImpl ?? globalThis.fetch,
+      cacheStorage,
+      cacheMode,
+      validate,
+    });
   } catch (error) {
     passKnownError(error, "artifact", "Snapshot artifact could not be loaded.");
   }
@@ -474,25 +669,33 @@ export async function loadAuxJson(manifest, key, options = {}) {
       throw new ArtifactLoadError("missing-validator", "dimensions validator is required.");
     }
     const { descriptor, requestUrl } = artifactRequest(manifest, key, options.baseUrl);
-    const fetchedBytes = await fetchBytes(
+    const cacheMode = cacheModeFrom(options);
+    const cacheStorage = hasOwn(options, "cacheStorage")
+      ? options.cacheStorage
+      : globalThis.caches;
+    const validate = async (value) => {
+      try {
+        const result = await options.validate(value);
+        if (result === false) throw new TypeError("validator returned false");
+      } catch (error) {
+        if (isAbortError(error)) throw error;
+        throw new ArtifactLoadError(
+          "schema",
+          "dimensions schema validation failed.",
+          error,
+        );
+      }
+    };
+    return loadVerifiedArtifact({
+      descriptor,
+      key,
       requestUrl,
-      { cache: "default", signal: options.signal },
-      options.fetchImpl ?? globalThis.fetch,
-    );
-    const bytes = await verifyDescriptorBytes(descriptor, key, fetchedBytes);
-    const value = parseJson(bytes, key);
-    try {
-      const result = await options.validate(value);
-      if (result === false) throw new TypeError("validator returned false");
-    } catch (error) {
-      if (isAbortError(error)) throw error;
-      throw new ArtifactLoadError(
-        "schema",
-        "dimensions schema validation failed.",
-        error,
-      );
-    }
-    return value;
+      signal: options.signal,
+      fetchImpl: options.fetchImpl ?? globalThis.fetch,
+      cacheStorage,
+      cacheMode,
+      validate,
+    });
   } catch (error) {
     passKnownError(error, "artifact", "Snapshot artifact could not be loaded.");
   }

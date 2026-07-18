@@ -160,6 +160,63 @@ const artifactFetch = (
   return new Response(bytes, { status });
 };
 
+function createCacheStorage({
+  entries = new Map(),
+  reject = new Set(),
+  hooks = {},
+} = {}) {
+  const calls = [];
+  const cache = {
+    async match(url) {
+      calls.push(["match", String(url)]);
+      await hooks.match?.();
+      if (reject.has("match")) throw new Error("match failed");
+      const entry = entries.get(String(url));
+      if (entry === undefined) return undefined;
+      if (typeof entry === "function") return entry();
+      if (entry instanceof Response) return entry.clone();
+      return new Response(entry.slice());
+    },
+    async put(url, response) {
+      calls.push(["put", String(url)]);
+      const bytes = new Uint8Array(await response.arrayBuffer());
+      await hooks.put?.();
+      if (reject.has("put")) throw new Error("put failed");
+      entries.set(String(url), bytes);
+    },
+    async delete(url) {
+      calls.push(["delete", String(url)]);
+      await hooks.delete?.();
+      if (reject.has("delete")) throw new Error("delete failed");
+      return entries.delete(String(url));
+    },
+  };
+  return {
+    calls,
+    entries,
+    async open(name) {
+      calls.push(["open", name]);
+      await hooks.open?.();
+      if (reject.has("open")) throw new Error("open failed");
+      return cache;
+    },
+  };
+}
+
+const deferred = () => {
+  let resolve;
+  const promise = new Promise((done) => { resolve = done; });
+  return { promise, resolve };
+};
+
+const abortBetweenHelperAndCaller = (controller) => {
+  queueMicrotask(() => {
+    queueMicrotask(() => {
+      queueMicrotask(() => controller.abort());
+    });
+  });
+};
+
 async function loadInvalidCore(mutator) {
   const value = clone(coreFixture);
   mutator(value);
@@ -167,7 +224,8 @@ async function loadInvalidCore(mutator) {
   const manifest = manifestWithBytes({ coreBytes: bytes });
   return rejectsWithCode(() => loadArtifact(manifest, "core", {
     baseUrl: BASE_URL,
-    fetchImpl: artifactFetch(CORE_PATH, bytes),
+    cacheMode: "reload",
+    fetchImpl: artifactFetch(CORE_PATH, bytes, { cache: "reload" }),
   }), "schema");
 }
 
@@ -178,8 +236,9 @@ async function loadInvalidPack(mutator) {
   const manifest = manifestWithBytes({ packBytes: bytes });
   return rejectsWithCode(() => loadArtifact(manifest, "pack", {
     baseUrl: BASE_URL,
+    cacheMode: "reload",
     core: coreFixture,
-    fetchImpl: artifactFetch(PACK_PATH, bytes),
+    fetchImpl: artifactFetch(PACK_PATH, bytes, { cache: "reload" }),
   }), "schema");
 }
 
@@ -253,6 +312,662 @@ test("loadArtifact fetches the exact immutable core pathname and verifies it", a
     fetchImpl: artifactFetch(CORE_PATH, CORE_BYTES),
   });
   assert.deepEqual(core, coreFixture);
+});
+
+test("loadArtifact awaits a verified cache commit before resolving", async () => {
+  const putStarted = deferred();
+  const allowPut = deferred();
+  const cacheStorage = createCacheStorage({
+    hooks: {
+      async put() {
+        putStarted.resolve();
+        await allowPut.promise;
+      },
+    },
+  });
+  const modes = [];
+  let settled = false;
+  const load = loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    cacheStorage,
+    fetchImpl: async (url, init) => {
+      modes.push(init.cache);
+      return artifactFetch(CORE_PATH, CORE_BYTES)(url, init);
+    },
+  }).finally(() => { settled = true; });
+  const firstSettlement = await Promise.race([
+    putStarted.promise.then(() => "put-started"),
+    load.then(
+      () => "load-settled",
+      () => "load-settled",
+    ),
+  ]);
+  assert.equal(firstSettlement, "put-started");
+  assert.equal(settled, false);
+  allowPut.resolve();
+  assert.deepEqual(await load, coreFixture);
+  assert.deepEqual(modes, ["default"]);
+  assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 1);
+});
+
+test("loadArtifact revalidates a cached artifact without fetching", async () => {
+  const url = new URL(CORE_PATH, BASE_URL).href;
+  const cacheStorage = createCacheStorage({
+    entries: new Map([[url, CORE_BYTES]]),
+  });
+  let fetches = 0;
+  const value = await loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    cacheStorage,
+    fetchImpl: async () => {
+      fetches += 1;
+      return new Response(CORE_BYTES);
+    },
+  });
+  assert.deepEqual(value, coreFixture);
+  assert.equal(fetches, 0);
+});
+
+test("sequential loads reuse the committed artifact", async () => {
+  const cacheStorage = createCacheStorage();
+  let fetches = 0;
+  const fetchImpl = async (url, init) => {
+    fetches += 1;
+    return artifactFetch(CORE_PATH, CORE_BYTES)(url, init);
+  };
+  const options = { baseUrl: BASE_URL, cacheStorage, fetchImpl };
+
+  assert.deepEqual(await loadArtifact(manifestWithBytes(), "core", options), coreFixture);
+  assert.deepEqual(await loadArtifact(manifestWithBytes(), "core", options), coreFixture);
+  assert.equal(fetches, 1);
+});
+
+test("artifact cache mode fails before cache or fetch", async () => {
+  let cacheCalls = 0;
+  let fetches = 0;
+  await rejectsWithCode(() => loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    cacheMode: "no-store",
+    cacheStorage: {
+      async open() {
+        cacheCalls += 1;
+      },
+    },
+    fetchImpl: async () => {
+      fetches += 1;
+      return new Response(CORE_BYTES);
+    },
+  }), "cache-mode");
+  assert.equal(cacheCalls, 0);
+  assert.equal(fetches, 0);
+});
+
+test("pack and dimensions commit only after semantic validation", async (t) => {
+  await t.test("invalid pack", async () => {
+    const invalidPack = clone(packFixture);
+    invalidPack.edges[0].source = "missing";
+    const bytes = encode(invalidPack);
+    const cacheStorage = createCacheStorage();
+    const modes = [];
+    await rejectsWithCode(() => loadArtifact(
+      manifestWithBytes({ packBytes: bytes }),
+      "pack",
+      {
+        baseUrl: BASE_URL,
+        cacheStorage,
+        core: coreFixture,
+        fetchImpl: async (_url, init) => {
+          modes.push(init.cache);
+          return new Response(bytes);
+        },
+      },
+    ), "schema");
+    assert.deepEqual(modes, ["default", "reload"]);
+    assert.equal(cacheStorage.calls.filter(([kind]) => kind === "delete").length, 1);
+    assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 0);
+  });
+
+  await t.test("valid pack", async () => {
+    const cacheStorage = createCacheStorage();
+    const value = await loadArtifact(manifestWithBytes(), "pack", {
+      baseUrl: BASE_URL,
+      cacheStorage,
+      core: coreFixture,
+      fetchImpl: artifactFetch(PACK_PATH, PACK_BYTES),
+    });
+    assert.deepEqual(value, packFixture);
+    assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 1);
+  });
+
+  await t.test("invalid dimensions", async () => {
+    const bytes = encode({ dimensions: "invalid" });
+    const cacheStorage = createCacheStorage();
+    const modes = [];
+    await rejectsWithCode(() => loadAuxJson(
+      manifestWithBytes({ dimensionsBytes: bytes }),
+      "dimensions",
+      {
+        baseUrl: BASE_URL,
+        cacheStorage,
+        fetchImpl: async (_url, init) => {
+          modes.push(init.cache);
+          return new Response(bytes);
+        },
+        validate(value) {
+          if (!Array.isArray(value.dimensions)) throw new TypeError("invalid dimensions");
+        },
+      },
+    ), "schema");
+    assert.deepEqual(modes, ["default", "reload"]);
+    assert.equal(cacheStorage.calls.filter(([kind]) => kind === "delete").length, 1);
+    assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 0);
+  });
+
+  await t.test("valid dimensions", async () => {
+    const cacheStorage = createCacheStorage();
+    const value = await loadAuxJson(manifestWithBytes(), "dimensions", {
+      baseUrl: BASE_URL,
+      cacheStorage,
+      fetchImpl: artifactFetch(DIMENSIONS_PATH, DIMENSIONS_BYTES),
+      validate(candidate) {
+        assert.deepEqual(candidate, dimensionsFixture);
+      },
+    });
+    assert.deepEqual(value, dimensionsFixture);
+    assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 1);
+  });
+});
+
+test("an auxiliary validator false result is a schema failure", async () => {
+  const cacheStorage = createCacheStorage();
+  const modes = [];
+  let validations = 0;
+  const error = await rejectsWithCode(() => loadAuxJson(
+    manifestWithBytes(),
+    "dimensions",
+    {
+      baseUrl: BASE_URL,
+      cacheStorage,
+      fetchImpl: async (_url, init) => {
+        modes.push(init.cache);
+        return new Response(DIMENSIONS_BYTES);
+      },
+      validate() {
+        validations += 1;
+        return false;
+      },
+    },
+  ), "schema");
+  assert.equal(error.message, "dimensions schema validation failed.");
+  assert.equal(validations, 2);
+  assert.deepEqual(modes, ["default", "reload"]);
+  assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 0);
+});
+
+test("content failures recover once and preserve the terminal error", async (t) => {
+  const hashBytes = CORE_BYTES.slice();
+  hashBytes[0] ^= 1;
+  const versionBytes = encode({ ...coreFixture, formatVersion: 2 });
+  const datasetBytes = encode({ ...coreFixture, datasetId: OTHER_DATASET_ID });
+  const schemaValue = clone(coreFixture);
+  schemaValue.nodes = [];
+  const schemaBytes = encode(schemaValue);
+  const contentCases = [
+    ["size", encode("short"), manifestWithBytes(), "size"],
+    ["hash", hashBytes, manifestWithBytes(), "hash"],
+    ["json", encode("{not-json"), null, "json"],
+    ["version", versionBytes, null, "version"],
+    ["dataset", datasetBytes, null, "dataset"],
+    ["schema", schemaBytes, null, "schema"],
+  ];
+
+  for (const [name, bytes, suppliedManifest, code] of contentCases) {
+    await t.test(name, async () => {
+      const manifest = suppliedManifest ?? manifestWithBytes({ coreBytes: bytes });
+      const cacheStorage = createCacheStorage();
+      const modes = [];
+      const error = await rejectsWithCode(() => loadArtifact(manifest, "core", {
+        baseUrl: BASE_URL,
+        cacheStorage,
+        fetchImpl: async (_url, init) => {
+          modes.push(init.cache);
+          return new Response(bytes);
+        },
+      }), code);
+      assert.equal(error.code, code);
+      assert.deepEqual(modes, ["default", "reload"]);
+      assert.equal(cacheStorage.calls.filter(([kind]) => kind === "delete").length, 1);
+      assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 0);
+    });
+  }
+
+  await t.test("the second content error is terminal", async () => {
+    const cacheStorage = createCacheStorage();
+    const modes = [];
+    let fetches = 0;
+    const error = await rejectsWithCode(() => loadArtifact(
+      manifestWithBytes(),
+      "core",
+      {
+        baseUrl: BASE_URL,
+        cacheStorage,
+        fetchImpl: async (_url, init) => {
+          modes.push(init.cache);
+          fetches += 1;
+          return new Response(fetches === 1 ? hashBytes : encode("short"));
+        },
+      },
+    ), "size");
+    assert.equal(error.code, "size");
+    assert.equal(fetches, 2);
+    assert.deepEqual(modes, ["default", "reload"]);
+    assert.equal(cacheStorage.calls.filter(([kind]) => kind === "delete").length, 1);
+    assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 0);
+  });
+
+  const cachedTransportCases = [
+    ["cached http", () => new Response("private", { status: 404 })],
+    ["cached body", () => ({
+      ok: true,
+      status: 200,
+      arrayBuffer: async () => { throw new Error("private body failure"); },
+    })],
+  ];
+  for (const [name, entry] of cachedTransportCases) {
+    await t.test(name, async () => {
+      const url = new URL(CORE_PATH, BASE_URL).href;
+      const cacheStorage = createCacheStorage({ entries: new Map([[url, entry]]) });
+      const modes = [];
+      await rejectsWithCode(() => loadArtifact(manifestWithBytes(), "core", {
+        baseUrl: BASE_URL,
+        cacheStorage,
+        fetchImpl: async (_url, init) => {
+          modes.push(init.cache);
+          return new Response(encode("short"));
+        },
+      }), "size");
+      assert.deepEqual(modes, ["reload"]);
+      assert.equal(cacheStorage.calls.filter(([kind]) => kind === "match").length, 1);
+      assert.equal(cacheStorage.calls.filter(([kind]) => kind === "delete").length, 1);
+      assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 0);
+    });
+  }
+
+  const transportCases = [
+    ["network http", "http", async () => new Response("private", { status: 404 })],
+    ["network failure", "network", async () => { throw new Error("private network"); }],
+    ["network body", "body", async () => ({
+      ok: true,
+      status: 200,
+      arrayBuffer: async () => { throw new Error("private body"); },
+    })],
+  ];
+  for (const [name, code, response] of transportCases) {
+    await t.test(name, async () => {
+      const cacheStorage = createCacheStorage();
+      const modes = [];
+      await rejectsWithCode(() => loadArtifact(manifestWithBytes(), "core", {
+        baseUrl: BASE_URL,
+        cacheStorage,
+        fetchImpl: async (url, init) => {
+          modes.push(init.cache);
+          return response(url, init);
+        },
+      }), code);
+      assert.deepEqual(modes, ["default"]);
+      assert.equal(cacheStorage.calls.filter(([kind]) => kind === "delete").length, 0);
+      assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 0);
+    });
+  }
+
+  await t.test("digest", async () => {
+    const cryptoDescriptor = Object.getOwnPropertyDescriptor(globalThis, "crypto");
+    Object.defineProperty(globalThis, "crypto", {
+      configurable: true,
+      value: {
+        subtle: {
+          async digest() {
+            throw new Error("private digest failure");
+          },
+        },
+      },
+    });
+    const cacheStorage = createCacheStorage();
+    const modes = [];
+    try {
+      await rejectsWithCode(() => loadArtifact(manifestWithBytes(), "core", {
+        baseUrl: BASE_URL,
+        cacheStorage,
+        fetchImpl: async (_url, init) => {
+          modes.push(init.cache);
+          return new Response(CORE_BYTES);
+        },
+      }), "digest");
+    } finally {
+      Object.defineProperty(globalThis, "crypto", cryptoDescriptor);
+    }
+    assert.deepEqual(modes, ["default"]);
+    assert.equal(cacheStorage.calls.filter(([kind]) => kind === "delete").length, 0);
+    assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 0);
+  });
+
+  await t.test("abort", async () => {
+    const abort = new DOMException("cancelled", "AbortError");
+    const cacheStorage = createCacheStorage();
+    const modes = [];
+    await assert.rejects(
+      () => loadArtifact(manifestWithBytes(), "core", {
+        baseUrl: BASE_URL,
+        cacheStorage,
+        fetchImpl: async (_url, init) => {
+          modes.push(init.cache);
+          throw abort;
+        },
+      }),
+      (error) => error === abort,
+    );
+    assert.deepEqual(modes, ["default"]);
+    assert.equal(cacheStorage.calls.filter(([kind]) => kind === "delete").length, 0);
+    assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 0);
+  });
+});
+
+test("a corrupt cached core is deleted and recovered once with reload", async () => {
+  const url = new URL(CORE_PATH, BASE_URL).href;
+  const cacheStorage = createCacheStorage({
+    entries: new Map([[url, encode("corrupt")]]),
+  });
+  const modes = [];
+  const value = await loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    cacheStorage,
+    fetchImpl: async (_url, init) => {
+      modes.push(init.cache);
+      return new Response(CORE_BYTES);
+    },
+  });
+  assert.deepEqual(value, coreFixture);
+  assert.deepEqual(modes, ["reload"]);
+  assert.equal(cacheStorage.calls.filter(([kind]) => kind === "delete").length, 1);
+  assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 1);
+});
+
+test("reload mode consumes the one bypass allowance", async () => {
+  const invalid = clone(coreFixture);
+  invalid.nodes = [];
+  const bytes = encode(invalid);
+  const cacheStorage = createCacheStorage();
+  const modes = [];
+  await rejectsWithCode(() => loadArtifact(
+    manifestWithBytes({ coreBytes: bytes }),
+    "core",
+    {
+      baseUrl: BASE_URL,
+      cacheMode: "reload",
+      cacheStorage,
+      fetchImpl: async (_url, init) => {
+        modes.push(init.cache);
+        return new Response(bytes);
+      },
+    },
+  ), "schema");
+  assert.deepEqual(modes, ["reload"]);
+  assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 0);
+});
+
+test("network transport failures do not retry", async (t) => {
+  const cases = [
+    ["http", "http", async () => new Response("private", { status: 503 })],
+    ["body", "body", async () => ({
+      ok: true,
+      status: 200,
+      arrayBuffer: async () => { throw new Error("private body"); },
+    })],
+  ];
+  for (const [name, code, response] of cases) {
+    await t.test(name, async () => {
+      const cacheStorage = createCacheStorage();
+      const modes = [];
+      await rejectsWithCode(() => loadArtifact(manifestWithBytes(), "core", {
+        baseUrl: BASE_URL,
+        cacheStorage,
+        fetchImpl: async (url, init) => {
+          modes.push(init.cache);
+          return response(url, init);
+        },
+      }), code);
+      assert.deepEqual(modes, ["default"]);
+      assert.equal(cacheStorage.calls.filter(([kind]) => kind === "delete").length, 0);
+      assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 0);
+    });
+  }
+});
+
+test("delete rejection does not block verified recovery", async () => {
+  const url = new URL(CORE_PATH, BASE_URL).href;
+  const cacheStorage = createCacheStorage({
+    entries: new Map([[url, encode("corrupt")]]),
+    reject: new Set(["delete"]),
+  });
+  const modes = [];
+  const value = await loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    cacheStorage,
+    fetchImpl: async (_url, init) => {
+      modes.push(init.cache);
+      return new Response(CORE_BYTES);
+    },
+  });
+  assert.deepEqual(value, coreFixture);
+  assert.deepEqual(modes, ["reload"]);
+  assert.equal(cacheStorage.calls.filter(([kind]) => kind === "delete").length, 1);
+  assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 1);
+});
+
+test("cache open match and put failures degrade to verified loading", async (t) => {
+  for (const operation of ["open", "match", "put"]) {
+    await t.test(operation, async () => {
+      const cacheStorage = createCacheStorage({ reject: new Set([operation]) });
+      const value = await loadArtifact(manifestWithBytes(), "core", {
+        baseUrl: BASE_URL,
+        cacheStorage,
+        fetchImpl: artifactFetch(CORE_PATH, CORE_BYTES),
+      });
+      assert.deepEqual(value, coreFixture);
+      assert.deepEqual(cacheStorage.calls[0], [
+        "open",
+        "matraix-synthesis-verified-artifacts-v1",
+      ]);
+    });
+  }
+});
+
+test("abort before cache open prevents cache and network I/O", async () => {
+  const controller = new AbortController();
+  controller.abort();
+  let cacheCalls = 0;
+  let fetches = 0;
+  await assert.rejects(
+    () => loadArtifact(manifestWithBytes(), "core", {
+      baseUrl: BASE_URL,
+      signal: controller.signal,
+      cacheStorage: {
+        async open() {
+          cacheCalls += 1;
+        },
+      },
+      fetchImpl: async () => {
+        fetches += 1;
+        return new Response(CORE_BYTES);
+      },
+    }),
+    (error) => error?.name === "AbortError",
+  );
+  assert.equal(cacheCalls, 0);
+  assert.equal(fetches, 0);
+});
+
+test("abort while cache match is paused prevents fetching or exposing a value", async () => {
+  const controller = new AbortController();
+  const matchStarted = deferred();
+  const allowMatch = deferred();
+  const cacheStorage = createCacheStorage({
+    hooks: {
+      async match() {
+        matchStarted.resolve();
+        await allowMatch.promise;
+      },
+    },
+  });
+  let fetches = 0;
+  const load = loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    signal: controller.signal,
+    cacheStorage,
+    fetchImpl: async () => {
+      fetches += 1;
+      return new Response(CORE_BYTES);
+    },
+  });
+  await matchStarted.promise;
+  controller.abort();
+  allowMatch.resolve();
+  await assert.rejects(load, (error) => error?.name === "AbortError");
+  assert.equal(fetches, 0);
+});
+
+test("abort after auxiliary validation prevents a cache commit", async () => {
+  const controller = new AbortController();
+  const cacheStorage = createCacheStorage();
+  await assert.rejects(
+    () => loadAuxJson(manifestWithBytes(), "dimensions", {
+      baseUrl: BASE_URL,
+      signal: controller.signal,
+      cacheStorage,
+      fetchImpl: artifactFetch(DIMENSIONS_PATH, DIMENSIONS_BYTES),
+      validate() {
+        controller.abort();
+        return true;
+      },
+    }),
+    (error) => error?.name === "AbortError",
+  );
+  assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 0);
+});
+
+test("abort while cache put is paused prevents exposing a parsed value", async () => {
+  const controller = new AbortController();
+  const putStarted = deferred();
+  const allowPut = deferred();
+  const cacheStorage = createCacheStorage({
+    hooks: {
+      async put() {
+        putStarted.resolve();
+        await allowPut.promise;
+      },
+    },
+  });
+  const load = loadArtifact(manifestWithBytes(), "core", {
+    baseUrl: BASE_URL,
+    signal: controller.signal,
+    cacheStorage,
+    fetchImpl: artifactFetch(CORE_PATH, CORE_BYTES),
+  });
+  await putStarted.promise;
+  controller.abort();
+  allowPut.resolve();
+  await assert.rejects(load, (error) => error?.name === "AbortError");
+  assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 1);
+});
+
+test("abort after cachedCandidate settles prevents reading cached bytes", async () => {
+  const controller = new AbortController();
+  const url = new URL(CORE_PATH, BASE_URL).href;
+  let reads = 0;
+  let fetches = 0;
+  const cacheStorage = createCacheStorage({
+    entries: new Map([[url, () => ({
+      ok: true,
+      status: 200,
+      async arrayBuffer() {
+        reads += 1;
+        return CORE_BYTES.buffer.slice(
+          CORE_BYTES.byteOffset,
+          CORE_BYTES.byteOffset + CORE_BYTES.byteLength,
+        );
+      },
+    })]]),
+    hooks: {
+      match() {
+        abortBetweenHelperAndCaller(controller);
+      },
+    },
+  });
+  await assert.rejects(
+    () => loadArtifact(manifestWithBytes(), "core", {
+      baseUrl: BASE_URL,
+      signal: controller.signal,
+      cacheStorage,
+      fetchImpl: async () => {
+        fetches += 1;
+        return new Response(CORE_BYTES);
+      },
+    }),
+    (error) => error?.name === "AbortError",
+  );
+  assert.equal(reads, 0);
+  assert.equal(fetches, 0);
+});
+
+test("abort after bestEffortDelete settles prevents a reload fetch", async () => {
+  const controller = new AbortController();
+  const url = new URL(CORE_PATH, BASE_URL).href;
+  let fetches = 0;
+  const cacheStorage = createCacheStorage({
+    entries: new Map([[url, encode("corrupt")]]),
+    hooks: {
+      delete() {
+        abortBetweenHelperAndCaller(controller);
+      },
+    },
+  });
+  await assert.rejects(
+    () => loadArtifact(manifestWithBytes(), "core", {
+      baseUrl: BASE_URL,
+      signal: controller.signal,
+      cacheStorage,
+      fetchImpl: async () => {
+        fetches += 1;
+        return new Response(CORE_BYTES);
+      },
+    }),
+    (error) => error?.name === "AbortError",
+  );
+  assert.equal(cacheStorage.entries.has(url), false);
+  assert.equal(fetches, 0);
+});
+
+test("abort after bestEffortCommit settles prevents exposing a parsed value", async () => {
+  const controller = new AbortController();
+  const url = new URL(CORE_PATH, BASE_URL).href;
+  const cacheStorage = createCacheStorage({
+    hooks: {
+      put() {
+        abortBetweenHelperAndCaller(controller);
+      },
+    },
+  });
+  await assert.rejects(
+    () => loadArtifact(manifestWithBytes(), "core", {
+      baseUrl: BASE_URL,
+      signal: controller.signal,
+      cacheStorage,
+      fetchImpl: artifactFetch(CORE_PATH, CORE_BYTES),
+    }),
+    (error) => error?.name === "AbortError",
+  );
+  assert.deepEqual(cacheStorage.entries.get(url), CORE_BYTES);
+  assert.equal(cacheStorage.calls.filter(([kind]) => kind === "put").length, 1);
 });
 
 test("loadArtifact validates a pack against the exact core", async () => {
@@ -361,7 +1076,8 @@ test("invalid manifest and artifact JSON use a safe json error", async (t) => {
     const manifest = manifestWithBytes({ coreBytes: bytes });
     const error = await rejectsWithCode(() => loadArtifact(manifest, "core", {
       baseUrl: BASE_URL,
-      fetchImpl: artifactFetch(CORE_PATH, bytes),
+      cacheMode: "reload",
+      fetchImpl: artifactFetch(CORE_PATH, bytes, { cache: "reload" }),
     }), "json");
     assert.equal(error.message, "core is not valid JSON.");
   });
@@ -382,7 +1098,8 @@ test("manifest and core formatVersion must be exactly 1", async (t) => {
     const manifest = manifestWithBytes({ coreBytes: bytes });
     await rejectsWithCode(() => loadArtifact(manifest, "core", {
       baseUrl: BASE_URL,
-      fetchImpl: artifactFetch(CORE_PATH, bytes),
+      cacheMode: "reload",
+      fetchImpl: artifactFetch(CORE_PATH, bytes, { cache: "reload" }),
     }), "version");
   });
 });
@@ -516,7 +1233,8 @@ test("artifact bytes and SHA-256 must match the pinned descriptor", async (t) =>
     manifest.artifacts.core.bytes++;
     await rejectsWithCode(() => loadArtifact(manifest, "core", {
       baseUrl: BASE_URL,
-      fetchImpl: artifactFetch(CORE_PATH, CORE_BYTES),
+      cacheMode: "reload",
+      fetchImpl: artifactFetch(CORE_PATH, CORE_BYTES, { cache: "reload" }),
     }), "size");
   });
 
@@ -525,7 +1243,8 @@ test("artifact bytes and SHA-256 must match the pinned descriptor", async (t) =>
     manifest.artifacts.core.sha256 = "0".repeat(64);
     await rejectsWithCode(() => loadArtifact(manifest, "core", {
       baseUrl: BASE_URL,
-      fetchImpl: artifactFetch(CORE_PATH, CORE_BYTES),
+      cacheMode: "reload",
+      fetchImpl: artifactFetch(CORE_PATH, CORE_BYTES, { cache: "reload" }),
     }), "hash");
   });
 });
@@ -536,7 +1255,8 @@ test("artifacts must carry the manifest datasetId", async () => {
   const manifest = manifestWithBytes({ coreBytes: bytes });
   await rejectsWithCode(() => loadArtifact(manifest, "core", {
     baseUrl: BASE_URL,
-    fetchImpl: artifactFetch(CORE_PATH, bytes),
+    cacheMode: "reload",
+    fetchImpl: artifactFetch(CORE_PATH, bytes, { cache: "reload" }),
   }), "dataset");
 });
 
@@ -703,7 +1423,8 @@ test("dimensions integrity and schema failures are fail-closed and safe", async 
     manifest.artifacts.dimensions.sha256 = "0".repeat(64);
     await rejectsWithCode(() => loadAuxJson(manifest, "dimensions", {
       baseUrl: BASE_URL,
-      fetchImpl: artifactFetch(DIMENSIONS_PATH, DIMENSIONS_BYTES),
+      cacheMode: "reload",
+      fetchImpl: artifactFetch(DIMENSIONS_PATH, DIMENSIONS_BYTES, { cache: "reload" }),
       validate() {},
     }), "hash");
   });
@@ -712,7 +1433,8 @@ test("dimensions integrity and schema failures are fail-closed and safe", async 
     const raw = new Error("bad field <img src=x onerror=alert(1)>");
     const error = await rejectsWithCode(() => loadAuxJson(manifestWithBytes(), "dimensions", {
       baseUrl: BASE_URL,
-      fetchImpl: artifactFetch(DIMENSIONS_PATH, DIMENSIONS_BYTES),
+      cacheMode: "reload",
+      fetchImpl: artifactFetch(DIMENSIONS_PATH, DIMENSIONS_BYTES, { cache: "reload" }),
       validate() { throw raw; },
     }), "schema");
     assert.equal(error.message, "dimensions schema validation failed.");
@@ -724,7 +1446,8 @@ test("dimensions integrity and schema failures are fail-closed and safe", async 
     const raw = new ArtifactLoadError("schema", "unsafe <script>alert(1)</script>");
     const error = await rejectsWithCode(() => loadAuxJson(manifestWithBytes(), "dimensions", {
       baseUrl: BASE_URL,
-      fetchImpl: artifactFetch(DIMENSIONS_PATH, DIMENSIONS_BYTES),
+      cacheMode: "reload",
+      fetchImpl: artifactFetch(DIMENSIONS_PATH, DIMENSIONS_BYTES, { cache: "reload" }),
       validate() { throw raw; },
     }), "schema");
     assert.equal(error.message, "dimensions schema validation failed.");
