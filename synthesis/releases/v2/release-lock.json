@@ -10,13 +10,13 @@
     },
     {
       "path": "app.js",
-      "bytes": 19684,
-      "sha256": "e879964665110a957933a3f5e6d3027eeaa6fd464609eb8c600ece509e27dea2"
+      "bytes": 20289,
+      "sha256": "97ec6397d3962d84e3a98ffcec945c31bb5bb8e805a96f2001235d367108c2d2"
     },
     {
       "path": "data-loader.js",
-      "bytes": 18380,
-      "sha256": "c8068c0b3624903303f4b5a6d5480b31e06d33f3136498c5d210dadffc11eec7"
+      "bytes": 26920,
+      "sha256": "50125f0c39cfebba5aabce483645859d5aba5e703d831fb180832e5c360c954c"
     },
     {
       "path": "detail-rail.js",
@@ -137,6 +137,6 @@
     "releaseId": "v1",
     "path": "synthesis/releases/v1/release-lock.json",
     "bytes": 2451,
-    "sha256": "b767bf107de2307cf6ffd0229c36b3cb7b797b083e3ec50a478c75715ecb7bf5"
+    "sha256": "5f00d7cec0115a0cfa094ca0348c3321b40f4e2842ce3642981b615d5ab2cce3"
   }
 }

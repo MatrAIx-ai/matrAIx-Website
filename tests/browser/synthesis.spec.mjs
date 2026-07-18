@@ -16,6 +16,7 @@ const MANIFEST_ROUTE = /\/synthesis\/data\/manifest\.v2\.json$/;
 const CORE_ROUTE = /\/synthesis\/data\/graph-core\.v1\.json$/;
 const PACK_ROUTE = /\/synthesis\/data\/sampler-pack\.v2\.json$/;
 const DIMENSIONS_ROUTE = /\/synthesis\/data\/dimensions\.[0-9a-f]{16,64}\.json$/;
+const VERIFIED_ARTIFACT_CACHE = "matraix-synthesis-verified-artifacts-v1";
 const REQUEST_CANCELLATION_ERRORS = new Set([
   "net::ERR_ABORTED",
   "Load request cancelled",
@@ -159,6 +160,34 @@ async function routeMutatedManifest(page, mutate) {
       body: `${JSON.stringify(manifest)}\n`,
     });
   });
+}
+
+async function seedCorruptArtifactCache(page, pathnames) {
+  await page.route(`${STUDIO_ORIGIN}/`, (route) => route.fulfill({
+    status: 200,
+    contentType: "text/html; charset=utf-8",
+    body: "<!doctype html><title>Cache seed</title>\n",
+  }), { times: 1 });
+  await page.goto("/");
+  await page.evaluate(async ({ cacheName, paths }) => {
+    const cache = await caches.open(cacheName);
+    for (const pathname of paths) {
+      await cache.put(
+        new URL(pathname, location.origin).href,
+        new Response("corrupt artifact\n", { status: 200 }),
+      );
+    }
+  }, { cacheName: VERIFIED_ARTIFACT_CACHE, paths: pathnames });
+}
+
+function watchArtifactRequests(context) {
+  const counts = { core: 0, pack: 0 };
+  context.on("request", (request) => {
+    const pathname = new URL(request.url()).pathname;
+    if (pathname === CORE_PATH) counts.core += 1;
+    if (pathname === PACK_PATH) counts.pack += 1;
+  });
+  return counts;
 }
 
 async function expectGenericLoadFailure(page) {
@@ -816,6 +845,131 @@ test("Retry recovers an artifact failure without refetching the pinned manifest"
   expect(await page.evaluate(() => globalThis.__synCoreFetchModes))
     .toEqual(["default", "reload"]);
   expect(expectedCoreFailure.remaining).toBe(0);
+});
+
+test("verified core and pack bytes survive a Window and Worker restart", async ({
+  context,
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium-desktop", "Cache/Worker reuse runs once on Chromium");
+  await seedCorruptArtifactCache(page, [CORE_PATH, PACK_PATH]);
+  await installNativeWorkerProbe(page);
+  const requests = watchArtifactRequests(context);
+
+  await openStudio(page);
+  expect(requests).toEqual({ core: 1, pack: 0 });
+  await page.getByRole("button", { name: "Generate personas" }).click();
+  await waitForGeneratedSeed(page, 42, 20);
+  expect(requests).toEqual({ core: 1, pack: 1 });
+  expect(await page.evaluate(() => ({
+    created: window.__nativeWorkerProbe.created,
+    resultCount: window.__synState?.results?.n ?? 0,
+  }))).toEqual({ created: 1, resultCount: 20 });
+
+  await page.reload();
+  await waitForStudio(page);
+  expect(requests).toEqual({ core: 1, pack: 1 });
+  await page.getByRole("button", { name: "Generate personas" }).click();
+  await waitForGeneratedSeed(page, 42, 20);
+  expect(requests).toEqual({ core: 1, pack: 1 });
+  expect(await page.evaluate(() => ({
+    created: window.__nativeWorkerProbe.created,
+    resultCount: window.__synState?.results?.n ?? 0,
+  }))).toEqual({ created: 1, resultCount: 20 });
+});
+
+test("corrupt cache recovery survives delete failure", async ({ context, page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium-desktop", "Cache recovery runs once on Chromium");
+  await seedCorruptArtifactCache(page, [CORE_PATH]);
+  await page.addInitScript((corePath) => {
+    const nativeDelete = Cache.prototype.delete;
+    Cache.prototype.delete = function deleteCachedArtifact(input, options) {
+      const rawUrl = input instanceof Request ? input.url : String(input);
+      if (new URL(rawUrl, location.href).pathname === corePath) {
+        return Promise.reject(new Error("synthetic cache delete failure"));
+      }
+      return nativeDelete.call(this, input, options);
+    };
+  }, CORE_PATH);
+  const requests = watchArtifactRequests(context);
+
+  await openStudio(page);
+  expect(requests.core).toBe(1);
+  await page.reload();
+  await waitForStudio(page);
+  expect(requests.core).toBe(1);
+});
+
+test("a failed forced core reload reaches Retry and then recovers", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium-desktop", "Forced recovery runs once on Chromium");
+  await seedCorruptArtifactCache(page, [CORE_PATH]);
+  await page.addInitScript(() => {
+    const nativeFetch = globalThis.fetch.bind(globalThis);
+    globalThis.__synCoreFetchModes = [];
+    globalThis.fetch = (input, init = {}) => {
+      const rawUrl = input instanceof Request ? input.url : String(input);
+      if (new URL(rawUrl, location.href).pathname
+          === "/synthesis/data/graph-core.v1.json") {
+        globalThis.__synCoreFetchModes.push(init.cache ?? null);
+      }
+      return nativeFetch(input, init);
+    };
+  });
+  let coreRequests = 0;
+  await page.route(CORE_ROUTE, async (route) => {
+    coreRequests += 1;
+    if (coreRequests === 1) {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json; charset=utf-8",
+        body: "corrupt network artifact\n",
+      });
+      return;
+    }
+    await route.continue();
+  });
+
+  await page.goto("/synthesis.html");
+  await expect(page.locator("#synRetry")).toBeVisible();
+  await expect.poll(() => page.evaluate(() => window.__synState?.store?.nodeCount ?? 0)).toBe(0);
+  expect(coreRequests).toBe(1);
+  await page.locator("#synRetry").click();
+  await waitForStudio(page);
+  expect(coreRequests).toBe(2);
+  expect(await page.evaluate(() => globalThis.__synCoreFetchModes))
+    .toEqual(["reload", "reload"]);
+});
+
+test("cache storage unavailable degrades to verified network loading", async ({
+  context,
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium-desktop", "Cache degradation runs once on Chromium");
+  await page.addInitScript(() => {
+    Object.defineProperty(globalThis, "caches", { configurable: true, value: undefined });
+  });
+  const requests = watchArtifactRequests(context);
+
+  await openStudio(page);
+  await page.reload();
+  await waitForStudio(page);
+  expect(requests.core).toBe(2);
+});
+
+test("cache storage put rejection degrades to verified network loading", async ({
+  context,
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium-desktop", "Cache degradation runs once on Chromium");
+  await page.addInitScript(() => {
+    Cache.prototype.put = () => Promise.reject(new Error("synthetic cache put failure"));
+  });
+  const requests = watchArtifactRequests(context);
+
+  await openStudio(page);
+  await page.reload();
+  await waitForStudio(page);
+  expect(requests.core).toBe(2);
 });
 
 test("a recipe-free batch paginates, renders text lazily, compares numeric distributions, and preserves selection focus", async ({ page }, testInfo) => {

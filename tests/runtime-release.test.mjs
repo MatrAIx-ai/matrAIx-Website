@@ -24,6 +24,25 @@ const { eagerModuleClosure, previousReleaseId, runCli } = runtimeBuilder;
 
 const temporaryRoots = [];
 const REPOSITORY_ROOT = fileURLToPath(new URL("..", import.meta.url));
+const V2_EAGER_MODULES = [
+  "adjust-panel.js",
+  "app.js",
+  "data-loader.js",
+  "detail-rail.js",
+  "dimensions-schema.js",
+  "dist-utils.js",
+  "drilldown-graph.js",
+  "graph-store.js",
+  "graph-views.js",
+  "overview-graph.js",
+  "render-persona.js",
+  "request-schema.js",
+  "results-panel.js",
+  "rng.js",
+  "sampler-client.js",
+  "sampler.js",
+  "url-state.js",
+];
 after(() => {
   for (const root of temporaryRoots) rmSync(root, { recursive: true, force: true });
 });
@@ -1189,6 +1208,17 @@ test("the exact repository v2 sources and pinned data pass a predecessor-bound t
   assert.equal(lock.predecessor.releaseId, "v1");
   assert.equal(lock.data.datasetId,
     readJson(root, "synthesis/data/manifest.v2.json").datasetId);
+
+  rmSync(join(root, "synthesis", "releases", "v2"), { recursive: true });
+  const sourceApp = readFileSync(join(root, "synthesis", "app.js"));
+  write(root, "synthesis/app.js", replaceBytes(
+    sourceApp,
+    'startArtifactRequest("synthesis/data/graph-core.v1.json"',
+    'startArtifactRequest("synthesis/data/graph-core.v2.json"',
+  ));
+  await rejects(root, ["--release", "v2", "--write"],
+    /startArtifactRequest|core|binding|path/i);
+  assertNoReleaseWork(root, ["v1"]);
 });
 
 test("repository releases and public entry points pin one query-free v2 runtime", async () => {
@@ -1200,25 +1230,10 @@ test("repository releases and public entry points pin one query-free v2 runtime"
     css: "synthesis/releases/v2/synthesis.css",
     app: "synthesis/releases/v2/app.js",
   });
-  assert.deepEqual(assertHtmlModulePreloads(REPOSITORY_ROOT, html, "v2"), [
-    "synthesis/releases/v2/adjust-panel.js",
-    "synthesis/releases/v2/app.js",
-    "synthesis/releases/v2/data-loader.js",
-    "synthesis/releases/v2/detail-rail.js",
-    "synthesis/releases/v2/dimensions-schema.js",
-    "synthesis/releases/v2/dist-utils.js",
-    "synthesis/releases/v2/drilldown-graph.js",
-    "synthesis/releases/v2/graph-store.js",
-    "synthesis/releases/v2/graph-views.js",
-    "synthesis/releases/v2/overview-graph.js",
-    "synthesis/releases/v2/render-persona.js",
-    "synthesis/releases/v2/request-schema.js",
-    "synthesis/releases/v2/results-panel.js",
-    "synthesis/releases/v2/rng.js",
-    "synthesis/releases/v2/sampler-client.js",
-    "synthesis/releases/v2/sampler.js",
-    "synthesis/releases/v2/url-state.js",
-  ]);
+  const modulePreloads = assertHtmlModulePreloads(REPOSITORY_ROOT, html, "v2");
+  assert.deepEqual(modulePreloads,
+    V2_EAGER_MODULES.map((name) => `synthesis/releases/v2/${name}`));
+  assert.equal(modulePreloads.includes("synthesis/releases/v2/sampler-worker.js"), false);
   assertLocalHtmlResources(REPOSITORY_ROOT, html);
 
   const reordered = html
