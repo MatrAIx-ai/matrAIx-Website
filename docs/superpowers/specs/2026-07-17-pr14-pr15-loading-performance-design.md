@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-17
 
-**Status:** Design approved; awaiting written-spec review
+**Status:** Approved for implementation
 
 **Scope:** Existing draft PRs 14 and 15
 
@@ -198,6 +198,8 @@ request then run concurrently.
 
 `data-loader.js` owns the request handle. The handle records the normalized URL
 and an always-observed settled result; callers do not parse or trust its bytes.
+It also owns the network cache mode, restricted to `default` or `reload`, so a
+consumer cannot silently replace the transport policy after the request starts.
 This avoids an unhandled rejection if manifest validation fails while the core
 request is still in flight.
 
@@ -246,13 +248,21 @@ schema, release-ID, origin, and path validation. They are not placed in the
 verified artifact cache because the current runtime does not carry a separately
 trusted manifest digest. This keeps the existing manifest trust model unchanged.
 
+The speculative core request follows the same page-attempt rule. Its first
+network miss uses `default`; after a current, non-abort page attempt fails, the
+next explicit Retry starts a new core handle with `reload`. A verified Cache
+Storage hit is still reused because it is independently revalidated. Successful
+core verification resets the next-attempt mode to `default`. Invalid cache modes
+fail before Cache Storage or network I/O.
+
 ### Read And Commit Rules
 
 Both `loadArtifact` and `loadAuxJson` use one verification pipeline:
 
 1. resolve and validate the descriptor URL;
 2. attempt an exact Cache Storage match;
-3. on a miss, fetch the URL with `cache: "default"`;
+3. on a miss, fetch the URL with the caller-owned mode: normally `default`, or
+   `reload` for the next explicit page Retry;
 4. verify descriptor byte length and SHA-256;
 5. parse JSON and verify format version and dataset binding;
 6. run core, pack-with-core, or supplied auxiliary schema validation;
@@ -264,19 +274,22 @@ integrity. A same-origin script that writes arbitrary cache bytes therefore
 cannot bypass artifact validation.
 
 If Cache Storage is absent, blocked, over quota, or throws during open or match,
-the loader falls back to a normally cached HTTP response followed by the same
-full verification. Cache availability must not determine whether correct data
-can load. A cache write failure is recorded as a cache miss for performance
-expectations but is not a page or Generate correctness failure.
+the loader falls back to an HTTP response using the caller-selected mode,
+followed by the same full verification. Cache availability must not determine
+whether correct data can load. A cache write failure is recorded as a cache miss
+for performance expectations but is not a page or Generate correctness failure.
 
-If bytes from either Cache Storage or a normal HTTP response fail an integrity
+If bytes from either Cache Storage or an artifact HTTP response fail an integrity
 or semantic check, the loader best-effort deletes the Cache Storage entry and,
 within the same call, makes exactly one bypassing request with `cache: "reload"`.
 Only a fully verified reload may replace the entry or produce output. This
 recovery works even if Cache Storage deletion fails; the current call never
-reads that key twice. If the forced response also fails, the loader fails closed
-and the existing UI Retry starts a new attempt. HTTP or network failures do not
-trigger an automatic second request and are left to the explicit Retry.
+reads that key twice. If the call's initial network request already used
+`reload`, that request consumes the call's bypass allowance and content failure
+does not issue a second reload. If the forced response also fails, the loader
+fails closed and the existing UI Retry starts a new attempt. HTTP or network
+failures do not trigger an automatic second request; the next explicit page
+Retry supplies `reload` to the new core handle.
 
 Call-contract failures such as an unsupported artifact key, a missing core for
 pack validation, or a missing auxiliary validator fail before cache access.
@@ -289,8 +302,11 @@ the Window from reporting core ready while a promptly created Worker can still
 race an in-progress core commit.
 
 Cache Storage operations do not accept `AbortSignal`. The loader checks the
-signal before and after every Cache Storage await and before exposing a parsed
-value. Network fetches share the attempt's signal and are actively aborted when
+signal before and after every Cache Storage await, again in the caller after an
+awaited cache helper settles, and immediately before starting reload or exposing
+a parsed value. The repeated caller checks close the Promise-continuation window
+in which an abort microtask can run after a helper's post-check. Network fetches
+share the attempt's signal and are actively aborted when
 the manifest/core attempt fails or is superseded. The loader never starts a
 cache write after observing an abort. If abort arrives during an already-started
 put, that put may finish because the platform cannot cancel it; the bytes were
@@ -343,6 +359,9 @@ removes the second compile/sample pass from the default Generate path.
 - Cached corruption is best-effort evicted and bypassed by one forced reload in
   the same call. Only a failed forced response reaches the page or Worker error
   surface; explicit Retry then starts a new attempt.
+- The first page attempt uses normal artifact HTTP caching; after a current
+  non-abort failure, the next page Retry owns one `reload` core request and can
+  recover from a cacheable HTTP/body failure without an automatic same-call retry.
 - Cache API and quota failures degrade to verified network loading.
 - Artifact HTTP, digest, JSON, schema, dataset, and pack/core errors retain safe
   user-facing messages and detailed internal error codes used by tests.
@@ -365,8 +384,14 @@ Implementation follows test-first changes at each boundary.
 - unavailable Cache API and rejected open/match/delete/put operations;
 - abort before put prevents a write; abort during an in-progress verified put may
   finish the put but exposes no parsed value;
+- nested-microtask aborts between cache-helper settlement and cached-body read,
+  reload start, or parsed-value return expose no value and start no new fetch;
 - awaited put completion before a successful load returns;
+- auxiliary validators that return `false` fail with safe `schema` errors and
+  never commit bytes;
 - speculative URL equality, concurrent start, cancellation, and observed failure;
+- default/reload handle ownership, invalid-mode preconditions, and a two-call
+  HTTP failure followed by explicit `reload` recovery;
 - no reuse of a rejected byte request.
 
 PR 15 Worker, request-schema, URL-state, and browser-model tests cover the false
@@ -405,7 +430,7 @@ verifies:
 - a planted corrupt cache entry is never used, attempts deletion, and performs
   one forced reload even when deletion fails;
 - forced-reload failure reaches the error UI and a later explicit Retry can
-  recover;
+  recover, with the retry core request carrying the browser's reload policy;
 - unavailable Cache Storage or rejected put still produces verified output but
   does not promise zero duplicate transfers;
 - failure, abort, and retry UI behavior remains intact.
@@ -432,6 +457,8 @@ behavior, integrity checks, and 404 absence are blocking assertions.
 - Every cache read still executes all descriptor and semantic validation.
 - Corrupt cached data cannot render or generate output; it is best-effort evicted
   and bypassed by a forced verified response even if deletion fails.
+- A cacheable core HTTP/body failure reaches the error UI without an automatic
+  retry; the next explicit page Retry bypasses that HTTP cache entry once.
 - Default PR 15 Generate does not compute baseline; explicit opt-in still does.
 - Runtime/data builders, lock checks, Node tests, and Playwright tests pass for
   both rebased PR heads.
