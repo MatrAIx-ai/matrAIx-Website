@@ -273,12 +273,14 @@ function mountDetail(callbacks = {}) {
   document.body.append(heading, rootEl);
   const selected = [];
   const centered = [];
+  const recipes = [];
   const renderer = createDetailRail({
     rootEl,
     onSelectNode: callbacks.onSelectNode ?? ((id) => selected.push(id)),
     onCenterNode: callbacks.onCenterNode ?? ((id) => centered.push(id)),
+    onAddRecipe: callbacks.onAddRecipe ?? ((entry) => recipes.push(entry)),
   });
-  return { heading, rootEl, renderer, selected, centered };
+  return { heading, rootEl, renderer, selected, centered, recipes };
 }
 
 function drillState(overrides = {}) {
@@ -383,6 +385,36 @@ test("drilldown exposes independent center, selected, helper, hit-target, full-t
   assert.match(selected.querySelectorAll("title")[0].textContent, /Leaf C/);
   assert.equal(svg.querySelectorAll("script").length, 0);
   assert.equal(svg.querySelectorAll("img").length, 0);
+});
+
+test("drilldown overlay decodes the selected persona, including helpers, and marks unsampled nodes", () => {
+  const { svg, renderer } = mountDrilldown();
+  const store = makeStore();
+  store.nodesById.get("h").values = ["h0", "h1"];
+  store.nodesById.get("h").prior = [0.5, 0.5];
+  const results = {
+    n: 2,
+    personaNodeIds: ["a", "h", "c"],
+    personaCodes: new Uint32Array([
+      0, 1, 0,
+      1, 0, 1,
+    ]),
+  };
+
+  renderer.render(drillState({ store, results, overlayIndex: null }));
+  assert.doesNotMatch(svg.textContent, /persona:|not sampled in this result/i);
+
+  renderer.render(drillState({ store, results, overlayIndex: 1 }));
+  assert.match(nodeGroup(svg, "a").querySelectorAll(".syn-dd-meta")[0].textContent,
+    /persona: no/i);
+  assert.match(nodeGroup(svg, "h").querySelectorAll(".syn-dd-meta")[0].textContent,
+    /persona: h0/i);
+  assert.match(nodeGroup(svg, "b").querySelectorAll(".syn-dd-meta")[0].textContent,
+    /not sampled/i);
+  assert.match(nodeGroup(svg, "h").getAttribute("aria-label"), /persona value h0/i);
+  assert.match(nodeGroup(svg, "b").getAttribute("aria-label"), /not sampled in this result/i);
+  assert.doesNotMatch(nodeGroup(svg, "a").textContent, /a0/i,
+    "overlay must show row 2's concrete value, not a marginal/top value");
 });
 
 test("pointer single and double clicks are exclusive while keyboard selection is immediate", () => {
@@ -555,6 +587,49 @@ test("detail renders metadata, absolute priors, edges, accessible callbacks, and
     /incoming.*Root <script>alert\(1\)<\/script>.*weight 0\.5.*primes helper/i);
 });
 
+test("detail offers category, prior, pin, and incoming-edge recipe actions", () => {
+  const { rootEl, renderer, recipes } = mountDetail();
+  const store = makeStore();
+  renderer.render({ store, centerNode: "a", selectedNode: "a" });
+
+  const buttons = rootEl.querySelectorAll("button");
+  const category = buttons.find((button) => button.dataset.focusKey === "adjust-category:a");
+  const prior = buttons.find((button) => button.dataset.focusKey === "adjust-prior:a");
+  const pinNo = buttons.find((button) => button.dataset.focusKey === "pin:a:1");
+  assert.match(category.getAttribute("aria-label"), /adjust.*Origin & input.*category/i);
+  assert.match(prior.getAttribute("aria-label"), /adjust.*prior.*Root <script>/i);
+  assert.match(pinNo.getAttribute("aria-label"), /pin.*Root <script>.*no/i);
+  category.dispatch("click");
+  prior.dispatch("click");
+  pinNo.dispatch("click");
+  assert.deepEqual(recipes, [
+    { kind: "category", category: "Origin & input", factor: 1 },
+    {
+      kind: "prior",
+      nodeId: "a",
+      label: "Root <script>alert(1)</script>",
+      values: ["yes", "no"],
+      weights: [0.75, 0.25],
+    },
+    { kind: "pin", nodeId: "a", label: "Root <script>alert(1)</script>", value: "no" },
+  ]);
+
+  renderer.render({ store, centerNode: "a", selectedNode: "b" });
+  const incomingScale = rootEl.querySelectorAll("button")
+    .find((button) => button.dataset.focusKey === "adjust-edge:a:b");
+  assert.match(incomingScale.getAttribute("aria-label"),
+    /adjust.*Root <script>.*Selected B.*edge weight/i);
+  incomingScale.dispatch("click");
+  assert.deepEqual(recipes.at(-1), {
+    kind: "edge",
+    source: "a",
+    target: "b",
+    sourceLabel: "Root <script>alert(1)</script>",
+    targetLabel: "Selected B with a deliberately long label",
+    factor: 1,
+  });
+});
+
 test("detail restores enabled keyed focus and otherwise falls back to its heading", () => {
   const { heading, rootEl, renderer } = mountDetail();
   const store = makeStore();
@@ -585,7 +660,7 @@ test("app, CSS, and truncation markup register the approved renderer and accessi
   assert.match(app, /^import \{ createDrilldownRenderer \} from "\.\/drilldown-graph\.js";$/m);
   assert.match(app, /^import \{ createDetailRail \} from "\.\/detail-rail\.js";$/m);
   assert.match(app,
-    /registerRenderer\(createDrilldownRenderer\([\s\S]*?slices: \["store", "centerNode", "selectedNode", "up", "down"\]/);
+    /registerRenderer\(createDrilldownRenderer\([\s\S]*?slices: \["store", "centerNode", "selectedNode", "up", "down", "results", "overlayIndex"\]/);
   assert.match(app,
     /registerRenderer\(createDetailRail\([\s\S]*?slices: \["store", "centerNode", "selectedNode"\]/);
   assert.equal((app.match(/addEventListener\("change"/g) ?? []).length, 2);

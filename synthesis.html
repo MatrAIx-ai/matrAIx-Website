@@ -17,16 +17,24 @@
   <link rel="stylesheet" href="css/subpages.css?v=8" />
   <link rel="stylesheet" href="css/subpages-light.css?v=2" />
   <link rel="stylesheet" href="css/navigation.css?v=1" />
-  <link rel="stylesheet" href="synthesis/releases/v1/synthesis.css" />
-  <link rel="modulepreload" href="synthesis/releases/v1/app.js" />
-  <link rel="modulepreload" href="synthesis/releases/v1/data-loader.js" />
-  <link rel="modulepreload" href="synthesis/releases/v1/detail-rail.js" />
-  <link rel="modulepreload" href="synthesis/releases/v1/dist-utils.js" />
-  <link rel="modulepreload" href="synthesis/releases/v1/drilldown-graph.js" />
-  <link rel="modulepreload" href="synthesis/releases/v1/graph-store.js" />
-  <link rel="modulepreload" href="synthesis/releases/v1/graph-views.js" />
-  <link rel="modulepreload" href="synthesis/releases/v1/overview-graph.js" />
-  <link rel="modulepreload" href="synthesis/releases/v1/url-state.js" />
+  <link rel="stylesheet" href="synthesis/releases/v2/synthesis.css" />
+  <link rel="modulepreload" href="synthesis/releases/v2/adjust-panel.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/app.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/data-loader.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/detail-rail.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/dimensions-schema.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/dist-utils.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/drilldown-graph.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/graph-store.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/graph-views.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/overview-graph.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/render-persona.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/request-schema.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/results-panel.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/rng.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/sampler-client.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/sampler.js" />
+  <link rel="modulepreload" href="synthesis/releases/v2/url-state.js" />
 </head>
 <body class="syn-body">
   <div class="grain" aria-hidden="true"></div>
@@ -91,9 +99,30 @@
         <div id="detailRail" class="syn-detail"></div>
       </div>
     </section>
+
+    <section class="syn-panel" id="panelGenerate" aria-labelledby="generateTitle">
+      <header class="syn-panel-head">
+        <h2 id="generateTitle" tabindex="-1">Adjust &amp; generate</h2>
+        <p class="syn-panel-hint">Pin values, scale influence, edit priors, then sample in a worker.</p>
+        <button class="syn-expand" type="button" data-panel="panelGenerate" aria-expanded="false" aria-controls="generatePanelBody" aria-label="Expand Adjust &amp; generate">Expand</button>
+      </header>
+      <div class="syn-panel-body" id="generatePanelBody">
+        <div id="adjustPanel" class="syn-adjust"></div>
+      </div>
+    </section>
+
+    <section class="syn-panel" id="panelResults" aria-labelledby="resultsTitle">
+      <header class="syn-panel-head">
+        <h2 id="resultsTitle" tabindex="-1">Results</h2>
+        <button class="syn-expand" type="button" data-panel="panelResults" aria-expanded="false" aria-controls="resultsPanelBody" aria-label="Expand Results">Expand</button>
+      </header>
+      <div class="syn-panel-body" id="resultsPanelBody">
+        <div id="resultsPanel" class="syn-results"></div>
+      </div>
+    </section>
   </main>
 
-  <script type="module" src="synthesis/releases/v1/app.js"></script>
+  <script type="module" src="synthesis/releases/v2/app.js"></script>
   <script src="js/theme-toggle.js?v=3"></script>
   <script src="js/site-performance.js?v=1"></script>
 </body>

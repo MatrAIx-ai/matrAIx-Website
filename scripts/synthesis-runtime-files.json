@@ -14,6 +14,29 @@
         { "source": "synthesis.css", "target": "synthesis.css" },
         { "source": "synthesis/url-state.js", "target": "url-state.js" }
       ]
+    },
+    "v2": {
+      "files": [
+        { "source": "synthesis/adjust-panel.js", "target": "adjust-panel.js" },
+        { "source": "synthesis/app.js", "target": "app.js" },
+        { "source": "synthesis/data-loader.js", "target": "data-loader.js" },
+        { "source": "synthesis/detail-rail.js", "target": "detail-rail.js" },
+        { "source": "synthesis/dimensions-schema.js", "target": "dimensions-schema.js" },
+        { "source": "synthesis/dist-utils.js", "target": "dist-utils.js" },
+        { "source": "synthesis/drilldown-graph.js", "target": "drilldown-graph.js" },
+        { "source": "synthesis/graph-store.js", "target": "graph-store.js" },
+        { "source": "synthesis/graph-views.js", "target": "graph-views.js" },
+        { "source": "synthesis/overview-graph.js", "target": "overview-graph.js" },
+        { "source": "synthesis/render-persona.js", "target": "render-persona.js" },
+        { "source": "synthesis/request-schema.js", "target": "request-schema.js" },
+        { "source": "synthesis/results-panel.js", "target": "results-panel.js" },
+        { "source": "synthesis/rng.js", "target": "rng.js" },
+        { "source": "synthesis/sampler-client.js", "target": "sampler-client.js" },
+        { "source": "synthesis/sampler-worker.js", "target": "sampler-worker.js" },
+        { "source": "synthesis/sampler.js", "target": "sampler.js" },
+        { "source": "synthesis.css", "target": "synthesis.css" },
+        { "source": "synthesis/url-state.js", "target": "url-state.js" }
+      ]
     }
   }
 }

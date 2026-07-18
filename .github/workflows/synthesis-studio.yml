@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   reproducibility:
-    name: Reproducibility (Node 18.19.1)
+    name: Reproducibility (Node 18.19.1 / Python 3.12.3)
     runs-on: ubuntu-latest
     env:
       MATRAIX_SOURCE_COMMIT: 4dfa4e066b706c6a2d33a10fd41b976efd3f524e
@@ -25,6 +25,17 @@ jobs:
         with:
           node-version: 18.19.1
           package-manager-cache: false
+
+      - name: Set up artifact-generation Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: 3.12.3
+
+      - name: Install artifact-generation Python dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check numpy==2.5.1
 
       - name: Check out pinned MatrAIx source
         uses: actions/checkout@v6
@@ -50,14 +61,11 @@ jobs:
             exit 1
           fi
           test -f "$MATRAIX_WORKTREE/persona/synthesis/graph/full_dag.json"
+          test -f "$MATRAIX_WORKTREE/application/playground/backend/service/persona_synthesis_service.py"
+          test -f "$MATRAIX_WORKTREE/persona/synthesis/sampler/sampler.py"
+          test -f "$MATRAIX_WORKTREE/persona/synthesis/render.py"
 
-      - name: Run Node tests
-        shell: bash
-        run: |
-          set -euo pipefail
-          node --test tests/
-
-      - name: Rebuild and verify phase 1 artifacts
+      - name: Rebuild and verify phase 1 and phase 2 artifacts
         shell: bash
         run: |
           set -euo pipefail
@@ -69,6 +77,7 @@ jobs:
 
           [[ "$V1_GENERATOR" =~ ^scripts/build-synthesis-data\.[0-9a-f]{64}\.mjs$ ]]
           [[ "$V1_GENERATOR_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$V1_GENERATOR" == "scripts/build-synthesis-data.${V1_GENERATOR_SHA256}.mjs" ]]
           printf '%s  %s\n' "$V1_GENERATOR_SHA256" "$V1_GENERATOR" | sha256sum -c -
 
           node "$V1_GENERATOR" \
@@ -76,9 +85,30 @@ jobs:
             --source-commit "$MATRAIX_SOURCE_COMMIT" \
             --out-dir synthesis/data \
             --phase 1
-          python3 scripts/generate-synthesis-goldens-p1.py \
+
+          V2_GENERATOR="$(node -e \
+            "const m=require('./synthesis/data/manifest.v2.json');process.stdout.write(m.generator.path)")"
+          V2_GENERATOR_SHA256="$(node -e \
+            "const m=require('./synthesis/data/manifest.v2.json');process.stdout.write(m.generator.sha256)")"
+
+          [[ "$V2_GENERATOR" =~ ^scripts/build-synthesis-data\.[0-9a-f]{64}\.mjs$ ]]
+          [[ "$V2_GENERATOR_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$V2_GENERATOR" == "scripts/build-synthesis-data.${V2_GENERATOR_SHA256}.mjs" ]]
+          printf '%s  %s\n' "$V2_GENERATOR_SHA256" "$V2_GENERATOR" | sha256sum -c -
+
+          node "$V2_GENERATOR" \
+            --graph "$MATRAIX_WORKTREE/persona/synthesis/graph/full_dag.json" \
+            --source-commit "$MATRAIX_SOURCE_COMMIT" \
+            --dimensions dimensions.json \
+            --out-dir synthesis/data \
+            --phase 2
+
+          python scripts/generate-synthesis-goldens-p1.py \
+            --matraix-root "$MATRAIX_WORKTREE"
+          python scripts/generate-synthesis-goldens-p2.py \
             --matraix-root "$MATRAIX_WORKTREE"
           node scripts/build-synthesis-runtime.mjs --release v1 --check
+          node --test tests/
 
           git diff --exit-code -- synthesis/data tests/fixtures
 

@@ -149,6 +149,96 @@ test("phase-2 generator remains self-contained apart from node built-ins", () =>
   assert.ok(specifiers.every((specifier) => specifier.startsWith("node:")), specifiers.join(", "));
 });
 
+const workflowSource = readFileSync(
+  new URL("../.github/workflows/synthesis-studio.yml", import.meta.url),
+  "utf8",
+);
+
+const workflowStep = (name) => {
+  const marker = `      - name: ${name}`;
+  const start = workflowSource.indexOf(marker);
+  assert.notEqual(start, -1, `missing workflow step: ${name}`);
+  const next = workflowSource.indexOf("\n      - name:", start + marker.length);
+  return workflowSource.slice(start, next === -1 ? workflowSource.length : next);
+};
+
+const assertFragmentsInOrder = (source, fragments) => {
+  let cursor = -1;
+  for (const fragment of fragments) {
+    const next = source.indexOf(fragment, cursor + 1);
+    assert.ok(next > cursor, `missing or out-of-order workflow fragment: ${fragment}`);
+    cursor = next;
+  }
+};
+
+test("reproducibility workflow pins the artifact toolchain and detached source", () => {
+  assert.match(
+    workflowSource,
+    /MATRAIX_SOURCE_COMMIT: 4dfa4e066b706c6a2d33a10fd41b976efd3f524e/,
+  );
+  assert.match(
+    workflowStep("Set up artifact-generation Node"),
+    /uses: actions\/setup-node@v6[\s\S]*node-version: 18\.19\.1/,
+  );
+  assert.match(
+    workflowStep("Set up artifact-generation Python"),
+    /uses: actions\/setup-python@v6[\s\S]*python-version: 3\.12\.3/,
+  );
+  assert.match(
+    workflowStep("Install artifact-generation Python dependencies"),
+    /python -m pip install[^\n]*\bnumpy==2\.5\.1\b/,
+  );
+
+  const checkout = workflowStep("Check out pinned MatrAIx source");
+  assert.match(checkout, /ref: 4dfa4e066b706c6a2d33a10fd41b976efd3f524e/);
+  const verify = workflowStep("Verify pinned source checkout");
+  assert.match(verify, /actual_commit=.*rev-parse HEAD/);
+  assert.match(verify, /\[\[ "\$actual_commit" != "\$MATRAIX_SOURCE_COMMIT" \]\]/);
+  assert.match(verify, /symbolic-ref --quiet HEAD/);
+});
+
+test("reproducibility workflow rebuilds both phases from manifest-pinned snapshots", () => {
+  const step = workflowStep("Rebuild and verify phase 1 and phase 2 artifacts");
+  const v2Start = step.indexOf('V2_GENERATOR="$(node -e');
+  assert.ok(v2Start > 0, "missing V2 generator manifest lookup");
+  const v1 = step.slice(0, v2Start);
+  const v2 = step.slice(v2Start);
+
+  for (const [phase, source] of [[1, v1], [2, v2]]) {
+    const prefix = `V${phase}`;
+    assert.match(source, new RegExp(`manifest\\.v${phase}\\.json`));
+    assert.match(source, /process\.stdout\.write\(m\.generator\.path\)/);
+    assert.match(source, /process\.stdout\.write\(m\.generator\.sha256\)/);
+    assert.ok(source.includes(
+      `[[ "$${prefix}_GENERATOR" =~ ^scripts/build-synthesis-data\\.[0-9a-f]{64}\\.mjs$ ]]`,
+    ));
+    assert.ok(source.includes(`[[ "$${prefix}_GENERATOR_SHA256" =~ ^[0-9a-f]{64}$ ]]`));
+    assert.ok(source.includes(
+      `[[ "$${prefix}_GENERATOR" == "scripts/build-synthesis-data.\${${prefix}_GENERATOR_SHA256}.mjs" ]]`,
+    ));
+    assert.ok(source.includes(
+      `printf '%s  %s\\n' "$${prefix}_GENERATOR_SHA256" "$${prefix}_GENERATOR" | sha256sum -c -`,
+    ));
+    assert.ok(source.includes(`node "$${prefix}_GENERATOR"`));
+    assert.ok(source.includes(`--phase ${phase}`));
+  }
+
+  assert.ok(v2.includes("--dimensions dimensions.json"));
+  assert.doesNotMatch(step, /\bscripts\/build-synthesis-data\.mjs\b/);
+});
+
+test("reproducibility workflow regenerates goldens, tests, then checks the full diff", () => {
+  const step = workflowStep("Rebuild and verify phase 1 and phase 2 artifacts");
+  assertFragmentsInOrder(step, [
+    'node "$V1_GENERATOR"',
+    'node "$V2_GENERATOR"',
+    "python scripts/generate-synthesis-goldens-p1.py",
+    "python scripts/generate-synthesis-goldens-p2.py",
+    "node --test tests/",
+    "git diff --exit-code -- synthesis/data tests/fixtures",
+  ]);
+});
+
 const validationOutcome = (validator, ...args) => {
   try {
     validator(...args);

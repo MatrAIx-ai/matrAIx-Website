@@ -1113,7 +1113,7 @@ test("manifest/release literals and generator module graph are pinned before wri
   await rejects(fakeBuiltin, ["--release", "v1", "--write"], /generator|built-in/i);
 });
 
-test("repository v1 runtime allowlist is the exact sorted ten-file closure", () => {
+test("repository runtime allowlists preserve v1 and pin the exact sorted v2 closure", () => {
   const config = JSON.parse(readFileSync(
     new URL("../scripts/synthesis-runtime-files.json", import.meta.url), "utf8"));
   assert.deepEqual(config, {
@@ -1133,66 +1133,108 @@ test("repository v1 runtime allowlist is the exact sorted ten-file closure", () 
           { source: "synthesis/url-state.js", target: "url-state.js" },
         ],
       },
+      v2: {
+        files: [
+          { source: "synthesis/adjust-panel.js", target: "adjust-panel.js" },
+          { source: "synthesis/app.js", target: "app.js" },
+          { source: "synthesis/data-loader.js", target: "data-loader.js" },
+          { source: "synthesis/detail-rail.js", target: "detail-rail.js" },
+          { source: "synthesis/dimensions-schema.js", target: "dimensions-schema.js" },
+          { source: "synthesis/dist-utils.js", target: "dist-utils.js" },
+          { source: "synthesis/drilldown-graph.js", target: "drilldown-graph.js" },
+          { source: "synthesis/graph-store.js", target: "graph-store.js" },
+          { source: "synthesis/graph-views.js", target: "graph-views.js" },
+          { source: "synthesis/overview-graph.js", target: "overview-graph.js" },
+          { source: "synthesis/render-persona.js", target: "render-persona.js" },
+          { source: "synthesis/request-schema.js", target: "request-schema.js" },
+          { source: "synthesis/results-panel.js", target: "results-panel.js" },
+          { source: "synthesis/rng.js", target: "rng.js" },
+          { source: "synthesis/sampler-client.js", target: "sampler-client.js" },
+          { source: "synthesis/sampler-worker.js", target: "sampler-worker.js" },
+          { source: "synthesis/sampler.js", target: "sampler.js" },
+          { source: "synthesis.css", target: "synthesis.css" },
+          { source: "synthesis/url-state.js", target: "url-state.js" },
+        ],
+      },
     },
   });
 });
 
-test("the exact repository v1 sources and pinned data pass a temp-clone write/check preflight", async () => {
+test("the exact repository v2 sources and pinned data pass a predecessor-bound temp preflight", async () => {
   const root = mkdtempSync(join(tmpdir(), "synthesis-runtime-real-preflight-"));
   temporaryRoots.push(root);
   const copy = (relative) => write(root, relative,
     readFileSync(join(REPOSITORY_ROOT, ...relative.split("/"))));
   copy("scripts/synthesis-runtime-files.json");
   const config = readJson(root, "scripts/synthesis-runtime-files.json");
-  for (const file of config.releases.v1.files) copy(file.source);
-  copy("synthesis/data/manifest.v1.json");
-  const manifest = readJson(root, "synthesis/data/manifest.v1.json");
-  for (const descriptor of Object.values(manifest.artifacts)) copy(descriptor.path);
-  copy(manifest.generator.path);
+  for (const file of config.releases.v2.files) copy(file.source);
+  for (const target of [
+    ...config.releases.v1.files.map((file) => file.target),
+    "release-lock.json",
+  ]) copy(`synthesis/releases/v1/${target}`);
+  for (const releaseId of ["v1", "v2"]) {
+    copy(`synthesis/data/manifest.${releaseId}.json`);
+    const manifest = readJson(root, `synthesis/data/manifest.${releaseId}.json`);
+    for (const descriptor of Object.values(manifest.artifacts)) {
+      if (!existsSync(join(root, ...descriptor.path.split("/")))) copy(descriptor.path);
+    }
+    copy(manifest.generator.path);
+  }
 
-  await run(root, "--release", "v1", "--write");
-  await run(root, "--release", "v1", "--check");
-  await run(root, "--release", "v1", "--check-source");
-  const lock = readJson(root, "synthesis/releases/v1/release-lock.json");
-  assert.equal(lock.runtime.length, 10);
-  assert.equal(lock.data.datasetId, manifest.datasetId);
+  await run(root, "--release", "v2", "--write");
+  await run(root, "--release", "v2", "--check");
+  await run(root, "--release", "v2", "--check-source");
+  const lock = readJson(root, "synthesis/releases/v2/release-lock.json");
+  assert.equal(lock.runtime.length, 19);
+  assert.equal(lock.predecessor.releaseId, "v1");
+  assert.equal(lock.data.datasetId,
+    readJson(root, "synthesis/data/manifest.v2.json").datasetId);
 });
 
-test("repository release and public entry points pin one query-free v1 runtime", async () => {
+test("repository releases and public entry points pin one query-free v2 runtime", async () => {
   await runCli(["--release", "v1", "--check"], { repoRoot: REPOSITORY_ROOT });
-  await runCli(["--release", "v1", "--check-source"], { repoRoot: REPOSITORY_ROOT });
+  await runCli(["--release", "v2", "--check"], { repoRoot: REPOSITORY_ROOT });
+  await runCli(["--release", "v2", "--check-source"], { repoRoot: REPOSITORY_ROOT });
   const html = readFileSync(join(REPOSITORY_ROOT, "synthesis.html"), "utf8");
-  assert.deepEqual(assertHtmlRuntimeEntries(html, "v1"), {
-    css: "synthesis/releases/v1/synthesis.css",
-    app: "synthesis/releases/v1/app.js",
+  assert.deepEqual(assertHtmlRuntimeEntries(html, "v2"), {
+    css: "synthesis/releases/v2/synthesis.css",
+    app: "synthesis/releases/v2/app.js",
   });
-  assert.deepEqual(assertHtmlModulePreloads(REPOSITORY_ROOT, html, "v1"), [
-    "synthesis/releases/v1/app.js",
-    "synthesis/releases/v1/data-loader.js",
-    "synthesis/releases/v1/detail-rail.js",
-    "synthesis/releases/v1/dist-utils.js",
-    "synthesis/releases/v1/drilldown-graph.js",
-    "synthesis/releases/v1/graph-store.js",
-    "synthesis/releases/v1/graph-views.js",
-    "synthesis/releases/v1/overview-graph.js",
-    "synthesis/releases/v1/url-state.js",
+  assert.deepEqual(assertHtmlModulePreloads(REPOSITORY_ROOT, html, "v2"), [
+    "synthesis/releases/v2/adjust-panel.js",
+    "synthesis/releases/v2/app.js",
+    "synthesis/releases/v2/data-loader.js",
+    "synthesis/releases/v2/detail-rail.js",
+    "synthesis/releases/v2/dimensions-schema.js",
+    "synthesis/releases/v2/dist-utils.js",
+    "synthesis/releases/v2/drilldown-graph.js",
+    "synthesis/releases/v2/graph-store.js",
+    "synthesis/releases/v2/graph-views.js",
+    "synthesis/releases/v2/overview-graph.js",
+    "synthesis/releases/v2/render-persona.js",
+    "synthesis/releases/v2/request-schema.js",
+    "synthesis/releases/v2/results-panel.js",
+    "synthesis/releases/v2/rng.js",
+    "synthesis/releases/v2/sampler-client.js",
+    "synthesis/releases/v2/sampler.js",
+    "synthesis/releases/v2/url-state.js",
   ]);
   assertLocalHtmlResources(REPOSITORY_ROOT, html);
 
   const reordered = html
-    .replace('<link rel="stylesheet" href="synthesis/releases/v1/synthesis.css" />',
-      '<link href="synthesis/releases/v1/synthesis.css" media="screen" rel="stylesheet" />')
-    .replace('<script type="module" src="synthesis/releases/v1/app.js"></script>',
-      '<script src="synthesis/releases/v1/app.js" defer type="module"></script>');
-  assertHtmlRuntimeEntries(`<!-- <script type="module" src="synthesis/app.js"></script> -->${reordered}`, "v1");
+    .replace('<link rel="stylesheet" href="synthesis/releases/v2/synthesis.css" />',
+      '<link href="synthesis/releases/v2/synthesis.css" media="screen" rel="stylesheet" />')
+    .replace('<script type="module" src="synthesis/releases/v2/app.js"></script>',
+      '<script src="synthesis/releases/v2/app.js" defer type="module"></script>');
+  assertHtmlRuntimeEntries(`<!-- <script type="module" src="synthesis/app.js"></script> -->${reordered}`, "v2");
 
   for (const bypass of [
     html.replace("</head>", '<link rel="stylesheet" href="synthesis.css" /></head>'),
     html.replace("</body>", '<script type="module" src="synthesis/app.js"></script></body>'),
-    html.replace("synthesis/releases/v1/synthesis.css", "synthesis/releases/v1/synthesis.css?v=mutable"),
-    html.replace('<script type="module" src="synthesis/releases/v1/app.js"></script>',
-      '<script type="module" src="synthesis/releases/v2/app.js"></script>'),
-  ]) assert.throws(() => assertHtmlRuntimeEntries(bypass, "v1"));
+    html.replace("synthesis/releases/v2/synthesis.css", "synthesis/releases/v2/synthesis.css?v=mutable"),
+    html.replace('<script type="module" src="synthesis/releases/v2/app.js"></script>',
+      '<script type="module" src="synthesis/releases/v1/app.js"></script>'),
+  ]) assert.throws(() => assertHtmlRuntimeEntries(bypass, "v2"));
 
   assert.match(html, /href="css\/styles\.css\?v=9"/);
   assert.match(html, /href="css\/navigation\.css\?v=1"/);
@@ -1204,5 +1246,7 @@ test("repository release and public entry points pin one query-free v1 runtime",
     /class="persona-hero-actions"[\s\S]*?<a class="persona-secondary-cta" href="synthesis\.html">Open the DAG Studio →<\/a>/);
   const readme = readFileSync(join(REPOSITORY_ROOT, "README.md"), "utf8");
   assert.match(readme,
-    /\| DAG Studio \| synthesis\.html \| Client-side browser for the Persona Full DAG: category overview, hop-bounded drill-down, per-node priors and strongest edges\. \|/);
+    /\| DAG Studio \| \[`synthesis\.html`\]\(synthesis\.html\) \| Verified client-side Persona Full DAG browser[\s\S]*?selected-persona overlays\. \|/);
+  assert.match(readme,
+    /manifest\.v2\.json[\s\S]*?\$V2_GENERATOR[\s\S]*?--phase 2[\s\S]*?default,[\s\S]*?unadjusted sampler/);
 });

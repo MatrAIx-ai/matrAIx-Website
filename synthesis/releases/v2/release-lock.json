@@ -1,0 +1,142 @@
+{
+  "formatVersion": 1,
+  "releaseId": "v2",
+  "allowlistSha256": "0a3986c7fec16074c8ea534032cc7585f461f4b3a9590caacb05900d126023b3",
+  "runtime": [
+    {
+      "path": "adjust-panel.js",
+      "bytes": 14864,
+      "sha256": "61ece9ac4b8433c3e19d863994bb487b89df0ec200ef67dc01b9c118d24ec933"
+    },
+    {
+      "path": "app.js",
+      "bytes": 19684,
+      "sha256": "e879964665110a957933a3f5e6d3027eeaa6fd464609eb8c600ece509e27dea2"
+    },
+    {
+      "path": "data-loader.js",
+      "bytes": 18380,
+      "sha256": "c8068c0b3624903303f4b5a6d5480b31e06d33f3136498c5d210dadffc11eec7"
+    },
+    {
+      "path": "detail-rail.js",
+      "bytes": 6933,
+      "sha256": "a448fd68098cebf59f558a6a228dfb7397db12b4f71c1c623046b9574cc70846"
+    },
+    {
+      "path": "dimensions-schema.js",
+      "bytes": 3737,
+      "sha256": "b294c3dc6b004b999274b5fe88bb4c1d9e768609cf1e695d4f2273cc144ca9fe"
+    },
+    {
+      "path": "dist-utils.js",
+      "bytes": 2917,
+      "sha256": "8925ae84c439e2c989efa290bb8d88b59ec89f542bcb48c6934ed125dff740be"
+    },
+    {
+      "path": "drilldown-graph.js",
+      "bytes": 11403,
+      "sha256": "3145fab95698853909ad4850a39d072ed23b7ea953dfcbdcb5b3ff2fc4d77b9a"
+    },
+    {
+      "path": "graph-store.js",
+      "bytes": 812,
+      "sha256": "77298efd038fa8e64c72ff8aed371c4f4f5ab876f0eaadf122bfbf171f1d1d4a"
+    },
+    {
+      "path": "graph-views.js",
+      "bytes": 8394,
+      "sha256": "94fd6d87049944d0ed9620281a0871ec3bbbf1d60f97d04a883cad354aa886c4"
+    },
+    {
+      "path": "overview-graph.js",
+      "bytes": 10001,
+      "sha256": "bc0f1d36d437533c6407d2e0ee6e7b0b74e3c3d9d7c8e69547ab451c360b31c2"
+    },
+    {
+      "path": "render-persona.js",
+      "bytes": 4508,
+      "sha256": "3206808334709ce23022a009f127d53cbccf3dcf3407495655c23515462ca10a"
+    },
+    {
+      "path": "request-schema.js",
+      "bytes": 12926,
+      "sha256": "ae7c3afaf66cbaee86328f7d9b12864123d812633d51b10aca8b2da75c3b23a5"
+    },
+    {
+      "path": "results-panel.js",
+      "bytes": 15930,
+      "sha256": "d46668f3446b382705d91e9929f46c2fbae7255b90ed662c594c8db338817192"
+    },
+    {
+      "path": "rng.js",
+      "bytes": 1388,
+      "sha256": "c9ade4b91e9e67580d0d73ac717e1c2835ad59b2f5051b70e7bafb258544e665"
+    },
+    {
+      "path": "sampler-client.js",
+      "bytes": 4931,
+      "sha256": "9ee50d7dbfcc9fd351e114c4ef11f3e4dcd1ecdbd21459d3055c484a52dbd5b0"
+    },
+    {
+      "path": "sampler-worker.js",
+      "bytes": 4459,
+      "sha256": "114a339874695b76a03dd0d5c5aacce6caa06f8d4d426657e5f2248b5e04ba32"
+    },
+    {
+      "path": "sampler.js",
+      "bytes": 32051,
+      "sha256": "5a07b76f7916c9f6fd0bd389f2039b7adeda78667df18f73d05f93ceb2835d0c"
+    },
+    {
+      "path": "synthesis.css",
+      "bytes": 19030,
+      "sha256": "cd28a01ce90e0d83ffa7f5766935df92f908e2f8334f8abdf94e8f0140918452"
+    },
+    {
+      "path": "url-state.js",
+      "bytes": 6183,
+      "sha256": "dd71c62ce6ccee5900b1c54f8d4c8c3514823889640fa248de87835bbde689c4"
+    }
+  ],
+  "data": {
+    "datasetId": "sha256:28822720c6f8beea8f9386ef918df329ff5607eacea9ad16f5b80edc6dc4e166",
+    "manifest": {
+      "path": "synthesis/data/manifest.v2.json",
+      "bytes": 977,
+      "sha256": "dbf5732ace03c9b6273c988b7c83a1e0ba2e2e1b367d6f1b637c3cc221562ee9"
+    },
+    "artifacts": [
+      {
+        "name": "dimensions",
+        "path": "synthesis/data/dimensions.109d203ae177b62e.json",
+        "bytes": 603975,
+        "sha256": "109d203ae177b62e872ebc3272d52a7705e02c35575456728f99332f481a4f42"
+      },
+      {
+        "name": "core",
+        "path": "synthesis/data/graph-core.v1.json",
+        "bytes": 1315948,
+        "sha256": "801614ade9e81212044347402ea06a7eac2783d756fe097dca55ad933ea6e9c9"
+      },
+      {
+        "name": "pack",
+        "path": "synthesis/data/sampler-pack.v2.json",
+        "bytes": 4202437,
+        "sha256": "0640b9dfebc45acb55a79b3fe2bdf07ea0680c7b153df7124c2ed7415878bb96"
+      }
+    ],
+    "generator": {
+      "path": "scripts/build-synthesis-data.104470871d231281f8ebc3531f66dc81103e426305deeff2721081647a10b74f.mjs",
+      "bytes": 27237,
+      "sha256": "104470871d231281f8ebc3531f66dc81103e426305deeff2721081647a10b74f",
+      "node": "18.19.1"
+    }
+  },
+  "predecessor": {
+    "releaseId": "v1",
+    "path": "synthesis/releases/v1/release-lock.json",
+    "bytes": 2451,
+    "sha256": "b767bf107de2307cf6ffd0229c36b3cb7b797b083e3ec50a478c75715ecb7bf5"
+  }
+}
