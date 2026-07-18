@@ -147,15 +147,18 @@ function throwsWithCode(action, code) {
   return error;
 }
 
-const artifactFetch = (expectedPath, bytes, { status = 200 } = {}) =>
-  async (url, init) => {
-    const expectedUrl = new URL(expectedPath, BASE_URL).href;
-    assert.equal(String(url), expectedUrl);
-    assert.equal(new URL(String(url)).search, "");
-    assert.equal(new URL(String(url)).hash, "");
-    assert.equal(init.cache, "no-store");
-    return new Response(bytes, { status });
-  };
+const artifactFetch = (
+  expectedPath,
+  bytes,
+  { status = 200, cache = "default" } = {},
+) => async (url, init) => {
+  const expectedUrl = new URL(expectedPath, BASE_URL).href;
+  assert.equal(String(url), expectedUrl);
+  assert.equal(new URL(String(url)).search, "");
+  assert.equal(new URL(String(url)).hash, "");
+  assert.equal(init.cache, cache);
+  return new Response(bytes, { status });
+};
 
 async function loadInvalidCore(mutator) {
   const value = clone(coreFixture);
@@ -208,7 +211,7 @@ test("loadManifest fetches and pins a valid release manifest", async () => {
     expectedReleaseId: "v1",
     fetchImpl: async (url, init) => {
       assert.equal(String(url), MANIFEST_URL);
-      assert.equal(init.cache, "no-store");
+      assert.equal(init.cache, "default");
       return new Response(JSON.stringify(manifestFixture));
     },
   });
@@ -216,6 +219,31 @@ test("loadManifest fetches and pins a valid release manifest", async () => {
   assert.deepEqual(manifest, manifestFixture);
   assert.ok(Object.isFrozen(manifest));
   assert.ok(Object.isFrozen(manifest.artifacts.core));
+});
+
+test("loadManifest uses default and explicit reload cache modes", async () => {
+  for (const cacheMode of ["default", "reload"]) {
+    await loadManifest(MANIFEST_URL, {
+      cacheMode,
+      expectedReleaseId: "v1",
+      fetchImpl: async (_url, init) => {
+        assert.equal(init.cache, cacheMode);
+        return new Response(JSON.stringify(manifestFixture));
+      },
+    });
+  }
+});
+
+test("loadManifest rejects an invalid cache mode before fetching", async () => {
+  let fetches = 0;
+  await rejectsWithCode(() => loadManifest(MANIFEST_URL, {
+    cacheMode: "no-store",
+    fetchImpl: async () => {
+      fetches += 1;
+      return new Response(JSON.stringify(manifestFixture));
+    },
+  }), "cache-mode");
+  assert.equal(fetches, 0);
 });
 
 test("loadArtifact fetches the exact immutable core pathname and verifies it", async () => {
@@ -409,7 +437,7 @@ test("descriptor loading is consistent under a subpath deployment", async () => 
     expectedReleaseId: "v2",
     fetchImpl: async (url, init) => {
       assert.equal(String(url), manifestUrl);
-      assert.equal(init.cache, "no-store");
+      assert.equal(init.cache, "default");
       return new Response(JSON.stringify(manifestValue));
     },
   });
@@ -417,7 +445,7 @@ test("descriptor loading is consistent under a subpath deployment", async () => 
     baseUrl: deploymentBase,
     fetchImpl: async (url, init) => {
       assert.equal(String(url), `${deploymentBase}${CORE_PATH}`);
-      assert.equal(init.cache, "no-store");
+      assert.equal(init.cache, "default");
       assert.equal(new URL(String(url)).search, "");
       assert.equal(new URL(String(url)).hash, "");
       return new Response(CORE_BYTES);
@@ -594,6 +622,21 @@ test("loadArtifact requires core for pack and reports an absent pack", async (t)
   });
 });
 
+test("pack and dimensions preconditions fail before artifact I/O", async () => {
+  let fetches = 0;
+  await rejectsWithCode(() => loadArtifact(
+    manifestWithBytes(),
+    "pack",
+    { baseUrl: BASE_URL, fetchImpl: async () => { fetches += 1; } },
+  ), "missing-core");
+  await rejectsWithCode(() => loadAuxJson(
+    manifestWithBytes(),
+    "dimensions",
+    { baseUrl: BASE_URL, fetchImpl: async () => { fetches += 1; } },
+  ), "missing-validator");
+  assert.equal(fetches, 0);
+});
+
 test("validatePack rejects unknown edge, CPT, and mask endpoints", async (t) => {
   const cases = [
     ["edge source", (pack) => { pack.edges[0].source = "missing"; }],
@@ -703,7 +746,7 @@ test("a rejected request is not cached and the next attempt refetches successful
   const fetchImpl = async (url, init) => {
     calls++;
     assert.equal(String(url), new URL(CORE_PATH, BASE_URL).href);
-    assert.equal(init.cache, "no-store");
+    assert.equal(init.cache, "default");
     if (calls === 1) throw new Error("temporary private failure");
     return new Response(CORE_BYTES);
   };

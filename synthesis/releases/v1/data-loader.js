@@ -65,7 +65,21 @@ const resolveUrl = (value, baseUrl, code = "url") => {
   }
 };
 
-async function responseBytes(url, init, fetchImpl) {
+async function readResponseBytes(response) {
+  if (!response?.ok) {
+    const status = Number.isInteger(response?.status) ? response.status : 0;
+    const suffix = status > 0 ? ` (${status})` : "";
+    throw new ArtifactLoadError("http", `Snapshot request failed${suffix}.`);
+  }
+  try {
+    return new Uint8Array(await response.arrayBuffer());
+  } catch (error) {
+    if (isAbortError(error)) throw error;
+    throw new ArtifactLoadError("body", "Snapshot body could not be read.", error);
+  }
+}
+
+async function fetchBytes(url, init, fetchImpl) {
   let response;
   try {
     if (typeof fetchImpl !== "function") throw new TypeError("fetch is unavailable");
@@ -74,19 +88,7 @@ async function responseBytes(url, init, fetchImpl) {
     if (isAbortError(error)) throw error;
     throw new ArtifactLoadError("network", "Snapshot request failed.", error);
   }
-
-  if (!response?.ok) {
-    const status = Number.isInteger(response?.status) ? response.status : 0;
-    const suffix = status > 0 ? ` (${status})` : "";
-    throw new ArtifactLoadError("http", `Snapshot request failed${suffix}.`);
-  }
-
-  try {
-    return new Uint8Array(await response.arrayBuffer());
-  } catch (error) {
-    if (isAbortError(error)) throw error;
-    throw new ArtifactLoadError("body", "Snapshot body could not be read.", error);
-  }
+  return readResponseBytes(response);
 }
 
 const parseJson = (bytes, label) => {
@@ -369,21 +371,16 @@ export function validatePack(pack, core) {
   }
 }
 
-async function verifyDescriptorBytes(descriptor, key, url, options) {
-  const fetchImpl = options.fetchImpl ?? globalThis.fetch;
-  const bytes = await responseBytes(
-    url,
-    { cache: "no-store", signal: options.signal },
-    fetchImpl,
-  );
+async function verifyDescriptorBytes(descriptor, key, bytes) {
   if (bytes.byteLength !== descriptor.bytes) {
     throw new ArtifactLoadError("size", `${key} size mismatch.`);
   }
-
   let digest;
   try {
     const subtle = globalThis.crypto?.subtle;
-    if (!subtle || typeof subtle.digest !== "function") throw new TypeError("Web Crypto unavailable");
+    if (!subtle || typeof subtle.digest !== "function") {
+      throw new TypeError("Web Crypto unavailable");
+    }
     digest = hex(await subtle.digest("SHA-256", bytes));
   } catch (error) {
     if (isAbortError(error)) throw error;
@@ -412,11 +409,20 @@ function artifactRequest(manifest, key, baseUrl) {
   return { descriptor, requestUrl };
 }
 
+function cacheModeFrom(options) {
+  const cacheMode = options.cacheMode ?? "default";
+  if (cacheMode !== "default" && cacheMode !== "reload") {
+    throw new ArtifactLoadError("cache-mode", "Snapshot cache mode is unsupported.");
+  }
+  return cacheMode;
+}
+
 export async function loadManifest(url, options = {}) {
   try {
-    const bytes = await responseBytes(
+    const cacheMode = cacheModeFrom(options);
+    const bytes = await fetchBytes(
       url,
-      { cache: "no-store", signal: options.signal },
+      { cache: cacheMode, signal: options.signal },
       options.fetchImpl ?? globalThis.fetch,
     );
     const value = parseJson(bytes, "Manifest");
@@ -433,8 +439,16 @@ export async function loadArtifact(manifest, key, options = {}) {
     if (key !== "core" && key !== "pack") {
       throw new ArtifactLoadError("artifact-key", "Snapshot artifact type is unsupported.");
     }
+    if (key === "pack" && !options.core) {
+      throw new ArtifactLoadError("missing-core", "Core is required to verify pack.");
+    }
     const { descriptor, requestUrl } = artifactRequest(manifest, key, options.baseUrl);
-    const bytes = await verifyDescriptorBytes(descriptor, key, requestUrl, options);
+    const fetchedBytes = await fetchBytes(
+      requestUrl,
+      { cache: "default", signal: options.signal },
+      options.fetchImpl ?? globalThis.fetch,
+    );
+    const bytes = await verifyDescriptorBytes(descriptor, key, fetchedBytes);
     const value = parseJson(bytes, key);
     if (!isRecord(value)) schemaError(key === "core" ? "Core" : "Pack");
     if (value.formatVersion !== 1) {
@@ -444,12 +458,7 @@ export async function loadArtifact(manifest, key, options = {}) {
       throw new ArtifactLoadError("dataset", `${key} belongs to another snapshot.`);
     }
     if (key === "core") validateCore(value);
-    else {
-      if (!options.core) {
-        throw new ArtifactLoadError("missing-core", "Core is required to verify pack.");
-      }
-      validatePack(value, options.core);
-    }
+    else validatePack(value, options.core);
     return value;
   } catch (error) {
     passKnownError(error, "artifact", "Snapshot artifact could not be loaded.");
@@ -465,7 +474,12 @@ export async function loadAuxJson(manifest, key, options = {}) {
       throw new ArtifactLoadError("missing-validator", "dimensions validator is required.");
     }
     const { descriptor, requestUrl } = artifactRequest(manifest, key, options.baseUrl);
-    const bytes = await verifyDescriptorBytes(descriptor, key, requestUrl, options);
+    const fetchedBytes = await fetchBytes(
+      requestUrl,
+      { cache: "default", signal: options.signal },
+      options.fetchImpl ?? globalThis.fetch,
+    );
+    const bytes = await verifyDescriptorBytes(descriptor, key, fetchedBytes);
     const value = parseJson(bytes, key);
     try {
       const result = await options.validate(value);
