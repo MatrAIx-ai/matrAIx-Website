@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { validateBuildDimensions } from "../scripts/build-synthesis-data.mjs";
 import { validateDimensions } from "../synthesis/dimensions-schema.js";
 
-const actualDimensions = JSON.parse(readFileSync(new URL("../dimensions.json", import.meta.url)));
+const actualDimensions = JSON.parse(readFileSync(new URL("../data/dimensions.json", import.meta.url)));
 
 const dimension = (overrides = {}) => ({
   id: "x",

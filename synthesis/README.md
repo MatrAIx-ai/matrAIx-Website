@@ -143,7 +143,7 @@ done
   --source-commit "$SOURCE_COMMIT" --out-dir synthesis/data --phase 1
 "$NODE18" "$V2_GENERATOR" \
   --graph "$SOURCE_WORKTREE/persona/synthesis/graph/full_dag.json" \
-  --source-commit "$SOURCE_COMMIT" --dimensions dimensions.json \
+  --source-commit "$SOURCE_COMMIT" --dimensions data/dimensions.json \
   --out-dir synthesis/data --phase 2
 ```
 

@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { loadDims, renderPersona } from "../synthesis/render-persona.js";
 
 const dimensionsData = JSON.parse(readFileSync(
-  new URL("../dimensions.json", import.meta.url),
+  new URL("../data/dimensions.json", import.meta.url),
 ));
 const dims = loadDims(dimensionsData);
 const golden = JSON.parse(readFileSync(

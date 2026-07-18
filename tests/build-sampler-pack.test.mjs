@@ -223,7 +223,7 @@ test("reproducibility workflow rebuilds both phases from manifest-pinned snapsho
     assert.ok(source.includes(`--phase ${phase}`));
   }
 
-  assert.ok(v2.includes("--dimensions dimensions.json"));
+  assert.ok(v2.includes("--dimensions data/dimensions.json"));
   assert.doesNotMatch(step, /\bscripts\/build-synthesis-data\.mjs\b/);
 });
 
@@ -353,7 +353,7 @@ test("build-time pack validator differentially matches the browser boundary", ()
 const sourceCommit = "4dfa4e066b706c6a2d33a10fd41b976efd3f524e";
 const lockedDimensionsSha = "109d203ae177b62e872ebc3272d52a7705e02c35575456728f99332f481a4f42";
 const lockedDimensionsBytes = 603_975;
-const dimensionsBytes = readFileSync(new URL("../dimensions.json", import.meta.url));
+const dimensionsBytes = readFileSync(new URL("../data/dimensions.json", import.meta.url));
 const dimensions = JSON.parse(dimensionsBytes.toString("utf8"));
 
 test("build JSON parsing is fatal UTF-8 and distinguishes malformed JSON", () => {

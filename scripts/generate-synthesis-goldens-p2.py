@@ -499,7 +499,9 @@ def main():
         "datasetId": core["datasetId"], "python": platform.python_version(),
         "numpy": np.__version__, "maxSourceArtifactDrift": max_fidelity_drift,
         "artifactStructureSha256": structure_sha256,
-        "dimensionsSha256": hashlib.sha256((WEBSITE_ROOT / "dimensions.json").read_bytes()).hexdigest(),
+        "dimensionsSha256": hashlib.sha256(
+            (WEBSITE_ROOT / "data" / "dimensions.json").read_bytes()
+        ).hexdigest(),
     }
     (fixtures / "sampler-probes.golden.json").write_text(
         json.dumps({"metadata": metadata, "assignment": assignment,
@@ -530,7 +532,7 @@ def main():
         "seeds": seeds, "scenarios": marg_out}))
 
     idx = base.sample_indices(5, rng=np.random.default_rng(7))
-    dims = rmod.load_dims(WEBSITE_ROOT / "dimensions.json")
+    dims = rmod.load_dims(WEBSITE_ROOT / "data" / "dimensions.json")
     renders = []
     for i in range(5):
         row = base.decode_row(idx, i)

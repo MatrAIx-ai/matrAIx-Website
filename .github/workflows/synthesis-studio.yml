@@ -99,7 +99,7 @@ jobs:
           node "$V2_GENERATOR" \
             --graph "$MATRAIX_WORKTREE/persona/synthesis/graph/full_dag.json" \
             --source-commit "$MATRAIX_SOURCE_COMMIT" \
-            --dimensions dimensions.json \
+            --dimensions data/dimensions.json \
             --out-dir synthesis/data \
             --phase 2
 

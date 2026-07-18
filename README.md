@@ -40,7 +40,7 @@ V2_GENERATOR=$("$NODE18" -e \
 "$NODE18" "$V2_GENERATOR" \
   --graph /path/to/pinned-MatrAIx/persona/synthesis/graph/full_dag.json \
   --source-commit 4dfa4e066b706c6a2d33a10fd41b976efd3f524e \
-  --dimensions dimensions.json --out-dir synthesis/data --phase 2
+  --dimensions data/dimensions.json --out-dir synthesis/data --phase 2
 ```
 
 Baseline comparisons use the same seed and sample count with the default,
