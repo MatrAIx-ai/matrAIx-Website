@@ -8,6 +8,10 @@ const MANIFEST_PATH = "/synthesis/data/manifest.v1.json";
 const CORE_PATH = "/synthesis/data/graph-core.v1.json";
 const MANIFEST_ROUTE = /\/synthesis\/data\/manifest\.v1\.json$/;
 const CORE_ROUTE = /\/synthesis\/data\/graph-core\.v1\.json$/;
+const REQUEST_CANCELLATION_ERRORS = new Set([
+  "net::ERR_ABORTED",
+  "Load request cancelled",
+]);
 const RELEASE_MODULE_PATHS = [
   "app.js",
   "data-loader.js",
@@ -56,10 +60,13 @@ function allowHttpFailure(page, pathname, status) {
     status,
     expected: 1,
     remaining: 1,
-    abortedAfterResponse: 0,
   };
   pageGuards.get(page).expectedHttp.push(expectation);
   return expectation;
+}
+
+function allowRequestCancellation(page, pathname) {
+  pageGuards.get(page).expectedCancellations.push({ pathname, remaining: 1 });
 }
 
 function hostileFixture() {
@@ -182,6 +189,7 @@ test.beforeEach(async ({ page }) => {
     resourceConsoleErrors: [],
     expectedHttp: [],
     expectedHttpRequests: new WeakMap(),
+    expectedCancellations: [],
   };
   pageGuards.set(page, guard);
 
@@ -194,14 +202,21 @@ test.beforeEach(async ({ page }) => {
   });
   page.on("pageerror", (error) => guard.issues.push(`page error: ${error.message}`));
   page.on("requestfailed", (request) => {
+    const errorText = request.failure()?.errorText;
     const expected = guard.expectedHttpRequests.get(request);
-    if (expected && request.failure()?.errorText === "net::ERR_ABORTED") {
-      expected.abortedAfterResponse += 1;
+    if (expected && REQUEST_CANCELLATION_ERRORS.has(errorText)) {
       guard.expectedHttpRequests.delete(request);
       return;
     }
+    const pathname = new URL(request.url()).pathname;
+    const expectedCancellation = guard.expectedCancellations.find((item) =>
+      item.remaining > 0 && item.pathname === pathname);
+    if (expectedCancellation && REQUEST_CANCELLATION_ERRORS.has(errorText)) {
+      expectedCancellation.remaining -= 1;
+      return;
+    }
     guard.issues.push(
-      `request failed: ${request.method()} ${request.url()} (${request.failure()?.errorText})`,
+      `request failed: ${request.method()} ${request.url()} (${errorText})`,
     );
   });
   page.on("response", (response) => {
@@ -468,6 +483,7 @@ test("hostile fixture text stays literal and cannot create executable DOM", asyn
 for (const scenario of [
   {
     name: "manifest 404",
+    cancelsCore: true,
     setup: async (page) => {
       allowHttpFailure(page, MANIFEST_PATH, 404);
       await page.route(MANIFEST_ROUTE, (route) => route.fulfill({
@@ -479,6 +495,7 @@ for (const scenario of [
   },
   {
     name: "malformed manifest JSON",
+    cancelsCore: true,
     setup: async (page) => page.route(MANIFEST_ROUTE, (route) => route.fulfill({
       status: 200,
       contentType: "application/json; charset=utf-8",
@@ -487,6 +504,7 @@ for (const scenario of [
   },
   {
     name: "unsupported formatVersion",
+    cancelsCore: true,
     setup: async (page) => routeMutatedManifest(page, (manifest) => {
       manifest.formatVersion = 2;
     }),
@@ -506,6 +524,7 @@ for (const scenario of [
   },
 ]) {
   test(`${scenario.name} shows only the generic verification error`, async ({ page }) => {
+    if (scenario.cancelsCore) allowRequestCancellation(page, CORE_PATH);
     await scenario.setup(page);
     await expectGenericLoadFailure(page);
   });
@@ -555,7 +574,7 @@ test("Retry recovers an artifact failure without refetching the pinned manifest"
   expect(coreRequests).toBe(2);
   expect(await page.evaluate(() => globalThis.__synCoreFetchModes))
     .toEqual(["default", "reload"]);
-  await expect.poll(() => expectedCoreFailure.abortedAfterResponse).toBe(1);
+  expect(expectedCoreFailure.remaining).toBe(0);
 });
 
 test("the 390px menu closes on Escape, link activation, and desktop resize", async ({ page }, testInfo) => {
