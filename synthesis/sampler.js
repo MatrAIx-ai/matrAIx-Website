@@ -1,7 +1,8 @@
 // Port of persona/synthesis/sampler/sampler.py::PersonaForwardSampler
 // (compile stage) + the service-layer override validation. float64 throughout,
 // with explicit finite checks at every scaling/accumulation boundary.
-import { normalizeDist } from "./dist-utils.js";
+import { cmpStr, normalizeDist, roundPy } from "./dist-utils.js";
+import { createRng } from "./rng.js";
 
 export const EPS = 1e-12;
 export const MAX_SAMPLE_N = 200;
@@ -661,4 +662,304 @@ export function compileSampler({ core, pack, gammaScale = 1, overrides = {} }) {
     topoPos,
     nodeDistribution,
   };
+}
+
+// Port of PersonaForwardSampler.sample_indices (scalar loop; n <= 200).
+export function sample(sampler, n, options = {}) {
+  if (typeof n !== "number" || !Number.isInteger(n) || n < 1 || n > MAX_SAMPLE_N) {
+    throw new SynthesisValidationError(
+      `n must be an integer between 1 and ${MAX_SAMPLE_N}`,
+      "n",
+    );
+  }
+  if (options === undefined) options = {};
+  record(options, "options");
+  const pins = defaultUndefined(options.pins, {});
+  const seed = options.seed;
+  if (
+    typeof seed !== "number"
+    || !Number.isSafeInteger(seed)
+    || seed < 0
+    || seed > MAX_SAFE_SEED
+  ) {
+    throw new SynthesisValidationError(
+      `seed must be an integer between 0 and ${MAX_SAFE_SEED}`,
+      "seed",
+    );
+  }
+  record(pins, "pins");
+
+  const pinned = new Map();
+  const helperPins = [];
+  for (const [nid, valueName] of Object.entries(pins)) {
+    const node = sampler.nodesById.get(nid);
+    if (!node) {
+      throw new SynthesisValidationError(`unknown pinned node: ${nid}`, `pins.${nid}`);
+    }
+    if (typeof valueName !== "string") {
+      throw new SynthesisValidationError(`unknown value for ${nid}`, `pins.${nid}`);
+    }
+    const valueIndex = sampler.vtoi.get(nid)?.get(valueName);
+    if (valueIndex === undefined) {
+      throw new SynthesisValidationError(
+        `unknown value for ${nid}: ${valueName}`,
+        `pins.${nid}`,
+      );
+    }
+    pinned.set(nid, valueIndex);
+    if (node.emit === false) helperPins.push(nid);
+  }
+  helperPins.sort(cmpStr);
+
+  const rng = createRng(seed);
+  const idx = new Map();
+
+  for (const planNode of sampler.plan) {
+    const { nid, k } = planNode;
+    if (pinned.has(nid)) {
+      idx.set(nid, new Int32Array(n).fill(pinned.get(nid)));
+      continue;
+    }
+    const selected = new Int32Array(n);
+    const logits = new Float64Array(k);
+    const probabilities = new Float64Array(k);
+    for (let rowIndex = 0; rowIndex < n; rowIndex++) {
+      // Upstream fills n random uniforms before evaluating the node. Consume
+      // exactly one per row even if an unconditional mask leaves a zero CDF.
+      const random = rng();
+      logits.set(planNode.logprior);
+      for (const cpt of planNode.cpts) {
+        let code = 0;
+        for (let parentIndex = 0; parentIndex < cpt.parents.length; parentIndex++) {
+          code += idx.get(cpt.parents[parentIndex])[rowIndex] * cpt.multipliers[parentIndex];
+        }
+        const cptRow = cpt.lookup.get(code);
+        if (cptRow) {
+          for (let valueIndex = 0; valueIndex < k; valueIndex++) {
+            logits[valueIndex] = finiteResult(
+              logits[valueIndex] + cptRow[valueIndex],
+              `sample.${nid}`,
+              "CPT logit",
+            );
+          }
+        }
+      }
+      for (const edge of planNode.edges) {
+        const edgeRow = edge.table[idx.get(edge.source)[rowIndex]];
+        for (let valueIndex = 0; valueIndex < k; valueIndex++) {
+          logits[valueIndex] = finiteResult(
+            logits[valueIndex] + edgeRow[valueIndex],
+            `sample.${nid}`,
+            "edge logit",
+          );
+        }
+      }
+
+      let max = -Infinity;
+      for (let valueIndex = 0; valueIndex < k; valueIndex++) {
+        if (logits[valueIndex] > max) max = logits[valueIndex];
+      }
+      for (let valueIndex = 0; valueIndex < k; valueIndex++) {
+        probabilities[valueIndex] = finiteResult(
+          Math.exp(logits[valueIndex] - max),
+          `sample.${nid}`,
+          "probability",
+        );
+      }
+
+      for (const mask of planNode.masks) {
+        let applies = mask.conds === null;
+        if (!applies) {
+          applies = mask.conds.every(
+            ({ p: parent, allowed }) => allowed[idx.get(parent)[rowIndex]],
+          );
+        }
+        if (!applies) continue;
+        if (mask.conds === null) {
+          for (let valueIndex = 0; valueIndex < k; valueIndex++) {
+            probabilities[valueIndex] = finiteResult(
+              probabilities[valueIndex] * mask.valueMult[valueIndex],
+              `sample.${nid}`,
+              "masked probability",
+            );
+          }
+          continue;
+        }
+        let maskedMass = 0;
+        for (let valueIndex = 0; valueIndex < k; valueIndex++) {
+          probabilities[valueIndex] = finiteResult(
+            probabilities[valueIndex] * mask.valueMult[valueIndex],
+            `sample.${nid}`,
+            "masked probability",
+          );
+          maskedMass = finiteResult(
+            maskedMass + probabilities[valueIndex],
+            `sample.${nid}`,
+            "masked mass",
+          );
+        }
+        if (maskedMass <= 0) probabilities.fill(1);
+      }
+
+      let total = 0;
+      for (let valueIndex = 0; valueIndex < k; valueIndex++) {
+        total = finiteResult(
+          total + probabilities[valueIndex],
+          `sample.${nid}`,
+          "probability mass",
+        );
+        probabilities[valueIndex] = total;
+      }
+      if (total <= 0) {
+        selected[rowIndex] = 0;
+        continue;
+      }
+      const bound = random * total;
+      let count = 0;
+      for (let valueIndex = 0; valueIndex < k; valueIndex++) {
+        if (probabilities[valueIndex] < bound) count += 1;
+      }
+      selected[rowIndex] = Math.min(count, k - 1);
+    }
+    idx.set(nid, selected);
+  }
+
+  // Required nodes outside the topological order use effective priors in
+  // stable graph declaration order, after all planned nodes.
+  for (const nid of sampler.priorOnlyNodes) {
+    if (pinned.has(nid)) {
+      idx.set(nid, new Int32Array(n).fill(pinned.get(nid)));
+      continue;
+    }
+    const prior = sampler.priorEff.get(nid);
+    const cdf = [];
+    let total = 0;
+    for (const probability of prior) {
+      total = finiteResult(total + probability, `sample.${nid}`, "prior mass");
+      cdf.push(total);
+    }
+    const selected = new Int32Array(n);
+    for (let rowIndex = 0; rowIndex < n; rowIndex++) {
+      const bound = rng() * total;
+      let count = 0;
+      // numpy Generator.choice uses right insertion at an exact CDF tie,
+      // unlike the plan-node searchsorted(..., side="left") path above.
+      for (const cumulative of cdf) if (cumulative <= bound) count += 1;
+      selected[rowIndex] = Math.min(count, prior.length - 1);
+    }
+    idx.set(nid, selected);
+  }
+
+  return { idx, helperPins };
+}
+
+const indexMap = (idx) => {
+  if (!(idx instanceof Map)) {
+    throw new SynthesisValidationError("idx must be a Map", "idx");
+  }
+  return idx;
+};
+
+const nodeCodes = (sampler, idx, nid, expectedLength = null) => {
+  const codes = idx.get(nid);
+  if (!(codes instanceof Int32Array)) {
+    throw new SynthesisValidationError(
+      `idx for ${nid} must be an Int32Array`,
+      `idx.${nid}`,
+    );
+  }
+  if (expectedLength !== null && codes.length !== expectedLength) {
+    throw new SynthesisValidationError(
+      `idx for ${nid} must contain ${expectedLength} rows`,
+      `idx.${nid}`,
+    );
+  }
+  const valueCount = sampler.values.get(nid)?.length;
+  if (!Number.isInteger(valueCount) || valueCount < 1) {
+    throw new SynthesisValidationError(`unknown node: ${nid}`, `idx.${nid}`);
+  }
+  return { codes, valueCount };
+};
+
+export function decodeRow(sampler, idx, i) {
+  indexMap(idx);
+  if (typeof i !== "number" || !Number.isSafeInteger(i) || i < 0) {
+    throw new SynthesisValidationError("i must be a non-negative integer", "i");
+  }
+  const row = {};
+  for (const nid of sampler.emitNodes) {
+    const { codes, valueCount } = nodeCodes(sampler, idx, nid);
+    if (i >= codes.length) {
+      throw new SynthesisValidationError(`idx for ${nid} has no row ${i}`, `idx.${nid}`);
+    }
+    const valueIndex = codes[i];
+    if (valueIndex < 0 || valueIndex >= valueCount) {
+      throw new SynthesisValidationError(
+        `idx for ${nid} contains an invalid value index`,
+        `idx.${nid}.${i}`,
+      );
+    }
+    row[nid] = sampler.values.get(nid)[valueIndex];
+  }
+  return row;
+}
+
+// Port of PersonaSynthesisService._marginals. Explicit request lists are
+// capped here as defense in depth; omitting nodeIds retains the public default
+// of all emitted nodes.
+export function computeMarginals(sampler, idx, n, nodeIds = undefined) {
+  indexMap(idx);
+  if (typeof n !== "number" || !Number.isInteger(n) || n < 1 || n > MAX_SAMPLE_N) {
+    throw new SynthesisValidationError(
+      `n must be an integer between 1 and ${MAX_SAMPLE_N}`,
+      "n",
+    );
+  }
+  const explicitNodeIds = nodeIds !== undefined;
+  const requested = explicitNodeIds ? nodeIds : sampler.emitNodes;
+  if (!Array.isArray(requested)) {
+    throw new SynthesisValidationError("nodeIds must be an array", "nodeIds");
+  }
+  if (explicitNodeIds && requested.length > 32) {
+    throw new SynthesisValidationError("nodeIds must contain at most 32 nodes", "nodeIds");
+  }
+
+  const seen = new Set();
+  const sampledNodes = new Set([
+    ...sampler.plan.map(({ nid }) => nid),
+    ...sampler.priorOnlyNodes,
+  ]);
+  const out = {};
+  for (let requestIndex = 0; requestIndex < requested.length; requestIndex++) {
+    const nid = requested[requestIndex];
+    const key = `nodeIds.${requestIndex}`;
+    if (typeof nid !== "string" || !sampler.nodesById.has(nid)) {
+      throw new SynthesisValidationError(`unknown marginal node: ${String(nid)}`, key);
+    }
+    if (seen.has(nid)) {
+      throw new SynthesisValidationError(`duplicate marginal node: ${nid}`, key);
+    }
+    seen.add(nid);
+    // A known helper can legitimately sit outside the emit dependency closure.
+    // It has no sample codes, so mirror the service marginal helper and omit it.
+    if (!sampledNodes.has(nid)) continue;
+    const { codes, valueCount } = nodeCodes(sampler, idx, nid, n);
+    const counts = new Array(valueCount).fill(0);
+    for (let rowIndex = 0; rowIndex < n; rowIndex++) {
+      const valueIndex = codes[rowIndex];
+      if (valueIndex < 0 || valueIndex >= valueCount) {
+        throw new SynthesisValidationError(
+          `idx for ${nid} contains an invalid value index`,
+          `idx.${nid}.${rowIndex}`,
+        );
+      }
+      counts[valueIndex] += 1;
+    }
+    out[nid] = {
+      label: sampler.nodesById.get(nid).label ?? nid,
+      values: [...sampler.values.get(nid)],
+      freqs: counts.map((count) => roundPy(count / n, 4)),
+    };
+  }
+  return out;
 }
