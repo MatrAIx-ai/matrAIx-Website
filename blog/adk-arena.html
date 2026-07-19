@@ -26,6 +26,7 @@
     .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:40px 0}.stat-cell{padding:20px;border:1px solid var(--line);border-radius:8px;background:rgba(74,143,194,.05);text-align:center}.stat-cell .n{font-size:1.9rem;font-weight:700;color:var(--phos);letter-spacing:-.02em}.stat-cell .l{margin-top:6px;font-size:.78rem;color:#8b929c;text-transform:uppercase;letter-spacing:.06em}
     table.data{width:100%;margin:30px 0;border-collapse:collapse;font-size:.92rem}table.data th,table.data td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:right}table.data th:first-child,table.data td:first-child{text-align:left}table.data thead th{color:#d8dbe0;font-weight:600;border-bottom:1px solid var(--phos-deep)}table.data tbody th{color:#e9ebee;font-weight:500}table.data td{color:#b9bfc8;font-family:var(--mono)}table.data tr.lead td,table.data tr.lead th{color:var(--phos)}
     .tbl-cap{margin:-14px 0 30px;color:#8b929c;font-size:.84rem;text-align:center}
+    .fw-grid{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 10px}.fw-grid span{padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(74,143,194,.05);color:#c7cbd1;font:.85rem/1 var(--mono);white-space:nowrap}.fw-note{margin:14px 0 8px;color:#8b929c;font-size:.9rem;text-align:center}
     footer{margin-top:80px;padding:40px 20px;border-top:1px solid var(--line);color:var(--ink-dim);font-size:.86rem;text-align:center}footer a{color:var(--phos);text-decoration:none}
     @media(max-width:768px){header{padding:15px 20px}.nav-toggle{display:block}header nav{position:absolute;top:100%;left:0;right:0;display:flex;max-height:0;overflow:hidden;flex-direction:column;gap:0;background:#0b0d10;opacity:0;transition:.25s}header nav.active{max-height:420px;padding:8px 0;opacity:1}header nav a{width:100%;padding:12px 24px;text-align:center}.btn-nav{display:none}main{padding:118px 20px 70px}.blog-title{font-size:clamp(2.25rem,12vw,3.5rem)}.blog-deck{font-size:1rem}.blog-meta{flex-direction:column;align-items:center}.blog-meta-item+.blog-meta-item{padding-left:0;border-left:0}table.data{font-size:.82rem}table.data th,table.data td{padding:8px 6px}}
   </style>
@@ -130,6 +131,15 @@
         <div class="stat-cell"><div class="n">0</div><div class="l">Hand-written agents</div></div>
       </div>
 
+      <h3>The 51 frameworks we tested</h3>
+
+      <p>We ran the simulated developer against every one of these popular Python Agent Development Kits, spanning official vendor SDKs, research releases, and community projects:</p>
+
+      <div class="fw-grid">
+        <span>LangChain</span><span>LangGraph</span><span>LlamaIndex</span><span>CrewAI</span><span>AutoGen</span><span>AG2</span><span>OpenAI Agents</span><span>Anthropic SDK</span><span>Google ADK</span><span>Semantic Kernel</span><span>PydanticAI</span><span>Haystack</span><span>Agno</span><span>Composio</span><span>Strands</span><span>SmoLAgents</span><span>Guidance</span><span>CAMEL</span><span>MetaGPT</span><span>Swarms</span><span>Griptape</span><span>Upsonic</span><span>ControlFlow</span><span>Agency Swarm</span><span>Agently</span><span>Lagent</span><span>MCP Agent</span><span>AtomicAgents</span><span>AgentUniverse</span><span>EvoAgentX</span><span>Nerve</span><span>Agent Squad</span><span>MotleyCrew</span><span>TaskflowAI</span><span>Agent Framework</span><span>CouncilAI</span><span>Qwen Agent</span><span>AgentFlow</span><span>AgentScope</span><span>AutoAgent</span><span>PraisonAI</span><span>AgentLite</span><span>Octotools</span><span>FastAgent</span><span>GPTSwarm</span><span>Solace</span><span>Taskweaver</span><span>Langroid</span><span>AutoAgents</span><span>BeeAI</span><span>OpenSage</span>
+      </div>
+      <p class="fw-note">Each was evaluated across four benchmarks (SWE-bench, &tau;&sup2;-bench, MCP-Atlas, Terminal-Bench). For the full per-framework generation effort and execution results, see the paper: <a href="https://arxiv.org/abs/2606.05548" target="_blank" rel="noopener">arxiv.org/abs/2606.05548</a>.</p>
+
       <h2>The evidence</h2>
 
       <p>The methodology is the point; the numbers are how we know it works. Running the simulated developer across all 51 frameworks (204 pairs, two developer models authoring agents, all executing on the same backbone) produced four results worth calling out.</p>
@@ -161,11 +171,11 @@
         <p>The specific numbers will age as models and frameworks change; the method will not. "Simulate the user, hold the simulation constant, vary the thing under test, and read off effort <em>and</em> outcome" is a general recipe. When the user is a developer, you measure SDK usability and the quality of what gets built. When the user is an evaluator, you get LLM-as-a-Judge. Whenever a human-in-the-loop makes evaluation expensive, slow, or biased, simulating that human with a controlled agent turns it into something you can run on demand, at scale.</p>
       </div>
 
-      <h2>Get the code</h2>
+      <h2>Read the paper &amp; get the code</h2>
 
-      <p>The full pipeline is open source: the LLM-as-a-Developer simulation loop, per-framework Docker isolation, the three-level validate-and-repair pipeline, the token proxy, and all four benchmark adapters.</p>
+      <p>The full study, with per-framework generation effort, execution results, and the information-source ablation, is on arXiv. The complete pipeline is open source: the LLM-as-a-Developer simulation loop, per-framework Docker isolation, the three-level validate-and-repair pipeline, the token proxy, and all four benchmark adapters.</p>
 
-      <p><a href="https://github.com/jintao-h/ADK-Arena" target="_blank" rel="noopener">github.com/jintao-h/ADK-Arena &rarr;</a></p>
+      <p><a href="https://arxiv.org/abs/2606.05548" target="_blank" rel="noopener">Paper &mdash; arxiv.org/abs/2606.05548 &rarr;</a><br><a href="https://github.com/jintao-h/ADK-Arena" target="_blank" rel="noopener">Code &mdash; github.com/jintao-h/ADK-Arena &rarr;</a></p>
 
       <p class="method-note"><strong>Note.</strong> ADK Arena is research from the MatrAIx community on simulating developers as users of agent frameworks. Reported figures are from the study's controlled runs and are meant to illustrate the methodology, not to rank any single framework definitively.</p>
     </article>
