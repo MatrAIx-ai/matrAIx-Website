@@ -1,7 +1,7 @@
 /* ============================================================
    matrAIx — synthetic persona (agent) generator
    Draws agents from the flat persona dimension space in
-   ../../dimensions.json by assigning ONE value per dimension.
+   ../../data/dimensions.json by assigning ONE value per dimension.
 
    Each agent → agent_XXXX.json (a flat {dimension_id: value} map
    plus a small header), mirroring the explorer's "Copy JSON".
@@ -19,7 +19,7 @@ const COUNT = parseInt(process.argv[2], 10) || 830;
 const ROOT = path.join(__dirname, '..', '..');
 const OUT = __dirname;
 
-const schema = JSON.parse(fs.readFileSync(path.join(ROOT, 'dimensions.json'), 'utf8'));
+const schema = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'dimensions.json'), 'utf8'));
 const dims = schema.dimensions;
 
 /* deterministic PRNG so agent N is reproducible across runs */

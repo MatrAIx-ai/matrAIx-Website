@@ -2,7 +2,7 @@
 
 A scaled-down sample of the **8.3 billion-agent** persona space that powers
 matrAIx simulations. Each agent is drawn from the flat dimension schema in
-[`dimensions.json`](../../dimensions.json) by assigning **one value per
+[`dimensions.json`](../../data/dimensions.json) by assigning **one value per
 dimension** — the same space explored on
 [matraix.ai/person.html](https://matraix.ai/person.html).
 

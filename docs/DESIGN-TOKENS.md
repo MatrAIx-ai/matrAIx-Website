@@ -2,13 +2,13 @@
 
 **Single source of truth for all design decisions.**
 
-All design tokens are defined in `light-theme.css` as CSS custom properties (variables). Change values there and they propagate site-wide.
+All design tokens are defined in `css/light-theme.css` as CSS custom properties (variables). Change values there and they propagate site-wide.
 
 ---
 
 ## Colors
 
-Update in `light-theme.css` lines 10-22.
+Update in `css/light-theme.css` lines 10-22.
 
 ### Backgrounds
 ```css
@@ -43,7 +43,7 @@ Update in `light-theme.css` lines 10-22.
 
 ## Typography
 
-Update in `light-theme.css` lines 24-29.
+Update in `css/light-theme.css` lines 24-29.
 
 ### Font Families
 ```css
@@ -57,7 +57,7 @@ Update in `light-theme.css` lines 24-29.
 
 ## Font Sizes
 
-Update in `light-theme.css` lines 31-40.
+Update in `css/light-theme.css` lines 31-40.
 
 Follows 1.25 modular ratio for harmonious scaling:
 
@@ -94,7 +94,7 @@ Not variables—use these literal values in CSS:
 
 ## Line Heights
 
-Update in `light-theme.css` lines 42-46.
+Update in `css/light-theme.css` lines 42-46.
 
 ```css
 --leading-tight:  1.1;    /* Tight spacing (headlines) */
@@ -109,7 +109,7 @@ Update in `light-theme.css` lines 42-46.
 
 ## Letter Spacing
 
-Update in `light-theme.css` lines 48-54.
+Update in `css/light-theme.css` lines 48-54.
 
 ```css
 --tracking-tight:   -0.02em;  /* Negative spacing (tight headlines) */
@@ -138,19 +138,19 @@ These don't have variables yet but should be consistent:
 
 ### Example: Update brand color across entire site
 
-1. Open `light-theme.css`
+1. Open `css/light-theme.css`
 2. Change `--phos: #003d7a;` to your new color
 3. **Done.** All buttons, accents, highlights, and glows update instantly
 
 ### Example: Make all body text smaller
 
-1. Open `light-theme.css`
+1. Open `css/light-theme.css`
 2. Change `--text-base: 1rem;` to `0.9rem;`
 3. **Done.** All base text scales proportionally
 
 ### Example: Change font to sans-serif
 
-1. Open `light-theme.css`
+1. Open `css/light-theme.css`
 2. Change `--disp: "Neuton", Georgia, serif;` to `"Inter", sans-serif;`
 3. Make sure the font is imported at top of file
 4. **Done.** All display text switches immediately
@@ -159,12 +159,12 @@ These don't have variables yet but should be consistent:
 
 ## Where Tokens Are Used
 
-- **light-theme.css** — Token definitions (single source of truth)
-- **home.css** — Homepage styles (uses tokens)
-- **styles.css** — Global styles (uses tokens)
-- **explorer.css** — Persona explorer (uses tokens)
-- **benchmark.css** — Demo benchmark (uses tokens)
-- **play.css** — Quiz page (uses tokens)
+- **css/light-theme.css** — Token definitions (single source of truth)
+- **css/home.css** — Homepage styles (uses tokens)
+- **css/styles.css** — Global styles (uses tokens)
+- **css/explorer.css** — Persona explorer (uses tokens)
+- **css/benchmark.css** — Demo benchmark (uses tokens)
+- **css/play.css** — Quiz page (uses tokens)
 
 All CSS files **import and reference** these tokens—they don't override or duplicate them.
 
@@ -173,16 +173,16 @@ All CSS files **import and reference** these tokens—they don't override or dup
 ## Best Practices
 
 ✅ **DO:**
-- Use CSS variables from light-theme.css
+- Use CSS variables from css/light-theme.css
 - Use `clamp()` for responsive font sizes
-- Keep all color, font, and size decisions in light-theme.css
+- Keep all color, font, and size decisions in css/light-theme.css
 - Document any new tokens you add
 
 ❌ **DON'T:**
 - Hardcode colors (`#ffffff`, `#1a1a1a`) in component files
 - Hardcode font sizes (`16px`, `1.5rem`) in component files
 - Duplicate token values across files
-- Change values locally — always edit light-theme.css
+- Change values locally — always edit css/light-theme.css
 
 ---
 

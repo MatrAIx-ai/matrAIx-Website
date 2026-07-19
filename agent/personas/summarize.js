@@ -12,7 +12,7 @@ const path = require('path');
 
 const OUT = __dirname;
 const ROOT = path.join(OUT, '..', '..');
-const schema = JSON.parse(fs.readFileSync(path.join(ROOT, 'dimensions.json'), 'utf8'));
+const schema = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'dimensions.json'), 'utf8'));
 const labelOf = Object.fromEntries(schema.dimensions.map(d => [d.id, d.label]));
 const valuesOf = Object.fromEntries(schema.dimensions.map(d => [d.id, d.values]));
 
@@ -116,7 +116,7 @@ const BARW = 22;
 const bar = pct => '█'.repeat(Math.round(pct / 100 * BARW)).padEnd(BARW, '·');
 const lines = [];
 lines.push(`# matrAIx synthetic agents — cohort summary\n`);
-lines.push(`Diversity and statistics for the **${N} generated agents** in this folder, each drawn from **${schema.dimensions.length} dimensions** in [\`dimensions.json\`](../../dimensions.json).\n`);
+lines.push(`Diversity and statistics for the **${N} generated agents** in this folder, each drawn from **${schema.dimensions.length} dimensions** in [\`dimensions.json\`](../../data/dimensions.json).\n`);
 lines.push(`> Regenerate with \`node agent/personas/summarize.js\`. Machine-readable form: [\`summary.json\`](summary.json).\n`);
 lines.push(`## At a glance\n`);
 lines.push(`| Metric | Value |`);
