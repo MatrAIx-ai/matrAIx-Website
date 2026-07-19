@@ -140,7 +140,7 @@ body {
 
 /* ---------- Buttons ---------- */
 .btn {
-  font-family: "Space Grotesk", var(--disp); font-size: 0.9rem; letter-spacing: -0.01em;
+  font-family: "Inter", var(--disp); font-size: 0.9rem; letter-spacing: -0.01em;
   text-transform: none; text-decoration: none; font-weight: 600;
   display: inline-flex; align-items: center; gap: 10px;
   padding: 12px 22px; border: 1px solid var(--line); border-radius: 10px;
@@ -981,7 +981,7 @@ main > aside {
 /* Shared research components */
 .section-kicker,
 .idx {
-  font-family: var(--mono); font-size: 0.72rem; font-weight: 500;
+  font-family: "Inter", var(--disp); font-size: 0.72rem; font-weight: 500;
   letter-spacing: .15em; text-transform: uppercase; color: var(--phos);
 }
 .maturity {
@@ -1205,7 +1205,7 @@ main > aside {
 }
 .stack-strip-flow > a { transition: border-color .2s, transform .2s; }
 .stack-strip-flow > a:hover { color: var(--phos); transform: translateY(-2px); }
-.stack-strip-flow span { display: block; color: var(--phos); font-family: var(--mono); font-size: .52rem; letter-spacing: .08em; }
+.stack-strip-flow span { display: block; color: var(--phos); font-family: "Inter", var(--disp); font-size: .52rem; letter-spacing: .08em; }
 .stack-strip-flow b { display: block; margin: 9px 0 4px; font-family: var(--disp); font-size: .86rem; }
 .stack-strip-flow > i { align-self: center; color: var(--phos); font-style: normal; font-size: .72rem; }
 .stack-strip-flow .stack-output { border-right: 0; }
@@ -1258,7 +1258,7 @@ main > aside {
 }
 .application-discovery::before { background: radial-gradient(70% 70% at 100% 0, rgba(255,181,71,.09), transparent 70%); }
 .discovery-card:hover { transform: translateY(-4px); border-color: var(--line); box-shadow: 0 14px 34px rgba(0,0,0,.12); }
-.discovery-top { position: relative; display: flex; justify-content: space-between; align-items: center; color: var(--phos); }
+.discovery-top { position: relative; display: flex; justify-content: flex-end; align-items: center; color: var(--phos); }
 .application-discovery .discovery-top { color: var(--amber); }
 .discovery-card h2 { position: relative; max-width: 440px; margin: 28px 0 10px; font-family: var(--disp); font-size: clamp(1.3rem, 2.6vw, 1.85rem); line-height: 1.08; letter-spacing: -.03em; }
 .discovery-link { position: relative; margin-top: auto; padding-top: 12px; color: var(--phos); font-size: .78rem; }
@@ -1363,4 +1363,3 @@ main > aside {
   .hero--split .hero-copy { left: clamp(24px, 2.6vw, 44px); }
   .hero-globe-wrap { left: clamp(-18px, -1vw, -8px); }
 }
-

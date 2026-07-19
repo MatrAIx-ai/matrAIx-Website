@@ -4,7 +4,9 @@ const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
 const OUT = path.join(__dirname, "i18n-extra.js");
-const { dimensions } = JSON.parse(fs.readFileSync(path.join(ROOT, "dimensions.json"), "utf8"));
+const { dimensions } = JSON.parse(
+  fs.readFileSync(path.join(ROOT, "data", "dimensions.json"), "utf8")
+);
 const I18N = require("./i18n-words");
 const BASE = require("./i18n-data/base-dicts");
 

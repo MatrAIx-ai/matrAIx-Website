@@ -29,8 +29,8 @@ python3 -m http.server 8000   # then visit http://localhost:8000
 The canonical source of truth is
 [`persona/schema/dimensions.json`](https://github.com/MatrAIx-ai/MatrAIx/blob/main/persona/schema/dimensions.json)
 in the MatrAIx research repository. This website keeps a synchronized
-[`dimensions.json`](dimensions.json) copy and an identical browser-loadable
-[`dimensions.js`](dimensions.js) bundle (`window.MATRAIX_DIMENSIONS = …`).
+[`dimensions.json`](data/dimensions.json) copy and an identical browser-loadable
+[`dimensions.js`](js/dimensions.js) bundle (`window.MATRAIX_DIMENSIONS = …`).
 
 The schema is a **flat, unified set**: every sampled persona is assigned exactly
 **one value per dimension**. The `category` field is for UI grouping/filtering
@@ -109,10 +109,15 @@ readable LinkedIn-style summary, and offers the result as JSON:
 ## Files
 
 ```
-index.html                      Landing page markup
-home.css                        Landing page styling — dark phosphor console (Space Grotesk + JetBrains Mono)
-home.js                         Agent-field sim, count-up, telemetry, A/B report viewer, SFT/RL toggle
-styles.css                      Shared console styling for the tool pages (CSS variables, base look)
+index.html                      Landing page markup; public HTML routes remain at the repository root
+
+css/                            Page and theme stylesheets
+js/                             Browser runtime scripts
+data/                           JSON schemas, dimensions, and metrics
+Assets/icons/                   Favicons and installable-app icons
+docs/                           Design, typography, and theme documentation
+scripts/                        Build and generation utilities
+archive/                        Non-served historical artifacts
 
 blog/
 ├── index.html                  Blog index page (links to research papers)
@@ -120,20 +125,20 @@ blog/
 ├── application-colm.html       Research: A Dress Rehearsal for App Testing
 └── env-colm.html               Research: What Happens When an AI Watches Itself Act?
 
-person.html                     Persona explorer markup
-explorer.html                   Redirect stub -> person.html
-explorer.css                    Persona-explorer styling
-explorer.js                     Schema loading, filtering, search, persona sampler
+persona.html                    Persona explorer markup
+explorer.html                   Redirect stub -> persona.html
+css/explorer.css                Persona-explorer styling
+js/explorer.js                  Schema loading, filtering, search, persona sampler
 
 demo.html                       Demo / benchmark console markup (runway hero + OS portal)
 benchmark.html                  Redirect stub -> demo.html
-benchmark.css                   Benchmark-specific styling
-benchmark.js                    Sampling, structured scoring, live stream, heatmap, JSONL export
+css/benchmark.css               Benchmark-specific styling
+js/benchmark.js                 Sampling, structured scoring, live stream, heatmap, JSONL export
 
 deck.html                       (Local only — not tracked in git) Self-contained investor pitch deck (15 slides)
 
-generate-dimensions.js          Legacy local schema-generation utility
-dimensions.json                 Synchronized copy of the canonical research schema
-dimensions.js                   Browser-loadable mirror of dimensions.json
+scripts/generate-dimensions.js  Legacy local schema-generation utility
+data/dimensions.json            Synchronized copy of the canonical research schema
+js/dimensions.js                Browser-loadable mirror of dimensions.json
 CNAME                           Custom domain for GitHub Pages (matraix.ai)
 ```

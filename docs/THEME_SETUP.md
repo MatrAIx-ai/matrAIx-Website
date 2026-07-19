@@ -4,7 +4,7 @@ The matrAIx.ai site now supports both dark and light themes with persistent user
 
 ## Files Added
 
-### 1. **light-theme.css**
+### 1. **css/light-theme.css**
 Contains all light theme color overrides and styling. Uses CSS custom properties (variables) to override the dark theme defaults:
 - White background (`--bg: #ffffff`)
 - Dark text (`--ink: #1a1a1a`)
@@ -24,7 +24,7 @@ JavaScript module that handles:
 
 ### HTML Changes
 Each HTML file includes:
-1. Light theme CSS link: `<link rel="stylesheet" href="light-theme.css" />`
+1. Light theme CSS link: `<link rel="stylesheet" href="css/light-theme.css" />`
 2. Theme toggle button: `<button class="theme-toggle">☀️</button>`
 3. Theme script: `<script src="theme-toggle.js"></script>`
 
@@ -68,4 +68,4 @@ Updated files:
 
 ## Customization
 
-To adjust light theme colors, edit `light-theme.css` in the `html[data-theme="light"]` rules. The light theme CSS fully overrides dark theme variables for any element.
+To adjust light theme colors, edit `css/light-theme.css` in the `html[data-theme="light"]` rules. The light theme CSS fully overrides dark theme variables for any element.
