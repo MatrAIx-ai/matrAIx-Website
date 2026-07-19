@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   addAffiliation(academicCloud, 'U of Toronto', 'utoronto.ca');
   addAffiliation(academicCloud, 'OSU', 'osu.edu');
-  addAffiliation(academicCloud, 'ASU', 'asu.edu');
   addAffiliation(academicCloud, 'UCSC', 'ucsc.edu');
   addAffiliation(academicCloud, 'UPenn', 'upenn.edu');
   addAffiliation(academicCloud, 'JHU', 'jhu.edu');
@@ -99,13 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
   chips = Object.fromEntries(
     [...cloud.querySelectorAll('.affiliation-chip')].map(chip => [chip.textContent.trim(), chip])
   );
-
-  const washington = chips['University of Washington'];
-  if (washington) {
-    const logo = washington.querySelector('img');
-    washington.textContent = 'U of Washington';
-    if (logo) washington.prepend(logo);
-  }
 
   let xai = chips.xAI;
   if (!xai) {
@@ -164,9 +156,4 @@ document.addEventListener('DOMContentLoaded', () => {
       cornell.classList.add('cornell-affiliation');
     }
 
-    const nvidiaLogo = chips.NVIDIA?.querySelector('img');
-    if (nvidiaLogo) {
-      nvidiaLogo.src = 'https://www.nvidia.com/favicon.ico';
-      chips.NVIDIA.classList.add('nvidia-affiliation');
-    }
 });
