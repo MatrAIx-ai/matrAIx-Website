@@ -73,7 +73,7 @@
 
       <p>Today's personalization is often shallow: a remembered name, a preferred format, a few lines of custom instructions. The deeper challenge is behavioral. Can an agent represent what a person values, what they know, how they make decisions, what constraints they face, and how those factors should change its actions over time?</p>
 
-      <p>We believe this is a natural next step for AI: <strong>give agents personas</strong>. A persona is not a decorative biography or a role-playing prompt. It is a structured, inspectable representation of a user that can condition how an agent interprets a situation, weighs trade-offs, communicates, and acts.</p>
+      <p>We believe this is a natural next step for AI: <strong>give agents personas</strong>. A persona here is a structured, inspectable representation of a user, one that goes beyond a decorative biography or a role-playing prompt. It conditions how an agent interprets a situation, weighs trade-offs, communicates, and acts.</p>
 
       <p>A credible persona also needs boundaries. It should distinguish observed evidence from inference, attach provenance and confidence to attributes, and leave unsupported fields unknown. Conditioning an agent on that representation is the first step. Demonstrating that the agent behaves differently for the right reasons, and not because it is reproducing a stereotype, is the harder one.</p>
 
@@ -99,7 +99,7 @@
 
       <p>That number should not be frozen into a claim about current tools. METR now explicitly labels it out of date. Its late-2025 follow-up covered <strong>57 developers, 143 repositories, and more than 800 tasks</strong>, but wider AI adoption introduced severe selection and time-measurement problems. METR concluded that the experiment gave an unreliable signal of the current productivity effect.<sup><a href="#ref-3">3</a></sup></p>
 
-      <p>The lesson is methodological, not anti-agent: benchmark scores, controlled experiments, self-reports, and production outcomes answer different questions. A test suite can verify a patch. It cannot tell us whether an engineer enjoyed steering the agent, trusted the implementation, accepted its style, or would choose it again. <strong>User satisfaction is not a softer version of correctness; it is a different outcome variable.</strong></p>
+      <p>The lesson is methodological, not anti-agent: benchmark scores, controlled experiments, self-reports, and production outcomes answer different questions. A test suite can verify a patch. It cannot tell us whether an engineer enjoyed steering the agent, trusted the implementation, accepted its style, or would choose it again. <strong>Task completion is one part of satisfaction, and the only part existing benchmarks measure. It is necessary, but nowhere near sufficient. For a product, satisfaction is the outcome that decides whether people come back, and completion is just the floor of it.</strong></p>
 
       <h2>3. Why simulation is becoming plausible</h2>
 
@@ -143,7 +143,7 @@
 
       <p>Today, that feedback is difficult to obtain early and repeatedly. Surveys and panels take time. Samples can miss small but important groups. Running a new study after every product or policy change is rarely practical. A population of persona-conditioned agents could act as a <strong>rehearsal layer</strong>: vary the population, run the same scenario many times, inspect where behavior diverges, and identify questions that deserve real-world study.</p>
 
-      <p>The goal is not an oracle that predicts society. Human behavior is contextual, adaptive, and affected by events no model can fully observe. The useful output is often not a single forecast, but a map of plausible responses, subgroup differences, sensitivities, and failure modes. Simulation should help us ask better questions before making irreversible decisions.</p>
+      <p>The goal is not an oracle that predicts society; human behavior is contextual, adaptive, and shaped by events no model can fully observe. What simulation offers is more modest and more useful: a map of plausible responses, subgroup differences, sensitivities, and failure modes. It should help us ask better questions before we make irreversible decisions.</p>
 
       <h3>Individual simulation: from assistant to representative</h3>
 
@@ -247,7 +247,7 @@
 
       <h2>9. The MatrAIx research agenda</h2>
 
-      <p>Our position is not that language models already simulate humanity. It is that human simulation has become empirically testable and operationally useful enough to deserve its own infrastructure and standards.</p>
+      <p>We are not claiming that language models already simulate humanity. Our claim is narrower: human simulation has become empirically testable and operationally useful enough to deserve its own infrastructure and standards.</p>
 
       <ol>
         <li><strong>Persona populations:</strong> typed, evidence-aware representations with compatibility constraints, provenance, uncertainty, and coverage measurement.</li>
@@ -256,7 +256,7 @@
         <li><strong>Evaluation and calibration:</strong> adherence, subgroup fidelity, treatment-effect transfer, uncertainty, drift, and comparison with held-out human evidence.</li>
       </ol>
 
-      <p>This is the motivation behind MatrAIx. We are building persona populations, agent environments, and evaluation tools to study how diverse simulated users behave before systems meet the real world. The ambition is not to reduce people to profiles. It is to make human difference a first-class part of how AI systems are designed and evaluated.</p>
+      <p>This is the motivation behind MatrAIx. We are building persona populations, agent environments, and evaluation tools to study how diverse simulated users behave before systems meet the real world. The ambition is the opposite of reducing people to profiles: it is to make human difference a first-class part of how AI systems are designed and evaluated.</p>
 
       <div class="quote-card">The next generation of agents should not only be more capable. They should understand who they are acting for.</div>
 
