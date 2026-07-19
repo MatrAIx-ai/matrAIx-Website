@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" style="color-scheme: dark;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>From Persona Graphs to Reproducible Generation — MatrAIx Blog</title>
+  <meta name="description" content="A look inside two draft pull requests that bring a static, reproducible Persona Synthesis Studio to the MatrAIx website." />
+  <link rel="icon" href="../Assets/icons/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../Assets/icons/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../Assets/icons/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../Assets/icons/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #0a0b0d; --ink: #e8e9ec; --ink-dim: #9ba3ad; --phos: #6daedb; --cyan: #7ac7d1; --amber: #e5a84b; --line: rgba(151,169,190,.17); --mono: "JetBrains Mono", monospace; --disp: "Inter", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.75 var(--disp); }
+    header { position: fixed; inset: 0 0 auto; z-index: 20; display: flex; align-items: center; justify-content: space-between; padding: 14px clamp(22px,4vw,56px); }
+    .brand, nav a, .btn-nav { color: var(--ink); text-decoration: none; }
+    .brand-name { font-size: 1.2rem; font-weight: 700; } .brand-name em { color: var(--phos); font-style: normal; }
+    nav { display: flex; gap: clamp(18px,2.4vw,34px); } nav a { color: var(--ink-dim); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+    .btn-nav { padding: 9px 15px; border: 1px solid rgba(109,174,219,.5); border-radius: 7px; font-size: .75rem; }
+    .nav-toggle { display: none; }
+    main { max-width: 1102px; margin: auto; padding: 148px 30px 90px; }
+    .blog-header { max-width: 780px; margin: 0 auto 64px; text-align: center; }
+    .blog-breadcrumb { color: var(--ink-dim); font: .7rem var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .blog-breadcrumb a { color: var(--phos); text-decoration: none; } .blog-breadcrumb span { margin: 0 8px; }
+    .blog-title { margin: 30px 0; font-size: clamp(2.2rem,5vw,3.6rem); line-height: 1.08; letter-spacing: -.045em; }
+    .blog-meta { display: flex; justify-content: center; align-items: center; gap: 24px; color: var(--ink-dim); font-size: .82rem; flex-wrap: wrap; }
+    .blog-meta-item { display: flex; align-items: center; gap: 10px; } .blog-meta strong { color: var(--ink); }
+    .article { max-width: 780px; margin: auto; } .article p, .article li { color: #c9cdd3; }
+    .article h2 { margin: 56px 0 18px; font-size: 1.8rem; letter-spacing: -.025em; }
+    .article h3 { margin: 34px 0 12px; font-size: 1.25rem; } .article a { color: var(--phos); }
+    .article-summary, .highlight-box { margin: 30px 0; padding: 22px 24px; border: 1px solid var(--line); border-radius: 10px; background: rgba(109,174,219,.06); }
+    .article-summary span { color: var(--phos); font: 600 .7rem var(--mono); letter-spacing: .12em; }
+    .article-summary p, .highlight-box p { margin-bottom: 0; }
+    .phase-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; margin: 30px 0; }
+    .phase-card { padding: 24px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.025); }
+    .phase-card small { color: var(--phos); font: .7rem var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .phase-card h3 { margin-top: 10px; } .phase-card ul { padding-left: 20px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 32px 0; }
+    .stat-card { padding: 18px; border: 1px solid var(--line); border-radius: 8px; text-align: center; }
+    .stat-number { color: var(--phos); font-size: 1.65rem; font-weight: 700; } .stat-label { color: var(--ink-dim); font: .68rem var(--mono); text-transform: uppercase; }
+    .code-block { overflow-x: auto; padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: #07080a; color: #b8d8ee; font: .82rem/1.6 var(--mono); }
+    .article-actions { margin-top: 56px; display: flex; gap: 12px; flex-wrap: wrap; } .article-actions a { padding: 11px 15px; border: 1px solid var(--line); border-radius: 7px; text-decoration: none; }
+    footer { padding: 40px 20px; border-top: 1px solid var(--line); color: var(--ink-dim); text-align: center; } footer a { color: var(--phos); }
+    @media (max-width: 720px) { nav, .btn-nav { display: none; } .phase-grid, .stats-grid { grid-template-columns: 1fr; } main { padding-top: 110px; } }
+  </style>
+  <link rel="stylesheet" href="../css/blog-post.css?v=21" />
+  <link rel="stylesheet" href="../css/navigation.css?v=1" />
+</head>
+<body>
+  <header class="site-nav">
+    <a class="brand" href="/"><span class="brand-name">Matr<em>AI</em>x</span></a>
+    <nav>
+      <a href="/">Home</a><a href="/blog/" aria-current="page">Research</a><a href="/persona.html">Persona</a><a href="/applications.html">Applications</a><a href="/demo.html">Playground</a><a href="/access.html">Community</a>
+    </nav>
+    <a href="/access.html" class="btn-nav">Join community</a>
+  </header>
+
+  <main>
+    <div class="blog-header">
+      <div class="blog-breadcrumb"><a href="/">Home</a><span>/</span><a href="/blog/">Research</a><span>/</span><span>Engineering</span></div>
+      <h1 class="blog-title">From Persona Graphs to Reproducible Generation</h1>
+      <div class="blog-meta">
+        <div class="blog-meta-item"><img src="../Assets/logos/Matrix_Logo.jpg" alt="MatrAIx" style="width:36px;height:36px;border-radius:50%;object-fit:cover" /><div><strong>MatrAIx Team</strong><div>Core Team</div></div></div>
+        <div class="blog-meta-item"><strong>July 19, 2026</strong></div>
+        <div class="blog-meta-item"><strong>8 min read</strong></div>
+      </div>
+    </div>
+
+    <article class="article">
+      <aside class="article-summary" aria-label="Article summary"><span>TL;DR</span><p>Two draft pull requests turn the MatrAIx persona synthesis graph into a browser-only studio. The first makes the graph explorable; the second adds deterministic adjustment and generation. Both are static, versioned, integrity-checked, and open for review.</p></aside>
+
+      <p>A persona model is easier to trust when people can inspect it. Which attributes are represented? How are they connected? What changes when a prior, category, or relationship is adjusted? Until now, answering those questions required working directly with the MatrAIx synthesis code and data.</p>
+      <p>Two new draft pull requests propose a different interface: a self-contained Synthesis Studio that runs entirely in the browser. The work is deliberately split into two phases so the graph explorer can be reviewed independently from the generative workflow.</p>
+
+      <div class="phase-grid">
+        <section class="phase-card"><small>Phase 1 · PR #14</small><h3>Explore the persona DAG</h3><ul><li>Search and filter 1,308 graph nodes</li><li>Inspect nodes, values, and directed edges</li><li>Navigate with URL-backed state</li><li>Use keyboard-accessible desktop and mobile layouts</li></ul><p><a href="https://github.com/MatrAIx-ai/matrAIx-Website/pull/14">Review PR #14 ↗</a></p></section>
+        <section class="phase-card"><small>Phase 2 · PR #15</small><h3>Adjust and generate</h3><ul><li>Apply four kinds of model adjustments</li><li>Generate deterministic persona samples</li><li>Compare adjusted and baseline marginals</li><li>Overlay a selected persona on the graph</li></ul><p><a href="https://github.com/MatrAIx-ai/matrAIx-Website/pull/15">Review PR #15 ↗</a></p></section>
+      </div>
+
+      <h2>Phase 1: making the graph legible</h2>
+      <p>The first draft introduces a read-only Persona DAG Studio at <code>/synthesis/</code>. The interface offers an overview of the full graph and hop-bounded drill-down views, with details for the currently selected node. Search, category filters, and URL-backed navigation make an otherwise large model approachable and shareable.</p>
+      <p>The graph is not downloaded from a mutable service. It is built from a pinned MatrAIx source commit and committed as an immutable <code>v1</code> release. A manifest binds the source, generator, dataset, byte sizes, and SHA-256 digests. The browser verifies those artifacts before it renders them.</p>
+
+      <h2>Phase 2: controlled experimentation</h2>
+      <p>The second draft builds on the explorer with an Adjust &amp; Generate workflow. A user can pin a value, replace a prior, scale a category, or scale an incoming edge. The studio compiles those edits into a strict request, samples personas with a reproducible seed, and summarizes the resulting marginals.</p>
+      <p>Generation runs inside a dedicated Web Worker, keeping the interface responsive. Starting a newer request supersedes the previous one, while worker failures are isolated and recoverable. Results remain local to the page and are intentionally excluded from the URL.</p>
+
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-number">1,308</div><div class="stat-label">Graph nodes</div></div>
+        <div class="stat-card"><div class="stat-number">6,999</div><div class="stat-label">Directed edges</div></div>
+        <div class="stat-card"><div class="stat-number">4</div><div class="stat-label">Adjustment types</div></div>
+      </div>
+
+      <h2>Static does not mean unverified</h2>
+      <p>The studio has no API server, database, or runtime dependency on the source repository. That smaller operational surface is paired with unusually strict provenance checks. The <code>v2</code> runtime independently verifies the graph core, sampler pack, and dimensions snapshot before using them. The existing <code>v1</code> release remains byte-checked so Phase 2 cannot silently rewrite Phase 1.</p>
+      <p>Reproducibility tests rebuild the artifacts from the pinned source and compare them with committed fixtures. Fidelity checks cover graph structure, probability tables, conditional masks, seeded samples, marginals, and rendered persona text.</p>
+
+      <div class="highlight-box"><strong>Why two releases?</strong><p>The stacked design creates a clean rollback boundary. Removing Phase 2 returns the page to the verified, read-only <code>v1</code> explorer without a data migration or service change.</p></div>
+
+      <h2>Testing across browsers and architectures</h2>
+      <p>The drafts include Node tests and Playwright flows for Chromium and WebKit at desktop and 390-pixel mobile viewports. Because the runtime is browser JavaScript with committed data, it is architecture-neutral and can also be exercised on ARM64 systems such as Apple Silicon and ARM Linux.</p>
+      <pre class="code-block"><code>git fetch origin pull/14/head:pr-14 pull/15/head:pr-15
+git switch pr-15
+python3 -m http.server 4173
+# Open http://127.0.0.1:4173/synthesis.html</code></pre>
+      <p>The artifact toolchain is pinned to Node 18.19.1. Reviewers who run the complete test suite should use that version to reproduce the documented build environment.</p>
+
+      <h2>What we want reviewers to examine</h2>
+      <p>Both pull requests remain drafts. We are especially interested in feedback on whether the graph is understandable without prior knowledge of the synthesis system, whether the adjustment vocabulary is clear, and whether the baseline comparison helps explain what an intervention changed.</p>
+      <p>Phase 2 is stacked on Phase 1 and must not merge first. After Phase 1 lands, its commits will be removed from the Phase 2 review diff.</p>
+
+      <div class="article-actions"><a href="https://github.com/MatrAIx-ai/matrAIx-Website/pull/14">Explore Phase 1 ↗</a><a href="https://github.com/MatrAIx-ai/matrAIx-Website/pull/15">Explore Phase 2 ↗</a><a href="https://github.com/MatrAIx-ai/MatrAIx">MatrAIx on GitHub ↗</a></div>
+    </article>
+  </main>
+
+  <footer><p>MatrAIx — Agent Simulation for Evaluation</p><p><a href="/">Home</a> · <a href="/blog/">Research</a> · <a href="mailto:info@matraix.ai">Contact</a></p><p>© 2026 MatrAIx</p></footer>
+  <script src="../js/site-performance.js?v=1"></script>
+  <script src="../js/blog-post.js?v=6"></script>
+</body>
+</html>
