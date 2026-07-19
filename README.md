@@ -121,9 +121,9 @@ archive/                        Non-served historical artifacts
 
 blog/
 ├── index.html                  Blog index page (links to research papers)
-├── position-colm.html          Research: AI Personas Need Receipts
-├── application-colm.html       Research: A Dress Rehearsal for App Testing
-└── env-colm.html               Research: What Happens When an AI Watches Itself Act?
+├── missing-human-layer.html    Position: Why Human Simulation Is the Next Step for AI Agents
+├── application-colm.html       Research: Evaluating Interactive Applications with Persona-Conditioned Agents
+└── env-colm.html               Research: Measuring Persona Drift in Long-Horizon Agent Simulations
 
 persona.html                    Persona explorer markup
 explorer.html                   Redirect stub -> persona.html

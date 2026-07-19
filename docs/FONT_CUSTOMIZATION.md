@@ -49,7 +49,7 @@ Update the `--disp` variable in each file's `:root` block.
 
 ### 3. Blog HTML files
 - `blog/index.html`
-- `blog/position-colm.html`
+- `blog/missing-human-layer.html`
 - `blog/application-colm.html`
 - `blog/env-colm.html`
 
