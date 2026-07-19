@@ -8,15 +8,16 @@
   <link rel="icon" type="image/png" sizes="32x32" href="Assets/icons/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="Assets/icons/favicon-16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="Assets/icons/apple-touch-icon.png" />
-  <meta name="description" content="Fill all persona attributes across 43 groups and export attributes.json." />
+  <meta name="description" content="Fill all 1,290 persona dimensions across 43 categories and export attributes.json." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css?v=9" />
-  <link rel="stylesheet" href="css/play.css?v=16" />
+  <link rel="stylesheet" href="css/play.css?v=31" />
   <link rel="stylesheet" href="css/dark-theme.css?v=5" />
-<link rel="stylesheet" href="css/subpages-light.css?v=2" />
-<link rel="stylesheet" href="css/navigation.css?v=1" /></head>
+  <link rel="stylesheet" href="css/subpages-light.css?v=2" />
+  <link rel="stylesheet" href="css/navigation.css?v=1" />
+</head>
 <body class="play-body">
   <div class="grain" aria-hidden="true"></div>
   <div class="scanlines" aria-hidden="true"></div>
@@ -47,15 +48,15 @@
       </div>
       <h1 class="play-title" id="titleText">Persona Attribute Survey</h1>
       <p class="play-sub" id="subtitleText">
-        Complete all 1290 persona dimensions in 43 groups. Progress is auto-saved locally every 15 seconds so you can continue after refresh.
+        Work through 43 categories of persona dimensions, one category at a time. Every answer is saved locally the moment you make it, so you can stop and pick up where you left off.
       </p>
     </section>
 
     <section class="play-quiz">
       <div class="toolbar">
         <label class="tool-field grow">
-          <span id="searchLabel">Search dimensions</span>
-          <input id="dimensionSearch" type="text" placeholder="search dimensions..." />
+          <span id="searchLabel">Search all dimensions</span>
+          <input id="dimensionSearch" type="text" placeholder="search all 43 categories..." />
         </label>
         <label class="tool-field">
           <span id="languageLabel">Language</span>
@@ -66,21 +67,35 @@
         </label>
       </div>
 
-      <div class="play-progress" id="progressStats"></div>
+      <div class="search-summary" id="searchSummary" hidden></div>
       <div class="tab-wrap" id="groupTabs"></div>
+      <div class="play-progress" id="progressStats"></div>
       <div class="play-step" id="groupContent"></div>
 
-      <div class="play-controls">
+      <div class="control-zone control-flow">
         <button id="prevGroupBtn" type="button" class="btn btn-ghost">← Previous</button>
-        <button id="nextGroupBtn" type="button" class="btn btn-ghost">Next →</button>
-        <button id="saveDraftBtn" type="button" class="btn btn-ghost">Save draft</button>
-        <button id="fillDefaultsBtn" type="button" class="btn btn-ghost">Fill group defaults</button>
-        <button id="downloadBtn" type="button" class="btn btn-solid">Download attributes.json</button>
-        <button id="generateReportBtn" type="button" class="btn btn-ghost">Reveal My MatrAIx Persona</button>
-        <button id="resetBtn" type="button" class="btn btn-ghost">Reset group</button>
+        <button id="fillDefaultsBtn" type="button" class="btn btn-quiet">Fill category defaults</button>
+        <button id="nextGroupBtn" type="button" class="btn btn-solid control-next">Next →</button>
       </div>
+
+      <div class="control-zone control-finish">
+        <p class="control-zone-label" id="finishZoneLabel">Finish</p>
+        <div class="control-zone-actions">
+          <button id="generateReportBtn" type="button" class="btn btn-solid">Reveal My MatrAIx Persona</button>
+          <button id="downloadBtn" type="button" class="btn btn-ghost">Download attributes.json</button>
+        </div>
+      </div>
+
+      <div class="control-zone control-danger">
+        <p class="control-zone-label" id="dangerZoneLabel">Danger zone</p>
+        <div class="control-zone-actions">
+          <button id="resetBtn" type="button" class="btn btn-danger">Reset category</button>
+          <button id="resetAllBtn" type="button" class="btn btn-danger">Reset all</button>
+        </div>
+      </div>
+
       <div class="play-controls secondary">
-        <span id="status" class="play-status"></span>
+        <span id="status" class="play-status" role="status" aria-live="polite"></span>
       </div>
     </section>
 
@@ -89,19 +104,24 @@
     </section>
   </main>
 
+  <button id="backToTop" class="back-to-top" type="button">
+    <span class="back-to-top-arrow" aria-hidden="true">↑</span>
+    <span id="backToTopLabel">Top</span>
+  </button>
+
   <footer class="foot">
     <span class="brand-name small">Matr<em>AI</em>x<span class="tld">.ai</span></span>
     <span class="foot-meta">LET'S PLAY · PERSONA FROM PERSONALITY · © 2026</span>
   </footer>
 
-  <script src="js/interactive-decks.js?v=2"></script>
+  <script src="js/interactive-decks.js?v=3"></script>
   <script src="js/communication-smart-bank.js?v=1"></script>
   <script src="js/agent-adoption-smart-bank.js?v=1"></script>
   <script src="js/worldview-smart-bank.js?v=1"></script>
   <script src="js/values-motivation-smart-bank.js?v=1"></script>
   <script src="js/personality-character-smart-bank.js?v=1"></script>
   <script src="js/matraix-archetypes.js?v=1"></script>
-  <script src="js/play.js?v=28"></script>
+  <script src="js/play.js?v=45"></script>
   <script src="js/site-performance.js?v=1"></script>
 </body>
 </html>

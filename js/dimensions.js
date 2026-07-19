@@ -7835,7 +7835,7 @@ window.MATRAIX_DIMENSIONS = {
     {
       "id": "att_traditional_gender_roles",
       "label": "Attitude: Traditional gender roles",
-      "category": "Demographic: Core",
+      "category": "Worldview: Beliefs",
       "description": "Stance toward traditional gender roles.",
       "values": [
         "Enthusiast",
