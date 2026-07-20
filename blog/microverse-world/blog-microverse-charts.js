@@ -11,7 +11,7 @@
     if (!mounts.length) return;
 
     const first = mounts[0];
-    const assetBase = first.dataset.assetBase || '../Assets/microverse-world/';
+    const assetBase = first.dataset.assetBase || 'microverse-world/';
 
     if (!window.MicroVerseBlogLoader) {
       mounts.forEach((el) => showError(el, 'Chart loader failed to start. Please refresh the page.'));

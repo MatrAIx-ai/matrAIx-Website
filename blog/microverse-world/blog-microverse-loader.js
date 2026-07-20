@@ -7,7 +7,7 @@
       if (window.MicroVerseBlogEmbed) return Promise.resolve(window.MicroVerseBlogEmbed);
       if (this._promise) return this._promise;
 
-      const base = (assetBase || '../Assets/microverse-world/').replace(/\/?$/, '/');
+      const base = (assetBase || 'microverse-world/').replace(/\/?$/, '/');
       this._promise = new Promise((resolve, reject) => {
         const existing = document.querySelector('script[data-microverse-embed-bundle]');
         if (existing) {

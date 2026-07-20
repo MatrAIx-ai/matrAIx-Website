@@ -10,7 +10,7 @@
   }
 
   document.querySelectorAll('[data-microverse-orb]').forEach((mount) => {
-    const assetBase = mount.dataset.assetBase || '../Assets/microverse-world/';
+    const assetBase = mount.dataset.assetBase || 'microverse-world/';
     const base = assetBase.endsWith('/') ? assetBase : `${assetBase}/`;
     const scrollTarget = mount.dataset.scrollTarget || 'research-demo';
 
