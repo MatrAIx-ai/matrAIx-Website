@@ -1,3 +1,6 @@
 # Oversized source recording (compressed web version is committed instead)
 Assets/hugclaim/HugClaim_Walkthrough.gif
 deck.html
+
+# Private local-only files; never publish to GitHub
+YH-private/
