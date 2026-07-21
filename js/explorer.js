@@ -60,9 +60,6 @@
   setStat('space', sciFromLog(log10space));
   setStat('datasets', datasetCount);
   document.getElementById('verTag').textContent = 'v' + DATA.schemaVersion;
-  document.getElementById('footMeta').textContent =
-    `SCHEMA v${DATA.schemaVersion} · ${dims.length} DIMS · ${datasetCount} DATASETS · © 2026`;
-
   /* ---------- Categories / chips ---------- */
   const cats = [...new Set(dims.map(d => d.category))];
   setStat('cats', fmtInt.format(cats.length));

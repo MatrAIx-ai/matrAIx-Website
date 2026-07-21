@@ -23,6 +23,10 @@
   <link rel="stylesheet" href="../css/blog-post.css?v=21" />
   <link rel="stylesheet" href="../css/subpages-light.css?v=2" />
   <link rel="stylesheet" href="../css/navigation.css?v=1" />
+  <style>
+    .human-simulation-figure{grid-column:2!important;width:min(820px,calc(100vw - 360px))!important;max-width:none!important;margin:42px 0!important;transform:none!important;justify-self:start!important}
+    @media(max-width:900px){.human-simulation-figure{width:100%!important;margin:40px 0!important}}
+  </style>
 </head>
 <body>
   <header class="site-nav">
@@ -62,6 +66,10 @@
         <div class="evidence-stat"><b>&gt;80%</b><span>LLM-judge agreement with human preferences</span></div>
       </div>
       <p class="figure-note">Selected results from SWE-bench, METR, Turing Experiments, and MT-Bench/Chatbot Arena. These studies measure different constructs and should not be read as one leaderboard.<sup><a href="#ref-1">1</a>, <a href="#ref-3">3</a>, <a href="#ref-4">4</a>, <a href="#ref-5">5</a></sup></p>
+
+      <figure class="article-figure human-simulation-figure">
+        <img src="../Assets/media/human-simulation-layer.png?v=8" alt="Conceptual flow from a general model through a persona layer to blue population nodes and one orange individual node" style="display:block;width:100%;height:auto" />
+      </figure>
 
       <h2>1. Capability is not preference</h2>
 
@@ -276,7 +284,7 @@
     </article>
   </main>
 
-  <footer><p><a href="/">Home</a> · <a href="/blog/">Research</a> · <a href="/persona.html">Personas</a> · <a href="/applications.html">Applications</a> · <a href="mailto:info@matraix.ai">Contact</a></p><p style="margin-top:14px">© 2026 MatrAIx — Open-source research community</p></footer>
+  <footer><p><a href="/">Home</a> · <a href="/blog/">Research</a> · <a href="/persona.html">Personas</a> · <a href="/applications.html">Applications</a> · <a href="/demo.html">Playground</a> · <a href="/access.html">Community</a> · <a href="/access.html#contact">Contact</a></p><p style="margin-top:14px">SIMULATE BEFORE REALITY · © 2026 MATRAIX</p></footer>
   <script src="../js/site-performance.js?v=1"></script>
   <script src="../js/blog-post.js?v=6"></script>
   <script>(function(){const toggle=document.querySelector('.nav-toggle'),nav=document.querySelector('header nav');if(!toggle||!nav)return;toggle.addEventListener('click',()=>nav.classList.toggle('active'));nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>nav.classList.remove('active')));})();</script>

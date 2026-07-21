@@ -630,72 +630,10 @@
     <div class="research-list-head"><span>Featured research</span><a href="#research-index">Browse all research ↓</a></div>
     <!-- Blog posts grid -->
     <div class="blog-grid">
-      <!-- Post: Capability Control -->
-      <a href="capability-control.html" class="blog-card">
-        <div class="featured-visual featured-table" aria-label="From frontier default to a faithful simulated person">
-          <span class="featured-visual-label">Start capable, end human</span>
-          <table>
-            <thead><tr><th>Dimension</th><th>Default</th><th>Faithful</th></tr></thead>
-            <tbody>
-              <tr><td>Knowledge</td><td>Near-complete</td><td>Partial, gapped</td></tr>
-              <tr><td>Error shape</td><td>Random</td><td>Directional</td></tr>
-              <tr><td>Effort</td><td>Grinds</td><td>Gives up</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="featured-card-copy">
-          <span class="blog-card-tag">Position</span>
-          <h3 class="blog-card-title">To Simulate a User, You Should Make Your LLM Dumber</h3>
-          <p class="blog-card-desc">A frontier model is the right start for a human simulation and the wrong end. Turning capability down to match a real person is its own research problem.</p>
-          <div class="blog-card-meta">
-            <div class="blog-card-author">
-              <img src="../Assets/logos/MatrAIx_Logo.png" alt="MatrAIx" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;" />
-              <span>Jintao Huang, Xiaomin Li, and Core Team</span>
-            </div>
-            <span>10 min</span>
-            <span>Jul 20</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Post: Persona for Robotics -->
-      <a href="persona-for-robotics.html" class="blog-card">
-        <div class="featured-visual featured-table" aria-label="What transfers from human simulation to robotics">
-          <span class="featured-visual-label">Persona, with a body attached</span>
-          <table>
-            <thead><tr><th>Human simulation</th><th>Robotics needs</th></tr></thead>
-            <tbody>
-              <tr><td>Grounded personas</td><td>A legible robot identity</td></tr>
-              <tr><td>Population simulation</td><td>Pre-deployment safety</td></tr>
-              <tr><td>Individual twins</td><td>A robot that anticipates you</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <span class="blog-card-tag">Position</span>
-        <h3 class="blog-card-title">Robots Have Bodies but No Selves: The Persona Layer That Lets Them Become Human</h3>
-        <p class="blog-card-desc">Humanoid robots can move but have no model of who they are or who they serve. Persona is the missing software layer of embodied AI.</p>
-        <div class="blog-card-meta">
-          <div class="blog-card-author">
-            <img src="../Assets/logos/MatrAIx_Logo.png" alt="MatrAIx" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;" />
-            <span>Jintao Huang, Xiaomin Li, and Core Team</span>
-          </div>
-          <span>9 min</span>
-          <span>Jul 20</span>
-        </div>
-      </a>
-
       <!-- Post: Human Simulation Position Paper -->
       <a href="missing-human-layer.html" class="blog-card">
-        <div class="featured-visual featured-table" aria-label="Three-layer evaluation stack preview">
-          <span class="featured-visual-label">Three-layer evaluation stack</span>
-          <table>
-            <thead><tr><th>Layer</th><th>Evidence</th><th>Scale</th></tr></thead>
-            <tbody>
-              <tr><td>Benchmark</td><td>Defined capability</td><td>High</td></tr>
-              <tr><td>Persona simulation</td><td>Interaction and diversity</td><td>High</td></tr>
-              <tr><td>Human study</td><td>Observed behavior</td><td>Limited</td></tr>
-            </tbody>
-          </table>
+        <div class="featured-visual featured-media">
+          <img class="featured-diagram" src="../Assets/media/human-simulation-layer.png?v=8" alt="General model flowing through a persona layer into blue population nodes and one orange individual node" style="background:#090c0f" />
         </div>
         <div class="featured-card-copy">
           <span class="blog-card-tag">Position</span>
@@ -709,6 +647,24 @@
             <span>16 min</span>
             <span>Jul 1</span>
           </div>
+        </div>
+      </a>
+
+      <!-- Post: Giving Agents a Soul -->
+      <a href="persona-for-robotics.html" class="blog-card">
+        <div class="featured-visual featured-media">
+          <img src="../Assets/media/persona-robotics-hero.jpg" alt="A white humanoid robot in profile, standing in a bright interior" />
+        </div>
+        <span class="blog-card-tag">Position</span>
+        <h3 class="blog-card-title">Giving Agents a “Soul”: Persona as the Missing Layer for AI and Robotics</h3>
+        <p class="blog-card-desc">Powerful models still behave like generic people. Persona carries a particular human's priorities and preferences consistently across tasks.</p>
+        <div class="blog-card-meta">
+          <div class="blog-card-author">
+            <img src="../Assets/logos/MatrAIx_Logo.png" alt="MatrAIx" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;" />
+            <span>Xiaomin Li, Yuexing Hao, Jintao Huang, and Core Team</span>
+          </div>
+          <span>9 min</span>
+          <span>Jul 2</span>
         </div>
       </a>
 
@@ -734,25 +690,7 @@
             <span>Xiaomin Li, Hanwen Xing, and Core Team</span>
           </div>
           <span>20 min</span>
-          <span>Jul 2</span>
-        </div>
-      </a>
-
-      <!-- Post: ADK Arena / LLM-as-a-Developer -->
-      <a href="adk-arena.html" class="blog-card">
-        <div class="featured-visual featured-media">
-          <img class="featured-diagram" src="../Assets/media/adk-arena-llm-as-developer.png" alt="Traditional framework evaluation compared with the LLM-as-a-Developer method" />
-        </div>
-        <span class="blog-card-tag">Research</span>
-        <h3 class="blog-card-title">LLM-as-a-Developer: Evaluating 51 Agent Frameworks</h3>
-        <p class="blog-card-desc">To evaluate an agent framework, the user you simulate is a developer. LLM-as-a-Developer measures API usability and framework effectiveness across 51 Agent Development Kits.</p>
-        <div class="blog-card-meta">
-          <div class="blog-card-author">
-            <img src="../Assets/logos/MatrAIx_Logo.png" alt="MatrAIx" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;" />
-            <span>Jintao Huang, Xiaomin Li, and Core Team</span>
-          </div>
-          <span>11 min</span>
-          <span>Jul 18</span>
+          <span>Jul 3</span>
         </div>
       </a>
 
@@ -782,19 +720,18 @@
         <h2>Research</h2>
         <div class="research-filters" role="group" aria-label="Filter research by type">
           <button class="active" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-filter="position" aria-pressed="false">Position</button>
           <button type="button" data-filter="publication" aria-pressed="false">Publication</button>
-          <button type="button" data-filter="application" aria-pressed="false">Application</button>
           <button type="button" data-filter="analysis" aria-pressed="false">Analysis</button>
         </div>
       </div>
       <div class="index-list">
-        <a href="capability-control.html" data-category="publication"><span><strong>Position</strong><small>Jul 20, 2026</small></span><div><b>To Simulate a User, You Should Make Your LLM Dumber</b><small>A frontier model is the right start for a human simulation and the wrong end; turning capability down to match a real person is its own research problem.</small></div><i>↗</i></a>
-        <a href="persona-for-robotics.html" data-category="publication"><span><strong>Position</strong><small>Jul 20, 2026</small></span><div><b>Robots Have Bodies but No Selves: The Persona Layer That Lets Them Become Human</b><small>Persona is the missing software layer of embodied AI, built on what human simulation has already produced.</small></div><i>↗</i></a>
-  <a href="adk-arena.html" data-category="publication"><span><strong>Publication</strong><small>Jul 18, 2026</small></span><div><b>LLM-as-a-Developer: Evaluating 51 Agent Frameworks</b><small>LLM-as-a-Developer: simulate the developer as the user of an agent framework to measure usability and effectiveness at ecosystem scale.</small></div><i>↗</i></a>
+        <a href="capability-control.html" data-category="position"><span><strong>Position</strong><small>Jul 20, 2026</small></span><div><b>To Simulate a User, You Should Make Your LLM Dumber</b><small>A frontier model is the right start for a human simulation and the wrong end; turning capability down to match a real person is its own research problem.</small></div><i>↗</i></a>
+        <a href="adk-arena.html" data-category="publication"><span><strong>Publication</strong><small>Jul 18, 2026</small></span><div><b>LLM-as-a-Developer: Evaluating 51 Agent Frameworks</b><small>LLM-as-a-Developer: simulate the developer as the user of an agent framework to measure usability and effectiveness at ecosystem scale.</small></div><i>↗</i></a>
         <a href="env-colm.html" data-category="publication"><span><strong>Publication</strong><small>Jul 12, 2026</small></span><div><b>Measuring Persona Drift in Long-Horizon Agent Simulations</b><small>Measuring and correcting persona drift in long-horizon agent interactions.</small></div><i>↗</i></a>
-        <a href="application-colm.html" data-category="application"><span><strong>Application</strong><small>Jul 5, 2026</small></span><div><b>Evaluating Interactive Applications with Persona-Conditioned Agents</b><small>Evaluate interactive applications using population-scale synthetic personas.</small></div><i>↗</i></a>
-        <a href="cost-comparison.html" data-category="analysis"><span><strong>Analysis</strong><small>Jul 2, 2026</small></span><div><b>The Cost of Synthetic-User Evaluation: Five Comparative Estimates</b><small>Human cost, AI inference, elapsed time, and validity across five evaluation modes.</small></div><i>↗</i></a>
-        <a href="missing-human-layer.html" data-category="publication"><span><strong>Position</strong><small>Jul 1, 2026</small></span><div><b>Why Human Simulation Is the Next Step for AI Agents</b><small>An evidence-backed case for personas, evaluation, population simulation, and individual digital twins.</small></div><i>↗</i></a>
+        <a href="cost-comparison.html" data-category="analysis"><span><strong>Analysis</strong><small>Jul 3, 2026</small></span><div><b>The Cost of Synthetic-User Evaluation: Five Comparative Estimates</b><small>Human cost, AI inference, elapsed time, and validity across five evaluation modes.</small></div><i>↗</i></a>
+        <a href="persona-for-robotics.html" data-category="position"><span><strong>Position</strong><small>Jul 2, 2026</small></span><div><b>Giving Agents a “Soul”: Persona as the Missing Layer for AI and Robotics</b><small>Why preference settings are not enough, and agents need a persona that remains coherent across tasks.</small></div><i>↗</i></a>
+        <a href="missing-human-layer.html" data-category="position"><span><strong>Position</strong><small>Jul 1, 2026</small></span><div><b>Why Human Simulation Is the Next Step for AI Agents</b><small>An evidence-backed case for personas, evaluation, population simulation, and individual digital twins.</small></div><i>↗</i></a>
       </div>
     </section>
 
@@ -806,7 +743,7 @@
     </div>
   </main>
 
-  <footer class="mx-footer"><span>MatrAIx · Research</span><span><a href="/">Home</a> · <a href="/persona.html">Personas</a> · <a href="/applications.html">Applications</a> · <a href="/demo.html">Playground</a></span><span>© 2026</span></footer>
+  <footer class="mx-footer"><span>MatrAIx · Research</span><span><a href="/">Home</a> · <a href="/persona.html">Personas</a> · <a href="/applications.html">Applications</a> · <a href="/demo.html">Playground</a> · <a href="/access.html">Community</a> · <a href="/access.html#contact">Contact</a></span><span>SIMULATE BEFORE REALITY · © 2026</span></footer>
 
   <script src="../js/site-performance.js?v=1"></script>
   <script>
