@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/benchmark.css?v=25" />
+  <link rel="stylesheet" href="css/benchmark.css?v=27" />
   <link rel="stylesheet" href="css/dark-theme.css?v=5" />
   <style>
   .os-explain .ex-url{color:var(--ink)}
@@ -108,6 +108,7 @@
       <span class="lbl">Evaluation task</span>
       <select id="target" class="os-select" aria-label="Evaluation task"></select>
       <button id="run" class="os-btn run">■ Pause run</button>
+      <p class="task-blurb" id="taskBlurb" aria-live="polite"></p>
     </div>
     <nav class="os-nav" id="playground-nav"><a href="index.html">Home</a><a href="blog/">Research</a><a href="persona.html">Personas</a><a href="applications.html">Applications</a><a class="active" href="demo.html">Playground</a><a href="access.html">Community</a></nav>
     <button class="os-menu" type="button" aria-controls="playground-nav" aria-expanded="false">Menu</button>
@@ -120,9 +121,6 @@
       <span class="os-clock playground-aux" id="clock">--:--:--</span>
     </div>
   </div>
-
-  <!-- Plain-language explainer -->
-  <div class="os-explain" id="explain">▸ loading…</div>
 
   <!-- Main grid -->
   <div class="os-grid">
@@ -183,6 +181,17 @@
   </section>
   </section>
 
+  <!-- In-focus agent persona card -->
+  <div class="persona-scrim" id="personaScrim" hidden>
+    <article class="persona-card" role="dialog" aria-modal="true" aria-labelledby="personaTitle">
+      <header class="persona-card-head">
+        <div><span class="persona-kicker">Agent persona card</span><h2 id="personaTitle">Persona profile</h2></div>
+        <button class="persona-close" id="personaClose" type="button" aria-label="Close persona card">✕</button>
+      </header>
+      <div class="persona-card-body" id="personaCardBody"></div>
+    </article>
+  </div>
+
   <!-- Generated reports -->
   <section class="genreports" id="reports">
     <div class="print-head" aria-hidden="true">
@@ -193,10 +202,12 @@
     <div class="gr-head">
       <span class="gr-idx">— GENERATED REPORTS</span>
       <h2 class="gr-title">Reports from eight evaluation tasks.</h2>
-      <p class="gr-sub">Survey, chatbot, website, and app evaluations from the public demo dataset.</p>
+      <p class="gr-sub">Public demo results with independent randomized sampling for every task.</p>
       <div class="gr-chips">
-        <span class="gr-chip">2 Surveys</span><span class="gr-chip">2 Chatbots</span><span class="gr-chip">2 Websites</span>
-        <span class="gr-chip">2 Apps</span><span class="gr-chip">100K personas / task</span>
+        <span class="gr-chip">2 Surveys · 1M responses</span>
+        <span class="gr-chip">2 Chatbots · 5.2B tokens</span>
+        <span class="gr-chip">2 Websites · 3.6M interactions</span>
+        <span class="gr-chip">2 Apps · 54.2K actions</span>
       </div>
       <button class="gr-print" id="grPrint">⎙ Print / Save as PDF</button>
     </div>
@@ -283,7 +294,7 @@
   <script src="js/site-performance.js?v=1"></script>
   <script src="js/dimensions.js?v=7"></script>
   <script src="js/metrics.js?v=2"></script>
-  <script src="js/benchmark.js?v=17"></script>
+  <script src="js/benchmark.js?v=20"></script>
   <script>
   /* ---------- Live agent runs from the CUA pipeline ---------- */
   (function(){

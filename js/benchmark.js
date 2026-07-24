@@ -77,46 +77,85 @@
     if (p.prior_context === 'Long ongoing project' || p.prior_context === 'Returning user') return 'Memory';
     return 'Perception';
   }
-  const ACTIONS = ['scan UI', 'tap target', 'type input', 'wait for load', 'read prompt', 'retry', 'confirm', 'scroll', 'select option', 'submit'];
+  const TELEMETRY = {
+    Survey: {
+      meta: 'question → response → score',
+      actions: ['read question', 'compare choices', 'select response', 'revise response', 'add explanation', 'skip question', 'submit survey'],
+      micro: ['re-reads the question', 'hesitates between choices', 'checks prior response', 'adds context'],
+    },
+    Chatbot: {
+      meta: 'prompt → reply → score',
+      actions: ['send prompt', 'read reply', 'ask follow-up', 'clarify constraint', 'check citation', 'request revision', 'rate reply'],
+      micro: ['rephrases the request', 'checks the answer', 'adds a constraint', 'waits for reply'],
+    },
+    Website: {
+      meta: 'page → interaction → outcome',
+      actions: ['scan page', 'follow link', 'search', 'open details', 'compare options', 'scroll', 'go back', 'confirm choice'],
+      micro: ['scans the page', 'checks navigation', 'waits for load', 'compares options'],
+    },
+    App: {
+      meta: 'screen → gesture → outcome',
+      actions: ['inspect screen', 'tap control', 'swipe', 'enter value', 'open menu', 'dismiss dialog', 'confirm action', 'go back'],
+      micro: ['checks the screen', 'hesitates before tapping', 'waits for update', 'reviews the result'],
+    },
+  };
+  const taskNature = t => (t.url.split(' · ')[0] || 'Website');
+  const telemetryFor = t => TELEMETRY[taskNature(t)] || TELEMETRY.Website;
 
   /* ---------- targets (apps/websites under evaluation) ---------- */
   const TARGETS = [
     { id: 'candy-land-price', url: 'Survey · Commerce', label: 'Candy Land price sensitivity',
+      blurb: 'Tests how price changes affect purchase intent across different shopper segments.',
+      personaFolder: 'Type 1 - Survey/survey_price-sensitivity-hasbro-gaming-candy-land/Persona Profiles', personaFiles: ['persona_0003.yaml','persona_0007.yaml','persona_0012.yaml','persona_0018.yaml'],
       steps: ['review product context', 'compare price points', 'state purchase intent', 'explain price sensitivity', 'submit survey'],
       report: { a: 'Current price', b: 'Proposed price', winner: 'A', lift: '+12.0%', metric: 'purchase intent', agents: 100000,
         segments: [['Parents', 72, 61], ['Gift buyers', 68, 57], ['Teachers', 64, 55], ['Price-sensitive households', 59, 41]],
         findings: [['high', 'Price-sensitive households show the largest decline at the proposed price.'], ['med', 'Gift buyers tolerate a smaller increase when the product is bundled.'], ['low', 'Brand familiarity moderates the decline in purchase intent.']] } },
     { id: 'annual-checkup', url: 'Survey · Healthcare', label: 'Annual checkup habits',
+      blurb: 'Measures which barriers and reminders influence people to schedule an annual checkup.',
+      personaFolder: 'Type 1 - Survey/survey_annual-checkup-habits/Persona Profiles', personaFiles: ['persona_0002.yaml','persona_0004.yaml','persona_0005.yaml','persona_0006.yaml'],
       steps: ['review health context', 'report checkup frequency', 'identify barriers', 'evaluate reminder', 'state booking intent'],
       report: { a: 'General reminder', b: 'Personalized planning', winner: 'B', lift: '+16.0%', metric: 'booking intent', agents: 100000,
         segments: [['Regular patients', 74, 86], ['Care avoiders', 38, 57], ['Uninsured', 31, 43], ['Rural patients', 45, 61]],
         findings: [['high', 'Cost and access remain the dominant barriers for uninsured personas.'], ['med', 'Personalized next steps improve intent most among care avoiders.'], ['low', 'Reminder timing matters more for parents and caregivers.']] } },
     { id: 'meal-planning', url: 'Chatbot · Healthcare', label: 'Meal planning nutrition assistant',
+      blurb: 'Evaluates whether meal plans are useful, safe, and tailored to dietary constraints.',
+      personaFolder: 'Type 2 - Chatbot/meal-planning-nutrition_chatbot/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0003.yaml','persona_0004.yaml','persona_0005.yaml'],
       steps: ['describe dietary goals', 'share restrictions', 'review meal plan', 'request substitution', 'rate usefulness'],
       report: { a: 'Generic assistant', b: 'Persona-aware assistant', winner: 'B', lift: '+21.0%', metric: 'useful safe plans', agents: 100000,
         segments: [['Budget constrained', 58, 82], ['Food allergies', 61, 89], ['Busy households', 67, 86], ['Fitness focused', 73, 88]],
         findings: [['high', 'Generic plans violate at least one stated constraint for allergy personas.'], ['med', 'Budget-aware substitutions drive the largest usefulness gain.'], ['low', 'Short preparation steps improve completion for busy households.']] } },
     { id: 'openbb-corporate-action', url: 'Chatbot · Finance', label: 'OpenBB corporate action',
+      blurb: 'Checks whether financial answers explain corporate actions accurately and cite reliable sources.',
+      personaFolder: 'Type 2 - Chatbot/chat-openbb-corporate-action/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0002.yaml','persona_0004.yaml','persona_0005.yaml'],
       steps: ['enter ticker', 'inspect missing quote', 'request delisting explanation', 'verify sources', 'summarize status'],
       report: { a: 'Quote-only response', b: 'Source-grounded research', winner: 'B', lift: '+28.0%', metric: 'research accuracy', agents: 100000,
         segments: [['Retail investors', 52, 84], ['Analysts', 63, 91], ['Finance students', 48, 83], ['Low expertise', 41, 76]],
         findings: [['high', 'Unsupported responses frequently confuse corporate actions with temporary data gaps.'], ['med', 'Source citations sharply improve trust among analysts.'], ['low', 'Plain-language corporate-action explanations help low-expertise users.']] } },
     { id: 'notion-plans', url: 'Website · Software', label: 'Notion plan comparison',
+      blurb: 'Tests whether users can understand plan differences and choose the right subscription.',
+      personaFolder: 'Type 3 - Website/web-notion-plan-comparison/Persona Profiles', personaFiles: ['persona_0002.yaml','persona_0038.yaml','persona_0056.yaml','persona_0091.yaml'],
       steps: ['open pricing page', 'compare plan features', 'check limits', 'match plan to needs', 'confirm choice'],
       report: { a: 'Comparison table', b: 'Guided recommendation', winner: 'B', lift: '+14.0%', metric: 'correct plan choice', agents: 100000,
         segments: [['Individuals', 78, 89], ['Small teams', 67, 86], ['Enterprise admins', 71, 84], ['First-time users', 55, 79]],
         findings: [['high', 'First-time users misread guest and member limits in the comparison table.'], ['med', 'Guided questions reduce over-purchasing among individuals.'], ['low', 'Security details remain difficult to find for enterprise admins.']] } },
     { id: 'mit-ocw-choice', url: 'Website · Education', label: 'MIT OpenCourseWare course choice',
+      blurb: 'Evaluates how easily learners can find a suitable course for their goals and background.',
+      personaFolder: 'Type 3 - Website/web-playwright-mit-ocw-course-choice/Persona Profiles', personaFiles: ['persona_0006.yaml','persona_0007.yaml','persona_0011.yaml','persona_0019.yaml'],
       steps: ['state learning goal', 'search course catalog', 'compare prerequisites', 'inspect materials', 'choose course'],
       report: { a: 'Catalog search', b: 'Goal-guided shortlist', winner: 'B', lift: '+19.0%', metric: 'suitable course choice', agents: 100000,
         segments: [['High-school learners', 49, 76], ['University students', 68, 85], ['Professionals', 61, 82], ['Non-native English', 54, 79]],
         findings: [['high', 'Prerequisite language causes the most mismatches for early learners.'], ['med', 'Goal-guided shortlists reduce time to a suitable course.'], ['low', 'Material-format filters matter most to working professionals.']] } },
     { id: 'news-plus', url: 'App · Software', label: 'News+ subscription decision',
+      blurb: 'Tests whether the offer communicates content, trial terms, and subscription value clearly.',
+      personaFolder: 'Type 4 - App/pg-os-app-ios-news-subscription-decision/Persona Profiles', personaFiles: ['persona_0005.yaml','persona_0010.yaml','persona_0019.yaml','persona_0038.yaml'],
       steps: ['open subscription offer', 'review included publications', 'inspect trial terms', 'compare value', 'make decision'],
       report: { a: 'Standard offer', b: 'Personalized content preview', winner: 'B', lift: '+11.0%', metric: 'informed subscription intent', agents: 100000,
         segments: [['Daily readers', 73, 87], ['Occasional readers', 42, 58], ['Existing subscribers', 65, 77], ['Price-sensitive users', 36, 49]],
         findings: [['high', 'Trial-renewal terms are missed by many occasional readers.'], ['med', 'Relevant publication previews improve perceived value.'], ['low', 'Price-sensitive users prefer annual savings stated in absolute dollars.']] } },
     { id: 'stocks-sentiment', url: 'App · Finance', label: 'Stocks sentiment',
+      blurb: 'Measures whether users interpret market sentiment correctly when context and risk cues are provided.',
+      personaFolder: 'Type 4 - App/pg-os-app-macos-stocks-mu-sentiment/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0004.yaml','persona_0008.yaml','persona_0011.yaml'],
       steps: ['select stock', 'review sentiment signal', 'inspect source context', 'assess confidence', 'state intended action'],
       report: { a: 'Raw sentiment score', b: 'Sentiment with context', winner: 'B', lift: '+23.0%', metric: 'correct interpretation', agents: 100000,
         segments: [['Beginner investors', 44, 76], ['Long-term investors', 63, 84], ['Active traders', 72, 89], ['Risk-averse users', 51, 81]],
@@ -285,7 +324,7 @@
     }, 180);
   }
 
-  const popEl = $('#pop'), focusListEl = $('#focusList'), conFeed = $('#conFeed'), intelBody = $('#intelBody'), explainEl = $('#explain');
+  const popEl = $('#pop'), focusListEl = $('#focusList'), conFeed = $('#conFeed'), intelBody = $('#intelBody');
 
   /* ---- population grid (visual swarm) ---- */
   const POP_N = 168;
@@ -299,17 +338,16 @@
   }
 
   /* ---- behaviour factory + finalize ---- */
-  const MICRO = ['scans the page', 're-reads the prompt', 'scrolls to find it', 'hesitates', 'checks the field', 'waits for load', 'compares options', 'taps the wrong button'];
   function newBehavior() {
     const persona = samplePersona(), pen = personaPenalty(persona), base = target.steps, rewards = [], traj = [];
     let n = 1;
     for (let i = 0; i < base.length; i++) {
       if (Math.random() < 0.45) {                                   // optional pre-action — varies per agent
         const rr = clamp01(0.9 - pen * 0.4 + (Math.random() - 0.5) * 0.12);
-        traj.push({ step: n++, observation: base[i], action: pick(MICRO), reward: +rr.toFixed(3) }); rewards.push(rr);
+        traj.push({ step: n++, observation: base[i], action: pick(telemetryFor(target).micro), reward: +rr.toFixed(3) }); rewards.push(rr);
       }
       const r = clamp01(0.88 - pen * (0.7 + Math.random() * 0.5) + (Math.random() - 0.5) * 0.14);
-      traj.push({ step: n++, observation: base[i], action: pick(ACTIONS), reward: +r.toFixed(3) }); rewards.push(r);
+      traj.push({ step: n++, observation: base[i], action: pick(telemetryFor(target).actions), reward: +r.toFixed(3) }); rewards.push(r);
       if (Math.random() < 0.12 + pen * 0.7) {                       // friction retry — more likely for hard personas
         const rr = clamp01(0.5 - pen * 0.5 + (Math.random() - 0.5) * 0.16);
         traj.push({ step: n++, observation: base[i] + ' — error, retry', action: 'retry', reward: +rr.toFixed(3) }); rewards.push(rr);
@@ -358,7 +396,7 @@
   /* ---- in-focus agents: slow, readable trajectories ---- */
   const FOCUS_N = 3;
   let focus = [];
-  function spawnFocus() { return { id: nextId++, b: newBehavior(), step: 0 }; }
+  function spawnFocus() { return { id: nextId++, b: newBehavior(), step: 0, personaFile: pick(target.personaFiles) }; }
   function renderFocusCards() {
     focusListEl.innerHTML = focus.map(f => {
       if (!f) return '';
@@ -366,14 +404,41 @@
       const cur = done ? null : b.traj[f.step];
       const lastR = f.step > 0 ? b.traj[f.step - 1].reward : null;
       const prog = Math.round(Math.min(f.step, total) / total * 100);
-      return `<div class="focus">
+      return `<button class="focus" type="button" data-focus-id="${f.id}" aria-label="Open persona card for agent ${pad(f.id, 4)}">
         <div class="f-top"><span class="f-id"><span class="foc">◉</span>AGENT#${pad(f.id, 4)}</span><span class="f-step">step ${Math.min(f.step + (done ? 0 : 1), total)}/${total}</span></div>
         <div class="f-persona">${personaLabel(b.persona)}</div>
         <div class="f-now">▸ <b>${done ? 'complete' : cur.observation}</b>${cur ? ` · ${cur.action}` : ''}${lastR != null ? ` · r=${lastR.toFixed(2)}` : ''}</div>
         <div class="f-bar"><i style="width:${prog}%"></i></div>
-      </div>`;
+        <span class="f-open">View persona ↗</span>
+      </button>`;
     }).join('');
   }
+
+  const personaScrim = $('#personaScrim'), personaCardBody = $('#personaCardBody'), personaClose = $('#personaClose');
+  const esc = value => String(value == null ? '—' : value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const personaField = (label, value) => `<div class="persona-field"><span>${esc(label)}</span><b>${esc(value)}</b></div>`;
+  function personaSourceUrl(file) {
+    const path = `${target.personaFolder}/${file}`.split('/').map(encodeURIComponent).join('/');
+    return `https://huggingface.co/datasets/MatrAIx2026/Demo_Application_Data/blob/main/${path}`;
+  }
+  function openPersona(f) {
+    if (!f || !personaScrim || !personaCardBody) return;
+    const p = f.b.persona, file = f.personaFile;
+    personaCardBody.innerHTML = `<div class="persona-summary"><div class="persona-avatar">${esc(p.age_bracket)}</div><div><b>AGENT#${pad(f.id, 4)}</b><span>${esc(target.label)}</span></div></div>
+      <div class="persona-grid">
+        ${personaField('Age',p.age_bracket)}${personaField('Region',p.region)}${personaField('Language',p.primary_language)}${personaField('Intent',p.intent)}
+        ${personaField('Query style',p.query_complexity)}${personaField('Trust',p.trust_level)}${personaField('Safety context',p.safety_sensitivity)}${personaField('Prior context',p.prior_context)}
+      </div>
+      <div class="persona-source"><span>Selected task-matched YAML</span><a href="${personaSourceUrl(file)}" target="_blank" rel="noopener">${esc(file)} · View source ↗</a><small>MatrAIx2026 / Demo_Application_Data · Hugging Face access may be required</small></div>`;
+    personaScrim.hidden = false;
+    document.body.classList.add('persona-open');
+    personaClose.focus();
+  }
+  function closePersona() { if (!personaScrim) return; personaScrim.hidden = true; document.body.classList.remove('persona-open'); }
+  focusListEl.addEventListener('click', e => { const card=e.target.closest('[data-focus-id]'); if(card) openPersona(focus.find(f => f.id === +card.dataset.focusId)); });
+  personaClose.addEventListener('click', closePersona);
+  personaScrim.addEventListener('click', e => { if (e.target === personaScrim) closePersona(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !personaScrim.hidden) closePersona(); });
   function focusTick() {
     if (!running) return;
     for (let idx = 0; idx < FOCUS_N; idx++) {
@@ -411,22 +476,24 @@
     $('#swarmCount').textContent = fmt.format(activeCount) + ' active';
   }
 
-  function setExplain() {
-    explainEl.innerHTML = `▸ <b>${fmt.format(activeCount)}</b> agents running <em>“${target.label}”</em> <span class="ex-url">${target.url}</span>`;
-  }
-
   function resetSession() {
     store.length = 0; agg.n = 0; agg.pass = 0; agg.rewardSum = 0; agg.hist.fill(0); agg.finishes = [];
     focus = Array.from({ length: FOCUS_N }, spawnFocus); renderFocusCards();
     conFeed.innerHTML = ''; bgScored = 0;
     activeCount = 590 + ((Math.random() * 60) | 0);
-    setExplain(); renderReport();
+    const conMeta = $('#conMeta');
+    if (conMeta) conMeta.textContent = telemetryFor(target).meta;
+    const taskBlurb = $('#taskBlurb');
+    if (taskBlurb) taskBlurb.textContent = target.blurb;
+    renderReport();
     conLine(`<span class="t">▸ session reset · target = ${target.url}</span>`, 'dim');
   }
 
   /* ---- target select ---- */
   const sel = $('#target');
   sel.innerHTML = TARGETS.map(t => `<option value="${t.id}">${t.label} · ${t.url}</option>`).join('');
+  const taskBlurb = $('#taskBlurb');
+  if (taskBlurb) taskBlurb.textContent = target.blurb;
   sel.addEventListener('change', () => { target = TARGETS.find(t => t.id === sel.value) || TARGETS[0]; resetSession(); });
 
   /* ---- run / halt ---- */
@@ -510,15 +577,12 @@
       const max = Math.max(1, ...agg.hist);
       const bars = agg.hist.map((v, i) => {
         const h = v / max * 100;
-        const err = v > 0 ? Math.sqrt(v) / max * 100 : 0;      // Poisson counting error ±√n
-        const lo = Math.max(0, h - err), hi = Math.min(100, h + err);
         const cls = i < 5 ? 'lo' : i < 7 ? 'mid' : '';
-        const whisk = v > 0 ? `<span class="herr" style="bottom:${lo.toFixed(1)}%;height:${(hi - lo).toFixed(1)}%"></span>` : '';
-        return `<span class="hbar" title="score ${(i / 10).toFixed(1)}–${((i + 1) / 10).toFixed(1)} · n=${v} ±${Math.round(Math.sqrt(v))}">${whisk}<i class="${cls}" style="height:${h.toFixed(1)}%"></i></span>`;
+        return `<span class="hbar" title="score ${(i / 10).toFixed(1)}–${((i + 1) / 10).toFixed(1)} · n=${v}"><i class="${cls}" style="height:${h.toFixed(1)}%"></i></span>`;
       }).join('');
       const finds = `<ul class="findings">${r.findings.map(([sev, t]) => `<li class="finding"><span class="sev ${sev}">${sev.toUpperCase()}</span>${t}</li>`).join('')}</ul>`;
       intelBody.innerHTML = `<div class="histo">${bars}</div><div class="histo-axis"><span>0.0</span><span>0.5</span><span>1.0</span></div>
-        <p class="histo-cap">Live score distribution · <b>${fmt.format(agg.n)}</b> behaviors · whiskers show ±&radic;n counting error.</p>
+        <p class="histo-cap">Live score distribution · <b>${fmt.format(agg.n)}</b> behaviors.</p>
         <div class="dist-find-head">What the simulation found</div>${finds}`;
     } else if (currentReport === 'heat') {
       intelBody.innerHTML = renderHeat();
@@ -545,7 +609,7 @@
      ============================================================ */
   focus = Array.from({ length: FOCUS_N }, spawnFocus);
   renderFocusCards();
-  vitals(); setExplain(); renderReport(); clock();
+  vitals(); renderReport(); clock();
   let timerIds = [];
   function startTimers() {
     if (timerIds.length || document.hidden) return;
