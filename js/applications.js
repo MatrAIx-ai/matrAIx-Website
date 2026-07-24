@@ -39,6 +39,7 @@ const taskDetails = {
     audience: "Independent learners, high-school and university students, educators, and working professionals. Personas vary by subject interest, educational background, language proficiency, available study time, and learning goals.",
     metric: ">80% suitable choice",
     metricNote: "At least 80% choose a course appropriate to their goals and prerequisite knowledge without assistance.",
+    supportingImage1: "Assets/media/application_demo/type_3_web/mit_opencourse/MIT_OpenCourseWare.png",
     results: { headline: "100%", label: "mean verifier reward", bars: [["Valid artifacts", 97.6], ["Not recovered", 2.4]], finding: "976 of 1,000 personas completed a valid course choice after comparing live OCW pages.", note: "n=1,000 · Claude Opus 4.8 · live MIT OpenCourseWare", source: "Type%203%20-%20Website/opus_4_8/web-playwright-mit-ocw-course-choice" }
   },
   "News+ Subscription Decision": {
