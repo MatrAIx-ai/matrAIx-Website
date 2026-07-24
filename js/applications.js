@@ -99,7 +99,7 @@ function openTask(card) {
   document.querySelector('#taskDialogTitle').textContent = title;
   document.querySelector('#taskDialogSummary').textContent = detail.summary;
   document.querySelector('#taskDialogAudience').textContent = detail.audience;
-  document.querySelector('#taskDialogPopulation').textContent = '100,000 personas';
+  document.querySelector('#taskDialogPopulation').textContent = card.dataset.type === 'app' ? '20 personas' : '1,000 personas';
   document.querySelector('#taskDialogMetric').textContent = detail.metric;
   document.querySelector('#taskDialogMetricNote').textContent = detail.metricNote;
   supportingImages.forEach((image, index) => {
