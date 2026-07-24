@@ -270,12 +270,17 @@ a { color: inherit; text-decoration: none; }
 .sev.med  { background: rgba(255,181,71,0.15); color: var(--amber); }
 .sev.low  { background: rgba(74,143,194,0.13); color: var(--phos); }
 
-.histo { display: flex; align-items: flex-end; gap: 3px; height: 160px; border-bottom: 1px solid var(--line-soft); padding-top: 6px; }
+.histo-chart { display: grid; grid-template-columns: 48px minmax(0,1fr); align-items: stretch; }
+.histo-y-title { display: flex; flex-direction: column; justify-content: center; padding-right: 8px; color: var(--ink-dim); font-size: .61rem; line-height: 1.35; text-align: right; text-transform: uppercase; letter-spacing: .04em; }
+.histo-y-title span { font-size: .54rem; text-transform: none; letter-spacing: 0; }
+.histo { display: flex; align-items: flex-end; gap: 3px; height: 160px; border-bottom: 1px solid var(--line-soft); border-left: 1px solid var(--line-soft); padding: 6px 0 0 5px; }
 .hbar { position: relative; flex: 1; height: 100%; display: flex; align-items: flex-end; }
 .hbar > i { width: 100%; background: linear-gradient(to top, var(--phos-deep), var(--phos)); min-height: 2px; transition: height 0.3s; }
 .hbar > i.lo { background: linear-gradient(to top, #7a2530, var(--rose)); }
 .hbar > i.mid { background: linear-gradient(to top, #7a5a17, var(--amber)); }
-.histo-axis { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--ink-dim); margin-top: 6px; }
+.histo-axis { display: flex; justify-content: space-between; margin: 6px 0 0 48px; font-size: 0.7rem; color: var(--ink-dim); }
+.histo-x-title { margin: 5px 0 0 48px; color: var(--ink); font-size: .67rem; text-align: center; text-transform: uppercase; letter-spacing: .05em; }
+.histo-x-title span { display: block; margin-top: 2px; color: var(--ink-dim); font-size: .59rem; text-transform: none; letter-spacing: 0; }
 .histo-cap { font-size: 0.76rem; color: var(--ink-dim); margin-top: 10px; line-height: 1.5; }
 .histo-cap b { color: var(--phos); }
 .dist-find-head { font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--phos); margin: 16px 0 9px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
@@ -846,7 +851,7 @@ body.persona-open { overflow: hidden !important; }
     line-height: 1.45;
   }
   .os-explain { width: min(1520px,calc(100% - 32px)); max-width: none; }
-  .os-grid { width: min(1520px,calc(100% - 32px)); grid-template-columns: 280px minmax(0,1fr) 390px; }
+  .os-grid { width: min(1520px,calc(100% - 32px)); grid-template-columns: 318px minmax(0,1fr) 390px; }
   .console { width: min(1520px,calc(100% - 32px)); }
 }
 

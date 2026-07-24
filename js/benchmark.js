@@ -11,11 +11,13 @@
   const DIM = (window.MATRAIX_DIMENSIONS && window.MATRAIX_DIMENSIONS.dimensions) || [];
   const byId = Object.fromEntries(DIM.map(d => [d.id, d]));
   const fmt = new Intl.NumberFormat('en-US');
+  const compactFmt = new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 });
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $ = s => document.querySelector(s);
   const clamp01 = x => (x < 0 ? 0 : x > 1 ? 1 : x);
   const pick = a => a[(Math.random() * a.length) | 0];
   const pad = (n, w) => String(n).padStart(w, '0');
+  const randomAgentScale = () => Math.round(10 ** (Math.log10(2300) + Math.random() * (Math.log10(5.6e9) - Math.log10(2300))));
 
   /* ---------- shared-site mobile navigation ---------- */
   const playgroundMenu = $('.os-menu');
@@ -108,59 +110,61 @@
       blurb: 'Tests how price changes affect purchase intent across different shopper segments.',
       personaFolder: 'Type 1 - Survey/survey_price-sensitivity-hasbro-gaming-candy-land/Persona Profiles', personaFiles: ['persona_0003.yaml','persona_0007.yaml','persona_0012.yaml','persona_0018.yaml'],
       steps: ['review product context', 'compare price points', 'state purchase intent', 'explain price sensitivity', 'submit survey'],
-      report: { a: 'Current price', b: 'Proposed price', winner: 'A', lift: '+12.0%', metric: 'purchase intent', agents: 100000,
+      report: { a: 'Current price', b: 'Proposed price', winner: 'A', lift: '+12.0%', metric: 'purchase intent', agents: 0,
         segments: [['Parents', 72, 61], ['Gift buyers', 68, 57], ['Teachers', 64, 55], ['Price-sensitive households', 59, 41]],
         findings: [['high', 'Price-sensitive households show the largest decline at the proposed price.'], ['med', 'Gift buyers tolerate a smaller increase when the product is bundled.'], ['low', 'Brand familiarity moderates the decline in purchase intent.']] } },
     { id: 'annual-checkup', url: 'Survey · Healthcare', label: 'Annual checkup habits',
       blurb: 'Measures which barriers and reminders influence people to schedule an annual checkup.',
       personaFolder: 'Type 1 - Survey/survey_annual-checkup-habits/Persona Profiles', personaFiles: ['persona_0002.yaml','persona_0004.yaml','persona_0005.yaml','persona_0006.yaml'],
       steps: ['review health context', 'report checkup frequency', 'identify barriers', 'evaluate reminder', 'state booking intent'],
-      report: { a: 'General reminder', b: 'Personalized planning', winner: 'B', lift: '+16.0%', metric: 'booking intent', agents: 100000,
+      report: { a: 'General reminder', b: 'Personalized planning', winner: 'B', lift: '+16.0%', metric: 'booking intent', agents: 0,
         segments: [['Regular patients', 74, 86], ['Care avoiders', 38, 57], ['Uninsured', 31, 43], ['Rural patients', 45, 61]],
         findings: [['high', 'Cost and access remain the dominant barriers for uninsured personas.'], ['med', 'Personalized next steps improve intent most among care avoiders.'], ['low', 'Reminder timing matters more for parents and caregivers.']] } },
     { id: 'meal-planning', url: 'Chatbot · Healthcare', label: 'Meal planning nutrition assistant',
       blurb: 'Evaluates whether meal plans are useful, safe, and tailored to dietary constraints.',
       personaFolder: 'Type 2 - Chatbot/meal-planning-nutrition_chatbot/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0003.yaml','persona_0004.yaml','persona_0005.yaml'],
       steps: ['describe dietary goals', 'share restrictions', 'review meal plan', 'request substitution', 'rate usefulness'],
-      report: { a: 'Generic assistant', b: 'Persona-aware assistant', winner: 'B', lift: '+21.0%', metric: 'useful safe plans', agents: 100000,
+      report: { a: 'Generic assistant', b: 'Persona-aware assistant', winner: 'B', lift: '+21.0%', metric: 'useful safe plans', agents: 0,
         segments: [['Budget constrained', 58, 82], ['Food allergies', 61, 89], ['Busy households', 67, 86], ['Fitness focused', 73, 88]],
         findings: [['high', 'Generic plans violate at least one stated constraint for allergy personas.'], ['med', 'Budget-aware substitutions drive the largest usefulness gain.'], ['low', 'Short preparation steps improve completion for busy households.']] } },
     { id: 'openbb-corporate-action', url: 'Chatbot · Finance', label: 'OpenBB corporate action',
       blurb: 'Checks whether financial answers explain corporate actions accurately and cite reliable sources.',
       personaFolder: 'Type 2 - Chatbot/chat-openbb-corporate-action/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0002.yaml','persona_0004.yaml','persona_0005.yaml'],
       steps: ['enter ticker', 'inspect missing quote', 'request delisting explanation', 'verify sources', 'summarize status'],
-      report: { a: 'Quote-only response', b: 'Source-grounded research', winner: 'B', lift: '+28.0%', metric: 'research accuracy', agents: 100000,
+      report: { a: 'Quote-only response', b: 'Source-grounded research', winner: 'B', lift: '+28.0%', metric: 'research accuracy', agents: 0,
         segments: [['Retail investors', 52, 84], ['Analysts', 63, 91], ['Finance students', 48, 83], ['Low expertise', 41, 76]],
         findings: [['high', 'Unsupported responses frequently confuse corporate actions with temporary data gaps.'], ['med', 'Source citations sharply improve trust among analysts.'], ['low', 'Plain-language corporate-action explanations help low-expertise users.']] } },
     { id: 'notion-plans', url: 'Website · Software', label: 'Notion plan comparison',
       blurb: 'Tests whether users can understand plan differences and choose the right subscription.',
       personaFolder: 'Type 3 - Website/web-notion-plan-comparison/Persona Profiles', personaFiles: ['persona_0002.yaml','persona_0038.yaml','persona_0056.yaml','persona_0091.yaml'],
       steps: ['open pricing page', 'compare plan features', 'check limits', 'match plan to needs', 'confirm choice'],
-      report: { a: 'Comparison table', b: 'Guided recommendation', winner: 'B', lift: '+14.0%', metric: 'correct plan choice', agents: 100000,
+      report: { a: 'Comparison table', b: 'Guided recommendation', winner: 'B', lift: '+14.0%', metric: 'correct plan choice', agents: 0,
         segments: [['Individuals', 78, 89], ['Small teams', 67, 86], ['Enterprise admins', 71, 84], ['First-time users', 55, 79]],
         findings: [['high', 'First-time users misread guest and member limits in the comparison table.'], ['med', 'Guided questions reduce over-purchasing among individuals.'], ['low', 'Security details remain difficult to find for enterprise admins.']] } },
     { id: 'mit-ocw-choice', url: 'Website · Education', label: 'MIT OpenCourseWare course choice',
       blurb: 'Evaluates how easily learners can find a suitable course for their goals and background.',
       personaFolder: 'Type 3 - Website/web-playwright-mit-ocw-course-choice/Persona Profiles', personaFiles: ['persona_0006.yaml','persona_0007.yaml','persona_0011.yaml','persona_0019.yaml'],
       steps: ['state learning goal', 'search course catalog', 'compare prerequisites', 'inspect materials', 'choose course'],
-      report: { a: 'Catalog search', b: 'Goal-guided shortlist', winner: 'B', lift: '+19.0%', metric: 'suitable course choice', agents: 100000,
+      report: { a: 'Catalog search', b: 'Goal-guided shortlist', winner: 'B', lift: '+19.0%', metric: 'suitable course choice', agents: 0,
         segments: [['High-school learners', 49, 76], ['University students', 68, 85], ['Professionals', 61, 82], ['Non-native English', 54, 79]],
         findings: [['high', 'Prerequisite language causes the most mismatches for early learners.'], ['med', 'Goal-guided shortlists reduce time to a suitable course.'], ['low', 'Material-format filters matter most to working professionals.']] } },
     { id: 'news-plus', url: 'App · Software', label: 'News+ subscription decision',
       blurb: 'Tests whether the offer communicates content, trial terms, and subscription value clearly.',
       personaFolder: 'Type 4 - App/pg-os-app-ios-news-subscription-decision/Persona Profiles', personaFiles: ['persona_0005.yaml','persona_0010.yaml','persona_0019.yaml','persona_0038.yaml'],
       steps: ['open subscription offer', 'review included publications', 'inspect trial terms', 'compare value', 'make decision'],
-      report: { a: 'Standard offer', b: 'Personalized content preview', winner: 'B', lift: '+11.0%', metric: 'informed subscription intent', agents: 100000,
+      report: { a: 'Standard offer', b: 'Personalized content preview', winner: 'B', lift: '+11.0%', metric: 'informed subscription intent', agents: 0,
         segments: [['Daily readers', 73, 87], ['Occasional readers', 42, 58], ['Existing subscribers', 65, 77], ['Price-sensitive users', 36, 49]],
         findings: [['high', 'Trial-renewal terms are missed by many occasional readers.'], ['med', 'Relevant publication previews improve perceived value.'], ['low', 'Price-sensitive users prefer annual savings stated in absolute dollars.']] } },
     { id: 'stocks-sentiment', url: 'App · Finance', label: 'Stocks sentiment',
       blurb: 'Measures whether users interpret market sentiment correctly when context and risk cues are provided.',
       personaFolder: 'Type 4 - App/pg-os-app-macos-stocks-mu-sentiment/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0004.yaml','persona_0008.yaml','persona_0011.yaml'],
       steps: ['select stock', 'review sentiment signal', 'inspect source context', 'assess confidence', 'state intended action'],
-      report: { a: 'Raw sentiment score', b: 'Sentiment with context', winner: 'B', lift: '+23.0%', metric: 'correct interpretation', agents: 100000,
+      report: { a: 'Raw sentiment score', b: 'Sentiment with context', winner: 'B', lift: '+23.0%', metric: 'correct interpretation', agents: 0,
         segments: [['Beginner investors', 44, 76], ['Long-term investors', 63, 84], ['Active traders', 72, 89], ['Risk-averse users', 51, 81]],
         findings: [['high', 'Beginners often interpret an unexplained score as investment advice.'], ['med', 'Source context improves calibration across every segment.'], ['low', 'Risk warnings are most effective beside the sentiment label.']] } },
   ];
+  TARGETS.forEach(t => { t.agentScale = randomAgentScale(); t.report.agents = t.agentScale; });
+  window.MATRAIX_TASK_AGENT_COUNTS = Object.fromEntries(TARGETS.map(t => [t.id, t.agentScale]));
 
   /* ============================================================
      NEURAL EVAL CORE — skill flow chart
@@ -309,7 +313,8 @@
   let target = TARGETS[0];
   let running = true;
   let nextId = 1021;
-  let activeCount = 600;
+  let activeCount = 683;
+  let totalAgents = target.agentScale;
   let currentReport = 'score';
   const store = [];
   const agg = { n: 0, pass: 0, rewardSum: 0, hist: new Array(10).fill(0), finishes: [] };
@@ -397,6 +402,7 @@
   const FOCUS_N = 3;
   let focus = [];
   function spawnFocus() { return { id: nextId++, b: newBehavior(), step: 0, personaFile: pick(target.personaFiles) }; }
+  function focusAgentNumber(f) { const match = f.personaFile.match(/persona_(\d+)\.yaml$/); return match ? match[1] : pad(f.id, 4); }
   function renderFocusCards() {
     focusListEl.innerHTML = focus.map(f => {
       if (!f) return '';
@@ -404,8 +410,8 @@
       const cur = done ? null : b.traj[f.step];
       const lastR = f.step > 0 ? b.traj[f.step - 1].reward : null;
       const prog = Math.round(Math.min(f.step, total) / total * 100);
-      return `<button class="focus" type="button" data-focus-id="${f.id}" aria-label="Open persona card for agent ${pad(f.id, 4)}">
-        <div class="f-top"><span class="f-id"><span class="foc">◉</span>AGENT#${pad(f.id, 4)}</span><span class="f-step">step ${Math.min(f.step + (done ? 0 : 1), total)}/${total}</span></div>
+      return `<button class="focus" type="button" data-focus-id="${f.id}" aria-label="Open persona card for agent ${focusAgentNumber(f)}">
+        <div class="f-top"><span class="f-id"><span class="foc">◉</span>AGENT#${focusAgentNumber(f)}</span><span class="f-step">step ${Math.min(f.step + (done ? 0 : 1), total)}/${total}</span></div>
         <div class="f-persona">${personaLabel(b.persona)}</div>
         <div class="f-now">▸ <b>${done ? 'complete' : cur.observation}</b>${cur ? ` · ${cur.action}` : ''}${lastR != null ? ` · r=${lastR.toFixed(2)}` : ''}</div>
         <div class="f-bar"><i style="width:${prog}%"></i></div>
@@ -424,7 +430,7 @@
   function openPersona(f) {
     if (!f || !personaScrim || !personaCardBody) return;
     const p = f.b.persona, file = f.personaFile;
-    personaCardBody.innerHTML = `<div class="persona-summary"><div class="persona-avatar">${esc(p.age_bracket)}</div><div><b>AGENT#${pad(f.id, 4)}</b><span>${esc(target.label)}</span></div></div>
+    personaCardBody.innerHTML = `<div class="persona-summary"><div class="persona-avatar">${esc(p.age_bracket)}</div><div><b>AGENT#${focusAgentNumber(f)}</b><span>${esc(target.label)}</span></div></div>
       <div class="persona-grid">
         ${personaField('Age',p.age_bracket)}${personaField('Region',p.region)}${personaField('Language',p.primary_language)}${personaField('Intent',p.intent)}
         ${personaField('Query style',p.query_complexity)}${personaField('Trust',p.trust_level)}${personaField('Safety context',p.safety_sensitivity)}${personaField('Prior context',p.prior_context)}
@@ -448,12 +454,12 @@
       if (f.step < b.traj.length) {
         const it = b.traj[f.step], r = it.reward;
         const rc = r >= 0.7 ? 'ok' : r >= 0.5 ? 'mid' : 'bad';
-        conLine(`<span class="t">[${nowStr()}]</span> <span class="foc">◉</span> <span class="ag">AGENT#${pad(f.id, 4)}</span> <span class="st">step ${f.step + 1}/${b.traj.length}</span> <span class="obs">obs:"${it.observation}"</span> → <span class="act">${it.action}</span> <span class="rw ${rc}">r=${r.toFixed(2)}</span>`);
+        conLine(`<span class="t">[${nowStr()}]</span> <span class="foc">◉</span> <span class="ag">AGENT#${focusAgentNumber(f)}</span> <span class="st">step ${f.step + 1}/${b.traj.length}</span> <span class="obs">obs:"${it.observation}"</span> → <span class="act">${it.action}</span> <span class="rw ${rc}">r=${r.toFixed(2)}</span>`);
         f.step++;
       } else {
         finalize(b, f.id);
         const vc = b.verdict === 'pass' ? 'done' : b.verdict === 'watch' ? 'rw mid' : 'rw bad';
-        conLine(`<span class="t">[${nowStr()}]</span> <span class="foc">◉</span> <span class="ag">AGENT#${pad(f.id, 4)}</span> <span class="${vc}">⮑ ${b.verdict.toUpperCase()}</span> score=${b.score.toFixed(2)} · ${b.traj.length} steps · region:${b.region}`);
+        conLine(`<span class="t">[${nowStr()}]</span> <span class="foc">◉</span> <span class="ag">AGENT#${focusAgentNumber(f)}</span> <span class="${vc}">⮑ ${b.verdict.toUpperCase()}</span> score=${b.score.toFixed(2)} · ${b.traj.length} steps · region:${b.region}`);
         focus[idx] = spawnFocus();
       }
     }
@@ -468,19 +474,23 @@
     if (el) el.innerHTML = arr.map(x => `<i style="height:${Math.max(8, Math.round(clamp01(x / max) * 100))}%"></i>`).join('');
   }
   function vitals() {
-    activeCount = 590 + ((Math.random() * 60) | 0);
+    activeCount = 620 + ((Math.random() * 141) | 0);
+    const parallelBatches = Math.max(1, Math.ceil(totalAgents / activeCount));
     const recent = agg.finishes.filter(t => performance.now() - t < 4000).length;
     const tp = recent / 4, rw = agg.n ? agg.rewardSum / agg.n : 0, ps = agg.n ? agg.pass / agg.n * 100 : 0;
-    setV('ag', fmt.format(activeCount)); setV('tp', tp.toFixed(1) + '/s'); setV('rw', rw.toFixed(3)); setV('ps', ps.toFixed(1) + '%');
-    pushSpark('ag', activeCount, 700); pushSpark('tp', tp + 0.3, 22); pushSpark('rw', rw, 1); pushSpark('ps', ps / 100, 1);
-    $('#swarmCount').textContent = fmt.format(activeCount) + ' active';
+    setV('ag', compactFmt.format(totalAgents)); setV('tp', tp.toFixed(1) + '/s'); setV('rw', rw.toFixed(3)); setV('ps', ps.toFixed(1) + '%');
+    pushSpark('ag', Math.log10(totalAgents), Math.log10(5.6e9)); pushSpark('tp', tp + 0.3, 22); pushSpark('rw', rw, 1); pushSpark('ps', ps / 100, 1);
+    $('#swarmCount').textContent = compactFmt.format(totalAgents) + ' agents running';
+    const batchMeta = $('#batchMeta');
+    if (batchMeta) batchMeta.textContent = `${fmt.format(activeCount)} agents / batch · ${compactFmt.format(parallelBatches)} batches in parallel · ■ shows batch ratio`;
   }
 
   function resetSession() {
     store.length = 0; agg.n = 0; agg.pass = 0; agg.rewardSum = 0; agg.hist.fill(0); agg.finishes = [];
     focus = Array.from({ length: FOCUS_N }, spawnFocus); renderFocusCards();
     conFeed.innerHTML = ''; bgScored = 0;
-    activeCount = 590 + ((Math.random() * 60) | 0);
+    activeCount = 620 + ((Math.random() * 141) | 0);
+    totalAgents = target.agentScale;
     const conMeta = $('#conMeta');
     if (conMeta) conMeta.textContent = telemetryFor(target).meta;
     const taskBlurb = $('#taskBlurb');
@@ -581,8 +591,10 @@
         return `<span class="hbar" title="score ${(i / 10).toFixed(1)}–${((i + 1) / 10).toFixed(1)} · n=${v}"><i class="${cls}" style="height:${h.toFixed(1)}%"></i></span>`;
       }).join('');
       const finds = `<ul class="findings">${r.findings.map(([sev, t]) => `<li class="finding"><span class="sev ${sev}">${sev.toUpperCase()}</span>${t}</li>`).join('')}</ul>`;
-      intelBody.innerHTML = `<div class="histo">${bars}</div><div class="histo-axis"><span>0.0</span><span>0.5</span><span>1.0</span></div>
-        <p class="histo-cap">Live score distribution · <b>${fmt.format(agg.n)}</b> behaviors.</p>
+      intelBody.innerHTML = `<div class="histo-chart" role="img" aria-label="Evaluation score distribution. Horizontal axis runs from zero, fail, to one, pass. Bar height shows relative behavior count."><div class="histo-y-title">Behaviors<br><span>relative count</span></div><div class="histo">${bars}</div></div>
+        <div class="histo-axis"><span>0.0</span><span>0.5</span><span>1.0</span></div>
+        <div class="histo-x-title">Evaluation score <span>0 = fail · 1 = pass</span></div>
+        <p class="histo-cap"><b>${fmt.format(agg.n)}</b> scored behaviors. Bar height shows how many fall in each score range, scaled to the busiest range.</p>
         <div class="dist-find-head">What the simulation found</div>${finds}`;
     } else if (currentReport === 'heat') {
       intelBody.innerHTML = renderHeat();
