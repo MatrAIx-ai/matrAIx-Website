@@ -174,6 +174,51 @@
   TARGETS.forEach(t => { t.agentScale = randomAgentScale(); t.report.agents = t.agentScale; });
   window.MATRAIX_TASK_AGENT_COUNTS = Object.fromEntries(TARGETS.map(t => [t.id, t.agentScale]));
 
+  // Each task begins with three metrics matched to what it is actually evaluating.
+  // Users can add any catalog or custom metric after these defaults.
+  const TASK_METRICS = {
+    'candy-land-price': [
+      ['Purchase intent', 'likelihood of buying at the shown price', 0.74],
+      ['Price sensitivity', 'response to the proposed price change', 0.68],
+      ['Value perception', 'perceived value relative to price', 0.72],
+    ],
+    'annual-checkup': [
+      ['Scheduling intent', 'likelihood of booking an annual checkup', 0.81],
+      ['Access barriers', 'cost, availability, and convenience barriers', 0.76],
+      ['Reminder effectiveness', 'response to the proposed reminder', 0.84],
+    ],
+    'meal-planning': [
+      ['Dietary safety', 'avoids allergens and unsafe recommendations', 0.94],
+      ['Constraint adherence', 'respects diet, budget, and time constraints', 0.87],
+      ['Plan usefulness', 'produces a practical, usable meal plan', 0.89],
+    ],
+    'openbb-corporate-action': [
+      ['Factual accuracy', 'identifies the corporate action correctly', 0.91],
+      ['Source grounding', 'supports claims with reliable evidence', 0.88],
+      ['Uncertainty calibration', 'separates verified facts from uncertainty', 0.86],
+    ],
+    'notion-plans': [
+      ['Plan fit', 'matches the selected plan to user needs', 0.90],
+      ['Feature comprehension', 'understands limits and plan differences', 0.85],
+      ['Price-value alignment', 'balances required features against cost', 0.87],
+    ],
+    'mit-ocw-choice': [
+      ['Course-goal fit', 'matches the course to the learner goal', 0.89],
+      ['Prerequisite match', 'aligns prerequisites with learner background', 0.84],
+      ['Navigation effort', 'finds and compares courses efficiently', 0.82],
+    ],
+    'news-plus': [
+      ['Offer comprehension', 'understands what the subscription includes', 0.88],
+      ['Subscription value', 'judges content value against the price', 0.79],
+      ['Renewal-term clarity', 'understands trial and renewal terms', 0.83],
+    ],
+    'stocks-sentiment': [
+      ['Sentiment comprehension', 'interprets the market signal correctly', 0.86],
+      ['Risk calibration', 'does not treat sentiment as guaranteed advice', 0.84],
+      ['Decision confidence', 'reports appropriately calibrated confidence', 0.81],
+    ],
+  };
+
   /* ============================================================
      NEURAL EVAL CORE — skill flow chart
      Each scored behavior flows through the skill it stressed.
@@ -185,12 +230,7 @@
     const keyOf = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
     // Editable evaluation metrics — users start from these defaults and add their own.
     // [name, description, target pass-rate]
-    const DEFAULTS = [
-      ['Safety', 'stays within bounds', 0.93],
-      ['Latency', 'responds in time', 0.88],
-      ['Quality', 'output is correct', 0.90],
-      ['User satisfaction', 'users are satisfied', 0.85],
-    ];
+    const DEFAULTS = TASK_METRICS[TARGETS[0].id];
     const metrics = [];
     const byKey = {};
 
@@ -230,6 +270,16 @@
       const k = keyOf(name), i = metrics.findIndex(m => keyOf(m.name) === k);
       if (i < 0) return;
       delete byKey[k]; metrics.splice(i, 1); render();
+    }
+    function setMetrics(defaults) {
+      metrics.length = 0;
+      Object.keys(byKey).forEach(k => delete byKey[k]);
+      defaults.forEach(d => {
+        const m = make(d[0], d[1], d[2]);
+        byKey[keyOf(d[0])] = m;
+        metrics.push(m);
+      });
+      render();
     }
     function pick() {
       let sum = 0; for (const m of metrics) sum += m.weight;
@@ -312,7 +362,7 @@
       inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); submit(); } });
     }
 
-    return { pulse, addMetric, removeMetric };
+    return { pulse, addMetric, removeMetric, setMetrics };
   })();
 
   /* ============================================================
@@ -500,6 +550,7 @@
     conFeed.innerHTML = ''; bgScored = 0;
     activeCount = 620 + ((Math.random() * 141) | 0);
     totalAgents = target.agentScale;
+    Brain.setMetrics(TASK_METRICS[target.id]);
     const conMeta = $('#conMeta');
     if (conMeta) conMeta.textContent = telemetryFor(target).meta;
     const taskBlurb = $('#taskBlurb');
