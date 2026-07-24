@@ -109,7 +109,7 @@
     { id: 'candy-land-price', url: 'Survey · Commerce', label: 'Candy Land price sensitivity',
       blurb: 'Tests how price changes affect purchase intent across different shopper segments.',
       scoreLabels: ['Would not buy', 'Would buy Candy Land'],
-      personaFolder: 'Type 1 - Survey/survey_price-sensitivity-hasbro-gaming-candy-land/Persona Profiles', personaFiles: ['persona_0003.yaml','persona_0007.yaml','persona_0012.yaml','persona_0018.yaml'],
+      personaFolder: 'Type 1 - Survey/survey_price-sensitivity-hasbro-gaming-candy-land/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0002.yaml','persona_0003.yaml','persona_0004.yaml','persona_0005.yaml','persona_0006.yaml','persona_0007.yaml','persona_0008.yaml','persona_0009.yaml','persona_0010.yaml','persona_0011.yaml','persona_0012.yaml'],
       steps: ['review product context', 'compare price points', 'state purchase intent', 'explain price sensitivity', 'submit survey'],
       report: { a: 'Current price', b: 'Proposed price', winner: 'A', lift: '+12.0%', metric: 'purchase intent', agents: 0,
         segments: [['Parents', 72, 61], ['Gift buyers', 68, 57], ['Teachers', 64, 55], ['Price-sensitive households', 59, 41]],
@@ -117,7 +117,7 @@
     { id: 'annual-checkup', url: 'Survey · Healthcare', label: 'Annual checkup habits',
       blurb: 'Measures which barriers and reminders influence people to schedule an annual checkup.',
       scoreLabels: ['Would not book', 'Would book a checkup'],
-      personaFolder: 'Type 1 - Survey/survey_annual-checkup-habits/Persona Profiles', personaFiles: ['persona_0002.yaml','persona_0004.yaml','persona_0005.yaml','persona_0006.yaml'],
+      personaFolder: 'Type 1 - Survey/survey_annual-checkup-habits/Persona Profiles', personaFiles: ['persona_0002.yaml','persona_0003.yaml','persona_0004.yaml','persona_0005.yaml','persona_0006.yaml','persona_0007.yaml','persona_0008.yaml','persona_0009.yaml','persona_0010.yaml','persona_0011.yaml','persona_0012.yaml','persona_0013.yaml'],
       steps: ['review health context', 'report checkup frequency', 'identify barriers', 'evaluate reminder', 'state booking intent'],
       report: { a: 'General reminder', b: 'Personalized planning', winner: 'B', lift: '+16.0%', metric: 'booking intent', agents: 0,
         segments: [['Regular patients', 74, 86], ['Care avoiders', 38, 57], ['Uninsured', 31, 43], ['Rural patients', 45, 61]],
@@ -125,7 +125,7 @@
     { id: 'meal-planning', url: 'Chatbot · Healthcare', label: 'Meal planning nutrition assistant',
       blurb: 'Evaluates whether meal plans are useful, safe, and tailored to dietary constraints.',
       scoreLabels: ['Unhelpful or unsafe', 'Useful and safe plan'],
-      personaFolder: 'Type 2 - Chatbot/meal-planning-nutrition_chatbot/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0003.yaml','persona_0004.yaml','persona_0005.yaml'],
+      personaFolder: 'Type 2 - Chatbot/meal-planning-nutrition_chatbot/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0002.yaml','persona_0003.yaml','persona_0004.yaml','persona_0005.yaml','persona_0006.yaml','persona_0007.yaml','persona_0008.yaml','persona_0009.yaml','persona_0010.yaml','persona_0011.yaml','persona_0012.yaml'],
       steps: ['describe dietary goals', 'share restrictions', 'review meal plan', 'request substitution', 'rate usefulness'],
       report: { a: 'Generic assistant', b: 'Persona-aware assistant', winner: 'B', lift: '+21.0%', metric: 'useful safe plans', agents: 0,
         segments: [['Budget constrained', 58, 82], ['Food allergies', 61, 89], ['Busy households', 67, 86], ['Fitness focused', 73, 88]],
@@ -133,7 +133,7 @@
     { id: 'openbb-corporate-action', url: 'Chatbot · Finance', label: 'OpenBB corporate action',
       blurb: 'Checks whether financial answers explain corporate actions accurately and cite reliable sources.',
       scoreLabels: ['Incorrect or unsupported', 'Accurate and sourced'],
-      personaFolder: 'Type 2 - Chatbot/chat-openbb-corporate-action/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0002.yaml','persona_0004.yaml','persona_0005.yaml'],
+      personaFolder: 'Type 2 - Chatbot/chat-openbb-corporate-action/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0002.yaml','persona_0003.yaml','persona_0004.yaml','persona_0005.yaml','persona_0006.yaml','persona_0007.yaml','persona_0008.yaml','persona_0009.yaml','persona_0010.yaml','persona_0011.yaml','persona_0012.yaml'],
       steps: ['enter ticker', 'inspect missing quote', 'request delisting explanation', 'verify sources', 'summarize status'],
       report: { a: 'Quote-only response', b: 'Source-grounded research', winner: 'B', lift: '+28.0%', metric: 'research accuracy', agents: 0,
         segments: [['Retail investors', 52, 84], ['Analysts', 63, 91], ['Finance students', 48, 83], ['Low expertise', 41, 76]],
@@ -141,7 +141,7 @@
     { id: 'notion-plans', url: 'Website · Software', label: 'Notion plan comparison',
       blurb: 'Tests whether users can understand plan differences and choose the right subscription.',
       scoreLabels: ['Rejects Notion plan', 'Chooses the right plan'],
-      personaFolder: 'Type 3 - Website/web-notion-plan-comparison/Persona Profiles', personaFiles: ['persona_0002.yaml','persona_0038.yaml','persona_0056.yaml','persona_0091.yaml'],
+      personaFolder: 'Type 3 - Website/web-notion-plan-comparison/Persona Profiles', personaFiles: ['persona_0002.yaml','persona_0038.yaml','persona_0056.yaml','persona_0091.yaml','persona_0109.yaml','persona_0130.yaml','persona_0131.yaml','persona_0164.yaml','persona_0170.yaml','persona_0176.yaml','persona_0189.yaml','persona_0231.yaml'],
       steps: ['open pricing page', 'compare plan features', 'check limits', 'match plan to needs', 'confirm choice'],
       report: { a: 'Comparison table', b: 'Guided recommendation', winner: 'B', lift: '+14.0%', metric: 'correct plan choice', agents: 0,
         segments: [['Individuals', 78, 89], ['Small teams', 67, 86], ['Enterprise admins', 71, 84], ['First-time users', 55, 79]],
@@ -149,7 +149,7 @@
     { id: 'mit-ocw-choice', url: 'Website · Education', label: 'MIT OpenCourseWare course choice',
       blurb: 'Evaluates how easily learners can find a suitable course for their goals and background.',
       scoreLabels: ['Unsuitable course', 'Suitable course selected'],
-      personaFolder: 'Type 3 - Website/web-playwright-mit-ocw-course-choice/Persona Profiles', personaFiles: ['persona_0006.yaml','persona_0007.yaml','persona_0011.yaml','persona_0019.yaml'],
+      personaFolder: 'Type 3 - Website/web-playwright-mit-ocw-course-choice/Persona Profiles', personaFiles: ['persona_0006.yaml','persona_0007.yaml','persona_0011.yaml','persona_0016.yaml','persona_0019.yaml','persona_0021.yaml','persona_0024.yaml','persona_0030.yaml','persona_0032.yaml','persona_0037.yaml','persona_0039.yaml','persona_0043.yaml'],
       steps: ['state learning goal', 'search course catalog', 'compare prerequisites', 'inspect materials', 'choose course'],
       report: { a: 'Catalog search', b: 'Goal-guided shortlist', winner: 'B', lift: '+19.0%', metric: 'suitable course choice', agents: 0,
         segments: [['High-school learners', 49, 76], ['University students', 68, 85], ['Professionals', 61, 82], ['Non-native English', 54, 79]],
@@ -157,7 +157,7 @@
     { id: 'news-plus', url: 'App · Software', label: 'News+ subscription decision',
       blurb: 'Tests whether the offer communicates content, trial terms, and subscription value clearly.',
       scoreLabels: ['Declines News+', 'Subscribes to News+'],
-      personaFolder: 'Type 4 - App/pg-os-app-ios-news-subscription-decision/Persona Profiles', personaFiles: ['persona_0005.yaml','persona_0010.yaml','persona_0019.yaml','persona_0038.yaml'],
+      personaFolder: 'Type 4 - App/pg-os-app-ios-news-subscription-decision/Persona Profiles', personaFiles: ['persona_0005.yaml','persona_0010.yaml','persona_0019.yaml','persona_0025.yaml','persona_0038.yaml','persona_0050.yaml','persona_0054.yaml','persona_0062.yaml','persona_0086.yaml','persona_0095.yaml','persona_0097.yaml','persona_0100.yaml'],
       steps: ['open subscription offer', 'review included publications', 'inspect trial terms', 'compare value', 'make decision'],
       report: { a: 'Standard offer', b: 'Personalized content preview', winner: 'B', lift: '+11.0%', metric: 'informed subscription intent', agents: 0,
         segments: [['Daily readers', 73, 87], ['Occasional readers', 42, 58], ['Existing subscribers', 65, 77], ['Price-sensitive users', 36, 49]],
@@ -165,7 +165,7 @@
     { id: 'stocks-sentiment', url: 'App · Finance', label: 'Stocks sentiment',
       blurb: 'Measures whether users interpret market sentiment correctly when context and risk cues are provided.',
       scoreLabels: ['Misreads sentiment', 'Interprets it correctly'],
-      personaFolder: 'Type 4 - App/pg-os-app-macos-stocks-mu-sentiment/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0004.yaml','persona_0008.yaml','persona_0011.yaml'],
+      personaFolder: 'Type 4 - App/pg-os-app-macos-stocks-mu-sentiment/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0004.yaml','persona_0005.yaml','persona_0008.yaml','persona_0011.yaml','persona_0012.yaml','persona_0027.yaml','persona_0030.yaml','persona_0051.yaml','persona_0053.yaml','persona_0066.yaml','persona_0093.yaml'],
       steps: ['select stock', 'review sentiment signal', 'inspect source context', 'assess confidence', 'state intended action'],
       report: { a: 'Raw sentiment score', b: 'Sentiment with context', winner: 'B', lift: '+23.0%', metric: 'correct interpretation', agents: 0,
         segments: [['Beginner investors', 44, 76], ['Long-term investors', 63, 84], ['Active traders', 72, 89], ['Risk-averse users', 51, 81]],
@@ -407,9 +407,10 @@
   }
 
   /* ---- in-focus agents: slow, readable trajectories ---- */
-  const FOCUS_N = 3;
+  const FOCUS_N = 8;
   let focus = [];
-  function spawnFocus() { return { id: nextId++, b: newBehavior(), step: 0, personaFile: pick(target.personaFiles) }; }
+  let personaFileCursor = (Math.random() * 1000) | 0;
+  function spawnFocus() { const personaFile=target.personaFiles[personaFileCursor++ % target.personaFiles.length]; return { id: nextId++, b: newBehavior(), step: 0, personaFile }; }
   function focusAgentNumber(f) { const match = f.personaFile.match(/persona_(\d+)\.yaml$/); return match ? match[1] : pad(f.id, 4); }
   function renderFocusCards() {
     focusListEl.innerHTML = focus.map(f => {
@@ -535,13 +536,6 @@
     renderReport();
   });
 
-  const HM_ABBR = {
-    'Simple factual': 'Simple', 'Multi-step': 'Multi-step', 'Ambiguous / underspecified': 'Ambiguous',
-    'Adversarial': 'Adversarial', 'Open-ended creative': 'Creative', 'Benign': 'Benign',
-    'Sensitive personal': 'Sensitive', 'High-stakes (medical/legal/financial)': 'High-stakes',
-    'Potentially harmful': 'Harmful', 'Dual-use': 'Dual-use',
-  };
-  const hmAbbr = v => HM_ABBR[v] || v;
   function hmColor(rate) {
     const stops = [[255, 92, 108], [255, 181, 71], [84, 246, 166]];
     const t = clamp01(rate) * 2, i = t < 1 ? 0 : 1, f = t < 1 ? t : t - 1;
@@ -549,30 +543,23 @@
     return `rgb(${c[0]},${c[1]},${c[2]})`;
   }
   function renderHeat() {
-    const QC = (byId['query_complexity'] || { values: [] }).values;
-    const SS = (byId['safety_sensitivity'] || { values: [] }).values;
-    const cell = {};
-    for (const b of store) {
-      const x = b.persona.query_complexity, y = b.persona.safety_sensitivity;
-      if (!x || !y) continue;
-      const k = x + '|' + y; (cell[k] = cell[k] || { n: 0, p: 0 });
-      cell[k].n++; if (b.verdict === 'pass') cell[k].p++;
-    }
-    let h = `<div class="hm-cap">Pass rate by persona aspect · <b>${fmt.format(agg.n)}</b> behaviors this session</div>`;
-    h += `<div class="hm-axis">Query complexity →</div>`;
-    h += `<div class="hm-grid" style="grid-template-columns:74px repeat(${QC.length},1fr)">`;
-    h += `<div class="hm-corner">Safety ↓</div>` + QC.map(x => `<div class="hm-xl">${hmAbbr(x)}</div>`).join('');
-    for (const y of SS) {
-      h += `<div class="hm-yl">${hmAbbr(y)}</div>`;
-      for (const x of QC) {
-        const c = cell[x + '|' + y];
-        if (!c || !c.n) { h += `<div class="hm-cell empty" title="${x} × ${y} — no samples yet">·</div>`; continue; }
-        const rate = c.p / c.n;
-        h += `<div class="hm-cell" style="background:${hmColor(rate)}" title="${x} × ${y} — ${(rate * 100).toFixed(0)}% pass · n=${c.n}">${Math.round(rate * 100)}</div>`;
+    const steps = target.steps.map(step => {
+      let n = 0, pass = 0;
+      for (const behavior of store) {
+        for (const item of behavior.trajectory) {
+          if (!item.observation.startsWith(step)) continue;
+          n++; if (item.reward >= .7) pass++;
+        }
       }
-    }
-    h += `</div><div class="hm-legend"><span>0%</span><div class="hm-grad"></div><span>100%</span></div>`;
-    return h;
+      return { step, n, rate: n ? pass / n : 0 };
+    });
+    const rows = steps.map((item, i) => item.n
+      ? `<div class="hm-step"><span class="hm-step-name"><b>${i + 1}</b>${item.step}</span><span class="hm-step-cell" style="background:${hmColor(item.rate)}" title="${item.step} · ${Math.round(item.rate * 100)}% pass · n=${item.n}"><b>${Math.round(item.rate * 100)}%</b><small>${fmt.format(item.n)} checks</small></span></div>`
+      : `<div class="hm-step"><span class="hm-step-name"><b>${i + 1}</b>${item.step}</span><span class="hm-step-cell empty">Waiting for runs</span></div>`
+    ).join('');
+    return `<div class="hm-cap">Live pass rate for the steps in <b>${target.label}</b></div>
+      <div class="hm-steps">${rows}</div>
+      <div class="hm-legend"><span>Needs attention</span><div class="hm-grad"></div><span>Passing</span></div>`;
   }
 
   function renderReport() {
