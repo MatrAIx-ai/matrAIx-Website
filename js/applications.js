@@ -33,7 +33,7 @@ const taskDetails = {
     audience: "Individuals, students, small teams, startups, and business administrators considering Notion. The audience varies by team size, budget, collaboration requirements, security needs, and prior workspace-tool experience.",
     metric: ">85% correct choice",
     metricNote: "More than 85% select the plan that best matches their stated needs and accurately explain the key tradeoffs.",
-    results: { headline: "99%", label: "task completion", bars: [["Completed plan comparison", 99], ["Timed out", 1]], finding: "990 of 1,000 personas completed a valid live-site plan comparison.", note: "n=1,000 · GPT-5.5 · live Notion pricing page", source: "Type%203%20-%20Website/web-notion-plan-comparison/gpt_5_5/report" }
+    results: { headline: "63.4%", label: "selected Notion Plus", bars: [["Plus", 63.4], ["Free", 24.2], ["Business", 11.6], ["Enterprise", 0.7]], finding: "Plus was the leading choice, selected by 649 personas; fit was the primary decision basis for 855 of 1,023 valid responses.", note: "n=1,023 valid artifacts of 1,024 · GPT-5.5 · monthly plan comparison", source: "Type%203%20-%20Website/web-notion-plan-comparison/gpt_5_5/artifact/jobs/pg-web-notion-plan-comparison-7b04e4ac/aggregation.json" }
   },
   "MIT OpenCourseWare Course Choice": {
     summary: "MIT OpenCourseWare wants to understand whether learners can find a suitable course among many options. Users search, compare prerequisites and materials, and select a course aligned with their goals and current knowledge.",
@@ -41,7 +41,7 @@ const taskDetails = {
     metric: ">80% suitable choice",
     metricNote: "At least 80% choose a course appropriate to their goals and prerequisite knowledge without assistance.",
     supportingImage1: "Assets/media/application_demo/type_3_web/mit_opencourse/MIT_OpenCourseWare.png",
-    results: { headline: "100%", label: "mean verifier reward", bars: [["Valid artifacts", 97.6], ["Not recovered", 2.4]], finding: "976 of 1,000 personas completed a valid course choice after comparing live OCW pages.", note: "n=1,000 · Claude Opus 4.8 · live MIT OpenCourseWare", source: "Type%203%20-%20Website/opus_4_8/web-playwright-mit-ocw-course-choice" }
+    results: { headline: "44.0%", label: "selected an undergraduate course", bars: [["Undergraduate", 44.0], ["Graduate", 40.0], ["Cross-listed", 15.3], ["Non-credit", 0.7]], finding: "Selections spanned 232 course titles. Psychology and Economics led with 63 choices (6.3%), while fit was the primary basis for 1,005 of 1,008 decisions.", note: "n=1,008 · GPT-5.5 · live MIT OpenCourseWare", source: "Type%203%20-%20Website/web-playwright-mit-ocw-course-choice/gpt_5_5/artifact/jobs/pg-web-mit-ocw-course-choice-e370ee2e/aggregation.json" }
   },
   "News+ Subscription Decision": {
     summary: "A news app wants to evaluate how users decide whether to subscribe to News+. Users explore the offer, assess content value, interpret trial and renewal terms, and make a subscription decision.",
