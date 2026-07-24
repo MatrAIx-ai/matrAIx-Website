@@ -96,7 +96,7 @@ function openTask(card) {
   const cardCover = card.querySelector('.task-cover-image');
   const dialogCover = document.querySelector('#taskDialogCoverImage');
   if (cardCover) {
-    dialogCover.src = cardCover.src;
+    dialogCover.src = cardCover.dataset.animatedSrc || cardCover.dataset.dialogSrc || cardCover.src;
     dialogCover.alt = cardCover.alt;
     dialogCover.className = cardCover.classList.contains('contain') ? 'contain' : '';
     dialogCover.hidden = false;
@@ -173,7 +173,11 @@ closeButton.addEventListener('click', () => dialog.close());
 dialog.addEventListener('click', event => {
   if (event.target === dialog) dialog.close();
 });
-dialog.addEventListener('close', () => triggerCard?.focus());
+dialog.addEventListener('close', () => {
+  document.querySelector('#taskDialogCoverImage').removeAttribute('src');
+  supportingImages.forEach(image => image.removeAttribute('src'));
+  triggerCard?.focus();
+});
 dialog.querySelectorAll('a[aria-disabled="true"]').forEach(link => {
   link.addEventListener('click', event => event.preventDefault());
 });
