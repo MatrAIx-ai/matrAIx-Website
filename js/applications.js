@@ -146,11 +146,13 @@ function openTask(card) {
       image.alt = `${title} ${index === 0 ? 'evaluation report' : 'report demo'}`;
       image.hidden = false;
       container.classList.add('has-image');
+      container.hidden = false;
     } else {
       image.removeAttribute('src');
       image.alt = '';
       image.hidden = true;
       container.classList.remove('has-image');
+      container.hidden = true;
     }
   });
   dialog.showModal();
