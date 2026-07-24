@@ -74,6 +74,28 @@ const supportingImages = supportingImageContainers.map(container => {
   return image;
 });
 let triggerCard = null;
+const animationTimers = new WeakMap();
+const canHover = matchMedia('(hover: hover) and (pointer: fine)');
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+function startCardAnimation(card, immediate = false) {
+  const image = card.querySelector('.task-cover-image[data-animated-src]');
+  if (!image || reduceMotion.matches) return;
+  clearTimeout(animationTimers.get(card));
+  const start = () => {
+    image.dataset.posterSrc ||= image.getAttribute('src');
+    image.src = image.dataset.animatedSrc;
+  };
+  if (immediate) start();
+  else animationTimers.set(card, setTimeout(start, 120));
+}
+
+function stopCardAnimation(card) {
+  clearTimeout(animationTimers.get(card));
+  animationTimers.delete(card);
+  const image = card.querySelector('.task-cover-image[data-animated-src]');
+  if (image?.dataset.posterSrc) image.src = image.dataset.posterSrc;
+}
 
 menu.addEventListener('click', () => nav.classList.toggle('open'));
 
@@ -82,6 +104,7 @@ document.querySelectorAll('.task-filter').forEach(button => {
     document.querySelectorAll('.task-filter').forEach(item => item.classList.toggle('active', item === button));
     document.querySelectorAll('.task-card').forEach(card => {
       card.hidden = button.dataset.filter !== 'all' && card.dataset.type !== button.dataset.filter;
+      if (card.hidden) stopCardAnimation(card);
     });
   });
 });
@@ -162,6 +185,14 @@ document.querySelectorAll('.task-card').forEach(card => {
   card.tabIndex = 0;
   card.setAttribute('role', 'button');
   card.setAttribute('aria-haspopup', 'dialog');
+  card.addEventListener('mouseenter', () => {
+    if (canHover.matches) startCardAnimation(card);
+  });
+  card.addEventListener('mouseleave', () => stopCardAnimation(card));
+  card.addEventListener('focus', () => {
+    if (card.matches(':focus-visible')) startCardAnimation(card, true);
+  });
+  card.addEventListener('blur', () => stopCardAnimation(card));
   card.addEventListener('click', () => openTask(card));
   card.addEventListener('keydown', event => {
     if (event.key === 'Enter' || event.key === ' ') {
