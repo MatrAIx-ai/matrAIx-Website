@@ -85,7 +85,7 @@ and the canonical task definitions live in the
 | Candy Land price sensitivity | Survey | Commerce |
 | Annual checkup habits | Survey | Healthcare |
 | Meal planning nutrition assistant | Chatbot | Healthcare |
-| OpenBB delisted-quote research | Chatbot | Finance |
+| OpenBB corporate action | Chatbot | Finance |
 | Notion plan comparison | Website | Software |
 | MIT OpenCourseWare course choice | Website | Education |
 | News+ subscription decision | App | Software |

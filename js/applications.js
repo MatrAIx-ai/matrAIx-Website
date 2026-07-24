@@ -4,6 +4,7 @@ const taskDetails = {
     audience: "Adults in the United States who purchase board games for children, families, classrooms, or gifts. The population varies by age, household income, parental status, shopping habits, and familiarity with Candy Land.",
     metric: ">55% acceptance",
     metricNote: "At least 55% of likely buyers retain purchase intent at the proposed new price.",
+    supportingImage2: "Assets/media/application_demo/type_1_survey/candyland/candyland.png",
     results: { headline: "98.3%", label: "would hesitate at $16.24", bars: [["Hesitate", 98.3], ["Fair / would buy", 1.7]], finding: "The proposed 25% increase triggered hesitation across every economic-motivation segment.", note: "n=1,000 · GPT-5.5 · verifier-valid survey artifacts", source: "Type%201%20-%20Survey/survey_price-sensitivity-hasbro-gaming-candy-land/gpt_5_5/report" }
   },
   "Annual Checkup Habits": {
@@ -20,9 +21,9 @@ const taskDetails = {
     metricNote: "At least 85% receive a feasible plan that respects every stated dietary and safety constraint.",
     results: { headline: "94.1%", label: "fully or partly resolved", bars: [["Resolved", 18.2], ["Partly resolved", 75.9], ["Unresolved", 5.9]], finding: "Useful clarification was universal, but most plans only partially satisfied personal preferences.", note: "n=989 successful of 1,000 · GPT-5.5 · diagnostic run", source: "Type%202%20-%20Chatbot/meal-planning-nutrition_chatbot/gpt-5-5-AWS/report" }
   },
-  "OpenBB Delisted-Quote Research": {
-    summary: "A finance research team wants to test whether an OpenBB assistant can investigate a missing or delisted stock quote. The assistant must clarify the ticker, locate credible evidence, explain the listing status, and distinguish facts from uncertainty.",
-    audience: "Retail investors, financial analysts, students, and researchers using market-data tools. Personas vary in financial expertise, research goals, risk tolerance, and familiarity with delistings and corporate actions.",
+  "OpenBB Corporate Action": {
+    summary: "A finance research team wants to test whether an OpenBB assistant can investigate a corporate action honestly. The assistant must clarify the security, locate credible evidence, explain the event and distinguish verified facts from uncertainty.",
+    audience: "Retail investors, financial analysts, students, and researchers using market-data tools. Personas vary in financial expertise, research goals, risk tolerance, and familiarity with corporate actions.",
     metric: ">90% accurate",
     metricNote: "At least 90% of responses identify the correct status and cite adequate supporting evidence without fabrication.",
     results: { headline: "1,000", label: "persona run corpus", bars: [["Published run coverage", 100]], finding: "The dataset currently exposes the full evaluation corpus; a task-level aggregate outcome summary has not yet been published.", note: "Coverage view · outcome aggregation pending", source: "Type%202%20-%20Chatbot/chat-openbb-corporate-action" }
