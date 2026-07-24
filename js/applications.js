@@ -3,43 +3,50 @@ const taskDetails = {
     summary: "Hasbro is considering a price change for Candy Land and wants to understand the likely market response before rollout. This survey measures purchase intent at different price points and identifies which customer segments are most price-sensitive.",
     audience: "Adults in the United States who purchase board games for children, families, classrooms, or gifts. The population varies by age, household income, parental status, shopping habits, and familiarity with Candy Land.",
     metric: ">55% acceptance",
-    metricNote: "At least 55% of likely buyers retain purchase intent at the proposed new price."
+    metricNote: "At least 55% of likely buyers retain purchase intent at the proposed new price.",
+    results: { headline: "98.3%", label: "would hesitate at $16.24", bars: [["Hesitate", 98.3], ["Fair / would buy", 1.7]], finding: "The proposed 25% increase triggered hesitation across every economic-motivation segment.", note: "n=1,000 · GPT-5.5 · verifier-valid survey artifacts", source: "Type%201%20-%20Survey/survey_price-sensitivity-hasbro-gaming-candy-land/gpt_5_5/report" }
   },
   "Annual Checkup Habits": {
     summary: "A healthcare organization wants to understand why some adults schedule annual checkups while others delay or avoid them. The survey examines access, cost, trust, convenience, health beliefs, and prior care experiences.",
     audience: "Adults with varied health status, insurance coverage, income, geography, healthcare access, and relationships with primary-care providers. The sample includes regular patients and people who rarely seek preventive care.",
     metric: ">60% intent",
-    metricNote: "More than 60% report an intention to schedule a checkup after the proposed intervention."
+    metricNote: "More than 60% report an intention to schedule a checkup after the proposed intervention.",
+    results: { headline: "100%", label: "likely to schedule on time", bars: [["Very likely", 50.5], ["Likely", 49.5]], finding: "Automatic reminders, easier online scheduling, and evening or weekend appointments were the leading requested improvements.", note: "n=1,000 · GPT-5.5 · completed survey artifacts", source: "Type%201%20-%20Survey/survey_annual-checkup-habits/gpt_5_5/report" }
   },
   "Meal Planning Nutrition Assistant": {
     summary: "A digital-health team wants to evaluate a conversational nutrition assistant that creates practical meal plans. Users provide dietary goals, allergies, budgets, time constraints, and food preferences through multi-turn conversations.",
     audience: "Adults who plan meals for themselves or their households, including users with allergies, dietary restrictions, fitness goals, chronic-health considerations, and limited cooking time or budgets.",
     metric: ">85% useful plans",
-    metricNote: "At least 85% receive a feasible plan that respects every stated dietary and safety constraint."
+    metricNote: "At least 85% receive a feasible plan that respects every stated dietary and safety constraint.",
+    results: { headline: "94.1%", label: "fully or partly resolved", bars: [["Resolved", 18.2], ["Partly resolved", 75.9], ["Unresolved", 5.9]], finding: "Useful clarification was universal, but most plans only partially satisfied personal preferences.", note: "n=989 successful of 1,000 · GPT-5.5 · diagnostic run", source: "Type%202%20-%20Chatbot/meal-planning-nutrition_chatbot/gpt-5-5-AWS/report" }
   },
   "OpenBB Delisted-Quote Research": {
     summary: "A finance research team wants to test whether an OpenBB assistant can investigate a missing or delisted stock quote. The assistant must clarify the ticker, locate credible evidence, explain the listing status, and distinguish facts from uncertainty.",
     audience: "Retail investors, financial analysts, students, and researchers using market-data tools. Personas vary in financial expertise, research goals, risk tolerance, and familiarity with delistings and corporate actions.",
     metric: ">90% accurate",
-    metricNote: "At least 90% of responses identify the correct status and cite adequate supporting evidence without fabrication."
+    metricNote: "At least 90% of responses identify the correct status and cite adequate supporting evidence without fabrication.",
+    results: { headline: "1,000", label: "persona run corpus", bars: [["Published run coverage", 100]], finding: "The dataset currently exposes the full evaluation corpus; a task-level aggregate outcome summary has not yet been published.", note: "Coverage view · outcome aggregation pending", source: "Type%202%20-%20Chatbot/chat_openbb_delisted_quote" }
   },
   "Notion Plan Comparison": {
     summary: "Notion wants to evaluate whether prospective customers can understand and compare its available plans. Users review features, limits, collaboration needs, and pricing before selecting the best plan for a realistic scenario.",
     audience: "Individuals, students, small teams, startups, and business administrators considering Notion. The audience varies by team size, budget, collaboration requirements, security needs, and prior workspace-tool experience.",
     metric: ">85% correct choice",
-    metricNote: "More than 85% select the plan that best matches their stated needs and accurately explain the key tradeoffs."
+    metricNote: "More than 85% select the plan that best matches their stated needs and accurately explain the key tradeoffs.",
+    results: { headline: "94.1%", label: "mean verifier reward", bars: [["Valid artifacts", 99], ["Timed out", 1]], finding: "990 of 1,000 personas completed a valid live-site plan comparison.", note: "n=1,000 · Claude Opus 4.8 · live Notion pricing page", source: "Type%203%20-%20Website/opus_4_8/web-notion-plan-comparison" }
   },
   "MIT OpenCourseWare Course Choice": {
     summary: "MIT OpenCourseWare wants to understand whether learners can find a suitable course among many options. Users search, compare prerequisites and materials, and select a course aligned with their goals and current knowledge.",
     audience: "Independent learners, high-school and university students, educators, and working professionals. Personas vary by subject interest, educational background, language proficiency, available study time, and learning goals.",
     metric: ">80% suitable choice",
-    metricNote: "At least 80% choose a course appropriate to their goals and prerequisite knowledge without assistance."
+    metricNote: "At least 80% choose a course appropriate to their goals and prerequisite knowledge without assistance.",
+    results: { headline: "100%", label: "mean verifier reward", bars: [["Valid artifacts", 97.6], ["Not recovered", 2.4]], finding: "976 of 1,000 personas completed a valid course choice after comparing live OCW pages.", note: "n=1,000 · Claude Opus 4.8 · live MIT OpenCourseWare", source: "Type%203%20-%20Website/opus_4_8/web-playwright-mit-ocw-course-choice" }
   },
   "News+ Subscription Decision": {
     summary: "A news app wants to evaluate how users decide whether to subscribe to News+. Users explore the offer, assess content value, interpret trial and renewal terms, and make a subscription decision.",
     audience: "Mobile news readers with different reading frequency, topic interests, household arrangements, subscription histories, price sensitivity, and trust in news brands.",
     metric: ">65% informed decisions",
-    metricNote: "More than 65% can accurately explain the price, renewal terms, and included value before deciding."
+    metricNote: "More than 65% can accurately explain the price, renewal terms, and included value before deciding.",
+    results: { headline: "96%", label: "declined News+", bars: [["Decline", 95.8], ["Subscribe", 4.2]], finding: "Catalog fit and the $12.99 monthly price drove the decision; 23 of 24 personas declined.", note: "n=24 published report cohort · GPT-5.5 · iOS app", source: "Type%204%20-%20App/pg-os-app-ios-news-subscription-decision/gpt_5_5/report" }
   },
   "Stocks Sentiment": {
     summary: "A finance app wants to test how investors interpret a stock-sentiment feature. Users review sentiment signals alongside market context and decide whether the information changes their confidence or intended action.",
@@ -47,7 +54,8 @@ const taskDetails = {
     metric: ">80% comprehension",
     metricNote: "At least 80% interpret the sentiment signal correctly without treating it as guaranteed investment advice.",
     supportingImage1: "Assets/media/application_demo/type_4_app/MU Stock/MU Stock Report.png",
-    supportingImage2: "Assets/media/application_demo/type_4_app/MU Stock/MU Report Demo.gif"
+    supportingImage2: "Assets/media/application_demo/type_4_app/MU Stock/MU Report Demo.gif",
+    results: { headline: "55%", label: "held MU stock", bars: [["Hold", 55], ["Buy", 45], ["Sell", 0]], finding: "Strong fundamentals supported buying interest, while short-term weakness kept a narrow majority at hold.", note: "n=20 · GPT-5.5 · mean decision confidence 7/10", source: "Type%204%20-%20App/pg-os-app-macos-stocks-mu-sentiment/gpt_5_5/report" }
   }
 };
 
@@ -55,6 +63,7 @@ const nav = document.querySelector('.mx-nav');
 const menu = document.querySelector('.mx-menu');
 const dialog = document.querySelector('#taskDialog');
 const closeButton = dialog.querySelector('.task-dialog-close');
+const resultsBase = 'https://huggingface.co/datasets/MatrAIx2026/Demo_Application_Data/tree/main/';
 const supportingImageContainers = [...dialog.querySelectorAll('.task-image-placeholder')].slice(1);
 const supportingImages = supportingImageContainers.map(container => {
   const image = document.createElement('img');
@@ -102,6 +111,32 @@ function openTask(card) {
   document.querySelector('#taskDialogPopulation').textContent = card.dataset.type === 'app' ? '20 personas' : '1,000 personas';
   document.querySelector('#taskDialogMetric').textContent = detail.metric;
   document.querySelector('#taskDialogMetricNote').textContent = detail.metricNote;
+  const results = detail.results;
+  document.querySelector('#taskResultHeadline').textContent = results.headline;
+  document.querySelector('#taskResultLabel').textContent = results.label;
+  document.querySelector('#taskResultFinding').textContent = results.finding;
+  document.querySelector('#taskResultNote').textContent = results.note;
+  document.querySelector('#taskResultsSource').href = resultsBase + results.source;
+  const bars = document.querySelector('#taskResultBars');
+  bars.replaceChildren(...results.bars.map(([label, value]) => {
+    const row = document.createElement('div');
+    row.className = 'task-result-row';
+    const head = document.createElement('div');
+    head.className = 'task-result-bar-head';
+    const name = document.createElement('span');
+    name.textContent = label;
+    const number = document.createElement('strong');
+    number.textContent = `${value}%`;
+    head.append(name, number);
+    const track = document.createElement('div');
+    track.className = 'task-result-track';
+    const fill = document.createElement('span');
+    fill.className = 'task-result-fill';
+    fill.style.width = `${Math.max(value, value > 0 ? 2 : 0)}%`;
+    track.append(fill);
+    row.append(head, track);
+    return row;
+  }));
   supportingImages.forEach((image, index) => {
     const source = detail[`supportingImage${index + 1}`];
     const container = supportingImageContainers[index];
