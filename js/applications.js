@@ -25,7 +25,7 @@ const taskDetails = {
     audience: "Retail investors, financial analysts, students, and researchers using market-data tools. Personas vary in financial expertise, research goals, risk tolerance, and familiarity with delistings and corporate actions.",
     metric: ">90% accurate",
     metricNote: "At least 90% of responses identify the correct status and cite adequate supporting evidence without fabrication.",
-    results: { headline: "1,000", label: "persona run corpus", bars: [["Published run coverage", 100]], finding: "The dataset currently exposes the full evaluation corpus; a task-level aggregate outcome summary has not yet been published.", note: "Coverage view · outcome aggregation pending", source: "Type%202%20-%20Chatbot/chat_openbb_delisted_quote" }
+    results: { headline: "1,000", label: "persona run corpus", bars: [["Published run coverage", 100]], finding: "The dataset currently exposes the full evaluation corpus; a task-level aggregate outcome summary has not yet been published.", note: "Coverage view · outcome aggregation pending", source: "Type%202%20-%20Chatbot/chat-openbb-corporate-action" }
   },
   "Notion Plan Comparison": {
     summary: "Notion wants to evaluate whether prospective customers can understand and compare its available plans. Users review features, limits, collaboration needs, and pricing before selecting the best plan for a realistic scenario.",
