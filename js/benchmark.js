@@ -108,6 +108,7 @@
   const TARGETS = [
     { id: 'candy-land-price', url: 'Survey · Commerce', label: 'Candy Land price sensitivity',
       blurb: 'Tests how price changes affect purchase intent across different shopper segments.',
+      scoreLabels: ['Would not buy', 'Would buy Candy Land'],
       personaFolder: 'Type 1 - Survey/survey_price-sensitivity-hasbro-gaming-candy-land/Persona Profiles', personaFiles: ['persona_0003.yaml','persona_0007.yaml','persona_0012.yaml','persona_0018.yaml'],
       steps: ['review product context', 'compare price points', 'state purchase intent', 'explain price sensitivity', 'submit survey'],
       report: { a: 'Current price', b: 'Proposed price', winner: 'A', lift: '+12.0%', metric: 'purchase intent', agents: 0,
@@ -115,6 +116,7 @@
         findings: [['high', 'Price-sensitive households show the largest decline at the proposed price.'], ['med', 'Gift buyers tolerate a smaller increase when the product is bundled.'], ['low', 'Brand familiarity moderates the decline in purchase intent.']] } },
     { id: 'annual-checkup', url: 'Survey · Healthcare', label: 'Annual checkup habits',
       blurb: 'Measures which barriers and reminders influence people to schedule an annual checkup.',
+      scoreLabels: ['Would not book', 'Would book a checkup'],
       personaFolder: 'Type 1 - Survey/survey_annual-checkup-habits/Persona Profiles', personaFiles: ['persona_0002.yaml','persona_0004.yaml','persona_0005.yaml','persona_0006.yaml'],
       steps: ['review health context', 'report checkup frequency', 'identify barriers', 'evaluate reminder', 'state booking intent'],
       report: { a: 'General reminder', b: 'Personalized planning', winner: 'B', lift: '+16.0%', metric: 'booking intent', agents: 0,
@@ -122,6 +124,7 @@
         findings: [['high', 'Cost and access remain the dominant barriers for uninsured personas.'], ['med', 'Personalized next steps improve intent most among care avoiders.'], ['low', 'Reminder timing matters more for parents and caregivers.']] } },
     { id: 'meal-planning', url: 'Chatbot · Healthcare', label: 'Meal planning nutrition assistant',
       blurb: 'Evaluates whether meal plans are useful, safe, and tailored to dietary constraints.',
+      scoreLabels: ['Unhelpful or unsafe', 'Useful and safe plan'],
       personaFolder: 'Type 2 - Chatbot/meal-planning-nutrition_chatbot/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0003.yaml','persona_0004.yaml','persona_0005.yaml'],
       steps: ['describe dietary goals', 'share restrictions', 'review meal plan', 'request substitution', 'rate usefulness'],
       report: { a: 'Generic assistant', b: 'Persona-aware assistant', winner: 'B', lift: '+21.0%', metric: 'useful safe plans', agents: 0,
@@ -129,6 +132,7 @@
         findings: [['high', 'Generic plans violate at least one stated constraint for allergy personas.'], ['med', 'Budget-aware substitutions drive the largest usefulness gain.'], ['low', 'Short preparation steps improve completion for busy households.']] } },
     { id: 'openbb-corporate-action', url: 'Chatbot · Finance', label: 'OpenBB corporate action',
       blurb: 'Checks whether financial answers explain corporate actions accurately and cite reliable sources.',
+      scoreLabels: ['Incorrect or unsupported', 'Accurate and sourced'],
       personaFolder: 'Type 2 - Chatbot/chat-openbb-corporate-action/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0002.yaml','persona_0004.yaml','persona_0005.yaml'],
       steps: ['enter ticker', 'inspect missing quote', 'request delisting explanation', 'verify sources', 'summarize status'],
       report: { a: 'Quote-only response', b: 'Source-grounded research', winner: 'B', lift: '+28.0%', metric: 'research accuracy', agents: 0,
@@ -136,6 +140,7 @@
         findings: [['high', 'Unsupported responses frequently confuse corporate actions with temporary data gaps.'], ['med', 'Source citations sharply improve trust among analysts.'], ['low', 'Plain-language corporate-action explanations help low-expertise users.']] } },
     { id: 'notion-plans', url: 'Website · Software', label: 'Notion plan comparison',
       blurb: 'Tests whether users can understand plan differences and choose the right subscription.',
+      scoreLabels: ['Rejects Notion plan', 'Chooses the right plan'],
       personaFolder: 'Type 3 - Website/web-notion-plan-comparison/Persona Profiles', personaFiles: ['persona_0002.yaml','persona_0038.yaml','persona_0056.yaml','persona_0091.yaml'],
       steps: ['open pricing page', 'compare plan features', 'check limits', 'match plan to needs', 'confirm choice'],
       report: { a: 'Comparison table', b: 'Guided recommendation', winner: 'B', lift: '+14.0%', metric: 'correct plan choice', agents: 0,
@@ -143,6 +148,7 @@
         findings: [['high', 'First-time users misread guest and member limits in the comparison table.'], ['med', 'Guided questions reduce over-purchasing among individuals.'], ['low', 'Security details remain difficult to find for enterprise admins.']] } },
     { id: 'mit-ocw-choice', url: 'Website · Education', label: 'MIT OpenCourseWare course choice',
       blurb: 'Evaluates how easily learners can find a suitable course for their goals and background.',
+      scoreLabels: ['Unsuitable course', 'Suitable course selected'],
       personaFolder: 'Type 3 - Website/web-playwright-mit-ocw-course-choice/Persona Profiles', personaFiles: ['persona_0006.yaml','persona_0007.yaml','persona_0011.yaml','persona_0019.yaml'],
       steps: ['state learning goal', 'search course catalog', 'compare prerequisites', 'inspect materials', 'choose course'],
       report: { a: 'Catalog search', b: 'Goal-guided shortlist', winner: 'B', lift: '+19.0%', metric: 'suitable course choice', agents: 0,
@@ -150,6 +156,7 @@
         findings: [['high', 'Prerequisite language causes the most mismatches for early learners.'], ['med', 'Goal-guided shortlists reduce time to a suitable course.'], ['low', 'Material-format filters matter most to working professionals.']] } },
     { id: 'news-plus', url: 'App · Software', label: 'News+ subscription decision',
       blurb: 'Tests whether the offer communicates content, trial terms, and subscription value clearly.',
+      scoreLabels: ['Declines News+', 'Subscribes to News+'],
       personaFolder: 'Type 4 - App/pg-os-app-ios-news-subscription-decision/Persona Profiles', personaFiles: ['persona_0005.yaml','persona_0010.yaml','persona_0019.yaml','persona_0038.yaml'],
       steps: ['open subscription offer', 'review included publications', 'inspect trial terms', 'compare value', 'make decision'],
       report: { a: 'Standard offer', b: 'Personalized content preview', winner: 'B', lift: '+11.0%', metric: 'informed subscription intent', agents: 0,
@@ -157,6 +164,7 @@
         findings: [['high', 'Trial-renewal terms are missed by many occasional readers.'], ['med', 'Relevant publication previews improve perceived value.'], ['low', 'Price-sensitive users prefer annual savings stated in absolute dollars.']] } },
     { id: 'stocks-sentiment', url: 'App · Finance', label: 'Stocks sentiment',
       blurb: 'Measures whether users interpret market sentiment correctly when context and risk cues are provided.',
+      scoreLabels: ['Misreads sentiment', 'Interprets it correctly'],
       personaFolder: 'Type 4 - App/pg-os-app-macos-stocks-mu-sentiment/Persona Profiles', personaFiles: ['persona_0001.yaml','persona_0004.yaml','persona_0008.yaml','persona_0011.yaml'],
       steps: ['select stock', 'review sentiment signal', 'inspect source context', 'assess confidence', 'state intended action'],
       report: { a: 'Raw sentiment score', b: 'Sentiment with context', winner: 'B', lift: '+23.0%', metric: 'correct interpretation', agents: 0,
@@ -571,18 +579,20 @@
     const r = target.report;
     const tgt = document.getElementById('rptTarget'); if (tgt) tgt.textContent = target.url;
     if (currentReport === 'ab') {
+      const rows = r.segments.map(([s, a, b]) => {
+        const d = b - a, cls = d > 0 ? 'up' : 'down';
+        return `<tr><td class="seg">${s}</td><td>${a}%</td><td class="win">${b}%</td><td class="${cls}">${d > 0 ? '+' : ''}${d}</td></tr>`;
+      }).join('');
+      const finds = `<ul class="findings">${r.findings.map(([sev, t]) => `<li class="finding"><span class="sev ${sev}">${sev.toUpperCase()}</span>${t}</li>`).join('')}</ul>`;
       intelBody.innerHTML = `<div class="verdict">
         <div class="target">${target.label}</div>
         <div class="vrow"><span class="badge">Variant ${r.winner} wins</span><span class="lift">${r.lift}</span></div>
         <div class="metric">${r.metric}, population-weighted · ${fmt.format(r.agents)} agents</div>
         <div class="variants"><b>A</b> ${r.a} &nbsp;·&nbsp; <b>B</b> ${r.b}</div></div>
-        <p style="font-size:.76rem;color:var(--ink-dim);line-height:1.5">Live session: <b style="color:var(--phos)">${fmt.format(agg.n)}</b> behaviors scored, ${(agg.n ? agg.pass / agg.n * 100 : 0).toFixed(1)}% pass.</p>`;
-    } else if (currentReport === 'seg') {
-      const rows = r.segments.map(([s, a, b]) => {
-        const d = b - a, cls = d > 0 ? 'up' : 'down';
-        return `<tr><td class="seg">${s}</td><td>${a}%</td><td class="win">${b}%</td><td class="${cls}">${d > 0 ? '+' : ''}${d}</td></tr>`;
-      }).join('');
-      intelBody.innerHTML = `<table class="seg-table"><thead><tr><th>Persona segment</th><th>A</th><th>B</th><th>Δ</th></tr></thead><tbody>${rows}</tbody></table>`;
+        <p class="ab-session">Live session: <b>${fmt.format(agg.n)}</b> behaviors scored, ${(agg.n ? agg.pass / agg.n * 100 : 0).toFixed(1)}% pass.</p>
+        <div class="report-subhead">Performance by persona segment</div>
+        <table class="seg-table"><thead><tr><th>Persona segment</th><th>A</th><th>B</th><th>Δ</th></tr></thead><tbody>${rows}</tbody></table>
+        <div class="report-subhead">What the agents found</div>${finds}`;
     } else if (currentReport === 'score') {
       const max = Math.max(1, ...agg.hist);
       const bars = agg.hist.map((v, i) => {
@@ -590,16 +600,11 @@
         const cls = i < 5 ? 'lo' : i < 7 ? 'mid' : '';
         return `<span class="hbar" title="score ${(i / 10).toFixed(1)}–${((i + 1) / 10).toFixed(1)} · n=${v}"><i class="${cls}" style="height:${h.toFixed(1)}%"></i></span>`;
       }).join('');
-      const finds = `<ul class="findings">${r.findings.map(([sev, t]) => `<li class="finding"><span class="sev ${sev}">${sev.toUpperCase()}</span>${t}</li>`).join('')}</ul>`;
-      intelBody.innerHTML = `<div class="histo-chart" role="img" aria-label="Evaluation score distribution. Horizontal axis runs from zero, fail, to one, pass. Bar height shows relative behavior count."><div class="histo-y-title">Behaviors<br><span>relative count</span></div><div class="histo">${bars}</div></div>
-        <div class="histo-axis"><span>0.0</span><span>0.5</span><span>1.0</span></div>
-        <div class="histo-x-title">Evaluation score <span>0 = fail · 1 = pass</span></div>
-        <p class="histo-cap"><b>${fmt.format(agg.n)}</b> scored behaviors. Bar height shows how many fall in each score range, scaled to the busiest range.</p>
-        <div class="dist-find-head">What the simulation found</div>${finds}`;
+      intelBody.innerHTML = `<div class="histo" role="img" aria-label="Outcome distribution from ${target.scoreLabels[0]} to ${target.scoreLabels[1]}. Bar height shows relative behavior count.">${bars}</div>
+        <div class="histo-axis outcome-axis"><span>${target.scoreLabels[0]}</span><span>${target.scoreLabels[1]}</span></div>
+        <p class="histo-cap"><b>${fmt.format(agg.n)}</b> scored behaviors. Bar height shows how many fall in each score range, scaled to the busiest range.</p>`;
     } else if (currentReport === 'heat') {
       intelBody.innerHTML = renderHeat();
-    } else {
-      intelBody.innerHTML = `<ul class="findings">${r.findings.map(([sev, t]) => `<li class="finding"><span class="sev ${sev}">${sev.toUpperCase()}</span>${t}</li>`).join('')}</ul>`;
     }
   }
 

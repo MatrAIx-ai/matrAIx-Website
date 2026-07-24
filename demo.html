@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/benchmark.css?v=29" />
+  <link rel="stylesheet" href="css/benchmark.css?v=32" />
   <link rel="stylesheet" href="css/dark-theme.css?v=5" />
   <style>
   .os-explain .ex-url{color:var(--ink)}
@@ -164,10 +164,8 @@
       <div class="win-bar"><span>Reports</span><span class="rpt-sub" id="rptTarget"></span></div>
       <div class="report-tabs" id="reportTabs">
         <button class="rtab" data-r="ab">A/B</button>
-        <button class="rtab" data-r="seg">Seg</button>
         <button class="rtab active" data-r="score">Dist</button>
         <button class="rtab" data-r="heat">Heat</button>
-        <button class="rtab" data-r="find">Find</button>
       </div>
       <div class="intel-body" id="intelBody"></div>
       <button id="export" class="os-btn">⬇ Export trajectories (JSONL)</button>
@@ -294,7 +292,7 @@
   <script src="js/site-performance.js?v=1"></script>
   <script src="js/dimensions.js?v=7"></script>
   <script src="js/metrics.js?v=2"></script>
-  <script src="js/benchmark.js?v=24"></script>
+  <script src="js/benchmark.js?v=26"></script>
   <script>
   /* ---------- Live agent runs from the CUA pipeline ---------- */
   (function(){
