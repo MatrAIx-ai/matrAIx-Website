@@ -45,7 +45,8 @@ const taskDetails = {
     summary: "A finance app wants to test how investors interpret a stock-sentiment feature. Users review sentiment signals alongside market context and decide whether the information changes their confidence or intended action.",
     audience: "Retail investors ranging from beginners to active traders, with varied portfolios, financial literacy, risk tolerance, investment horizons, and familiarity with sentiment indicators.",
     metric: ">80% comprehension",
-    metricNote: "At least 80% interpret the sentiment signal correctly without treating it as guaranteed investment advice."
+    metricNote: "At least 80% interpret the sentiment signal correctly without treating it as guaranteed investment advice.",
+    supportingImage2: "Assets/media/application_demo/type_4_app/MU Stock Report.png"
   }
 };
 
@@ -53,6 +54,11 @@ const nav = document.querySelector('.mx-nav');
 const menu = document.querySelector('.mx-menu');
 const dialog = document.querySelector('#taskDialog');
 const closeButton = dialog.querySelector('.task-dialog-close');
+const supportingImage2Container = dialog.querySelectorAll('.task-image-placeholder')[2];
+const supportingImage2 = document.createElement('img');
+supportingImage2.className = 'task-supporting-image';
+supportingImage2.hidden = true;
+supportingImage2Container.prepend(supportingImage2);
 let triggerCard = null;
 
 menu.addEventListener('click', () => nav.classList.toggle('open'));
@@ -92,6 +98,17 @@ function openTask(card) {
   document.querySelector('#taskDialogPopulation').textContent = '100,000 personas';
   document.querySelector('#taskDialogMetric').textContent = detail.metric;
   document.querySelector('#taskDialogMetricNote').textContent = detail.metricNote;
+  if (detail.supportingImage2) {
+    supportingImage2.src = detail.supportingImage2;
+    supportingImage2.alt = `${title} evaluation report`;
+    supportingImage2.hidden = false;
+    supportingImage2Container.classList.add('has-image');
+  } else {
+    supportingImage2.removeAttribute('src');
+    supportingImage2.alt = '';
+    supportingImage2.hidden = true;
+    supportingImage2Container.classList.remove('has-image');
+  }
   dialog.showModal();
 }
 
