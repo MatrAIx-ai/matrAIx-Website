@@ -19,21 +19,21 @@ const taskDetails = {
     audience: "Adults who plan meals for themselves or their households, including users with allergies, dietary restrictions, fitness goals, chronic-health considerations, and limited cooking time or budgets.",
     metric: ">85% useful plans",
     metricNote: "At least 85% receive a feasible plan that respects every stated dietary and safety constraint.",
-    results: { headline: "94.1%", label: "fully or partly resolved", bars: [["Resolved", 18.2], ["Partly resolved", 75.9], ["Unresolved", 5.9]], finding: "Useful clarification was universal, but most plans only partially satisfied personal preferences.", note: "n=989 successful of 1,000 · GPT-5.5 · diagnostic run", source: "Type%202%20-%20Chatbot/meal-planning-nutrition_chatbot/gpt-5-5-AWS/report" }
+    results: { headline: "94.1%", label: "fully or partly resolved", bars: [["Resolved", 18.2], ["Partly resolved", 75.9], ["Unresolved", 5.9]], finding: "Useful clarification was universal, but most plans only partially satisfied personal preferences.", note: "n=989 successful of 1,000 · GPT-5.5 · diagnostic run", source: "Type%202%20-%20Chatbot/meal-planning-nutrition_chatbot/gpt-5-5" }
   },
   "OpenBB Corporate Action": {
     summary: "A finance research team wants to test whether an OpenBB assistant can investigate a corporate action honestly. The assistant must clarify the security, locate credible evidence, explain the event and distinguish verified facts from uncertainty.",
     audience: "Retail investors, financial analysts, students, and researchers using market-data tools. Personas vary in financial expertise, research goals, risk tolerance, and familiarity with corporate actions.",
     metric: ">90% accurate",
     metricNote: "At least 90% of responses identify the correct status and cite adequate supporting evidence without fabrication.",
-    results: { headline: "1,000", label: "persona run corpus", bars: [["Published run coverage", 100]], finding: "The dataset currently exposes the full evaluation corpus; a task-level aggregate outcome summary has not yet been published.", note: "Coverage view · outcome aggregation pending", source: "Type%202%20-%20Chatbot/chat-openbb-corporate-action" }
+    results: { headline: "1,000", label: "persona run corpus", bars: [["Published run coverage", 100]], finding: "The dataset currently exposes the full evaluation corpus; a task-level aggregate outcome summary has not yet been published.", note: "Coverage view · outcome aggregation pending", source: "Type%202%20-%20Chatbot/chat-openbb-corporate-action/gpt-5-5" }
   },
   "Notion Plan Comparison": {
     summary: "Notion wants to evaluate whether prospective customers can understand and compare its available plans. Users review features, limits, collaboration needs, and pricing before selecting the best plan for a realistic scenario.",
     audience: "Individuals, students, small teams, startups, and business administrators considering Notion. The audience varies by team size, budget, collaboration requirements, security needs, and prior workspace-tool experience.",
     metric: ">85% correct choice",
     metricNote: "More than 85% select the plan that best matches their stated needs and accurately explain the key tradeoffs.",
-    results: { headline: "94.1%", label: "mean verifier reward", bars: [["Valid artifacts", 99], ["Timed out", 1]], finding: "990 of 1,000 personas completed a valid live-site plan comparison.", note: "n=1,000 · Claude Opus 4.8 · live Notion pricing page", source: "Type%203%20-%20Website/opus_4_8/web-notion-plan-comparison" }
+    results: { headline: "99%", label: "task completion", bars: [["Completed plan comparison", 99], ["Timed out", 1]], finding: "990 of 1,000 personas completed a valid live-site plan comparison.", note: "n=1,000 · GPT-5.5 · live Notion pricing page", source: "Type%203%20-%20Website/web-notion-plan-comparison/gpt_5_5/report" }
   },
   "MIT OpenCourseWare Course Choice": {
     summary: "MIT OpenCourseWare wants to understand whether learners can find a suitable course among many options. Users search, compare prerequisites and materials, and select a course aligned with their goals and current knowledge.",
