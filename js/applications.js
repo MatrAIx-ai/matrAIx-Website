@@ -73,6 +73,19 @@ function openTask(card) {
   triggerCard = card;
   document.querySelector('#taskDialogType').textContent = card.querySelector('.task-meta span').textContent;
   document.querySelector('#taskDialogCover').dataset.type = card.dataset.type;
+  const cardCover = card.querySelector('.task-cover-image');
+  const dialogCover = document.querySelector('#taskDialogCoverImage');
+  if (cardCover) {
+    dialogCover.src = cardCover.src;
+    dialogCover.alt = cardCover.alt;
+    dialogCover.className = cardCover.classList.contains('contain') ? 'contain' : '';
+    dialogCover.hidden = false;
+  } else {
+    dialogCover.removeAttribute('src');
+    dialogCover.alt = '';
+    dialogCover.className = '';
+    dialogCover.hidden = true;
+  }
   document.querySelector('#taskDialogTitle').textContent = title;
   document.querySelector('#taskDialogSummary').textContent = detail.summary;
   document.querySelector('#taskDialogAudience').textContent = detail.audience;

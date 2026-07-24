@@ -14,7 +14,7 @@ the persona **dimension schema** that defines the space those agents are sampled
 | Landing | [`index.html`](index.html) | Hero with the 8.3-billion-behavior headline, "Open-Source Community" badge, and a live agent-field simulation (canvas), telemetry strip, and eval methodology. |
 | Blog | [`blog/`](blog/) | Blog index page with 3 research papers in a single-column layout. Gateway to research insights on persona grounding, evaluation frameworks, and agent simulation. |
 | Persona Explorer | [`person.html`](person.html) | Browse the flat persona schema: filter by category, search, expand value pools, and sample a full synthetic persona. |
-| Demo Portal (matrAIx OS) | [`demo.html`](demo.html) | A mission-control interface: a live "Neural Eval Core" brain visualization, an agent swarm simulating the selected app/website, streaming trajectory telemetry, switchable reports (A/B, segments, score distribution, heatmap, findings), and JSONL trajectory export. |
+| Demo Portal (matrAIx OS) | [`demo.html`](demo.html) | A mission-control interface for eight public evaluation tasks across surveys, chatbots, websites, and apps, with live agent telemetry, reports, and JSONL trajectory export. |
 | Case Study | [`case_study.html`](case_study.html) | A recorded sample trajectory: a matrAIx computer-using agent (10-dimension persona) files an auto-insurance claim on hugclaim.com, with per-step screenshots, observations, actions, rewards, friction findings, and a JSONL export. |
 | Let's Play! | [`play.html`](play.html) | A fun 8-question personality quiz. Each answer maps to a real persona dimension value (`dominant_trait`, `risk_tolerance`, `decision_style`, `values_priority`, `tone_expected`, `learning_style`, `media_diet`, `economic_motivation`); after answering, matrAIx synthesizes the player's **persona**, names their archetype, and **predicts how they'd behave** inside a product flow — the simulation-fidelity thesis, made playable. Self-contained (no schema file needed). |
 
@@ -69,11 +69,27 @@ Hugging Face release is planned.
 
 ## Benchmark portal (matrAIx OS)
 
-The [Demo Portal](demo.html) is a mission-control interface. Pick a **target**
-(app/website), and an **agent swarm** of personas drawn from the dimension space runs its
+The [Demo Portal](demo.html) is a mission-control interface. Pick one of the **eight demo tasks**,
+and an **agent swarm** of personas drawn from the dimension space runs its
 flow step by step. Each step emits **trajectory telemetry** (`observation → action → reward`)
 to the live console, the **Neural Eval Core** brain pulses the activated region, and the
 verdict feeds the **reports** panel (A/B, segments, score distribution, findings).
+
+The published artifacts are available in the
+[Demo Application Data dataset](https://huggingface.co/datasets/MatrAIx2026/Demo_Application_Data),
+and the canonical task definitions live in the
+[MatrAIx application/tasks directory](https://github.com/MatrAIx-ai/MatrAIx/tree/main/application/tasks).
+
+| Task | Type | Domain |
+|---|---|---|
+| Candy Land price sensitivity | Survey | Commerce |
+| Annual checkup habits | Survey | Healthcare |
+| Meal planning nutrition assistant | Chatbot | Healthcare |
+| OpenBB delisted-quote research | Chatbot | Finance |
+| Notion plan comparison | Website | Software |
+| MIT OpenCourseWare course choice | Website | Education |
+| News+ subscription decision | App | Software |
+| Stocks sentiment | App | Finance |
 
 Scores are **synthetic but structured**: a behavior's difficulty is driven mainly by its single
 hardest persona aspect (e.g. `query_complexity = Adversarial`, `safety_sensitivity = Potentially

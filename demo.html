@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MatrAIx Eval Infra — Simulation Preview</title>
+  <title>MatrAIx Eval Infra — Eight Evaluation Tasks</title>
   <link rel="icon" href="Assets/icons/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="Assets/icons/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="Assets/icons/favicon-16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="Assets/icons/apple-touch-icon.png" />
-  <meta name="description" content="MatrAIx evaluation infrastructure: simulated agents evaluate apps and websites step by step, with live trajectory telemetry and reports." />
+  <meta name="description" content="Explore eight MatrAIx evaluation infrastructure tasks across surveys, chatbots, websites, and apps with live persona simulation telemetry and reports." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
@@ -105,8 +105,8 @@
   <div class="os-bar">
     <a class="os-id" href="index.html">Matr<span class="ai">AI</span>x <span class="os-name">Eval Infra</span><span class="v">Preview</span></a>
     <div class="os-target">
-      <span class="lbl">Evaluation target</span>
-      <select id="target" class="os-select" aria-label="Evaluation target"></select>
+      <span class="lbl">Evaluation task</span>
+      <select id="target" class="os-select" aria-label="Evaluation task"></select>
       <button id="run" class="os-btn run">■ Pause run</button>
     </div>
     <nav class="os-nav" id="playground-nav"><a href="index.html">Home</a><a href="blog/">Research</a><a href="persona.html">Personas</a><a href="applications.html">Applications</a><a class="active" href="demo.html">Playground</a><a href="access.html">Community</a></nav>
@@ -192,11 +192,11 @@
     </div>
     <div class="gr-head">
       <span class="gr-idx">— GENERATED REPORTS</span>
-      <h2 class="gr-title">Example evaluation report.</h2>
-      <p class="gr-sub">A clearer view of the output generated from the simulation above.</p>
+      <h2 class="gr-title">Reports from eight evaluation tasks.</h2>
+      <p class="gr-sub">Survey, chatbot, website, and app evaluations from the public demo dataset.</p>
       <div class="gr-chips">
-        <span class="gr-chip">Web apps</span><span class="gr-chip">Checkout</span><span class="gr-chip">Onboarding</span>
-        <span class="gr-chip">AI assistants</span><span class="gr-chip">Search</span><span class="gr-chip">Accessibility</span>
+        <span class="gr-chip">2 Surveys</span><span class="gr-chip">2 Chatbots</span><span class="gr-chip">2 Websites</span>
+        <span class="gr-chip">2 Apps</span><span class="gr-chip">100K personas / task</span>
       </div>
       <button class="gr-print" id="grPrint">⎙ Print / Save as PDF</button>
     </div>
@@ -283,7 +283,7 @@
   <script src="js/site-performance.js?v=1"></script>
   <script src="js/dimensions.js?v=7"></script>
   <script src="js/metrics.js?v=2"></script>
-  <script src="js/benchmark.js?v=16"></script>
+  <script src="js/benchmark.js?v=17"></script>
   <script>
   /* ---------- Live agent runs from the CUA pipeline ---------- */
   (function(){
@@ -378,18 +378,14 @@
     if(!tabsEl||!body) return;
     var nf=new Intl.NumberFormat('en-US');
     var REPORTS=[
-      {tab:'Checkout',target:'Checkout flow · Shopify storefront',a:'3-step checkout',b:'1-page express',agents:48000,metric:'task completion',winner:'B',lift:'+14.2%',
-        segments:[['New users',71,88],['Returning users',84,90],['Mobile · low-bandwidth',52,79],['Non-native English',63,81],['Cognitive / neurodivergent',58,77]],
-        findings:[['high','Variant A: coupon field traps 23% of mobile agents in a focus loop.'],['med','Variant A: shipping step lacks a progress indicator — 12% abandon here.'],['low','Variant B: address autofill mismatches non-Latin postal formats.']]},
-      {tab:'Onboarding',target:'Onboarding wizard · B2B analytics app',a:'Guided product tour',b:'Empty-state + checklist',agents:31500,metric:'day-1 activation',winner:'B',lift:'+9.6%',
-        segments:[['First-time admins',66,78],['Technical users',81,80],['Non-technical',54,71],['Time-pressured',49,68]],
-        findings:[['high','Variant A: 41% of power users skip the tour and never return to it.'],['med','Variant B: checklist drives 2.3× more next-day returns.'],['med','Both: undefined jargon blocks non-technical agents at step 2.']]},
-      {tab:'Mobile signup',target:'Signup · fintech mobile app',a:'Email + password',b:'Passkey-first',agents:22800,metric:'signup completion',winner:'B',lift:'+11.0%',
-        segments:[['Digital natives',86,95],['Age 55+',70,61],['Accessibility · visual',64,77],['Reluctant adopters',58,55]],
-        findings:[['high','Variant B: passkey prompt confuses 39% of 55+ agents — net negative for that segment.'],['low','Variant B: 2.1× faster completion for digital-native agents.'],['med','Recommend segment-gating: passkey-first for natives, email fallback for 55+.']]},
-      {tab:'AI assistant',target:'In-product AI assistant · support chat',a:'Freeform chat',b:'Guided + freeform',agents:40100,metric:'issue resolution',winner:'B',lift:'+18.0%',
-        segments:[['Troubleshooting',72,88],['Billing questions',69,85],['How-to',78,86],['Red-team (adversarial)',41,63]],
-        findings:[['high','Variant A: prompt-injection succeeds in 9% of adversarial agent sessions.'],['med','Variant A: hallucinated steps in 14% of troubleshooting flows.'],['low','Variant B: guided entry cuts mean time-to-resolution by 31%.']]}
+      {tab:'Candy Land',target:'Candy Land price sensitivity · Survey · Commerce',a:'Current price',b:'Proposed price',agents:100000,metric:'purchase intent',winner:'A',lift:'+12.0%',segments:[['Parents',72,61],['Gift buyers',68,57],['Teachers',64,55],['Price-sensitive households',59,41]],findings:[['high','Price-sensitive households show the largest decline at the proposed price.'],['med','Gift buyers tolerate a smaller increase when the product is bundled.'],['low','Brand familiarity moderates the decline in purchase intent.']]},
+      {tab:'Checkups',target:'Annual checkup habits · Survey · Healthcare',a:'General reminder',b:'Personalized planning',agents:100000,metric:'booking intent',winner:'B',lift:'+16.0%',segments:[['Regular patients',74,86],['Care avoiders',38,57],['Uninsured',31,43],['Rural patients',45,61]],findings:[['high','Cost and access remain the dominant barriers for uninsured personas.'],['med','Personalized next steps improve intent most among care avoiders.'],['low','Reminder timing matters more for parents and caregivers.']]},
+      {tab:'Meal plans',target:'Meal planning nutrition assistant · Chatbot · Healthcare',a:'Generic assistant',b:'Persona-aware assistant',agents:100000,metric:'useful safe plans',winner:'B',lift:'+21.0%',segments:[['Budget constrained',58,82],['Food allergies',61,89],['Busy households',67,86],['Fitness focused',73,88]],findings:[['high','Generic plans violate at least one stated constraint for allergy personas.'],['med','Budget-aware substitutions drive the largest usefulness gain.'],['low','Short preparation steps improve completion for busy households.']]},
+      {tab:'OpenBB',target:'OpenBB delisted-quote research · Chatbot · Finance',a:'Quote-only response',b:'Source-grounded research',agents:100000,metric:'research accuracy',winner:'B',lift:'+28.0%',segments:[['Retail investors',52,84],['Analysts',63,91],['Finance students',48,83],['Low expertise',41,76]],findings:[['high','Quote-only responses frequently confuse delisting with temporary data gaps.'],['med','Source citations sharply improve trust among analysts.'],['low','Plain-language corporate-action explanations help low-expertise users.']]},
+      {tab:'Notion',target:'Notion plan comparison · Website · Software',a:'Comparison table',b:'Guided recommendation',agents:100000,metric:'correct plan choice',winner:'B',lift:'+14.0%',segments:[['Individuals',78,89],['Small teams',67,86],['Enterprise admins',71,84],['First-time users',55,79]],findings:[['high','First-time users misread guest and member limits in the comparison table.'],['med','Guided questions reduce over-purchasing among individuals.'],['low','Security details remain difficult to find for enterprise admins.']]},
+      {tab:'MIT OCW',target:'MIT OpenCourseWare course choice · Website · Education',a:'Catalog search',b:'Goal-guided shortlist',agents:100000,metric:'suitable course choice',winner:'B',lift:'+19.0%',segments:[['High-school learners',49,76],['University students',68,85],['Professionals',61,82],['Non-native English',54,79]],findings:[['high','Prerequisite language causes the most mismatches for early learners.'],['med','Goal-guided shortlists reduce time to a suitable course.'],['low','Material-format filters matter most to working professionals.']]},
+      {tab:'News+',target:'News+ subscription decision · App · Software',a:'Standard offer',b:'Personalized content preview',agents:100000,metric:'informed subscription intent',winner:'B',lift:'+11.0%',segments:[['Daily readers',73,87],['Occasional readers',42,58],['Existing subscribers',65,77],['Price-sensitive users',36,49]],findings:[['high','Trial-renewal terms are missed by many occasional readers.'],['med','Relevant publication previews improve perceived value.'],['low','Price-sensitive users prefer annual savings stated in absolute dollars.']]},
+      {tab:'Stocks',target:'Stocks sentiment · App · Finance',a:'Raw sentiment score',b:'Sentiment with context',agents:100000,metric:'correct interpretation',winner:'B',lift:'+23.0%',segments:[['Beginner investors',44,76],['Long-term investors',63,84],['Active traders',72,89],['Risk-averse users',51,81]],findings:[['high','Beginners often interpret an unexplained score as investment advice.'],['med','Source context improves calibration across every segment.'],['low','Risk warnings are most effective beside the sentiment label.']]}
     ];
     function render(i){
       var r=REPORTS[i];
@@ -411,20 +407,5 @@
   })();
   </script>
 
-  <!-- Demo video -->
-  <section style="max-width: 1080px; margin: 80px auto; padding: 0 clamp(20px, 5vw, 40px); text-align: center;">
-    <h2 style="font-family: var(--disp); font-weight: 800; font-size: clamp(2rem, 4vw, 2.8rem); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 28px; color: var(--ink);">See MatrAIx in Action</h2>
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 1px solid var(--line); background: #000;">
-      <iframe
-        loading="lazy"
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-        src="https://www.youtube.com/embed/puKQNjasK40"
-        title="matrAIx Demo"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen>
-      </iframe>
-    </div>
-  </section>
 </body>
 </html>
