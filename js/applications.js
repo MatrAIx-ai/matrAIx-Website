@@ -66,6 +66,17 @@ const menu = document.querySelector('.mx-menu');
 const dialog = document.querySelector('#taskDialog');
 const closeButton = dialog.querySelector('.task-dialog-close');
 const resultsBase = 'https://huggingface.co/datasets/MatrAIx2026/Demo_Application_Data/tree/main/';
+const taskFolders = {
+  "Candy Land Price Sensitivity": "Type%201%20-%20Survey/survey_price-sensitivity-hasbro-gaming-candy-land",
+  "Annual Checkup Habits": "Type%201%20-%20Survey/survey_annual-checkup-habits",
+  "Meal Planning Nutrition Assistant": "Type%202%20-%20Chatbot/meal-planning-nutrition_chatbot",
+  "OpenBB Corporate Action": "Type%202%20-%20Chatbot/chat-openbb-corporate-action",
+  "Notion Plan Comparison": "Type%203%20-%20Website/web-notion-plan-comparison",
+  "MIT OpenCourseWare Course Choice": "Type%203%20-%20Website/web-playwright-mit-ocw-course-choice",
+  "News+ Subscription Decision": "Type%204%20-%20App/pg-os-app-ios-news-subscription-decision",
+  "Stocks Sentiment": "Type%204%20-%20App/pg-os-app-macos-stocks-mu-sentiment"
+};
+const [huggingFaceLink, youtubeLink] = dialog.querySelectorAll('.task-dialog-links a');
 const supportingImageContainers = [...dialog.querySelectorAll('.task-image-placeholder')].slice(1);
 const supportingImages = supportingImageContainers.map(container => {
   const image = document.createElement('img');
@@ -142,6 +153,12 @@ function openTask(card) {
   document.querySelector('#taskResultFinding').textContent = results.finding;
   document.querySelector('#taskResultNote').textContent = results.note;
   document.querySelector('#taskResultsSource').href = resultsBase + results.source;
+  huggingFaceLink.href = resultsBase + taskFolders[title];
+  huggingFaceLink.removeAttribute('aria-disabled');
+  huggingFaceLink.querySelector('small').textContent = 'Task folder';
+  const isApp = card.dataset.type === 'app';
+  youtubeLink.hidden = !isApp;
+  youtubeLink.setAttribute('aria-disabled', 'true');
   const bars = document.querySelector('#taskResultBars');
   bars.replaceChildren(...results.bars.map(([label, value]) => {
     const row = document.createElement('div');
@@ -213,5 +230,7 @@ dialog.addEventListener('close', () => {
   triggerCard?.focus();
 });
 dialog.querySelectorAll('a[aria-disabled="true"]').forEach(link => {
-  link.addEventListener('click', event => event.preventDefault());
+  link.addEventListener('click', event => {
+    if (link.getAttribute('aria-disabled') === 'true') event.preventDefault();
+  });
 });

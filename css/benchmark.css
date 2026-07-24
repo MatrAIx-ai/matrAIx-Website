@@ -475,7 +475,7 @@ body.persona-open { overflow: hidden !important; }
     padding-bottom: 18px;
   }
 
-  .swarm { align-self: start; height: 560px; }
+  .swarm { align-self: stretch; height: auto; }
 
   .os-bar {
     display: grid;
@@ -581,7 +581,8 @@ body.persona-open { overflow: hidden !important; }
     grid-template-columns: 220px minmax(0,1fr) 310px;
     gap: 12px;
     width: min(1320px,calc(100% - 32px));
-    min-height: 650px;
+    height: 560px;
+    min-height: 560px;
     margin: 12px auto;
     padding: 0;
   }
@@ -745,6 +746,7 @@ body.persona-open { overflow: hidden !important; }
 @media screen and (max-width: 1180px) {
   .playground-aux { display: none; }
   .os-grid {
+    height: auto;
     grid-template-columns: 230px minmax(0,1fr);
     grid-template-areas:
       "swarm stage"
