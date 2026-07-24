@@ -46,7 +46,8 @@ const taskDetails = {
     audience: "Retail investors ranging from beginners to active traders, with varied portfolios, financial literacy, risk tolerance, investment horizons, and familiarity with sentiment indicators.",
     metric: ">80% comprehension",
     metricNote: "At least 80% interpret the sentiment signal correctly without treating it as guaranteed investment advice.",
-    supportingImage2: "Assets/media/application_demo/type_4_app/MU Stock Report.png"
+    supportingImage1: "Assets/media/application_demo/type_4_app/MU Stock/MU Stock Report.png",
+    supportingImage2: "Assets/media/application_demo/type_4_app/MU Stock/MU Report Demo.gif"
   }
 };
 
@@ -54,11 +55,14 @@ const nav = document.querySelector('.mx-nav');
 const menu = document.querySelector('.mx-menu');
 const dialog = document.querySelector('#taskDialog');
 const closeButton = dialog.querySelector('.task-dialog-close');
-const supportingImage2Container = dialog.querySelectorAll('.task-image-placeholder')[2];
-const supportingImage2 = document.createElement('img');
-supportingImage2.className = 'task-supporting-image';
-supportingImage2.hidden = true;
-supportingImage2Container.prepend(supportingImage2);
+const supportingImageContainers = [...dialog.querySelectorAll('.task-image-placeholder')].slice(1);
+const supportingImages = supportingImageContainers.map(container => {
+  const image = document.createElement('img');
+  image.className = 'task-supporting-image';
+  image.hidden = true;
+  container.prepend(image);
+  return image;
+});
 let triggerCard = null;
 
 menu.addEventListener('click', () => nav.classList.toggle('open'));
@@ -98,17 +102,21 @@ function openTask(card) {
   document.querySelector('#taskDialogPopulation').textContent = '100,000 personas';
   document.querySelector('#taskDialogMetric').textContent = detail.metric;
   document.querySelector('#taskDialogMetricNote').textContent = detail.metricNote;
-  if (detail.supportingImage2) {
-    supportingImage2.src = detail.supportingImage2;
-    supportingImage2.alt = `${title} evaluation report`;
-    supportingImage2.hidden = false;
-    supportingImage2Container.classList.add('has-image');
-  } else {
-    supportingImage2.removeAttribute('src');
-    supportingImage2.alt = '';
-    supportingImage2.hidden = true;
-    supportingImage2Container.classList.remove('has-image');
-  }
+  supportingImages.forEach((image, index) => {
+    const source = detail[`supportingImage${index + 1}`];
+    const container = supportingImageContainers[index];
+    if (source) {
+      image.src = source;
+      image.alt = `${title} ${index === 0 ? 'evaluation report' : 'report demo'}`;
+      image.hidden = false;
+      container.classList.add('has-image');
+    } else {
+      image.removeAttribute('src');
+      image.alt = '';
+      image.hidden = true;
+      container.classList.remove('has-image');
+    }
+  });
   dialog.showModal();
 }
 
